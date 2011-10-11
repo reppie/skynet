@@ -1,4 +1,4 @@
-# Django settings for skynet project.
+# Django settings for skynet_frontend project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,12 +11,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'skynet',                      # Or path to database file if using sqlite3.
-        'USER': 'skynet',                      # Not used with sqlite3.
-        'PASSWORD': 'asdasd',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '/home/wytse/workspace/skynet/frontend/skynet_frontend/sqlite.db',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -27,11 +27,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'Europe/Amsterdam'
+TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'nl-NL'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
@@ -83,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '=h4j*+2u_%ftb%w&f9=cpzs+yzz8n_2+49qsmd=@zr0ry++tx)'
+SECRET_KEY = '$%#kkh)x*2vsoa95khb4)6j(+wdn#nuxk8gmd4irt(ouq^2q)!'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'skynet.urls'
+ROOT_URLCONF = 'skynet_frontend.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -115,8 +115,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'south',
+    # Uncomment the next line to enable the admin:
+    # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
