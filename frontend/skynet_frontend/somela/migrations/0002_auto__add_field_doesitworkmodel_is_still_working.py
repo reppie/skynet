@@ -8,25 +8,21 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'DoesItWorkModel'
-        db.create_table('somela_doesitworkmodel', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('is_working', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('migration_worked', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('somela', ['DoesItWorkModel'])
+        # Adding field 'DoesItWorkModel.is_still_working'
+        db.add_column('somela_doesitworkmodel', 'is_still_working', self.gf('django.db.models.fields.BooleanField')(default=False), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Deleting model 'DoesItWorkModel'
-        db.delete_table('somela_doesitworkmodel')
+        # Deleting field 'DoesItWorkModel.is_still_working'
+        db.delete_column('somela_doesitworkmodel', 'is_still_working')
 
 
     models = {
         'somela.doesitworkmodel': {
             'Meta': {'object_name': 'DoesItWorkModel'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_still_working': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_working': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'migration_worked': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         }
