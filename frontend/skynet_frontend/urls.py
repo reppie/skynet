@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-absoluteStaticPath = os.path.join(settings.PROJECT_PATH, 'static')
+absoluteStaticPath = os.path.join(settings.PROJECT_PATH, 'site_media')
 urlpatterns += patterns('',
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': absoluteStaticPath, 'show_indexes': True}),
