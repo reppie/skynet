@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
+from django.conf import settings
 
 admin.autodiscover()
 
@@ -11,3 +12,9 @@ urlpatterns = patterns('',
     (r'^somela/$', 'somela.views.index'),
     url(r'^admin/', include(admin.site.urls)),
 )
+
+if True:
+    urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': '/home/wytse/workspace/skynet/frontend/skynet_frontend/static', 'show_indexes': True}),
+    )

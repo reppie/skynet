@@ -1,3 +1,4 @@
 from django.db import models
 
-# Create your models here.
+class DoesItWorkModel(models.Model):
+    is_working = models.BooleanField()
