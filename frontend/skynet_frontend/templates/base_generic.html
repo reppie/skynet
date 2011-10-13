@@ -1,54 +1,66 @@
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!doctype html> <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-	<title>{% block title %}Skynet{% endblock %}</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<link rel="stylesheet" href="/site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
-  	<link rel="stylesheet" href="/site_media/css/blueprint/print.css" type="text/css" media="print"> 
-  	<!--[if lt IE 8]>
-    	<link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
-  	<![endif]-->
-
-	<script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
-	
-</head>
-<body>
-
-<div id="container">
-	<header>
-		{% block header %}Header{% endblock %}
-	</header>
-	<div id="main" role="main">
-		{% block body %}Body{% endblock %}
-	</div>
-	<footer>
-		{% block footer %}Footer{% endblock %}
-	</footer>
-</div> <!--! end of #container -->
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-
-<!-- scripts concatenated and minified via ant build script-->
-<script src="/site_media/js/plugins.js"></script>
-<script src="/site_media/js/script.js"></script>
-<!-- end scripts-->
-
-
-<!--[if lt IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-<![endif]-->
-
-</body>
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+	<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>{% block title %}Skynet{% endblock %}</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="/site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="/site_media/css/blueprint/print.css" type="text/css" media="print">
+		<link rel="stylesheet" href="/site_media/css/style.css" type="text/css" media="screen, projection">
+		<!--[if lt IE 8]>
+		<link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+		<![endif]-->
+		<script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header class="span-24">
+				{% block header %}Skynet header{% endblock %}
+			</header>
+			<section class="span-18 main">
+				{% block main %}The center column{% endblock %}
+			</section>
+			<aside class="span-6 last">
+				{% block sidebar %}
+					<section id="region-name">
+						{% block region-name %}
+							<h1>Groningen</h1>
+						{% endblock %}
+					</section>
+					<section id="tag-cloud">
+						<h1 class="title">Tag cloud</h1>
+						{% block tag-cloud %}
+							vandalisme fiets FC weer natuur
+						{% endblock %}
+					</section>
+					<section id="moodgraph">
+						<h1 class="title">Mood graph</h1>
+						{% block moodgraph %}
+							<img src="/site_media/img/dummy/graph.png"	
+						{% endblock %}
+					</section>	
+				{% endblock %}
+			</aside>
+			<footer class="span-24">
+				{% block footer %}The footer{% endblock %}
+			</footer>
+		</div>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+		<!-- scripts concatenated and minified via ant build script-->
+		<script src="/site_media/js/plugins.js"></script>
+		<script src="/site_media/js/script.js"></script>
+		<!-- end scripts-->
+		<!--[if lt IE 7 ]>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+		<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+		<![endif]-->
+	</body>
 </html>

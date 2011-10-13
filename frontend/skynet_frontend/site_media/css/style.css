@@ -1,0 +1,20 @@
+header
+{
+	height: 150px;
+}
+
+footer
+{
+	height: 20px;
+}
+
+aside section
+{
+	background-color: #dddddd;
+}
+
+aside section h1.title
+{
+	font-size: 1.5em;
+}
+
