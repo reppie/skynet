@@ -284,7 +284,7 @@ class DjangoTestSuiteRunner(object):
         # Second pass -- actually create the databases.
         old_names = []
         mirrors = []
-        print 'test'
+        print 'skipping test database creation/destruction'
         return old_names, mirrors
         for signature, (db_name, aliases) in dependency_ordered(test_databases.items(), dependencies):
             # Actually create the database for the first connection
