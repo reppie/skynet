@@ -22,13 +22,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'skynet',
-        'USER': 'skynet',
+        'USER': 'root',
         'PASSWORD': 'asdasd',
         'HOST': '',
         'PORT': '',
     }
 }
-TEST_RUNNER = 'modified_testrunner.DjangoTestSuiteRunner'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
