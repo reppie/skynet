@@ -102,6 +102,15 @@ class Tweet(models.Model):
     coordinates = models.TextField(null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs")
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags")
+    
+    def save(self, *args, **kwargs):
+        super(Tweet, self).save(*args, **kwargs)
+        keywords = self.body.split()
+        for keyword in keywords:
+            TweetIndex(keyword = keyword, tweet = self).save()
+    
+    def __unicode__(self):
+        return "@" + self.username + ": " + self.body
 
 class TweetMention(models.Model):
     tweet_id = models.ForeignKey(Tweet)
@@ -114,3 +123,6 @@ class TweetContributor(models.Model):
 class TweetIndex(models.Model):
     keyword = models.CharField(max_length=140)
     tweet_id = models.ForeignKey(Tweet)
+
+    def __unicode__(self):
+        return self.keyword
