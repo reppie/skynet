@@ -22,7 +22,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'skynet',
-        'USER': 'root',
+        'USER': 'skynet',
         'PASSWORD': 'asdasd',
         'HOST': '',
         'PORT': '',

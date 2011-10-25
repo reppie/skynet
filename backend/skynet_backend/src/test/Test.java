@@ -1,19 +1,28 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-import twitter4j.FilterQuery;
-import twitter4j.Status;
-import twitter4j.StatusDeletionNotice;
-import twitter4j.StatusListener;
-import twitter4j.TwitterException;
-import twitter4j.TwitterStream;
-import twitter4j.TwitterStreamFactory;
+import com.mysql.jdbc.Connection;
 
 public class Test {
 
-    public static void main(String[] args) throws TwitterException {
+	public static void main(String[] args) {
+		
+		Connection conn = null;
+		
+		try {
+		    conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/skynet?" + "user=skynet&password=asdasd");
+		    System.out.println("Connected!");
+		} catch (SQLException ex) {
+		    // handle any errors
+		    System.out.println("SQLException: " + ex.getMessage());
+		    System.out.println("SQLState: " + ex.getSQLState());
+		    System.out.println("VendorError: " + ex.getErrorCode());
+		}
+	}
+	
+    /*public static void main(String[] args) throws TwitterException {
         if (args.length < 1) {
             System.out.println("Usage: java twitter4j.examples.PrintFilterStream [follow(comma separated numerical user ids)] [track(comma separated filter terms)]");
             System.exit(-1);
@@ -83,6 +92,6 @@ public class Test {
             }
         }
         return isNumericalArgument;
-    }
+    }*/
 
 }

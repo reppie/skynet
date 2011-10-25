@@ -33,15 +33,14 @@ Received:
 		"bounding_box":
 		{
 			"type":"Polygon",
-			"coordinates":[[[6.4626199,53.1786819],[6.6669276,53.1786819],[6.6669276,53.2649053],[6.4626199,53.2649053]]]
+			"coordinates":[[[6.4626199,53.1786819],[6.6669276,53.1786819],[6.6669276,53.2649053],[6.4626199,53.2649053]]]},
+			"name":"Groningen",
+			"attributes":{},
+			"country_code":"NL",
+			"url":"http://api.twitter.com/1/geo/id/1b6ebeaa6394f50e.json",
+			"full_name":"Groningen",
+			"country":"The Netherlands"
 		},
-		"name":"Groningen",
-		"attributes":{},
-		"country_code":"NL",
-		"url":"http://api.twitter.com/1/geo/id/1b6ebeaa6394f50e.json",
-		"full_name":"Groningen",
-		"country":"The Netherlands"
-	},
 	"user":
 	{
 		"location":"Groningen",
