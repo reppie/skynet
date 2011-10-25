@@ -1,5 +1,3 @@
 *.pyc
-
+settings.*
 *.class
-.classpath
-.project

@@ -115,10 +115,16 @@ class Tweet(models.Model):
 class TweetMention(models.Model):
     tweet_id = models.ForeignKey(Tweet)
     user_twitter_id = models.BigIntegerField()
+    
+    class Meta:
+        db_table = "twitter_tweet_mentions"
 
 class TweetContributor(models.Model):
     tweet_id = models.ForeignKey(Tweet)
     user_twitter_id = models.BigIntegerField()
+    
+    class Meta:
+        db_table = "twitter_tweet_contributors"
 
 class TweetIndex(models.Model):
     keyword = models.CharField(max_length=140)
