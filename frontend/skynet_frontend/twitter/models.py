@@ -16,7 +16,7 @@ class BoundingBoxType(models.Model):
     text = models.CharField(max_length=10)
 
 class BoundingBox(models.Model):
-    bb_type = models.ForeignKey(BoundingBoxType)
+    bounding_box_type = models.ForeignKey(BoundingBoxType)
     coordinates = models.TextField(null=True)
 
 class Language(models.Model):
@@ -53,7 +53,7 @@ class User(models.Model):
     default_profile = models.BooleanField()
     statuses_count = models.IntegerField()
     profile_background_tile = models.BooleanField()
-    lang = models.ForeignKey(Language)
+    language = models.ForeignKey(Language)
     profile_link_color = models.CharField(max_length=255)
     following = models.IntegerField()
     favourites_count = models.BigIntegerField()
@@ -107,12 +107,12 @@ class Tweet(models.Model):
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
-        keywords = self.body.split()
+        keywords = self.text.split()
         for keyword in keywords:
             TweetIndex(keyword = keyword, tweet = self).save()
     
     def __unicode__(self):
-        return "@" + self.user.twitter_id + ": " + self.body
+        return "@" + self.user.name + ": " + self.text
 
 class TweetMention(models.Model):
     tweet = models.ForeignKey(Tweet)
