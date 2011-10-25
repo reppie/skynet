@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Count
+from skynet_frontend.settings import TWITTER
 
 class Hashtag(models.Model):
     text = models.CharField(max_length=139)
@@ -14,7 +16,7 @@ class BoundingBoxType(models.Model):
     text = models.CharField(max_length=10)
 
 class BoundingBox(models.Model):
-    bb_type_id = models.ForeignKey(BoundingBoxType)
+    bounding_box_type = models.ForeignKey(BoundingBoxType)
     coordinates = models.TextField(null=True)
 
 class Language(models.Model):
@@ -29,12 +31,12 @@ class TimeZone(models.Model):
 
 class Place(models.Model):
     twitter_id = models.BigIntegerField()
-    place_type_id = models.ForeignKey(PlaceType)
-    bb_id = models.ForeignKey(BoundingBox)
+    place_type = models.ForeignKey(PlaceType)
+    bounding_box = models.ForeignKey(BoundingBox)
     name = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
     full_name = models.CharField(max_length=255)
-    country_id = models.ForeignKey(Country)
+    country = models.ForeignKey(Country)
     street_address = models.CharField(max_length=255)
     locality = models.CharField(max_length=255, null=True)
     region = models.CharField(max_length=255, null=True)
@@ -47,11 +49,11 @@ class Place(models.Model):
 
 class User(models.Model):
     twitter_id = models.BigIntegerField()
-    place_id = models.ForeignKey(Place)
+    place = models.ForeignKey(Place)
     default_profile = models.BooleanField()
     statuses_count = models.IntegerField()
     profile_background_tile = models.BooleanField()
-    lang_id = models.ForeignKey(Language)
+    language = models.ForeignKey(Language)
     profile_link_color = models.CharField(max_length=255)
     following = models.IntegerField()
     favourites_count = models.BigIntegerField()
@@ -72,7 +74,7 @@ class User(models.Model):
     profile_background_image_url_https = models.CharField(max_length=255, null=True)
     follow_request_sent = models.BooleanField()
     url = models.CharField(max_length=255, null=True)
-    time_zone_id = models.ForeignKey(TimeZone)
+    time_zone = models.ForeignKey(TimeZone)
     notifications = models.IntegerField()
     profile_use_background_image = models.BooleanField()
     friends_count = models.IntegerField()
@@ -88,39 +90,39 @@ class Url(models.Model):
 
 class Tweet(models.Model):
     text = models.CharField(max_length=140)
-    geo = models.CharField(max_length=255, null=True) #WTF?
+    geo = models.CharField(max_length=255, null=True) #@TODO: Find out what kind of field should be used here
     truncated = models.BooleanField()
     twitter_id = models.BigIntegerField()
-    source_type_id = models.ForeignKey(SourceType)
+    source_type = models.ForeignKey(SourceType)
     favorited = models.BooleanField()
     in_reply_to_tweet_twitter_id = models.BigIntegerField(null=True)
     in_reply_to_user_twitter_id = models.BigIntegerField(null=True)
     retweet_count = models.IntegerField()
     created_at = models.DateTimeField()
-    place_id = models.ForeignKey(Place)
-    user_id = models.ForeignKey(User)
+    place = models.ForeignKey(Place)
+    user = models.ForeignKey(User)
     coordinates = models.TextField(null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs")
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags")
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
-        keywords = self.body.split()
+        keywords = self.text.split()
         for keyword in keywords:
             TweetIndex(keyword = keyword, tweet = self).save()
     
     def __unicode__(self):
-        return "@" + self.username + ": " + self.body
+        return "@" + self.user.name + ": " + self.text
 
 class TweetMention(models.Model):
-    tweet_id = models.ForeignKey(Tweet)
+    tweet = models.ForeignKey(Tweet)
     user_twitter_id = models.BigIntegerField()
     
     class Meta:
         db_table = "twitter_tweet_mentions"
 
 class TweetContributor(models.Model):
-    tweet_id = models.ForeignKey(Tweet)
+    tweet = models.ForeignKey(Tweet)
     user_twitter_id = models.BigIntegerField()
     
     class Meta:
@@ -128,7 +130,51 @@ class TweetContributor(models.Model):
 
 class TweetIndex(models.Model):
     keyword = models.CharField(max_length=140)
-    tweet_id = models.ForeignKey(Tweet)
+    tweet = models.ForeignKey(Tweet)
 
+    def getCloudMap(self):
+        query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword'))
+        keyword_map = {}
+        for entry in query_set:
+            keyword_map[entry['keyword']] = entry['count']
+
+        largest = None
+        smallest = None
+        total_count = 0
+        sum_count = 0
+        for entry in query_set:
+            count = entry['count']
+            
+            if(largest is None or count > largest):
+                largest = count
+
+            if(smallest is None or count < smallest):
+                smallest = count
+                
+            total_count = total_count + 1
+            sum_count = sum_count + count
+
+        spread = largest - smallest
+        if(spread < 1):
+            spread = 1
+            
+        min_font_size = TWITTER['keywordcloud']['min_font_size']
+        max_font_size = TWITTER['keywordcloud']['max_font_size']
+        step = (max_font_size - min_font_size) / spread
+        sizes = []
+        for entry in query_set:
+            count = min_font_size + (entry['count'] - smallest) * step
+            t = TweetIndexCount(keyword=entry["keyword"], count=count)
+            sizes.append(t)
+            
+        return sizes
+            
     def __unicode__(self):
         return self.keyword
+    
+class TweetIndexCount(models.Model):
+    class Meta:
+        managed = False
+    
+    keyword = models.CharField(max_length=140)
+    count = models.IntegerField()

@@ -1,5 +1,11 @@
 {% extends "base_generic.html" %}
 
+{% block tag-cloud %}
+	{% for keyword in keywords %}
+		<p class="cloud-element" style="font-size: {{ keyword.count }}px !important }">{{ keyword.keyword }}</p>
+	{% endfor %}
+{% endblock %}
+
 {% block title %} Skynet - SoMeLa {% endblock %}
 
 {% block main %} De body van de SoLeMa index {% endblock %}
