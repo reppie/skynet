@@ -153,3 +153,11 @@ LOGGING = {
         },
     }
 }
+
+# Twitter settings
+TWITTER = {
+    'keywordcloud': {
+        'min_font_size': 14,
+        'max_font_size': 30
+    }
+}

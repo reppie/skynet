@@ -18,3 +18,7 @@ aside section h1.title
 	font-size: 1.5em;
 }
 
+.cloud-element
+{
+	display: inline;
+}

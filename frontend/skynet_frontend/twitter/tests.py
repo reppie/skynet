@@ -5,7 +5,8 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.eet
 """
 from django.test import TestCase
-from skynet_frontend.twitter.models import Tweet , TweetIndex
+from skynet_frontend.twitter.models import Tweet, TweetIndex
+
 class TweetTest(TestCase):
     def setUp(self):
         self.body = "body of the tweet"
@@ -25,4 +26,25 @@ class TweetTest(TestCase):
         self.assertEquals(len(tweetIndices), 1)
         tweetIndices = TweetIndex.objects.all()
         self.assertEquals(len(tweetIndices), 4)
+
+class TweetIndexTest(TestCase):
+    def setUp(self):
+        self.body = "keyword keyword keyword keyword singlekeyword"
+        self.twitter_id = 1337
+        self.username = "user"
+        self.tweet = Tweet(body=self.body, twitter_id=self.twitter_id, username=self.username)
+        self.tweet.save()
+    
+    def testCloudData(self):
+        min_font_size = 14
+        max_font_size = 30
+        
+        smallest = 1
+        spread = 3
+        step = (max_font_size - min_font_size) / spread
+        
+        cloud = TweetIndex().getCloudMap()
+            
+        self.assertEquals(cloud[0].count, min_font_size + (4 - smallest) * step)
+        self.assertEquals(cloud[1].count, min_font_size + (1 - smallest) * step)
         
