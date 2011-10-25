@@ -3,3 +3,4 @@ settings.*
 *.class
 .classpath
 .project
+backend/skynet_backend/target/*
