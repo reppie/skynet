@@ -10,11 +10,11 @@ import toctep.skynet.backend.dal.domain.Tweet;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class TweetDaoImpl implements Dao {
+public class TweetDaoImpl extends Dao {
 	
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Connection conn = (Connection) this.getConnection();
 		
 		Tweet tweet = (Tweet) domain;
 		
@@ -40,7 +40,7 @@ public class TweetDaoImpl implements Dao {
 
 	@Override
 	public Tweet select(int id) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Connection conn = (Connection) this.getConnection();
 		
 		Tweet tweet = null;
 		
@@ -73,7 +73,7 @@ public class TweetDaoImpl implements Dao {
 	
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Connection conn = (Connection) this.getConnection();
 		
 		Tweet tweet = (Tweet) domain;
 		

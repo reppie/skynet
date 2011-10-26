@@ -10,11 +10,11 @@ import toctep.skynet.backend.dal.domain.User;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class UserDaoImpl implements Dao {
+public class UserDaoImpl extends Dao {
 
 	@Override
 	public User select(int id) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Connection conn = (Connection) this.getConnection();
 		
 		User user = null;
 		
@@ -42,7 +42,7 @@ public class UserDaoImpl implements Dao {
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Connection conn = (Connection) this.getConnection();
 		
 		User user = (User) domain;
 		
@@ -73,7 +73,7 @@ public class UserDaoImpl implements Dao {
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Connection conn = (Connection) this.getConnection();
 		
 		User user = (User) domain;
 		

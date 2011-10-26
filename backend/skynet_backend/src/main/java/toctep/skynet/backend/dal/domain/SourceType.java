@@ -1,5 +1,19 @@
 package toctep.skynet.backend.dal.domain;
 
-public class SourceType {
+public class SourceType extends Domain {
 
+	public String text;
+	
+	public SourceType(String text) {
+		this.text = text;
+	}
+	
+	public String getSourceType() {
+		return text;
+	}
+	
+	public void setSourceType(String text) {
+		this.text = text;
+	}
+	
 }
