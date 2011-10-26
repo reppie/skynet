@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 #     url(r'^$', 'skynet_frontend.views.home', name='home'),
 #     url(r'^skynet_frontend/', include('skynet_frontend.foo.urls')),
 
-    (r'^somela/$', 'somela.views.index'),
+    (r'^somela/$', 'twitter.views.index'),
     url(r'^admin/', include(admin.site.urls)),
 )
 
