@@ -17,11 +17,12 @@
 		<!--[if lt IE 8]>
 		<link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
 		<![endif]-->
-		<script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
+		<script src="/site_media/js/libs/modernizr-2.0.6.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<header class="span-24">
+				<img class="twitter-logo" src="/site_media/img/twitter_newbird_blue.png"/>
 				{% block header %}<h1>Social Media Lab</h1>{% endblock %}
 			</header>
 			<section class="span-18 main">
@@ -49,7 +50,10 @@
 					
 				{% endblock %}
 				<footer class="span-24">
-				{% block footer %}&copy; Hanze Hogeschool Groningen{% endblock %}
+				{% block footer %}
+				<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
+				<p>&copy; Hanze Hogeschool Groningen</p>
+				{% endblock %}
 				</footer>
 			</aside>
 			

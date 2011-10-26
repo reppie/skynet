@@ -5,6 +5,7 @@ header
 
 footer
 {
+	margin-top: 10%;
 	height: 20px;
 }
 
@@ -41,4 +42,12 @@ aside section h1.title
 body{
 	background-color: #ddd;
 
+}
+.twitter-logo{
+	float:right;
+	position: relative;
+	top: -50px;
+	width:200px;
+	height: 200px;
+	
 }
