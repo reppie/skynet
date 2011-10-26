@@ -11,6 +11,12 @@ class Country(models.Model):
     
 class PlaceType(models.Model):
     text = models.CharField(max_length=10, blank=True, null=True)
+    
+class GeoType(models.Model):
+    text = models.CharField(max_length=10, blank=True, null=True)
+    
+class CoordinatesType(models.Model):
+    text = models.CharField(max_length=10, blank=True, null=True)     
 
 class BoundingBoxType(models.Model):
     text = models.CharField(max_length=10, blank=True, null=True)
@@ -46,6 +52,14 @@ class Place(models.Model):
     twitter = models.CharField(max_length=255, blank=True, null=True)
     url = models.CharField(max_length=255, blank=True, null=True)
     appid = models.CharField(max_length=255, blank=True, null=True)
+
+class Geo(models.Model):
+    geo_type = models.ForeignKey(GeoType, blank=True, null=True)
+    coordinates = models.TextField(blank=True, null=True)
+    
+class Coordinates(models.Model):
+    coordinates_type = models.ForeignKey(CoordinatesType, blank=True, null=True)
+    coordinates = models.TextField(blank=True, null=True)    
 
 class User(models.Model):
     twitter_id = models.IntegerField(blank=True, default=0)
@@ -93,7 +107,7 @@ class Url(models.Model):
 
 class Tweet(models.Model):
     text = models.CharField(max_length=140, null=True)
-    geo = models.CharField(max_length=255, blank=True, null=True) #@TODO: Find out what kind of field should be used here, oftewel WTF!?
+    geo = models.ForeignKey(Geo, blank=True, null=True)
     truncated = models.BooleanField(blank=True)
     twitter_id = models.IntegerField(default=0)
     source_type = models.ForeignKey(SourceType, blank=True, null=True)
@@ -104,7 +118,7 @@ class Tweet(models.Model):
     created_at = models.DateTimeField(null=True)
     place = models.ForeignKey(Place, blank=True, null=True)
     user = models.ForeignKey(User, null=True)
-    coordinates = models.TextField(blank=True, null=True)
+    coordinates = models.ForeignKey(Coordinates, blank=True, null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
     

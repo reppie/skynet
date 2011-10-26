@@ -24,12 +24,19 @@ public class TweetParser {
 		return instance;
 	}
 	
-	public boolean parse(Status tweet) {
-		System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+	public boolean parse(Status status) {
+		System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
         System.out.println();
         
-        tweetDao.insert(new Tweet(tweet.getText()));
-		
+        Tweet tweet = new Tweet();
+        tweet.setText(status.getText());
+        tweet.setTruncated(status.isTruncated());
+        tweet.setTwitterId(status.getId());
+		tweet.setFavorited(status.isFavorited());
+		tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
+		tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
+		tweet.setRetweetCount(status.getRetweetCount());
+		tweet.setCreatedAt(status.getCreatedAt());
 		return true;
 	}
 	
