@@ -71,8 +71,24 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(
+					"DELETE FROM twitter_tweet" +
+					"WHERE id=" +	user.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 
 }
