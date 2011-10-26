@@ -28,7 +28,7 @@ public class TweetParser {
 		System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
         System.out.println();
         
-        tweetDao.insertTweet(new Tweet(tweet.getText()));
+        tweetDao.insert(new Tweet(tweet.getText()));
 		
 		return true;
 	}

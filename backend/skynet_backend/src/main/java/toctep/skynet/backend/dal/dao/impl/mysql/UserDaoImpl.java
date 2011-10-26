@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.UserDao;
+import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.User;
 
 import com.mysql.jdbc.Connection;
@@ -12,7 +13,7 @@ import com.mysql.jdbc.Statement;
 public class UserDaoImpl implements UserDao {
 
 	@Override
-	public User selectUser(String name) {	
+	public User select(int id) {	
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		User user = null;
@@ -22,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE name = '" + name + "'");
+			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE id = '" + id + "'");
 			rs.first();
 			user = new User(rs.getInt("id"), rs.getString("name"));
 		} catch (SQLException e) {
@@ -40,8 +41,10 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void insertUser(User user) {
+	public void insert(Domain domain) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		
+		User user = (User) domain;
 		
 		Statement stmt = null;
 		
@@ -64,14 +67,15 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-		
+	public void update(Domain domain) {
+		// TODO
 	}
 
 	@Override
-	public void deleteUser(User user) {
+	public void delete(Domain domain) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		
+		User user = (User) domain;
 		
 		Statement stmt = null;
 		

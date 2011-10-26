@@ -11,6 +11,7 @@ public class TweetRetriever implements Runnable {
 
 	private TweetParser tweetParser;
 	private StatusListener statusListerner;
+	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
 	    Initialize();
@@ -43,13 +44,14 @@ public class TweetRetriever implements Runnable {
 	            ex.printStackTrace();
 	        }
 	    };
+	    
+	    twitterStream = new TwitterStreamFactory().getInstance();
+	    twitterStream.addListener(statusListerner);
 	}
 
 	@Override
 	public void run() {
-		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
-	    twitterStream.addListener(statusListerner);
-	    
+		// TODO Filters beheren
 	    double[][] coords = { {3.39, 51.17}, {7.29, 53.51} }; // Nederland
 	    //double[][] coords = { {6.19, 53.09}, {7.22, 53.51} }; // Provincie Groningen
 	    //double[][] coords = { {6.45, 53.16}, {6.65, 53.26} }; // Groningen
