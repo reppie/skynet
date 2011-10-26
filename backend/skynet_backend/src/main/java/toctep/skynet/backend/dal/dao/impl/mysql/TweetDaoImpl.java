@@ -3,28 +3,74 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import toctep.skynet.backend.dal.dao.UserDao;
-import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.domain.Tweet;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class UserDaoImpl implements UserDao {
+public class TweetDaoImpl implements TweetDao{
 
 	@Override
-	public User selectUser(String name) {	
+	public void deleteTweet(Tweet tweet) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
-		User user = null;
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(
+					"DELETE FROM twitter_tweet" +
+					"WHERE id=" +	tweet.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+	}
+
+	@Override
+	public void insertTweet(Tweet tweet) {
+		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(
+					"INSERT INTO twitter_tweet" +
+						"(text)" +
+					"VALUES " +
+						"('" + tweet.getText() + "')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public Tweet selectTweet(int tweetId) {
+		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		
+		Tweet tweet = null;
 		
 		Statement stmt = null;
 		ResultSet rs = null;
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE name = '" + name + "'");
+			rs = stmt.executeQuery("SELECT id FROM twitter_tweet WHERE id = " + tweetId);
 			rs.first();
-			user = new User(rs.getInt("id"), rs.getString("name"));
+			tweet = new Tweet(rs.getInt("id"), rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -36,59 +82,13 @@ public class UserDaoImpl implements UserDao {
 			}
 		}
 		
-		return user;
+		return tweet;
 	}
 
 	@Override
-	public void insertUser(User user) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"INSERT INTO twitter_user" +
-						"(name)" +
-					"VALUES " +
-						"('" + user.getName() + "')");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	@Override
-	public void updateUser(User user) {
+	public void updateTweet(Tweet tweet) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void deleteUser(User user) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"DELETE FROM twitter_tweet" +
-					"WHERE id=" +	user.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
 	}
 
 }
