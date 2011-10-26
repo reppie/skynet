@@ -1,19 +1,27 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.DaoFacade;
+import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 
 public class DaoFacadeImpl implements DaoFacade {
 	
-	private UserDao userDAO;
+	private UserDao userDao;
+	private TweetDao tweetDao;
 	
 	public DaoFacadeImpl() {
-		userDAO = new UserDaoImpl();
+		userDao = new UserDaoImpl();
+		tweetDao = new TweetDaoImpl();
 	}
 	
 	@Override
-	public UserDao getUserDAO() {
-		return userDAO;
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	@Override
+	public TweetDao getTweetDao() {
+		return tweetDao;
 	}
 
 }

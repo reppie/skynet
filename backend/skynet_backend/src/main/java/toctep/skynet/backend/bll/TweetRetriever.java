@@ -7,15 +7,24 @@ import twitter4j.StatusListener;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-public class Server implements Runnable {
+public class TweetRetriever implements Runnable {
 
+	private TweetParser tweetParser;
 	private StatusListener statusListerner;
 	
-	public Server() {
-	    statusListerner = new StatusListener() {
+	public TweetRetriever() {
+	    Initialize();
+	}
+	
+	private void Initialize() {
+		// Disable twitter4j logging
+		System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory"); 
+		
+		tweetParser = TweetParser.getInstance();
+		
+		statusListerner = new StatusListener() {
 	        public void onStatus(Status status) {
-	            System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
-	            System.out.println();
+	            tweetParser.parse(status);
 	        }
 	
 	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
@@ -35,7 +44,7 @@ public class Server implements Runnable {
 	        }
 	    };
 	}
-	
+
 	@Override
 	public void run() {
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
@@ -47,10 +56,6 @@ public class Server implements Runnable {
 	    //double[][] coords = { {6.52, 53.23}, {6.55, 53.25} }; // Zernike Complex
 	    
 	    twitterStream.filter(new FilterQuery(0, /*new long[] { 397147205 }*/null, null, coords));
-	}
-	
-	public static void main(String[] args) {
-		new Thread(new Server()).start();
 	}
 	
 }

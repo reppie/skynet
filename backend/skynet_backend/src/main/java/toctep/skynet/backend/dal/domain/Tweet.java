@@ -19,6 +19,10 @@ public class Tweet {
 	private User user;
 	private String coordinates;
 	
+	public Tweet(String text) {
+		this.text = text;
+	}
+	
 	public Tweet(int id, String text) {
 		this.id = id;
 		this.text = text;
