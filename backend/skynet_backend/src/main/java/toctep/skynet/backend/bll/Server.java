@@ -40,14 +40,12 @@ public class Server implements Runnable {
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 	    twitterStream.addListener(statusListerner);
 	    
-	    //double[][] coords = { {3.39, 51.17}, {7.29, 53.51} }; // Nederland
+	    double[][] coords = { {3.39, 51.17}, {7.29, 53.51} }; // Nederland
 	    //double[][] coords = { {6.19, 53.09}, {7.22, 53.51} }; // Provincie Groningen
-	    double[][] coords = { {6.45, 53.16}, {6.65, 53.26} }; // Groningen
+	    //double[][] coords = { {6.45, 53.16}, {6.65, 53.26} }; // Groningen
 	    //double[][] coords = { {6.52, 53.23}, {6.55, 53.25} }; // Zernike Complex
 	    
-	    // filter() method internally creates a thread which manipulates TwitterStream
-	    // and calls these adequate listener methods continuously.
-	    twitterStream.filter(new FilterQuery(0, new long[] { 397147205 }, null, coords));
+	    twitterStream.filter(new FilterQuery(0, /*new long[] { 397147205 }*/null, null, coords));
 	}
 	
 	public static void main(String[] args) {

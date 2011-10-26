@@ -3,17 +3,17 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import toctep.skynet.backend.dal.dao.UserDAO;
+import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.User;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class UserDAOImpl implements UserDAO {
+public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User selectUser(String name) {	
-		Connection conn = MySQL.getInstance().getConnection();
+		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		User user = null;
 		
@@ -41,7 +41,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void insertUser(User user) {
-		Connection conn = MySQL.getInstance().getConnection();
+		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		Statement stmt = null;
 		
