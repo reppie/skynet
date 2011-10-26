@@ -15,6 +15,7 @@ public class Server implements Runnable {
 	    statusListerner = new StatusListener() {
 	        public void onStatus(Status status) {
 	            System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
+	            System.out.println();
 	        }
 	
 	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
