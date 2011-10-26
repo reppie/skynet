@@ -51,7 +51,7 @@ public class TweetRetriever implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Filters beheren
+		// TODO Create a "pretty" way of managing filters 
 	    double[][] coords = { {3.39, 51.17}, {7.29, 53.51} }; // Nederland
 	    //double[][] coords = { {6.19, 53.09}, {7.22, 53.51} }; // Provincie Groningen
 	    //double[][] coords = { {6.45, 53.16}, {6.65, 53.26} }; // Groningen

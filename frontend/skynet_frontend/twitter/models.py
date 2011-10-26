@@ -151,56 +151,70 @@ class TweetIndex(models.Model):
 
     def getCloudMap(self):
         query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword'))
-        keyword_map = self.getHashMapFromQuerySet(query_set)
-
-        largest = self.getLargestValueFromMap(keyword_map)
-        smallest = self.getSmallestValueFromMap(keyword_map)
-        spread = self.getSpread(largest, smallest)
-            
         min_font_size = TWITTER['keywordcloud']['min_font_size']
         max_font_size = TWITTER['keywordcloud']['max_font_size']
-        step = self.calculateFontSizeIncrement(max_font_size, min_font_size, spread)
         
-        sizes = self.querySetToTweetIndexCount(query_set, min_font_size, smallest, step)
+        cloud = KeywordCloud(query_set=query_set, min_font_size=min_font_size, max_font_size=max_font_size)
+        return cloud.create()
+        
+    def __unicode__(self):
+        return self.keyword
+    
+class KeywordCloud:
+    query_set = None
+    
+    def __init__(self, query_set, min_font_size=14, max_font_size=30):
+        self.query_set = query_set
+        self.min_font_size = min_font_size
+        self.max_font_size = max_font_size
+        
+    def create(self):
+        keyword_map = self.__getHashMapFromQuerySet(self.query_set)
+
+        largest = self.__getLargestValueFromMap(keyword_map)
+        smallest = self.__getSmallestValueFromMap(keyword_map)
+        spread = self.__getSpread(largest, smallest)
+            
+        step = self.__calculateFontSizeIncrement(self.max_font_size, self.min_font_size, spread)
+        sizes = self.__querySetToTweetIndexCount(self.query_set, self.min_font_size, smallest, step)
             
         return sizes
-    
-    def getLargestValueFromMap(self, a_map):
+
+    def __getLargestValueFromMap(self, a_map):
         key_of_largest_value = max(a_map, key=a_map.get) 
         
         return int(a_map[key_of_largest_value])
     
-    def getSmallestValueFromMap(self, a_map):
+    def __getSmallestValueFromMap(self, a_map):
         key_of_smallest_value = min(a_map, key=a_map.get) 
         
         return int(a_map[key_of_smallest_value])
     
-    def getHashMapFromQuerySet(self, the_query_set):
+    def __getHashMapFromQuerySet(self, the_query_set):
         keyword_map = {}
         for entry in the_query_set:
             keyword_map[entry['keyword']] = entry['count']
             
         return keyword_map
     
-    def getSumOfHashMapValues(self, a_map):
+    def __getSumOfHashMapValues(self, a_map):
         value_sum = 0
         for key in a_map:
             value_sum += int(a_map[key])
             
         return value_sum
     
-    
-    def getSpread(self, largest, smallest):
+    def __getSpread(self, largest, smallest):
         spread = largest - smallest
         if(spread < 1):
             spread = 1
             
         return spread
     
-    def calculateFontSizeIncrement(self, max_font_size, min_font_size, spread):
+    def __calculateFontSizeIncrement(self, max_font_size, min_font_size, spread):
         return (max_font_size - min_font_size) / spread
     
-    def querySetToTweetIndexCount(self, the_query_set, min_font_size, smallest_value, step):
+    def __querySetToTweetIndexCount(self, the_query_set, min_font_size, smallest_value, step):
         tweet_index_count_array = []
         if len(the_query_set) == 0:
             return []
@@ -209,9 +223,6 @@ class TweetIndex(models.Model):
             tweet_index_count_array.append(TweetIndexCount(keyword=row["keyword"], count=new_font_size))
             
         return tweet_index_count_array
-    
-    def __unicode__(self):
-        return self.keyword
     
 class TweetIndexCount(models.Model):
     class Meta:

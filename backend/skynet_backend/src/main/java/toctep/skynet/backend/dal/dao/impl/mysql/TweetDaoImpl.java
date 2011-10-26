@@ -3,14 +3,14 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.Tweet;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class TweetDaoImpl implements TweetDao {
+public class TweetDaoImpl implements Dao {
 	
 	@Override
 	public void insert(Domain domain) {
@@ -22,10 +22,11 @@ public class TweetDaoImpl implements TweetDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"INSERT INTO twitter_tweet" +
-						"(text)" +
-					"VALUES " +	"(\"" + ((Tweet) tweet).getText() + "\")");
+			int id = stmt.executeUpdate(
+				"INSERT INTO twitter_tweet (text) VALUES (\"" + ((Tweet) tweet).getText() + "\")",
+				Statement.RETURN_GENERATED_KEYS
+			);
+			tweet.setId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -80,9 +81,7 @@ public class TweetDaoImpl implements TweetDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"DELETE FROM twitter_tweet" +
-					"WHERE id=" +	tweet.getId());
+			stmt.executeUpdate("DELETE FROM twitter_tweet WHERE id=" +	tweet.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
