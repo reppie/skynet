@@ -18,7 +18,8 @@ public class Tweet extends Domain {
 	private User user;
 	private String coordinates;
 	
-	public Tweet() {		
+	public Tweet() {
+		super();
 	}
 	
 	public Tweet(String text) {
