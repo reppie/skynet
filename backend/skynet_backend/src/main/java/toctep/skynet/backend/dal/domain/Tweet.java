@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Tweet {
 
+	private int id;
 	private String text;
 	private String geo;
 	private boolean truncated;
@@ -18,15 +19,17 @@ public class Tweet {
 	private User user;
 	private String coordinates;
 	
-	public Tweet(String text) {
+	public Tweet(int id, String text) {
+		this.id = id;
 		this.text = text;
 	}
 	
-	public Tweet(String text, String geo, boolean truncated, int twitterId,
+	public Tweet(int id, String text, String geo, boolean truncated, int twitterId,
 			SourceType sourceType, boolean favorited,
 			int inReplyToTweetTwitterId, int inReplyToUserTwitterId,
 			int retweetCount, Date createdAt, Place place, User user,
 			String coordinates) {
+		this.id = id;
 		this.text = text;
 		this.geo = geo;
 		this.truncated = truncated;
@@ -42,6 +45,14 @@ public class Tweet {
 		this.coordinates = coordinates;
 	}
 
+	public String getId() {
+		return text;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getText() {
 		return text;
 	}
