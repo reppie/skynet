@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.dao;
 
 public interface DaoFacade {
 
-	public UserDao getUserDao();
-	public TweetDao getTweetDao();
+	public Dao getUserDao();
+	public Dao getTweetDao();
 	
 }

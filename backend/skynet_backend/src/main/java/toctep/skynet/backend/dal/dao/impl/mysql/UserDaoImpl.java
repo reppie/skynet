@@ -3,17 +3,17 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import toctep.skynet.backend.dal.dao.UserDao;
+import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.User;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements Dao {
 
 	@Override
-	public User select(int id) {	
+	public User select(int id) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		User user = null;
@@ -50,11 +50,11 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"INSERT INTO twitter_user" +
-						"(name)" +
-					"VALUES " +
-						"('" + user.getName() + "')");
+			int id = stmt.executeUpdate(
+				"INSERT INTO twitter_user (name) VALUES	('" + user.getName() + "')",
+				Statement.RETURN_GENERATED_KEYS
+			);
+			user.setId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -81,9 +81,7 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"DELETE FROM twitter_tweet" +
-					"WHERE id=" +	user.getId());
+			stmt.executeUpdate("DELETE FROM twitter_tweet WHERE id=" +	user.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
