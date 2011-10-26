@@ -2,9 +2,8 @@ package toctep.skynet.backend.dal.domain;
 
 import java.util.Date;
 
-public class User {
+public class User extends Domain {
 
-	private int id;
 	private int twitterId;
 	private Place place;
 	private boolean defaultProfile;
@@ -42,7 +41,7 @@ public class User {
 	private int listedCount;
 	
 	public User(int id, String name) {
-		this.id = id;
+		super(id);
 		this.name = name;
 	}
 	
@@ -60,7 +59,7 @@ public class User {
 			String profileSideBarFillColor, String screenName,
 			String profileImageUrl, boolean showAllInlineMedia,
 			boolean isTranslator, int listedCount) {
-		this.id = id;
+		super(id);
 		this.twitterId = twitterId;
 		this.place = place;
 		this.defaultProfile = defaultProfile;
@@ -96,14 +95,6 @@ public class User {
 		this.showAllInlineMedia = showAllInlineMedia;
 		this.isTranslator = isTranslator;
 		this.listedCount = listedCount;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getTwitterId() {

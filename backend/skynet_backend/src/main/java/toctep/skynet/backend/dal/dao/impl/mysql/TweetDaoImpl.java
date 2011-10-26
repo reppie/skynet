@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.Tweet;
 
 import com.mysql.jdbc.Connection;
@@ -12,7 +13,7 @@ import com.mysql.jdbc.Statement;
 public class TweetDaoImpl implements TweetDao {
 
 	@Override
-	public void deleteTweet(Tweet tweet) {
+	public void delete(Domain tweet) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		Statement stmt = null;
@@ -34,7 +35,7 @@ public class TweetDaoImpl implements TweetDao {
 	}
 
 	@Override
-	public void insertTweet(Tweet tweet) {
+	public void insert(Domain tweet) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		Statement stmt = null;
@@ -58,7 +59,7 @@ public class TweetDaoImpl implements TweetDao {
 	}
 
 	@Override
-	public Tweet selectTweet(int tweetId) {
+	public Tweet select(int id) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
 		Tweet tweet = null;
@@ -68,7 +69,7 @@ public class TweetDaoImpl implements TweetDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT id FROM twitter_tweet WHERE id = " + tweetId);
+			rs = stmt.executeQuery("SELECT id FROM twitter_tweet WHERE id = " + id);
 			rs.first();
 			tweet = new Tweet(rs.getInt("id"), rs.getString("text"));
 		} catch (SQLException e) {
@@ -86,7 +87,7 @@ public class TweetDaoImpl implements TweetDao {
 	}
 
 	@Override
-	public void updateTweet(Tweet tweet) {
+	public void update(Domain tweet) {
 		// TODO Auto-generated method stub
 		
 	}

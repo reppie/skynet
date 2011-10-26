@@ -2,9 +2,8 @@ package toctep.skynet.backend.dal.domain;
 
 import java.util.Date;
 
-public class Tweet {
+public class Tweet extends Domain {
 
-	private int id;
 	private String text;
 	private String geo;
 	private boolean truncated;
@@ -20,7 +19,7 @@ public class Tweet {
 	private String coordinates;
 	
 	public Tweet(int id, String text) {
-		this.id = id;
+		super(id);
 		this.text = text;
 	}
 	
@@ -29,7 +28,7 @@ public class Tweet {
 			int inReplyToTweetTwitterId, int inReplyToUserTwitterId,
 			int retweetCount, Date createdAt, Place place, User user,
 			String coordinates) {
-		this.id = id;
+		super(id);
 		this.text = text;
 		this.geo = geo;
 		this.truncated = truncated;
@@ -43,14 +42,6 @@ public class Tweet {
 		this.place = place;
 		this.user = user;
 		this.coordinates = coordinates;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public String getText() {

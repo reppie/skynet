@@ -1,7 +1,15 @@
 package toctep.skynet.backend.dal.dao;
 
-public interface DaoFacade {
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 
-	public UserDao getUserDAO();
+public abstract class DaoFacade {
+
+	private DaoConnection connection;
+	
+	public DaoFacade() {
+		connection = DaoConnectionImpl.getInstance();
+	}
+	
+	public abstract UserDao getUserDao();
 	
 }
