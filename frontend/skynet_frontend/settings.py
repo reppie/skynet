@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'twitter',
-    'somela',
+#    'somela',
 #    'django_hudson',
     'south',
     # Uncomment the next line to enable admin documentation:
