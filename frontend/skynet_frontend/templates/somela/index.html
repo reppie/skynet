@@ -6,6 +6,14 @@
 	{% endfor %}
 {% endblock %}
 
-{% block title %} Skynet - SoMeLa {% endblock %}
+{% block title %} Social Media Lab {% endblock %}
 
-{% block main %} De body van de SoLeMa index {% endblock %}
+{% block main %} 
+	De body van de SoLeMa index
+	{% if tweets %}
+		{% for tweet in tweets %}
+		<div class="tweet">{{ tweet.text }}</div>
+		{% endfor %}
+	{% endif %}
+
+ {% endblock %}
