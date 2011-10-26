@@ -5,6 +5,7 @@ header
 
 footer
 {
+	margin-top: 10%;
 	height: 20px;
 }
 
@@ -21,4 +22,32 @@ aside section h1.title
 .cloud-element
 {
 	display: inline;
+}
+
+.container{
+    background-color: #eee;         
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;         
+    -moz-box-shadow: 10px 10px 5px #000;    
+    -webkit-box-shadow: 10px 10px 5px #000;
+    box-shadow: 10px 10px 10px #000;
+    padding: 2%;
+	margin-top: 5%;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	bottom: 0px;
+}
+
+body{
+	background-color: #ddd;
+
+}
+.twitter-logo{
+	float:right;
+	position: relative;
+	top: -50px;
+	width:200px;
+	height: 200px;
+	
 }

@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>{% block title %}Skynet{% endblock %}</title>
+		<title>{% block title %}Social Media Lab{% endblock %}</title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -17,12 +17,13 @@
 		<!--[if lt IE 8]>
 		<link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
 		<![endif]-->
-		<script src="/static/js/libs/modernizr-2.0.6.min.js"></script>
+		<script src="/site_media/js/libs/modernizr-2.0.6.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<header class="span-24">
-				{% block header %}Skynet header{% endblock %}
+				<img class="twitter-logo" src="/site_media/img/twitter_newbird_blue.png"/>
+				{% block header %}<h1>Social Media Lab</h1>{% endblock %}
 			</header>
 			<section class="span-18 main">
 				{% block main %}The center column{% endblock %}
@@ -46,14 +47,19 @@
 							<img src="/site_media/img/dummy/graph.png"	
 						{% endblock %}
 					</section>	
+					
 				{% endblock %}
+				<footer class="span-24">
+				{% block footer %}
+				<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
+				<p>&copy; Hanzehogeschool Groningen</p>
+				{% endblock %}
+				</footer>
 			</aside>
-			<footer class="span-24">
-				{% block footer %}The footer{% endblock %}
-			</footer>
+			
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+		<script>window.jQuery || document.write('<script src="/site_media/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 		<!-- scripts concatenated and minified via ant build script-->
 		<script src="/site_media/js/plugins.js"></script>
 		<script src="/site_media/js/script.js"></script>
