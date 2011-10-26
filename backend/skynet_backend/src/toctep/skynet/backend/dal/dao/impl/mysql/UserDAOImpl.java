@@ -12,7 +12,7 @@ import com.mysql.jdbc.Statement;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public User selectUser(int id) {	
+	public User selectUser(String name) {	
 		Connection conn = MySQL.getInstance().getConnection();
 		
 		User user = null;
@@ -22,9 +22,9 @@ public class UserDAOImpl implements UserDAO {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE id = '" + id + "'");
+			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE name = '" + name + "'");
 			rs.first();
-			user = new User(id, rs.getString("name"));
+			user = new User(rs.getString("name"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -37,6 +37,42 @@ public class UserDAOImpl implements UserDAO {
 		}
 		
 		return user;
+	}
+
+	@Override
+	public void insertUser(User user) {
+		Connection conn = MySQL.getInstance().getConnection();
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(
+					"INSERT INTO twitter_user" +
+						"(name)" +
+					"VALUES " +
+						"('" + user.getName() + "')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
