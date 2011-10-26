@@ -3,11 +3,13 @@ package toctep.skynet.backend.bll;
 import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
+import toctep.skynet.backend.dal.domain.Tweet;
 import twitter4j.Status;
 
 public class TweetParser {
 	
 	private static TweetParser instance;
+	
 	private DaoFacade daoFacade;
 	private Dao tweetDao;
 	
@@ -26,6 +28,8 @@ public class TweetParser {
 	public boolean parse(Status status) {
 		System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
         System.out.println();
+        
+        tweetDao.insert(new Tweet(status.getText()));
 		
 		return true;
 	}
