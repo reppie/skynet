@@ -33,12 +33,16 @@ class TweetIndexTest(TestCase):
         min_font_size = 14
         max_font_size = 30
         
+        a_map = { 'keyword':'4', 'singlekeyword':'1' }
+        self.assertEquals(TweetIndex().getLargestValueFromMap(a_map), 4)
+        self.assertEquals(TweetIndex().getSmallestValueFromMap(a_map), 1)
+        
         smallest = 1
         spread = 3
         step = (max_font_size - min_font_size) / spread
         
         cloud = TweetIndex().getCloudMap()
-            
+        
         self.assertEquals(cloud[0].count, min_font_size + (4 - smallest) * step)
         self.assertEquals(cloud[1].count, min_font_size + (1 - smallest) * step)
         
