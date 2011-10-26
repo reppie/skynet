@@ -3,15 +3,17 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import toctep.skynet.backend.dal.dao.DaoConnection;
+
 import com.mysql.jdbc.Connection;
 
-public class MySQL {
+public class DaoConnectionImpl implements DaoConnection {
 
-	private static MySQL instance;
+	private static DaoConnectionImpl instance;
 	
 	private Connection conn;
 	
-	private MySQL() {	
+	private DaoConnectionImpl() {	
 		try {
 		    conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/skynet?" + "user=skynet&password=asdasd");
 		} catch (SQLException e) {
@@ -19,13 +21,14 @@ public class MySQL {
 		}
 	}
 	
-	public static MySQL getInstance() {
+	public static DaoConnectionImpl getInstance() {
 		if (instance == null) {
-			instance = new MySQL();
+			instance = new DaoConnectionImpl();
 		}
 		return instance;
 	}
 	
+	@Override
 	public Connection getConnection() {
 		return conn;
 	}
