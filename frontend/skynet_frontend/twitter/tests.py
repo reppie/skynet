@@ -1,6 +1,6 @@
 import datetime
 from django.test import TestCase
-from skynet_frontend.twitter.models import Tweet, TweetIndex, User, KeywordCloud
+from skynet_frontend.twitter.models import Tweet, TweetIndex, User
 
 class TweetTest(TestCase):
     def setUp(self):

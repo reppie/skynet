@@ -149,8 +149,14 @@ class TweetIndex(models.Model):
     keyword = models.CharField(max_length=140)
     tweet = models.ForeignKey(Tweet)
 
+    def since_yesterday(self):
+        from datetime import datetime, timedelta
+        yesterday = datetime.now() - timedelta(days = 1)
+        query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gt=yesterday)
+        return query_set
+
     def getCloudMap(self):
-        query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword'))
+        query_set = self.since_yesterday()
         min_font_size = TWITTER['keywordcloud']['min_font_size']
         max_font_size = TWITTER['keywordcloud']['max_font_size']
         
