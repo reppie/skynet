@@ -3,7 +3,7 @@ package toctep.skynet.backend.dal.domain;
 public class Place extends Domain {
 
 	private int twitterId;
-	private PlaceType placeType;
+	private PlaceType type;
 	private BoundingBox boundingBox;
 	private String name;
 	private String fullName;
@@ -24,7 +24,7 @@ public class Place extends Domain {
 			String postalCode, String phone, String twitter, String url,
 			String appId) {
 		this.twitterId = twitterId;
-		this.placeType = placeType;
+		this.type = placeType;
 		this.boundingBox = boundingBox;
 		this.name = name;
 		this.fullName = fullName;
@@ -48,12 +48,12 @@ public class Place extends Domain {
 		this.twitterId = twitterId;
 	}
 
-	public PlaceType getPlaceType() {
-		return placeType;
+	public PlaceType getType() {
+		return type;
 	}
 
-	public void setPlaceType(PlaceType placeType) {
-		this.placeType = placeType;
+	public void setType(PlaceType placeType) {
+		this.type = placeType;
 	}
 
 	public BoundingBox getBoundingBox() {
