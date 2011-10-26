@@ -2,6 +2,7 @@
 
 # -*- coding: utf-8 -*-
 import os
+import sys
 gettext = lambda s: s
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -21,13 +22,16 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'skynet',
+        'NAME': 'skynet', 
         'USER': 'skynet',
         'PASSWORD': 'asdasd',
         'HOST': '',
         'PORT': '',
     }
 }
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'sqlite3', 'NAME': os.path.join(PROJECT_PATH, 'db') + "/db"}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

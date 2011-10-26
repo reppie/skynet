@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE name = '" + name + "'");
 			rs.first();
-			user = new User(rs.getString("name"));
+			user = new User(rs.getInt("id"), rs.getString("name"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -45,8 +45,8 @@ public class Tweet {
 		this.coordinates = coordinates;
 	}
 
-	public String getId() {
-		return text;
+	public int getId() {
+		return id;
 	}
 
 	public void setId(int id) {
