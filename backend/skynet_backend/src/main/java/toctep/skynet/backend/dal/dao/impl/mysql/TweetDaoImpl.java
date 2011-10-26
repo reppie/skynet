@@ -44,8 +44,7 @@ public class TweetDaoImpl implements TweetDao {
 			stmt.executeUpdate(
 					"INSERT INTO twitter_tweet" +
 						"(text)" +
-					"VALUES " +
-						"('" + tweet.getText() + "')");
+					"VALUES " +	"(\"" + tweet.getText() + "\")");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
