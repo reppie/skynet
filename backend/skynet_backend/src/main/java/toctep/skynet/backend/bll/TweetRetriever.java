@@ -7,16 +7,17 @@ import twitter4j.StatusListener;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-public class Server implements Runnable {
+public class TweetRetriever implements Runnable {
 
 	private TweetParser tweetParser;
 	private StatusListener statusListerner;
 	
-	public Server() {
+	public TweetRetriever() {
 	    Initialize();
 	}
 	
 	private void Initialize() {
+		// Disable twitter4j logging
 		System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory"); 
 		
 		tweetParser = TweetParser.getInstance();

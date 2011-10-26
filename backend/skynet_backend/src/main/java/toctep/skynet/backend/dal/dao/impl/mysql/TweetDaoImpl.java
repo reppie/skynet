@@ -9,7 +9,7 @@ import toctep.skynet.backend.dal.domain.Tweet;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class TweetDaoImpl implements TweetDao{
+public class TweetDaoImpl implements TweetDao {
 
 	@Override
 	public void deleteTweet(Tweet tweet) {
