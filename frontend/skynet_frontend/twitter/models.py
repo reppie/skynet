@@ -153,6 +153,9 @@ class TweetIndex(models.Model):
                 
             total_count = total_count + 1
             sum_count = sum_count + count
+        
+        if not largest or not smallest:
+            return []
 
         spread = largest - smallest
         if(spread < 1):
