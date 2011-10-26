@@ -62,7 +62,7 @@ class User(models.Model):
     verified = models.BooleanField(blank=True)
     contributors_enabled = models.BooleanField(blank=True)
     description = models.CharField(max_length=160, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, null=True)
     profile_sidebar_border_color = models.CharField(max_length=255, blank=True, null=True)
     profile_background_color = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -84,26 +84,29 @@ class User(models.Model):
     show_all_inline_media = models.BooleanField(blank=True)
     is_translator = models.BooleanField(blank=True)
     listed_count = models.IntegerField(blank=True, default=0)
+    
+    def __unicode__(self):
+        return self.name
 
 class Url(models.Model):
     text = models.CharField(max_length=255, blank=True, null=True);
 
 class Tweet(models.Model):
-    text = models.CharField(max_length=140, blank=True, null=True)
+    text = models.CharField(max_length=140, null=True)
     geo = models.CharField(max_length=255, blank=True, null=True) #@TODO: Find out what kind of field should be used here, oftewel WTF!?
     truncated = models.BooleanField(blank=True)
-    twitter_id = models.IntegerField(blank=True, default=0)
+    twitter_id = models.IntegerField(default=0)
     source_type = models.ForeignKey(SourceType, blank=True, null=True)
     favorited = models.BooleanField(blank=True)
     in_reply_to_tweet_twitter_id = models.IntegerField(blank=True, default=0)
     in_reply_to_user_twitter_id = models.IntegerField(blank=True, default=0)
     retweet_count = models.IntegerField(blank=True, default=0)
-    created_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(null=True)
     place = models.ForeignKey(Place, blank=True, null=True)
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(User, null=True)
     coordinates = models.TextField(blank=True, null=True)
-    urls = models.ManyToManyField(Url, verbose_name="list of URLs")
-    hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags")
+    urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
+    hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
@@ -112,7 +115,7 @@ class Tweet(models.Model):
             TweetIndex(keyword = keyword, tweet = self).save()
     
     def __unicode__(self):
-        return "@tweeter: " + self.text
+        return "@" + self.user.name + ": " + self.text
 
 class TweetMention(models.Model):
     tweet = models.ForeignKey(Tweet)

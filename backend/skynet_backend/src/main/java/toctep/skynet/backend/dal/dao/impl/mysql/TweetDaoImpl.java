@@ -11,32 +11,12 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 public class TweetDaoImpl implements TweetDao {
-
+	
 	@Override
-	public void delete(Domain tweet) {
+	public void insert(Domain domain) {
 		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"DELETE FROM twitter_tweet" +
-					"WHERE id=" +	tweet.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
-	}
-
-	@Override
-	public void insert(Domain tweet) {
-		Connection conn = DaoConnectionImpl.getInstance().getConnection();
+		Tweet tweet = (Tweet) domain;
 		
 		Statement stmt = null;
 		
@@ -45,8 +25,7 @@ public class TweetDaoImpl implements TweetDao {
 			stmt.executeUpdate(
 					"INSERT INTO twitter_tweet" +
 						"(text)" +
-					"VALUES " +
-						"('" + tweet.getText() + "')");
+					"VALUES " +	"(\"" + ((Tweet) tweet).getText() + "\")");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -87,9 +66,32 @@ public class TweetDaoImpl implements TweetDao {
 	}
 
 	@Override
-	public void update(Domain tweet) {
-		// TODO Auto-generated method stub
+	public void update(Domain domain) {
+		// TODO
+	}
+	
+	@Override
+	public void delete(Domain domain) {
+		Connection conn = DaoConnectionImpl.getInstance().getConnection();
 		
+		Tweet tweet = (Tweet) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(
+					"DELETE FROM twitter_tweet" +
+					"WHERE id=" +	tweet.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 
 }

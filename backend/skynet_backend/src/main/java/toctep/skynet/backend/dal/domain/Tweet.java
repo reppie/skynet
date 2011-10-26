@@ -18,6 +18,10 @@ public class Tweet extends Domain {
 	private User user;
 	private String coordinates;
 	
+	public Tweet(String text) {
+		this.text = text;
+	}
+	
 	public Tweet(int id, String text) {
 		super(id);
 		this.text = text;
