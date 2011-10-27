@@ -62,7 +62,7 @@ class Coordinates(models.Model):
     coordinates = models.TextField(blank=True, null=True)    
 
 class User(models.Model):
-    id = models.BigIntegerField(primary_key=True)
+    twitter_id = models.BigIntegerField(blank=True, default=0)
     place = models.ForeignKey(Place, blank=True, null=True)
     default_profile = models.BooleanField(blank=True)
     statuses_count = models.IntegerField(blank=True, default=0)
@@ -128,10 +128,10 @@ class Keyword(models.Model):
         return self.keyword
 
 class Tweet(models.Model):
-    id = models.BigIntegerField(primary_key=True)
     text = models.CharField(max_length=140, null=True)
     geo = models.ForeignKey(Geo, blank=True, null=True)
     truncated = models.BooleanField(blank=True)
+    twitter_id = models.BigIntegerField(default=0)
     source_type = models.ForeignKey(SourceType, blank=True, null=True)
     favorited = models.BooleanField(blank=True)
     in_reply_to_tweet_twitter_id = models.IntegerField(blank=True, default=0)
@@ -170,4 +170,4 @@ class TweetContributor(models.Model):
     user_twitter_id = models.IntegerField()
 
     class Meta:
-        db_table = "twitter_tweet_contributors";
+        db_table = "twitter_tweet_contributors";    
