@@ -8,8 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import toctep.skynet.backend.dal.dao.Dao;
+import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
+import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 
@@ -21,8 +23,9 @@ public abstract class DomainTest extends TestCase {
 	private Connection conn;
 	
 	private DaoFacade daoFacade;
-	protected Dao userDao;
-	protected Dao tweetDao;
+	protected UserDao userDao;
+	protected TweetDao tweetDao;
+	protected BoundingBoxDao boundingBoxDao;
 	
 	@Before
 	public void setUp() {
@@ -39,6 +42,7 @@ public abstract class DomainTest extends TestCase {
 		daoFacade = new DaoFacadeImpl();
 		userDao = daoFacade.getUserDao();
 		tweetDao = daoFacade.getTweetDao();
+		boundingBoxDao = daoFacade.getBoundingBoxDao();
 	}
 
 	@After
