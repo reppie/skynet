@@ -6,5 +6,6 @@ public interface DaoFacade {
 	public TweetDao getTweetDao();
 	public BoundingBoxDao getBoundingBoxDao();
 	public BoundingBoxTypeDao getBoundingBoxTypeDao();
-	public PlaceDao getPlaceDao();	
+	public PlaceDao getPlaceDao();
+	public PlaceTypeDao getPlaceTypeDao();	
 }
