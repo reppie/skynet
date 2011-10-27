@@ -17,32 +17,6 @@ public class Place extends Domain {
 	private String twitter;
 	private String url;
 	private String appId;
-	
-	public Place() {
-		super();
-	}
-	
-	public Place(String twitterId, PlaceType placeType, BoundingBox boundingBox,
-			String name, String fullName, Country country,
-			String streetAddress, String locality, String region, String iso3,
-			String postalCode, String phone, String twitter, String url,
-			String appId) {
-		this.twitterId = twitterId;
-		this.type = placeType;
-		this.boundingBox = boundingBox;
-		this.name = name;
-		this.fullName = fullName;
-		this.country = country;
-		this.streetAddress = streetAddress;
-		this.locality = locality;
-		this.region = region;
-		this.iso3 = iso3;
-		this.postalCode = postalCode;
-		this.phone = phone;
-		this.twitter = twitter;
-		this.url = url;
-		this.appId = appId;
-	}
 
 	public String getTwitterId() {
 		return twitterId;

@@ -51,7 +51,9 @@ public class TweetDaoImpl extends TweetDao {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT id FROM " + tableName + " WHERE id = " + id);
 			rs.first();
-			tweet = new Tweet(rs.getInt("id"), rs.getString("text"));
+			tweet = new Tweet();
+			tweet.setId(id);
+			tweet.setText(rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

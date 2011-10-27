@@ -1,18 +1,9 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Geo {
+public class Geo extends Domain {
 	
 	private GeoType type;
 	private String coordinates;
-	
-	public Geo(){		
-	}
-	
-	public Geo(GeoType type, String coordinates) {
-		super();
-		this.type = type;
-		this.coordinates = coordinates;
-	}	
 
 	public GeoType getType() {
 		return type;
@@ -29,4 +20,5 @@ public class Geo {
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
 	}
+	
 }

@@ -25,7 +25,9 @@ public class UserDaoImpl extends UserDao {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT name FROM " + tableName + " WHERE id = " + id);
 			rs.first();
-			user = new User(id, rs.getString("name"));
+			user = new User();
+			user.setId(id);
+			user.setName(rs.getString("name"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

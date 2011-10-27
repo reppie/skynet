@@ -4,14 +4,6 @@ public abstract class Domain {
 
 	private int id;
 	
-	public Domain() {
-		
-	}
-	
-	public Domain(int id) {
-		this.id = id;
-	}
-	
 	public int getId() {
 		return id;
 	}
