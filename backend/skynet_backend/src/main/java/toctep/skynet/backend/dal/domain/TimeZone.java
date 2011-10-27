@@ -11,6 +11,10 @@ public class TimeZone {
 		this.timeZone = timeZone;
 	}
 
+	public TimeZone() {
+		super();
+	}
+
 	public int getUtcOffset() {
 		return utcOffset;
 	}

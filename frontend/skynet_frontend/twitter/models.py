@@ -36,7 +36,7 @@ class TimeZone(models.Model):
     time_zone = models.CharField(max_length=255, blank=True, null=True)
 
 class Place(models.Model):
-    twitter_id = models.IntegerField(blank=True, default=0)
+    twitter_id = models.CharField(max_length=255, blank=True, null=True)
     place_type = models.ForeignKey(PlaceType, blank=True, null=True)
     bounding_box = models.ForeignKey(BoundingBox, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
