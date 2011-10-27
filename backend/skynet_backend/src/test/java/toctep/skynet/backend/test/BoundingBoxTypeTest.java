@@ -1,7 +1,5 @@
 package toctep.skynet.backend.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 
 public class BoundingBoxTypeTest extends DomainTest{
