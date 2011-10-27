@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.junit.Test;
-
 import toctep.skynet.backend.dal.domain.Geo;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.SourceType;
@@ -67,7 +65,7 @@ public class TweetTest extends DomainTest {
 		
 		User user = new User();
 		tweet.setUser(user);
-		assertTrue(user.equals(tweet.getUser());
+		assertTrue(user.equals(tweet.getUser()));
 		
 		String coordinates = "test";
 		tweet.setCoordinates(coordinates);

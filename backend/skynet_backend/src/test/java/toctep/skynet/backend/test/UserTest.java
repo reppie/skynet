@@ -3,9 +3,6 @@ package toctep.skynet.backend.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import toctep.skynet.backend.dal.domain.User;
 
 public class UserTest extends DomainTest {

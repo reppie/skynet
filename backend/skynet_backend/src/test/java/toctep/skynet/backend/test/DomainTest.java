@@ -80,5 +80,8 @@ public abstract class DomainTest {
 	public abstract void testInsert();
 	
 	@Test
+	public abstract void testUpdate();
+	
+	@Test
 	public abstract void testDelete();	
 }
