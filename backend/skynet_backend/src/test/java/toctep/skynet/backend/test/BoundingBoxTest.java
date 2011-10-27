@@ -1,7 +1,5 @@
 package toctep.skynet.backend.test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 
@@ -29,8 +27,20 @@ public class BoundingBoxTest extends DomainTest{
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		BoundingBox preBoundingBox = new BoundingBox();
 		
+		BoundingBoxType boundingBoxType = new BoundingBoxType();
+		preBoundingBox.setType(boundingBoxType);
+		
+		String coordinates = "58.18, 20.11";
+		preBoundingBox.setCoordinates(coordinates);
+		
+		boundingBoxDao.insert(preBoundingBox);
+		assertEquals(1, boundingBoxDao.count());
+		
+		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(preBoundingBox.getId());
+		assertTrue(postBoundingBox.getType().equals(preBoundingBox.getType()));
+		assertTrue(postBoundingBox.getCoordinates().equals(preBoundingBox));
 	}
 
 	@Override
