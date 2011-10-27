@@ -5,18 +5,22 @@ import java.util.Date;
 public class Tweet extends Domain {
 
 	private String text;
-	private String geo;
+	private Geo geo;
 	private boolean truncated;
-	private int twitterId;
+	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private int inReplyToTweetTwitterId;
-	private int inReplyToUserTwitterId;
-	private int retweetCount;
+	private long inReplyToTweetTwitterId;
+	private long inReplyToUserTwitterId;
+	private long retweetCount;
 	private Date createdAt;
 	private Place place;
 	private User user;
 	private String coordinates;
+	
+	public Tweet() {
+		super();
+	}
 	
 	public Tweet(String text) {
 		this.text = text;
@@ -27,7 +31,7 @@ public class Tweet extends Domain {
 		this.text = text;
 	}
 	
-	public Tweet(int id, String text, String geo, boolean truncated, int twitterId,
+	public Tweet(int id, String text, Geo geo, boolean truncated, int twitterId,
 			SourceType sourceType, boolean favorited,
 			int inReplyToTweetTwitterId, int inReplyToUserTwitterId,
 			int retweetCount, Date createdAt, Place place, User user,
@@ -56,11 +60,11 @@ public class Tweet extends Domain {
 		this.text = text;
 	}
 
-	public String getGeo() {
+	public Geo getGeo() {
 		return geo;
 	}
 
-	public void setGeo(String geo) {
+	public void setGeo(Geo geo) {
 		this.geo = geo;
 	}
 
@@ -72,11 +76,11 @@ public class Tweet extends Domain {
 		this.truncated = truncated;
 	}
 
-	public int getTwitterId() {
+	public long getTwitterId() {
 		return twitterId;
 	}
 
-	public void setTwitterId(int twitterId) {
+	public void setTwitterId(long twitterId) {
 		this.twitterId = twitterId;
 	}
 
@@ -96,27 +100,27 @@ public class Tweet extends Domain {
 		this.favorited = favorited;
 	}
 
-	public int getInReplyToTweetTwitterId() {
+	public long getInReplyToTweetTwitterId() {
 		return inReplyToTweetTwitterId;
 	}
 
-	public void setInReplyToTweetTwitterId(int inReplyToTweetTwitterId) {
+	public void setInReplyToTweetTwitterId(long inReplyToTweetTwitterId) {
 		this.inReplyToTweetTwitterId = inReplyToTweetTwitterId;
 	}
 
-	public int getInReplyToUserTwitterId() {
+	public long getInReplyToUserTwitterId() {
 		return inReplyToUserTwitterId;
 	}
 
-	public void setInReplyToUserTwitterId(int inReplyToUserTwitterId) {
+	public void setInReplyToUserTwitterId(long inReplyToUserTwitterId) {
 		this.inReplyToUserTwitterId = inReplyToUserTwitterId;
 	}
 
-	public int getRetweetCount() {
+	public long getRetweetCount() {
 		return retweetCount;
 	}
 
-	public void setRetweetCount(int retweetCount) {
+	public void setRetweetCount(long retweetCount) {
 		this.retweetCount = retweetCount;
 	}
 

@@ -9,6 +9,7 @@ import twitter4j.Status;
 public class TweetParser {
 	
 	private static TweetParser instance;
+	
 	private DaoFacade daoFacade;
 	private Dao tweetDao;
 	
@@ -24,11 +25,11 @@ public class TweetParser {
 		return instance;
 	}
 	
-	public boolean parse(Status tweet) {
-		System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+	public boolean parse(Status status) {
+		System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
         System.out.println();
         
-        tweetDao.insert(new Tweet(tweet.getText()));
+        tweetDao.insert(new Tweet(status.getText()));
 		
 		return true;
 	}
