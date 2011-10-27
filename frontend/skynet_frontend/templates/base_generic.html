@@ -63,15 +63,17 @@
 		<script>window.jQuery || document.write('<script src="/site_media/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 		<script id="tweetTemplate" type="text/x-jquery-tmpl">
     		<div class="tweet" data-tweet-id="${id}">
-    			
+    			${text}
     		</div>
 		</script>
 		<!-- scripts concatenated and minified via ant build script-->
-		<script src="/site_media/js/plugins.js"></script>
-		<script src="/site_media/js/script.js"></script>
+		
 		<script src="/site_media/js/libs/jquery.jsonrpc.js"></script>
 		<script src="/site_media/js/libs/jquery.tmpl.js"></script>
 		<script src="/site_media/js/tweets.js"></script>
+		
+		<script src="/site_media/js/plugins.js"></script>
+		<script src="/site_media/js/script.js"></script>
 		<!-- end scripts-->
 		<!--[if lt IE 7 ]>
 		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>

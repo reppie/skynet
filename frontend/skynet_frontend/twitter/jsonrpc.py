@@ -34,6 +34,7 @@ class JSONRPCService:
         self.method_map = method_map
 
     def add_method(self, name, method):
+        self.method_map = self.method_map or {}
         self.method_map[name] = method
 
     def __call__(self, request, extra=None):
@@ -42,23 +43,22 @@ class JSONRPCService:
         data = simplejson.loads(request.raw_post_data)
         # Altered to forward the request parameter when a member method
         # is invoked <julien@pimentech.net>
-        id, method, params = data["id"],data["method"],[request,]+data["params"]
+        id, method, params = data["id"],data["method"],data["params"]
         if method in self.method_map:
             try:
                 result = self.method_map[method](*params)
                 return response(id, result)
             except BaseException:
                 etype, eval, etb = sys.exc_info()
-                return error(id, 100, '%s: %s' %(etype.__name__, eval))
+                return error(id, 100, '%s: %s %s' %(etype.__name__, eval, params))
             except:
                 etype, eval, etb = sys.exc_info()
                 return error(id, 100, 'Exception %s: %s' %(etype, eval))
         else:
-            return error(id, 100, 'method "%s" does not exist' % method)
+            return error(id, 100, 'method "%s" does not exist' % (method))
 
 
 def jsonremote(service):
-
     def remotify(func):
         if isinstance(service, JSONRPCService):
             service.add_method(func.__name__, func)

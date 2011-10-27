@@ -1,4 +1,4 @@
-package toctep.skynet.backend.dal.dao.impl.jdbc;
+package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class DaoConnectionImpl implements DaoConnection {
 
 	private static DaoConnectionImpl instance;
 	
-	public static final String JDBC_CONFIG = "conf/jdbc.ini";
+	public static final String JDBC_CONFIG = "conf/mysql.ini";
 	
 	private String driver;
 	private String host;
@@ -60,9 +60,9 @@ public class DaoConnectionImpl implements DaoConnection {
 	}
 	
 	private void connect() throws SQLException {
-		conn = (Connection) DriverManager.getConnection(
-		  	"jdbc:" + driver + "://" + host + "/" + name, user, pass
-		);
+		String url = "jdbc:" + driver + "://" + host + "/" + name;
+		
+		conn = (Connection) DriverManager.getConnection(url, user, pass);
 		
 		System.out.println("Connection established");
 	}

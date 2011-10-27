@@ -1,9 +1,26 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
-import toctep.skynet.backend.dal.dao.impl.jdbc.DaoFacadeImpl;
-import toctep.skynet.backend.dal.domain.*;
+import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
+import toctep.skynet.backend.dal.domain.BoundingBox;
+import toctep.skynet.backend.dal.domain.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.Country;
+import toctep.skynet.backend.dal.domain.Geo;
+import toctep.skynet.backend.dal.domain.GeoType;
+import toctep.skynet.backend.dal.domain.Hashtag;
+import toctep.skynet.backend.dal.domain.Language;
+import toctep.skynet.backend.dal.domain.Place;
+import toctep.skynet.backend.dal.domain.PlaceType;
+import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.TimeZone;
+import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.TweetContributor;
+import toctep.skynet.backend.dal.domain.TweetHashtag;
+import toctep.skynet.backend.dal.domain.TweetMention;
+import toctep.skynet.backend.dal.domain.TweetURL;
+import toctep.skynet.backend.dal.domain.URL;
+import toctep.skynet.backend.dal.domain.User;
 import twitter4j.GeoLocation;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
@@ -28,7 +45,7 @@ public class TweetParser {
 	private static TweetParser instance;
 	
 	private DaoFacade daoFacade;
-	private Dao tweetDao;
+	private TweetDao tweetDao;
 	
 	private TweetParser() {
 		daoFacade = new DaoFacadeImpl();
