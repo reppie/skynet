@@ -4,7 +4,6 @@ import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.PlaceType;
-import toctep.skynet.backend.dal.domain.User;
 
 public class PlaceTest extends DomainTest{
 
