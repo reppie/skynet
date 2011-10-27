@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
+import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
@@ -34,6 +35,7 @@ public abstract class DomainTest extends TestCase {
 	protected BoundingBoxTypeDao boundingBoxTypeDao;
 	protected URLDao urlDao;
 	protected PlaceDao placeDao;
+	protected CountryDao countryDao;
 	protected PlaceTypeDao placeTypeDao;
 	
 	@Before
@@ -55,6 +57,7 @@ public abstract class DomainTest extends TestCase {
 		boundingBoxDao = daoFacade.getBoundingBoxDao();
 		boundingBoxTypeDao = daoFacade.getBoundingBoxTypeDao();
 		placeDao = daoFacade.getPlaceDao();
+		countryDao = daoFacade.getCountryDao();
 		placeTypeDao = daoFacade.getPlaceTypeDao();
 	}
 

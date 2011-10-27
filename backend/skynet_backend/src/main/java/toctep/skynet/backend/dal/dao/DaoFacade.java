@@ -7,4 +7,6 @@ public interface DaoFacade {
 	public BoundingBoxDao getBoundingBoxDao();
 	public BoundingBoxTypeDao getBoundingBoxTypeDao();
 	public PlaceDao getPlaceDao();	
+	public CountryDao getCountryDao();
+	public PlaceTypeDao getPlaceTypeDao();	
 }
