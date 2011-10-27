@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.test import TestCase
-from skynet_frontend.twitter.models import Tweet, TweetIndex, User
+from skynet_frontend.twitter.models import Tweet, Keyword, User
 
 class TweetTest(TestCase):
     def setUp(self):
@@ -19,14 +19,14 @@ class TweetTest(TestCase):
 
     def test_indexing(self):
         self.tweet.save()
-        tweetIndices = TweetIndex.objects.filter(keyword="body")
+        tweetIndices = Keyword.objects.filter(keyword="body")
         self.assertEquals(len(tweetIndices), 1)
-        tweetIndices = TweetIndex.objects.all()
+        tweetIndices = Keyword.objects.all()
         self.assertEquals(len(tweetIndices), 4)
         
 class TweetIndexTest(TestCase):
     def test_get_keyword_cloud_no_data(self):
-        self.assertFalse(TweetIndex.get_keyword_cloud().items)
+        self.assertFalse(Keyword.get_keyword_cloud().items)
     
     def test_get_keyword_cloud(self):
         text = "keyword keyword keyword keyword singlekeyword"
@@ -35,11 +35,11 @@ class TweetIndexTest(TestCase):
         user = User(name="username")
         tweet = Tweet(text=text, twitter_id=twitter_id, created_at=created_at, user=user)
         tweet.save()
-        self.assertTrue(TweetIndex.get_keyword_cloud().items[0])
+        self.assertTrue(Keyword.get_keyword_cloud().items[0])
         
     def test_get_all_since_no_data(self):
         yesterday = datetime.now() - timedelta(days=1)
-        self.assertFalse(TweetIndex.get_all_since(yesterday))
+        self.assertFalse(Keyword.get_all_since(yesterday))
         
     def test_get_all_since(self):
         user = User(name="username")
@@ -52,7 +52,7 @@ class TweetIndexTest(TestCase):
         really_old_tweet.save()
         
         yesterday = datetime.now() - timedelta(days = 1)
-        recent_indexes = TweetIndex.get_all_since(yesterday)
+        recent_indexes = Keyword.get_all_since(yesterday)
         
         self.assertEquals(recent_indexes.count(), 1)
         self.assertEquals(recent_indexes[0]['keyword'], recent_text)

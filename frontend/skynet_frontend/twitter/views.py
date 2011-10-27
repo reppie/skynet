@@ -1,10 +1,10 @@
 from django.shortcuts import render_to_response
-from skynet_frontend.twitter.models import TweetIndex, Tweet
+from skynet_frontend.twitter.models import Tweet, Keyword
 from jsonrpc import JSONRPCService, jsonremote
 from django.core.urlresolvers import reverse
 
 def index(request):
-    return render_to_response("twitter/index.html", { 'keywordcloud': TweetIndex.get_keyword_cloud(), 'tweets': Tweet.objects.all() }) 
+    return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }) 
 
 def rpc(request):
 
