@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 
 def index(request):
-    return render_to_response("twitter/index.html", { 'keywordcloud': TweetIndex().get_keyword_cloud(), 'tweets': Tweet.objects.all() }) 
+    return render_to_response("twitter/index.html", { 'keywordcloud': TweetIndex.get_keyword_cloud(), 'tweets': Tweet.objects.all() }) 
 
 service = JSONRPCService()
 

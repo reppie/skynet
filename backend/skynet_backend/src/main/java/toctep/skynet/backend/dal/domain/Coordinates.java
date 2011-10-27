@@ -1,24 +1,24 @@
 package toctep.skynet.backend.dal.domain;
 
-public class BoundingBox {
+public class Coordinates {
 	
-	private BoundingBoxType type;
+	private CoordinatesType type;
 	private String coordinates;
 	
-	public BoundingBox() {		
+	public Coordinates(){		
 	}
 	
-	public BoundingBox(BoundingBoxType type, String coordinates) {
+	public Coordinates(CoordinatesType type, String coordinates) {
 		super();
 		this.type = type;
 		this.coordinates = coordinates;
-	}
+	}	
 
-	public BoundingBoxType getType() {
+	public CoordinatesType getType() {
 		return type;
 	}
 
-	public void setType(BoundingBoxType type) {
+	public void setType(CoordinatesType type) {
 		this.type = type;
 	}
 
@@ -29,5 +29,4 @@ public class BoundingBox {
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
 	}
-	
 }

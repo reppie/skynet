@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Count
-from skynet_frontend.settings import TWITTER
+from skynet_frontend import settings
 
 class Hashtag(models.Model):
     text = models.CharField(max_length=139, blank=True, null=True)
@@ -36,7 +36,7 @@ class TimeZone(models.Model):
     time_zone = models.CharField(max_length=255, blank=True, null=True)
 
 class Place(models.Model):
-    twitter_id = models.IntegerField(blank=True, default=0)
+    twitter_id = models.CharField(max_length=255, blank=True, null=True)
     place_type = models.ForeignKey(PlaceType, blank=True, null=True)
     bounding_box = models.ForeignKey(BoundingBox, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
@@ -146,21 +146,23 @@ class TweetContributor(models.Model):
         db_table = "twitter_tweet_contributors";
 
 class TweetIndex(models.Model):
+    
     keyword = models.CharField(max_length=140)
     tweet = models.ForeignKey(Tweet)
 
-    def since_yesterday(self):
-        from datetime import datetime, timedelta
-        yesterday = datetime.now() - timedelta(days = 1)
-        query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gt=yesterday)
-        return query_set
+    @staticmethod
+    def get_all_since(datetime_since):
+        return TweetIndex.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
 
-    def get_keyword_cloud(self):
+    @staticmethod
+    def get_keyword_cloud():
         from skynet_frontend.keywordcloud.models import KeywordCloud 
+        from datetime import datetime, timedelta
         
-        query_set = self.since_yesterday()
-        min_font_size = TWITTER['keywordcloud']['min_font_size']
-        max_font_size = TWITTER['keywordcloud']['max_font_size']
+        yesterday = datetime.now() - timedelta(days=1)
+        query_set = TweetIndex.get_all_since(yesterday)
+        min_font_size = settings.TWITTER['keywordcloud']['min_font_size']
+        max_font_size = settings.TWITTER['keywordcloud']['max_font_size']
         
         return KeywordCloud(query_set=query_set, min_font_size=min_font_size, max_font_size=max_font_size)
         
