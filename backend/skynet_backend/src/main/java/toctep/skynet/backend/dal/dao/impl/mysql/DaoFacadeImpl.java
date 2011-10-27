@@ -6,6 +6,7 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
+import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 
@@ -18,6 +19,7 @@ public class DaoFacadeImpl implements DaoFacade {
 	private PlaceDao placeDao;
 	private CountryDao countryDao;
 	private PlaceTypeDao placeTypeDao;
+	private SourceTypeDao sourceTypeDao;
 	
 	public DaoFacadeImpl() {
 		userDao = new UserDaoImpl();
@@ -26,6 +28,7 @@ public class DaoFacadeImpl implements DaoFacade {
 		boundingBoxTypeDao = new BoundingBoxTypeDaoImpl();
 		placeDao = new PlaceDaoImpl();
 		placeTypeDao = new PlaceTypeDaoImpl();
+		sourceTypeDao = new SourceTypeDaoImpl();
 	}
 	
 	@Override
@@ -58,8 +61,14 @@ public class DaoFacadeImpl implements DaoFacade {
 		return countryDao;
 	}
 
+	@Override
 	public PlaceTypeDao getPlaceTypeDao() {
 		return placeTypeDao;
+	}
+	
+	@Override
+	public SourceTypeDao getSourceTypeDao() {
+		return sourceTypeDao;
 	}
 
 }
