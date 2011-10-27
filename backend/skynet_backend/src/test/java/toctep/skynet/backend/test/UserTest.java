@@ -10,8 +10,8 @@ import toctep.skynet.backend.dal.domain.User;
 
 public class UserTest extends DomainTest {
 	
-	@Test
-	public void testCreatingUser() { 
+	@Override
+	public void testCreate() { 
 		User user = new User();
 		assertNotNull(user);
 		
@@ -28,8 +28,8 @@ public class UserTest extends DomainTest {
 		assertTrue(name.equals(user.getName()));
 	}
 	
-	@Test
-	public void testInsertUser() {
+	@Override
+	public void testInsert() {
 		User preUser = new User();
 		
 		String name = "Test";
@@ -43,13 +43,13 @@ public class UserTest extends DomainTest {
 		// TODO
 	}
 	
-	@Test
-	public void testUpdatingUser() {
+	@Override
+	public void testUpdate() {
 		// TODO
 	}
 	
-	@Test
-	public void testDeletingUser() {
+	@Override
+	public void testDelete() {
 		User user = new User();
 		assertNotNull(user);
 		userDao.insert(user);
