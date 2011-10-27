@@ -39,9 +39,12 @@ class TweetIndexTest(TestCase):
         
         smallest = 1
         spread = 3
+        
         step = (max_font_size - min_font_size) / spread
         
         cloud = TweetIndex().getCloudMap()
         
         self.assertEquals(cloud[0].count, min_font_size + (4 - smallest) * step)
         self.assertEquals(cloud[1].count, min_font_size + (1 - smallest) * step)
+        
+        
