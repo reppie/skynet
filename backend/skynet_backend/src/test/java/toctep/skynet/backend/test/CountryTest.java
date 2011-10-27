@@ -16,7 +16,7 @@ public class CountryTest extends DomainTest{
 		assertTrue(code.equals(country.getCode()));
 		
 		String text = "Netherlands";
-		country.setCode(text);
+		country.setText(text);
 		assertTrue(text.equals(country.getText()));
 	}
 
