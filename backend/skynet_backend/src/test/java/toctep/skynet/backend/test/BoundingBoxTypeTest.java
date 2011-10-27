@@ -1,6 +1,5 @@
 package toctep.skynet.backend.test;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 
 public class BoundingBoxTypeTest extends DomainTest{
@@ -17,12 +16,12 @@ public class BoundingBoxTypeTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		BoundingBox boundingBox = new BoundingBox();
-		assertNotNull(boundingBox);
-		boundingBoxDao.insert(boundingBox);
+		BoundingBoxType boundingBoxType = new BoundingBoxType();
+		assertNotNull(boundingBoxType);
+		boundingBoxTypeDao.insert(boundingBoxType);
 		assertEquals(1, boundingBoxDao.count());
-		boundingBoxDao.delete(boundingBox);
-		assertEquals(0, boundingBoxDao.count());		
+		boundingBoxTypeDao.delete(boundingBoxType);
+		assertEquals(0, boundingBoxTypeDao.count());		
 	}
 
 	@Override
