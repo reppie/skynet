@@ -4,6 +4,9 @@ public class BoundingBoxType {
 
 	private String text;
 	
+	public BoundingBoxType() {		
+	}
+	
 	public BoundingBoxType(String text) {
 		this.text = text;
 	}

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 #     url(r'^skynet_frontend/', include('skynet_frontend.foo.urls')),
 
     (r'^somela/$', 'twitter.views.index'),
+    url(r'^twitter/rpc/', 'twitter.views.rpc', name='twitter-rpc'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

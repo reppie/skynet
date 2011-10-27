@@ -1,23 +1,24 @@
 package toctep.skynet.backend.dal.domain;
 
-public class PlaceType extends Domain {
+public class CoordinatesType {
 
-	public String text;
-	
-	public PlaceType() {
-		super();
+	private String text;
+
+	public CoordinatesType() {		
 	}
 	
-	public PlaceType(String text) {
+	public CoordinatesType(String text) {
+		super();
 		this.text = text;
 	}
-	
+
 	public String getText() {
 		return text;
 	}
-	
+
 	public void setText(String text) {
 		this.text = text;
-	}
+	}	
+	
 	
 }
