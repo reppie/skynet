@@ -1,44 +1,43 @@
 package toctep.skynet.backend.test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import toctep.skynet.backend.dal.dao.impl.jdbc.DaoConnectionImpl;
+import toctep.skynet.backend.dal.domain.User;
 
-import com.mysql.jdbc.Connection;
-
-public class UserTest {
-	
-	private Connection conn;
-	
-	@Before
-	public void setUp() {
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-			
-			conn = DaoConnectionImpl.getInstance(
-					"hsqldb",
-					"localhost",
-					"skynet_test",
-					"sa",
-					"")
-				.getConnection();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@After
-	public void tearDown() {
+public class UserTest extends DomainTest {
 		
+	@Test
+	public void testAddingUser() {
+		User preUser = new User();
+		assertNotNull(preUser);
+		
+		String name = "Daniel";
+		preUser.setName(name);
+		assertTrue(name.equals(preUser.getName()));
+		
+		userDao.insert(preUser);
+		assertEquals(1, userDao.count());
+		User postUser = (User) userDao.select(preUser.getId());
+		assertTrue(postUser.getName().equals(preUser.getName()));
 	}
+	
+	//@Test
+	//public void testUpdatingUser() {
+	//	
+	//}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testDeletingUser() {
+		User user = new User();
+		assertNotNull(user);
+		userDao.insert(user);
+		assertEquals(1, userDao.count());
+		userDao.delete(user);
+		assertEquals(0, userDao.count());
 	}
 
 }

@@ -60,9 +60,9 @@ public class DaoConnectionImpl implements DaoConnection {
 	}
 	
 	private void connect() throws SQLException {
-		conn = (Connection) DriverManager.getConnection(
-		  	"jdbc:" + driver + "://" + host + "/" + name, user, pass
-		);
+		String url = "jdbc:" + driver + "://" + host + "/" + name;
+		
+		conn = (Connection) DriverManager.getConnection(url, user, pass);
 		
 		System.out.println("Connection established");
 	}
