@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from skynet_frontend.twitter.models import Tweet, Keyword
+from skynet_frontend.twitter.models import Tweet, Keyword, User
 from jsonrpc import JSONRPCService, jsonremote
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -26,4 +26,14 @@ class TwitterRpcMethods(object):
             'id': tweet.id,
             'text': tweet.text,
             'user_id': tweet.user_id,
+        }
+    @staticmethod
+    @jsonremote(service)
+    def load_user(user_id):
+        user = User.objects.get(pk=user_id)
+       
+        return {
+            'id': user.id,
+            'name': user.name,
+            'screen_name': user.screen_name,
         }
