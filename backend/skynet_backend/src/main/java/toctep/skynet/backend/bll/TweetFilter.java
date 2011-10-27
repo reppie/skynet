@@ -15,29 +15,25 @@ public class TweetFilter {
 				cleanTweet = cleanTweet.replaceAll(commonWord, "");
 			}
 		}
-		cleanTweet = removeDoubleSpaces(cleanTweet);
+		cleanTweet = removeMultipleSpaces(cleanTweet);
 		
 		return cleanTweet;
 	}
 	
-	private String removeDoubleSpaces(String dirtyString) {
-		String cleanString = dirtyString.replaceAll(doubleSpaceRegex, " ");
-		
-		return cleanString.trim();
+	private String removeMultipleSpaces(String dirtyString) {
+		return dirtyString.replaceAll(doubleSpaceRegex, " ").trim();
 	}
 	
 	public String filterSpecialCharacters(String tweetText) {
 		String cleanTweet = tweetText.replaceAll(specialCharRegex, "");
-		cleanTweet = removeDoubleSpaces(cleanTweet);
+		cleanTweet = removeMultipleSpaces(cleanTweet);
 		cleanTweet = filterSingleCharacter(cleanTweet);
 		
 		return cleanTweet;
 	}
 	
 	private String filterSingleCharacter(String dirtyString) {
-		String cleanString = dirtyString.replaceAll(singleCharRegex, " ");
-		
-		return cleanString;
+		return dirtyString.replaceAll(singleCharRegex, " ");
 	}
 
 }
