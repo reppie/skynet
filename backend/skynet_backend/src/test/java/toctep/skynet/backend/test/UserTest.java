@@ -9,26 +9,44 @@ import org.junit.Test;
 import toctep.skynet.backend.dal.domain.User;
 
 public class UserTest extends DomainTest {
-		
+	
 	@Test
-	public void testAddingUser() {
+	public void testCreatingUser() { 
 		User preUser = new User();
 		assertNotNull(preUser);
+		
+		boolean defaultProfile = false;
+		preUser.setDefaultProfile(defaultProfile);
+		assertTrue(preUser.isDefaultProfile() == defaultProfile);
+		
+		int statusesCount = 1;
+		preUser.setStatusesCount(statusesCount);
+		assertEquals(statusesCount, preUser.getStatusesCount());
 		
 		String name = "Daniel";
 		preUser.setName(name);
 		assertTrue(name.equals(preUser.getName()));
+	}
+	
+	@Test
+	public void testInsertUser() {
+		User preUser = new User();
+		
+		String name = "Test";
+		preUser.setName(name);
 		
 		userDao.insert(preUser);
 		assertEquals(1, userDao.count());
+		
 		User postUser = (User) userDao.select(preUser.getId());
 		assertTrue(postUser.getName().equals(preUser.getName()));
+		// TODO
 	}
 	
-	//@Test
-	//public void testUpdatingUser() {
-	//	
-	//}
+	@Test
+	public void testUpdatingUser() {
+		// TODO
+	}
 	
 	@Test
 	public void testDeletingUser() {
