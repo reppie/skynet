@@ -21,8 +21,12 @@ public class BoundingBoxTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		BoundingBox boundingBox = new BoundingBox();
+		assertNotNull(boundingBox);
+		boundingBoxDao.insert(boundingBox);
+		assertEquals(1, boundingBoxDao.count());
+		boundingBoxDao.delete(boundingBox);
+		assertEquals(0, boundingBoxDao.count());		
 	}
 
 	@Override
@@ -40,7 +44,7 @@ public class BoundingBoxTest extends DomainTest{
 		
 		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(preBoundingBox.getId());
 		assertTrue(postBoundingBox.getType().equals(preBoundingBox.getType()));
-		assertTrue(postBoundingBox.getCoordinates().equals(preBoundingBox));
+		assertTrue(postBoundingBox.getCoordinates().equals(preBoundingBox.getCoordinates()));
 	}
 
 	@Override
