@@ -155,7 +155,7 @@ class TweetIndex(models.Model):
         query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gt=yesterday)
         return query_set
 
-    def getCloudMap(self):
+    def get_keyword_cloud(self):
         from skynet_frontend.keywordcloud.models import KeywordCloud 
         
         query_set = self.since_yesterday()

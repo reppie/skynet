@@ -1,16 +1,31 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
+from datetime import datetime
 
 from django.test import TestCase
+from django.db.models import Count
 
+from skynet_frontend.twitter.models import TweetIndex, User, Tweet
+from skynet_frontend.keywordcloud.models import KeywordCloud
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+class CloudMapTest(TestCase):
+    def setUp(self):
+        self.text = "keyword keyword keyword keyword singlekeyword"
+        self.twitter_id = 1337
+        self.created_at = datetime.now()
+        self.user = User(name="username")
+        self.tweet = Tweet(text=self.text, twitter_id=self.twitter_id, created_at=self.created_at, user=self.user)
+        self.tweet.save()
+        
+    def test_creation(self):
+        min_font_size = 14
+        max_font_size = 30
+        
+        smallest = 1
+        spread = 3
+        
+        step = (max_font_size - min_font_size) / spread
+        
+        query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword'))
+        cloud = KeywordCloud(query_set, min_font_size, max_font_size)
+        
+        self.assertEquals(cloud.items[0].font_size, min_font_size + (4 - smallest) * step)
+        self.assertEquals(cloud.items[1].font_size, min_font_size + (1 - smallest) * step)

@@ -20,11 +20,17 @@ class KeywordCloud:
         return self.__generateItemList(query_set, min_font_size, smallest, step)
 
     def __getLargestValueFromMap(self, a_map):
+        if not a_map:
+            return 0
+        
         key_of_largest_value = max(a_map, key=a_map.get) 
         
         return int(a_map[key_of_largest_value])
     
     def __getSmallestValueFromMap(self, a_map):
+        if not a_map:
+            return 0
+        
         key_of_smallest_value = min(a_map, key=a_map.get) 
         
         return int(a_map[key_of_smallest_value])
