@@ -2,6 +2,8 @@ package toctep.skynet.backend.test;
 
 import java.sql.SQLException;
 
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,7 @@ import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public abstract class DomainTest {
+public abstract class DomainTest extends TestCase {
 
 	private Connection conn;
 	

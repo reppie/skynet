@@ -1,16 +1,42 @@
 (function($){
-	var tweets = window.tweets || (window.tweets = {
-		load: function(tweetId, callback) {
-			$.jsonRPC.request('load_tweet', {
-			  params: [tweetId],
-			  success: callback,
-			  error: callback,
-		  	});
-		}
+	var api = window.api || (window.api = {
+		
+		'Tweet': function(json){
+			if(!(this instanceof 'Tweet')) {
+				throw "please use new Tweet(args);";
+			}
+		},
+		'User': function(){
+			
+			
+		},
+		cache:{
+			'tweets':{},
+			'users':{}
+		},
+		'tweet':{
+			'get': function(tweetId, callback) {
+				$.jsonRPC.request('load_tweet', {
+				  params: [tweetId],
+				  success: function(result){
+				  	console.log(result);
+				  	callback(new api.Tweet(result.result));
+				  },
+				  error: function(result){
+				  	console.log(result);
+			  		callback(null);
+				  },
+			  	});
+			}
+		},
+		
 	});
 	$.jsonRPC.setup({
 	  	endPoint: '/twitter/rpc/'
 	});
+	/*
+	 * Send along CSRF security token otherwise requests will fail
+	 */
 	$.ajaxSetup({ 
      beforeSend: function(xhr, settings) {
          function getCookie(name) {
