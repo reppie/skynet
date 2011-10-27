@@ -19,7 +19,7 @@ public class BoundingBoxTypeTest extends DomainTest{
 		BoundingBoxType boundingBoxType = new BoundingBoxType();
 		assertNotNull(boundingBoxType);
 		boundingBoxTypeDao.insert(boundingBoxType);
-		assertEquals(1, boundingBoxDao.count());
+		assertEquals(1, boundingBoxTypeDao.count());
 		boundingBoxTypeDao.delete(boundingBoxType);
 		assertEquals(0, boundingBoxTypeDao.count());		
 	}

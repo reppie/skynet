@@ -1,5 +1,6 @@
 package toctep.skynet.backend.test;
 
+import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
 
 public class CountryTest extends DomainTest{
@@ -20,14 +21,30 @@ public class CountryTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		Country country = new Country();
+		assertNotNull(country);
+		countryDao.insert(country);
+		assertEquals(1, countryDao.count());
+		countryDao.delete(country);
+		assertEquals(0, countryDao.count());		
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		Country preCountry = new Country();
 		
+		String code = "NL";
+		preCountry.setCode(code);
+		
+		String text = "Netherlands";
+		preCountry.setText(text);
+		
+		countryDao.insert(preCountry);
+		assertEquals(1, countryDao.count());
+		
+		Country postCountry = (Country) countryDao.select(preCountry.getId());
+		assertTrue(postCountry.getCode().equals(preCountry.getCode()));
+		assertTrue(postCountry.getText().equals(preCountry.getText()));
 	}
 
 	@Override
