@@ -1,9 +1,5 @@
 package toctep.skynet.backend.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Date;
 
 import toctep.skynet.backend.dal.domain.Language;
