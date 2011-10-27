@@ -2,11 +2,9 @@
 
 */
 
-console.log(window);
-tweets.load(1, function(result){
+api.tweet.get(1, function(tweet){
 	
-	console.log(result);
-	
+	console.log(tweet);
 	
 });
 
