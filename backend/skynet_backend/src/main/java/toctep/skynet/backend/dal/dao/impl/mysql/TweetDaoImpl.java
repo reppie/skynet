@@ -49,7 +49,7 @@ public class TweetDaoImpl extends TweetDao {
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT id FROM " + tableName + " WHERE id = " + id);
+			rs = stmt.executeQuery("SELECT id, text FROM " + tableName + " WHERE id = " + id);
 			rs.first();
 			tweet = new Tweet();
 			tweet.setId(id);
