@@ -1,4 +1,4 @@
-package toctep.skynet.backend.dal.dao.impl.jdbc;
+package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.TweetDao;

@@ -1,4 +1,4 @@
-package toctep.skynet.backend.dal.dao.impl.jdbc;
+package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class DaoConnectionImpl implements DaoConnection {
 
 	private static DaoConnectionImpl instance;
 	
-	public static final String JDBC_CONFIG = "conf/jdbc.ini";
+	public static final String JDBC_CONFIG = "conf/mysql.ini";
 	
 	private String driver;
 	private String host;

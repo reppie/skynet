@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-import toctep.skynet.backend.dal.dao.impl.jdbc.DaoConnectionImpl;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public abstract class Dao {

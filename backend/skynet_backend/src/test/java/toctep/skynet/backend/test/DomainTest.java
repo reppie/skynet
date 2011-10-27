@@ -7,8 +7,8 @@ import org.junit.Before;
 
 import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
-import toctep.skynet.backend.dal.dao.impl.jdbc.DaoConnectionImpl;
-import toctep.skynet.backend.dal.dao.impl.jdbc.DaoFacadeImpl;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
