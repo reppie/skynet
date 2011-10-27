@@ -4,16 +4,6 @@ public class TweetURL {
 	
 	private Tweet tweet;
 	private URL url;
-	
-	public TweetURL() {
-		super();
-	}
-
-	public TweetURL(Tweet tweet, URL url) {
-		super();
-		this.tweet = tweet;
-		this.url = url;
-	}
 
 	public Tweet getTweet() {
 		return tweet;
@@ -29,5 +19,6 @@ public class TweetURL {
 
 	public void setUrl(URL url) {
 		this.url = url;
-	}			
+	}
+	
 }

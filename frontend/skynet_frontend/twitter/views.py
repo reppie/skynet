@@ -2,36 +2,22 @@ from django.shortcuts import render_to_response
 from skynet_frontend.twitter.models import Tweet, Keyword
 from jsonrpc import JSONRPCService, jsonremote
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 
 def index(request):
     return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }) 
 
+service = JSONRPCService()
+
 def rpc(request):
-
-    rpc     = JSONRPCService( TwitterRpcMethods() )
-    result  = rpc(request)
-
-    return result
+    result  = service(request)
+    return HttpResponse(result, mimetype='application/json')
 
 class TwitterRpcMethods(object):
 
     url = reverse("twitter-rpc")
 
-    @jsonremote
-    def add(self, x, y):
-        return x+y
-
-    @jsonremote
-    def sub(self, x, y):
-        return x-y
-
-    @jsonremote
-    def load_tweet(self, tweet_id):
+    @staticmethod
+    @jsonremote(service)
+    def load_tweet(tweet_id):
         return Tweet.objects.get(pk=tweet_id)
-    
-    def test(self):
-        pass
-     
-    @jsonremote
-    def sayHello(self, *args):
-        return "hello "

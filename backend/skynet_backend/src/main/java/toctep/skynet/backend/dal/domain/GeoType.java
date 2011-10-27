@@ -1,16 +1,8 @@
 package toctep.skynet.backend.dal.domain;
 
-public class GeoType {
+public class GeoType extends Domain {
 
 	private String text;
-
-	public GeoType() {		
-	}
-	
-	public GeoType(String text) {
-		super();
-		this.text = text;
-	}
 
 	public String getText() {
 		return text;
