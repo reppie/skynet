@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
