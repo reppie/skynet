@@ -20,4 +20,10 @@ class TwitterRpcMethods(object):
     @staticmethod
     @jsonremote(service)
     def load_tweet(tweet_id):
-        return Tweet.objects.get(pk=tweet_id)
+        tweet = Tweet.objects.get(pk=tweet_id)
+       
+        return {
+            'id': tweet.id,
+            'text': tweet.text,
+            'user_id': tweet.user_id,
+        }

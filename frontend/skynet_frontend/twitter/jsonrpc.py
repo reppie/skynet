@@ -18,11 +18,13 @@ import sys
 # then dump jsonservice into urlpatterns:
 #  (r'^service1/$', 'djangoapp.views.jsonservice'),
 
+version = '2.0'
+
 def response(id, result):
-    return simplejson.dumps({'version': '1.1', 'id':id,
+    return simplejson.dumps({'version': version, 'id':id,
                              'result':result, 'error':None})
 def error(id, code, message):
-    return simplejson.dumps({'id': id, 'version': '1.1',
+    return simplejson.dumps({'id': id, 'version': version,
                              'error': {'name': 'JSONRPCError',
                                        'code': code,
                                        'message': message
@@ -43,7 +45,7 @@ class JSONRPCService:
         data = simplejson.loads(request.raw_post_data)
         # Altered to forward the request parameter when a member method
         # is invoked <julien@pimentech.net>
-        id, method, params = data["id"],data["method"],data["params"]
+        id, method, params = data["id"],data["method"], data["params"] or request.REQUEST.values()
         if method in self.method_map:
             try:
                 result = self.method_map[method](*params)
