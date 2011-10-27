@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="/site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="/site_media/css/blueprint/print.css" type="text/css" media="print">
 		<link rel="stylesheet" href="/site_media/css/style.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="/site_media/css/tweets.css" type="text/css" media="screen, projection">
 		<!--[if lt IE 8]>
 		<link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
 		<![endif]-->
@@ -60,7 +61,17 @@
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="/site_media/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+		<script id="tweetTemplate" type="text/x-jquery-tmpl">
+    		<div class="tweet" data-tweet-id="${id}">
+    			${text}
+    		</div>
+		</script>
 		<!-- scripts concatenated and minified via ant build script-->
+		
+		<script src="/site_media/js/libs/jquery.jsonrpc.js"></script>
+		<script src="/site_media/js/libs/jquery.tmpl.js"></script>
+		<script src="/site_media/js/tweets.js"></script>
+		
 		<script src="/site_media/js/plugins.js"></script>
 		<script src="/site_media/js/script.js"></script>
 		<!-- end scripts-->

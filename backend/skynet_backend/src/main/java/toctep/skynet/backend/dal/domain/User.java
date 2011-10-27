@@ -7,12 +7,12 @@ public class User extends Domain {
 	private long twitterId;
 	private Place place;
 	private boolean defaultProfile;
-	private long statusesCount;
+	private int statusesCount;
 	private long profileBackgroundTile;
 	private Language language;
 	private String profileLinkColor;
-	private long following;
-	private long favouritesCount;
+	private int following;
+	private int favouritesCount;
 	private boolean isProtected;
 	private String profileTextColor;
 	private boolean verified;
@@ -23,22 +23,22 @@ public class User extends Domain {
 	private String profileBackgroundColor;
 	private Date createdAt;
 	private boolean defaultProfileImage;
-	private long followersCount;
+	private int followersCount;
 	private boolean geoEnabled;
 	private String profileBackgroundImageUrl;
 	private String profileBackgroundImageUrlHttps;
 	private boolean followRequestSent;
-	private String url;
+	private URL url;
 	private TimeZone timeZone;
 	private long notifications;
 	private boolean profileUseBackgroundImage;
-	private long friendsCount;
+	private int friendsCount;
 	private String profileSideBarFillColor;
 	private String screenName;
 	private String profileImageUrl;
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
-	private long listedCount;
+	private int listedCount;
 	
 	public User() {
 		super();
@@ -51,18 +51,18 @@ public class User extends Domain {
 	
 	public User(int id, long twitterId, Place place, boolean defaultProfile,
 			int statusesCount, long profileBackgroundTile, Language language,
-			String profileLinkColor, long following, long favouritesCount,
+			String profileLinkColor, int following, int favouritesCount,
 			boolean isProtected, String profileTextColor, boolean verified,
 			boolean contributorsEnabled, String description, String name,
 			String profileSidebarBorderColor, String profileBackgroundColor,
 			Date createdAt, boolean defaultProfileImage, int followersCount,
 			boolean geoEnabled, String profileBackgroundImageUrl,
 			String profileBackgroundImageUrlHttps, boolean followRequestSent,
-			String url, TimeZone timeZone, long notifications,
-			boolean profileUseBackgroundImage, long friendsCount,
+			URL url, TimeZone timeZone, long notifications,
+			boolean profileUseBackgroundImage, int friendsCount,
 			String profileSideBarFillColor, String screenName,
 			String profileImageUrl, boolean showAllInlineMedia,
-			boolean isTranslator, long listedCount) {
+			boolean isTranslator, int listedCount) {
 		super(id);
 		this.twitterId = twitterId;
 		this.place = place;
@@ -125,11 +125,11 @@ public class User extends Domain {
 		this.defaultProfile = defaultProfile;
 	}
 
-	public long getStatusesCount() {
+	public int getStatusesCount() {
 		return statusesCount;
 	}
 
-	public void setStatusesCount(long statusesCount) {
+	public void setStatusesCount(int statusesCount) {
 		this.statusesCount = statusesCount;
 	}
 
@@ -157,19 +157,19 @@ public class User extends Domain {
 		this.profileLinkColor = profileLinkColor;
 	}
 
-	public long getFollowing() {
+	public int getFollowing() {
 		return following;
 	}
 
-	public void setFollowing(long following) {
+	public void setFollowing(int following) {
 		this.following = following;
 	}
 
-	public long getFavouritesCount() {
+	public int getFavouritesCount() {
 		return favouritesCount;
 	}
 
-	public void setFavouritesCount(long favouritesCount) {
+	public void setFavouritesCount(int favouritesCount) {
 		this.favouritesCount = favouritesCount;
 	}
 
@@ -253,11 +253,11 @@ public class User extends Domain {
 		this.defaultProfileImage = defaultProfileImage;
 	}
 
-	public long getFollowersCount() {
+	public int getFollowersCount() {
 		return followersCount;
 	}
 
-	public void setFollowersCount(long followersCount) {
+	public void setFollowersCount(int followersCount) {
 		this.followersCount = followersCount;
 	}
 
@@ -294,11 +294,11 @@ public class User extends Domain {
 		this.followRequestSent = followRequestSent;
 	}
 
-	public String getUrl() {
+	public URL getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(URL url) {
 		this.url = url;
 	}
 
@@ -326,11 +326,11 @@ public class User extends Domain {
 		this.profileUseBackgroundImage = profileUseBackgroundImage;
 	}
 
-	public long getFriendsCount() {
+	public int getFriendsCount() {
 		return friendsCount;
 	}
 
-	public void setFriendsCount(long friendsCount) {
+	public void setFriendsCount(int friendsCount) {
 		this.friendsCount = friendsCount;
 	}
 
@@ -374,11 +374,11 @@ public class User extends Domain {
 		this.isTranslator = isTranslator;
 	}
 
-	public long getListedCount() {
+	public int getListedCount() {
 		return listedCount;
 	}
 
-	public void setListedCount(long listedCount) {
+	public void setListedCount(int listedCount) {
 		this.listedCount = listedCount;
 	}
 	
