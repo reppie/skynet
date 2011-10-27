@@ -66,6 +66,9 @@ public class TweetParser {
         Language language = new Language();
         language.setText(status.getUser().getLang()); 
         
+        PlaceType placeType = new PlaceType();
+        placeType.setText(status.getPlace().getPlaceType());
+        
         Place place = new Place();
         twitter4j.Place placeStatus = status.getPlace();
         place.setTwitterId(placeStatus.getId());
@@ -80,6 +83,7 @@ public class TweetParser {
         place.setTwitter(""); //Twitter4j has no support for this?
         place.setUrl(placeStatus.getURL());
         place.setAppId(""); //Twitter4j has no support for this?
+        place.setType(placeType);
         place.setBoundingBox(bb);
         place.setCountry(country);
         

@@ -4,6 +4,10 @@ public class PlaceType extends Domain {
 
 	public String text;
 	
+	public PlaceType() {
+		super();
+	}
+	
 	public PlaceType(String text) {
 		this.text = text;
 	}
