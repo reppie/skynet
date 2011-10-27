@@ -16,14 +16,27 @@ public class PlaceTypeTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		PlaceType placeType = new PlaceType();
+		assertNotNull(placeType);
+		placeTypeDao.insert(placeType);
+		assertEquals(1, placeTypeDao.count());
+		placeTypeDao.delete(placeType);
+		assertEquals(0, placeTypeDao.count());
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		PlaceType prePlaceType = new PlaceType();
 		
+		String text = "test";
+		prePlaceType.setText(text);
+		
+		placeTypeDao.insert(prePlaceType);
+		assertEquals(1, placeTypeDao.count());
+		
+		PlaceType postPlaceType = (PlaceType) placeTypeDao.select(prePlaceType.getId());
+		
+		assertTrue(postPlaceType.getText().equals(prePlaceType.getText()));
 	}
 
 	@Override

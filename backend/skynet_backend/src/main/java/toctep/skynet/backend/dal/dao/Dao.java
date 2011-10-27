@@ -3,11 +3,11 @@ package toctep.skynet.backend.dal.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 import toctep.skynet.backend.dal.domain.Domain;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 
 public abstract class Dao {
 
