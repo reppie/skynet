@@ -191,7 +191,8 @@ public class TweetParser {
         user.setListedCount(userStatus.getListedCount());   
         user.setPlace(place);
         user.setLanguage(language);
-        user.setUrl(new URL(userStatus.getURL().toExternalForm()));
+        URL userUrl = new URL();
+        userUrl.setText(userStatus.getURL().toExternalForm());
         user.setTimeZone(timeZone);
     }
     
