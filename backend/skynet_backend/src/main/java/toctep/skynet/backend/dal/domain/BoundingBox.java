@@ -1,19 +1,10 @@
 package toctep.skynet.backend.dal.domain;
 
-public class BoundingBox {
+public class BoundingBox extends Domain {
 	
 	private BoundingBoxType type;
 	private String coordinates;
 	
-	public BoundingBox() {		
-	}
-	
-	public BoundingBox(BoundingBoxType type, String coordinates) {
-		super();
-		this.type = type;
-		this.coordinates = coordinates;
-	}
-
 	public BoundingBoxType getType() {
 		return type;
 	}

@@ -1,17 +1,8 @@
 package toctep.skynet.backend.dal.domain;
 
-public class URL {
+public class URL extends Domain {
 	
 	private String text;
-	
-	public URL() {
-		super();
-	}
-
-	public URL(String text) {
-		super();
-		this.text = text;
-	}
 
 	public String getText() {
 		return text;
@@ -20,4 +11,5 @@ public class URL {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
 }

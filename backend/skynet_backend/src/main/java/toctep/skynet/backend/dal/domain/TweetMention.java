@@ -4,16 +4,6 @@ public class TweetMention {
 	
 	private Tweet tweet;
 	private long user;
-	
-	public TweetMention() {
-		super();
-	}
-
-	public TweetMention(Tweet tweet, long user) {
-		super();
-		this.tweet = tweet;
-		this.user = user;
-	}
 
 	public Tweet getTweet() {
 		return tweet;
@@ -29,5 +19,6 @@ public class TweetMention {
 
 	public void setUser(long user) {
 		this.user = user;
-	}		
+	}
+	
 }

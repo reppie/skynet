@@ -3,7 +3,7 @@ from datetime import datetime
 from django.test import TestCase
 from django.db.models import Count
 
-from skynet_frontend.twitter.models import TweetIndex, User, Tweet
+from skynet_frontend.twitter.models import Keyword, User, Tweet
 from skynet_frontend.keywordcloud.models import KeywordCloud
 
 class CloudMapTest(TestCase):
@@ -24,7 +24,7 @@ class CloudMapTest(TestCase):
         
         step = (max_font_size - min_font_size) / spread
         
-        query_set = TweetIndex.objects.values('keyword').annotate(count=Count('keyword'))
+        query_set = Keyword.objects.values('keyword').annotate(count=Count('keyword'))
         cloud = KeywordCloud(query_set, min_font_size, max_font_size)
         
         self.assertEquals(cloud.items[0].font_size, min_font_size + (4 - smallest) * step)
