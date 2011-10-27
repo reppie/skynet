@@ -1,7 +1,5 @@
 package toctep.skynet.backend.test;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Geo;
 import toctep.skynet.backend.dal.domain.GeoType;
 
