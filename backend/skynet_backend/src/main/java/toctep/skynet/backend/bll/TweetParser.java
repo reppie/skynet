@@ -1,8 +1,5 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.dal.dao.DaoFacade;
-import toctep.skynet.backend.dal.dao.TweetDao;
-import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
