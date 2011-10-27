@@ -22,36 +22,6 @@ public class Tweet extends Domain {
 		super();
 	}
 	
-	public Tweet(String text) {
-		this.text = text;
-	}
-	
-	public Tweet(int id, String text) {
-		super(id);
-		this.text = text;
-	}
-	
-	public Tweet(int id, String text, Geo geo, boolean truncated, int twitterId,
-			SourceType sourceType, boolean favorited,
-			int inReplyToTweetTwitterId, int inReplyToUserTwitterId,
-			int retweetCount, Date createdAt, Place place, User user,
-			String coordinates) {
-		super(id);
-		this.text = text;
-		this.geo = geo;
-		this.truncated = truncated;
-		this.twitterId = twitterId;
-		this.sourceType = sourceType;
-		this.favorited = favorited;
-		this.inReplyToTweetTwitterId = inReplyToTweetTwitterId;
-		this.inReplyToUserTwitterId = inReplyToUserTwitterId;
-		this.retweetCount = retweetCount;
-		this.createdAt = createdAt;
-		this.place = place;
-		this.user = user;
-		this.coordinates = coordinates;
-	}
-	
 	public String getText() {
 		return text;
 	}

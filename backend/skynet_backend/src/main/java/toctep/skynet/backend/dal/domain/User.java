@@ -40,67 +40,6 @@ public class User extends Domain {
 	private boolean isTranslator;
 	private int listedCount;
 	
-	public User() {
-		super();
-	}
-	
-	public User(int id, String name) {
-		super(id);
-		this.name = name;
-	}
-	
-	public User(int id, long twitterId, Place place, boolean defaultProfile,
-			int statusesCount, long profileBackgroundTile, Language language,
-			String profileLinkColor, int following, int favouritesCount,
-			boolean isProtected, String profileTextColor, boolean verified,
-			boolean contributorsEnabled, String description, String name,
-			String profileSidebarBorderColor, String profileBackgroundColor,
-			Date createdAt, boolean defaultProfileImage, int followersCount,
-			boolean geoEnabled, String profileBackgroundImageUrl,
-			String profileBackgroundImageUrlHttps, boolean followRequestSent,
-			URL url, TimeZone timeZone, long notifications,
-			boolean profileUseBackgroundImage, int friendsCount,
-			String profileSideBarFillColor, String screenName,
-			String profileImageUrl, boolean showAllInlineMedia,
-			boolean isTranslator, int listedCount) {
-		super(id);
-		this.twitterId = twitterId;
-		this.place = place;
-		this.defaultProfile = defaultProfile;
-		this.statusesCount = statusesCount;
-		this.profileBackgroundTile = profileBackgroundTile;
-		this.language = language;
-		this.profileLinkColor = profileLinkColor;
-		this.following = following;
-		this.favouritesCount = favouritesCount;
-		this.isProtected = isProtected;
-		this.profileTextColor = profileTextColor;
-		this.verified = verified;
-		this.contributorsEnabled = contributorsEnabled;
-		this.description = description;
-		this.name = name;
-		this.profileSidebarBorderColor = profileSidebarBorderColor;
-		this.profileBackgroundColor = profileBackgroundColor;
-		this.createdAt = createdAt;
-		this.defaultProfileImage = defaultProfileImage;
-		this.followersCount = followersCount;
-		this.geoEnabled = geoEnabled;
-		this.profileBackgroundImageUrl = profileBackgroundImageUrl;
-		this.profileBackgroundImageUrlHttps = profileBackgroundImageUrlHttps;
-		this.followRequestSent = followRequestSent;
-		this.url = url;
-		this.timeZone = timeZone;
-		this.notifications = notifications;
-		this.profileUseBackgroundImage = profileUseBackgroundImage;
-		this.friendsCount = friendsCount;
-		this.profileSideBarFillColor = profileSideBarFillColor;
-		this.screenName = screenName;
-		this.profileImageUrl = profileImageUrl;
-		this.showAllInlineMedia = showAllInlineMedia;
-		this.isTranslator = isTranslator;
-		this.listedCount = listedCount;
-	}
-
 	public long getTwitterId() {
 		return twitterId;
 	}

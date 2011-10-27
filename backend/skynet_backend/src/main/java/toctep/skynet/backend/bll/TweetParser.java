@@ -1,8 +1,5 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.dal.dao.DaoFacade;
-import toctep.skynet.backend.dal.dao.TweetDao;
-import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
@@ -191,7 +188,8 @@ public class TweetParser {
         user.setListedCount(userStatus.getListedCount());   
         user.setPlace(place);
         user.setLanguage(language);
-        user.setUrl(new URL(userStatus.getURL().toExternalForm()));
+        URL userUrl = new URL();
+        userUrl.setText(userStatus.getURL().toExternalForm());
         user.setTimeZone(timeZone);
     }
     

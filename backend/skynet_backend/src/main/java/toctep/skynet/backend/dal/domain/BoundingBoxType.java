@@ -1,15 +1,8 @@
 package toctep.skynet.backend.dal.domain;
 
-public class BoundingBoxType {
+public class BoundingBoxType extends Domain {
 
 	private String text;
-	
-	public BoundingBoxType() {		
-	}
-	
-	public BoundingBoxType(String text) {
-		this.text = text;
-	}
 
 	public String getText() {
 		return text;
