@@ -3,13 +3,13 @@ package toctep.skynet.backend.dal.domain;
 public class TweetMention {
 	
 	private Tweet tweet;
-	private User user;
+	private long user;
 	
 	public TweetMention() {
 		super();
 	}
 
-	public TweetMention(Tweet tweet, User user) {
+	public TweetMention(Tweet tweet, long user) {
 		super();
 		this.tweet = tweet;
 		this.user = user;
@@ -23,11 +23,11 @@ public class TweetMention {
 		this.tweet = tweet;
 	}
 
-	public User getUser() {
+	public long getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(long user) {
 		this.user = user;
 	}		
 }

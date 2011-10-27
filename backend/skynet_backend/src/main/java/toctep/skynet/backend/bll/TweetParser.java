@@ -2,11 +2,13 @@ package toctep.skynet.backend.bll;
 
 import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
-import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
+import toctep.skynet.backend.dal.dao.impl.jdbc.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.*;
 import twitter4j.GeoLocation;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
+import twitter4j.URLEntity;
+import twitter4j.UserMentionEntity;
 
 public class TweetParser {
 	
@@ -69,6 +71,13 @@ public class TweetParser {
         PlaceType placeType = new PlaceType();
         placeType.setText(status.getPlace().getPlaceType());
         
+        SourceType sourceType = new SourceType();
+        sourceType.setSourceType(status.getSource());
+        
+        TimeZone timeZone = new TimeZone();
+        timeZone.setTimeZone(status.getUser().getTimeZone());
+        timeZone.setUtcOffset(status.getUser().getUtcOffset());                
+        
         Place place = new Place();
         twitter4j.Place placeStatus = status.getPlace();
         place.setTwitterId(placeStatus.getId());
@@ -96,6 +105,7 @@ public class TweetParser {
         tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
         tweet.setRetweetCount(status.getRetweetCount());
         tweet.setCreatedAt(status.getCreatedAt());
+        tweet.setSourceType(sourceType);
         
         for(HashtagEntity hashtagEntity : status.getHashtagEntities()) {
             Hashtag hashtag = new Hashtag();
@@ -139,7 +149,27 @@ public class TweetParser {
         user.setTranslator(userStatus.isTranslator());
         user.setListedCount(userStatus.getListedCount());   
         user.setLanguage(language);
+        user.setTimeZone(timeZone);
 		
+        for(long contributor : status.getContributors()) {
+            TweetContributor tweetContributor = new TweetContributor();
+            tweetContributor.setTweet(tweet);
+            tweetContributor.setUser_twitter_id(contributor);
+        } 
+        
+        for(UserMentionEntity mentionEntity : status.getUserMentionEntities()) {
+            TweetMention tweetMention = new TweetMention();
+            tweetMention.setTweet(tweet);
+            tweetMention.setUser(mentionEntity.getId());
+        } 
+        
+        for(URLEntity urlEntity : status.getURLEntities()) {
+            URL url = new URL();
+            url.setText(urlEntity.getDisplayURL());
+            TweetURL tweetURL = new TweetURL();
+            tweetURL.setTweet(tweet);
+            tweetURL.setUrl(url);
+        }       
 		return true;
 	}	
 }

@@ -8,6 +8,10 @@ public class SourceType extends Domain {
 		this.text = text;
 	}
 	
+	public SourceType() {
+		super();
+	}
+
 	public String getSourceType() {
 		return text;
 	}

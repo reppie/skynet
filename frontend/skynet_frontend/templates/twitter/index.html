@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block tag-cloud %}
+	{% if keywordcloud.items %}
+		{% for item in keywordcloud.items %}
+			<p class="cloud-element" style="font-size: {{ item.font_size }}px !important }">{{ item.keyword }}</p>
+		{% endfor %}
+	{% else %}
+		<p>{% trans "No tweets indexed yet" %}</p>
+	{% endif %}
+{% endblock %}
+
+{% block title %} Social Media Lab {% endblock %}
+
+{% block main %} 
+	De body van de SoLeMa index
+	{% for tweet in tweets %}
+		<div class="tweet">{{ tweet.text }}</div>
+	{% endfor %}
+ {% endblock %}

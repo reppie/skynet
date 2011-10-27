@@ -1,57 +1,31 @@
-package toctep.skynet.backend.dal.dao.impl.mysql;
+package toctep.skynet.backend.dal.dao.impl.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.User;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class TweetDaoImpl extends Dao {
-	
-	@Override
-	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
-		
-		Tweet tweet = (Tweet) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-				"INSERT INTO twitter_tweet (text) VALUES (\"" + ((Tweet) tweet).getText() + "\")",
-				Statement.RETURN_GENERATED_KEYS
-			);
-			tweet.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+public class UserDaoImpl extends Dao {
 
 	@Override
-	public Tweet select(int id) {
+	public User select(int id) {
 		Connection conn = (Connection) this.getConnection();
 		
-		Tweet tweet = null;
+		User user = null;
 		
 		Statement stmt = null;
 		ResultSet rs = null;
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT id FROM twitter_tweet WHERE id = " + id);
+			rs = stmt.executeQuery("SELECT name FROM twitter_user WHERE id = '" + id + "'");
 			rs.first();
-			tweet = new Tweet(rs.getInt("id"), rs.getString("text"));
+			user = new User(rs.getInt("id"), rs.getString("name"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -63,25 +37,51 @@ public class TweetDaoImpl extends Dao {
 			}
 		}
 		
-		return tweet;
+		return user;
+	}
+
+	@Override
+	public void insert(Domain domain) {
+		Connection conn = (Connection) this.getConnection();
+		
+		User user = (User) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			int id = stmt.executeUpdate(
+				"INSERT INTO twitter_user (name) VALUES	('" + user.getName() + "')",
+				Statement.RETURN_GENERATED_KEYS
+			);
+			user.setId(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public void update(Domain domain) {
 		// TODO
 	}
-	
+
 	@Override
 	public void delete(Domain domain) {
 		Connection conn = (Connection) this.getConnection();
 		
-		Tweet tweet = (Tweet) domain;
+		User user = (User) domain;
 		
 		Statement stmt = null;
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM twitter_tweet WHERE id=" +	tweet.getId());
+			stmt.executeUpdate("DELETE FROM twitter_tweet WHERE id=" +	user.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
