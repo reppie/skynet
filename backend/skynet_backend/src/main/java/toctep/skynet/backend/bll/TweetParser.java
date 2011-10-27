@@ -125,7 +125,7 @@ public class TweetParser {
     
     private void parseSourceType(Status status) {
         sourceType = new SourceType();
-        sourceType.setSourceType(status.getSource());
+        sourceType.setText(status.getSource());
     }
     
     private void parseTimeZone(twitter4j.User user) {

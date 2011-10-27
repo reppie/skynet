@@ -14,7 +14,9 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
+import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.URLDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
@@ -32,9 +34,11 @@ public abstract class DomainTest extends TestCase {
 	protected TweetDao tweetDao;
 	protected BoundingBoxDao boundingBoxDao;
 	protected BoundingBoxTypeDao boundingBoxTypeDao;
+	protected URLDao urlDao;
 	protected PlaceDao placeDao;
 	protected CountryDao countryDao;
 	protected PlaceTypeDao placeTypeDao;
+	protected SourceTypeDao sourceTypeDao;
 	
 	@Before
 	public void setUp() {
@@ -57,6 +61,7 @@ public abstract class DomainTest extends TestCase {
 		placeDao = daoFacade.getPlaceDao();
 		countryDao = daoFacade.getCountryDao();
 		placeTypeDao = daoFacade.getPlaceTypeDao();
+		sourceTypeDao = daoFacade.getSourceTypeDao();
 	}
 
 	@After
