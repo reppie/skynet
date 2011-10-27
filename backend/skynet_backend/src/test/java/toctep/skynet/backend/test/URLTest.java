@@ -17,8 +17,16 @@ public class URLTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		URL preURL = new URL();
 		
+		String urlText = "http://www.diablo3.com";
+		preURL.setText(urlText);
+		
+		urlDao.insert(preURL);
+		assertEquals(1, urlDao.count());
+		
+		URL postURL = (URL) urlDao.select(preURL.getId());
+		assertTrue(postURL.getText().equals(preURL.getText()));
 	}
 
 	@Override
@@ -34,3 +42,4 @@ public class URLTest extends DomainTest {
 	}
 
 }
+
