@@ -44,12 +44,7 @@ public class TweetParser {
 		
 	private static TweetParser instance;
 	
-	private DaoFacade daoFacade;
-	private TweetDao tweetDao;
-	
 	private TweetParser() {
-		daoFacade = new DaoFacadeImpl();
-		tweetDao = daoFacade.getTweetDao();
 	}
 	
 	public static TweetParser getInstance() {
@@ -75,8 +70,7 @@ public class TweetParser {
 		parseUrl(status);
 		parseHashtag(status);
 		parseContributor(status);
-		parseMention(status);
-		
+		parseMention(status);		
 		return true;
 	}
 	
