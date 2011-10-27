@@ -105,6 +105,28 @@ class User(models.Model):
 class Url(models.Model):
     text = models.CharField(max_length=255, blank=True, null=True);
 
+class Keyword(models.Model):
+    keyword = models.CharField(max_length=140)
+
+    @staticmethod
+    def get_all_since(datetime_since):
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
+
+    @staticmethod
+    def get_keyword_cloud():
+        from skynet_frontend.keywordcloud.models import KeywordCloud 
+        from datetime import datetime, timedelta
+        
+        yesterday = datetime.now() - timedelta(days=1)
+        query_set = Keyword.get_all_since(yesterday)
+        min_font_size = settings.TWITTER['keywordcloud']['min_font_size']
+        max_font_size = settings.TWITTER['keywordcloud']['max_font_size']
+        
+        return KeywordCloud(query_set=query_set, min_font_size=min_font_size, max_font_size=max_font_size)
+        
+    def __unicode__(self):
+        return self.keyword
+
 class Tweet(models.Model):
     text = models.CharField(max_length=140, null=True)
     geo = models.ForeignKey(Geo, blank=True, null=True)
@@ -121,16 +143,21 @@ class Tweet(models.Model):
     coordinates = models.ForeignKey(Coordinates, blank=True, null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
+    keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True, null=True)
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
-        keywords = self.text.split()
-        for keyword in keywords:
-            TweetIndex(keyword = keyword, tweet = self).save()
+        words = self.text.split()
+        for word in words:
+            keyword = Keyword(keyword=word)
+            keyword.save()
+            self.keywords.add(keyword)
+            
+        super(Tweet, self).save(*args, **kwargs)
     
     def __unicode__(self):
         return "@" + self.user.name + ": " + self.text
-
+    
 class TweetMention(models.Model):
     tweet = models.ForeignKey(Tweet)
     user_twitter_id = models.IntegerField()
@@ -144,27 +171,3 @@ class TweetContributor(models.Model):
 
     class Meta:
         db_table = "twitter_tweet_contributors";
-
-class TweetIndex(models.Model):
-    
-    keyword = models.CharField(max_length=140)
-    tweet = models.ForeignKey(Tweet)
-
-    @staticmethod
-    def get_all_since(datetime_since):
-        return TweetIndex.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
-
-    @staticmethod
-    def get_keyword_cloud():
-        from skynet_frontend.keywordcloud.models import KeywordCloud 
-        from datetime import datetime, timedelta
-        
-        yesterday = datetime.now() - timedelta(days=1)
-        query_set = TweetIndex.get_all_since(yesterday)
-        min_font_size = settings.TWITTER['keywordcloud']['min_font_size']
-        max_font_size = settings.TWITTER['keywordcloud']['max_font_size']
-        
-        return KeywordCloud(query_set=query_set, min_font_size=min_font_size, max_font_size=max_font_size)
-        
-    def __unicode__(self):
-        return self.keyword

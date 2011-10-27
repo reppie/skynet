@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 import toctep.skynet.backend.dal.dao.Dao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
@@ -72,4 +73,12 @@ public abstract class DomainTest {
 		}
 	}
 	
+	@Test
+	public abstract void testCreate();
+	
+	@Test
+	public abstract void testInsert();
+	
+	@Test
+	public abstract void testDelete();	
 }
