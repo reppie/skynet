@@ -23,7 +23,7 @@ public class TweetDaoImpl extends TweetDao {
 		try {
 			stmt = (Statement) conn.createStatement();
 			int id = stmt.executeUpdate(
-				"INSERT INTO " + tableName + "  (text) VALUES (\"" + ((Tweet) tweet).getText() + "\")",
+				"INSERT INTO " + tableName + " (text) VALUES (\"" + tweet.getText() + "\")",
 				Statement.RETURN_GENERATED_KEYS
 			);
 			tweet.setId(id);
