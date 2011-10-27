@@ -12,19 +12,23 @@ public class TweetTest extends DomainTest {
 
 	@Test
 	public void testCreatingTweet() {
-		Tweet preTweet = new Tweet();
-		assertNotNull(preTweet);
+		Tweet tweet = new Tweet();
+		assertNotNull(tweet);
 		
-		String text = "Lap text";
-		preTweet.setText(text);
-		assertTrue(text.equals(preTweet.getText()));
+		String text = "test";
+		tweet.setText(text);
+		assertTrue(text.equals(tweet.getText()));
+		
+		boolean truncated = false;
+		tweet.setTruncated(truncated);
+		assertTrue(truncated == tweet.isTruncated());
 	}
 	
 	@Test
 	public void testInsertingTweet() {
 		Tweet preTweet = new Tweet();
 		
-		String text = "text";
+		String text = "test";
 		preTweet.setText(text);
 		
 		tweetDao.insert(preTweet);
@@ -36,7 +40,7 @@ public class TweetTest extends DomainTest {
 	}
 	
 	@Test
-	public void testUpdatingUser() {
+	public void testUpdatingTweet() {
 		// TODO
 	}
 	

@@ -12,20 +12,20 @@ public class UserTest extends DomainTest {
 	
 	@Test
 	public void testCreatingUser() { 
-		User preUser = new User();
-		assertNotNull(preUser);
+		User user = new User();
+		assertNotNull(user);
 		
 		boolean defaultProfile = false;
-		preUser.setDefaultProfile(defaultProfile);
-		assertTrue(preUser.isDefaultProfile() == defaultProfile);
+		user.setDefaultProfile(defaultProfile);
+		assertTrue(user.isDefaultProfile() == defaultProfile);
 		
 		int statusesCount = 1;
-		preUser.setStatusesCount(statusesCount);
-		assertEquals(statusesCount, preUser.getStatusesCount());
+		user.setStatusesCount(statusesCount);
+		assertEquals(statusesCount, user.getStatusesCount());
 		
 		String name = "Daniel";
-		preUser.setName(name);
-		assertTrue(name.equals(preUser.getName()));
+		user.setName(name);
+		assertTrue(name.equals(user.getName()));
 	}
 	
 	@Test
