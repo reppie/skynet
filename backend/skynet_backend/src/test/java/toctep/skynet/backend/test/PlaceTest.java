@@ -4,6 +4,7 @@ import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.PlaceType;
+import toctep.skynet.backend.dal.domain.User;
 
 public class PlaceTest extends DomainTest{
 
@@ -75,14 +76,83 @@ public class PlaceTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		Place place = new Place();
+		assertNotNull(place);
+		placeDao.insert(place);
+		assertEquals(1, placeDao.count());
+		placeDao.delete(place);
+		assertEquals(0, placeDao.count());
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		Place prePlace = new Place();
 		
+		String twitterId = "test";
+		prePlace.setTwitterId(twitterId);
+		
+		PlaceType placeType = new PlaceType();
+		prePlace.setType(placeType);
+		
+		BoundingBox boundingBox = new BoundingBox();
+		prePlace.setBoundingBox(boundingBox);
+		
+		String name = "test";
+		prePlace.setName(name);
+		
+		String fullName = "test";
+		prePlace.setFullName(fullName);
+		
+		Country country = new Country();
+		prePlace.setCountry(country);
+		
+		String streetAddress = "test";
+		prePlace.setStreetAddress(streetAddress);
+		
+		String locality = "test";
+		prePlace.setLocality(locality);
+		
+		String region = "test";
+		prePlace.setRegion(region);
+		
+		String iso3 = "test";
+		prePlace.setIso3(iso3);
+		
+		String postalCode = "test";
+		prePlace.setPostalCode(postalCode);
+		
+		String phone = "test";
+		prePlace.setPhone(phone);
+		
+		String twitter = "test";
+		prePlace.setTwitter(twitter);
+		
+		String url = "test";
+		prePlace.setUrl(url);
+		
+		String appId = "test";
+		prePlace.setAppId(appId);
+		
+		placeDao.insert(prePlace);
+		assertEquals(1, userDao.count());
+		
+		Place postPlace = (Place) placeDao.select(prePlace.getId());
+		
+		assertTrue(postPlace.getTwitterId().equals(prePlace.getTwitterId()));
+		assertTrue(postPlace.getType().equals(prePlace.getType()));
+		assertTrue(postPlace.getBoundingBox().equals(prePlace.getBoundingBox()));
+		assertTrue(postPlace.getName().equals(prePlace.getName()));
+		assertTrue(postPlace.getFullName().equals(prePlace.getFullName()));
+		assertTrue(postPlace.getCountry().equals(prePlace.getCountry()));
+		assertTrue(postPlace.getStreetAddress().equals(prePlace.getStreetAddress()));
+		assertTrue(postPlace.getLocality().equals(prePlace.getStreetAddress()));
+		assertTrue(postPlace.getRegion().equals(prePlace.getRegion()));
+		assertTrue(postPlace.getIso3().equals(prePlace.getIso3()));
+		assertTrue(postPlace.getPostalCode().equals(prePlace.getIso3()));
+		assertTrue(postPlace.getPhone().equals(prePlace.getPhone()));
+		assertTrue(postPlace.getTwitter().equals(prePlace.getTwitter()));
+		assertTrue(postPlace.getUrl().equals(prePlace.getUrl()));
+		assertTrue(postPlace.getAppId().equals(prePlace.getAppId()));
 	}
 
 	@Override
