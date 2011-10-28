@@ -20,8 +20,30 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
 	public void insert(Domain domain) {
-		// TODO Auto-generated method stub
+		Connection conn = (Connection) this.getConnection();
 		
+		BoundingBox boundingBox = (BoundingBox) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			int id = stmt.executeUpdate(
+					"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
+					"VALUES (" + boundingBox.getType() + ", '" 
+								+ boundingBox.getCoordinates() + "')",					
+					Statement.RETURN_GENERATED_KEYS
+				);
+			boundingBox.setId(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
