@@ -20,7 +20,6 @@
 		cache:{
 			'collections':{},
 			'get': function(type, id){
-				var type = typeof type;
 				var item = null;				
 				var col = api.cache.collections[type];				
 				if(col){
@@ -100,7 +99,7 @@
 	  	});
 	}
 	api.User.get = function(userId, callback) {
-		var user = api.cache.get(api.User, userId);
+		var user = api.cache.get(typeof api.User, userId);
 		if(user){
 			console.log("serving User with id: "+userId+" from cache.;")
 			callback(user);
