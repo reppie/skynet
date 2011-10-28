@@ -11,4 +11,5 @@ public interface DaoFacade {
 	public PlaceTypeDao getPlaceTypeDao();	
 	public SourceTypeDao getSourceTypeDao();
 	public GeoDao getGeoDao();
+	public GeoTypeDao getGeoTypeDao();
 }

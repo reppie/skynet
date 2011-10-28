@@ -16,14 +16,26 @@ public class GeoTypeTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		GeoType geoType = new GeoType();
+		assertNotNull(geoType);
+		geoTypeDao.insert(geoType);
+		assertEquals(1, geoTypeDao.count());
+		geoTypeDao.delete(geoType);
+		assertEquals(0, geoTypeDao.count());		
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		GeoType preGeoType = new GeoType();
 		
+		String text = "Point";
+		preGeoType.setText(text);
+		
+		geoTypeDao.insert(preGeoType);
+		assertEquals(1, geoTypeDao.count());
+		
+		GeoType postGeoType = (GeoType) geoTypeDao.select(preGeoType.getId());
+		assertTrue(postGeoType.getText().equals(preGeoType.getText()));
 	}
 
 	@Override

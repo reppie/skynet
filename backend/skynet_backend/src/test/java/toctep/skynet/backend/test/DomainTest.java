@@ -13,6 +13,7 @@ import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
+import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
@@ -41,6 +42,7 @@ public abstract class DomainTest extends TestCase {
 	protected PlaceTypeDao placeTypeDao;
 	protected SourceTypeDao sourceTypeDao;
 	protected GeoDao geoDao;
+	protected GeoTypeDao geoTypeDao;
 	
 	@Before
 	public void setUp() {
@@ -65,6 +67,7 @@ public abstract class DomainTest extends TestCase {
 		placeTypeDao = daoFacade.getPlaceTypeDao();
 		sourceTypeDao = daoFacade.getSourceTypeDao();
 		geoDao = daoFacade.getGeoDao();
+		geoTypeDao = daoFacade.getGeoTypeDao();
 	}
 
 	@After
