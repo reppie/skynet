@@ -8,6 +8,12 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding model 'Url'
+        db.create_table('twitter_url', (
+            ('text', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, primary_key=True)),
+        ))
+        db.send_create_signal('twitter', ['Url'])
+
         # Adding model 'Hashtag'
         db.create_table('twitter_hashtag', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -17,8 +23,7 @@ class Migration(SchemaMigration):
 
         # Adding model 'Country'
         db.create_table('twitter_country', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('code', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, blank=True)),
+            ('code', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, primary_key=True)),
             ('text', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
         ))
         db.send_create_signal('twitter', ['Country'])
@@ -29,6 +34,20 @@ class Migration(SchemaMigration):
             ('text', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
         ))
         db.send_create_signal('twitter', ['PlaceType'])
+
+        # Adding model 'GeoType'
+        db.create_table('twitter_geotype', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('text', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
+        ))
+        db.send_create_signal('twitter', ['GeoType'])
+
+        # Adding model 'CoordinatesType'
+        db.create_table('twitter_coordinatestype', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('text', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
+        ))
+        db.send_create_signal('twitter', ['CoordinatesType'])
 
         # Adding model 'BoundingBoxType'
         db.create_table('twitter_boundingboxtype', (
@@ -69,11 +88,11 @@ class Migration(SchemaMigration):
 
         # Adding model 'Place'
         db.create_table('twitter_place', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('twitter_id', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
+            ('id', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, primary_key=True)),
             ('place_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.PlaceType'], null=True, blank=True)),
             ('bounding_box', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.BoundingBox'], null=True, blank=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('url', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Url'], null=True, blank=True)),
             ('full_name', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Country'], null=True, blank=True)),
             ('street_address', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
@@ -83,15 +102,29 @@ class Migration(SchemaMigration):
             ('postal_code', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('twitter', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('appid', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
         ))
         db.send_create_signal('twitter', ['Place'])
 
+        # Adding model 'Geo'
+        db.create_table('twitter_geo', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('geo_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.GeoType'], null=True, blank=True)),
+            ('coordinates', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+        ))
+        db.send_create_signal('twitter', ['Geo'])
+
+        # Adding model 'Coordinates'
+        db.create_table('twitter_coordinates', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('coordinates_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.CoordinatesType'], null=True, blank=True)),
+            ('coordinates', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+        ))
+        db.send_create_signal('twitter', ['Coordinates'])
+
         # Adding model 'User'
         db.create_table('twitter_user', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('twitter_id', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
+            ('id', self.gf('django.db.models.fields.BigIntegerField')(primary_key=True)),
             ('place', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Place'], null=True, blank=True)),
             ('default_profile', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('statuses_count', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
@@ -105,53 +138,53 @@ class Migration(SchemaMigration):
             ('verified', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('contributors_enabled', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=160, null=True, blank=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=15, null=True)),
             ('profile_sidebar_border_color', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('profile_background_color', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
             ('default_profile_image', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('followers_count', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
+            ('profile_image_url', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='user_profile_image_url', null=True, to=orm['twitter.Url'])),
+            ('profile_image_url_https', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='user_profile_image_url_https', null=True, to=orm['twitter.Url'])),
             ('geo_enabled', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('profile_background_image_url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('profile_background_image_url_https', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('profile_background_image_url', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='user_profile_background_image_url', null=True, to=orm['twitter.Url'])),
+            ('profile_background_image_url_https', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='user_profile_background_image_url_https', null=True, to=orm['twitter.Url'])),
             ('follow_request_sent', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('url', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='user_url', null=True, to=orm['twitter.Url'])),
             ('time_zone', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.TimeZone'], null=True, blank=True)),
             ('notifications', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
             ('profile_use_background_image', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('friends_count', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
             ('profile_sidebar_fill_color', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('screen_name', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('profile_image_url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('screen_name', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
             ('show_all_inline_media', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_translator', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('listed_count', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
         ))
         db.send_create_signal('twitter', ['User'])
 
-        # Adding model 'Url'
-        db.create_table('twitter_url', (
+        # Adding model 'Keyword'
+        db.create_table('twitter_keyword', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('text', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('keyword', self.gf('django.db.models.fields.CharField')(max_length=140)),
         ))
-        db.send_create_signal('twitter', ['Url'])
+        db.send_create_signal('twitter', ['Keyword'])
 
         # Adding model 'Tweet'
         db.create_table('twitter_tweet', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('text', self.gf('django.db.models.fields.CharField')(max_length=140, null=True, blank=True)),
-            ('geo', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('id', self.gf('django.db.models.fields.BigIntegerField')(primary_key=True)),
+            ('text', self.gf('django.db.models.fields.CharField')(max_length=140, null=True)),
+            ('geo', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Geo'], null=True, blank=True)),
             ('truncated', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('twitter_id', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
             ('source_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.SourceType'], null=True, blank=True)),
             ('favorited', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('in_reply_to_tweet_twitter_id', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
-            ('in_reply_to_user_twitter_id', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
+            ('in_reply_to_tweet', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Tweet'], null=True, blank=True)),
+            ('in_reply_to_user', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='user_in_reply_to_user', null=True, to=orm['twitter.User'])),
             ('retweet_count', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
-            ('created_at', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(null=True)),
             ('place', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Place'], null=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.User'], null=True, blank=True)),
-            ('coordinates', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.User'], null=True)),
+            ('coordinates', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Coordinates'], null=True, blank=True)),
         ))
         db.send_create_signal('twitter', ['Tweet'])
 
@@ -171,11 +204,19 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('twitter_tweet_hashtags', ['tweet_id', 'hashtag_id'])
 
+        # Adding M2M table for field keywords on 'Tweet'
+        db.create_table('twitter_tweet_keywords', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('tweet', models.ForeignKey(orm['twitter.tweet'], null=False)),
+            ('keyword', models.ForeignKey(orm['twitter.keyword'], null=False))
+        ))
+        db.create_unique('twitter_tweet_keywords', ['tweet_id', 'keyword_id'])
+
         # Adding model 'TweetMention'
         db.create_table('twitter_tweet_mentions', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('tweet', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Tweet'])),
-            ('user_twitter_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.User'])),
         ))
         db.send_create_signal('twitter', ['TweetMention'])
 
@@ -183,21 +224,16 @@ class Migration(SchemaMigration):
         db.create_table('twitter_tweet_contributors', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('tweet', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Tweet'])),
-            ('user_twitter_id', self.gf('django.db.models.fields.IntegerField')()),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.User'])),
         ))
         db.send_create_signal('twitter', ['TweetContributor'])
-
-        # Adding model 'TweetIndex'
-        db.create_table('twitter_tweetindex', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('keyword', self.gf('django.db.models.fields.CharField')(max_length=140)),
-            ('tweet', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Tweet'])),
-        ))
-        db.send_create_signal('twitter', ['TweetIndex'])
 
 
     def backwards(self, orm):
         
+        # Deleting model 'Url'
+        db.delete_table('twitter_url')
+
         # Deleting model 'Hashtag'
         db.delete_table('twitter_hashtag')
 
@@ -206,6 +242,12 @@ class Migration(SchemaMigration):
 
         # Deleting model 'PlaceType'
         db.delete_table('twitter_placetype')
+
+        # Deleting model 'GeoType'
+        db.delete_table('twitter_geotype')
+
+        # Deleting model 'CoordinatesType'
+        db.delete_table('twitter_coordinatestype')
 
         # Deleting model 'BoundingBoxType'
         db.delete_table('twitter_boundingboxtype')
@@ -225,11 +267,17 @@ class Migration(SchemaMigration):
         # Deleting model 'Place'
         db.delete_table('twitter_place')
 
+        # Deleting model 'Geo'
+        db.delete_table('twitter_geo')
+
+        # Deleting model 'Coordinates'
+        db.delete_table('twitter_coordinates')
+
         # Deleting model 'User'
         db.delete_table('twitter_user')
 
-        # Deleting model 'Url'
-        db.delete_table('twitter_url')
+        # Deleting model 'Keyword'
+        db.delete_table('twitter_keyword')
 
         # Deleting model 'Tweet'
         db.delete_table('twitter_tweet')
@@ -240,14 +288,14 @@ class Migration(SchemaMigration):
         # Removing M2M table for field hashtags on 'Tweet'
         db.delete_table('twitter_tweet_hashtags')
 
+        # Removing M2M table for field keywords on 'Tweet'
+        db.delete_table('twitter_tweet_keywords')
+
         # Deleting model 'TweetMention'
         db.delete_table('twitter_tweet_mentions')
 
         # Deleting model 'TweetContributor'
         db.delete_table('twitter_tweet_contributors')
-
-        # Deleting model 'TweetIndex'
-        db.delete_table('twitter_tweetindex')
 
 
     models = {
@@ -262,16 +310,42 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
         },
+        'twitter.coordinates': {
+            'Meta': {'object_name': 'Coordinates'},
+            'coordinates': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'coordinates_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.CoordinatesType']", 'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
+        'twitter.coordinatestype': {
+            'Meta': {'object_name': 'CoordinatesType'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
+        },
         'twitter.country': {
             'Meta': {'object_name': 'Country'},
-            'code': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'code': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'primary_key': 'True'}),
             'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+        },
+        'twitter.geo': {
+            'Meta': {'object_name': 'Geo'},
+            'coordinates': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'geo_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.GeoType']", 'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+        },
+        'twitter.geotype': {
+            'Meta': {'object_name': 'GeoType'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
         },
         'twitter.hashtag': {
             'Meta': {'object_name': 'Hashtag'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'text': ('django.db.models.fields.CharField', [], {'max_length': '139', 'null': 'True', 'blank': 'True'})
+        },
+        'twitter.keyword': {
+            'Meta': {'object_name': 'Keyword'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'keyword': ('django.db.models.fields.CharField', [], {'max_length': '140'})
         },
         'twitter.language': {
             'Meta': {'object_name': 'Language'},
@@ -284,7 +358,7 @@ class Migration(SchemaMigration):
             'bounding_box': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.BoundingBox']", 'null': 'True', 'blank': 'True'}),
             'country': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Country']", 'null': 'True', 'blank': 'True'}),
             'full_name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'primary_key': 'True'}),
             'iso3': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'locality': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
@@ -294,8 +368,7 @@ class Migration(SchemaMigration):
             'region': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'street_address': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'twitter': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'twitter_id': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'url': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Url']", 'null': 'True', 'blank': 'True'})
         },
         'twitter.placetype': {
             'Meta': {'object_name': 'PlaceType'},
@@ -315,51 +388,38 @@ class Migration(SchemaMigration):
         },
         'twitter.tweet': {
             'Meta': {'object_name': 'Tweet'},
-            'coordinates': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'created_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'coordinates': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Coordinates']", 'null': 'True', 'blank': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'favorited': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'geo': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'hashtags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['twitter.Hashtag']", 'symmetrical': 'False'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'in_reply_to_tweet_twitter_id': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'in_reply_to_user_twitter_id': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
+            'geo': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Geo']", 'null': 'True', 'blank': 'True'}),
+            'hashtags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['twitter.Hashtag']", 'symmetrical': 'False', 'blank': 'True'}),
+            'id': ('django.db.models.fields.BigIntegerField', [], {'primary_key': 'True'}),
+            'in_reply_to_tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']", 'null': 'True', 'blank': 'True'}),
+            'in_reply_to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_in_reply_to_user'", 'null': 'True', 'to': "orm['twitter.User']"}),
+            'keywords': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['twitter.Keyword']", 'symmetrical': 'False', 'blank': 'True'}),
             'place': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Place']", 'null': 'True', 'blank': 'True'}),
             'retweet_count': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
             'source_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.SourceType']", 'null': 'True', 'blank': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True'}),
             'truncated': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'twitter_id': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'urls': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['twitter.Url']", 'symmetrical': 'False'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.User']", 'null': 'True', 'blank': 'True'})
+            'urls': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['twitter.Url']", 'symmetrical': 'False', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.User']", 'null': 'True'})
         },
         'twitter.tweetcontributor': {
             'Meta': {'object_name': 'TweetContributor', 'db_table': "'twitter_tweet_contributors'"},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']"}),
-            'user_twitter_id': ('django.db.models.fields.IntegerField', [], {})
-        },
-        'twitter.tweetindex': {
-            'Meta': {'object_name': 'TweetIndex'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'keyword': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
-            'tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']"})
-        },
-        'twitter.tweetindexcount': {
-            'Meta': {'object_name': 'TweetIndexCount', 'managed': 'False'},
-            'count': ('django.db.models.fields.IntegerField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'keyword': ('django.db.models.fields.CharField', [], {'max_length': '140'})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.User']"})
         },
         'twitter.tweetmention': {
             'Meta': {'object_name': 'TweetMention', 'db_table': "'twitter_tweet_mentions'"},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']"}),
-            'user_twitter_id': ('django.db.models.fields.IntegerField', [], {})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.User']"})
         },
         'twitter.url': {
             'Meta': {'object_name': 'Url'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'primary_key': 'True'})
         },
         'twitter.user': {
             'Meta': {'object_name': 'User'},
@@ -374,30 +434,30 @@ class Migration(SchemaMigration):
             'following': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
             'friends_count': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
             'geo_enabled': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.BigIntegerField', [], {'primary_key': 'True'}),
             'is_translator': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'language': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Language']", 'null': 'True', 'blank': 'True'}),
             'listed_count': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '15', 'null': 'True'}),
             'notifications': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
             'place': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Place']", 'null': 'True', 'blank': 'True'}),
             'profile_background_color': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'profile_background_image_url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'profile_background_image_url_https': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'profile_background_image_url': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_profile_background_image_url'", 'null': 'True', 'to': "orm['twitter.Url']"}),
+            'profile_background_image_url_https': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_profile_background_image_url_https'", 'null': 'True', 'to': "orm['twitter.Url']"}),
             'profile_background_tile': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'profile_image_url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'profile_image_url': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_profile_image_url'", 'null': 'True', 'to': "orm['twitter.Url']"}),
+            'profile_image_url_https': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_profile_image_url_https'", 'null': 'True', 'to': "orm['twitter.Url']"}),
             'profile_link_color': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'profile_sidebar_border_color': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'profile_sidebar_fill_color': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'profile_text_color': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'profile_use_background_image': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'protected': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'screen_name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'screen_name': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
             'show_all_inline_media': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'statuses_count': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
             'time_zone': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.TimeZone']", 'null': 'True', 'blank': 'True'}),
-            'twitter_id': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'url': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_url'", 'null': 'True', 'to': "orm['twitter.Url']"}),
             'verified': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         }
     }
