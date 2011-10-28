@@ -23,19 +23,17 @@ class TwitterRpcMethods(object):
     @jsonremote(service)
     def load_tweet(tweet_id):
         tweet = Tweet.objects.get(pk=tweet_id)
-       
-        return {
-            'id': tweet.id,
-            'text': tweet.text,
-            'user_id': tweet.user_id,
-        }
+        return tweet
+    
     @staticmethod
     @jsonremote(service)
     def load_user(user_id):
         user = User.objects.get(pk=user_id)
-       
-        return {
-            'id': user.id,
-            'name': user.name,
-            'screen_name': user.screen_name,
-        }
+        return user
+        
+    @staticmethod
+    @jsonremote(service)
+    def search_tweets(filters):
+        for filter in filters:
+            pass
+        return Tweet.objects.values('id').all()
