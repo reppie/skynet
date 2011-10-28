@@ -38,8 +38,7 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 
 }

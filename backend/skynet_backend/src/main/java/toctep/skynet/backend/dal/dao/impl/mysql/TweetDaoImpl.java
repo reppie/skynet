@@ -7,62 +7,31 @@ import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.Tweet;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 public class TweetDaoImpl extends TweetDao {
 	
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		Tweet tweet = (Tweet) domain;
 		
-		Statement stmt = null;
+		int id = MySqlUtil.getInstance().insert(
+			"INSERT INTO " + tableName + " (text) VALUES (\"" + tweet.getText() + "\")"
+		);
 		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-				"INSERT INTO " + tableName + " (text) VALUES (\"" + tweet.getText() + "\")",
-				Statement.RETURN_GENERATED_KEYS
-			);
-			tweet.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		tweet.setId(id);
 	}
 
 	@Override
 	public Tweet select(long id) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
+		Tweet tweet = new Tweet();
 		
-		Tweet tweet = null;
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT id, text FROM " + tableName + " WHERE id = " + id);
 		
-		Statement stmt = null;
-		ResultSet rs = null;
+		tweet.setId(id);
 		
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT id, text FROM " + tableName + " WHERE id = " + id);
-			rs.first();
-			tweet = new Tweet();
-			tweet.setId(id);
 			tweet.setText(rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return tweet;
@@ -75,24 +44,8 @@ public class TweetDaoImpl extends TweetDao {
 	
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		Tweet tweet = (Tweet) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + tweet.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweet.getId());	
 	}
 
 	@Override
@@ -103,8 +56,7 @@ public class TweetDaoImpl extends TweetDao {
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 
 }

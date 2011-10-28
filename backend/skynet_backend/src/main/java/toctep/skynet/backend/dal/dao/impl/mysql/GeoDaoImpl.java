@@ -7,88 +7,40 @@ import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.Geo;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 public class GeoDaoImpl extends GeoDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		Geo geo = (Geo) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + geo.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geo.getId());
 	}
+	
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		Geo geo = (Geo) domain;
 		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-					"INSERT INTO " + tableName + " (geo_type_id, coordinates) " +
-					"VALUES (" + geo.getType() + ", '" 
-								+ geo.getCoordinates() + "')",					
-					Statement.RETURN_GENERATED_KEYS
+		int id = MySqlUtil.getInstance().insert(
+				"INSERT INTO " + tableName + " (geo_type_id, coordinates) " +
+				"VALUES (" + geo.getType() + ", '" 
+							+ geo.getCoordinates() + "')"					
 				);
-			geo.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		geo.setId(id);
 	}
 
 	@Override
 	public Geo select(long id) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
+		Geo geo = new Geo();
 		
-		Geo geo = null;
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
 		
-		Statement stmt = null;
-		ResultSet rs = null;
-		
+		geo.setId(id);
+//		geo.setType(); // TODO!
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id = " + id);
-			rs.first();
-			geo = new Geo();
-			geo.setId(id);
-//			geo.setType(); // TODO!
 			geo.setCoordinates(rs.getString("coordinates"));
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-		
 		return geo;
 	}
 
