@@ -232,7 +232,7 @@ public class UserTest extends DomainTest {
 		boolean followRequestSent = false;
 		preUser.setFollowRequestSent(followRequestSent);
 		
-		URL url = new URL();
+		Url url = new Url();
 		preUser.setUrl(url);
 		
 		TimeZone timeZone = new TimeZone();
