@@ -1,7 +1,6 @@
 (function($){
 	var api = window.api || (window.api = {
 		
-		
 		'Base': function(json){
 			var base = this;
 			$.each(json,function(key, value){
@@ -27,13 +26,12 @@
 				}
 				return item;
 			},
-			'set': function(id, item){
-				var type = typeof item;
-				var col = api.cache.collections[item.constructor];				
+			'set': function(type, item){
+				var col = api.cache.collections[type];				
 				if(!col){
-					col = api.cache.collections[item.constructor] = {};					
+					col = api.cache.collections[type] = {};					
 				}
-				col[""+id] = item;
+				col[""+item.id] = item;
 			}
 		},
 		
@@ -71,26 +69,30 @@
         }
  	});
 	api.Tweet.prototype.getUser = function(callback){
-		api.User.get(this.user_id, callback);
-		
+		if(this.user){
+			callback(this.user);
+			return;
+		}
+		var tweet = this;
+		api.User.get(this.user_id, function(user){
+			tweet.user = user;
+			callback(user);
+		});
 	}
 	
 	api.Tweet.get = function(tweetId, callback) {
-		var tweet = api.cache.get(api.Tweet, tweetId);
+		var tweet = api.cache.get('api.Tweet', tweetId);
 		if(tweet){
 			console.log("serving Tweet with id: "+tweetId+" from cache.;")
 			callback(tweet);
 			return;
 		}
-		
 		$.jsonRPC.request('load_tweet', {
-		  params: [tweetId],
-		  success: function(result){
-		  	console.log("success");
-		  	console.log(result);
-		  	var tweet = new api.Tweet(result.result);
-		  	api.cache.set(tweetId, tweet);
-		  	callback(tweet);
+		  	params: [tweetId],
+		  	success: function(result){
+		  		var tweet = new api.Tweet(result.result);
+		  		api.cache.set('api.Tweet', tweet);
+		  		callback(tweet);
 		  },
 		  error: function(result){
 		  	console.log(result);
@@ -99,18 +101,18 @@
 	  	});
 	}
 	api.User.get = function(userId, callback) {
-		var user = api.cache.get(typeof api.User, userId);
+		var user = api.cache.get('api.User', userId);
 		if(user){
 			console.log("serving User with id: "+userId+" from cache.;")
 			callback(user);
 			return;
 		}
 		$.jsonRPC.request('load_user', {
-		  params: [userId],
-		  success: function(result){
-		  	var user = new api.User(result.result);
-		  	api.cache.set(userId, user);
-		  	callback(user);
+		  	params: [userId],
+		  	success: function(result){
+		  		var user = new api.User(result.result);
+		  		api.cache.set('api.User', user);
+		  		callback(user);
 		  },
 		  error: function(result){
 		  	console.log(result);
