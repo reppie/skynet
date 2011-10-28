@@ -1,6 +1,5 @@
 package toctep.skynet.backend.test;
 
-import toctep.skynet.backend.dal.domain.SourceType;
 import toctep.skynet.backend.dal.domain.TimeZone;
 
 public class TimeZoneTest extends DomainTest {

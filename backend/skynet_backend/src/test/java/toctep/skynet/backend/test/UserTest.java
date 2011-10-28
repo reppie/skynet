@@ -160,15 +160,118 @@ public class UserTest extends DomainTest {
 	public void testInsert() {
 		User preUser = new User();
 		
-		String name = "Test";
+		long twitterId = 0L;
+		preUser.setTwitterId(twitterId);
+		
+		Place place = new Place();
+		preUser.setPlace(place);
+		
+		boolean defaultProfile = false;
+		preUser.setDefaultProfile(defaultProfile);
+		
+		int statusesCount = 1;
+		preUser.setStatusesCount(statusesCount);
+		
+		long profileBackgroundTile = 0L;
+		preUser.setProfileBackgroundTile(profileBackgroundTile);
+		
+		Language language = new Language();
+		preUser.setLanguage(language);
+		
+		String profileLinkColor = "test";
+		preUser.setProfileLinkColor(profileLinkColor);
+		
+		int following = 0;
+		preUser.setFollowing(following);
+		
+		int favouritesCount = 0;
+		preUser.setFollowersCount(favouritesCount);
+		
+		boolean isProtected = false;
+		preUser.setProtected(isProtected);
+		
+		String profileTextColor = "test";
+		preUser.setProfileTextColor(profileTextColor);
+		
+		boolean verified = false;
+		preUser.setVerified(verified);
+		
+		boolean contributorsEnabled = false;
+		preUser.setContributorsEnabled(contributorsEnabled);
+		
+		String description = "test";
+		preUser.setDescription(description);
+		
+		String name = "test";
 		preUser.setName(name);
+		
+		String profileSidebarBorderColor = "test";
+		preUser.setProfileSidebarBorderColor(profileSidebarBorderColor);
+		
+		String profileBackgroundColor = "test";
+		preUser.setProfileBackgroundColor(profileBackgroundColor);
+	
+		Date createdAt = new Date();
+		preUser.setCreatedAt(createdAt);
+		
+		boolean defaultProfileImage = false;
+		preUser.setDefaultProfileImage(defaultProfileImage);
+		
+		int followersCount = 0;
+		preUser.setFollowersCount(followersCount);
+		
+		boolean geoEnabled = false;
+		preUser.setGeoEnabled(geoEnabled);
+		
+		String profileBackgroundImageUrl = "test";
+		preUser.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
+		
+		String profileBackgroundImageUrlHttps = "test";
+		preUser.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
+	
+		boolean followRequestSent = false;
+		preUser.setFollowRequestSent(followRequestSent);
+		
+		URL url = new URL();
+		preUser.setUrl(url);
+		
+		TimeZone timeZone = new TimeZone();
+		preUser.setTimeZone(timeZone);
+		
+		long notifications = 0L;
+		preUser.setNotifications(notifications);
+		
+		boolean profileUseBackgroundImage = false;
+		preUser.setProfileUseBackgroundImage(profileUseBackgroundImage);
+		
+		int friendsCount = 0;
+		preUser.setFriendsCount(friendsCount);
+		
+		String profileSideBarFillColor = "test";
+		preUser.setProfileSideBarFillColor(profileSideBarFillColor);
+		
+		String screenName = "test";
+		preUser.setScreenName(screenName);
+		
+		String profileImageUrl = "test";
+		preUser.setProfileImageUrl(profileImageUrl);
+		
+		boolean showAllInlineMedia = false;
+		preUser.setShowAllInlineMedia(showAllInlineMedia);
+		
+		boolean isTranslator = false;
+		preUser.setTranslator(isTranslator);
+		
+		int listedCount = 0;
+		preUser.setListedCount(listedCount);
 		
 		userDao.insert(preUser);
 		assertEquals(1, userDao.count());
 		
 		User postUser = (User) userDao.select(preUser.getId());
-		assertTrue(postUser.getName().equals(preUser.getName()));
-		// TODO
+		assertEquals(postUser.getTwitterId(), preUser.getTwitterId());
+		assertTrue(postUser.getPlace().equals(preUser.getPlace()));
+		assertTrue(postUser.isDefaultProfile() == preUser.isDefaultProfile());
 	}
 	
 	@Override
