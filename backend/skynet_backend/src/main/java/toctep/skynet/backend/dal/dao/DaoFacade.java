@@ -9,4 +9,7 @@ public interface DaoFacade {
 	public PlaceDao getPlaceDao();	
 	public CountryDao getCountryDao();
 	public PlaceTypeDao getPlaceTypeDao();	
+	public SourceTypeDao getSourceTypeDao();
+	public GeoDao getGeoDao();
+	public GeoTypeDao getGeoTypeDao();
 }

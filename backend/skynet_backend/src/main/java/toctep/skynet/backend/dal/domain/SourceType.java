@@ -4,11 +4,11 @@ public class SourceType extends Domain {
 
 	public String text;
 
-	public String getSourceType() {
+	public String getText() {
 		return text;
 	}
 	
-	public void setSourceType(String text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 	

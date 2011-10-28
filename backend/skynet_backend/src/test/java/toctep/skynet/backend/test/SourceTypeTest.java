@@ -2,28 +2,42 @@ package toctep.skynet.backend.test;
 
 import toctep.skynet.backend.dal.domain.SourceType;
 
-public class SourceTypeTest extends DomainTest{
+public class SourceTypeTest extends DomainTest {
 
 	@Override
 	public void testCreate() { 
-		SourceType SourceType = new SourceType();
-		assertNotNull(SourceType);
+		SourceType sourceType = new SourceType();
+		assertNotNull(sourceType);
 		
 		String text = "Web";
-		SourceType.setSourceType(text);
-		assertTrue(text.equals(SourceType.getSourceType()));
+		sourceType.setText(text);
+		
+		assertTrue(text.equals(sourceType.getText()));
 	}
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		SourceType sourceType = new SourceType();
+		assertNotNull(sourceType);
+		sourceTypeDao.insert(sourceType);
+		assertEquals(1, sourceTypeDao.count());
+		sourceTypeDao.delete(sourceType);
+		assertEquals(0, sourceTypeDao.count());
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		SourceType preSourceType = new SourceType();
 		
+		String text = "test";
+		preSourceType.setText(text);
+		
+		sourceTypeDao.insert(preSourceType);
+		assertEquals(1, sourceTypeDao.count());
+		
+		SourceType postSourceType = (SourceType) sourceTypeDao.select(preSourceType.getId());
+		
+		assertTrue(postSourceType.getText().equals(preSourceType.getText()));
 	}
 
 	@Override
