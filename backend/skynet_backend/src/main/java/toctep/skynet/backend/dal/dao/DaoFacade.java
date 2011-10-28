@@ -12,6 +12,7 @@ public interface DaoFacade {
 	public SourceTypeDao getSourceTypeDao();
 	public GeoDao getGeoDao();
 	public GeoTypeDao getGeoTypeDao();
+	public TimeZoneDao getTimeZoneDao();
 	public HashtagDao getHashtagDao();
 	public LanguageDao getLanguageDao();
 }
