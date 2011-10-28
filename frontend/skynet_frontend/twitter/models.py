@@ -111,7 +111,7 @@ class Keyword(models.Model):
     @staticmethod
     def get_all_since(datetime_since):
         return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
-
+    
     @staticmethod
     def get_keyword_cloud():
         from skynet_frontend.keywordcloud.models import KeywordCloud 
@@ -153,6 +153,9 @@ class Tweet(models.Model):
             if not keyword:
                 keyword = Keyword(keyword=word)
                 keyword.save()
+            else:
+                keyword = keyword[0]
+            self.keywords.add(keyword)
             
         super(Tweet, self).save(*args, **kwargs)
     
