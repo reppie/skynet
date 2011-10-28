@@ -15,11 +15,11 @@ import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.dao.HashtagDao;
+import toctep.skynet.backend.dal.dao.LanguageDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
-import toctep.skynet.backend.dal.dao.TweetURLDao;
 import toctep.skynet.backend.dal.dao.URLDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
@@ -47,6 +47,7 @@ public abstract class DomainTest extends TestCase {
 	protected GeoDao geoDao;
 	protected GeoTypeDao geoTypeDao;
 	protected HashtagDao hashtagDao;
+	protected LanguageDao languageDao;
 	
 	@Before
 	public void setUp() {
@@ -73,6 +74,7 @@ public abstract class DomainTest extends TestCase {
 		geoDao = daoFacade.getGeoDao();
 		geoTypeDao = daoFacade.getGeoTypeDao();
 		hashtagDao = daoFacade.getHashtagDao();
+		languageDao = daoFacade.getLanguageDao();
 	}
 
 	@After

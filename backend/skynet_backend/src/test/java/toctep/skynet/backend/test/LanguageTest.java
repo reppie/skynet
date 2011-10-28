@@ -1,6 +1,5 @@
 package toctep.skynet.backend.test;
 
-import toctep.skynet.backend.dal.domain.Hashtag;
 import toctep.skynet.backend.dal.domain.Language;
 
 public class LanguageTest extends DomainTest{
