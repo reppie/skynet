@@ -150,11 +150,11 @@ class Tweet(models.Model):
         words = self.text.split()
         for word in words:
             keyword = Keyword.objects.filter(keyword=word)
-            if not keyword:
+            if keyword:
+                keyword = keyword[0]
+            else:
                 keyword = Keyword(keyword=word)
                 keyword.save()
-            else:
-                keyword = keyword[0]
             self.keywords.add(keyword)
             
         super(Tweet, self).save(*args, **kwargs)
