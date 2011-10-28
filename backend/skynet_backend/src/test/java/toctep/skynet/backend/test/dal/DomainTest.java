@@ -29,7 +29,7 @@ import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
-import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
+import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 
 import com.mysql.jdbc.Connection;
@@ -64,7 +64,7 @@ public abstract class DomainTest extends TestCase {
 	
 	@Before
 	public void setUp() {
-		conn = DaoConnectionImpl.getInstance(
+		conn = MySqlUtil.getInstance(
 				"mysql",
 				"localhost",
 				"skynet_test",

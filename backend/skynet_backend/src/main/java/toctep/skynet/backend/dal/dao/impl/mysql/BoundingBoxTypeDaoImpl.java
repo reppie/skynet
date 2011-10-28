@@ -14,7 +14,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 		
@@ -36,7 +36,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 		
@@ -62,7 +62,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public BoundingBoxType select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBoxType boundingBoxType = null;
 		
@@ -100,4 +100,11 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 }

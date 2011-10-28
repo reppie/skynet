@@ -99,7 +99,7 @@ public class PlaceTest extends DomainTest{
 
 	@Override
 	public void testInsert() {
-		placeDao.insert(place);
+		place.save();
 		assertEquals(1, placeDao.count());
 		assertEquals(1, place.getId());
 		

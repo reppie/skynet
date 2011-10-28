@@ -36,4 +36,10 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 		return false;
 	}
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

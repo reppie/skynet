@@ -14,7 +14,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		GeoType geoType = (GeoType) domain;
 		
@@ -36,7 +36,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		GeoType geoType = (GeoType) domain;
 		
@@ -62,7 +62,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 
 	@Override
 	public GeoType select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		GeoType geoType = null;
 		
@@ -99,6 +99,12 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 	public boolean exists(Domain domain) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

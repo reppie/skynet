@@ -31,7 +31,7 @@ public class TweetUrlTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		tweetUrlDao.insert(tweet);
+		tweetUrl.save();
 		assertEquals(1, tweetUrlDao.count());
 	}
 	

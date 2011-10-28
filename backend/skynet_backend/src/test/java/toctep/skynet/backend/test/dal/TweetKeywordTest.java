@@ -34,7 +34,7 @@ public class TweetKeywordTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		tweetKeywordDao.insert(tweetKeyword);
+		tweetKeyword.save();
 		
 		TweetKeyword postTweetKeyword = (TweetKeyword) tweetKeywordDao.select(tweetKeyword.getId());
 		

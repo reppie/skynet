@@ -31,7 +31,7 @@ public class CountryTest extends DomainTest{
 
 	@Override
 	public void testInsert() {
-		countryDao.insert(country);
+		country.save();
 		assertEquals(1, countryDao.count());
 		assertEquals(id, country.getId());
 

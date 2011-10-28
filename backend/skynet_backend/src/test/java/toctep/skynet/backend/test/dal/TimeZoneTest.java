@@ -31,7 +31,7 @@ public class TimeZoneTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		timeZoneDao.insert(timeZone);
+		timeZone.save();
 		assertEquals(1, timeZoneDao.count());
 		assertEquals(1, timeZone.getId());
 	}

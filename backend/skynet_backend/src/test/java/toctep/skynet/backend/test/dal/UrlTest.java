@@ -26,7 +26,7 @@ public class UrlTest extends DomainTest {
 	
 	@Override
 	public void testSelect() {
-		urlDao.insert(url);
+		url.save();
 		assertEquals(1, urlDao.count());
 		
 		Url postUrl = (Url) urlDao.select(url.getId());
