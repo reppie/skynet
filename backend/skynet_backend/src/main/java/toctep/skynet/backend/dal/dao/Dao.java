@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
-import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 import com.mysql.jdbc.Connection;
@@ -16,12 +15,8 @@ public abstract class Dao {
 	
 	protected String tableName;
 	
-	protected DaoFacade daoFacade;
-	
 	public Dao() {
 		connection = DaoConnectionImpl.getInstance().getConnection();
-	
-		daoFacade = new DaoFacadeImpl();
 		
 		setTableName();
 	}
