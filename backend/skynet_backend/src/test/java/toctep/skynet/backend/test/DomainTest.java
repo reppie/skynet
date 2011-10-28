@@ -70,19 +70,22 @@ public abstract class DomainTest extends TestCase {
 		
 		daoFacade = new DaoFacadeImpl();
 		
-		userDao = daoFacade.getUserDao();
-		tweetDao = daoFacade.getTweetDao();
 		boundingBoxDao = daoFacade.getBoundingBoxDao();
 		boundingBoxTypeDao = daoFacade.getBoundingBoxTypeDao();
-		placeDao = daoFacade.getPlaceDao();
 		countryDao = daoFacade.getCountryDao();
-		placeTypeDao = daoFacade.getPlaceTypeDao();
-		sourceTypeDao = daoFacade.getSourceTypeDao();
 		geoDao = daoFacade.getGeoDao();
 		geoTypeDao = daoFacade.getGeoTypeDao();
 		hashtagDao = daoFacade.getHashtagDao();
 		languageDao = daoFacade.getLanguageDao();
+		placeDao = daoFacade.getPlaceDao();
+		placeTypeDao = daoFacade.getPlaceTypeDao();
+		sourceTypeDao = daoFacade.getSourceTypeDao();
 		timeZoneDao = daoFacade.getTimeZoneDao();
+		tweetContributorDao = daoFacade.getTweetContributorDao();
+		tweetHashtagDao = daoFacade.getHashtagDao();
+		tweetDao = daoFacade.getTweetDao();
+		tweetURLDao = daoFacade.getTweetURLDao();
+		userDao = daoFacade.getUserDao();
 	}
 
 	@After
@@ -129,5 +132,6 @@ public abstract class DomainTest extends TestCase {
 	public abstract void testUpdate();
 	
 	@Test
-	public abstract void testDelete();	
+	public abstract void testDelete();
+	
 }
