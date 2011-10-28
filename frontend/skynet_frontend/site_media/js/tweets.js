@@ -16,6 +16,11 @@
 			api.Base.prototype.constructor.call(this, json);
 			
 		},
+		'TweetList': function(element, tweets){
+			this.$el = element;
+			this.tweets = tweets || [];
+			element.data("TweetList", this);
+		},
 		cache:{
 			'collections':{},
 			'get': function(type, id){
@@ -36,6 +41,13 @@
 		},
 		
 	});
+	
+	$.fn.TweetList = function(tweets) {
+		return new api.TweetList(this, tweets);
+    };
+	
+	
+	
 	$.jsonRPC.setup({
 	  	endPoint: '/twitter/rpc/'
 	});

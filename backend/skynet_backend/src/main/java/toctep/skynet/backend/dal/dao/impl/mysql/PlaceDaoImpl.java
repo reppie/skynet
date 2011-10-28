@@ -30,4 +30,10 @@ public class PlaceDaoImpl extends PlaceDao {
 
 	}
 
+	@Override
+	public boolean exists(Domain domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

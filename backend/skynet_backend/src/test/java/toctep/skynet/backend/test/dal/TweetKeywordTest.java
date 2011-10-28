@@ -3,19 +3,30 @@ package toctep.skynet.backend.test.dal;
 import toctep.skynet.backend.dal.domain.TweetKeyword;
 
 public class TweetKeywordTest extends DomainTest {
-
+	private TweetKeyword tweetKeyword;
+	private int tweetId;
+	private String keywordValue;
+	private int keywordId;
+	
 	@Override
-	public void testCreate() {
-		TweetKeyword tweetKeyword = new TweetKeyword();
-		assertNotNull(tweetKeyword);
+	public void setUp() {
+		super.setUp();
 		
-		int tweetId = 15;
-		String keywordValue = "testValue";
-		int keywordId = 99;
+		tweetKeyword = new TweetKeyword();
+		
+		tweetId = 15;
+		keywordValue = "testValue";
+		keywordId = 99;
 		
 		tweetKeyword.setKeywordId(keywordId);
 		tweetKeyword.setTweetId(tweetId);
 		tweetKeyword.setTweetKeywordValue(keywordValue);
+	}
+
+	@Override
+	public void testCreate() {
+		assertNotNull(tweetKeyword);
+		
 		assertEquals("getKeywordId: ", keywordId, tweetKeyword.getKeywordId());
 		assertEquals("getKeywordValue: ", keywordValue, tweetKeyword.getTweetKeywordValue());
 		assertEquals("getTweetId: ", tweetId, tweetKeyword.getTweetId());
@@ -23,8 +34,13 @@ public class TweetKeywordTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
-
+		tweetKeywordDao.insert(tweetKeyword);
+		
+		TweetKeyword postTweetKeyword = (TweetKeyword) tweetKeywordDao.select(tweetKeyword.getId());
+		
+		assertEquals("getKeywordId: ", tweetKeyword.getKeywordId(), postTweetKeyword.getKeywordId());
+		assertEquals("getKeywordValue: ", tweetKeyword.getTweetKeywordValue(), postTweetKeyword.getTweetKeywordValue());
+		assertEquals("getTweetId: ", tweetKeyword.getTweetId(), postTweetKeyword.getTweetId());
 	}
 
 	@Override

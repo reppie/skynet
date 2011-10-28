@@ -14,6 +14,10 @@ def search(request):
     tweets = Tweet.objects.all()
     return render_to_response("twitter/index.html", { 'keywordcloud': cloud, 'tweets': tweets }) 
 
+def tweets(request):
+    return render_to_response("twitter/tweets.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
+
+
 service = JSONRPCService()
 
 def rpc(request):
@@ -41,4 +45,9 @@ class TwitterRpcMethods(object):
     def search_tweets(filters):
         for filter in filters:
             pass
+        
+        
         return Tweet.objects.values('id').all()
+    
+    
+    
