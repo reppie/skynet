@@ -1,9 +1,9 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import toctep.skynet.backend.dal.dao.TweetURLDao;
+import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class TweetURLDaoImpl extends TweetURLDao {
+public class TweetUrlDaoImpl extends TweetUrlDao {
 
 	@Override
 	public void insert(Domain domain) {

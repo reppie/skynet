@@ -1,9 +1,9 @@
 package toctep.skynet.backend.dal.domain;
 
-public class TweetURL extends Domain {
+public class TweetUrl extends Domain {
 	
 	private Tweet tweet;
-	private URL url;
+	private Url url;
 
 	public Tweet getTweet() {
 		return tweet;
@@ -13,11 +13,11 @@ public class TweetURL extends Domain {
 		this.tweet = tweet;
 	}
 
-	public URL getUrl() {
+	public Url getUrl() {
 		return url;
 	}
 
-	public void setUrl(URL url) {
+	public void setUrl(Url url) {
 		this.url = url;
 	}
 	

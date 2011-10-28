@@ -14,7 +14,11 @@ public interface DaoFacade {
 	public GeoTypeDao getGeoTypeDao();
 	public TimeZoneDao getTimeZoneDao();
 	public HashtagDao getHashtagDao();
-	public TweetURLDao getTweetURLDao();
+	public TweetUrlDao getTweetUrlDao();
 	public TweetMentionDao getTweetMentionDao();
 	public LanguageDao getLanguageDao();
+	public TweetContributorDao getTweetContributorDao();
+	public TweetHashtagDao getTweetHashtagDao();
+	public UrlDao getUrlDao();
+	
 }
