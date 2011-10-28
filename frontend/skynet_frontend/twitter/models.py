@@ -117,7 +117,8 @@ class Keyword(models.Model):
 
     @staticmethod
     def get_all_since(datetime_since):
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
+        #return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweetkeyword__tweet__created_at__gte=datetime_since)
     
     @staticmethod
     def get_keyword_cloud():
@@ -152,6 +153,9 @@ class Tweet(models.Model):
     urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
     #keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True)
+    @property
+    def keywords(self):
+        return Keyword.objects.filter(tweetkeyword__tweet = self)
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
