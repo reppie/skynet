@@ -27,6 +27,8 @@ public abstract class Dao {
 	public abstract void update(Domain domain);
 	public abstract void delete(Domain domain);
 	
+	public abstract boolean exists(Domain domain);
+	
 	public int count() {
 		Connection conn = (Connection) this.getConnection();
 		
