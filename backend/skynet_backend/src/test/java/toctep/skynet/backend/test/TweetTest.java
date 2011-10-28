@@ -75,12 +75,60 @@ public class TweetTest extends DomainTest {
 		String text = "test";
 		preTweet.setText(text);
 		
+		Geo geo = new Geo();
+		preTweet.setGeo(geo);
+		
+		boolean truncated = false;
+		preTweet.setTruncated(truncated);
+		
+		long twitterId = 0L;
+		preTweet.setTwitterId(twitterId);
+		
+		SourceType sourceType = new SourceType();
+		preTweet.setSourceType(sourceType);
+		
+		boolean favorited = false;
+		preTweet.setFavorited(favorited);
+		
+		long inReplyToTweetTwitterId = 0L;
+		preTweet.setInReplyToTweetTwitterId(inReplyToTweetTwitterId);
+		
+		long inReplyToUserTwitterId = 0L;
+		preTweet.setInReplyToUserTwitterId(inReplyToUserTwitterId);
+		
+		long retweetCount = 0L;
+		preTweet.setRetweetCount(retweetCount);
+		
+		Date createdAt = new Date();
+		preTweet.setCreatedAt(createdAt);
+		
+		Place place = new Place();
+		preTweet.setPlace(place);
+		
+		User user = new User();
+		preTweet.setUser(user);
+		
+		String coordinates = "test";
+		preTweet.setCoordinates(coordinates);
+		
 		tweetDao.insert(preTweet);
 		assertEquals(1, tweetDao.count());
 		
 		Tweet postTweet = (Tweet) tweetDao.select(preTweet.getId());
+		
 		assertTrue(postTweet.getText().equals(preTweet.getText()));
-		// TODO
+		assertTrue(postTweet.getGeo().equals(preTweet.getGeo()));
+		assertTrue(postTweet.isTruncated() == preTweet.isTruncated());
+		assertEquals(postTweet.getTwitterId(), preTweet.getTwitterId());
+		assertTrue(postTweet.getSourceType().equals(preTweet.getSourceType()));
+		assertTrue(postTweet.isFavorited() == preTweet.isFavorited());
+		assertEquals(postTweet.getInReplyToTweetTwitterId(), preTweet.getInReplyToTweetTwitterId());
+		assertEquals(postTweet.getInReplyToUserTwitterId(), preTweet.getInReplyToUserTwitterId());
+		assertEquals(postTweet.getRetweetCount(), preTweet.getRetweetCount());
+		assertTrue(postTweet.getCreatedAt().equals(preTweet.getCreatedAt()));
+		assertTrue(postTweet.getPlace().equals(preTweet.getPlace()));
+		assertTrue(postTweet.getUser().equals(preTweet.getUser()));
+		assertTrue(postTweet.getCoordinates().equals(preTweet.getCoordinates()));
 	}
 	
 	@Override

@@ -13,10 +13,16 @@ import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
+import toctep.skynet.backend.dal.dao.GeoTypeDao;
+import toctep.skynet.backend.dal.dao.HashtagDao;
+import toctep.skynet.backend.dal.dao.LanguageDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
+import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.TweetMentionDao;
+import toctep.skynet.backend.dal.dao.TweetURLDao;
 import toctep.skynet.backend.dal.dao.URLDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
@@ -31,16 +37,24 @@ public abstract class DomainTest extends TestCase {
 	
 	private DaoFacade daoFacade;
 	
-	protected UserDao userDao;
-	protected TweetDao tweetDao;
 	protected BoundingBoxDao boundingBoxDao;
 	protected BoundingBoxTypeDao boundingBoxTypeDao;
-	protected URLDao urlDao;
-	protected PlaceDao placeDao;
 	protected CountryDao countryDao;
+	protected GeoDao geoDao;
+	protected GeoTypeDao geoTypeDao;
+	protected HashtagDao hashtagDao;
+	protected LanguageDao languageDao;
+	protected PlaceDao placeDao;
 	protected PlaceTypeDao placeTypeDao;
 	protected SourceTypeDao sourceTypeDao;
-	protected GeoDao geoDao;
+	protected TimeZoneDao timeZoneDao;
+	protected TweetContributorDao tweetContributorDao;
+	protected TweetHashtagDao tweetHashtagDao;
+	protected TweetDao tweetDao;
+	protected TweetMentionDao tweetMentionDao;
+	protected TweetURLDao tweetURLDao;
+	protected URLDao urlDao;
+	protected UserDao userDao;
 	
 	@Before
 	public void setUp() {
@@ -65,6 +79,10 @@ public abstract class DomainTest extends TestCase {
 		placeTypeDao = daoFacade.getPlaceTypeDao();
 		sourceTypeDao = daoFacade.getSourceTypeDao();
 		geoDao = daoFacade.getGeoDao();
+		geoTypeDao = daoFacade.getGeoTypeDao();
+		hashtagDao = daoFacade.getHashtagDao();
+		languageDao = daoFacade.getLanguageDao();
+		timeZoneDao = daoFacade.getTimeZoneDao();
 	}
 
 	@After
