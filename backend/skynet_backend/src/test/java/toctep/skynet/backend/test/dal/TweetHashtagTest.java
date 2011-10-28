@@ -6,37 +6,35 @@ import toctep.skynet.backend.dal.domain.TweetHashtag;
 
 public class TweetHashtagTest extends DomainTest {
 
+	private TweetHashtag tweetHashtag;
+	
+	private Tweet tweet;
+	private Hashtag hashtag;
+	
 	@Override
-	public void testCreate() {
-		TweetHashtag tweetHashtag = new TweetHashtag();
-		assertNotNull(tweetHashtag);
+	public void setUp() {
+		super.setUp();
 		
-		Tweet tweet = new Tweet();
-		Hashtag hashtag = new Hashtag();
-		tweetHashtag.setHashtag(hashtag);
+		tweetHashtag = new TweetHashtag();
+		
+		tweet = new Tweet();
 		tweetHashtag.setTweet(tweet);
 		
+		hashtag = new Hashtag();
+		tweetHashtag.setHashtag(hashtag);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(tweetHashtag);
 		assertEquals("getHashtag: ", hashtag, tweetHashtag.getHashtag());
 		assertEquals("getTweet: ", tweet, tweetHashtag.getTweet());
 	}
 
 	@Override
 	public void testInsert() {
-		TweetHashtag preTweetHashtag = new TweetHashtag();
-		
-		Tweet tweet = new Tweet();
-		preTweetHashtag.setTweet(tweet);
-		
-		Hashtag hashtag = new Hashtag();
-		preTweetHashtag.setHashtag(hashtag);
-		
-		tweetHashtagDao.insert(preTweetHashtag);
+		tweetHashtagDao.insert(tweetHashtag);
 		assertEquals(1, boundingBoxDao.count());
-		
-		TweetHashtag postTweetHastag = (TweetHashtag) tweetHashtagDao.select(preTweetHashtag.getId());
-		
-		assertTrue(postTweetHastag.getHashtag().equals(preTweetHashtag.getHashtag()));
-		assertTrue(postTweetHastag.getTweet().equals(preTweetHashtag.getTweet()));
 	}
 	
 	@Override
@@ -53,8 +51,6 @@ public class TweetHashtagTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		TweetHashtag tweetHashtag = new TweetHashtag();
-		assertNotNull(tweetHashtag);
 		tweetHashtagDao.insert(tweetHashtag);
 		assertEquals(1, tweetHashtagDao.count());
 		tweetHashtagDao.delete(tweetHashtag);

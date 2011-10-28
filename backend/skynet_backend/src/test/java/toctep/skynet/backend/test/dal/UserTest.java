@@ -10,314 +10,249 @@ import toctep.skynet.backend.dal.domain.User;
 
 public class UserTest extends DomainTest {
 	
+	private User user;
+	
+	private long twitterId;
+	private Place place;
+	private boolean defaultProfile;
+	private int statusesCount;
+	private long profileBackgroundTile;
+	private Language language;
+	private String profileLinkColor;
+	private int following;
+	private int favouritesCount;
+	private boolean isProtected;
+	private String profileTextColor;
+	private boolean verified;
+	private boolean contributorsEnabled;
+	private String description;
+	private String name;
+	private String profileSidebarBorderColor;
+	private String profileBackgroundColor;
+	private Date createdAt;
+	private boolean defaultProfileImage;
+	private int followersCount;
+	private boolean geoEnabled;
+	private String profileBackgroundImageUrl;
+	private String profileBackgroundImageUrlHttps;
+	private boolean followRequestSent;
+	private Url url;
+	private TimeZone timeZone;
+	private long notifications;
+	private boolean profileUseBackgroundImage;
+	private int friendsCount;
+	private String profileSideBarFillColor;
+	private String screenName;
+	private String profileImageUrl;
+	private String profileImageUrlHttps;
+	private boolean showAllInlineMedia;
+	private boolean isTranslator;
+	private int listedCount;
+	
 	@Override
-	public void testCreate() { 
-		User user = new User();
-		assertNotNull(user);
+	public void setUp() {
+		super.setUp();
 		
-		long twitterId = 0L;
-		user.setTwitterId(twitterId);
-		assertEquals(twitterId, user.getTwitterId());
+		user = new User();
 		
-		Place place = new Place();
+		twitterId = 0L;
+		user.setId(twitterId);
+		
+		place = new Place();
 		user.setPlace(place);
-		assertTrue(place.equals(user.getPlace()));
 		
-		boolean defaultProfile = false;
+		defaultProfile = false;
 		user.setDefaultProfile(defaultProfile);
-		assertTrue(user.isDefaultProfile() == defaultProfile);
 		
-		int statusesCount = 1;
+		statusesCount = 1;
 		user.setStatusesCount(statusesCount);
-		assertEquals(statusesCount, user.getStatusesCount());
 		
-		long profileBackgroundTile = 0L;
+		profileBackgroundTile = 0L;
 		user.setProfileBackgroundTile(profileBackgroundTile);
-		assertEquals(profileBackgroundTile, user.getProfileBackgroundTile());
 		
-		Language language = new Language();
+		language = new Language();
 		user.setLanguage(language);
-		assertEquals(language, user.getLanguage());
 		
-		String profileLinkColor = "test";
+		profileLinkColor = "test";
 		user.setProfileLinkColor(profileLinkColor);
-		assertTrue(profileLinkColor.equals(user.getProfileLinkColor()));
 		
-		int following = 0;
+		following = 0;
 		user.setFollowing(following);
-		assertEquals(following, user.getFollowing());
 		
-		int favouritesCount = 0;
+		favouritesCount = 0;
 		user.setFollowersCount(favouritesCount);
-		assertEquals(favouritesCount, user.getFavouritesCount());
 		
-		boolean isProtected = false;
+		isProtected = false;
 		user.setProtected(isProtected);
-		assertTrue(isProtected == user.isProtected());
 		
-		String profileTextColor = "test";
+		profileTextColor = "test";
 		user.setProfileTextColor(profileTextColor);
-		assertTrue(profileTextColor.equals(user.getProfileTextColor()));
 		
-		boolean verified = false;
+		verified = false;
 		user.setVerified(verified);
-		assertTrue(verified == user.isVerified());
 		
-		boolean contributorsEnabled = false;
+		contributorsEnabled = false;
 		user.setContributorsEnabled(contributorsEnabled);
-		assertTrue(contributorsEnabled == user.isContributorsEnabled());
 		
-		String description = "test";
+		description = "test";
 		user.setDescription(description);
-		assertTrue(description.equals(user.getDescription()));
 		
-		String name = "test";
+		name = "test";
 		user.setName(name);
-		assertTrue(name.equals(user.getName()));
 		
-		String profileSidebarBorderColor = "test";
+		profileSidebarBorderColor = "test";
 		user.setProfileSidebarBorderColor(profileSidebarBorderColor);
-		assertTrue(profileSidebarBorderColor.equals(user.getProfileSidebarBorderColor()));
 		
-		String profileBackgroundColor = "test";
+		profileBackgroundColor = "test";
 		user.setProfileBackgroundColor(profileBackgroundColor);
-		assertTrue(profileBackgroundColor.equals(user.getProfileBackgroundColor()));
 	
-		Date createdAt = new Date();
+		createdAt = new Date();
 		user.setCreatedAt(createdAt);
-		assertTrue(createdAt.equals(user.getCreatedAt()));
 		
-		boolean defaultProfileImage = false;
+		defaultProfileImage = false;
 		user.setDefaultProfileImage(defaultProfileImage);
-		assertTrue(defaultProfileImage == user.isDefaultProfileImage());
 		
-		int followersCount = 0;
+		followersCount = 0;
 		user.setFollowersCount(followersCount);
-		assertEquals(followersCount, user.getFollowersCount());
 		
-		boolean geoEnabled = false;
+		geoEnabled = false;
 		user.setGeoEnabled(geoEnabled);
-		assertTrue(geoEnabled == user.isGeoEnabled());
 		
-		String profileBackgroundImageUrl = "test";
+		profileBackgroundImageUrl = "test";
 		user.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
-		assertTrue(profileBackgroundImageUrl.equals(user.getProfileBackgroundImageUrl()));
 		
-		String profileBackgroundImageUrlHttps = "test";
+		profileBackgroundImageUrlHttps = "test";
 		user.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
-		assertTrue(profileBackgroundImageUrlHttps.equals(user.getProfileBackgroundImageUrlHttps()));
 	
-		boolean followRequestSent = false;
+		followRequestSent = false;
 		user.setFollowRequestSent(followRequestSent);
-		assertTrue(followRequestSent == user.isFollowRequestSent());
 		
-		Url url = new Url();
+		url = new Url();
 		user.setUrl(url);
-		assertTrue(url.equals(user.getUrl()));
 		
-		TimeZone timeZone = new TimeZone();
+		timeZone = new TimeZone();
 		user.setTimeZone(timeZone);
-		assertTrue(timeZone.equals(user.getTimeZone()));
 		
-		long notifications = 0L;
+		notifications = 0L;
 		user.setNotifications(notifications);
-		assertEquals(notifications, user.getNotifications());
 		
-		boolean profileUseBackgroundImage = false;
+		profileUseBackgroundImage = false;
 		user.setProfileUseBackgroundImage(profileUseBackgroundImage);
-		assertTrue(profileUseBackgroundImage == user.isProfileUseBackgroundImage());
 		
-		int friendsCount = 0;
+		friendsCount = 0;
 		user.setFriendsCount(friendsCount);
-		assertEquals(friendsCount, user.getFriendsCount());
 		
-		String profileSideBarFillColor = "test";
+		profileSideBarFillColor = "test";
 		user.setProfileSideBarFillColor(profileSideBarFillColor);
-		assertTrue(profileSideBarFillColor.equals(user.getProfileSideBarFillColor()));
 		
-		String screenName = "test";
+		screenName = "test";
 		user.setScreenName(screenName);
-		assertTrue(screenName.equals(user.getScreenName()));
 		
-		String profileImageUrl = "test";
+		profileImageUrl = "test";
 		user.setProfileImageUrl(profileImageUrl);
-		assertTrue(profileImageUrl.equals(user.getProfileImageUrl()));
 		
-		String profileImageUrlHttps = "test";
+		profileImageUrlHttps = "test";
 		user.setProfileImageUrlHttps(profileImageUrlHttps);
-		assertTrue(profileImageUrlHttps.equals(user.getProfileImageUrlHttps()));
 		
-		boolean showAllInlineMedia = false;
+		showAllInlineMedia = false;
 		user.setShowAllInlineMedia(showAllInlineMedia);
-		assertTrue(showAllInlineMedia == user.isShowAllInlineMedia());
 		
-		boolean isTranslator = false;
+		isTranslator = false;
 		user.setTranslator(isTranslator);
-		assertTrue(isTranslator == user.isTranslator());
 		
-		int listedCount = 0;
+		listedCount = 0;
 		user.setListedCount(listedCount);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(user);
+		assertEquals(twitterId, user.getId());
+		assertTrue(place.equals(user.getPlace()));
+		assertTrue(user.isDefaultProfile() == defaultProfile);
+		assertEquals(statusesCount, user.getStatusesCount());
+		assertEquals(profileBackgroundTile, user.getProfileBackgroundTile());
+		assertEquals(language, user.getLanguage());
+		assertTrue(profileLinkColor.equals(user.getProfileLinkColor()));
+		assertEquals(following, user.getFollowing());
+		assertEquals(favouritesCount, user.getFavouritesCount());
+		assertTrue(isProtected == user.isProtected());
+		assertTrue(profileTextColor.equals(user.getProfileTextColor()));
+		assertTrue(verified == user.isVerified());
+		assertTrue(contributorsEnabled == user.isContributorsEnabled());
+		assertTrue(description.equals(user.getDescription()));
+		assertTrue(name.equals(user.getName()));
+		assertTrue(profileSidebarBorderColor.equals(user.getProfileSidebarBorderColor()));
+		assertTrue(profileBackgroundColor.equals(user.getProfileBackgroundColor()));
+		assertTrue(createdAt.equals(user.getCreatedAt()));
+		assertTrue(defaultProfileImage == user.isDefaultProfileImage());
+		assertEquals(followersCount, user.getFollowersCount());
+		assertTrue(geoEnabled == user.isGeoEnabled());
+		assertTrue(profileBackgroundImageUrl.equals(user.getProfileBackgroundImageUrl()));
+		assertTrue(profileBackgroundImageUrlHttps.equals(user.getProfileBackgroundImageUrlHttps()));
+		assertTrue(followRequestSent == user.isFollowRequestSent());
+		assertTrue(url.equals(user.getUrl()));
+		assertTrue(timeZone.equals(user.getTimeZone()));
+		assertEquals(notifications, user.getNotifications());
+		assertTrue(profileUseBackgroundImage == user.isProfileUseBackgroundImage());
+		assertEquals(friendsCount, user.getFriendsCount());
+		assertTrue(profileSideBarFillColor.equals(user.getProfileSideBarFillColor()));
+		assertTrue(screenName.equals(user.getScreenName()));
+		assertTrue(profileImageUrl.equals(user.getProfileImageUrl()));
+		assertTrue(profileImageUrlHttps.equals(user.getProfileImageUrlHttps()));
+		assertTrue(showAllInlineMedia == user.isShowAllInlineMedia());
+		assertTrue(isTranslator == user.isTranslator());
 		assertEquals(listedCount, user.getListedCount());
 	}
 	
 	@Override
 	public void testInsert() {
-		User preUser = new User();
-		
-		long twitterId = 0L;
-		preUser.setTwitterId(twitterId);
-		
-		Place place = new Place();
-		preUser.setPlace(place);
-		
-		boolean defaultProfile = false;
-		preUser.setDefaultProfile(defaultProfile);
-		
-		int statusesCount = 1;
-		preUser.setStatusesCount(statusesCount);
-		
-		long profileBackgroundTile = 0L;
-		preUser.setProfileBackgroundTile(profileBackgroundTile);
-		
-		Language language = new Language();
-		preUser.setLanguage(language);
-		
-		String profileLinkColor = "test";
-		preUser.setProfileLinkColor(profileLinkColor);
-		
-		int following = 0;
-		preUser.setFollowing(following);
-		
-		int favouritesCount = 0;
-		preUser.setFollowersCount(favouritesCount);
-		
-		boolean isProtected = false;
-		preUser.setProtected(isProtected);
-		
-		String profileTextColor = "test";
-		preUser.setProfileTextColor(profileTextColor);
-		
-		boolean verified = false;
-		preUser.setVerified(verified);
-		
-		boolean contributorsEnabled = false;
-		preUser.setContributorsEnabled(contributorsEnabled);
-		
-		String description = "test";
-		preUser.setDescription(description);
-		
-		String name = "test";
-		preUser.setName(name);
-		
-		String profileSidebarBorderColor = "test";
-		preUser.setProfileSidebarBorderColor(profileSidebarBorderColor);
-		
-		String profileBackgroundColor = "test";
-		preUser.setProfileBackgroundColor(profileBackgroundColor);
-	
-		Date createdAt = new Date();
-		preUser.setCreatedAt(createdAt);
-		
-		boolean defaultProfileImage = false;
-		preUser.setDefaultProfileImage(defaultProfileImage);
-		
-		int followersCount = 0;
-		preUser.setFollowersCount(followersCount);
-		
-		boolean geoEnabled = false;
-		preUser.setGeoEnabled(geoEnabled);
-		
-		String profileBackgroundImageUrl = "test";
-		preUser.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
-		
-		String profileBackgroundImageUrlHttps = "test";
-		preUser.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
-	
-		boolean followRequestSent = false;
-		preUser.setFollowRequestSent(followRequestSent);
-		
-		Url url = new Url();
-		preUser.setUrl(url);
-		
-		TimeZone timeZone = new TimeZone();
-		preUser.setTimeZone(timeZone);
-		
-		long notifications = 0L;
-		preUser.setNotifications(notifications);
-		
-		boolean profileUseBackgroundImage = false;
-		preUser.setProfileUseBackgroundImage(profileUseBackgroundImage);
-		
-		int friendsCount = 0;
-		preUser.setFriendsCount(friendsCount);
-		
-		String profileSideBarFillColor = "test";
-		preUser.setProfileSideBarFillColor(profileSideBarFillColor);
-		
-		String screenName = "test";
-		preUser.setScreenName(screenName);
-		
-		String profileImageUrl = "test";
-		preUser.setProfileImageUrl(profileImageUrl);
-		
-		String profileImageUrlHttps = "test";
-		preUser.setProfileImageUrlHttps(profileImageUrlHttps);
-		
-		boolean showAllInlineMedia = false;
-		preUser.setShowAllInlineMedia(showAllInlineMedia);
-		
-		boolean isTranslator = false;
-		preUser.setTranslator(isTranslator);
-		
-		int listedCount = 0;
-		preUser.setListedCount(listedCount);
-		
-		userDao.insert(preUser);
+		userDao.insert(user);
 		assertEquals(1, userDao.count());
-		
-		User postUser = (User) userDao.select(preUser.getId());
-		assertEquals(postUser.getTwitterId(), preUser.getTwitterId());
-		assertTrue(postUser.getPlace().equals(preUser.getPlace()));
-		assertTrue(postUser.isDefaultProfile() == preUser.isDefaultProfile());
-		assertEquals(postUser.getStatusesCount(), preUser.getStatusesCount());
-		assertEquals(postUser.getProfileBackgroundTile(), preUser.getProfileBackgroundTile());
-		assertTrue(postUser.getLanguage().equals(preUser.getLanguage()));
-		assertEquals(postUser.getProfileLinkColor(), preUser.getProfileLinkColor());
-		assertEquals(postUser.getFollowing(), preUser.getFollowing());
-		assertEquals(postUser.getFavouritesCount(), preUser.getFavouritesCount());
-		assertTrue(postUser.isProtected() == preUser.isProtected());
-		assertEquals(postUser.getProfileTextColor(), preUser.getProfileTextColor());
-		assertTrue(postUser.isVerified() == preUser.isVerified());
-		assertTrue(postUser.isContributorsEnabled() == preUser.isContributorsEnabled());
-		assertEquals(postUser.getDescription(), preUser.getDescription());
-		assertEquals(postUser.getName(), preUser.getName());
-		assertEquals(postUser.getProfileSidebarBorderColor(), preUser.getProfileSidebarBorderColor());
-		assertEquals(postUser.getProfileBackgroundColor(), preUser.getProfileBackgroundColor());
-		assertTrue(postUser.getCreatedAt().equals(preUser.getCreatedAt()));
-		assertTrue(postUser.isDefaultProfileImage() == preUser.isDefaultProfileImage());
-		assertEquals(postUser.getFollowersCount(), preUser.getFollowersCount());
-		assertTrue(postUser.isGeoEnabled() == preUser.isGeoEnabled());
-		assertEquals(postUser.getProfileBackgroundImageUrl(), preUser.getProfileBackgroundImageUrl());
-		assertEquals(postUser.getProfileBackgroundImageUrlHttps(), preUser.getProfileBackgroundImageUrlHttps());
-		assertTrue(postUser.isFollowRequestSent() == preUser.isFollowRequestSent());
-		assertTrue(postUser.getUrl().equals(preUser.getUrl()));
-		assertTrue(postUser.getTimeZone().equals(preUser.getTimeZone()));
-		assertEquals(postUser.getNotifications(), preUser.getNotifications());
-		assertTrue(postUser.isProfileUseBackgroundImage() == preUser.isProfileUseBackgroundImage());
-		assertEquals(postUser.getFriendsCount(), preUser.getFriendsCount());
-		assertEquals(postUser.getProfileSideBarFillColor(), preUser.getProfileSideBarFillColor());
-		assertEquals(postUser.getScreenName(), preUser.getScreenName());
-		assertEquals(postUser.getProfileImageUrl(), preUser.getProfileImageUrl());
-		assertEquals(postUser.getProfileImageUrlHttps(), preUser.getProfileImageUrlHttps());
-		assertTrue(postUser.isShowAllInlineMedia() == preUser.isShowAllInlineMedia());
-		assertTrue(postUser.isTranslator() == preUser.isTranslator());
-		assertEquals(postUser.getListedCount(), preUser.getListedCount());						
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		userDao.insert(user);
 		
+		User postUser = (User) userDao.select(user.getId());
+		
+		assertEquals(postUser.getTwitterId(), user.getTwitterId());
+		assertTrue(postUser.getPlace().equals(user.getPlace()));
+		assertTrue(postUser.isDefaultProfile() == user.isDefaultProfile());
+		assertEquals(postUser.getStatusesCount(), user.getStatusesCount());
+		assertEquals(postUser.getProfileBackgroundTile(), user.getProfileBackgroundTile());
+		assertTrue(postUser.getLanguage().equals(user.getLanguage()));
+		assertEquals(postUser.getProfileLinkColor(), user.getProfileLinkColor());
+		assertEquals(postUser.getFollowing(), user.getFollowing());
+		assertEquals(postUser.getFavouritesCount(), user.getFavouritesCount());
+		assertTrue(postUser.isProtected() == user.isProtected());
+		assertEquals(postUser.getProfileTextColor(), user.getProfileTextColor());
+		assertTrue(postUser.isVerified() == user.isVerified());
+		assertTrue(postUser.isContributorsEnabled() == user.isContributorsEnabled());
+		assertEquals(postUser.getDescription(), user.getDescription());
+		assertEquals(postUser.getName(), user.getName());
+		assertEquals(postUser.getProfileSidebarBorderColor(), user.getProfileSidebarBorderColor());
+		assertEquals(postUser.getProfileBackgroundColor(), user.getProfileBackgroundColor());
+		assertTrue(postUser.getCreatedAt().equals(user.getCreatedAt()));
+		assertTrue(postUser.isDefaultProfileImage() == user.isDefaultProfileImage());
+		assertEquals(postUser.getFollowersCount(), user.getFollowersCount());
+		assertTrue(postUser.isGeoEnabled() == user.isGeoEnabled());
+		assertEquals(postUser.getProfileBackgroundImageUrl(), user.getProfileBackgroundImageUrl());
+		assertEquals(postUser.getProfileBackgroundImageUrlHttps(), user.getProfileBackgroundImageUrlHttps());
+		assertTrue(postUser.isFollowRequestSent() == user.isFollowRequestSent());
+		assertTrue(postUser.getUrl().equals(user.getUrl()));
+		assertTrue(postUser.getTimeZone().equals(user.getTimeZone()));
+		assertEquals(postUser.getNotifications(), user.getNotifications());
+		assertTrue(postUser.isProfileUseBackgroundImage() == user.isProfileUseBackgroundImage());
+		assertEquals(postUser.getFriendsCount(), user.getFriendsCount());
+		assertEquals(postUser.getProfileSideBarFillColor(), user.getProfileSideBarFillColor());
+		assertEquals(postUser.getScreenName(), user.getScreenName());
+		assertEquals(postUser.getProfileImageUrl(), user.getProfileImageUrl());
+		assertEquals(postUser.getProfileImageUrlHttps(), user.getProfileImageUrlHttps());
+		assertTrue(postUser.isShowAllInlineMedia() == user.isShowAllInlineMedia());
+		assertTrue(postUser.isTranslator() == user.isTranslator());
+		assertEquals(postUser.getListedCount(), user.getListedCount());
 	}
 	
 	@Override
@@ -327,8 +262,6 @@ public class UserTest extends DomainTest {
 	
 	@Override
 	public void testDelete() {
-		User user = new User();
-		assertNotNull(user);
 		userDao.insert(user);
 		assertEquals(1, userDao.count());
 		userDao.delete(user);
