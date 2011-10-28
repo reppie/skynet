@@ -1,4 +1,4 @@
-package toctep.skynet.backend.test;
+package toctep.skynet.backend.test.bll;
 
 import static org.junit.Assert.assertEquals;
 
