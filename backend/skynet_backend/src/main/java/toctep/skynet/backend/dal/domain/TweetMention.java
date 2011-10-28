@@ -20,5 +20,9 @@ public class TweetMention extends Domain {
 	public void setUser(long user) {
 		this.user = user;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getTweetMentionDao();
+	}
 }

@@ -11,5 +11,10 @@ public class Country extends DomainStringPk {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getCountryDao();		
+	}
 	
 }

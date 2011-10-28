@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Domain;
 
 import com.mysql.jdbc.Connection;
@@ -77,7 +76,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 			rs.first();
 			boundingBox = new BoundingBox();
 			boundingBox.setId(id);
-			boundingBox.setType((BoundingBoxType) daoFacade.getBoundingBoxTypeDao().select(rs.getInt("bounding_box_type_id")));
+//			boundingBox.setType(); // TODO!
 			boundingBox.setCoordinates(rs.getString("coordinates"));
 		} catch (SQLException e) {
 			e.printStackTrace();

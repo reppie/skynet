@@ -11,5 +11,9 @@ public class PlaceType extends DomainLongPk {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getPlaceTypeDao();
+	}
 }
