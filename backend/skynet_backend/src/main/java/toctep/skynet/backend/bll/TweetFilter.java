@@ -1,10 +1,12 @@
 package toctep.skynet.backend.bll;
 
+import java.util.regex.Pattern;
+
 public class TweetFilter {
 	private String[] commonWords = { "de", "het", "een" };
-	private String specialCharRegex = "[^@\\wa-zA-Z#\\w\\s]";
-	private String singleCharRegex = "\\s[\\w]\\s";
-	private String doubleSpaceRegex = "\\s+";
+	private static Pattern specialCharRegex = Pattern.compile("[^@\\wa-zA-Z#\\w\\s]");
+	private static Pattern singleCharRegex = Pattern.compile("\\s[\\w]\\s");
+	private static Pattern doubleSpaceRegex = Pattern.compile("\\s+");
 	
 	
 	public String filterCommonWords(String tweetText) {
