@@ -5,37 +5,35 @@ import toctep.skynet.backend.dal.domain.TweetContributor;
 
 public class TweetContributorTest extends DomainTest {
 
+	private TweetContributor tweetContributor;
+	
+	private long userTwitterId;
+	private Tweet tweet;
+	
 	@Override
-	public void testCreate() {
-		TweetContributor tweetContributor = new TweetContributor();
-		assertNotNull(tweetContributor);
+	public void setUp() {
+		super.setUp();
 		
-		long userTwitterId = 123456789;
-		Tweet tweet = new Tweet();
-		tweetContributor.setTweet(tweet);
+		tweetContributor = new TweetContributor();
+		
+		userTwitterId = 123456789;
 		tweetContributor.setUserTwitterId(userTwitterId);
 		
+		tweet = new Tweet();
+		tweetContributor.setTweet(tweet);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(tweetContributor);
 		assertEquals("getTweet: ", tweet, tweetContributor.getTweet());
 		assertEquals("getUserTwitterId: ", userTwitterId, tweetContributor.getUserTwitterId());
 	}
 
 	@Override
 	public void testInsert() {
-		TweetContributor preTweetContributor = new TweetContributor();
-		
-		Tweet tweet = new Tweet();
-		preTweetContributor.setTweet(tweet);
-		
-		long userTwitterId = 0L;
-		preTweetContributor.setUserTwitterId(userTwitterId);
-		
-		tweetContributorDao.insert(preTweetContributor);
+		tweetContributorDao.insert(tweetContributor);
 		assertEquals(1, tweetContributorDao.count());
-		
-		TweetContributor postTweetContributor = (TweetContributor) tweetContributorDao.select(preTweetContributor.getId());
-		
-		assertEquals(postTweetContributor.getUserTwitterId(), preTweetContributor.getUserTwitterId());
-		assertTrue(postTweetContributor.getTweet().equals(preTweetContributor.getTweet()));
 	}
 	
 	@Override
@@ -52,14 +50,10 @@ public class TweetContributorTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		TweetContributor tweetContributor = new TweetContributor();
-		assertNotNull(tweetContributor);
 		tweetContributorDao.insert(tweetContributor);
 		assertEquals(1, tweetContributorDao.count());
 		tweetContributorDao.delete(tweetContributor);
 		assertEquals(0, tweetContributorDao.count());
 	}
 	
-	
-
 }

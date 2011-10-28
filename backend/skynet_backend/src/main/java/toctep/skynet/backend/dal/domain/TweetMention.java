@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class TweetMention extends DomainLongPk {
+public class TweetMention extends Domain {
 	
 	private Tweet tweet;
 	private long user;
