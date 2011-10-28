@@ -233,7 +233,7 @@ public class TweetParser {
         for(long contributor : status.getContributors()) {
             TweetContributor tweetContributor = new TweetContributor();
             tweetContributor.setTweet(tweet);
-            tweetContributor.setUser_twitter_id(contributor);
+            tweetContributor.setUserTwitterId(contributor);
         }
     }
     
