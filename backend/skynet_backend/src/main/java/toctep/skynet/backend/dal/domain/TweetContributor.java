@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class TweetContributor {
+public class TweetContributor extends Domain {
 
 	private Tweet tweet;
 	private long userTwitterId;
@@ -13,11 +13,11 @@ public class TweetContributor {
 		this.tweet = tweet;
 	}
 
-	public long getUser_twitter_id() {
+	public long getUserTwitterId() {
 		return userTwitterId;
 	}
 
-	public void setUser_twitter_id(long userTwitterId) {
+	public void setUserTwitterId(long userTwitterId) {
 		this.userTwitterId = userTwitterId;
 	}
 	
