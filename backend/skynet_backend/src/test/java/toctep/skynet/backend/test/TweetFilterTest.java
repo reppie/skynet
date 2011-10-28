@@ -30,5 +30,9 @@ public class TweetFilterTest {
 		
 		assertEquals("filter result: ", cleanTweet, tweetFilter.filterSpecialCharacters(rawTweet));
 	}
+	
+	@Test public void filterDoubleWordsTest() {
+		
+	}
 
 }
