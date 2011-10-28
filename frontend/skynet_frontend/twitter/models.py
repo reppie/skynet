@@ -182,7 +182,3 @@ class TweetContributor(models.Model):
 
     class Meta:
         db_table = "twitter_tweet_contributors";
-        
-
-    
-            
