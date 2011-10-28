@@ -14,24 +14,9 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
-		BoundingBox boundingBox = (BoundingBox) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + boundingBox.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
+		BoundingBox boundingBox = (BoundingBox) domain;	
+
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBox.getId());
 	}
 	@Override
 	public void insert(Domain domain) {
@@ -42,7 +27,6 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 			"VALUES (" + boundingBox.getType() + ", '" + 
 					     boundingBox.getCoordinates() + "')"
 		);
-		
 		boundingBox.setId(id);
 	}
 
