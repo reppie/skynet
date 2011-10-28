@@ -20,5 +20,9 @@ public class TimeZone extends DomainLongPk {
 	public void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getTimeZoneDao();
+	}
 }

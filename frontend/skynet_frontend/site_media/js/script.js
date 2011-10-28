@@ -1,7 +1,7 @@
 /* Author:
 
 */
-
+/*
 api.Tweet.get(1, function(tweet){
 	
 	console.log(tweet);
@@ -33,7 +33,7 @@ api.Tweet.get(1, function(tweet){
 		});
 	}
 });
-
+*/
 
 
 

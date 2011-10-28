@@ -20,5 +20,9 @@ public class Keyword extends DomainLongPk {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getKeywordDao();
+	}
 }
