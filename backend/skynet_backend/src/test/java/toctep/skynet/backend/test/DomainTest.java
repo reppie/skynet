@@ -14,6 +14,7 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
+import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
@@ -45,6 +46,7 @@ public abstract class DomainTest extends TestCase {
 	protected SourceTypeDao sourceTypeDao;
 	protected GeoDao geoDao;
 	protected GeoTypeDao geoTypeDao;
+	protected HashtagDao hashtagDao;
 	
 	@Before
 	public void setUp() {
@@ -70,6 +72,7 @@ public abstract class DomainTest extends TestCase {
 		sourceTypeDao = daoFacade.getSourceTypeDao();
 		geoDao = daoFacade.getGeoDao();
 		geoTypeDao = daoFacade.getGeoTypeDao();
+		hashtagDao = daoFacade.getHashtagDao();
 	}
 
 	@After

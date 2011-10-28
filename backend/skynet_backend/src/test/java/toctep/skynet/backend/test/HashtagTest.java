@@ -16,14 +16,26 @@ public class HashtagTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		Hashtag hashtag = new Hashtag();
+		assertNotNull(hashtag);
+		hashtagDao.insert(hashtag);
+		assertEquals(1, hashtagDao.count());
+		hashtagDao.delete(hashtag);
+		assertEquals(0, hashtagDao.count());		
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		Hashtag preHashtag = new Hashtag();
 		
+		String text = "Test";
+		preHashtag.setText(text);
+		
+		hashtagDao.insert(preHashtag);
+		assertEquals(1, hashtagDao.count());
+		
+		Hashtag postHashtag = (Hashtag) hashtagDao.select(preHashtag.getId());
+		assertTrue(postHashtag.getText().equals(preHashtag.getText()));
 	}
 
 	@Override
