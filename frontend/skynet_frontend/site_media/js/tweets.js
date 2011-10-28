@@ -120,7 +120,20 @@
 		  },
 	  	});
 	}
-	console.log("loaded");
+	api.Tweet.search = function(filters, callback) {
+		
+		$.jsonRPC.request('search_tweet', {
+		  	params: [filters],
+		  	success: function(result){
+		  		var tweetIds = result.result;
+		  		callback(tweetIds);
+		  },
+		  error: function(result){
+	  		callback(null);
+		  },
+	  	});
+	}
+	
 })(jQuery);
 
 
