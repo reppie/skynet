@@ -81,6 +81,8 @@ public abstract class DomainTest extends TestCase {
 		geoDao = daoFacade.getGeoDao();
 		geoTypeDao = daoFacade.getGeoTypeDao();
 		hashtagDao = daoFacade.getHashtagDao();
+		tweetURLDao = daoFacade.getTweetURLDao();
+		tweetMentionDao = daoFacade.getTweetMentionDao();
 		languageDao = daoFacade.getLanguageDao();
 		timeZoneDao = daoFacade.getTimeZoneDao();
 	}
