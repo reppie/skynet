@@ -13,8 +13,12 @@
 
 {% block title %} Social Media Lab {% endblock %}
 
-{% block main %} 
-	De body van de SoLeMa index
+{% block main %}
+	<form method="get">
+		<input type="text" name="t" placeholder="{% trans 'Search for tweets' %}" />
+		<input type="submit" />		
+	</form>
+ 
 	{% for tweet in tweets %}
 		<div class="tweet">{{ tweet.text }}</div>
 	{% endfor %}

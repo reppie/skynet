@@ -9,6 +9,11 @@ from django.template import RequestContext
 def index(request):
     return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
 
+def search(request):
+    cloud = Keyword.get_keyword_cloud() #TODO: Cloud should be based on search
+    tweets = Tweet.objects.all()
+    return render_to_response("twitter/index.html", { 'keywordcloud': cloud, 'tweets': tweets }) 
+
 service = JSONRPCService()
 
 def rpc(request):

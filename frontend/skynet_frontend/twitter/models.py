@@ -175,7 +175,7 @@ class Tweet(models.Model):
             'text': self.text,
             'user_id': self.user_id,
         }
-       
+
 class TweetKeyword(models.Model):
     tweet = models.ForeignKey(Tweet)
     value = models.CharField(max_length=140)
