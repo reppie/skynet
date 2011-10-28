@@ -83,6 +83,23 @@ public class MySqlUtil {
 		return conn;
 	}
 	
+	public void query(String query) {
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public int insert(String query) {
 		int id = 0;
 		
