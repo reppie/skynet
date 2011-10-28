@@ -83,6 +83,32 @@ public class MySqlUtil {
 		return conn;
 	}
 	
+	public int insert(String query) {
+		int id = 0;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			id = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return id;
+	}
+	
+	public boolean exists(String tableName, String where) {
+		// TODO
+		return false;
+	}
+	
 	public int count(String tableName) {
 		int count = 0;
 

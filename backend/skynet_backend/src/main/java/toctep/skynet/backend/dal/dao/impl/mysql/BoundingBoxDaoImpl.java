@@ -35,30 +35,15 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 	}
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
-		Statement stmt = null;
+		int id = MySqlUtil.getInstance().insert(
+			"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
+			"VALUES (" + boundingBox.getType() + ", '" + 
+					     boundingBox.getCoordinates() + "')"
+		);
 		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-					"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
-					"VALUES (" + boundingBox.getType() + ", '" 
-								+ boundingBox.getCoordinates() + "')",					
-					Statement.RETURN_GENERATED_KEYS
-				);
-			boundingBox.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		boundingBox.setId(id);
 	}
 
 	@Override
