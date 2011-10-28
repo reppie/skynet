@@ -19,6 +19,7 @@ import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.TweetURLDao;
 import toctep.skynet.backend.dal.dao.URLDao;
 import toctep.skynet.backend.dal.dao.UserDao;
@@ -47,6 +48,7 @@ public abstract class DomainTest extends TestCase {
 	protected GeoDao geoDao;
 	protected GeoTypeDao geoTypeDao;
 	protected HashtagDao hashtagDao;
+	protected TweetMentionDao tweetMentionDao;
 	
 	@Before
 	public void setUp() {
