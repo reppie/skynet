@@ -12,7 +12,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	}
 
 	@Override
-	public Domain select(int id) {
+	public Domain select(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

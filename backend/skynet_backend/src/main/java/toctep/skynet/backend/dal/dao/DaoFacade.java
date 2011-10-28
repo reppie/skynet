@@ -2,14 +2,23 @@ package toctep.skynet.backend.dal.dao;
 
 public interface DaoFacade {
 
-	public UserDao getUserDao();
-	public TweetDao getTweetDao();
 	public BoundingBoxDao getBoundingBoxDao();
 	public BoundingBoxTypeDao getBoundingBoxTypeDao();
-	public PlaceDao getPlaceDao();	
 	public CountryDao getCountryDao();
-	public PlaceTypeDao getPlaceTypeDao();	
-	public SourceTypeDao getSourceTypeDao();
 	public GeoDao getGeoDao();
 	public GeoTypeDao getGeoTypeDao();
+	public HashtagDao getHashtagDao();
+	public LanguageDao getLanguageDao();
+	public PlaceDao getPlaceDao();	
+	public PlaceTypeDao getPlaceTypeDao();	
+	public SourceTypeDao getSourceTypeDao();
+	public TimeZoneDao getTimeZoneDao();
+	public TweetContributorDao getTweetContributorDao();
+	public TweetHashtagDao getTweetHashtagDao();
+	public TweetMentionDao getTweetMentionDao();
+	public TweetDao getTweetDao();
+	public TweetUrlDao getTweetUrlDao();
+	public UrlDao getUrlDao();
+	public UserDao getUserDao();
+	
 }

@@ -15,8 +15,8 @@ import toctep.skynet.backend.dal.domain.Tweet;
 import toctep.skynet.backend.dal.domain.TweetContributor;
 import toctep.skynet.backend.dal.domain.TweetHashtag;
 import toctep.skynet.backend.dal.domain.TweetMention;
-import toctep.skynet.backend.dal.domain.TweetURL;
-import toctep.skynet.backend.dal.domain.URL;
+import toctep.skynet.backend.dal.domain.TweetUrl;
+import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.User;
 import twitter4j.GeoLocation;
 import twitter4j.HashtagEntity;
@@ -188,7 +188,7 @@ public class TweetParser {
         user.setListedCount(userStatus.getListedCount());   
         user.setPlace(place);
         user.setLanguage(language);
-        URL userUrl = new URL();
+        Url userUrl = new Url();
         userUrl.setText(userStatus.getURL().toExternalForm());
         user.setTimeZone(timeZone);
     }
@@ -211,9 +211,9 @@ public class TweetParser {
 
     private void parseUrl(Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
-            URL url = new URL();
+            Url url = new Url();
             url.setText(urlEntity.getDisplayURL());
-            TweetURL tweetURL = new TweetURL();
+            TweetUrl tweetURL = new TweetUrl();
             tweetURL.setTweet(tweet);
             tweetURL.setUrl(url);
         }
