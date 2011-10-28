@@ -10,16 +10,16 @@ class KeywordCloud:
         self.items = self.__generate(query_set, min_font_size, max_font_size)
 
     def __generate(self, query_set, min_font_size, max_font_size):
-        keyword_map = self.__getHashMapFromQuerySet(query_set)
+        keyword_map = self.__get_map_from_query_set(query_set)
 
-        largest = self.__getLargestValueFromMap(keyword_map)
-        smallest = self.__getSmallestValueFromMap(keyword_map)
-        spread = self.__getSpread(largest, smallest)
-        step = self.__calculateFontSizeIncrement(max_font_size, min_font_size, spread)
+        largest = self.__get_largest_value_from_map(keyword_map)
+        smallest = self.__get_smallest_value_from_map(keyword_map)
+        spread = self.__calculate_spread(largest, smallest)
+        step = self.__calculate_font_size_increment(max_font_size, min_font_size, spread)
         
-        return self.__generateItemList(query_set, min_font_size, smallest, step)
+        return self.__generate_item_list(query_set, min_font_size, smallest, step)
 
-    def __getLargestValueFromMap(self, a_map):
+    def __get_largest_value_from_map(self, a_map):
         if not a_map:
             return 0
         
@@ -27,7 +27,7 @@ class KeywordCloud:
         
         return int(a_map[key_of_largest_value])
     
-    def __getSmallestValueFromMap(self, a_map):
+    def __get_smallest_value_from_map(self, a_map):
         if not a_map:
             return 0
         
@@ -35,31 +35,31 @@ class KeywordCloud:
         
         return int(a_map[key_of_smallest_value])
     
-    def __getHashMapFromQuerySet(self, the_query_set):
+    def __get_map_from_query_set(self, the_query_set):
         keyword_map = {}
         for entry in the_query_set:
             keyword_map[entry['keyword']] = entry['count']
             
         return keyword_map
     
-    def __getSumOfHashMapValues(self, a_map):
+    def __get_sum_of_map_values(self, a_map):
         value_sum = 0
         for key in a_map:
             value_sum += int(a_map[key])
             
         return value_sum
     
-    def __getSpread(self, largest, smallest):
+    def __calculate_spread(self, largest, smallest):
         spread = largest - smallest
         if(spread < 1):
             spread = 1
             
         return spread
     
-    def __calculateFontSizeIncrement(self, max_font_size, min_font_size, spread):
+    def __calculate_font_size_increment(self, max_font_size, min_font_size, spread):
         return (max_font_size - min_font_size) / spread
     
-    def __generateItemList(self, the_query_set, min_font_size, smallest_value, step):
+    def __generate_item_list(self, the_query_set, min_font_size, smallest_value, step):
         tweet_index_count_array = []
         if len(the_query_set) == 0:
             return []
@@ -79,3 +79,6 @@ class KeywordFontSize:
     def __init__(self, keyword, font_size):
         self.keyword = keyword
         self.font_size = font_size
+        
+    def __unicode__(self):
+        return self.keyword + ": " + self.font_size + "px"
