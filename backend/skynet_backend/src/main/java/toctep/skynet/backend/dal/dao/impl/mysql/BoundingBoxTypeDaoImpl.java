@@ -44,8 +44,11 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-				"INSERT INTO " + tableName + " (name) VALUES ('" + boundingBoxType.getText() + "')");
+			int id = stmt.executeUpdate(
+					"INSERT INTO " + tableName + " (text) VALUES ('" + boundingBoxType.getText() + "')",
+					Statement.RETURN_GENERATED_KEYS
+				);
+			boundingBoxType.setId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -68,7 +71,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id = " + id);
+			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id = " + id);			
 			rs.first();
 			boundingBoxType = new BoundingBoxType();
 			boundingBoxType.setId(id);
