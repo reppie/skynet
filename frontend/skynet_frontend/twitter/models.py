@@ -64,7 +64,7 @@ class Coordinates(models.Model):
     coordinates = models.TextField(blank=True, null=True)  
 
 class User(models.Model):
-    twitter_id = models.BigIntegerField(blank=True, default=0)
+    id = models.BigIntegerField(primary_key=True)
     place = models.ForeignKey(Place, blank=True, null=True)
     default_profile = models.BooleanField(blank=True)
     statuses_count = models.IntegerField(blank=True, default=0)
@@ -103,13 +103,22 @@ class User(models.Model):
     
     def __unicode__(self):
         return self.name
+    
+class TweetKeyword(models.Model):
+    tweet = models.ForeignKey('Tweet')
+    value = models.CharField(max_length=140)
+    keyword = models.ForeignKey('Keyword')
+    
+    class Meta:
+        db_table = "twitter_tweet_keywords";
 
 class Keyword(models.Model):
     keyword = models.CharField(max_length=140)
 
     @staticmethod
     def get_all_since(datetime_since):
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
+        #return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweetkeyword__tweet__created_at__gte=datetime_since)
     
     @staticmethod
     def get_keyword_cloud():
@@ -125,12 +134,13 @@ class Keyword(models.Model):
         
     def __unicode__(self):
         return self.keyword
+    
 
 class Tweet(models.Model):
+    id = models.BigIntegerField(primary_key=True)
     text = models.CharField(max_length=140, null=True)
     geo = models.ForeignKey(Geo, blank=True, null=True)
     truncated = models.BooleanField(blank=True)
-    twitter_id = models.BigIntegerField(default=0)
     source_type = models.ForeignKey(SourceType, blank=True, null=True)
     favorited = models.BooleanField(blank=True)
     in_reply_to_tweet = models.ForeignKey('self', blank=True, null=True)
@@ -142,7 +152,10 @@ class Tweet(models.Model):
     coordinates = models.ForeignKey(Coordinates, blank=True, null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
-    keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True)
+    #keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True)
+    @property
+    def keywords(self):
+        return Keyword.objects.filter(tweetkeyword__tweet = self)
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)

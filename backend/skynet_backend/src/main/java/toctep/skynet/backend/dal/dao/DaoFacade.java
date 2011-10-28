@@ -22,5 +22,7 @@ public interface DaoFacade {
 	public TweetUrlDao getTweetUrlDao();
 	public UrlDao getUrlDao();
 	public UserDao getUserDao();
+	public TweetKeywordDao getTweetKeywordDao();
+	public KeywordDao getKeywordDao();
 	
 }

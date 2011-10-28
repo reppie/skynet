@@ -8,22 +8,22 @@ from skynet_frontend.keywordcloud.models import KeywordCloud
 class CloudMapTest(TestCase):
     def setUp(self):
         text = "keyword singlekeyword"
-        twitter_id = 1337
+        id = 1337
         created_at = datetime.now()
         user = User(name="username")
-        tweet = Tweet(text=text, twitter_id=twitter_id, created_at=created_at, user=user)
+        tweet = Tweet(text=text, id=id, created_at=created_at, user=user)
         tweet.save()
         
         text = "keyword"
-        tweet = Tweet(text=text, twitter_id=twitter_id, created_at=created_at, user=user)
+        tweet = Tweet(text=text, id=id, created_at=created_at, user=user)
         tweet.save()
         
         text = "keyword"
-        tweet = Tweet(text=text, twitter_id=twitter_id, created_at=created_at, user=user)
+        tweet = Tweet(text=text, id=id, created_at=created_at, user=user)
         tweet.save()
         
         text = "keyword"
-        tweet = Tweet(text=text, twitter_id=twitter_id, created_at=created_at, user=user)
+        tweet = Tweet(text=text, id=id, created_at=created_at, user=user)
         tweet.save()
         
     def test_creation(self):

@@ -163,6 +163,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('twitter', ['User'])
 
+        # Adding model 'TweetKeyword'
+        db.create_table('twitter_tweet_keywords', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('tweet', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Tweet'])),
+            ('value', self.gf('django.db.models.fields.CharField')(max_length=140)),
+            ('keyword', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['twitter.Keyword'])),
+        ))
+        db.send_create_signal('twitter', ['TweetKeyword'])
+
         # Adding model 'Keyword'
         db.create_table('twitter_keyword', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -203,14 +212,6 @@ class Migration(SchemaMigration):
             ('hashtag', models.ForeignKey(orm['twitter.hashtag'], null=False))
         ))
         db.create_unique('twitter_tweet_hashtags', ['tweet_id', 'hashtag_id'])
-
-        # Adding M2M table for field keywords on 'Tweet'
-        db.create_table('twitter_tweet_keywords', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('tweet', models.ForeignKey(orm['twitter.tweet'], null=False)),
-            ('keyword', models.ForeignKey(orm['twitter.keyword'], null=False))
-        ))
-        db.create_unique('twitter_tweet_keywords', ['tweet_id', 'keyword_id'])
 
         # Adding model 'TweetMention'
         db.create_table('twitter_tweet_mentions', (
@@ -276,6 +277,9 @@ class Migration(SchemaMigration):
         # Deleting model 'User'
         db.delete_table('twitter_user')
 
+        # Deleting model 'TweetKeyword'
+        db.delete_table('twitter_tweet_keywords')
+
         # Deleting model 'Keyword'
         db.delete_table('twitter_keyword')
 
@@ -287,9 +291,6 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field hashtags on 'Tweet'
         db.delete_table('twitter_tweet_hashtags')
-
-        # Removing M2M table for field keywords on 'Tweet'
-        db.delete_table('twitter_tweet_keywords')
 
         # Deleting model 'TweetMention'
         db.delete_table('twitter_tweet_mentions')
@@ -396,7 +397,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.BigIntegerField', [], {'primary_key': 'True'}),
             'in_reply_to_tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']", 'null': 'True', 'blank': 'True'}),
             'in_reply_to_user': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'user_in_reply_to_user'", 'null': 'True', 'to': "orm['twitter.User']"}),
-            'keywords': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['twitter.Keyword']", 'symmetrical': 'False', 'blank': 'True'}),
             'place': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Place']", 'null': 'True', 'blank': 'True'}),
             'retweet_count': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
             'source_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.SourceType']", 'null': 'True', 'blank': 'True'}),
@@ -410,6 +410,13 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.User']"})
+        },
+        'twitter.tweetkeyword': {
+            'Meta': {'object_name': 'TweetKeyword', 'db_table': "'twitter_tweet_keywords'"},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'keyword': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Keyword']"}),
+            'tweet': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.Tweet']"}),
+            'value': ('django.db.models.fields.CharField', [], {'max_length': '140'})
         },
         'twitter.tweetmention': {
             'Meta': {'object_name': 'TweetMention', 'db_table': "'twitter_tweet_mentions'"},
