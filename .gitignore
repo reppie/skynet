@@ -1,7 +1,9 @@
 *.pyc
 settings.*
+.settings
 *.class
 .classpath
 .project
 .metadata
 backend/skynet_backend/target/*
+
