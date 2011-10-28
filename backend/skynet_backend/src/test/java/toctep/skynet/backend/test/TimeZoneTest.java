@@ -19,8 +19,21 @@ public class TimeZoneTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		TimeZone preTimeZone = new TimeZone();
 		
+		int utcOffset = 0;
+		preTimeZone.setUtcOffset(utcOffset);
+		
+		String timeZone = "test";
+		preTimeZone.setTimeZone(timeZone);
+		
+		timeZoneDao.insert(preTimeZone);
+		assertEquals(1, timeZoneDao.count());
+		
+		TimeZone postTimeZone = (TimeZone) timeZoneDao.select(preTimeZone.getId());
+		
+		assertEquals(postTimeZone.getUtcOffset(), preTimeZone.getUtcOffset());
+		assertTrue(postTimeZone.getTimeZone().equals(preTimeZone.getTimeZone()));
 	}
 
 	@Override
@@ -31,8 +44,12 @@ public class TimeZoneTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		TimeZone timeZone = new TimeZone();
+		assertNotNull(timeZone);
+		timeZoneDao.insert(timeZone);
+		assertEquals(1, timeZoneDao.count());
+		timeZoneDao.delete(timeZone);
+		assertEquals(0, timeZoneDao.count());
 	}
 
 }

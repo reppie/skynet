@@ -15,9 +15,11 @@ import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.dao.HashtagDao;
+import toctep.skynet.backend.dal.dao.LanguageDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
+import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.TweetURLDao;
@@ -48,6 +50,8 @@ public abstract class DomainTest extends TestCase {
 	protected GeoDao geoDao;
 	protected GeoTypeDao geoTypeDao;
 	protected HashtagDao hashtagDao;
+	protected LanguageDao languageDao;
+	protected TimeZoneDao timeZoneDao;
 	protected TweetMentionDao tweetMentionDao;
 	
 	@Before
@@ -77,6 +81,8 @@ public abstract class DomainTest extends TestCase {
 		hashtagDao = daoFacade.getHashtagDao();
 		tweetURLDao = daoFacade.getTweetURLDao();
 		tweetMentionDao = daoFacade.getTweetMentionDao();
+		languageDao = daoFacade.getLanguageDao();
+		timeZoneDao = daoFacade.getTimeZoneDao();
 	}
 
 	@After

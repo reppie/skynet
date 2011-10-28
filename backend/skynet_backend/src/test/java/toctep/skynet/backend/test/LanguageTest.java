@@ -16,14 +16,26 @@ public class LanguageTest extends DomainTest{
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		Language language = new Language();
+		assertNotNull(language);
+		languageDao.insert(language);
+		assertEquals(1, languageDao.count());
+		languageDao.delete(language);
+		assertEquals(0, languageDao.count());		
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		Language preLanguage = new Language();
 		
+		String text = "Test";
+		preLanguage.setText(text);
+		
+		languageDao.insert(preLanguage);
+		assertEquals(1, languageDao.count());
+		
+		Language postLanguage = (Language) languageDao.select(preLanguage.getId());
+		assertTrue(postLanguage.getText().equals(preLanguage.getText()));
 	}
 
 	@Override
