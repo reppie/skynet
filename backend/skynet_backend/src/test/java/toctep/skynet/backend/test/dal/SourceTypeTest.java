@@ -26,7 +26,7 @@ public class SourceTypeTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		sourceTypeDao.insert(sourceType);
+		sourceType.save();
 		assertEquals(1, sourceTypeDao.count());
 		assertEquals(1, sourceType.getId());
 	}

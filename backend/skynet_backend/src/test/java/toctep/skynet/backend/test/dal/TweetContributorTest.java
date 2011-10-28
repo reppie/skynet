@@ -32,7 +32,7 @@ public class TweetContributorTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		tweetContributorDao.insert(tweetContributor);
+		tweetContributor.save();
 		assertEquals(1, tweetContributorDao.count());
 	}
 	

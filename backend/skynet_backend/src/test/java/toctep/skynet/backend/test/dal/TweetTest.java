@@ -97,7 +97,7 @@ public class TweetTest extends DomainTest {
 	
 	@Override
 	public void testInsert() {
-		tweetDao.insert(tweet);
+		tweet.save();
 		assertEquals(1, tweetDao.count());
 		
 		Tweet postTweet = (Tweet) tweetDao.select(tweet.getId());

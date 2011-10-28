@@ -33,7 +33,7 @@ public class TweetHashtagTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		tweetHashtagDao.insert(tweetHashtag);
+		tweetHashtag.save();
 		assertEquals(1, boundingBoxDao.count());
 	}
 	
