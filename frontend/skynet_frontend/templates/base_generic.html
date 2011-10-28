@@ -1,3 +1,6 @@
+{% load i18n %}
+{% load url from future %}
+
 <!doctype html> <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
@@ -28,6 +31,11 @@
 				{% block header %}<h1>Social Media Lab</h1>{% endblock %}
 			</header>
 			<section class="span-18 main">
+				<form method="get" action="/twitter/search">
+					<input type="text" name="q" placeholder="{% trans 'Search for tweets' %}" />
+					<input type="submit" />		
+				</form>
+ 
 				{% block main %}The center column{% endblock %}
 			</section>
 			<aside class="span-6 last">

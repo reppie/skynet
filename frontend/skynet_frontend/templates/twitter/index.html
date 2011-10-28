@@ -15,13 +15,7 @@
 {% block title %} Social Media Lab {% endblock %}
 
 {% block main %}
-	<form method="get">
-		{% url 'twitter:search' %}
-		<input action="/reverse/template" type="text" name="t" placeholder="{% trans 'Search for tweets' %}" />
-		<input type="submit" />		
-	</form>
- 
 	{% for tweet in tweets %}
 		<div class="tweet">{{ tweet.text }}</div>
 	{% endfor %}
- {% endblock %}
+{% endblock %}

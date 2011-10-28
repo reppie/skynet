@@ -10,9 +10,14 @@ def index(request):
     return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
 
 def search(request):
+    search_string = request.GET.get('q', '')
+    if(search_string):
+        tweets = Tweet.objects.filter(keywords__keyword=search_string)
+    else:
+        tweets = Tweet.objects.all() 
+    
     cloud = Keyword.get_keyword_cloud() #TODO: Cloud should be based on search
-    tweets = Tweet.objects.all()
-    return render_to_response("twitter/index.html", { 'keywordcloud': cloud, 'tweets': tweets }) 
+    return render_to_response("twitter/tweets.html", { 'keywordcloud': cloud, 'tweets': tweets }) 
 
 def tweets(request):
     return render_to_response("twitter/tweets.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
