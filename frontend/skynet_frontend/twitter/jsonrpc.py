@@ -21,10 +21,10 @@ import sys
 version = '2.0'
 
 def response(id, result):
-    return simplejson.dumps({'version': version, 'id':id,
+    return simplejson.dumps({'jsonrpc': version, 'id':id,
                              'result':result, 'error':None})
 def error(id, code, message):
-    return simplejson.dumps({'id': id, 'version': version,
+    return simplejson.dumps({'id': id, 'jsonrpc': version,
                              'error': {'name': 'JSONRPCError',
                                        'code': code,
                                        'message': message
