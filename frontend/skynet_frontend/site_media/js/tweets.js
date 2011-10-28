@@ -65,7 +65,9 @@
 					var $tweet = tweetList.$tweetList.find('[data-tweet-id="'+tweet.id+'"]');
 					$tweet.data('tweet', tweet);
 					$tweet.html(tweet.text);
-					$tweet.removeClass("loading");
+					$tweet.slideDown(250, function(){
+						$tweet.removeClass("loading");
+					});
 				}
 				/*else{
 					console.log(tweetId);
