@@ -6,4 +6,5 @@ settings.*
 .project
 .metadata
 backend/skynet_backend/target/*
+*~
 
