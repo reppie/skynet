@@ -37,22 +37,24 @@ public abstract class DomainTest extends TestCase {
 	
 	private DaoFacade daoFacade;
 	
-	protected UserDao userDao;
-	protected TweetDao tweetDao;
 	protected BoundingBoxDao boundingBoxDao;
 	protected BoundingBoxTypeDao boundingBoxTypeDao;
-	protected URLDao urlDao;
-	protected PlaceDao placeDao;
 	protected CountryDao countryDao;
-	protected PlaceTypeDao placeTypeDao;
-	protected TweetURLDao tweetURLDao;
-	protected SourceTypeDao sourceTypeDao;
 	protected GeoDao geoDao;
 	protected GeoTypeDao geoTypeDao;
 	protected HashtagDao hashtagDao;
 	protected LanguageDao languageDao;
+	protected PlaceDao placeDao;
+	protected PlaceTypeDao placeTypeDao;
+	protected SourceTypeDao sourceTypeDao;
 	protected TimeZoneDao timeZoneDao;
+	protected TweetContributorDao tweetContributorDao;
+	protected TweetHashtagDao tweetHashtagDao;
+	protected TweetDao tweetDao;
 	protected TweetMentionDao tweetMentionDao;
+	protected TweetURLDao tweetURLDao;
+	protected URLDao urlDao;
+	protected UserDao userDao;
 	
 	@Before
 	public void setUp() {
