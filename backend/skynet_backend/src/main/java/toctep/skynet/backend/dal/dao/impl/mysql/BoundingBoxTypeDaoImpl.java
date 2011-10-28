@@ -25,7 +25,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	}
 
 	@Override
-	public BoundingBoxType select(int id) {
+	public BoundingBoxType select(long id) {
 		Connection conn = (Connection) this.getConnection();
 		
 		BoundingBoxType boundingBoxType = null;
@@ -50,7 +50,6 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 				e.printStackTrace();
 			}
 		}
-		
 		return boundingBoxType;
 	}
 
@@ -59,5 +58,4 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

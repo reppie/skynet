@@ -12,7 +12,7 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 	}
 
 	@Override
-	public Domain select(int id) {
+	public Domain select(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

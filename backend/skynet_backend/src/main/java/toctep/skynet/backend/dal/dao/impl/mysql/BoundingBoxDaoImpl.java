@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.User;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -26,7 +25,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 	}
 
 	@Override
-	public BoundingBox select(int id) {
+	public BoundingBox select(long id) {
 		Connection conn = (Connection) this.getConnection();
 		
 		BoundingBox boundingBox = null;
@@ -55,7 +54,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 		
 		return boundingBox;
 	}
-
+	
 	@Override
 	public void update(Domain domain) {
 		// TODO Auto-generated method stub

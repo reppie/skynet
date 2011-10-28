@@ -39,7 +39,7 @@ public class TweetDaoImpl extends TweetDao {
 	}
 
 	@Override
-	public Tweet select(int id) {
+	public Tweet select(long id) {
 		Connection conn = (Connection) this.getConnection();
 		
 		Tweet tweet = null;
