@@ -6,7 +6,7 @@ public class CountryTest extends DomainTest{
 
 	private Country country;
 	
-	private String code;
+	private String id;
 	private String text;
 	
 	@Override
@@ -15,8 +15,8 @@ public class CountryTest extends DomainTest{
 		
 		country = new Country();
 		
-		code = "NL";
-		country.setCode(code);
+		String id = "NL";
+		country.setId(id);
 		
 		text = "Netherlands";
 		country.setText(text);
@@ -25,7 +25,7 @@ public class CountryTest extends DomainTest{
 	@Override
 	public void testCreate() { 
 		assertNotNull(country);
-		assertTrue(code.equals(country.getCode()));
+		assertTrue(id.equals(country.getId()));
 		assertTrue(text.equals(country.getText()));
 	}
 
@@ -33,7 +33,8 @@ public class CountryTest extends DomainTest{
 	public void testInsert() {
 		countryDao.insert(country);
 		assertEquals(1, countryDao.count());
-		assertEquals(1, country.getId());
+		assertEquals(id, country.getId());
+
 	}
 	
 	@Override
@@ -41,8 +42,6 @@ public class CountryTest extends DomainTest{
 		countryDao.insert(country);
 		
 		Country postCountry = (Country) countryDao.select(country.getId());
-		
-		assertTrue(postCountry.getCode().equals(country.getCode()));
 		assertTrue(postCountry.getText().equals(country.getText()));
 	}
 

@@ -91,7 +91,7 @@ public class TweetParser {
 
     private void parseCountry(twitter4j.Place place) {
         country = new Country();
-        country.setCode(place.getCountryCode());
+        country.setId(place.getCountryCode());
         country.setText(place.getCountry());
     }
 
@@ -136,7 +136,7 @@ public class TweetParser {
     
     private void parsePlace(twitter4j.Place placeStatus) {
         this.place = new Place();
-        place.setTwitterId(placeStatus.getId());
+        place.setId(placeStatus.getId());
         place.setName(placeStatus.getName());
         place.setFullName(placeStatus.getFullName());
         place.setStreetAddress(placeStatus.getStreetAddress());
@@ -155,7 +155,7 @@ public class TweetParser {
     
     private void parseUser(twitter4j.User userStatus) {
         this.user = new User();
-        user.setTwitterId(userStatus.getId());
+        user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
         user.setStatusesCount(userStatus.getStatusesCount());    
         user.setProfileBackgroundTile(0); //Twitter4j has no support for this?
@@ -183,21 +183,22 @@ public class TweetParser {
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
         user.setScreenName(userStatus.getScreenName());
         user.setProfileImageUrl(userStatus.getProfileImageURL().toExternalForm());
+        user.setProfileImageUrlHttps(userStatus.getProfileImageUrlHttps().toExternalForm());
         user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
         user.setTranslator(userStatus.isTranslator());
         user.setListedCount(userStatus.getListedCount());   
         user.setPlace(place);
         user.setLanguage(language);
         Url userUrl = new Url();
-        userUrl.setText(userStatus.getURL().toExternalForm());
+        userUrl.setId(userStatus.getURL().toExternalForm());
         user.setTimeZone(timeZone);
     }
     
     private void parseTweet(Status status) {
         tweet = new Tweet();
+        tweet.setId(status.getId());
         tweet.setText(status.getText());
         tweet.setTruncated(status.isTruncated());
-        tweet.setTwitterId(status.getId());
         tweet.setFavorited(status.isFavorited());
         tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
         tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
@@ -212,7 +213,7 @@ public class TweetParser {
     private void parseUrl(Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
             Url url = new Url();
-            url.setText(urlEntity.getDisplayURL());
+            url.setId(urlEntity.getDisplayURL());
             TweetUrl tweetURL = new TweetUrl();
             tweetURL.setTweet(tweet);
             tweetURL.setUrl(url);

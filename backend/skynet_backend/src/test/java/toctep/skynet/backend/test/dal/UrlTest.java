@@ -8,11 +8,11 @@ public class UrlTest extends DomainTest {
 	public void testCreate() {
 		Url url = new Url();
 		assertNotNull(url);
-		assertNull(url.getText());
+		assertNull(url.getId());
 		
 		String urlText = "htt://www.diablo3.com";
-		url.setText(urlText);
-		assertEquals("getText result: ", urlText, url.getText());
+		url.setId(urlText);
+		assertEquals("getText result: ", urlText, url.getId());
 	}
 
 	@Override
@@ -20,13 +20,13 @@ public class UrlTest extends DomainTest {
 		Url preURL = new Url();
 		
 		String urlText = "http://www.diablo3.com";
-		preURL.setText(urlText);
+		preURL.setId(urlText);
 		
 		urlDao.insert(preURL);
 		assertEquals(1, urlDao.count());
 		
 		Url postURL = (Url) urlDao.select(preURL.getId());
-		assertTrue(postURL.getText().equals(preURL.getText()));
+		assertTrue(postURL.getId().equals(preURL.getId()));
 	}
 	
 	@Override

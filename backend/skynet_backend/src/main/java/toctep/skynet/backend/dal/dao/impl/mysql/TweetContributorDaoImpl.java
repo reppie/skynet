@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.TweetContributorDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.DomainLongPk;
 
 public class TweetContributorDaoImpl extends TweetContributorDao {
 
@@ -12,7 +13,7 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 	}
 
 	@Override
-	public Domain select(long id) {
+	public DomainLongPk select(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

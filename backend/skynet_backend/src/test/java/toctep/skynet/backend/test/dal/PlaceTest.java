@@ -9,7 +9,7 @@ public class PlaceTest extends DomainTest{
 
 	private Place place;
 	
-	private String twitterId;
+	private String id;
 	private PlaceType placeType;
 	private BoundingBox boundingBox;
 	private String name;
@@ -31,8 +31,8 @@ public class PlaceTest extends DomainTest{
 		
 		place = new Place();
 		
-		twitterId = "hex";
-		place.setTwitterId(twitterId);
+		id = "0x20";
+		place.setId(id);
 		
 		placeType = new PlaceType();
 		place.setType(placeType);
@@ -80,7 +80,7 @@ public class PlaceTest extends DomainTest{
 	@Override
 	public void testCreate() { 
 		assertNotNull(place);
-		assertTrue(twitterId.equals(place.getTwitterId()));
+		assertTrue(id.equals(place.getId()));
 		assertTrue(place.getType() == placeType);
 		assertTrue(place.getBoundingBox() == boundingBox);
 		assertTrue(name.equals(place.getName()));
@@ -102,6 +102,9 @@ public class PlaceTest extends DomainTest{
 		placeDao.insert(place);
 		assertEquals(1, placeDao.count());
 		assertEquals(1, place.getId());
+		
+		placeDao.insert(place);
+		assertEquals(1, userDao.count());
 	}
 	
 	@Override
@@ -110,7 +113,6 @@ public class PlaceTest extends DomainTest{
 		
 		Place postPlace = (Place) placeDao.select(place.getId());
 		
-		assertTrue(postPlace.getTwitterId().equals(place.getTwitterId()));
 		assertTrue(postPlace.getType().equals(place.getType()));
 		assertTrue(postPlace.getBoundingBox().equals(place.getBoundingBox()));
 		assertTrue(postPlace.getName().equals(place.getName()));
