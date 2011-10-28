@@ -6,11 +6,7 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-#     url(r'^$', 'skynet_frontend.views.home', name='home'),
-#     url(r'^skynet_frontend/', include('skynet_frontend.foo.urls')),
-
-    (r'^somela/$', 'twitter.views.index'),
+    (r'^$', 'twitter.views.index'),
     url(r'^twitter/rpc/', 'twitter.views.rpc', name='twitter-rpc'),
     url(r'^admin/', include(admin.site.urls)),
 )
