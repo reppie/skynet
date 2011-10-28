@@ -159,7 +159,7 @@ class Tweet(models.Model):
             relation.save()
     
     def __unicode__(self):
-        return "@" + self.user.name + ": " + self.text
+        return u'@%s: %s' % (self.user.name, self.text)
        
 class TweetKeyword(models.Model):
     tweet = models.ForeignKey(Tweet)
