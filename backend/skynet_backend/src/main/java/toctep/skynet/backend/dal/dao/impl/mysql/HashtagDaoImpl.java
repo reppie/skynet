@@ -95,4 +95,10 @@ public class HashtagDaoImpl extends HashtagDao{
 		
 	}
 
+	@Override
+	public boolean exists(Domain domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -97,4 +97,10 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public boolean exists(Domain domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

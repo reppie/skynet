@@ -30,4 +30,10 @@ public class KeywordDaoImpl extends KeywordDao {
 		
 	}
 
+	@Override
+	public boolean exists(Domain domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
