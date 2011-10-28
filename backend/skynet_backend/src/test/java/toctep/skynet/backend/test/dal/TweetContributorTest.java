@@ -13,15 +13,29 @@ public class TweetContributorTest extends DomainTest {
 		long userTwitterId = 123456789;
 		Tweet tweet = new Tweet();
 		tweetContributor.setTweet(tweet);
-		tweetContributor.setUser_twitter_id(userTwitterId);
+		tweetContributor.setUserTwitterId(userTwitterId);
+		
 		assertEquals("getTweet: ", tweet, tweetContributor.getTweet());
-		assertEquals("getUserTwitterId: ", userTwitterId, tweetContributor.getUser_twitter_id());
+		assertEquals("getUserTwitterId: ", userTwitterId, tweetContributor.getUserTwitterId());
 	}
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		TweetContributor preTweetContributor = new TweetContributor();
 		
+		Tweet tweet = new Tweet();
+		preTweetContributor.setTweet(tweet);
+		
+		long userTwitterId = 0L;
+		preTweetContributor.setUserTwitterId(userTwitterId);
+		
+		tweetContributorDao.insert(preTweetContributor);
+		assertEquals(1, tweetContributorDao.count());
+		
+		TweetContributor postTweetContributor = (TweetContributor) tweetContributorDao.select(preTweetContributor.getId());
+		
+		assertEquals(postTweetContributor.getUserTwitterId(), preTweetContributor.getUserTwitterId());
+		assertTrue(postTweetContributor.getTweet().equals(preTweetContributor.getTweet()));
 	}
 
 	@Override
@@ -32,8 +46,12 @@ public class TweetContributorTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		TweetContributor tweetContributor = new TweetContributor();
+		assertNotNull(tweetContributor);
+		tweetContributorDao.insert(tweetContributor);
+		assertEquals(1, tweetContributorDao.count());
+		tweetContributorDao.delete(tweetContributor);
+		assertEquals(0, tweetContributorDao.count());
 	}
 	
 	
