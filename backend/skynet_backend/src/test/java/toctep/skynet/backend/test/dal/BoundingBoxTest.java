@@ -5,51 +5,60 @@ import toctep.skynet.backend.dal.domain.BoundingBoxType;
 
 public class BoundingBoxTest extends DomainTest{
 
+	private BoundingBox boundingBox;
+	
+	private BoundingBoxType boundingBoxType;
+	private String coordinates;
+	
 	@Override
-	public void testCreate() { 
-		BoundingBox boundingBox = new BoundingBox();
-		assertNotNull(boundingBox);
+	public void setUp() {
+		super.setUp();
 		
-		BoundingBoxType boundingBoxType = new BoundingBoxType();
+		boundingBox = new BoundingBox();
+		
+		boundingBoxType = new BoundingBoxType();
 		boundingBox.setType(boundingBoxType);
-		assertTrue(boundingBox.getType() == boundingBoxType);
 		
-		String coordinates = "58.17, 68.20";
+		coordinates = "58.17, 68.20";
 		boundingBox.setCoordinates(coordinates);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(boundingBox);
+		assertTrue(boundingBox.getType() == boundingBoxType);
 		assertTrue(coordinates.equals(boundingBox.getCoordinates()));
 	}
 
 	@Override
+	public void testInsert() {		
+		boundingBoxDao.insert(boundingBox);
+		assertEquals(1, boundingBoxDao.count());
+		assertEquals(1, boundingBox.getId());
+	}
+
+	@Override
+	public void testSelect() {
+		boundingBoxDao.insert(boundingBox);
+		
+		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(boundingBox.getId());
+		
+		assertTrue(postBoundingBox.getType().equals(boundingBox.getType()));
+		assertTrue(postBoundingBox.getCoordinates().equals(boundingBox.getCoordinates()));
+	}
+	
+	@Override
+	public void testUpdate() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void testDelete() {
-		BoundingBox boundingBox = new BoundingBox();
-		assertNotNull(boundingBox);
 		boundingBoxDao.insert(boundingBox);
 		assertEquals(1, boundingBoxDao.count());
 		boundingBoxDao.delete(boundingBox);
 		assertEquals(0, boundingBoxDao.count());		
 	}
 
-	@Override
-	public void testInsert() {
-		BoundingBox preBoundingBox = new BoundingBox();
-		
-		BoundingBoxType boundingBoxType = new BoundingBoxType();
-		preBoundingBox.setType(boundingBoxType);
-		
-		String coordinates = "58.18, 20.11";
-		preBoundingBox.setCoordinates(coordinates);
-		
-		boundingBoxDao.insert(preBoundingBox);
-		assertEquals(1, boundingBoxDao.count());
-		
-		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(preBoundingBox.getId());
-		assertTrue(postBoundingBox.getType().equals(preBoundingBox.getType()));
-		assertTrue(postBoundingBox.getCoordinates().equals(preBoundingBox.getCoordinates()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}	
 }
