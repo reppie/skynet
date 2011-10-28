@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class User extends DomainLongPk {
 
-	private long twitterId;
 	private Place place;
 	private boolean defaultProfile;
 	private int statusesCount;
@@ -40,14 +39,6 @@ public class User extends DomainLongPk {
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
 	private int listedCount;
-	
-	public long getTwitterId() {
-		return twitterId;
-	}
-
-	public void setTwitterId(long twitterId) {
-		this.twitterId = twitterId;
-	}
 
 	public Place getPlace() {
 		return place;
