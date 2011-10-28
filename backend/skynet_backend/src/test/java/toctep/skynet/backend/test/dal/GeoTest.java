@@ -32,7 +32,7 @@ public class GeoTest extends DomainTest{
 
 	@Override
 	public void testInsert() {
-		geoDao.insert(geo);
+		geo.save();
 		assertEquals(1, geoDao.count());
 		assertEquals(1, geo.getId());
 	}

@@ -33,7 +33,7 @@ public class HashtagTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		hashtagDao.insert(hashtag);
+		hashtag.save();
 		
 		Hashtag postHashtag = (Hashtag) hashtagDao.select(hashtag.getId());
 		

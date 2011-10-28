@@ -32,7 +32,7 @@ public class TweetMentionTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		tweetMentionDao.insert(tweetMention);
+		tweetMention.save();
 		assertEquals(1, tweetMentionDao.count());
 	}
 	
