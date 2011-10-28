@@ -109,8 +109,7 @@ class Keyword(models.Model):
 
     @staticmethod
     def get_all_since(datetime_since):
-        #return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweetkeyword__tweet__created_at__gte=datetime_since)
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
     
     @staticmethod
     def get_keyword_cloud():
@@ -155,7 +154,7 @@ class Tweet(models.Model):
             else:
                 keyword = Keyword(keyword=word)
                 keyword.save()
-
+            
             relation = TweetKeyword(tweet=self, keyword=keyword)
             relation.save()
     
