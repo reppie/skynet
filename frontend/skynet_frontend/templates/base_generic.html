@@ -21,6 +21,7 @@
 		<script src="/site_media/js/libs/modernizr-2.0.6.min.js"></script>
 	</head>
 	<body>
+		
 		<div class="container">
 			<header class="span-24">
 				<img class="twitter-logo" src="/site_media/img/twitter_newbird_blue.png"/>
@@ -47,8 +48,7 @@
 						{% block moodgraph %}
 							<img src="/site_media/img/dummy/graph.png"/>
 						{% endblock %}
-					</section>	
-					
+					</section>
 				{% endblock %}
 				<footer class="span-24">
 				{% block footer %}
@@ -59,6 +59,7 @@
 			</aside>
 			
 		</div>
+		{% csrf_token %}
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="/site_media/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 		<script id="tweetTemplate" type="text/x-jquery-tmpl">
