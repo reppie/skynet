@@ -320,4 +320,9 @@ public class User extends DomainLongPk {
 	public void setListedCount(int listedCount) {
 		this.listedCount = listedCount;
 	}
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getUserDao();
+	}
 }

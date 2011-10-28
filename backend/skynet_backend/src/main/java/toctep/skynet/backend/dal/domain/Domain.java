@@ -19,11 +19,10 @@ public abstract class Domain {
 	public abstract void setDao();
 	
 	public void save() {
-		if (dao.exists()) {
+		if (dao.exists(this)) {
 			dao.update(this);
-		} else
+		} else {
 			dao.insert(this);
 		}
 	}
-	
-}
+}	

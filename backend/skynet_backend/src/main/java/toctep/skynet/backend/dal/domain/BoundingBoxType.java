@@ -14,8 +14,7 @@ public class BoundingBoxType extends DomainLongPk {
 
 	@Override
 	public void setDao() {
-		// TODO Auto-generated method stub
-		
+		dao = daoFacade.getBoundingBoxTypeDao();		
 	}
 	
 }

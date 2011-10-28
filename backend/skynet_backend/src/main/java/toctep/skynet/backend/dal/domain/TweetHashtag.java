@@ -20,5 +20,9 @@ public class TweetHashtag extends Domain {
 	public void setHashtag(Hashtag hashtag) {
 		this.hashtag = hashtag;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getTweetHashtagDao();
+	}
 }

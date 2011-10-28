@@ -26,5 +26,8 @@ public class TweetKeyword extends DomainLongPk {
 	public void setKeywordId(int keywordId) {
 		this.keywordId = keywordId;
 	}
-
+	@Override
+	public void setDao() {
+		dao = daoFacade.getTweetKeywordDao();
+	}
 }

@@ -20,5 +20,9 @@ public class TweetContributor extends Domain {
 	public void setUserTwitterId(long userTwitterId) {
 		this.userTwitterId = userTwitterId;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getTweetContributorDao();
+	}
 }
