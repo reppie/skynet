@@ -104,13 +104,20 @@ class User(models.Model):
     def __unicode__(self):
         return self.name
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'screen_name': self.screen_name,
+        }
+    
+
 class Keyword(models.Model):
     keyword = models.CharField(max_length=140)
 
     @staticmethod
     def get_all_since(datetime_since):
-        #return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweetkeyword__tweet__created_at__gte=datetime_since)
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
     
     @staticmethod
     def get_keyword_cloud():
@@ -155,12 +162,19 @@ class Tweet(models.Model):
             else:
                 keyword = Keyword(keyword=word)
                 keyword.save()
-
+            
             relation = TweetKeyword(tweet=self, keyword=keyword)
             relation.save()
     
     def __unicode__(self):
-        return "@" + self.user.name + ": " + self.text
+        return u'@%s: %s' % (self.user.name, self.text)
+    
+    def to_json(self):
+        return {
+            'id': self.id,
+            'text': self.text,
+            'user_id': self.user_id,
+        }
        
 class TweetKeyword(models.Model):
     tweet = models.ForeignKey(Tweet)
@@ -183,7 +197,3 @@ class TweetContributor(models.Model):
 
     class Meta:
         db_table = "twitter_tweet_contributors";
-        
-
-    
-            

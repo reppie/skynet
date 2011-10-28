@@ -4,34 +4,40 @@ import toctep.skynet.backend.dal.domain.GeoType;
 
 public class GeoTypeTest extends DomainTest{
 
+	private GeoType geoType;
+	
+	private String text;
+	
+	@Override
+	public void setUp() {
+		super.setUp();
+		
+		geoType = new GeoType();
+		
+		text = "Point";
+		geoType.setText(text);
+	}
+	
 	@Override
 	public void testCreate() { 
-		GeoType geoType = new GeoType();
 		assertNotNull(geoType);
-		
-		String text = "Point";
-		geoType.setText(text);
 		assertTrue(text.equals(geoType.getText()));
 	}
 
 	@Override
 	public void testInsert() {
-		GeoType preGeoType = new GeoType();
-		
-		String text = "Point";
-		preGeoType.setText(text);
-		
-		geoTypeDao.insert(preGeoType);
+		geoTypeDao.insert(geoType);
 		assertEquals(1, geoTypeDao.count());
-		
-		GeoType postGeoType = (GeoType) geoTypeDao.select(preGeoType.getId());
-		assertTrue(postGeoType.getText().equals(preGeoType.getText()));
+		assertEquals(1, geoType.getId());
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		geoTypeDao.insert(geoType);
 		
+		GeoType postGeoType = (GeoType) geoTypeDao.select(geoType.getId());
+		
+		assertTrue(postGeoType.getText().equals(geoType.getText()));
 	}
 
 	@Override
@@ -42,8 +48,6 @@ public class GeoTypeTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		GeoType geoType = new GeoType();
-		assertNotNull(geoType);
 		geoTypeDao.insert(geoType);
 		assertEquals(1, geoTypeDao.count());
 		geoTypeDao.delete(geoType);
