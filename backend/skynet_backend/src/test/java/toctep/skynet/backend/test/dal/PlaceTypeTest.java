@@ -4,35 +4,40 @@ import toctep.skynet.backend.dal.domain.PlaceType;
 
 public class PlaceTypeTest extends DomainTest{
 
+	private PlaceType placeType;
+	
+	private String text;
+	
 	@Override
-	public void testCreate() { 
-		PlaceType placeType = new PlaceType();
-		assertNotNull(placeType);
+	public void setUp() {
+		super.setUp();
 		
-		String text = "City";
+		placeType = new PlaceType();
+		
+		text = "City";
 		placeType.setText(text);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(placeType);
 		assertTrue(text.equals(placeType.getText()));
 	}
 	
 	@Override
 	public void testInsert() {
-		PlaceType prePlaceType = new PlaceType();
-		
-		String text = "test";
-		prePlaceType.setText(text);
-		
-		placeTypeDao.insert(prePlaceType);
+		placeTypeDao.insert(placeType);
 		assertEquals(1, placeTypeDao.count());
-		
-		PlaceType postPlaceType = (PlaceType) placeTypeDao.select(prePlaceType.getId());
-		
-		assertTrue(postPlaceType.getText().equals(prePlaceType.getText()));
+		assertEquals(1, placeType.getId());
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		placeTypeDao.insert(placeType);
 		
+		PlaceType postPlaceType = (PlaceType) placeTypeDao.select(placeType.getId());
+		
+		assertTrue(postPlaceType.getText().equals(placeType.getText()));
 	}
 
 	@Override
@@ -43,8 +48,6 @@ public class PlaceTypeTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		PlaceType placeType = new PlaceType();
-		assertNotNull(placeType);
 		placeTypeDao.insert(placeType);
 		assertEquals(1, placeTypeDao.count());
 		placeTypeDao.delete(placeType);

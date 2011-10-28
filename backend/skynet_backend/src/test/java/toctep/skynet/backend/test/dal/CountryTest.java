@@ -15,10 +15,10 @@ public class CountryTest extends DomainTest{
 		
 		country = new Country();
 		
-		String code = "NL";
+		code = "NL";
 		country.setCode(code);
 		
-		String text = "Netherlands";
+		text = "Netherlands";
 		country.setText(text);
 	}
 	

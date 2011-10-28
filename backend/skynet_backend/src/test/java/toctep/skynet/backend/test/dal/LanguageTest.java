@@ -4,34 +4,40 @@ import toctep.skynet.backend.dal.domain.Language;
 
 public class LanguageTest extends DomainTest{
 
+	private Language language;
+	
+	private String text;
+	
 	@Override
-	public void testCreate() { 
-		Language language = new Language();
-		assertNotNull(language);
+	public void setUp() {
+		super.setUp();
 		
-		String text = "English";
+		language = new Language();
+		
+		text = "English";
 		language.setText(text);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(language);
 		assertTrue(text.equals(language.getText()));
 	}
 
 	@Override
 	public void testInsert() {
-		Language preLanguage = new Language();
-		
-		String text = "Test";
-		preLanguage.setText(text);
-		
-		languageDao.insert(preLanguage);
+		languageDao.insert(language);
 		assertEquals(1, languageDao.count());
-		
-		Language postLanguage = (Language) languageDao.select(preLanguage.getId());
-		assertTrue(postLanguage.getText().equals(preLanguage.getText()));
+		assertEquals(1, language.getId());
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		languageDao.insert(language);
 		
+		Language postLanguage = (Language) languageDao.select(language.getId());
+		
+		assertTrue(postLanguage.getText().equals(language.getText()));
 	}
 
 	@Override
@@ -42,8 +48,6 @@ public class LanguageTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		Language language = new Language();
-		assertNotNull(language);
 		languageDao.insert(language);
 		assertEquals(1, languageDao.count());
 		languageDao.delete(language);

@@ -16,10 +16,10 @@ public class GeoTest extends DomainTest{
 		
 		geo = new Geo();
 		
-		GeoType geoType = new GeoType();
+		geoType = new GeoType();
 		geo.setType(geoType);
 		
-		String coordinates = "58.17, 68.20";
+		coordinates = "58.17, 68.20";
 		geo.setCoordinates(coordinates);
 	}
 	
