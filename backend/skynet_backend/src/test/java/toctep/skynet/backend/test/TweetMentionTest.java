@@ -20,8 +20,19 @@ public class TweetMentionTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		// TODO Auto-generated method stub
+		TweetMention preTweetMention = new TweetMention();
 		
+		long user = 123456789;
+		Tweet tweet = new Tweet();
+		preTweetMention.setUser(user);
+		preTweetMention.setTweet(tweet);
+		
+		tweetMentionDao.insert(preTweetMention);
+		assertEquals(1, tweetMentionDao.count());
+		
+		TweetMention postTweetMention = (TweetMention) tweetMentionDao.select(preTweetMention.getId());
+		assertEquals(preTweetMention.getUser(), postTweetMention.getUser());
+		assertEquals(preTweetMention.getTweet(), postTweetMention.getTweet());
 	}
 
 	@Override
