@@ -4,16 +4,16 @@ from skynet_frontend.twitter.models import Tweet, Keyword, User
 
 class TweetTest(TestCase):
     def setUp(self):
+        self.id = 1337l
         self.text = "body of the tweet"
-        self.twitter_id = 1337
         self.created_at = datetime.now() 
         self.user = User(name="username")
-        self.tweet = Tweet(text=self.text, twitter_id=self.twitter_id, created_at=self.created_at, user=self.user)
+        self.tweet = Tweet(id=self.id, text=self.text, created_at=self.created_at, user=self.user)
     
     def test_creation(self):
         self.assertTrue(self.tweet)
+        self.assertEquals(self.tweet.id, self.id)
         self.assertEquals(self.tweet.text, self.text)
-        self.assertEquals(self.tweet.twitter_id, self.twitter_id)
         self.assertEquals(self.tweet.created_at, self.created_at)
         self.assertEquals(self.tweet.user, self.user)
 
@@ -29,11 +29,11 @@ class TweetIndexTest(TestCase):
         self.assertFalse(Keyword.get_keyword_cloud().items)
     
     def test_get_keyword_cloud(self):
+        id = 1337l
         text = "keyword keyword keyword keyword singlekeyword"
-        twitter_id = 1337
         created_at = datetime.now()
         user = User(name="username")
-        tweet = Tweet(text=text, twitter_id=twitter_id, created_at=created_at, user=user)
+        tweet = Tweet(id=id, text=text, created_at=created_at, user=user)
         tweet.save()
         self.assertTrue(Keyword.get_keyword_cloud().items[0])
         
@@ -44,11 +44,11 @@ class TweetIndexTest(TestCase):
     def test_get_all_since(self):
         user = User(name="username")
         recent_text = "recenttweet"
-        recent_tweet = Tweet(text=recent_text, twitter_id=1337, created_at=datetime.now(), user=user)
+        recent_tweet = Tweet(text=recent_text, id=1337l, created_at=datetime.now(), user=user)
         recent_tweet.save()
         
         long_ago = datetime.now() - timedelta(days = 100)
-        really_old_tweet = Tweet(text="oldtweet", twitter_id=1338, created_at=long_ago, user=user)
+        really_old_tweet = Tweet(text="oldtweet", id=1338l, created_at=long_ago, user=user)
         really_old_tweet.save()
         
         yesterday = datetime.now() - timedelta(days = 1)

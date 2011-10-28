@@ -22,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'skynet', 
+        'NAME': 'skynet2', 
         'USER': 'skynet',
         'PASSWORD': 'asdasd',
         'HOST': '',
@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'south',
+#    'south',
     'twitter',
     'keywordcloud'
 )
