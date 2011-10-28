@@ -6,7 +6,6 @@
 			$.each(json,function(key, value){
 				base[key] = value;
 			});
-			
 		},
 		'Tweet': function(json){
 			api.Base.prototype.constructor.call(this, json);
@@ -18,8 +17,7 @@
 		},
 		'TweetList': function(element, tweets){
 			this.$el = element;
-			this.tweets = tweets || [];
-			element.data("TweetList", this);
+			this.reset(tweets);
 		},
 		cache:{
 			'collections':{},
@@ -41,12 +39,28 @@
 		},
 		
 	});
-	
+	var tweetListKey = "__TweetList"
 	$.fn.TweetList = function(tweets) {
-		return new api.TweetList(this, tweets);
+		var tweetList = this.data(tweetListKey);
+		if(!tweetList){
+			tweetList = new api.TweetList(this, tweets);
+			this.data(tweetListKey, tweetList);
+		}else if (tweets){
+			tweetList.reset(tweets);
+		}
+		return tweetList;
     };
 	
-	
+	api.TweetList.prototype.reset = function(tweets){
+		this.$el.empty();
+		this.tweets = tweets || [];
+		if(tweets){
+			for(var index in tweets){
+				var tweet = tweets[index];
+				console.log(tweet);
+			}
+		}
+	}
 	
 	$.jsonRPC.setup({
 	  	endPoint: '/twitter/rpc/'
