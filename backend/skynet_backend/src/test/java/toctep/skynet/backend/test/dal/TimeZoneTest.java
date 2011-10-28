@@ -4,42 +4,46 @@ import toctep.skynet.backend.dal.domain.TimeZone;
 
 public class TimeZoneTest extends DomainTest {
 
+	private TimeZone timeZone;
+	
+	private String timeZoneString;
+	private int utcOffset;
+	
+	@Override
+	public void setUp() {
+		super.setUp();
+		
+		timeZone = new TimeZone();
+		
+		timeZoneString = "GMT";
+		timeZone.setTimeZone(timeZoneString);
+		
+		utcOffset = 2;
+		timeZone.setUtcOffset(utcOffset);
+	}
+	
 	@Override
 	public void testCreate() {
-		TimeZone timeZone = new TimeZone();
 		assertNotNull(timeZone);
-		
-		String timeZoneString = "GMT";
-		int utcOffset = 2;
-		timeZone.setTimeZone(timeZoneString);
-		timeZone.setUtcOffset(utcOffset);
 		assertEquals("getTimeZone: ", timeZoneString, timeZone.getTimeZone());
 		assertEquals("getUtcOffset: ", utcOffset, timeZone.getUtcOffset());
 	}
 
 	@Override
 	public void testInsert() {
-		TimeZone preTimeZone = new TimeZone();
-		
-		int utcOffset = 0;
-		preTimeZone.setUtcOffset(utcOffset);
-		
-		String timeZone = "test";
-		preTimeZone.setTimeZone(timeZone);
-		
-		timeZoneDao.insert(preTimeZone);
+		timeZoneDao.insert(timeZone);
 		assertEquals(1, timeZoneDao.count());
-		
-		TimeZone postTimeZone = (TimeZone) timeZoneDao.select(preTimeZone.getId());
-		
-		assertEquals(postTimeZone.getUtcOffset(), preTimeZone.getUtcOffset());
-		assertTrue(postTimeZone.getTimeZone().equals(preTimeZone.getTimeZone()));
+		assertEquals(1, timeZone.getId());
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		timeZoneDao.insert(timeZone);
 		
+		TimeZone postTimeZone = (TimeZone) timeZoneDao.select(timeZone.getId());
+		
+		assertEquals(postTimeZone.getUtcOffset(), timeZone.getUtcOffset());
+		assertTrue(postTimeZone.getTimeZone().equals(timeZone.getTimeZone()));
 	}
 
 	@Override
@@ -50,8 +54,6 @@ public class TimeZoneTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		TimeZone timeZone = new TimeZone();
-		assertNotNull(timeZone);
 		timeZoneDao.insert(timeZone);
 		assertEquals(1, timeZoneDao.count());
 		timeZoneDao.delete(timeZone);

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class TweetHashtag extends DomainLongPk {
+public class TweetHashtag extends Domain {
 	
 	private Tweet tweet;
 	private Hashtag hashtag;

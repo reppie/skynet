@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class TweetUrl extends DomainLongPk {
+public class TweetUrl extends Domain {
 	
 	private Tweet tweet;
 	private Url url;

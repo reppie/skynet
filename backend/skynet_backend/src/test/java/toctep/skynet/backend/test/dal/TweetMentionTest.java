@@ -5,34 +5,35 @@ import toctep.skynet.backend.dal.domain.TweetMention;
 
 public class TweetMentionTest extends DomainTest {
 
+	private TweetMention tweetMention;
+	
+	private long userTwitterId;
+	private Tweet tweet;
+	
 	@Override
-	public void testCreate() {
-		TweetMention tweetMention = new TweetMention();
-		assertNotNull(tweetMention);
+	public void setUp() {
+		super.setUp();
 		
-		long user = 123456789;
+		TweetMention tweetMention = new TweetMention();
+		
+		long userTwitterId = 123456789;
+		tweetMention.setUser(userTwitterId);
+		
 		Tweet tweet = new Tweet();
 		tweetMention.setTweet(tweet);
-		tweetMention.setUser(user);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(tweetMention);
 		assertEquals("getTweet: ", tweet, tweetMention.getTweet());
-		assertEquals("getUser: ", user, tweetMention.getUser());
+		assertEquals("getUser: ", userTwitterId, tweetMention.getUser());
 	}
 
 	@Override
 	public void testInsert() {
-		TweetMention preTweetMention = new TweetMention();
-		
-		long user = 123456789;
-		Tweet tweet = new Tweet();
-		preTweetMention.setUser(user);
-		preTweetMention.setTweet(tweet);
-		
-		tweetMentionDao.insert(preTweetMention);
+		tweetMentionDao.insert(tweetMention);
 		assertEquals(1, tweetMentionDao.count());
-		
-		TweetMention postTweetMention = (TweetMention) tweetMentionDao.select(preTweetMention.getId());
-		assertEquals(preTweetMention.getUser(), postTweetMention.getUser());
-		assertEquals(preTweetMention.getTweet(), postTweetMention.getTweet());
 	}
 	
 	@Override
@@ -49,8 +50,6 @@ public class TweetMentionTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		TweetMention tweetMention = new TweetMention();
-		assertNotNull(tweetMention);
 		tweetMentionDao.insert(tweetMention);
 		assertEquals(1, tweetMentionDao.count());
 		tweetMentionDao.delete(tweetMention);

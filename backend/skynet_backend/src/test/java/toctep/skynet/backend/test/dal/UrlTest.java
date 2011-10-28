@@ -4,35 +4,33 @@ import toctep.skynet.backend.dal.domain.Url;
 
 public class UrlTest extends DomainTest {
 	
+	private Url url;
+	
+	@Override
+	public void setUp() {
+		super.setUp();
+		
+		url = new Url();
+	}
+	
 	@Override
 	public void testCreate() {
-		Url url = new Url();
 		assertNotNull(url);
-		assertNull(url.getId());
-		
-		String urlText = "htt://www.diablo3.com";
-		url.setId(urlText);
-		assertEquals("getText result: ", urlText, url.getId());
 	}
 
 	@Override
 	public void testInsert() {
-		Url preURL = new Url();
-		
-		String urlText = "http://www.diablo3.com";
-		preURL.setId(urlText);
-		
-		urlDao.insert(preURL);
+		urlDao.insert(url);
 		assertEquals(1, urlDao.count());
-		
-		Url postURL = (Url) urlDao.select(preURL.getId());
-		assertTrue(postURL.getId().equals(preURL.getId()));
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		urlDao.insert(url);
+		assertEquals(1, urlDao.count());
 		
+		Url postUrl = (Url) urlDao.select(url.getId());
+		assertTrue(postUrl.getId().equals(url.getId()));
 	}
 
 	@Override
@@ -43,8 +41,6 @@ public class UrlTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		Url url = new Url();
-		assertNotNull(url);
 		urlDao.insert(url);
 		assertEquals(1, urlDao.count());
 		urlDao.delete(url);
