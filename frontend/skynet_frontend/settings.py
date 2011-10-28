@@ -22,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'skynet2', 
+        'NAME': 'skynet', 
         'USER': 'skynet',
         'PASSWORD': 'asdasd',
         'HOST': '',
