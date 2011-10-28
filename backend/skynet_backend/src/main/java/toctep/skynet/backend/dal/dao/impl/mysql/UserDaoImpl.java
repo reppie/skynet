@@ -13,7 +13,7 @@ import com.mysql.jdbc.Statement;
 public class UserDaoImpl extends UserDao {
 
 	@Override
-	public User select(int id) {
+	public User select(long id) {
 		Connection conn = (Connection) this.getConnection();
 		
 		User user = null;
