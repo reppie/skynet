@@ -20,6 +20,8 @@ import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.TweetMentionDao;
+import toctep.skynet.backend.dal.dao.TweetURLDao;
 import toctep.skynet.backend.dal.dao.URLDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
@@ -48,6 +50,7 @@ public abstract class DomainTest extends TestCase {
 	protected GeoTypeDao geoTypeDao;
 	protected HashtagDao hashtagDao;
 	protected TimeZoneDao timeZoneDao;
+	protected TweetMentionDao tweetMentionDao;
 	
 	@Before
 	public void setUp() {
