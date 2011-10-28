@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain;
 
 import java.util.Date;
 
-public class User extends Domain {
+public class User extends DomainLongPk {
 
 	private long twitterId;
 	private Place place;

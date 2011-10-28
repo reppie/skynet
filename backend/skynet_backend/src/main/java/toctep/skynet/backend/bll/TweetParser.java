@@ -91,7 +91,7 @@ public class TweetParser {
 
     private void parseCountry(twitter4j.Place place) {
         country = new Country();
-        country.setCode(place.getCountryCode());
+        country.setId(place.getCountryCode());
         country.setText(place.getCountry());
     }
 
@@ -136,7 +136,7 @@ public class TweetParser {
     
     private void parsePlace(twitter4j.Place placeStatus) {
         this.place = new Place();
-        place.setTwitterId(placeStatus.getId());
+        place.setId(placeStatus.getId());
         place.setName(placeStatus.getName());
         place.setFullName(placeStatus.getFullName());
         place.setStreetAddress(placeStatus.getStreetAddress());
@@ -190,7 +190,7 @@ public class TweetParser {
         user.setPlace(place);
         user.setLanguage(language);
         Url userUrl = new Url();
-        userUrl.setText(userStatus.getURL().toExternalForm());
+        userUrl.setId(userStatus.getURL().toExternalForm());
         user.setTimeZone(timeZone);
     }
     
@@ -213,7 +213,7 @@ public class TweetParser {
     private void parseUrl(Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
             Url url = new Url();
-            url.setText(urlEntity.getDisplayURL());
+            url.setId(urlEntity.getDisplayURL());
             TweetUrl tweetURL = new TweetUrl();
             tweetURL.setTweet(tweet);
             tweetURL.setUrl(url);

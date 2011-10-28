@@ -10,8 +10,8 @@ public class CountryTest extends DomainTest{
 		assertNotNull(country);
 		
 		String code = "NL";
-		country.setCode(code);
-		assertTrue(code.equals(country.getCode()));
+		country.setId(code);
+		assertTrue(code.equals(country.getId()));
 		
 		String text = "Netherlands";
 		country.setText(text);
@@ -23,7 +23,7 @@ public class CountryTest extends DomainTest{
 		Country preCountry = new Country();
 		
 		String code = "NL";
-		preCountry.setCode(code);
+		preCountry.setId(code);
 		
 		String text = "Netherlands";
 		preCountry.setText(text);
@@ -32,7 +32,6 @@ public class CountryTest extends DomainTest{
 		assertEquals(1, countryDao.count());
 		
 		Country postCountry = (Country) countryDao.select(preCountry.getId());
-		assertTrue(postCountry.getCode().equals(preCountry.getCode()));
 		assertTrue(postCountry.getText().equals(preCountry.getText()));
 	}
 	

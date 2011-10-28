@@ -44,12 +44,9 @@ public class CountryDaoImpl extends CountryDao{
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
+			stmt.executeUpdate(
 					"INSERT INTO " + tableName + " (code, text) " +
-					"VALUES ('" + country.getCode() + "', '" + country.getText() + "')",
-					Statement.RETURN_GENERATED_KEYS
-				);
-			country.setId(id);
+					"VALUES ('" + country.getId() + "', '" + country.getText() + "')");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -62,7 +59,7 @@ public class CountryDaoImpl extends CountryDao{
 	}
 
 	@Override
-	public Country select(long id) {
+	public Country select(String id) {
 		Connection conn = (Connection) this.getConnection();
 		
 		Country country = null;
@@ -76,7 +73,6 @@ public class CountryDaoImpl extends CountryDao{
 			rs.first();
 			country = new Country();
 			country.setId(id);
-			country.setText(rs.getString("code"));
 			country.setText(rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,17 +1,8 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Country extends Domain {
+public class Country extends DomainStringPk {
 
-	private String code;
 	private String text;
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
 
 	public String getText() {
 		return text;

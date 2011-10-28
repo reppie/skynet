@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Place extends Domain {
+public class Place extends DomainStringPk {
 
-	private String twitterId;
 	private PlaceType type;
 	private BoundingBox boundingBox;
 	private String name;
@@ -17,14 +16,6 @@ public class Place extends Domain {
 	private String twitter;
 	private String url;
 	private String appId;
-
-	public String getTwitterId() {
-		return twitterId;
-	}
-
-	public void setTwitterId(String twitterId) {
-		this.twitterId = twitterId;
-	}
 
 	public PlaceType getType() {
 		return type;

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Hashtag extends Domain {
+public class Hashtag extends DomainLongPk {
 
 	public String text;
 	
