@@ -7,82 +7,33 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Domain;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 public class CountryDaoImpl extends CountryDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		Country country = (Country) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + country.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + country.getId());
 	}
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		Country country = (Country) domain;
 		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(
-					"INSERT INTO " + tableName + " (code, text) " +
+		MySqlUtil.getInstance().insert("INSERT INTO " + tableName + " (code, text) " +
 					"VALUES ('" + country.getId() + "', '" + country.getText() + "')");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	@Override
 	public Country select(String id) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
+		Country country = new Country();
 		
-		Country country = null;
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
 		
-		Statement stmt = null;
-		ResultSet rs = null;
-		
+		country.setId(id);
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id = " + id);			
-			rs.first();
-			country = new Country();
-			country.setId(id);
 			country.setText(rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return country;
 	}
