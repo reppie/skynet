@@ -83,12 +83,14 @@ public class MySqlUtil {
 		return conn;
 	}
 	
-	public void query(String query) {
+	public int query(String query) {
+		int result = 0;
+		
 		Statement stmt = null;
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(query);
+			result = stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -98,6 +100,8 @@ public class MySqlUtil {
 				e.printStackTrace();
 			}
 		}
+		
+		return result;
 	}
 	
 	public int insert(String query) {
@@ -119,6 +123,37 @@ public class MySqlUtil {
 		}
 		
 		return id;
+	}
+	
+	public ResultSet select(String query) {
+		ResultSet rs = null;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			rs = stmt.executeQuery(query);
+			rs.first();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return rs;
+	}
+	
+	public int update(String query) {
+		return this.query(query);
+	}
+	
+	public int delete(String query) {
+		return this.query(query);
 	}
 	
 	public boolean exists(String tableName, String where) {
