@@ -208,7 +208,7 @@ public class TweetParser {
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
         tweet.setUser(user);
-    } 
+    }
 
     private void parseUrl(Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
