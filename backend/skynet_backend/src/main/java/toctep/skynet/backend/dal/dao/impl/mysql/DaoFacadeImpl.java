@@ -6,9 +6,11 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.DaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
+import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
+import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 
@@ -24,6 +26,8 @@ public class DaoFacadeImpl implements DaoFacade {
 	private SourceTypeDao sourceTypeDao;
 	private GeoDao geoDao;
 	private GeoTypeDao geoTypeDao;
+	private HashtagDao hashtagDao;
+	private TimeZoneDao timeZoneDao;
 	
 	public DaoFacadeImpl() {
 		userDao = new UserDaoImpl();
@@ -35,6 +39,9 @@ public class DaoFacadeImpl implements DaoFacade {
 		sourceTypeDao = new SourceTypeDaoImpl();
 		countryDao = new CountryDaoImpl();
 		geoDao = new GeoDaoImpl();
+		geoTypeDao = new GeoTypeDaoImpl();
+		hashtagDao = new HashtagDaoImpl();
+		timeZoneDao = new TimeZoneDaoImpl();
 	}
 	
 	@Override
@@ -86,5 +93,14 @@ public class DaoFacadeImpl implements DaoFacade {
 	public GeoTypeDao getGeoTypeDao() {
 		return geoTypeDao;
 	}
+	
+	@Override
+	public HashtagDao getHashtagDao() {
+		return hashtagDao;
+	}
 
+	@Override
+	public TimeZoneDao getTimeZoneDao() {
+		return timeZoneDao;
+	}
 }

@@ -13,4 +13,5 @@ public interface DaoFacade {
 	public GeoDao getGeoDao();
 	public GeoTypeDao getGeoTypeDao();
 	public TimeZoneDao getTimeZoneDao();
+	public HashtagDao getHashtagDao();
 }
