@@ -20,16 +20,28 @@ import sys
 
 version = '2.0'
 
+import json
+
+to_json_implementation = 'to_json'
+from_json_implementation = 'from_json'
+
+class CustomEncoder(json.JSONEncoder):
+    def default(self, obj):
+        impl = getattr(obj, to_json_implementation, None)
+        if impl and callable(impl):
+            return impl()
+        return json.JSONEncoder.default(self, obj)
+
 def response(id, result):
-    return simplejson.dumps({'jsonrpc': version, 'id':id,
-                             'result':result, 'error':None})
+    return json.dumps({'jsonrpc': version, 'id':id,
+                             'result':result, 'error':None}, cls=CustomEncoder)
 def error(id, code, message):
-    return simplejson.dumps({'id': id, 'jsonrpc': version,
+    return json.dumps({'id': id, 'jsonrpc': version,
                              'error': {'name': 'JSONRPCError',
                                        'code': code,
                                        'message': message
                                        }
-                                 })
+                                 }, cls=CustomEncoder)
 
 class JSONRPCService:
     def __init__(self, method_map={}):
