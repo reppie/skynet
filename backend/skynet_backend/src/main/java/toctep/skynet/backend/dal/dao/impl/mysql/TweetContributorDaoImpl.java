@@ -30,4 +30,10 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 
 	}
 
+	@Override
+	public boolean exists(Domain domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

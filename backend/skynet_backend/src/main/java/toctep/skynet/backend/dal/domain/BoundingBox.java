@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
+
 public class BoundingBox extends DomainLongPk {
 	
 	private BoundingBoxType type;
@@ -19,6 +20,11 @@ public class BoundingBox extends DomainLongPk {
 
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
+	}
+	
+	@Override
+	public void setDao() {
+		dao = daoFacade.getBoundingBoxDao();
 	}
 	
 }

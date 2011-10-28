@@ -94,4 +94,10 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean exists(Domain domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
