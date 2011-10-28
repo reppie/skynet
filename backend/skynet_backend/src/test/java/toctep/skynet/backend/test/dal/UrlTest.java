@@ -28,6 +28,12 @@ public class UrlTest extends DomainTest {
 		Url postURL = (Url) urlDao.select(preURL.getId());
 		assertTrue(postURL.getText().equals(preURL.getText()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {

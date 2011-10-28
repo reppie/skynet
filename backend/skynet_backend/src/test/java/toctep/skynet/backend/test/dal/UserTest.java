@@ -307,6 +307,12 @@ public class UserTest extends DomainTest {
 	}
 	
 	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public void testUpdate() {
 		// TODO
 	}
