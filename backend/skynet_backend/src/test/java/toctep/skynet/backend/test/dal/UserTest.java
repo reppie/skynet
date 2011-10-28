@@ -143,6 +143,10 @@ public class UserTest extends DomainTest {
 		user.setProfileImageUrl(profileImageUrl);
 		assertTrue(profileImageUrl.equals(user.getProfileImageUrl()));
 		
+		String profileImageUrlHttps = "test";
+		user.setProfileImageUrlHttps(profileImageUrlHttps);
+		assertTrue(profileImageUrlHttps.equals(user.getProfileImageUrlHttps()));
+		
 		boolean showAllInlineMedia = false;
 		user.setShowAllInlineMedia(showAllInlineMedia);
 		assertTrue(showAllInlineMedia == user.isShowAllInlineMedia());
@@ -256,6 +260,9 @@ public class UserTest extends DomainTest {
 		String profileImageUrl = "test";
 		preUser.setProfileImageUrl(profileImageUrl);
 		
+		String profileImageUrlHttps = "test";
+		preUser.setProfileImageUrlHttps(profileImageUrlHttps);
+		
 		boolean showAllInlineMedia = false;
 		preUser.setShowAllInlineMedia(showAllInlineMedia);
 		
@@ -301,9 +308,16 @@ public class UserTest extends DomainTest {
 		assertEquals(postUser.getProfileSideBarFillColor(), preUser.getProfileSideBarFillColor());
 		assertEquals(postUser.getScreenName(), preUser.getScreenName());
 		assertEquals(postUser.getProfileImageUrl(), preUser.getProfileImageUrl());
+		assertEquals(postUser.getProfileImageUrlHttps(), preUser.getProfileImageUrlHttps());
 		assertTrue(postUser.isShowAllInlineMedia() == preUser.isShowAllInlineMedia());
 		assertTrue(postUser.isTranslator() == preUser.isTranslator());
 		assertEquals(postUser.getListedCount(), preUser.getListedCount());						
+	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
@@ -320,5 +334,4 @@ public class UserTest extends DomainTest {
 		userDao.delete(user);
 		assertEquals(0, userDao.count());
 	}
-
 }

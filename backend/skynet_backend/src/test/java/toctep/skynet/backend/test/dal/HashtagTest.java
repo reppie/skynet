@@ -4,43 +4,54 @@ import toctep.skynet.backend.dal.domain.Hashtag;
 
 public class HashtagTest extends DomainTest{
 
+	private Hashtag hashtag;
+	
+	private String text;
+	
+	@Override
+	public void setUp() {
+		super.setUp();
+		
+		hashtag = new Hashtag();
+		
+		text = "toctep";
+		hashtag.setText(text);
+	}
+	
 	@Override
 	public void testCreate() { 
-		Hashtag hashtag = new Hashtag();
 		assertNotNull(hashtag);
-		
-		String text = "toctep";
-		hashtag.setText(text);
 		assertTrue(text.equals(hashtag.getText()));
 	}
 
 	@Override
-	public void testDelete() {
-		Hashtag hashtag = new Hashtag();
-		assertNotNull(hashtag);
+	public void testInsert() {
 		hashtagDao.insert(hashtag);
 		assertEquals(1, hashtagDao.count());
-		hashtagDao.delete(hashtag);
-		assertEquals(0, hashtagDao.count());		
+		assertEquals(1, hashtag.getId());
 	}
-
+	
 	@Override
-	public void testInsert() {
-		Hashtag preHashtag = new Hashtag();
+	public void testSelect() {
+		hashtagDao.insert(hashtag);
 		
-		String text = "Test";
-		preHashtag.setText(text);
+		Hashtag postHashtag = (Hashtag) hashtagDao.select(hashtag.getId());
 		
-		hashtagDao.insert(preHashtag);
-		assertEquals(1, hashtagDao.count());
-		
-		Hashtag postHashtag = (Hashtag) hashtagDao.select(preHashtag.getId());
-		assertTrue(postHashtag.getText().equals(preHashtag.getText()));
+		assertTrue(postHashtag.getText().equals(hashtag.getText()));
 	}
-
+	
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		hashtagDao.insert(hashtag);
+		assertEquals(1, geoTypeDao.count());
+		hashtagDao.delete(hashtag);
+		assertEquals(0, geoTypeDao.count());		
+	}
+
 }

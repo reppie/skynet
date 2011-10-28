@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.domain.BoundingBox;
+import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Domain;
 
 import com.mysql.jdbc.Connection;
@@ -14,14 +15,51 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
 	public void delete(Domain domain) {
-		// TODO Auto-generated method stub
+		Connection conn = (Connection) this.getConnection();
 		
+		BoundingBox boundingBox = (BoundingBox) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + boundingBox.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
-
 	@Override
 	public void insert(Domain domain) {
-		// TODO Auto-generated method stub
+		Connection conn = (Connection) this.getConnection();
 		
+		BoundingBox boundingBox = (BoundingBox) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			int id = stmt.executeUpdate(
+					"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
+					"VALUES (" + boundingBox.getType() + ", '" 
+								+ boundingBox.getCoordinates() + "')",					
+					Statement.RETURN_GENERATED_KEYS
+				);
+			boundingBox.setId(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -39,7 +77,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 			rs.first();
 			boundingBox = new BoundingBox();
 			boundingBox.setId(id);
-//			boundingBox.setType(type); // TODO
+			boundingBox.setType((BoundingBoxType) daoFacade.getBoundingBoxTypeDao().select(rs.getInt("bounding_box_type_id")));
 			boundingBox.setCoordinates(rs.getString("coordinates"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,5 +98,4 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

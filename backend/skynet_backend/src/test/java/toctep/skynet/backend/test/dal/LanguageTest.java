@@ -4,43 +4,54 @@ import toctep.skynet.backend.dal.domain.Language;
 
 public class LanguageTest extends DomainTest{
 
+	private Language language;
+	
+	private String text;
+	
 	@Override
-	public void testCreate() { 
-		Language language = new Language();
-		assertNotNull(language);
+	public void setUp() {
+		super.setUp();
 		
-		String text = "English";
+		language = new Language();
+		
+		text = "English";
 		language.setText(text);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(language);
 		assertTrue(text.equals(language.getText()));
 	}
 
 	@Override
-	public void testDelete() {
-		Language language = new Language();
-		assertNotNull(language);
+	public void testInsert() {
 		languageDao.insert(language);
 		assertEquals(1, languageDao.count());
-		languageDao.delete(language);
-		assertEquals(0, languageDao.count());		
+		assertEquals(1, language.getId());
 	}
-
+	
 	@Override
-	public void testInsert() {
-		Language preLanguage = new Language();
+	public void testSelect() {
+		languageDao.insert(language);
 		
-		String text = "Test";
-		preLanguage.setText(text);
+		Language postLanguage = (Language) languageDao.select(language.getId());
 		
-		languageDao.insert(preLanguage);
-		assertEquals(1, languageDao.count());
-		
-		Language postLanguage = (Language) languageDao.select(preLanguage.getId());
-		assertTrue(postLanguage.getText().equals(preLanguage.getText()));
+		assertTrue(postLanguage.getText().equals(language.getText()));
 	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		languageDao.insert(language);
+		assertEquals(1, languageDao.count());
+		languageDao.delete(language);
+		assertEquals(0, languageDao.count());		
+	}
+
 }

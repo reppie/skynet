@@ -5,51 +5,60 @@ import toctep.skynet.backend.dal.domain.GeoType;
 
 public class GeoTest extends DomainTest{
 
+	private Geo geo;
+	
+	private GeoType geoType;
+	private String coordinates;
+	
 	@Override
-	public void testCreate() { 
-		Geo geo = new Geo();
-		assertNotNull(geo);
+	public void setUp() {
+		super.setUp();
 		
-		GeoType geoType = new GeoType();
+		geo = new Geo();
+		
+		geoType = new GeoType();
 		geo.setType(geoType);
-		assertTrue(geo.getType() == geoType);
 		
-		String coordinates = "58.17, 68.20";
+		coordinates = "58.17, 68.20";
 		geo.setCoordinates(coordinates);
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(geo);
+		assertTrue(geo.getType() == geoType);
 		assertTrue(coordinates.equals(geo.getCoordinates()));
 	}
 
 	@Override
-	public void testDelete() {
-		Geo geo = new Geo();
-		assertNotNull(geo);
+	public void testInsert() {
 		geoDao.insert(geo);
 		assertEquals(1, geoDao.count());
-		geoDao.delete(geo);
-		assertEquals(0, geoDao.count());		
+		assertEquals(1, geo.getId());
 	}
-
+	
 	@Override
-	public void testInsert() {
-		Geo preGeo = new Geo();
+	public void testSelect() {
+		geoDao.insert(geo);
 		
-		GeoType geoType = new GeoType();
-		preGeo.setType(geoType);
+		Geo postGeo = (Geo) geoDao.select(geo.getId());
 		
-		String coordinates = "58.18, 20.11";
-		preGeo.setCoordinates(coordinates);
-		
-		geoDao.insert(preGeo);
-		assertEquals(1, geoDao.count());
-		
-		Geo postGeo = (Geo) geoDao.select(preGeo.getId());
-		assertTrue(postGeo.getType().equals(preGeo.getType()));
-		assertTrue(postGeo.getCoordinates().equals(preGeo.getCoordinates()));
+		assertTrue(postGeo.getType().equals(geo.getType()));
+		assertTrue(postGeo.getCoordinates().equals(geo.getCoordinates()));
 	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		geoDao.insert(geo);
+		assertEquals(1, geoDao.count());
+		geoDao.delete(geo);
+		assertEquals(0, geoDao.count());		
+	}
+	
 }

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Geo extends Domain {
+public class Geo extends DomainLongPk {
 	
 	private GeoType type;
 	private String coordinates;

@@ -103,7 +103,7 @@ class User(models.Model):
     
     def __unicode__(self):
         return self.name
-    
+
     def to_json(self):
         return {
             'id': self.id,
@@ -111,21 +111,13 @@ class User(models.Model):
             'screen_name': self.screen_name,
         }
     
-class TweetKeyword(models.Model):
-    tweet = models.ForeignKey('Tweet')
-    value = models.CharField(max_length=140)
-    keyword = models.ForeignKey('Keyword')
-    
-    class Meta:
-        db_table = "twitter_tweet_keywords";
 
 class Keyword(models.Model):
     keyword = models.CharField(max_length=140)
 
     @staticmethod
     def get_all_since(datetime_since):
-        #return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweetkeyword__tweet__created_at__gte=datetime_since)
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
     
     @staticmethod
     def get_keyword_cloud():
@@ -141,7 +133,6 @@ class Keyword(models.Model):
         
     def __unicode__(self):
         return self.keyword
-    
 
 class Tweet(models.Model):
     id = models.BigIntegerField(primary_key=True)
@@ -159,10 +150,7 @@ class Tweet(models.Model):
     coordinates = models.ForeignKey(Coordinates, blank=True, null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
-    #keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True)
-    @property
-    def keywords(self):
-        return Keyword.objects.filter(tweetkeyword__tweet = self)
+    keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True, through='TweetKeyword')
     
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
@@ -174,8 +162,9 @@ class Tweet(models.Model):
             else:
                 keyword = Keyword(keyword=word)
                 keyword.save()
-            self.keywords.add(keyword)
-        super(Tweet, self).save(*args, **kwargs)
+            
+            relation = TweetKeyword(tweet=self, keyword=keyword)
+            relation.save()
     
     def __unicode__(self):
         return "@" + self.user.name + ": " + self.text
@@ -186,7 +175,15 @@ class Tweet(models.Model):
             'text': self.text,
             'user_id': self.user_id,
         }
+       
+class TweetKeyword(models.Model):
+    tweet = models.ForeignKey(Tweet)
+    value = models.CharField(max_length=140)
+    keyword = models.ForeignKey(Keyword)
     
+    class Meta:
+        db_table = "twitter_tweet_keywords";
+ 
 class TweetMention(models.Model):
     tweet = models.ForeignKey(Tweet)
     user = models.ForeignKey(User)
@@ -199,4 +196,4 @@ class TweetContributor(models.Model):
     user = models.ForeignKey(User)
 
     class Meta:
-        db_table = "twitter_tweet_contributors";    
+        db_table = "twitter_tweet_contributors";

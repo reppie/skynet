@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class TimeZone extends Domain {
+public class TimeZone extends DomainLongPk {
 
 	private int utcOffset;
 	private String timeZone;
