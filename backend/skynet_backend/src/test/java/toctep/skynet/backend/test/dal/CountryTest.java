@@ -16,11 +16,9 @@ public class CountryTest extends DomainTest{
 		country = new Country();
 		
 		String id = "NL";
-
 		country.setId(id);
-		assertTrue(id.equals(country.getId()));
 		
-		String text = "Netherlands";
+		text = "Netherlands";
 		country.setText(text);
 	}
 	
@@ -33,22 +31,9 @@ public class CountryTest extends DomainTest{
 
 	@Override
 	public void testInsert() {
-		Country preCountry = new Country();
-		
-		String id = "NL";
-		preCountry.setId(id);
-		
-		String text = "Netherlands";
-		preCountry.setText(text);
-		
-		countryDao.insert(preCountry);
-		assertEquals(1, countryDao.count());
-		
-		Country postCountry = (Country) countryDao.select(preCountry.getId());
-		assertTrue(postCountry.getText().equals(preCountry.getText()));
 		countryDao.insert(country);
 		assertEquals(1, countryDao.count());
-		assertEquals(1, country.getId());
+		assertEquals(id, country.getId());
 
 	}
 	

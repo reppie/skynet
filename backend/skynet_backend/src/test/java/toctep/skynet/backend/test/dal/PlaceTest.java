@@ -7,139 +7,126 @@ import toctep.skynet.backend.dal.domain.PlaceType;
 
 public class PlaceTest extends DomainTest{
 
+	private Place place;
+	
+	private String id;
+	private PlaceType placeType;
+	private BoundingBox boundingBox;
+	private String name;
+	private String fullName;
+	private Country country;
+	private String streetAddress;
+	private String locality;
+	private String region;
+	private String iso3;
+	private String postalCode;
+	private String phone;
+	private String twitter;
+	private String url;
+	private String appId;
+	
+	@Override
+	public void setUp() {
+		super.setUp();
+		
+		place = new Place();
+		
+		id = "0x20";
+		place.setId(id);
+		
+		placeType = new PlaceType();
+		place.setType(placeType);
+		
+		boundingBox = new BoundingBox();
+		place.setBoundingBox(boundingBox);
+		
+		name = "TestName";
+		place.setName(name);
+		
+		fullName = "TestFullName";
+		place.setFullName(fullName);
+		
+		country = new Country();
+		place.setCountry(country);
+		
+		streetAddress = "Teststreet";
+		place.setStreetAddress(streetAddress);
+		
+		locality = "TestLocality";
+		place.setLocality(locality);
+		
+		region = "TestRegion";
+		place.setRegion(region);
+		
+		iso3 = "TestIso3";
+		place.setIso3(iso3);
+		
+		postalCode = "TestPostalCode";
+		place.setPostalCode(postalCode);
+		
+		phone = "TestPhone";
+		place.setPhone(phone);
+		
+		twitter = "TestTwitter";
+		place.setTwitter(twitter);
+		
+		url = "TestUrl";
+		place.setUrl(url);
+		
+		appId = "TestAppId";
+		place.setAppId(appId);
+	}
+	
 	@Override
 	public void testCreate() { 
-		Place place = new Place();
 		assertNotNull(place);
-		
-		PlaceType placeType = new PlaceType();
-		place.setType(placeType);
+		assertTrue(id.equals(place.getId()));
 		assertTrue(place.getType() == placeType);
-		
-		BoundingBox boundingBox = new BoundingBox();
-		place.setBoundingBox(boundingBox);
 		assertTrue(place.getBoundingBox() == boundingBox);
-		
-		String name = "TestName";
-		place.setName(name);
 		assertTrue(name.equals(place.getName()));
-		
-		String fullName = "TestFullName";
-		place.setFullName(fullName);
 		assertTrue(fullName.equals(place.getFullName()));
-		
-		Country country = new Country();
-		place.setCountry(country);
 		assertTrue(place.getCountry() == country);
-		
-		String streetAddress = "Teststreet";
-		place.setStreetAddress(streetAddress);
 		assertTrue(streetAddress.equals(place.getStreetAddress()));
-		
-		String locality = "TestLocality";
-		place.setLocality(locality);
 		assertTrue(locality.equals(place.getLocality()));
-		
-		String region = "TestRegion";
-		place.setRegion(region);
 		assertTrue(region.equals(place.getRegion()));
-		
-		String iso3 = "TestIso3";
-		place.setIso3(iso3);
 		assertTrue(iso3.equals(place.getIso3()));
-		
-		String postalCode = "TestPostalCode";
-		place.setPostalCode(postalCode);
 		assertTrue(postalCode.equals(place.getPostalCode()));
-		
-		String phone = "TestPhone";
-		place.setPhone(phone);
 		assertTrue(phone.equals(place.getPhone()));
-		
-		String twitter = "TestTwitter";
-		place.setTwitter(twitter);
 		assertTrue(twitter.equals(place.getTwitter()));
-		
-		String url = "TestUrl";
-		place.setUrl(url);
 		assertTrue(url.equals(place.getUrl()));
-		
-		String appId = "TestAppId";
-		place.setAppId(appId);
 		assertTrue(appId.equals(place.getAppId()));
 	}
 
 	@Override
 	public void testInsert() {
-		Place prePlace = new Place();
+		placeDao.insert(place);
+		assertEquals(1, placeDao.count());
+		assertEquals(1, place.getId());
 		
-		PlaceType placeType = new PlaceType();
-		prePlace.setType(placeType);
-		
-		BoundingBox boundingBox = new BoundingBox();
-		prePlace.setBoundingBox(boundingBox);
-		
-		String name = "test";
-		prePlace.setName(name);
-		
-		String fullName = "test";
-		prePlace.setFullName(fullName);
-		
-		Country country = new Country();
-		prePlace.setCountry(country);
-		
-		String streetAddress = "test";
-		prePlace.setStreetAddress(streetAddress);
-		
-		String locality = "test";
-		prePlace.setLocality(locality);
-		
-		String region = "test";
-		prePlace.setRegion(region);
-		
-		String iso3 = "test";
-		prePlace.setIso3(iso3);
-		
-		String postalCode = "test";
-		prePlace.setPostalCode(postalCode);
-		
-		String phone = "test";
-		prePlace.setPhone(phone);
-		
-		String twitter = "test";
-		prePlace.setTwitter(twitter);
-		
-		String url = "test";
-		prePlace.setUrl(url);
-		
-		String appId = "test";
-		prePlace.setAppId(appId);
-		
-		placeDao.insert(prePlace);
+		placeDao.insert(place);
 		assertEquals(1, userDao.count());
-		
-		Place postPlace = (Place) placeDao.select(prePlace.getId());
-		
-		assertTrue(postPlace.getType().equals(prePlace.getType()));
-		assertTrue(postPlace.getBoundingBox().equals(prePlace.getBoundingBox()));
-		assertTrue(postPlace.getName().equals(prePlace.getName()));
-		assertTrue(postPlace.getFullName().equals(prePlace.getFullName()));
-		assertTrue(postPlace.getCountry().equals(prePlace.getCountry()));
-		assertTrue(postPlace.getStreetAddress().equals(prePlace.getStreetAddress()));
-		assertTrue(postPlace.getLocality().equals(prePlace.getStreetAddress()));
-		assertTrue(postPlace.getRegion().equals(prePlace.getRegion()));
-		assertTrue(postPlace.getIso3().equals(prePlace.getIso3()));
-		assertTrue(postPlace.getPostalCode().equals(prePlace.getIso3()));
-		assertTrue(postPlace.getPhone().equals(prePlace.getPhone()));
-		assertTrue(postPlace.getTwitter().equals(prePlace.getTwitter()));
-		assertTrue(postPlace.getUrl().equals(prePlace.getUrl()));
-		assertTrue(postPlace.getAppId().equals(prePlace.getAppId()));
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		placeDao.insert(place);
 		
+		Place postPlace = (Place) placeDao.select(place.getId());
+		
+		assertTrue(postPlace.getType().equals(place.getType()));
+		assertTrue(postPlace.getBoundingBox().equals(place.getBoundingBox()));
+		assertTrue(postPlace.getName().equals(place.getName()));
+		assertTrue(postPlace.getFullName().equals(place.getFullName()));
+		assertTrue(postPlace.getCountry().equals(place.getCountry()));
+		assertTrue(postPlace.getStreetAddress().equals(place.getStreetAddress()));
+		assertTrue(postPlace.getLocality().equals(place.getStreetAddress()));
+		assertTrue(postPlace.getRegion().equals(place.getRegion()));
+		assertTrue(postPlace.getIso3().equals(place.getIso3()));
+		assertTrue(postPlace.getPostalCode().equals(place.getIso3()));
+		assertTrue(postPlace.getPhone().equals(place.getPhone()));
+		assertTrue(postPlace.getTwitter().equals(place.getTwitter()));
+		assertTrue(postPlace.getUrl().equals(place.getUrl()));
+		assertTrue(postPlace.getAppId().equals(place.getAppId()));
 	}
 
 	@Override
@@ -150,8 +137,6 @@ public class PlaceTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		Place place = new Place();
-		assertNotNull(place);
 		placeDao.insert(place);
 		assertEquals(1, placeDao.count());
 		placeDao.delete(place);

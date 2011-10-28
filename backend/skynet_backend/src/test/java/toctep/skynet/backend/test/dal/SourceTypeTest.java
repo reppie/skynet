@@ -4,36 +4,40 @@ import toctep.skynet.backend.dal.domain.SourceType;
 
 public class SourceTypeTest extends DomainTest {
 
+	private SourceType sourceType;
+	
+	private String text;
+	
 	@Override
-	public void testCreate() { 
-		SourceType sourceType = new SourceType();
-		assertNotNull(sourceType);
+	public void setUp() {
+		super.setUp();
 		
-		String text = "Web";
+		sourceType = new SourceType();
+		
+		text = "Web";
 		sourceType.setText(text);
-		
+	}
+	
+	@Override
+	public void testCreate() {
+		assertNotNull(sourceType);
 		assertTrue(text.equals(sourceType.getText()));
 	}
 
 	@Override
 	public void testInsert() {
-		SourceType preSourceType = new SourceType();
-		
-		String text = "test";
-		preSourceType.setText(text);
-		
-		sourceTypeDao.insert(preSourceType);
+		sourceTypeDao.insert(sourceType);
 		assertEquals(1, sourceTypeDao.count());
-		
-		SourceType postSourceType = (SourceType) sourceTypeDao.select(preSourceType.getId());
-		
-		assertTrue(postSourceType.getText().equals(preSourceType.getText()));
+		assertEquals(1, sourceType.getId());
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		sourceTypeDao.insert(sourceType);
 		
+		SourceType postSourceType = (SourceType) sourceTypeDao.select(sourceType.getId());
+		
+		assertTrue(postSourceType.getText().equals(sourceType.getText()));
 	}
 
 	@Override
@@ -44,11 +48,10 @@ public class SourceTypeTest extends DomainTest {
 	
 	@Override
 	public void testDelete() {
-		SourceType sourceType = new SourceType();
-		assertNotNull(sourceType);
 		sourceTypeDao.insert(sourceType);
 		assertEquals(1, sourceTypeDao.count());
 		sourceTypeDao.delete(sourceType);
 		assertEquals(0, sourceTypeDao.count());
 	}
+	
 }
