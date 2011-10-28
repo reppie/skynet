@@ -4,8 +4,10 @@ from jsonrpc import JSONRPCService, jsonremote
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 
+from django.template import RequestContext
+
 def index(request):
-    return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }) 
+    return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
 
 service = JSONRPCService()
 

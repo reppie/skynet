@@ -23,6 +23,7 @@ public class DaoFacadeImpl implements DaoFacade {
 	private SourceTypeDao sourceTypeDao;
 	private GeoDao geoDao;
 	
+	
 	public DaoFacadeImpl() {
 		userDao = new UserDaoImpl();
 		tweetDao = new TweetDaoImpl();
