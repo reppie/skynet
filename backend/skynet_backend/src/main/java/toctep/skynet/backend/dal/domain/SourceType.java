@@ -10,6 +10,5 @@ public class SourceType extends Domain {
 	
 	public void setText(String text) {
 		this.text = text;
-	}
-	
+	}	
 }

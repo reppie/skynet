@@ -155,7 +155,7 @@ public class TweetParser {
     
     private void parseUser(twitter4j.User userStatus) {
         this.user = new User();
-        user.setTwitterId(userStatus.getId());
+        user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
         user.setStatusesCount(userStatus.getStatusesCount());    
         user.setProfileBackgroundTile(0); //Twitter4j has no support for this?
@@ -183,6 +183,7 @@ public class TweetParser {
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
         user.setScreenName(userStatus.getScreenName());
         user.setProfileImageUrl(userStatus.getProfileImageURL().toExternalForm());
+        user.setProfileImageUrlHttps(userStatus.getProfileImageUrlHttps().toExternalForm());
         user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
         user.setTranslator(userStatus.isTranslator());
         user.setListedCount(userStatus.getListedCount());   
@@ -195,9 +196,9 @@ public class TweetParser {
     
     private void parseTweet(Status status) {
         tweet = new Tweet();
+        tweet.setId(status.getId());
         tweet.setText(status.getText());
         tweet.setTruncated(status.isTruncated());
-        tweet.setTwitterId(status.getId());
         tweet.setFavorited(status.isFavorited());
         tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
         tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());

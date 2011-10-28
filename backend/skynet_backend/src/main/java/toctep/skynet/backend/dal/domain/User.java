@@ -36,6 +36,7 @@ public class User extends Domain {
 	private String profileSideBarFillColor;
 	private String screenName;
 	private String profileImageUrl;
+	private String profileImageUrlHttps;
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
 	private int listedCount;
@@ -296,6 +297,14 @@ public class User extends Domain {
 	public void setProfileImageUrl(String profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
 	}
+	
+	public String getProfileImageUrlHttps() {
+		return profileImageUrlHttps;
+	}	
+	
+	public void setProfileImageUrlHttps(String profileImageUrlHttps) {
+		this.profileImageUrlHttps = profileImageUrlHttps;
+	}
 
 	public boolean isShowAllInlineMedia() {
 		return showAllInlineMedia;
@@ -320,5 +329,4 @@ public class User extends Domain {
 	public void setListedCount(int listedCount) {
 		this.listedCount = listedCount;
 	}
-	
 }
