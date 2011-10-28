@@ -3,12 +3,14 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 
 public class MySqlUtil {
 
@@ -22,7 +24,7 @@ public class MySqlUtil {
 	private String user;
 	private String pass;
 	
-	private Connection connection;
+	private Connection conn;
 	
 	private MySqlUtil() {
 		try {
@@ -60,9 +62,7 @@ public class MySqlUtil {
 	private void connect() throws SQLException {
 		String url = "jdbc:" + driver + "://" + host + "/" + name;
 		
-		connection = (Connection) DriverManager.getConnection(url, user, pass);
-		
-		System.out.println("Connection established");
+		conn = (Connection) DriverManager.getConnection(url, user, pass);
 	}
 	
 	public static MySqlUtil getInstance(String driver, String host, String name, String user, String pass) {
@@ -80,7 +80,31 @@ public class MySqlUtil {
 	}
 	
 	public Connection getConnection() {
-		return connection;
+		return conn;
 	}
 	
+	public int count(String tableName) {
+		int count = 0;
+
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = (Statement) conn.createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName);
+			rs.next();
+			count = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
 }

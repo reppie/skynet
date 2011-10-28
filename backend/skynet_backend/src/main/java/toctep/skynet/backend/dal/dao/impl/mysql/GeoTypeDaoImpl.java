@@ -101,4 +101,10 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 		return false;
 	}
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

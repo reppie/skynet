@@ -13,13 +13,24 @@
 
 {% block title %} Social Media Lab {% endblock %}
 
-{% block main %}
-	<form method="get">
-		<input type="text" name="t" placeholder="{% trans 'Search for tweets' %}" />
-		<input type="submit" />		
-	</form>
- 
+{% block main %} 
+
+	Lijst met tweets
+	<div class="tweets">
+		
+		
+	</div>
+	De body van de SoLeMa index
 	{% for tweet in tweets %}
 		<div class="tweet">{{ tweet.text }}</div>
 	{% endfor %}
  {% endblock %}
+ 
+{% block scripts %} 
+	<script type="text/javascript">
+		$(function(){
+			var tweetList = $(".tweets").TweetList();
+		})
+	</script>
+
+{% endblock %}

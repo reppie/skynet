@@ -6,7 +6,7 @@ public abstract class Dao {
 	
 	protected String tableName;
 	
-	public Dao() {		
+	public Dao() {
 		setTableName();
 	}
 	
@@ -15,7 +15,8 @@ public abstract class Dao {
 	public abstract void insert(Domain domain);
 	public abstract void update(Domain domain);
 	public abstract void delete(Domain domain);
-	
+		
 	public abstract boolean exists(Domain domain);
+	public abstract int count();
 	
 }

@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.Geo;
-import toctep.skynet.backend.dal.domain.GeoType;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
@@ -77,7 +76,7 @@ public class GeoDaoImpl extends GeoDao{
 			rs.first();
 			geo = new Geo();
 			geo.setId(id);
-			geo.setType((GeoType) daoFacade.getGeoTypeDao().select(rs.getInt("geo_type_id")));
+//			geo.setType(); // TODO!
 			geo.setCoordinates(rs.getString("coordinates"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -103,6 +102,11 @@ public class GeoDaoImpl extends GeoDao{
 	public boolean exists(Domain domain) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -36,4 +36,10 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 		return false;
 	}
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

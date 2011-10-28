@@ -25,6 +25,5 @@ public abstract class Domain {
 			dao.insert(this);
 		}
 	}
-}
 	
-
+}

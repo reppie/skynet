@@ -98,4 +98,11 @@ public class CountryDaoImpl extends CountryDao{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 }

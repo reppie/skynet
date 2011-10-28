@@ -40,7 +40,7 @@ public class TweetDaoImpl extends TweetDao {
 
 	@Override
 	public Tweet select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Tweet tweet = null;
 		
@@ -75,7 +75,7 @@ public class TweetDaoImpl extends TweetDao {
 	
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Tweet tweet = (Tweet) domain;
 		
@@ -99,6 +99,12 @@ public class TweetDaoImpl extends TweetDao {
 	public boolean exists(Domain domain) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

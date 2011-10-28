@@ -36,7 +36,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		SourceType sourceType = (SourceType) domain;
 		
@@ -62,7 +62,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 
 	@Override
 	public SourceType select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		SourceType sourceType = null;
 		
@@ -99,5 +99,11 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	public boolean exists(Domain domain) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -128,5 +128,9 @@ public class Place extends DomainStringPk {
 	public void setAppId(String appId) {
 		this.appId = appId;
 	}
-	
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getPlaceDao();		
+	}
 }

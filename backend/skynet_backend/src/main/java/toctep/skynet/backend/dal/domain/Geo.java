@@ -20,5 +20,10 @@ public class Geo extends DomainLongPk {
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
 	}
+
+	@Override
+	public void setDao() {
+		dao = daoFacade.getGeoDao();
+	}
 	
 }
