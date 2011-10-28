@@ -22,53 +22,44 @@ import toctep.skynet.backend.dal.dao.UserDao;
 
 public class DaoFacadeImpl implements DaoFacade {
 	
-	private UserDao userDao;
-	private TweetDao tweetDao;
 	private BoundingBoxDao boundingBoxDao;
 	private BoundingBoxTypeDao boundingBoxTypeDao;
-	private PlaceDao placeDao;
 	private CountryDao countryDao;
-	private PlaceTypeDao placeTypeDao;
-	private SourceTypeDao sourceTypeDao;
 	private GeoDao geoDao;
 	private GeoTypeDao geoTypeDao;
 	private HashtagDao hashtagDao;
-	private TweetUrlDao tweetURLDao;
-	private TweetMentionDao tweetMentionDao;
 	private LanguageDao languageDao;
+	private PlaceDao placeDao;
+	private PlaceTypeDao placeTypeDao;
+	private SourceTypeDao sourceTypeDao;
 	private TimeZoneDao timeZoneDao;
 	private TweetContributorDao tweetContributorDao;
-	private UrlDao urlDao;
 	private TweetHashtagDao tweetHashtagDao;
+	private TweetMentionDao tweetMentionDao;
+	private TweetDao tweetDao;
+	private TweetUrlDao tweetUrlDao;
+	private UrlDao urlDao;
+	private UserDao userDao;
 	
 	public DaoFacadeImpl() {
-		userDao = new UserDaoImpl();
-		tweetDao = new TweetDaoImpl();
 		boundingBoxDao = new BoundingBoxDaoImpl();
 		boundingBoxTypeDao = new BoundingBoxTypeDaoImpl();
-		placeDao = new PlaceDaoImpl();
-		placeTypeDao = new PlaceTypeDaoImpl();
-		sourceTypeDao = new SourceTypeDaoImpl();
 		countryDao = new CountryDaoImpl();
 		geoDao = new GeoDaoImpl();
 		geoTypeDao = new GeoTypeDaoImpl();
 		hashtagDao = new HashtagDaoImpl();
-		tweetURLDao = new TweetUrlDaoImpl();
 		languageDao = new LanguageDaoImpl();
+		placeDao = new PlaceDaoImpl();
+		placeTypeDao = new PlaceTypeDaoImpl();
+		sourceTypeDao = new SourceTypeDaoImpl();
 		timeZoneDao = new TimeZoneDaoImpl();
 		tweetContributorDao = new TweetContributorDaoImpl();
-		urlDao = new UrlDaoImpl();
 		tweetHashtagDao = new TweetHashtagDaoImpl();
-	}
-	
-	@Override
-	public UserDao getUserDao() {
-		return userDao;
-	}
-
-	@Override
-	public TweetDao getTweetDao() {
-		return tweetDao;
+		tweetMentionDao = new TweetMentionDaoImpl();
+		tweetDao = new TweetDaoImpl();
+		tweetUrlDao = new TweetUrlDaoImpl();
+		urlDao = new UrlDaoImpl();
+		userDao = new UserDaoImpl();
 	}
 	
 	@Override
@@ -80,15 +71,35 @@ public class DaoFacadeImpl implements DaoFacade {
 	public BoundingBoxTypeDao getBoundingBoxTypeDao() {
 		return boundingBoxTypeDao;
 	}
+	
+	@Override
+	public CountryDao getCountryDao() {
+		return countryDao;
+	}
+	
+	@Override
+	public GeoDao getGeoDao() {
+		return geoDao;
+	}
+
+	@Override
+	public GeoTypeDao getGeoTypeDao() {
+		return geoTypeDao;
+	}
+
+	@Override
+	public HashtagDao getHashtagDao() {
+		return hashtagDao;
+	}
+	
+	@Override
+	public LanguageDao getLanguageDao() {
+		return languageDao;
+	}
 
 	@Override
 	public PlaceDao getPlaceDao() {
 		return placeDao;
-	}
-
-	@Override
-	public CountryDao getCountryDao() {
-		return countryDao;
 	}
 
 	@Override
@@ -102,40 +113,10 @@ public class DaoFacadeImpl implements DaoFacade {
 	}
 
 	@Override
-	public GeoDao getGeoDao() {
-		return geoDao;
-	}
-
-	@Override
-	public GeoTypeDao getGeoTypeDao() {
-		return geoTypeDao;
-	}
-	
-	@Override
-	public HashtagDao getHashtagDao() {
-		return hashtagDao;
-	}
-
-	@Override
-	public TweetUrlDao getTweetUrlDao() {
-		return tweetURLDao;
-	}
-
-	@Override
-	public TweetMentionDao getTweetMentionDao() {
-		return tweetMentionDao;
-	}
-	
-	@Override
-	public LanguageDao getLanguageDao() {
-		return languageDao;
-	}	
-
-	@Override
 	public TimeZoneDao getTimeZoneDao() {
 		return timeZoneDao;
 	}
-
+	
 	@Override
 	public TweetContributorDao getTweetContributorDao() {
 		return tweetContributorDao;
@@ -145,9 +126,29 @@ public class DaoFacadeImpl implements DaoFacade {
 	public TweetHashtagDao getTweetHashtagDao() {
 		return tweetHashtagDao;
 	}
+	
+	@Override
+	public TweetMentionDao getTweetMentionDao() {
+		return tweetMentionDao;
+	}
+	
+	@Override
+	public TweetDao getTweetDao() {
+		return tweetDao;
+	}
+	
+	@Override
+	public TweetUrlDao getTweetUrlDao() {
+		return tweetUrlDao;
+	}
 
 	@Override
 	public UrlDao getUrlDao() {
 		return urlDao;
+	}
+	
+	@Override
+	public UserDao getUserDao() {
+		return userDao;
 	}
 }
