@@ -15,16 +15,6 @@ public class LanguageTest extends DomainTest{
 	}
 
 	@Override
-	public void testDelete() {
-		Language language = new Language();
-		assertNotNull(language);
-		languageDao.insert(language);
-		assertEquals(1, languageDao.count());
-		languageDao.delete(language);
-		assertEquals(0, languageDao.count());		
-	}
-
-	@Override
 	public void testInsert() {
 		Language preLanguage = new Language();
 		
@@ -37,10 +27,27 @@ public class LanguageTest extends DomainTest{
 		Language postLanguage = (Language) languageDao.select(preLanguage.getId());
 		assertTrue(postLanguage.getText().equals(preLanguage.getText()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		Language language = new Language();
+		assertNotNull(language);
+		languageDao.insert(language);
+		assertEquals(1, languageDao.count());
+		languageDao.delete(language);
+		assertEquals(0, languageDao.count());		
+	}
+
 }

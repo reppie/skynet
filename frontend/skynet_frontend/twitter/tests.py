@@ -33,7 +33,7 @@ class TweetIndexTest(TestCase):
         text = "keyword keyword keyword keyword singlekeyword"
         created_at = datetime.now()
         user = User(name="username")
-        tweet = Tweet(id=id, text=text, created_at=created_at, user=user)
+        tweet = Tweet(text=text, id=id, created_at=created_at, user=user)
         tweet.save()
         self.assertTrue(Keyword.get_keyword_cloud().items[0])
         
@@ -48,7 +48,8 @@ class TweetIndexTest(TestCase):
         recent_tweet.save()
         
         long_ago = datetime.now() - timedelta(days = 100)
-        really_old_tweet = Tweet(text="oldtweet", id=1338l, created_at=long_ago, user=user)
+        recent_tweet = Tweet(text=recent_text, id=1337, created_at=datetime.now(), user=user)
+        really_old_tweet = Tweet(id=1338l, text="oldtweet", created_at=long_ago, user=user)
         really_old_tweet.save()
         
         yesterday = datetime.now() - timedelta(days = 1)

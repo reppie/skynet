@@ -37,6 +37,12 @@ public class TweetContributorTest extends DomainTest {
 		assertEquals(postTweetContributor.getUserTwitterId(), preTweetContributor.getUserTwitterId());
 		assertTrue(postTweetContributor.getTweet().equals(preTweetContributor.getTweet()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {

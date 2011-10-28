@@ -15,16 +15,6 @@ public class GeoTypeTest extends DomainTest{
 	}
 
 	@Override
-	public void testDelete() {
-		GeoType geoType = new GeoType();
-		assertNotNull(geoType);
-		geoTypeDao.insert(geoType);
-		assertEquals(1, geoTypeDao.count());
-		geoTypeDao.delete(geoType);
-		assertEquals(0, geoTypeDao.count());		
-	}
-
-	@Override
 	public void testInsert() {
 		GeoType preGeoType = new GeoType();
 		
@@ -37,10 +27,27 @@ public class GeoTypeTest extends DomainTest{
 		GeoType postGeoType = (GeoType) geoTypeDao.select(preGeoType.getId());
 		assertTrue(postGeoType.getText().equals(preGeoType.getText()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		GeoType geoType = new GeoType();
+		assertNotNull(geoType);
+		geoTypeDao.insert(geoType);
+		assertEquals(1, geoTypeDao.count());
+		geoTypeDao.delete(geoType);
+		assertEquals(0, geoTypeDao.count());		
+	}
+	
 }

@@ -16,16 +16,6 @@ public class SourceTypeTest extends DomainTest {
 	}
 
 	@Override
-	public void testDelete() {
-		SourceType sourceType = new SourceType();
-		assertNotNull(sourceType);
-		sourceTypeDao.insert(sourceType);
-		assertEquals(1, sourceTypeDao.count());
-		sourceTypeDao.delete(sourceType);
-		assertEquals(0, sourceTypeDao.count());
-	}
-
-	@Override
 	public void testInsert() {
 		SourceType preSourceType = new SourceType();
 		
@@ -39,10 +29,26 @@ public class SourceTypeTest extends DomainTest {
 		
 		assertTrue(postSourceType.getText().equals(preSourceType.getText()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		SourceType sourceType = new SourceType();
+		assertNotNull(sourceType);
+		sourceTypeDao.insert(sourceType);
+		assertEquals(1, sourceTypeDao.count());
+		sourceTypeDao.delete(sourceType);
+		assertEquals(0, sourceTypeDao.count());
+	}
 }

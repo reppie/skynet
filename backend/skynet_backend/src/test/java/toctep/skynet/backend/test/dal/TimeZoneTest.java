@@ -35,6 +35,12 @@ public class TimeZoneTest extends DomainTest {
 		assertEquals(postTimeZone.getUtcOffset(), preTimeZone.getUtcOffset());
 		assertTrue(postTimeZone.getTimeZone().equals(preTimeZone.getTimeZone()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {

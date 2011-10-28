@@ -38,6 +38,12 @@ public class TweetHashtagTest extends DomainTest {
 		assertTrue(postTweetHastag.getHashtag().equals(preTweetHashtag.getHashtag()));
 		assertTrue(postTweetHastag.getTweet().equals(preTweetHashtag.getTweet()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
