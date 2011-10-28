@@ -4,17 +4,30 @@ import toctep.skynet.backend.dal.domain.Country;
 
 public class CountryTest extends DomainTest{
 
+	private Country country;
+	
+	private String id;
+	private String text;
+	
 	@Override
-	public void testCreate() { 
-		Country country = new Country();
-		assertNotNull(country);
+	public void setUp() {
+		super.setUp();
 		
-		String code = "NL";
-		country.setId(code);
-		assertTrue(code.equals(country.getId()));
+		country = new Country();
+		
+		String id = "NL";
+
+		country.setId(id);
+		assertTrue(id.equals(country.getId()));
 		
 		String text = "Netherlands";
 		country.setText(text);
+	}
+	
+	@Override
+	public void testCreate() { 
+		assertNotNull(country);
+		assertTrue(id.equals(country.getId()));
 		assertTrue(text.equals(country.getText()));
 	}
 
@@ -22,8 +35,8 @@ public class CountryTest extends DomainTest{
 	public void testInsert() {
 		Country preCountry = new Country();
 		
-		String code = "NL";
-		preCountry.setId(code);
+		String id = "NL";
+		preCountry.setId(id);
 		
 		String text = "Netherlands";
 		preCountry.setText(text);
@@ -33,12 +46,18 @@ public class CountryTest extends DomainTest{
 		
 		Country postCountry = (Country) countryDao.select(preCountry.getId());
 		assertTrue(postCountry.getText().equals(preCountry.getText()));
+		countryDao.insert(country);
+		assertEquals(1, countryDao.count());
+		assertEquals(1, country.getId());
+
 	}
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		countryDao.insert(country);
 		
+		Country postCountry = (Country) countryDao.select(country.getId());
+		assertTrue(postCountry.getText().equals(country.getText()));
 	}
 
 	@Override
@@ -49,8 +68,6 @@ public class CountryTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		Country country = new Country();
-		assertNotNull(country);
 		countryDao.insert(country);
 		assertEquals(1, countryDao.count());
 		countryDao.delete(country);
