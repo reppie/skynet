@@ -14,7 +14,7 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Keyword keyword = (Keyword) domain;
 		

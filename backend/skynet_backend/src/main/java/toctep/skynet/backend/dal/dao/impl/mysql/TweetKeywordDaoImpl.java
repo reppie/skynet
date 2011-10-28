@@ -14,7 +14,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		TweetKeyword tweetKeyword = (TweetKeyword) domain;
 		
