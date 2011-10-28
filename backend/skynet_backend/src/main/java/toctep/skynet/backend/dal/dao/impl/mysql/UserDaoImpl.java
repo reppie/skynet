@@ -7,92 +7,48 @@ import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.User;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 public class UserDaoImpl extends UserDao {
 
 	@Override
+	public void insert(Domain domain) {
+		User user = (User) domain;
+		
+		int id = MySqlUtil.getInstance().insert(
+			"INSERT INTO " + tableName + " (name) VALUES ('" + user.getName() + "')"
+		);
+		
+		user.setId(id);
+	}
+	
+	@Override
 	public User select(long id) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
+		User user = new User();
 		
-		User user = null;
+		ResultSet rs = MySqlUtil.getInstance().select(
+			"SELECT name FROM " + tableName + " WHERE id = " + id
+		);
 		
-		Statement stmt = null;
-		ResultSet rs = null;
+		user.setId(id);
 		
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT name FROM " + tableName + " WHERE id = " + id);
-			rs.first();
-			user = new User();
-			user.setId(id);
 			user.setName(rs.getString("name"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return user;
 	}
 
 	@Override
-	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
-		User user = (User) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-				"INSERT INTO " + tableName + " (name) VALUES ('" + user.getName() + "')",
-				Statement.RETURN_GENERATED_KEYS
-			);
-			user.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	@Override
 	public void update(Domain domain) {
-		// TODO
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		User user = (User) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + user.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + user.getId());	
 	}
 
 	@Override
@@ -103,8 +59,7 @@ public class UserDaoImpl extends UserDao {
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 
 }
