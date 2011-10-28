@@ -14,14 +14,47 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public void delete(Domain domain) {
-		// TODO Auto-generated method stub
+		Connection conn = (Connection) this.getConnection();
 		
+		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
 
 	@Override
 	public void insert(Domain domain) {
-		// TODO Auto-generated method stub
+		Connection conn = (Connection) this.getConnection();
 		
+		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
+		
+		Statement stmt = null;
+		
+		try {
+			stmt = (Statement) conn.createStatement();
+			stmt.executeUpdate(
+				"INSERT INTO " + tableName + " (name) VALUES ('" + boundingBoxType.getText() + "')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
