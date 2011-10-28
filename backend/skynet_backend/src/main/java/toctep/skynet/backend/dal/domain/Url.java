@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class URL extends Domain {
+public class Url extends Domain {
 	
 	private String text;
 

@@ -5,7 +5,7 @@ import java.util.Date;
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.URL;
+import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.User;
 
 public class UserTest extends DomainTest {
@@ -111,7 +111,7 @@ public class UserTest extends DomainTest {
 		user.setFollowRequestSent(followRequestSent);
 		assertTrue(followRequestSent == user.isFollowRequestSent());
 		
-		URL url = new URL();
+		Url url = new Url();
 		user.setUrl(url);
 		assertTrue(url.equals(user.getUrl()));
 		
