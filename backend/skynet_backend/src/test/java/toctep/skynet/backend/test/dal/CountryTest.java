@@ -19,16 +19,6 @@ public class CountryTest extends DomainTest{
 	}
 
 	@Override
-	public void testDelete() {
-		Country country = new Country();
-		assertNotNull(country);
-		countryDao.insert(country);
-		assertEquals(1, countryDao.count());
-		countryDao.delete(country);
-		assertEquals(0, countryDao.count());		
-	}
-
-	@Override
 	public void testInsert() {
 		Country preCountry = new Country();
 		
@@ -45,10 +35,27 @@ public class CountryTest extends DomainTest{
 		assertTrue(postCountry.getCode().equals(preCountry.getCode()));
 		assertTrue(postCountry.getText().equals(preCountry.getText()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		Country country = new Country();
+		assertNotNull(country);
+		countryDao.insert(country);
+		assertEquals(1, countryDao.count());
+		countryDao.delete(country);
+		assertEquals(0, countryDao.count());		
+	}
+	
 }

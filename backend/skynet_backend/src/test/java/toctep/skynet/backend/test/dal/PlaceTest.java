@@ -74,16 +74,6 @@ public class PlaceTest extends DomainTest{
 	}
 
 	@Override
-	public void testDelete() {
-		Place place = new Place();
-		assertNotNull(place);
-		placeDao.insert(place);
-		assertEquals(1, placeDao.count());
-		placeDao.delete(place);
-		assertEquals(0, placeDao.count());
-	}
-
-	@Override
 	public void testInsert() {
 		Place prePlace = new Place();
 		
@@ -153,10 +143,27 @@ public class PlaceTest extends DomainTest{
 		assertTrue(postPlace.getUrl().equals(prePlace.getUrl()));
 		assertTrue(postPlace.getAppId().equals(prePlace.getAppId()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		Place place = new Place();
+		assertNotNull(place);
+		placeDao.insert(place);
+		assertEquals(1, placeDao.count());
+		placeDao.delete(place);
+		assertEquals(0, placeDao.count());
+	}
+	
 }

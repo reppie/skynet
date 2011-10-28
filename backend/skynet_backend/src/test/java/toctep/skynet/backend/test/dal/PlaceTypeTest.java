@@ -13,17 +13,7 @@ public class PlaceTypeTest extends DomainTest{
 		placeType.setText(text);
 		assertTrue(text.equals(placeType.getText()));
 	}
-
-	@Override
-	public void testDelete() {
-		PlaceType placeType = new PlaceType();
-		assertNotNull(placeType);
-		placeTypeDao.insert(placeType);
-		assertEquals(1, placeTypeDao.count());
-		placeTypeDao.delete(placeType);
-		assertEquals(0, placeTypeDao.count());
-	}
-
+	
 	@Override
 	public void testInsert() {
 		PlaceType prePlaceType = new PlaceType();
@@ -38,10 +28,27 @@ public class PlaceTypeTest extends DomainTest{
 		
 		assertTrue(postPlaceType.getText().equals(prePlaceType.getText()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		PlaceType placeType = new PlaceType();
+		assertNotNull(placeType);
+		placeTypeDao.insert(placeType);
+		assertEquals(1, placeTypeDao.count());
+		placeTypeDao.delete(placeType);
+		assertEquals(0, placeTypeDao.count());
+	}
+	
 }

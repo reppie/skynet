@@ -20,16 +20,6 @@ public class GeoTest extends DomainTest{
 	}
 
 	@Override
-	public void testDelete() {
-		Geo geo = new Geo();
-		assertNotNull(geo);
-		geoDao.insert(geo);
-		assertEquals(1, geoDao.count());
-		geoDao.delete(geo);
-		assertEquals(0, geoDao.count());		
-	}
-
-	@Override
 	public void testInsert() {
 		Geo preGeo = new Geo();
 		
@@ -46,10 +36,27 @@ public class GeoTest extends DomainTest{
 		assertTrue(postGeo.getType().equals(preGeo.getType()));
 		assertTrue(postGeo.getCoordinates().equals(preGeo.getCoordinates()));
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		Geo geo = new Geo();
+		assertNotNull(geo);
+		geoDao.insert(geo);
+		assertEquals(1, geoDao.count());
+		geoDao.delete(geo);
+		assertEquals(0, geoDao.count());		
+	}
+	
 }

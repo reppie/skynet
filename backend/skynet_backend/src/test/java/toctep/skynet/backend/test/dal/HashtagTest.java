@@ -1,5 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
+import toctep.skynet.backend.dal.domain.GeoType;
 import toctep.skynet.backend.dal.domain.Hashtag;
 
 public class HashtagTest extends DomainTest{
@@ -15,16 +16,6 @@ public class HashtagTest extends DomainTest{
 	}
 
 	@Override
-	public void testDelete() {
-		Hashtag hashtag = new Hashtag();
-		assertNotNull(hashtag);
-		hashtagDao.insert(hashtag);
-		assertEquals(1, hashtagDao.count());
-		hashtagDao.delete(hashtag);
-		assertEquals(0, hashtagDao.count());		
-	}
-
-	@Override
 	public void testInsert() {
 		Hashtag preHashtag = new Hashtag();
 		
@@ -37,10 +28,27 @@ public class HashtagTest extends DomainTest{
 		Hashtag postHashtag = (Hashtag) hashtagDao.select(preHashtag.getId());
 		assertTrue(postHashtag.getText().equals(preHashtag.getText()));
 	}
-
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@Override
 	public void testUpdate() {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	@Override
+	public void testDelete() {
+		GeoType geoType = new GeoType();
+		assertNotNull(geoType);
+		geoTypeDao.insert(geoType);
+		assertEquals(1, geoTypeDao.count());
+		geoTypeDao.delete(geoType);
+		assertEquals(0, geoTypeDao.count());		
+	}
+
 }

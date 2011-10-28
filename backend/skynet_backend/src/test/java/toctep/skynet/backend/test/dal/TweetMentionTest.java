@@ -34,6 +34,12 @@ public class TweetMentionTest extends DomainTest {
 		assertEquals(preTweetMention.getUser(), postTweetMention.getUser());
 		assertEquals(preTweetMention.getTweet(), postTweetMention.getTweet());
 	}
+	
+	@Override
+	public void testSelect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void testUpdate() {
