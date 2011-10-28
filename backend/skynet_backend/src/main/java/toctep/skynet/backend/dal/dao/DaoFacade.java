@@ -18,4 +18,7 @@ public interface DaoFacade {
 	public TweetMentionDao getTweetMentionDao();
 	public LanguageDao getLanguageDao();
 	public TweetContributorDao getTweetContributorDao();
+	public TweetHashtagDao getTweetHashtagDao();
+	public UrlDao getUrlDao();
+	
 }
