@@ -1,12 +1,12 @@
-package toctep.skynet.backend.test;
+package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.URL;
+import toctep.skynet.backend.dal.domain.Url;
 
-public class URLTest extends DomainTest {
+public class UrlTest extends DomainTest {
 	
 	@Override
 	public void testCreate() {
-		URL url = new URL();
+		Url url = new Url();
 		assertNotNull(url);
 		assertNull(url.getText());
 		
@@ -17,7 +17,7 @@ public class URLTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		URL preURL = new URL();
+		Url preURL = new Url();
 		
 		String urlText = "http://www.diablo3.com";
 		preURL.setText(urlText);
@@ -25,7 +25,7 @@ public class URLTest extends DomainTest {
 		urlDao.insert(preURL);
 		assertEquals(1, urlDao.count());
 		
-		URL postURL = (URL) urlDao.select(preURL.getId());
+		Url postURL = (Url) urlDao.select(preURL.getId());
 		assertTrue(postURL.getText().equals(preURL.getText()));
 	}
 
@@ -37,8 +37,12 @@ public class URLTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		Url url = new Url();
+		assertNotNull(url);
+		urlDao.insert(url);
+		assertEquals(1, urlDao.count());
+		urlDao.delete(url);
+		assertEquals(0, urlDao.count());
 	}
 
 }

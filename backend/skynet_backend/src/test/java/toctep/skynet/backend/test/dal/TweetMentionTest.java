@@ -1,4 +1,4 @@
-package toctep.skynet.backend.test;
+package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.Tweet;
 import toctep.skynet.backend.dal.domain.TweetMention;
@@ -43,7 +43,11 @@ public class TweetMentionTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		// TODO Auto-generated method stub
-		
+		TweetMention tweetMention = new TweetMention();
+		assertNotNull(tweetMention);
+		tweetMentionDao.insert(tweetMention);
+		assertEquals(1, tweetMentionDao.count());
+		tweetMentionDao.delete(tweetMention);
+		assertEquals(0, tweetMentionDao.count());
 	}
 }

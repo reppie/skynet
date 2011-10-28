@@ -24,7 +24,7 @@ public abstract class Dao {
 	protected abstract void setTableName();
 	
 	public abstract void insert(Domain domain);
-	public abstract Domain select(int id);
+	public abstract Domain select(long id);
 	public abstract void update(Domain domain);
 	public abstract void delete(Domain domain);
 	

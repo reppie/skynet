@@ -28,7 +28,7 @@ public class User extends Domain {
 	private String profileBackgroundImageUrl;
 	private String profileBackgroundImageUrlHttps;
 	private boolean followRequestSent;
-	private URL url;
+	private Url url;
 	private TimeZone timeZone;
 	private long notifications;
 	private boolean profileUseBackgroundImage;
@@ -233,11 +233,11 @@ public class User extends Domain {
 		this.followRequestSent = followRequestSent;
 	}
 
-	public URL getUrl() {
+	public Url getUrl() {
 		return url;
 	}
 
-	public void setUrl(URL url) {
+	public void setUrl(Url url) {
 		this.url = url;
 	}
 

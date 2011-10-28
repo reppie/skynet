@@ -1,4 +1,4 @@
-package toctep.skynet.backend.test;
+package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.Geo;
 import toctep.skynet.backend.dal.domain.GeoType;

@@ -1,4 +1,4 @@
-package toctep.skynet.backend.test;
+package toctep.skynet.backend.test.dal;
 
 import java.sql.SQLException;
 
@@ -20,10 +20,12 @@ import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
+import toctep.skynet.backend.dal.dao.TweetContributorDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.TweetHashtagDao;
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
-import toctep.skynet.backend.dal.dao.TweetURLDao;
-import toctep.skynet.backend.dal.dao.URLDao;
+import toctep.skynet.backend.dal.dao.TweetUrlDao;
+import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
@@ -52,8 +54,8 @@ public abstract class DomainTest extends TestCase {
 	protected TweetHashtagDao tweetHashtagDao;
 	protected TweetDao tweetDao;
 	protected TweetMentionDao tweetMentionDao;
-	protected TweetURLDao tweetURLDao;
-	protected URLDao urlDao;
+	protected TweetUrlDao tweetUrlDao;
+	protected UrlDao urlDao;
 	protected UserDao userDao;
 	
 	@Before
@@ -70,21 +72,25 @@ public abstract class DomainTest extends TestCase {
 		
 		daoFacade = new DaoFacadeImpl();
 		
-		userDao = daoFacade.getUserDao();
-		tweetDao = daoFacade.getTweetDao();
 		boundingBoxDao = daoFacade.getBoundingBoxDao();
 		boundingBoxTypeDao = daoFacade.getBoundingBoxTypeDao();
-		placeDao = daoFacade.getPlaceDao();
 		countryDao = daoFacade.getCountryDao();
-		placeTypeDao = daoFacade.getPlaceTypeDao();
-		sourceTypeDao = daoFacade.getSourceTypeDao();
 		geoDao = daoFacade.getGeoDao();
 		geoTypeDao = daoFacade.getGeoTypeDao();
 		hashtagDao = daoFacade.getHashtagDao();
-		tweetURLDao = daoFacade.getTweetURLDao();
+		tweetUrlDao = daoFacade.getTweetUrlDao();
 		tweetMentionDao = daoFacade.getTweetMentionDao();
 		languageDao = daoFacade.getLanguageDao();
+		placeDao = daoFacade.getPlaceDao();
+		placeTypeDao = daoFacade.getPlaceTypeDao();
+		sourceTypeDao = daoFacade.getSourceTypeDao();
 		timeZoneDao = daoFacade.getTimeZoneDao();
+		tweetContributorDao = daoFacade.getTweetContributorDao();
+		tweetHashtagDao = daoFacade.getTweetHashtagDao();
+		tweetDao = daoFacade.getTweetDao();
+		tweetUrlDao = daoFacade.getTweetUrlDao();
+		urlDao = daoFacade.getUrlDao();
+		userDao = daoFacade.getUserDao();
 	}
 
 	@After
@@ -95,27 +101,27 @@ public abstract class DomainTest extends TestCase {
 	public void emptyDatabase() {
 		try {
 			Statement stmt = (Statement) conn.createStatement();
-			stmt.executeQuery("TRUNCATE TABLE twitter_boundingbox");
-			stmt.executeQuery("TRUNCATE TABLE twitter_boundingboxtype");
-			stmt.executeQuery("TRUNCATE TABLE twitter_coordinates");
-			stmt.executeQuery("TRUNCATE TABLE twitter_coordinatestype");
-			stmt.executeQuery("TRUNCATE TABLE twitter_country");
-			stmt.executeQuery("TRUNCATE TABLE twitter_geo");
-			stmt.executeQuery("TRUNCATE TABLE twitter_geotype");
-			stmt.executeQuery("TRUNCATE TABLE twitter_hashtag");
-			stmt.executeQuery("TRUNCATE TABLE twitter_language");
-			stmt.executeQuery("TRUNCATE TABLE twitter_place");
-			stmt.executeQuery("TRUNCATE TABLE twitter_placetype");
-			stmt.executeQuery("TRUNCATE TABLE twitter_sourcetype");
-			stmt.executeQuery("TRUNCATE TABLE twitter_timezone");
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweet");
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweetindex");
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweet_contributors");
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweet_hashtags");
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweet_mentions");
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweet_urls");
-			stmt.executeQuery("TRUNCATE TABLE twitter_url");
-			stmt.executeQuery("TRUNCATE TABLE twitter_user");
+			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE twitter_coordinates"); // TODO
+			stmt.executeQuery("TRUNCATE TABLE twitter_coordinatestype"); // TODO
+			stmt.executeQuery("TRUNCATE TABLE " + CountryDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + GeoDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE twitter_tweetindex"); // TODO
+			stmt.executeQuery("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + UrlDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -131,5 +137,6 @@ public abstract class DomainTest extends TestCase {
 	public abstract void testUpdate();
 	
 	@Test
-	public abstract void testDelete();	
+	public abstract void testDelete();
+	
 }

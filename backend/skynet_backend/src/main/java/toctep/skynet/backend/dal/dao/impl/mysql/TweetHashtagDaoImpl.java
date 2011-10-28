@@ -1,14 +1,14 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import toctep.skynet.backend.dal.dao.TweetMentionDao;
+import toctep.skynet.backend.dal.dao.TweetHashtagDao;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class TweetMentionDaoImpl extends TweetMentionDao {
+public class TweetHashtagDaoImpl extends TweetHashtagDao {
 
 	@Override
 	public void insert(Domain domain) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -20,13 +20,13 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 	@Override
 	public void update(Domain domain) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Domain domain) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
