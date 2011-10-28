@@ -15,7 +15,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
@@ -36,7 +36,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 	}
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
@@ -64,7 +64,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
 	public BoundingBox select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBox boundingBox = null;
 		

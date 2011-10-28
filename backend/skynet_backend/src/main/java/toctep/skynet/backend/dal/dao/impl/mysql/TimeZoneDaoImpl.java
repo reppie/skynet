@@ -14,7 +14,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		TimeZone timeZone = (TimeZone) domain;
 		

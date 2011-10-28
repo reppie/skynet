@@ -2,8 +2,6 @@ package toctep.skynet.backend.dal.dao;
 
 public interface DaoFacade {
 
-	// TODO, make this a singleton!
-	
 	public BoundingBoxDao getBoundingBoxDao();
 	public BoundingBoxTypeDao getBoundingBoxTypeDao();
 	public CountryDao getCountryDao();

@@ -15,7 +15,7 @@ public class GeoDaoImpl extends GeoDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Geo geo = (Geo) domain;
 		
@@ -36,7 +36,7 @@ public class GeoDaoImpl extends GeoDao{
 	}
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Geo geo = (Geo) domain;
 		
@@ -64,7 +64,7 @@ public class GeoDaoImpl extends GeoDao{
 
 	@Override
 	public Geo select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Geo geo = null;
 		

@@ -8,13 +8,11 @@ import java.sql.SQLException;
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
-import toctep.skynet.backend.dal.dao.DaoConnection;
-
 import com.mysql.jdbc.Connection;
 
-public class DaoConnectionImpl implements DaoConnection {
+public class MySqlUtil {
 
-	private static DaoConnectionImpl instance;
+	private static MySqlUtil instance;
 	
 	public static final String JDBC_CONFIG = "conf/mysql.ini";
 	
@@ -24,9 +22,9 @@ public class DaoConnectionImpl implements DaoConnection {
 	private String user;
 	private String pass;
 	
-	private Connection conn;
+	private Connection connection;
 	
-	private DaoConnectionImpl() {
+	private MySqlUtil() {
 		try {
 		    Wini ini = new Wini(new File("conf/jdbc.ini"));
 	        driver = ini.get("jdbc", "driver", String.class);
@@ -45,7 +43,7 @@ public class DaoConnectionImpl implements DaoConnection {
 		}
 	}
 	
-	private DaoConnectionImpl(String driver, String host, String name, String user, String pass) {
+	private MySqlUtil(String driver, String host, String name, String user, String pass) {
 		try {	        
 			this.driver = driver;
 			this.host = host;
@@ -62,28 +60,27 @@ public class DaoConnectionImpl implements DaoConnection {
 	private void connect() throws SQLException {
 		String url = "jdbc:" + driver + "://" + host + "/" + name;
 		
-		conn = (Connection) DriverManager.getConnection(url, user, pass);
+		connection = (Connection) DriverManager.getConnection(url, user, pass);
 		
 		System.out.println("Connection established");
 	}
 	
-	public static DaoConnectionImpl getInstance(String driver, String host, String name, String user, String pass) {
+	public static MySqlUtil getInstance(String driver, String host, String name, String user, String pass) {
 		if (instance == null) {
-			instance = new DaoConnectionImpl(driver, host, name, user, pass);
+			instance = new MySqlUtil(driver, host, name, user, pass);
 		}
 		return instance;
 	}
 	
-	public static DaoConnectionImpl getInstance() {
+	public static MySqlUtil getInstance() {
 		if (instance == null) {
-			instance = new DaoConnectionImpl();
+			instance = new MySqlUtil();
 		}
 		return instance;
 	}
 	
-	@Override
 	public Connection getConnection() {
-		return conn;
+		return connection;
 	}
 	
 }

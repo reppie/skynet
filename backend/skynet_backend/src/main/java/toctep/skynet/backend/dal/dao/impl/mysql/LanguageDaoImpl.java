@@ -14,7 +14,7 @@ public class LanguageDaoImpl extends LanguageDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Language language = (Language) domain;
 		

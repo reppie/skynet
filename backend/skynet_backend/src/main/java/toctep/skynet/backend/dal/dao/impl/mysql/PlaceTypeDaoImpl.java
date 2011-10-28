@@ -14,7 +14,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		PlaceType placeType = (PlaceType) domain;
 		
@@ -36,7 +36,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		PlaceType placeType = (PlaceType) domain;
 		
@@ -62,7 +62,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 
 	@Override
 	public PlaceType select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		PlaceType placeType = null;
 		

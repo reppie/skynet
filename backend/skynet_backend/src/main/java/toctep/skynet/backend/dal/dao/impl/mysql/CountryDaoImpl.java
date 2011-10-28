@@ -14,7 +14,7 @@ public class CountryDaoImpl extends CountryDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Country country = (Country) domain;
 		
@@ -36,7 +36,7 @@ public class CountryDaoImpl extends CountryDao{
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Country country = (Country) domain;
 		
@@ -60,7 +60,7 @@ public class CountryDaoImpl extends CountryDao{
 
 	@Override
 	public Country select(String id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Country country = null;
 		

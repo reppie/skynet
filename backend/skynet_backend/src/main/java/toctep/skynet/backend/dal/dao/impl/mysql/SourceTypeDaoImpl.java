@@ -14,7 +14,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		SourceType sourceType = (SourceType) domain;
 		

@@ -14,7 +14,7 @@ public class HashtagDaoImpl extends HashtagDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		Hashtag hashtag = (Hashtag) domain;
 		

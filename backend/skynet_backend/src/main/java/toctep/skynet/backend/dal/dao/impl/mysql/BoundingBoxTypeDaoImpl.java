@@ -14,7 +14,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 		
