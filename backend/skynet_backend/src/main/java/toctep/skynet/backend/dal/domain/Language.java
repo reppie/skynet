@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Language extends Domain {
+public class Language extends DomainLongPk {
 
 	public String text;
 	

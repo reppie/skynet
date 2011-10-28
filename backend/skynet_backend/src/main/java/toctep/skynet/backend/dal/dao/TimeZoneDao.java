@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public abstract class TimeZoneDao extends Dao {
+public abstract class TimeZoneDao extends DaoLongPk {
 
 	public static final String TABLE_NAME = "twitter_timezone";
 	

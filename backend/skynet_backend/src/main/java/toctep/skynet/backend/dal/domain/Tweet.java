@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain;
 
 import java.util.Date;
 
-public class Tweet extends Domain {
+public class Tweet extends DomainLongPk {
 
 	private String text;
 	private Geo geo;

@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.DomainStringPk;
 
 public class PlaceDaoImpl extends PlaceDao {
 
@@ -12,7 +13,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	}
 
 	@Override
-	public Domain select(long id) {
+	public DomainStringPk select(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

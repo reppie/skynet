@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class PlaceType extends Domain {
+public class PlaceType extends DomainLongPk {
 
 	public String text;
 	

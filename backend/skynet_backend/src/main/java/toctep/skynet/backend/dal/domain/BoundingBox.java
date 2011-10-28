@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class BoundingBox extends Domain {
+public class BoundingBox extends DomainLongPk {
 	
 	private BoundingBoxType type;
 	private String coordinates;

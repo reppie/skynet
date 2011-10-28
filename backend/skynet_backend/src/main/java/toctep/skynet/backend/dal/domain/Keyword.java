@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-public class Keyword extends Domain {
+public class Keyword extends DomainLongPk {
 	
 	private int keywordId;
 	private String keyword;
