@@ -272,6 +272,38 @@ public class UserTest extends DomainTest {
 		assertEquals(postUser.getTwitterId(), preUser.getTwitterId());
 		assertTrue(postUser.getPlace().equals(preUser.getPlace()));
 		assertTrue(postUser.isDefaultProfile() == preUser.isDefaultProfile());
+		assertEquals(postUser.getStatusesCount(), preUser.getStatusesCount());
+		assertEquals(postUser.getProfileBackgroundTile(), preUser.getProfileBackgroundTile());
+		assertTrue(postUser.getLanguage().equals(preUser.getLanguage()));
+		assertEquals(postUser.getProfileLinkColor(), preUser.getProfileLinkColor());
+		assertEquals(postUser.getFollowing(), preUser.getFollowing());
+		assertEquals(postUser.getFavouritesCount(), preUser.getFavouritesCount());
+		assertTrue(postUser.isProtected() == preUser.isProtected());
+		assertEquals(postUser.getProfileTextColor(), preUser.getProfileTextColor());
+		assertTrue(postUser.isVerified() == preUser.isVerified());
+		assertTrue(postUser.isContributorsEnabled() == preUser.isContributorsEnabled());
+		assertEquals(postUser.getDescription(), preUser.getDescription());
+		assertEquals(postUser.getName(), preUser.getName());
+		assertEquals(postUser.getProfileSidebarBorderColor(), preUser.getProfileSidebarBorderColor());
+		assertEquals(postUser.getProfileBackgroundColor(), preUser.getProfileBackgroundColor());
+		assertTrue(postUser.getCreatedAt().equals(preUser.getCreatedAt()));
+		assertTrue(postUser.isDefaultProfileImage() == preUser.isDefaultProfileImage());
+		assertEquals(postUser.getFollowersCount(), preUser.getFollowersCount());
+		assertTrue(postUser.isGeoEnabled() == preUser.isGeoEnabled());
+		assertEquals(postUser.getProfileBackgroundImageUrl(), preUser.getProfileBackgroundImageUrl());
+		assertEquals(postUser.getProfileBackgroundImageUrlHttps(), preUser.getProfileBackgroundImageUrlHttps());
+		assertTrue(postUser.isFollowRequestSent() == preUser.isFollowRequestSent());
+		assertTrue(postUser.getUrl().equals(preUser.getUrl()));
+		assertTrue(postUser.getTimeZone().equals(preUser.getTimeZone()));
+		assertEquals(postUser.getNotifications(), preUser.getNotifications());
+		assertTrue(postUser.isProfileUseBackgroundImage() == preUser.isProfileUseBackgroundImage());
+		assertEquals(postUser.getFriendsCount(), preUser.getFriendsCount());
+		assertEquals(postUser.getProfileSideBarFillColor(), preUser.getProfileSideBarFillColor());
+		assertEquals(postUser.getScreenName(), preUser.getScreenName());
+		assertEquals(postUser.getProfileImageUrl(), preUser.getProfileImageUrl());
+		assertTrue(postUser.isShowAllInlineMedia() == preUser.isShowAllInlineMedia());
+		assertTrue(postUser.isTranslator() == preUser.isTranslator());
+		assertEquals(postUser.getListedCount(), preUser.getListedCount());						
 	}
 	
 	@Override
