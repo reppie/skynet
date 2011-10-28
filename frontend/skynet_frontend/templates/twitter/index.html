@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
+{% load url from future %}
 
 {% block tag-cloud %}
 	{% if keywordcloud.items %}
@@ -15,7 +16,8 @@
 
 {% block main %}
 	<form method="get">
-		<input type="text" name="t" placeholder="{% trans 'Search for tweets' %}" />
+		{% url 'twitter:search' %}
+		<input action="/reverse/template" type="text" name="t" placeholder="{% trans 'Search for tweets' %}" />
 		<input type="submit" />		
 	</form>
  
