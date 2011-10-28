@@ -22,8 +22,8 @@ import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
-import toctep.skynet.backend.dal.dao.TweetURLDao;
-import toctep.skynet.backend.dal.dao.URLDao;
+import toctep.skynet.backend.dal.dao.TweetUrlDao;
+import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoConnectionImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
@@ -52,8 +52,8 @@ public abstract class DomainTest extends TestCase {
 	protected TweetHashtagDao tweetHashtagDao;
 	protected TweetDao tweetDao;
 	protected TweetMentionDao tweetMentionDao;
-	protected TweetURLDao tweetURLDao;
-	protected URLDao urlDao;
+	protected TweetUrlDao tweetUrlDao;
+	protected UrlDao urlDao;
 	protected UserDao userDao;
 	
 	@Before
@@ -76,7 +76,7 @@ public abstract class DomainTest extends TestCase {
 		geoDao = daoFacade.getGeoDao();
 		geoTypeDao = daoFacade.getGeoTypeDao();
 		hashtagDao = daoFacade.getHashtagDao();
-		tweetURLDao = daoFacade.getTweetURLDao();
+		tweetUrlDao = daoFacade.getTweetUrlDao();
 		tweetMentionDao = daoFacade.getTweetMentionDao();
 		languageDao = daoFacade.getLanguageDao();
 		placeDao = daoFacade.getPlaceDao();
@@ -86,7 +86,8 @@ public abstract class DomainTest extends TestCase {
 		tweetContributorDao = daoFacade.getTweetContributorDao();
 		tweetHashtagDao = daoFacade.getHashtagDao();
 		tweetDao = daoFacade.getTweetDao();
-		tweetURLDao = daoFacade.getTweetURLDao();
+		tweetUrlDao = daoFacade.getTweetUrlDao();
+		urlDao = daoFacade.getUrlDao();
 		userDao = daoFacade.getUserDao();
 	}
 

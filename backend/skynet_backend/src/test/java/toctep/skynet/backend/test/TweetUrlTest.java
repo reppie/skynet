@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Tweet;
 import toctep.skynet.backend.dal.domain.TweetURL;
 import toctep.skynet.backend.dal.domain.URL;
 
-public class TweetURLTest extends DomainTest {
+public class TweetUrlTest extends DomainTest {
 	
 	@Override
 	public void testCreate() {
@@ -29,10 +29,10 @@ public class TweetURLTest extends DomainTest {
 		tweetURL.setTweet(tweet);
 		tweetURL.setUrl(url);
 		
-		tweetURLDao.insert(tweet);
-		assertEquals(1, tweetURLDao.count());
+		tweetUrlDao.insert(tweet);
+		assertEquals(1, tweetUrlDao.count());
 		
-		TweetURL postTweetURL = (TweetURL) tweetURLDao.select(tweetURL.getId());
+		TweetURL postTweetURL = (TweetURL) tweetUrlDao.select(tweetURL.getId());
 		assertTrue(postTweetURL.getTweet().equals(tweetURL.getTweet()));
 		assertTrue(postTweetURL.getUrl().equals(tweetURL.getUrl()));
 	}

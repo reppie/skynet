@@ -14,7 +14,7 @@ import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
-import toctep.skynet.backend.dal.dao.TweetURLDao;
+import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 
 public class DaoFacadeImpl implements DaoFacade {
@@ -30,7 +30,7 @@ public class DaoFacadeImpl implements DaoFacade {
 	private GeoDao geoDao;
 	private GeoTypeDao geoTypeDao;
 	private HashtagDao hashtagDao;
-	private TweetURLDao tweetURLDao;
+	private TweetUrlDao tweetURLDao;
 	private TweetMentionDao tweetMentionDao;
 	private LanguageDao languageDao;
 	private TimeZoneDao timeZoneDao;
@@ -47,7 +47,7 @@ public class DaoFacadeImpl implements DaoFacade {
 		geoDao = new GeoDaoImpl();
 		geoTypeDao = new GeoTypeDaoImpl();
 		hashtagDao = new HashtagDaoImpl();
-		tweetURLDao = new TweetURLDaoImpl();
+		tweetURLDao = new TweetUrlDaoImpl();
 		languageDao = new LanguageDaoImpl();
 		timeZoneDao = new TimeZoneDaoImpl();
 	}
@@ -108,7 +108,7 @@ public class DaoFacadeImpl implements DaoFacade {
 	}
 
 	@Override
-	public TweetURLDao getTweetURLDao() {
+	public TweetUrlDao getTweetUrlDao() {
 		return tweetURLDao;
 	}
 

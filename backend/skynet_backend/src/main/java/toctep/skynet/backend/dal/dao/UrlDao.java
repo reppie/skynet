@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public abstract class URLDao extends Dao {
+public abstract class UrlDao extends Dao {
 
 	public static final String TABLE_NAME = "twitter_url";
 	

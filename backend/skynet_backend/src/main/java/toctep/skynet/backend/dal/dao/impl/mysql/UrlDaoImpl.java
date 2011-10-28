@@ -1,9 +1,9 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import toctep.skynet.backend.dal.dao.URLDao;
+import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class URLDaoImpl extends URLDao {
+public class UrlDaoImpl extends UrlDao {
 
 	@Override
 	public void insert(Domain domain) {
