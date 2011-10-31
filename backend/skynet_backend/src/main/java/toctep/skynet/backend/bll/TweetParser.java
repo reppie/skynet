@@ -157,7 +157,9 @@ public class TweetParser {
         place.setPostalCode(""); //Twitter4j has no support for this?
         place.setPhone(""); //Twitter4j has no support for this?
         place.setTwitter(""); //Twitter4j has no support for this?
-        place.setUrl(placeStatus.getURL());
+        Url placeUrl = new Url();
+        placeUrl.setId(placeStatus.getURL());
+        place.setUrl(placeUrl);
         place.setAppId(""); //Twitter4j has no support for this?
         place.setType(placeType);
         place.setBoundingBox(boundingBox);

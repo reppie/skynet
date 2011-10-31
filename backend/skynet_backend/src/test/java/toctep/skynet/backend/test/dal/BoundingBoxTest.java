@@ -60,5 +60,4 @@ public class BoundingBoxTest extends DomainTest{
 		boundingBoxDao.delete(boundingBox);
 		assertEquals(0, boundingBoxDao.count());		
 	}
-
 }
