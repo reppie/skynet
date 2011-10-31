@@ -27,7 +27,7 @@ DATABASES = {
         'PASSWORD': 'asdasd',
         'HOST': '',
         'PORT': '',
-    }
+    },
     'test_mysql': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'test_skynet', 
