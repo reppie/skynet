@@ -38,8 +38,8 @@ public class UrlDaoImpl extends UrlDao {
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Url url = (Url) domain;
+		return MySqlUtil.getInstance().exists(tableName, "text = " + MySqlUtil.escape(url.getId()));
 	}
 
 	@Override
