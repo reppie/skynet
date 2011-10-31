@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.Tweet;
 
 public class TweetDaoImpl extends TweetDao {
