@@ -204,4 +204,9 @@ public class MySqlUtil {
 
 		return count;
 	}
+	
+	public static String escape(String str) {
+		str = "\"" + str + "\"";
+		return str;
+	}
 }
