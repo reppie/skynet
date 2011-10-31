@@ -3,13 +3,19 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
+import toctep.skynet.backend.dal.domain.Url;
 
 public class UrlDaoImpl extends UrlDao {
 
 	@Override
 	public void insert(Domain domain) {
-		// TODO Auto-generated method stub
-		
+		Url url = (Url) domain;
+
+		MySqlUtil.getInstance().insert("INSERT INTO " 
+					+ tableName 
+					+ " (text) VALUES (" 
+					+ MySqlUtil.escape(url.getId()) + ")"
+					);
 	}
 
 	@Override

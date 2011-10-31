@@ -17,9 +17,6 @@ class PlaceType(models.Model):
     
 class GeoType(models.Model):
     text = models.CharField(max_length=10, blank=True, null=True)
-    
-class CoordinatesType(models.Model):
-    text = models.CharField(max_length=10, blank=True, null=True)     
 
 class BoundingBoxType(models.Model):
     text = models.CharField(max_length=10, blank=True, null=True)
@@ -58,10 +55,6 @@ class Place(models.Model):
 class Geo(models.Model):
     geo_type = models.ForeignKey(GeoType, blank=True, null=True)
     coordinates = models.TextField(blank=True, null=True)
-    
-class Coordinates(models.Model):
-    coordinates_type = models.ForeignKey(CoordinatesType, blank=True, null=True)
-    coordinates = models.TextField(blank=True, null=True)  
 
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True)
@@ -147,11 +140,11 @@ class Tweet(models.Model):
     created_at = models.DateTimeField(null=True)
     place = models.ForeignKey(Place, blank=True, null=True)
     user = models.ForeignKey(User, null=True)
-    coordinates = models.ForeignKey(Coordinates, blank=True, null=True)
     urls = models.ManyToManyField(Url, verbose_name="list of URLs", blank=True)
     hashtags = models.ManyToManyField(Hashtag, verbose_name="List of hashtags", blank=True)
     keywords = models.ManyToManyField(Keyword, verbose_name="Keywords", blank=True, through='TweetKeyword')
-    
+    coordinates = models.TextField(blank=True, null=True)  
+
     def save(self, *args, **kwargs):
         super(Tweet, self).save(*args, **kwargs)
         words = self.text.split()

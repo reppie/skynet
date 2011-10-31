@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.Tweet;
 
 public class TweetDaoImpl extends TweetDao {
@@ -13,11 +14,22 @@ public class TweetDaoImpl extends TweetDao {
 	public void insert(Domain domain) {
 		Tweet tweet = (Tweet) domain;
 		
-		int id = MySqlUtil.getInstance().insert(
-			"INSERT INTO " + tableName + " (text) VALUES (\"" + tweet.getText() + "\")"
-		);
+		String query = "INSERT INTO " + tableName +	"VALUES ("
+		+ tweet.getId() + ", '"
+		+ MySqlUtil.escape(tweet.getText()) + ", '"
+		+ tweet.getGeo().getId() + ", '"
+		+ tweet.isTruncated() + ", '"
+		+ tweet.getSourceType().getId() + ", '"
+		+ tweet.isFavorited() + ", '"
+		+ tweet.getInReplyToTweetTwitterId() + ", '"
+		+ tweet.getInReplyToUserTwitterId() + ", '"
+		+ tweet.getRetweetCount() + ", '"
+		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", '"
+		+ MySqlUtil.escape(tweet.getPlace().getId()) + ", '"
+		+ tweet.getUser() + ", '"
+		+ MySqlUtil.escape(tweet.getCoordinates()) + "')";
 		
-		tweet.setId(id);
+		MySqlUtil.getInstance().insert(query);
 	}
 
 	@Override
