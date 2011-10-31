@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import java.util.Date;
+import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
@@ -106,7 +106,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundColor = "test";
 		user.setProfileBackgroundColor(profileBackgroundColor);
 	
-		createdAt = new Date();
+		createdAt = new java.sql.Date(0);
 		user.setCreatedAt(createdAt);
 		
 		defaultProfileImage = false;

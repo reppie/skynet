@@ -1,19 +1,12 @@
 package toctep.skynet.backend.test.bll;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import toctep.skynet.backend.bll.TweetSplitter;
 
 public class TweetSplitterTest {
-	private TweetSplitter tweetSplitter;
-	
-	@Before
-	public void setUp() {
-		tweetSplitter = new TweetSplitter();
-	}
 	
 	@Test
 	public void splitTweetTest() {
@@ -35,7 +28,7 @@ public class TweetSplitterTest {
 		
 		String[] tweetWordsAfterSplit = {};
 		
-		tweetWordsAfterSplit = tweetSplitter.splitTweet(tweetBody);
+		tweetWordsAfterSplit = TweetSplitter.splitTweet(tweetBody);
 		
 		for(int i = 0; i < presplitTweetBody.length; i++) {
 			assertEquals("result: ", presplitTweetBody[i], tweetWordsAfterSplit[i]);

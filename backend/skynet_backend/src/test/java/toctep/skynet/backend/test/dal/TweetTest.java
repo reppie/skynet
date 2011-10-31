@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import java.util.Date;
+import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.Geo;
 import toctep.skynet.backend.dal.domain.Place;
@@ -63,7 +63,7 @@ public class TweetTest extends DomainTest {
 		retweetCount = 0L;
 		tweet.setRetweetCount(retweetCount);
 		
-		createdAt = new Date();
+		createdAt = new java.sql.Date(0);
 		tweet.setCreatedAt(createdAt);
 		
 		place = new Place();
