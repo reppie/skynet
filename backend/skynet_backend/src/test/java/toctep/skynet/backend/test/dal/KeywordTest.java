@@ -24,7 +24,7 @@ public class KeywordTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		keywordDao.insert(keyword);
+		keyword.save();
 		
 		Keyword postKeyword = (Keyword) keywordDao.select(keyword.getId());
 		assertEquals("getKeyword: ", keyword.getKeyword(), postKeyword.getKeyword());

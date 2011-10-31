@@ -52,8 +52,8 @@ public class GeoDaoImpl extends GeoDao{
 	
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Geo geo = (Geo) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + geo.getId());
 	}
 	@Override
 	public int count() {
