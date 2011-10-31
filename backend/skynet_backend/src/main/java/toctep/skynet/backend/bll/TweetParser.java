@@ -1,6 +1,5 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
@@ -237,13 +236,10 @@ public class TweetParser {
     
     private long getKeywordId(String keywordString) {
     	Keyword keyword = new Keyword();
-    	keyword.setKeyword(keywordString);
+    	keyword.setKeyword(keywordString.toLowerCase());
+    	keyword.save();
     	
-    	if(!MySqlUtil.getInstance().exists("tweet_keyword", "keyword = '"+keyword.getKeyword()+"';")) {
-			keyword.save();
-		}
-    	
-    	return MySqlUtil.getInstance().query("SELECT id FROM tweet_keyword WHERE keyword ='"+keyword.getKeyword()+"';");
+    	return keyword.getId();
     }
     
     private void saveTweetKeyword(String keywordString, long keywordId, Tweet tweet) {

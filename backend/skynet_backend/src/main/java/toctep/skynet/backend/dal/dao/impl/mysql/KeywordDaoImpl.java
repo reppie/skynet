@@ -27,8 +27,7 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public void update(Domain domain) {
-		// TODO Auto-generated method stub
-		
+		//we don't update keywords
 	}
 
 	@Override
