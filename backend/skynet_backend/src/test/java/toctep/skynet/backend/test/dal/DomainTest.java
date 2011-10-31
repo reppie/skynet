@@ -109,8 +109,6 @@ public abstract class DomainTest extends TestCase {
 			Statement stmt = (Statement) conn.createStatement();
 			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE twitter_coordinates"); // TODO
-			stmt.executeQuery("TRUNCATE TABLE twitter_coordinatestype"); // TODO
 			stmt.executeQuery("TRUNCATE TABLE " + CountryDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + GeoDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
