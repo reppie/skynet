@@ -51,8 +51,8 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 	
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		BoundingBox boundingBox = (BoundingBox) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + boundingBox.getId());
 	}
 	
 	@Override

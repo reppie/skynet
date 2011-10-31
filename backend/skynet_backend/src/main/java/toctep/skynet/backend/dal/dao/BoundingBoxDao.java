@@ -8,5 +8,4 @@ public abstract class BoundingBoxDao extends DaoLongPk {
 	protected void setTableName() {
 		this.tableName = TABLE_NAME;
 	}
-
 }

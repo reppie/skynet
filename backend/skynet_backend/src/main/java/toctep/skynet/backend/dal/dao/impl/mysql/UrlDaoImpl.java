@@ -32,14 +32,14 @@ public class UrlDaoImpl extends UrlDao {
 
 	@Override
 	public void delete(Domain domain) {
-		// TODO Auto-generated method stub
-		
+		Url url = (Url) domain;
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE text = " + MySqlUtil.escape(url.getId()));
 	}
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Url url = (Url) domain;
+		return MySqlUtil.getInstance().exists(tableName, "text = " + MySqlUtil.escape(url.getId()));
 	}
 
 	@Override

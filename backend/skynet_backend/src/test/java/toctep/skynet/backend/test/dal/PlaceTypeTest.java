@@ -33,7 +33,7 @@ public class PlaceTypeTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		placeTypeDao.insert(placeType);
+		placeType.save();
 		
 		PlaceType postPlaceType = (PlaceType) placeTypeDao.select(placeType.getId());
 		
@@ -48,9 +48,9 @@ public class PlaceTypeTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		placeTypeDao.insert(placeType);
+		placeType.save();
 		assertEquals(1, placeTypeDao.count());
-		placeTypeDao.delete(placeType);
+		placeType.delete();
 		assertEquals(0, placeTypeDao.count());
 	}
 	

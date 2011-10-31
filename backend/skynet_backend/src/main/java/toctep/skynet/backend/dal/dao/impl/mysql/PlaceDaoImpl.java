@@ -46,13 +46,13 @@ public class PlaceDaoImpl extends PlaceDao {
 	@Override
 	public void delete(Domain domain) {
 		Place place = (Place) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + place.getId());
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + MySqlUtil.escape(place.getId()));
 	}
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Place place = (Place) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + MySqlUtil.escape(place.getId()));
 	}
 
 	@Override

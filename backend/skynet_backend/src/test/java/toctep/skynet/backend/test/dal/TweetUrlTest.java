@@ -49,9 +49,9 @@ public class TweetUrlTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		tweetUrlDao.insert(tweetUrl);
+		tweetUrl.save();
 		assertEquals(1, tweetUrlDao.count());
-		tweetUrlDao.delete(tweetUrl);
+		tweetUrl.delete();
 		assertEquals(0, tweetUrlDao.count());
 	}
 

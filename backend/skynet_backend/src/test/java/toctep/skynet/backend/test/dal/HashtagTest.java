@@ -48,10 +48,10 @@ public class HashtagTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		hashtagDao.insert(hashtag);
-		assertEquals(1, geoTypeDao.count());
-		hashtagDao.delete(hashtag);
-		assertEquals(0, geoTypeDao.count());		
+		hashtag.save();
+		assertEquals(1, hashtagDao.count());
+		hashtag.delete();
+		assertEquals(0, hashtagDao.count());	
 	}
 
 }

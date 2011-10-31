@@ -1,17 +1,13 @@
 package toctep.skynet.backend.bll;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
-import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Geo;
 import toctep.skynet.backend.dal.domain.GeoType;
 import toctep.skynet.backend.dal.domain.Hashtag;
-import toctep.skynet.backend.dal.domain.Keyword;
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.PlaceType;
@@ -20,7 +16,6 @@ import toctep.skynet.backend.dal.domain.TimeZone;
 import toctep.skynet.backend.dal.domain.Tweet;
 import toctep.skynet.backend.dal.domain.TweetContributor;
 import toctep.skynet.backend.dal.domain.TweetHashtag;
-import toctep.skynet.backend.dal.domain.TweetKeyword;
 import toctep.skynet.backend.dal.domain.TweetMention;
 import toctep.skynet.backend.dal.domain.TweetUrl;
 import toctep.skynet.backend.dal.domain.Url;
@@ -239,36 +234,8 @@ public class TweetParser {
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
         tweet.setUser(user);
-        //indexTweetKeywords(tweet);
-    }
-    
-    private void indexTweetKeywords(Tweet tweet) {
-    	String filteredTweetBody = TweetFilter.filterTweet(tweet);
-    	String[] keywordStrings = TweetSplitter.splitTweet(filteredTweetBody);
-    	
-    	for(String keywordString: keywordStrings) {
-    		long keywordId = getKeywordId(keywordString);
-    		saveTweetKeyword(keywordString, keywordId, tweet);
-    	}
-    }
-    
-    private long getKeywordId(String keywordString) {
-    	Keyword keyword = new Keyword();
-    	keyword.setKeyword(keywordString);
-    	
-    	if(!MySqlUtil.getInstance().exists("tweet_keyword", "keyword = '"+keyword.getKeyword()+"';")) {
-			keyword.save();
-		}
-    	
-    	return MySqlUtil.getInstance().query("SELECT id FROM tweet_keyword WHERE keyword ='"+keyword.getKeyword()+"';");
-    }
-    
-    private void saveTweetKeyword(String keywordString, long keywordId, Tweet tweet) {
-    	TweetKeyword tweetKeyword = new TweetKeyword();
-    	
-    	tweetKeyword.setKeywordId(keywordId);
-    	tweetKeyword.setTweetId(tweet.getId());
-    	tweetKeyword.setTweetKeywordValue(keywordString);
+        tweet.save();
+        new TweetIndexer().indexTweetKeywords(tweet);
     }
     
     private void parseUrl(Status status) {

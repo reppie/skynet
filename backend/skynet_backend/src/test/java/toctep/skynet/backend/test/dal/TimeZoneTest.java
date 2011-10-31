@@ -38,7 +38,7 @@ public class TimeZoneTest extends DomainTest {
 	
 	@Override
 	public void testSelect() {
-		timeZoneDao.insert(timeZone);
+		timeZone.save();
 		
 		TimeZone postTimeZone = (TimeZone) timeZoneDao.select(timeZone.getId());
 		
@@ -54,9 +54,9 @@ public class TimeZoneTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		timeZoneDao.insert(timeZone);
+		timeZone.save();
 		assertEquals(1, timeZoneDao.count());
-		timeZoneDao.delete(timeZone);
+		timeZone.delete();
 		assertEquals(0, timeZoneDao.count());
 	}
 

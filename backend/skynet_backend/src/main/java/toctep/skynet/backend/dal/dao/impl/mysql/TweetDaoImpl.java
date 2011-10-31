@@ -56,13 +56,13 @@ public class TweetDaoImpl extends TweetDao {
 	@Override
 	public void delete(Domain domain) {
 		Tweet tweet = (Tweet) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweet.getId());	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweet.getId());
 	}
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Tweet tweet = (Tweet) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + tweet.getId());
 	}
 
 	@Override

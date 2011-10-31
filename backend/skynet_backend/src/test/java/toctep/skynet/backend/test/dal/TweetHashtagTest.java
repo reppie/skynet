@@ -51,9 +51,9 @@ public class TweetHashtagTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		tweetHashtagDao.insert(tweetHashtag);
+		tweetHashtag.save();
 		assertEquals(1, tweetHashtagDao.count());
-		tweetHashtagDao.delete(tweetHashtag);
+		tweetHashtag.delete();
 		assertEquals(0, tweetHashtagDao.count());
 	}
 	

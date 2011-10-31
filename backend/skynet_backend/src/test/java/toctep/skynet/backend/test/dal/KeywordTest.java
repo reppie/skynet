@@ -4,7 +4,6 @@ import toctep.skynet.backend.dal.domain.Keyword;
 
 public class KeywordTest extends DomainTest {
 	private Keyword keyword;
-	private int keywordId;
 	private String keywordValue;
 
 	@Override
@@ -12,17 +11,14 @@ public class KeywordTest extends DomainTest {
 		super.setUp();
 		
 		keyword = new Keyword();
-		int keywordId = 112;
-		String keywordValue = "cvketel";
+		keywordValue = "cvketel";
 		
-		keyword.setKeywordId(keywordId);
 		keyword.setKeyword(keywordValue);
 	}
 	@Override
 	public void testCreate() {
 		assertNotNull(keyword);
 		
-		assertEquals("getKeywordId: ", keywordId, keyword.getKeywordId());
 		assertEquals("getKeyword: ", keywordValue, keyword.getKeyword());
 	}
 
@@ -31,7 +27,6 @@ public class KeywordTest extends DomainTest {
 		keyword.save();
 		
 		Keyword postKeyword = (Keyword) keywordDao.select(keyword.getId());
-		assertEquals("getKeywordId: ", keyword.getKeywordId(), postKeyword.getKeywordId());
 		assertEquals("getKeyword: ", keyword.getKeyword(), postKeyword.getKeyword());
 	}
 

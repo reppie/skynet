@@ -26,4 +26,8 @@ public abstract class Domain {
 		}
 	}
 	
+	public void delete() {
+		dao.delete(this);
+	}
+	
 }
