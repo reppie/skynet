@@ -1,5 +1,10 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
@@ -13,7 +18,7 @@ public class KeywordDaoImpl extends KeywordDao {
 		
 		int id = MySqlUtil.getInstance().insert(
 				"INSERT INTO " + tableName + " (keyword) " +
-				"VALUES (" + keyword.getKeyword() + ")" 
+				"VALUES ('" + keyword.getKeyword() + "');" 
 				);
 		
 		keyword.setId(id);
@@ -38,8 +43,31 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean exists = false;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE '" + ((Keyword) domain).getKeyword() + "';");
+			if (rs.first()) {
+				exists = true;
+			} else if (rs.getFetchSize() > 1) {
+				System.out.println("ER IS IETS FOUT!!");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return exists;
 	}
 
 	@Override

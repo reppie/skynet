@@ -6,7 +6,6 @@ import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Geo;
 import toctep.skynet.backend.dal.domain.GeoType;
 import toctep.skynet.backend.dal.domain.Hashtag;
-import toctep.skynet.backend.dal.domain.Keyword;
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.PlaceType;
@@ -15,7 +14,6 @@ import toctep.skynet.backend.dal.domain.TimeZone;
 import toctep.skynet.backend.dal.domain.Tweet;
 import toctep.skynet.backend.dal.domain.TweetContributor;
 import toctep.skynet.backend.dal.domain.TweetHashtag;
-import toctep.skynet.backend.dal.domain.TweetKeyword;
 import toctep.skynet.backend.dal.domain.TweetMention;
 import toctep.skynet.backend.dal.domain.TweetUrl;
 import toctep.skynet.backend.dal.domain.Url;
@@ -223,33 +221,7 @@ public class TweetParser {
         tweet.setPlace(place);
         tweet.setUser(user);
         tweet.save();
-        indexTweetKeywords(tweet);
-    }
-    
-    private void indexTweetKeywords(Tweet tweet) {
-    	String filteredTweetBody = TweetFilter.filterTweet(tweet);
-    	String[] keywordStrings = TweetSplitter.splitTweet(filteredTweetBody);
-    	
-    	for(String keywordString: keywordStrings) {
-    		long keywordId = getKeywordId(keywordString);
-    		saveTweetKeyword(keywordString, keywordId, tweet);
-    	}
-    }
-    
-    private long getKeywordId(String keywordString) {
-    	Keyword keyword = new Keyword();
-    	keyword.setKeyword(keywordString.toLowerCase());
-    	keyword.save();
-    	
-    	return keyword.getId();
-    }
-    
-    private void saveTweetKeyword(String keywordString, long keywordId, Tweet tweet) {
-    	TweetKeyword tweetKeyword = new TweetKeyword();
-    	
-    	tweetKeyword.setKeywordId(keywordId);
-    	tweetKeyword.setTweetId(tweet.getId());
-    	tweetKeyword.setTweetKeywordValue(keywordString);
+        new TweetIndexer().indexTweetKeywords(tweet);
     }
     
     private void parseUrl(Status status) {
