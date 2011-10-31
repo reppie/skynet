@@ -218,7 +218,7 @@ public class UserTest extends DomainTest {
 		User postUser = (User) userDao.select(user.getId());
 		
 		assertEquals(postUser.getId(), user.getId());
-		assertTrue(postUser.getPlace().equals(user.getPlace()));
+		assertEquals(postUser.getPlace().getId(), user.getPlace().getId());
 		assertTrue(postUser.isDefaultProfile() == user.isDefaultProfile());
 		assertEquals(postUser.getStatusesCount(), user.getStatusesCount());
 		assertEquals(postUser.getProfileBackgroundTile(), user.getProfileBackgroundTile());
