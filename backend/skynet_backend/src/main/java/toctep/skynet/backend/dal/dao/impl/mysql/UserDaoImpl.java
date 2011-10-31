@@ -34,7 +34,7 @@ public class UserDaoImpl extends UserDao {
 					MySqlUtil.escape(user.getName()) + "," +
 					MySqlUtil.escape(user.getProfileSidebarBorderColor()) + "," +
 					MySqlUtil.escape(user.getProfileBackgroundColor()) + "," +
-					user.getCreatedAt() + "," +
+					MySqlUtil.escape(user.getCreatedAt().toString()) + "," +
 					user.isDefaultProfileImage() + "," +
 					user.getFollowersCount() + "," +
 					MySqlUtil.escape(user.getProfileImageUrl()) + "," +
