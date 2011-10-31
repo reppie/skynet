@@ -25,7 +25,7 @@ public class TweetDaoImpl extends TweetDao {
 		+ tweet.getRetweetCount() + ", "
 		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", "
 		+ MySqlUtil.escape(tweet.getPlace().getId()) + ", "
-		+ tweet.getUser() + ", "
+		+ tweet.getUser().getId() + ", "
 		+ MySqlUtil.escape(tweet.getCoordinates()) + ")";
 		
 		MySqlUtil.getInstance().insert(query);

@@ -18,7 +18,7 @@ public class PlaceDaoImpl extends PlaceDao {
 		+ MySqlUtil.escape(place.getName()) + ", "
 		+ MySqlUtil.escape(place.getUrl().getId()) + ", "
 		+ MySqlUtil.escape(place.getFullName()) + ", "
-		+ place.getCountry().getId() + ", "
+		+ MySqlUtil.escape(place.getCountry().getId()) + ", "
 		+ MySqlUtil.escape(place.getStreetAddress()) + ", "
 		+ MySqlUtil.escape(place.getLocality()) + ", "
 		+ MySqlUtil.escape(place.getRegion()) + ", "

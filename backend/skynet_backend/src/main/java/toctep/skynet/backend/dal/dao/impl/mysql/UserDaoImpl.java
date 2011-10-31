@@ -3,6 +3,8 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.User;
@@ -18,7 +20,7 @@ public class UserDaoImpl extends UserDao {
 			"VALUES " +
 				"(" +
 					user.getId() + "," +
-					user.getPlace().getId() + "," +
+					MySqlUtil.escape(user.getPlace().getId()) + "," +
 					user.isDefaultProfile() + "," +
 					user.getStatusesCount() + "," +
 					user.getProfileBackgroundTile() + "," +
@@ -43,7 +45,7 @@ public class UserDaoImpl extends UserDao {
 					MySqlUtil.escape(user.getProfileBackgroundImageUrl()) + "," +
 					MySqlUtil.escape(user.getProfileBackgroundImageUrlHttps()) + "," +
 					user.isFollowRequestSent() + "," +
-					user.getUrl().getId() + "," +
+					MySqlUtil.escape(user.getUrl().getId()) + "," +
 					user.getTimeZone().getId() + "," +
 					user.getNotifications() + "," +
 					user.isProfileUseBackgroundImage() + "," +

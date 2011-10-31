@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User extends DomainLongPk {
 

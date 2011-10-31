@@ -1,5 +1,9 @@
 package toctep.skynet.backend.bll;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
@@ -41,7 +45,7 @@ public class TweetParser {
 	private Place place;
 	private User user;
 	private Tweet tweet;
-		
+	
 	private static TweetParser instance;
 	
 	private TweetParser() { }
@@ -54,22 +58,26 @@ public class TweetParser {
 	}
 	
 	public boolean parse(Status status) {
-		parseBoundingBoxType(status.getPlace());
-		parseBoundingBox(status.getPlace());
-		parseCountry(status.getPlace());
-		parseGeoType(status.getPlace());
-		parseGeo(status.getPlace());
-		parseLanguage(status.getUser());
-		parsePlaceType(status.getPlace());
-		parseSourceType(status);
-		parseTimeZone(status.getUser());
-		parsePlace(status.getPlace());
-		parseUser(status.getUser());
-		parseTweet(status);
-		parseUrl(status);
-		parseHashtag(status);
-		parseContributor(status);
-		parseMention(status);	
+		try {
+			parseBoundingBoxType(status.getPlace());
+			parseBoundingBox(status.getPlace());
+			parseCountry(status.getPlace());
+			parseGeoType(status.getPlace());
+			parseGeo(status.getPlace());
+			parseLanguage(status.getUser());
+			parsePlaceType(status.getPlace());
+			parseSourceType(status);
+			parseTimeZone(status.getUser());
+			parsePlace(status.getPlace());
+			parseUser(status.getUser());
+			parseTweet(status);
+			parseUrl(status);
+			parseHashtag(status);
+			parseContributor(status);
+			parseMention(status);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
 		boundingBoxType.save();
 		boundingBox.save();
@@ -171,7 +179,7 @@ public class TweetParser {
         place.setCountry(country);
     }
     
-    private void parseUser(twitter4j.User userStatus) {
+    private void parseUser(twitter4j.User userStatus) throws ParseException {
         this.user = new User();
         user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
@@ -188,7 +196,7 @@ public class TweetParser {
         user.setName(userStatus.getName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
-        user.setCreatedAt(userStatus.getCreatedAt());
+        user.setCreatedAt(new java.sql.Date(userStatus.getCreatedAt().getDate()));
         user.setDefaultProfileImage(false); //Twitter4j has no support for this?
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
@@ -208,11 +216,11 @@ public class TweetParser {
         user.setPlace(place);
         user.setLanguage(language);
         
+        Url userUrl = new Url();
         if (userStatus.getURL() != null) {
-	        Url userUrl = new Url();
 	        userUrl.setId(userStatus.getURL().toExternalForm());
-	        user.setUrl(userUrl);
         }
+        user.setUrl(userUrl);
         
         user.setTimeZone(timeZone);
     }
@@ -226,7 +234,7 @@ public class TweetParser {
         tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
         tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
         tweet.setRetweetCount(status.getRetweetCount());
-        tweet.setCreatedAt(status.getCreatedAt());
+        tweet.setCreatedAt(new java.sql.Date(status.getCreatedAt().getDate()));
         tweet.setGeo(geo);
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
