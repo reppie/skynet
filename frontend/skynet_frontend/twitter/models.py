@@ -26,7 +26,7 @@ class BoundingBox(models.Model):
     coordinates = models.TextField(blank=True, null=True)
 
 class Language(models.Model):
-    text = models.CharField(max_length=2, blank=True, null=True)
+    text = models.CharField(max_length=4, blank=True, null=True)
 
 class SourceType(models.Model):
     text = models.CharField(max_length=10, blank=True, null=True)
