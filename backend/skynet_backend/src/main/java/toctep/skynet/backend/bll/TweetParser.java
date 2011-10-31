@@ -52,7 +52,7 @@ public class TweetParser {
 		return instance;
 	}
 	
-	public boolean parse(Status status) {
+	public void parse(Status status) {
 		try {
 			parseBoundingBoxType(status.getPlace());
 			parseBoundingBox(status.getPlace());
@@ -74,20 +74,7 @@ public class TweetParser {
 			e.printStackTrace();
 		}
 		
-		boundingBoxType.save();
-		boundingBox.save();
-		country.save();
-		geoType.save();
-		geo.save();
-		language.save();
-		placeType.save();
-		sourceType.save();
-		timeZone.save();
-		place.save();
-		user.save();
 		tweet.save();
-		
-		return true;
 	}
 	
 	private void parseBoundingBoxType(twitter4j.Place place) {

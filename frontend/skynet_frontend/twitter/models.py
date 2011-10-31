@@ -29,7 +29,7 @@ class Language(models.Model):
     text = models.CharField(max_length=4, blank=True, null=True)
 
 class SourceType(models.Model):
-    text = models.CharField(max_length=10, blank=True, null=True)
+    text = models.CharField(max_length=255, blank=True, null=True)
 
 class TimeZone(models.Model):
     utc_offset = models.IntegerField(blank=True, default=0)
@@ -71,7 +71,7 @@ class User(models.Model):
     verified = models.BooleanField(blank=True)
     contributors_enabled = models.BooleanField(blank=True)
     description = models.CharField(max_length=160, blank=True, null=True)
-    name = models.CharField(max_length=15, null=True)
+    name = models.CharField(max_length=20, null=True)
     profile_sidebar_border_color = models.CharField(max_length=255, blank=True, null=True)
     profile_background_color = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)
@@ -89,7 +89,7 @@ class User(models.Model):
     profile_use_background_image = models.BooleanField(blank=True)
     friends_count = models.IntegerField(blank=True, default=0)
     profile_sidebar_fill_color = models.CharField(max_length=255, blank=True, null=True)
-    screen_name = models.CharField(max_length=20, blank=True, null=True)
+    screen_name = models.CharField(max_length=15, blank=True, null=True)
     show_all_inline_media = models.BooleanField(blank=True)
     is_translator = models.BooleanField(blank=True)
     listed_count = models.IntegerField(blank=True, default=0)

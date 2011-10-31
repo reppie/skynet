@@ -331,7 +331,7 @@ public class User extends DomainLongPk {
 		place.save();
 		language.save();
 		url.save();
-		timeZone.save();	
+		timeZone.save();
 		this.place.setId(place.getId());
 		this.language.setId(language.getId());
 		this.url.setId(url.getId());

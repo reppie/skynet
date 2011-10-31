@@ -256,7 +256,7 @@ public class MySqlUtil {
 	}
 	
 	public static String escape(String str) {
-		str = "\"" + str + "\"";
+		str = "\"" + (str != null ? str.replace("\"", "\\\"") : "") + "\"";
 		return str;
 	}
 }
