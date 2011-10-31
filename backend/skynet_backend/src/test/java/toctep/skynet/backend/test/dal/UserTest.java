@@ -37,8 +37,8 @@ public class UserTest extends DomainTest {
 	private boolean defaultProfileImage;
 	private int followersCount;
 	private boolean geoEnabled;
-	private String profileBackgroundImageUrl;
-	private String profileBackgroundImageUrlHttps;
+	private Url profileBackgroundImageUrl;
+	private Url profileBackgroundImageUrlHttps;
 	private boolean followRequestSent;
 	private Url url;
 	private TimeZone timeZone;
@@ -47,8 +47,8 @@ public class UserTest extends DomainTest {
 	private int friendsCount;
 	private String profileSideBarFillColor;
 	private String screenName;
-	private String profileImageUrl;
-	private String profileImageUrlHttps;
+	private Url profileImageUrl;
+	private Url profileImageUrlHttps;
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
 	private int listedCount;
@@ -128,10 +128,10 @@ public class UserTest extends DomainTest {
 		geoEnabled = false;
 		user.setGeoEnabled(geoEnabled);
 		
-		profileBackgroundImageUrl = "test";
+		profileBackgroundImageUrl = new Url();
 		user.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
 		
-		profileBackgroundImageUrlHttps = "test";
+		profileBackgroundImageUrlHttps = new Url();
 		user.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
 	
 		followRequestSent = false;
@@ -158,10 +158,10 @@ public class UserTest extends DomainTest {
 		screenName = "test";
 		user.setScreenName(screenName);
 		
-		profileImageUrl = "test";
+		profileImageUrl = new Url();
 		user.setProfileImageUrl(profileImageUrl);
 		
-		profileImageUrlHttps = "test";
+		profileImageUrlHttps = new Url();
 		user.setProfileImageUrlHttps(profileImageUrlHttps);
 		
 		showAllInlineMedia = false;

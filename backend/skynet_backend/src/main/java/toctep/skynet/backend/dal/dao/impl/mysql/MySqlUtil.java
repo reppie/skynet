@@ -181,6 +181,7 @@ public class MySqlUtil {
 		try {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + where);
+			
 			int counter = 0;
 			while (rs.next()) {
 				counter++;
@@ -230,12 +231,14 @@ public class MySqlUtil {
 	public void truncateDatabase() {
 		try {
 			Statement stmt = (Statement) conn.createStatement();
-			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
+			stmt.executeQuery("set foreign_key_checks=0");
+			stmt.executeQuery("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + CountryDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + GeoDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);
@@ -247,9 +250,9 @@ public class MySqlUtil {
 			stmt.executeQuery("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + UrlDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + KeywordDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);
+			stmt.executeQuery("set foreign_key_checks=1");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

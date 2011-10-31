@@ -88,6 +88,10 @@ public class TweetTest extends DomainTest {
 		user.setPlace(place);
 		user.setLanguage(new Language());
 		user.setUrl(new Url());
+		user.setProfileBackgroundImageUrl(new Url());
+		user.setProfileBackgroundImageUrlHttps(new Url());
+		user.setProfileImageUrl(new Url());
+		user.setProfileImageUrlHttps(new Url());
 		user.setTimeZone(new TimeZone());
 		user.setCreatedAt(new Date(0));
 		tweet.setUser(user);
