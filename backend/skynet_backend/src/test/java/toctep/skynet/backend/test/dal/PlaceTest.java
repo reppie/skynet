@@ -4,6 +4,7 @@ import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.PlaceType;
+import toctep.skynet.backend.dal.domain.Url;
 
 public class PlaceTest extends DomainTest{
 
@@ -22,7 +23,7 @@ public class PlaceTest extends DomainTest{
 	private String postalCode;
 	private String phone;
 	private String twitter;
-	private String url;
+	private Url url;
 	private String appId;
 	
 	@Override
@@ -70,7 +71,7 @@ public class PlaceTest extends DomainTest{
 		twitter = "TestTwitter";
 		place.setTwitter(twitter);
 		
-		url = "TestUrl";
+		url = new Url();
 		place.setUrl(url);
 		
 		appId = "TestAppId";
