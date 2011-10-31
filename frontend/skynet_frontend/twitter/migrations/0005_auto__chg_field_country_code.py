@@ -10,14 +10,14 @@ class Migration(SchemaMigration):
         
         # Changing field 'Country.code'
         db.alter_column('twitter_country', 'code', self.gf('django.db.models.fields.CharField')(max_length=4, null=True, primary_key=True))
-        db.alter_column('twitter_place', 'country_id', self.gf('django.db.models.fields.CharField')(max_length=4, null=True, primary_key=True))
+        db.alter_column('twitter_place', 'country_id', self.gf('django.db.models.fields.CharField')(max_length=4, null=True, primary_key=False))
 
 
     def backwards(self, orm):
         
         # Changing field 'Country.code'
         db.alter_column('twitter_country', 'code', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, primary_key=True))
-        db.alter_column('twitter_place', 'country_id', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, primary_key=True))
+        db.alter_column('twitter_place', 'country_id', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, primary_key=False))
          
 
     models = {
