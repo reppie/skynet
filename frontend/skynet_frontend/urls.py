@@ -8,6 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^$', 'twitter.views.index'),
     (r'^tweets$', 'twitter.views.tweets'),
+    url(r'^twitter/search$', 'twitter.views.search'),
     url(r'^twitter/rpc/', 'twitter.views.rpc', name='twitter-rpc'),
     url(r'^admin/', include(admin.site.urls)),
 )

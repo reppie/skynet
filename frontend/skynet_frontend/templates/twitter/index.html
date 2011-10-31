@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
+{% load url from future %}
 
 {% block tag-cloud %}
 	{% if keywordcloud.items %}
@@ -14,12 +15,7 @@
 {% block title %} Social Media Lab {% endblock %}
 
 {% block main %}
-	<form method="get">
-		<input type="text" name="t" placeholder="{% trans 'Search for tweets' %}" />
-		<input type="submit" />		
-	</form>
- 
 	{% for tweet in tweets %}
 		<div class="tweet">{{ tweet.text }}</div>
 	{% endfor %}
- {% endblock %}
+{% endblock %}
