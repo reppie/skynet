@@ -40,6 +40,7 @@ public class TweetTest extends DomainTest {
 		tweet.setText(text);
 		
 		geo = new Geo();
+		geo.setId(1);
 		tweet.setGeo(geo);
 		
 		truncated = false;
@@ -99,28 +100,27 @@ public class TweetTest extends DomainTest {
 	public void testInsert() {
 		tweet.save();
 		assertEquals(1, tweetDao.count());
+	}
+	
+	@Override
+	public void testSelect() {
+		tweet.save();
 		
 		Tweet postTweet = (Tweet) tweetDao.select(tweet.getId());
 		
 		assertTrue(postTweet.getText().equals(tweet.getText()));
-		assertTrue(postTweet.getGeo().equals(tweet.getGeo()));
+		assertEquals(postTweet.getGeo().getId(), tweet.getGeo().getId());
 		assertTrue(postTweet.isTruncated() == tweet.isTruncated());
 		assertEquals(postTweet.getTwitterId(), tweet.getTwitterId());
-		assertTrue(postTweet.getSourceType().equals(tweet.getSourceType()));
+		assertEquals(postTweet.getSourceType().getId(), tweet.getSourceType().getId());
 		assertTrue(postTweet.isFavorited() == tweet.isFavorited());
 		assertEquals(postTweet.getInReplyToTweetTwitterId(), tweet.getInReplyToTweetTwitterId());
 		assertEquals(postTweet.getInReplyToUserTwitterId(), tweet.getInReplyToUserTwitterId());
 		assertEquals(postTweet.getRetweetCount(), tweet.getRetweetCount());
 		assertTrue(postTweet.getCreatedAt().equals(tweet.getCreatedAt()));
-		assertTrue(postTweet.getPlace().equals(tweet.getPlace()));
-		assertTrue(postTweet.getUser().equals(tweet.getUser()));
+		assertTrue(postTweet.getPlace().getId().equals(tweet.getPlace().getId()));
+		assertEquals(postTweet.getUser().getId(), tweet.getUser().getId());
 		assertTrue(postTweet.getCoordinates().equals(tweet.getCoordinates()));
-	}
-	
-	@Override
-	public void testSelect() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

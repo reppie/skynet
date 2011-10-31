@@ -3,7 +3,6 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
-import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
 
 public class PlaceDaoImpl extends PlaceDao {
@@ -47,7 +46,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	@Override
 	public void delete(Domain domain) {
 		Place place = (Place) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + place.getId());
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + MySqlUtil.escape(place.getId()));
 	}
 
 	@Override
