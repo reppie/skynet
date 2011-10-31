@@ -6,20 +6,20 @@ import java.util.regex.Pattern;
 import toctep.skynet.backend.dal.domain.Tweet;
 
 public class TweetFilter {
-	private String[] commonWords = { "de", "het", "een" };
+	private static String[] commonWords = { "de", "het", "een" };
 	private static final Pattern SPECIAL_CHAR_REGEX = Pattern.compile("[^@\\wa-zA-Z#\\w\\s]");
 	private static final Pattern SINGLE_CHAR_REGEX = Pattern.compile("\\s[\\w]\\s");
 	private static final Pattern MULTIPLE_SPACE_REGEX = Pattern.compile("\\s+");
-	private Matcher matcher;
+	private static Matcher matcher;
 	
-	public String filterTweet(Tweet tweet) {
+	public static String filterTweet(Tweet tweet) {
 		String filteredTweet = filterCommonWords(tweet.getText());
 		filteredTweet = filterSpecialCharacters(filteredTweet);
 		
 		return filteredTweet;
 	}
 	
-	public String filterCommonWords(String tweetText) {
+	public static String filterCommonWords(String tweetText) {
 		String cleanTweet = tweetText;
 		
 		for(String commonWord: commonWords) {
@@ -32,12 +32,12 @@ public class TweetFilter {
 		return cleanTweet;
 	}
 	
-	private String removeMultipleSpaces(String dirtyString) {
+	private static String removeMultipleSpaces(String dirtyString) {
 		matcher = MULTIPLE_SPACE_REGEX.matcher(dirtyString);
 		return matcher.replaceAll(" ").trim();
 	}
 	
-	public String filterSpecialCharacters(String tweetText) {
+	public static String filterSpecialCharacters(String tweetText) {
 		matcher = SPECIAL_CHAR_REGEX.matcher(tweetText);
 		String cleanTweet = matcher.replaceAll("");
 		cleanTweet = removeMultipleSpaces(cleanTweet);
@@ -46,7 +46,7 @@ public class TweetFilter {
 		return cleanTweet;
 	}
 	
-	private String filterSingleCharacter(String dirtyString) {
+	private static String filterSingleCharacter(String dirtyString) {
 		matcher = SINGLE_CHAR_REGEX.matcher(dirtyString);
 		return matcher.replaceAll(" ");
 	}

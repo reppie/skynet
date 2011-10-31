@@ -178,8 +178,31 @@ public class MySqlUtil {
 	}
 	
 	public boolean exists(String tableName, String where) {
+		boolean exists = false;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
 
-		return false;
+		try {
+			stmt = (Statement) conn.createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE " + where);
+			if (rs.getFetchSize() == 1) {
+				exists = true;
+			} else if (rs.getFetchSize() > 1) {
+				System.out.println("ER IS IETS FOUT!!");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return exists;
 	}
 	
 	public int count(String tableName) {
