@@ -26,11 +26,7 @@
 	<script type="text/javascript">
 		$(function(){
 			var tweetList = $(".tweets").TweetList([
-				{% if tweets %}
-					{% for tweet in tweets %}
-						{{tweet.pk}},
-					{% endfor %}				
-				{% endif %}
+				{{ tweet_ids|join:"," }}
 			]);
 		})
 	</script>
