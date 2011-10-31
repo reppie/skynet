@@ -55,8 +55,7 @@ public class HashtagDaoImpl extends HashtagDao{
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 
 }

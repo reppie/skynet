@@ -223,6 +223,8 @@ public class MySqlUtil {
 			}
 		}
 
+		System.out.println("[" + tableName + "] " + count);
+		
 		return count;
 	}
 	

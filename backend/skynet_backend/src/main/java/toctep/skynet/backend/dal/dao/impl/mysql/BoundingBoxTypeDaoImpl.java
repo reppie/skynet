@@ -55,8 +55,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 	
 }

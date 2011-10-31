@@ -54,8 +54,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 
 }
