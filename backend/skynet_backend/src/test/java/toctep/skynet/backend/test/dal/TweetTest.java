@@ -89,6 +89,7 @@ public class TweetTest extends DomainTest {
 		user.setLanguage(new Language());
 		user.setUrl(new Url());
 		user.setTimeZone(new TimeZone());
+		user.setCreatedAt(new Date(0));
 		tweet.setUser(user);
 		
 		coordinates = "test";
