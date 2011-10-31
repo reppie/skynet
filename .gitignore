@@ -7,4 +7,5 @@ settings.*
 .metadata
 backend/skynet_backend/target/*
 *~
+/frontend/.pydevproject
 

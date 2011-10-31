@@ -60,21 +60,23 @@
 			var tweetId = tweetIds[index];
 			var $tweet = $('<div/>').addClass('tweet loading').attr('data-tweet-id', tweetId).html(""+tweetId);
 			this.$tweetList.append($tweet);
-			api.Tweet.get(tweetId, function(tweet){
+			api.Tweet.get.call($tweet, tweetId, function(tweet){
+				
+				var $tweet = this;
+				
 				if(tweet){
-					var $tweet = tweetList.$tweetList.find('[data-tweet-id="'+tweet.id+'"]');
 					$tweet.data('tweet', tweet);
 					$tweet.html(tweet.text);
-					$tweet.slideDown(250, function(){
-						$tweet.removeClass("loading");
-					});
-				}
-				/*else{
-					console.log(tweetId);
+					
+				}else{
+					var tweetId = $tweet.data("tweetId");
 					$tweet.html("error retrieving tweet id: "+tweetId);
-					$tweet.removeClass("loading");
 					$tweet.addClass("error");
-				}*/
+				}
+				$tweet.slideDown(250, function(){
+					$tweet.removeClass("loading");
+				});
+				
 			});
 		}
 	}
@@ -112,22 +114,25 @@
         }
  	});
 	api.Tweet.prototype.getUser = function(callback){
+		
+		var This = this;
 		if(this.user){
-			callback(this.user);
+			callback.call(This, this.user);
 			return;
 		}
 		var tweet = this;
 		api.User.get(this.user_id, function(user){
 			tweet.user = user;
-			callback(user);
+			callback.call(This, user);
 		});
 	}
 	
 	api.Tweet.get = function(tweetId, callback) {
+		var This = this;
 		var tweet = api.cache.get('api.Tweet', tweetId);
 		if(tweet){
 			console.log("serving Tweet with id: "+tweetId+" from cache.;")
-			callback(tweet);
+			callback.call(This,tweet);
 			return;
 		}
 		$.jsonRPC.request('load_tweet', {
@@ -135,18 +140,19 @@
 		  	success: function(result){
 		  		var tweet = new api.Tweet(result.result);
 		  		api.cache.set('api.Tweet', tweet);
-		  		callback(tweet);
+		  		callback.call(This, tweet);
 		  },
 		  error: function(result){
-	  		callback(null);
+	  		callback.call(This, null);
 		  },
 	  	});
 	}
 	api.User.get = function(userId, callback) {
+		var This = this;
 		var user = api.cache.get('api.User', userId);
 		if(user){
 			console.log("serving User with id: "+userId+" from cache.;")
-			callback(user);
+			callback.call(This, user);
 			return;
 		}
 		$.jsonRPC.request('load_user', {
@@ -154,24 +160,23 @@
 		  	success: function(result){
 		  		var user = new api.User(result.result);
 		  		api.cache.set('api.User', user);
-		  		callback(user);
+		  		callback.call(This, user);
 		  },
 		  error: function(result){
-		  	console.log(result);
-	  		callback(null);
+	  		callback.call(This, null);
 		  },
 	  	});
 	}
 	api.Tweet.search = function(filters, callback) {
-		
+		var This = this;
 		$.jsonRPC.request('search_tweet', {
 		  	params: [filters],
 		  	success: function(result){
 		  		var tweetIds = result.result;
-		  		callback(tweetIds);
+		  		callback.call(This, tweetIds);
 		  },
 		  error: function(result){
-	  		callback(null);
+	  		callback.call(This, null);
 		  },
 	  	});
 	}
