@@ -109,8 +109,16 @@ class Keyword(models.Model):
     keyword = models.CharField(max_length=140)
 
     @staticmethod
+    def get_all_with_count():
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword'))
+
+    @staticmethod
     def get_all_since(datetime_since):
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).filter(tweet__created_at__gte=datetime_since)
+        return Keyword.get_all_with_count().filter(tweet__created_at__gte=datetime_since)
+        
+    @staticmethod
+    def get_all_in_tweets(tweets):
+        return Keyword.get_all_with_count().filter(tweet__in=tweets)
     
     @staticmethod
     def get_keyword_cloud():
