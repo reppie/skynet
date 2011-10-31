@@ -22,6 +22,7 @@ public abstract class Domain {
 		if (dao.exists(this)) {
 			dao.update(this);
 		} else {
+			System.out.println("asdads");
 			dao.insert(this);
 		}
 	}

@@ -6,10 +6,7 @@ import java.sql.SQLException;
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
-import toctep.skynet.backend.dal.domain.Hashtag;
 import toctep.skynet.backend.dal.domain.Keyword;
-
-import com.mysql.jdbc.Statement;
 
 public class KeywordDaoImpl extends KeywordDao {
 
