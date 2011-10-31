@@ -36,7 +36,7 @@ public class MySqlUtil {
 
 	private static MySqlUtil instance;
 	
-	public static final String JDBC_CONFIG = "conf/mysql.ini";
+	public static final String MYSQL_CONFIG = "conf/mysql.ini";
 	
 	private String driver;
 	private String host;
@@ -48,7 +48,7 @@ public class MySqlUtil {
 	
 	private MySqlUtil() {
 		try {
-		    Wini ini = new Wini(new File("conf/mysql.ini"));
+		    Wini ini = new Wini(new File(MYSQL_CONFIG));
 	        driver = ini.get("jdbc", "driver", String.class);
 	        host = ini.get("jdbc", "host", String.class);
 	        name = ini.get("jdbc", "name", String.class);
@@ -158,13 +158,6 @@ public class MySqlUtil {
 			rs.first();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return rs;

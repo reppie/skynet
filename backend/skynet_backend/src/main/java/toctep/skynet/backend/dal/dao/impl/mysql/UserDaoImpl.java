@@ -3,8 +3,6 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
-
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.User;
@@ -72,6 +70,8 @@ public class UserDaoImpl extends UserDao {
 		
 		try {
 			user.setName(rs.getString("name"));
+			
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
