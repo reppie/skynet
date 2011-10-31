@@ -34,12 +34,11 @@ public class CountryTest extends DomainTest{
 		country.save();
 		assertEquals(1, countryDao.count());
 		assertEquals(id, country.getId());
-
 	}
 	
 	@Override
 	public void testSelect() {
-		countryDao.insert(country);
+		country.save();
 		
 		Country postCountry = (Country) countryDao.select(country.getId());
 		assertTrue(postCountry.getText().equals(country.getText()));

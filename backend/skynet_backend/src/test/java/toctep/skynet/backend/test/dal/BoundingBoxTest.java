@@ -39,7 +39,7 @@ public class BoundingBoxTest extends DomainTest{
 
 	@Override
 	public void testSelect() {
-		boundingBoxDao.insert(boundingBox);
+		boundingBox.save();
 		
 		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(boundingBox.getId());
 		
