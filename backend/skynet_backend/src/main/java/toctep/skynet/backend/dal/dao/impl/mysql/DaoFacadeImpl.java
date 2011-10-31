@@ -65,6 +65,7 @@ public class DaoFacadeImpl implements DaoFacade {
 		urlDao = new UrlDaoImpl();
 		userDao = new UserDaoImpl();
 		tweetKeywordDao = new TweetKeywordDaoImpl();
+		keywordDao = new KeywordDaoImpl();
 	}
 	
 	@Override

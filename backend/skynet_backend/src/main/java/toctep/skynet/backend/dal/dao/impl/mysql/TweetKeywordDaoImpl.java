@@ -1,5 +1,8 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
@@ -23,8 +26,19 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public DomainLongPk select(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		TweetKeyword tweetKeyword = new TweetKeyword();
+		
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		
+		tweetKeyword.setId(id);
+		try {
+			tweetKeyword.setKeywordId(rs.getInt("keyword_id"));
+			tweetKeyword.setTweetId(rs.getLong("tweet_id"));
+			tweetKeyword.setTweetKeywordValue(rs.getString("value"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tweetKeyword;
 	}
 
 	@Override

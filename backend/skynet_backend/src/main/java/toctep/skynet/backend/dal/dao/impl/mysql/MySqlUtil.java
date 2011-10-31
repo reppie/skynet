@@ -15,6 +15,7 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.dao.HashtagDao;
+import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.dao.LanguageDao;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
@@ -23,6 +24,7 @@ import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.TweetContributorDao;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.TweetHashtagDao;
+import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
@@ -179,7 +181,7 @@ public class MySqlUtil {
 		try {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE " + where);
-			if (rs.getFetchSize() == 1) {
+			if (rs.first()) {
 				exists = true;
 			} else if (rs.getFetchSize() > 1) {
 				System.out.println("ER IS IETS FOUT!!");
@@ -206,7 +208,7 @@ public class MySqlUtil {
 
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName);
+			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName);
 			rs.next();
 			count = rs.getInt(1);
 		} catch (SQLException e) {
@@ -238,13 +240,14 @@ public class MySqlUtil {
 			stmt.executeQuery("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweet_keywords"); // TODO
 			stmt.executeQuery("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + UrlDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + KeywordDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
