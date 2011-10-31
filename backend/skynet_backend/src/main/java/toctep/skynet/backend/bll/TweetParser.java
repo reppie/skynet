@@ -54,29 +54,42 @@ public class TweetParser {
 	}
 	
 	public boolean parse(Status status) {
-		parsePlace(status.getPlace());
-		parsePlaceType(status.getPlace());
 		parseBoundingBoxType(status.getPlace());
 		parseBoundingBox(status.getPlace());
 		parseCountry(status.getPlace());
 		parseGeoType(status.getPlace());
 		parseGeo(status.getPlace());
 		parseLanguage(status.getUser());
+		parsePlaceType(status.getPlace());
 		parseSourceType(status);
 		parseTimeZone(status.getUser());
+		parsePlace(status.getPlace());
 		parseUser(status.getUser());
 		parseTweet(status);
 		parseUrl(status);
 		parseHashtag(status);
 		parseContributor(status);
-		parseMention(status);		
+		parseMention(status);	
+		
+		boundingBoxType.save();
+		boundingBox.save();
+		country.save();
+		geoType.save();
+		geo.save();
+		language.save();
+		placeType.save();
+		sourceType.save();
+		timeZone.save();
+		place.save();
+		user.save();
+		tweet.save();
+		
 		return true;
 	}
 	
 	private void parseBoundingBoxType(twitter4j.Place place) {
         boundingBoxType = new BoundingBoxType();
         boundingBoxType.setText(place.getBoundingBoxType());
-        boundingBoxType.save();
 	}
 	
 	private void parseBoundingBox(twitter4j.Place place) {
@@ -90,20 +103,17 @@ public class TweetParser {
         }        
         boundingBox.setCoordinates(coordinates);
         boundingBox.setType(boundingBoxType);
-        boundingBox.save();
 	}
 
     private void parseCountry(twitter4j.Place place) {
         country = new Country();
         country.setId(place.getCountryCode());
         country.setText(place.getCountry());
-        country.save();
     }
 
     private void parseGeoType(twitter4j.Place place) {        
         geoType = new GeoType();
         geoType.setText(place.getGeometryType());
-        geoType.save();
     }
 
     private void parseGeo(twitter4j.Place place) {
@@ -117,32 +127,27 @@ public class TweetParser {
         }        
         geo.setCoordinates(geoCoordinates);
         geo.setType(geoType);   
-        geo.save();
     }
 
     private void parseLanguage(twitter4j.User user) {
         language = new Language();
         language.setText(user.getLang());
-        language.save();
     }
     
     private void parsePlaceType(twitter4j.Place place) {
         placeType = new PlaceType();
-        placeType.setText(place.getPlaceType());
-        placeType.save();
+        placeType.setText(place.getPlaceType());;
     }
     
     private void parseSourceType(Status status) {
         sourceType = new SourceType();
         sourceType.setText(status.getSource());
-        sourceType.save();
     }
     
     private void parseTimeZone(twitter4j.User user) {
         timeZone = new TimeZone();
         timeZone.setTimeZone(user.getTimeZone());
         timeZone.setUtcOffset(user.getUtcOffset());
-        timeZone.save();
     }
     
     private void parsePlace(twitter4j.Place placeStatus) {
@@ -164,7 +169,6 @@ public class TweetParser {
         place.setType(placeType);
         place.setBoundingBox(boundingBox);
         place.setCountry(country);
-        place.save();
     }
     
     private void parseUser(twitter4j.User userStatus) {
@@ -203,10 +207,14 @@ public class TweetParser {
         user.setListedCount(userStatus.getListedCount());   
         user.setPlace(place);
         user.setLanguage(language);
-        Url userUrl = new Url();
-        userUrl.setId(userStatus.getURL().toExternalForm());
+        
+        if (userStatus.getURL() != null) {
+	        Url userUrl = new Url();
+	        userUrl.setId(userStatus.getURL().toExternalForm());
+	        user.setUrl(userUrl);
+        }
+        
         user.setTimeZone(timeZone);
-        user.save();
     }
     
     private void parseTweet(Status status) {
@@ -223,8 +231,7 @@ public class TweetParser {
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
         tweet.setUser(user);
-        tweet.save();
-        indexTweetKeywords(tweet);
+        //indexTweetKeywords(tweet);
     }
     
     private void indexTweetKeywords(Tweet tweet) {
@@ -263,7 +270,6 @@ public class TweetParser {
             TweetUrl tweetUrl = new TweetUrl();
             tweetUrl.setTweet(tweet);
             tweetUrl.setUrl(url);
-            tweetUrl.save();
         }
     }
     
@@ -274,17 +280,17 @@ public class TweetParser {
             TweetHashtag tweetHashtag = new TweetHashtag();
             tweetHashtag.setHashtag(hashtag);
             tweetHashtag.setTweet(tweet);
-            tweetHashtag.save();
         } 
     }
 
     private void parseContributor(Status status) {
-        for(long contributor : status.getContributors()) {
-            TweetContributor tweetContributor = new TweetContributor();
-            tweetContributor.setTweet(tweet);
-            tweetContributor.setUserTwitterId(contributor);
-            tweetContributor.save();
-        }
+    	if (status.getContributors() != null) {
+	        for(long contributor : status.getContributors()) {
+	            TweetContributor tweetContributor = new TweetContributor();
+	            tweetContributor.setTweet(tweet);
+	            tweetContributor.setUserTwitterId(contributor);
+	        }
+    	}
     }
     
     private void parseMention(Status status) {
@@ -292,7 +298,7 @@ public class TweetParser {
             TweetMention tweetMention = new TweetMention();
             tweetMention.setTweet(tweet);
             tweetMention.setUser(mentionEntity.getId());
-            tweetMention.save();
         }
-    }	
+    }
+    
 }
