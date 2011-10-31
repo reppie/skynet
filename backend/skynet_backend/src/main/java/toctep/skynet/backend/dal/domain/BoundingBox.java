@@ -27,4 +27,10 @@ public class BoundingBox extends DomainLongPk {
 		dao = daoFacade.getBoundingBoxDao();
 	}
 	
+	@Override
+	public void save() {
+		type.save();
+		this.type.setId(type.getId());
+		super.save();
+	}	
 }
