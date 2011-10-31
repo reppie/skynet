@@ -9,7 +9,7 @@ class Hashtag(models.Model):
     text = models.CharField(max_length=139, blank=True, null=True)
 
 class Country(models.Model):
-    code = models.CharField(primary_key=True, max_length=2, blank=True, null=True)
+    code = models.CharField(primary_key=True, max_length=4, blank=True, null=True)
     text = models.CharField(max_length=255, blank=True, null=True)
     
 class PlaceType(models.Model):
@@ -168,6 +168,9 @@ class Tweet(models.Model):
             'text': self.text,
             'user_id': self.user_id,
         }
+        
+    class Meta:
+        ordering = ['-created_at']
 
 class TweetKeyword(models.Model):
     tweet = models.ForeignKey(Tweet)

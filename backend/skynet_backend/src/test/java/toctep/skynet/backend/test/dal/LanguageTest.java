@@ -14,7 +14,7 @@ public class LanguageTest extends DomainTest{
 		
 		language = new Language();
 		
-		text = "English";
+		text = "en";
 		language.setText(text);
 	}
 	

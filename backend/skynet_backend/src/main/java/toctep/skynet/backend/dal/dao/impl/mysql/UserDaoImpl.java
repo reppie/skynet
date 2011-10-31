@@ -18,7 +18,7 @@ public class UserDaoImpl extends UserDao {
 			"VALUES " +
 				"(" +
 					user.getId() + "," +
-					user.getPlace().getId() + "," +
+					MySqlUtil.escape(user.getPlace().getId()) + "," +
 					user.isDefaultProfile() + "," +
 					user.getStatusesCount() + "," +
 					user.getProfileBackgroundTile() + "," +
@@ -43,7 +43,7 @@ public class UserDaoImpl extends UserDao {
 					MySqlUtil.escape(user.getProfileBackgroundImageUrl()) + "," +
 					MySqlUtil.escape(user.getProfileBackgroundImageUrlHttps()) + "," +
 					user.isFollowRequestSent() + "," +
-					user.getUrl().getId() + "," +
+					MySqlUtil.escape(user.getUrl().getId()) + "," +
 					user.getTimeZone().getId() + "," +
 					user.getNotifications() + "," +
 					user.isProfileUseBackgroundImage() + "," +
@@ -70,6 +70,8 @@ public class UserDaoImpl extends UserDao {
 		
 		try {
 			user.setName(rs.getString("name"));
+			
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

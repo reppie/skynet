@@ -13,20 +13,20 @@ public class TweetDaoImpl extends TweetDao {
 	public void insert(Domain domain) {
 		Tweet tweet = (Tweet) domain;
 		
-		String query = "INSERT INTO " + tableName +	"VALUES ("
-		+ tweet.getId() + ", '"
-		+ MySqlUtil.escape(tweet.getText()) + ", '"
-		+ tweet.getGeo().getId() + ", '"
-		+ tweet.isTruncated() + ", '"
-		+ tweet.getSourceType().getId() + ", '"
-		+ tweet.isFavorited() + ", '"
-		+ tweet.getInReplyToTweetTwitterId() + ", '"
-		+ tweet.getInReplyToUserTwitterId() + ", '"
-		+ tweet.getRetweetCount() + ", '"
-		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", '"
-		+ MySqlUtil.escape(tweet.getPlace().getId()) + ", '"
-		+ tweet.getUser() + ", '"
-		+ MySqlUtil.escape(tweet.getCoordinates()) + "')";
+		String query = "INSERT INTO " + tableName +	" VALUES ("
+		+ tweet.getId() + ", "
+		+ MySqlUtil.escape(tweet.getText()) + ", "
+		+ tweet.getGeo().getId() + ", "
+		+ tweet.isTruncated() + ", "
+		+ tweet.getSourceType().getId() + ", "
+		+ tweet.isFavorited() + ", "
+		+ tweet.getInReplyToTweetTwitterId() + ", "
+		+ tweet.getInReplyToUserTwitterId() + ", "
+		+ tweet.getRetweetCount() + ", "
+		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", "
+		+ MySqlUtil.escape(tweet.getPlace().getId()) + ", "
+		+ tweet.getUser().getId() + ", "
+		+ MySqlUtil.escape(tweet.getCoordinates()) + ")";
 		
 		MySqlUtil.getInstance().insert(query);
 	}

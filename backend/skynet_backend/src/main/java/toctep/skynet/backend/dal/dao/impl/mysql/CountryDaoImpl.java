@@ -27,7 +27,7 @@ public class CountryDaoImpl extends CountryDao{
 	public Country select(String id) {
 		Country country = new Country();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE code = " + MySqlUtil.escape(id));
 		
 		country.setId(id);
 		try {

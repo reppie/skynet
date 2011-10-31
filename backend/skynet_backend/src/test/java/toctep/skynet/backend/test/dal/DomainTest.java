@@ -35,6 +35,7 @@ import com.mysql.jdbc.Connection;
 public abstract class DomainTest extends TestCase {
 
 	private Connection conn;
+	private MySqlUtil mySqlUtil;
 	
 	private DaoFacade daoFacade;
 	
@@ -61,13 +62,14 @@ public abstract class DomainTest extends TestCase {
 	
 	@Before
 	public void setUp() {
-		conn = MySqlUtil.getInstance(
+		mySqlUtil = MySqlUtil.getInstance(
 				"mysql",
 				"localhost",
 				"skynet_test",
 				"skynet",
 				"asdasd"
-			).getConnection();
+			);
+		conn = mySqlUtil.getConnection();
 		
 		emptyDatabase();
 		
@@ -102,7 +104,7 @@ public abstract class DomainTest extends TestCase {
 	}
 	
 	public void emptyDatabase() {
-		((MySqlUtil) conn).truncateDatabase();
+		mySqlUtil.truncateDatabase();
 	}
 	
 	@Test

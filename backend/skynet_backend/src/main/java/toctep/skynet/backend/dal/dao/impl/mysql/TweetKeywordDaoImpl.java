@@ -14,7 +14,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		int id = MySqlUtil.getInstance().insert(
 			"INSERT INTO " + tableName + " (tweet_id, value, keyword_id) " +
 			"VALUES (" + tweetKeyword.getTweetId() + ", " + 
-                         tweetKeyword.getTweetKeywordValue()+ ", "+
+                         MySqlUtil.escape(tweetKeyword.getTweetKeywordValue()) + ", "+
 						 tweetKeyword.getKeywordId()+")"
 		);
 		
