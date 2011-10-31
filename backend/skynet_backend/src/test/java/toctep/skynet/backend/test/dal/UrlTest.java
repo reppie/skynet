@@ -20,7 +20,7 @@ public class UrlTest extends DomainTest {
 
 	@Override
 	public void testInsert() {
-		urlDao.insert(url);
+		url.save();
 		assertEquals(1, urlDao.count());
 	}
 	
@@ -41,9 +41,9 @@ public class UrlTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		urlDao.insert(url);
+		url.save();
 		assertEquals(1, urlDao.count());
-		urlDao.delete(url);
+		url.delete();
 		assertEquals(0, urlDao.count());
 	}
 

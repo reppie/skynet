@@ -48,8 +48,8 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		GeoType geoType = (GeoType) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + geoType.getId());
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class SourceTypeTest extends DomainTest {
 	
 	@Override
 	public void testSelect() {
-		sourceTypeDao.insert(sourceType);
+		sourceType.save();
 		
 		SourceType postSourceType = (SourceType) sourceTypeDao.select(sourceType.getId());
 		
@@ -48,9 +48,9 @@ public class SourceTypeTest extends DomainTest {
 	
 	@Override
 	public void testDelete() {
-		sourceTypeDao.insert(sourceType);
+		sourceType.save();
 		assertEquals(1, sourceTypeDao.count());
-		sourceTypeDao.delete(sourceType);
+		sourceType.delete();
 		assertEquals(0, sourceTypeDao.count());
 	}
 	

@@ -46,8 +46,8 @@ public class CountryDaoImpl extends CountryDao{
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Country country = (Country) domain;
+		return MySqlUtil.getInstance().exists(tableName, "code = " + MySqlUtil.escape(country.getId()));
 	}
 
 	@Override

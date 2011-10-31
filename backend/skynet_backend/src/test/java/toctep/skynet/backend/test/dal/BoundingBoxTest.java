@@ -57,7 +57,7 @@ public class BoundingBoxTest extends DomainTest{
 	public void testDelete() {
 		boundingBox.save();
 		assertEquals(1, boundingBoxDao.count());
-		boundingBoxDao.delete(boundingBox);
+		boundingBox.delete();
 		assertEquals(0, boundingBoxDao.count());		
 	}
 }

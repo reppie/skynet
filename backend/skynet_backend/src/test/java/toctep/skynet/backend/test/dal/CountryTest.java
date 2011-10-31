@@ -51,9 +51,9 @@ public class CountryTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		countryDao.insert(country);
+		country.save();
 		assertEquals(1, countryDao.count());
-		countryDao.delete(country);
+		country.delete();
 		assertEquals(0, countryDao.count());		
 	}
 	

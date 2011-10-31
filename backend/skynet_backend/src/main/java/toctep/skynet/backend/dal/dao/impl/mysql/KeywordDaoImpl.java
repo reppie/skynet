@@ -59,8 +59,8 @@ public class KeywordDaoImpl extends KeywordDao {
 
 		try {
 			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName + " WHERE " + ((Keyword) domain).getKeyword() + ";");
-			if (rs.first()) {
+			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName + " WHERE keyword = '" + ((Keyword) domain).getKeyword() + "';");
+			if (rs.next()) {
 				exists = true;
 			} else if (rs.getFetchSize() > 1) {
 				System.out.println("ER IS IETS FOUT!!");
@@ -75,8 +75,9 @@ public class KeywordDaoImpl extends KeywordDao {
 				e.printStackTrace();
 			}
 		}
-
-		return exists;
+		
+		Keyword keyword = (Keyword) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + keyword.getId());
 	}
 
 	@Override

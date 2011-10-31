@@ -57,7 +57,7 @@ public class GeoTest extends DomainTest{
 	public void testDelete() {
 		geo.save();
 		assertEquals(1, geoDao.count());
-		geoDao.delete(geo);
+		geo.delete();
 		assertEquals(0, geoDao.count());		
 	}
 	

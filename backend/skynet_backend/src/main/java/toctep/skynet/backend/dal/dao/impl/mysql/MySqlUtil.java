@@ -181,7 +181,7 @@ public class MySqlUtil {
 		try {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName + " WHERE " + where + ";");
-			if (rs.first()) {
+			if (rs.next()) {
 				exists = true;
 			} else if (rs.getFetchSize() > 1) {
 				System.out.println("ER IS IETS FOUT!!");
