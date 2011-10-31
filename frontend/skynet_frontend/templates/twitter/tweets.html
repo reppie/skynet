@@ -15,24 +15,23 @@
 
 {% block main %} 
 
-	<!--Lijst met tweets
+	Lijst met tweets
 	<div class="tweets">
 		
 	</div>
-	De body van de SoLeMa index-->
-	{% if tweets %}
-		{% for tweet in tweets %}
-			<div class="tweet">{{ tweet.text }}</div>
-		{% endfor %}
-	{% else %}
-		{% trans "No tweets to display" %}
-	{% endif %}
- {% endblock %}
+	De body van de SoLeMa index
+{% endblock %}
  
 {% block scripts %} 
 	<script type="text/javascript">
 		$(function(){
-			var tweetList = $(".tweets").TweetList([1,2,3]);
+			var tweetList = $(".tweets").TweetList([
+				{% if tweets %}
+					{% for tweet in tweets %}
+						{{tweet.pk}},
+					{% endfor %}				
+				{% endif %}
+			]);
 		})
 	</script>
 

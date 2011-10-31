@@ -3,3 +3,11 @@
 	font-size: 15px;
 	position: relative;
 }
+.tweet.loading{
+	display:none;
+	
+}
+.tweet.error{
+	background-color: red;
+	color: #000;
+}

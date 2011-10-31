@@ -207,7 +207,7 @@ public class UserTest extends DomainTest {
 	
 	@Override
 	public void testInsert() {
-		userDao.insert(user);
+		user.save();
 		assertEquals(1, userDao.count());
 	}
 	

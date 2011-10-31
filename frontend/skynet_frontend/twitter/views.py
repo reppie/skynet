@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from skynet_frontend.twitter.models import Tweet, Keyword, User
+from skynet_frontend.twitter.models import Tweet, Keyword, TweetKeyword, User
 from jsonrpc import JSONRPCService, jsonremote
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -12,9 +12,9 @@ def index(request):
 def search(request):
     search_string = request.GET.get('q', '')
     if(search_string):
-        tweets = Tweet.objects.filter(keywords__keyword=search_string)
+        tweets = TweetKeyword.objects.filter(keyword__keyword=search_string)
     else:
-        tweets = Tweet.objects.all() 
+        tweets = TweetKeyword.objects.all()
     
     cloud = Keyword.get_keyword_cloud() #TODO: Cloud should be based on search
     return render_to_response("twitter/tweets.html", { 'keywordcloud': cloud, 'tweets': tweets }) 
@@ -50,7 +50,6 @@ class TwitterRpcMethods(object):
     def search_tweets(filters):
         for filter in filters:
             pass
-        
         
         return Tweet.objects.values('id').all()
     

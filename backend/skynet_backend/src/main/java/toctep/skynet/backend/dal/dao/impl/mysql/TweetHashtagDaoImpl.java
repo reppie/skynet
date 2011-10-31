@@ -36,4 +36,10 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 		return false;
 	}
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

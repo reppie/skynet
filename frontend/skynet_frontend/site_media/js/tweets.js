@@ -16,7 +16,7 @@
 			
 		},
 		'TweetList': function(element, tweets){
-			this.$el = element;
+			this.$tweetList = element;
 			this.reset(tweets);
 		},
 		cache:{
@@ -39,26 +39,41 @@
 		},
 		
 	});
-	var tweetListKey = "__TweetList"
-	$.fn.TweetList = function(tweets) {
+	var tweetListKey = "__TweetList";
+	$.fn.TweetList = function(tweetIds) {
 		var tweetList = this.data(tweetListKey);
 		if(!tweetList){
-			tweetList = new api.TweetList(this, tweets);
+			tweetList = new api.TweetList(this, tweetIds);
 			this.data(tweetListKey, tweetList);
-		}else if (tweets){
-			tweetList.reset(tweets);
+		}else if (tweetIds){
+			tweetList.reset(tweetIds);
 		}
 		return tweetList;
     };
 	
-	api.TweetList.prototype.reset = function(tweets){
-		this.$el.empty();
-		this.tweets = tweets || [];
-		if(tweets){
-			for(var index in tweets){
-				var tweet = tweets[index];
-				console.log(tweet);
-			}
+	api.TweetList.prototype.reset = function(tweetIds){
+		var tweetList = this;
+		this.$tweetList.empty();
+		this.tweetIds = tweetIds || [];
+		
+		for(var index in tweetIds){
+			var tweetId = tweetIds[index];
+			var $tweet = $('<div/>').addClass('tweet loading').attr('data-tweet-id', tweetId).html(""+tweetId);
+			this.$tweetList.append($tweet);
+			api.Tweet.get(tweetId, function(tweet){
+				if(tweet){
+					var $tweet = tweetList.$tweetList.find('[data-tweet-id="'+tweet.id+'"]');
+					$tweet.data('tweet', tweet);
+					$tweet.html(tweet.text);
+					$tweet.removeClass("loading");
+				}
+				/*else{
+					console.log(tweetId);
+					$tweet.html("error retrieving tweet id: "+tweetId);
+					$tweet.removeClass("loading");
+					$tweet.addClass("error");
+				}*/
+			});
 		}
 	}
 	
@@ -121,7 +136,6 @@
 		  		callback(tweet);
 		  },
 		  error: function(result){
-		  	console.log(result);
 	  		callback(null);
 		  },
 	  	});

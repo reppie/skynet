@@ -14,7 +14,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
@@ -35,35 +35,20 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 	}
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = (Connection) this.getConnection();
-		
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
-		Statement stmt = null;
+		int id = MySqlUtil.getInstance().insert(
+			"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
+			"VALUES (" + boundingBox.getType() + ", '" + 
+					     boundingBox.getCoordinates() + "')"
+		);
 		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-					"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
-					"VALUES (" + boundingBox.getType() + ", '" 
-								+ boundingBox.getCoordinates() + "')",					
-					Statement.RETURN_GENERATED_KEYS
-				);
-			boundingBox.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		boundingBox.setId(id);
 	}
 
 	@Override
 	public BoundingBox select(long id) {
-		Connection conn = (Connection) this.getConnection();
+		Connection conn = MySqlUtil.getInstance().getConnection();
 		
 		BoundingBox boundingBox = null;
 		
@@ -103,4 +88,11 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 }
