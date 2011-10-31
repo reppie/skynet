@@ -213,7 +213,7 @@ public class UserTest extends DomainTest {
 	
 	@Override
 	public void testSelect() {
-		userDao.insert(user);
+		user.save();
 		
 		User postUser = (User) userDao.select(user.getId());
 		
@@ -262,7 +262,7 @@ public class UserTest extends DomainTest {
 	
 	@Override
 	public void testDelete() {
-		userDao.insert(user);
+		user.save();
 		assertEquals(1, userDao.count());
 		userDao.delete(user);
 		assertEquals(0, userDao.count());

@@ -15,7 +15,7 @@ public class CountryTest extends DomainTest{
 		
 		country = new Country();
 		
-		String id = "NL";
+		id = "NL";
 		country.setId(id);
 		
 		text = "Netherlands";
@@ -33,7 +33,6 @@ public class CountryTest extends DomainTest{
 	public void testInsert() {
 		country.save();
 		assertEquals(1, countryDao.count());
-		assertEquals(id, country.getId());
 	}
 	
 	@Override

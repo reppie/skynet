@@ -325,4 +325,17 @@ public class User extends DomainLongPk {
 	public void setDao() {
 		dao = daoFacade.getUserDao();
 	}
+	
+	@Override
+	public void save() {
+		place.save();
+		language.save();
+		url.save();
+		timeZone.save();	
+		this.place.setId(place.getId());
+		this.language.setId(language.getId());
+		this.url.setId(url.getId());
+		this.timeZone.setId(timeZone.getId());
+		super.save();
+	}	
 }

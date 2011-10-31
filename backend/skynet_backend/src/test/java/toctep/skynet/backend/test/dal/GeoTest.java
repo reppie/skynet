@@ -39,7 +39,7 @@ public class GeoTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		geoDao.insert(geo);
+		geo.save();
 		
 		Geo postGeo = (Geo) geoDao.select(geo.getId());
 		
@@ -55,7 +55,7 @@ public class GeoTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		geoDao.insert(geo);
+		geo.save();
 		assertEquals(1, geoDao.count());
 		geoDao.delete(geo);
 		assertEquals(0, geoDao.count());		
