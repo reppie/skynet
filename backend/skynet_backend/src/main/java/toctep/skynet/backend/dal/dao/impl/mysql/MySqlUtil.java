@@ -180,7 +180,7 @@ public class MySqlUtil {
 
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE " + where);
+			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName + " WHERE " + where + ";");
 			if (rs.first()) {
 				exists = true;
 			} else if (rs.getFetchSize() > 1) {

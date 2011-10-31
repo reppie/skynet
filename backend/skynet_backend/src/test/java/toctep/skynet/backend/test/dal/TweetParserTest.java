@@ -1,7 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,6 +38,7 @@ public class TweetParserTest {
 		
 		Keyword keyword = new Keyword();
 		keyword.setKeyword("elfstedentocht");
+		assertFalse(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht'"));
 		keyword.save();
 		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
 		assertTrue(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht';"));

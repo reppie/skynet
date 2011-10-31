@@ -59,7 +59,7 @@ public class KeywordDaoImpl extends KeywordDao {
 
 		try {
 			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE '" + ((Keyword) domain).getKeyword() + "';");
+			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName + " WHERE " + ((Keyword) domain).getKeyword() + ";");
 			if (rs.first()) {
 				exists = true;
 			} else if (rs.getFetchSize() > 1) {
