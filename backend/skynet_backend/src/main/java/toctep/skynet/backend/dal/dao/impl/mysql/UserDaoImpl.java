@@ -37,19 +37,19 @@ public class UserDaoImpl extends UserDao {
 					user.getCreatedAt() + "," +
 					user.isDefaultProfileImage() + "," +
 					user.getFollowersCount() + "," +
-					user.getProfileImageUrl() + "," +
-					user.getProfileImageUrlHttps() + "," +
+					MySqlUtil.escape(user.getProfileImageUrl()) + "," +
+					MySqlUtil.escape(user.getProfileImageUrlHttps()) + "," +
 					user.isGeoEnabled() + "," +
-					user.getProfileBackgroundImageUrl() + "," +
-					user.getProfileBackgroundImageUrlHttps() + "," +
+					MySqlUtil.escape(user.getProfileBackgroundImageUrl()) + "," +
+					MySqlUtil.escape(user.getProfileBackgroundImageUrlHttps()) + "," +
 					user.isFollowRequestSent() + "," +
 					user.getUrl().getId() + "," +
 					user.getTimeZone().getId() + "," +
 					user.getNotifications() + "," +
 					user.isProfileUseBackgroundImage() + "," +
 					user.getFriendsCount() + "," +
-					user.getProfileSideBarFillColor() + "," +
-					user.getScreenName() + "," +
+					MySqlUtil.escape(user.getProfileSideBarFillColor()) + "," +
+					MySqlUtil.escape(user.getScreenName()) + "," +
 					user.isShowAllInlineMedia() + "," +
 					user.isTranslator() + "," +
 					user.getListedCount() +
