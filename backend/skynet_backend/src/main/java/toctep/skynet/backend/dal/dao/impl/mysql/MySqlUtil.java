@@ -9,6 +9,25 @@ import java.sql.SQLException;
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
+import toctep.skynet.backend.dal.dao.BoundingBoxDao;
+import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
+import toctep.skynet.backend.dal.dao.CountryDao;
+import toctep.skynet.backend.dal.dao.GeoDao;
+import toctep.skynet.backend.dal.dao.GeoTypeDao;
+import toctep.skynet.backend.dal.dao.HashtagDao;
+import toctep.skynet.backend.dal.dao.LanguageDao;
+import toctep.skynet.backend.dal.dao.PlaceDao;
+import toctep.skynet.backend.dal.dao.PlaceTypeDao;
+import toctep.skynet.backend.dal.dao.SourceTypeDao;
+import toctep.skynet.backend.dal.dao.TimeZoneDao;
+import toctep.skynet.backend.dal.dao.TweetContributorDao;
+import toctep.skynet.backend.dal.dao.TweetDao;
+import toctep.skynet.backend.dal.dao.TweetHashtagDao;
+import toctep.skynet.backend.dal.dao.TweetMentionDao;
+import toctep.skynet.backend.dal.dao.TweetUrlDao;
+import toctep.skynet.backend.dal.dao.UrlDao;
+import toctep.skynet.backend.dal.dao.UserDao;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -28,7 +47,7 @@ public class MySqlUtil {
 	
 	private MySqlUtil() {
 		try {
-		    Wini ini = new Wini(new File("conf/jdbc.ini"));
+		    Wini ini = new Wini(new File("conf/mysql.ini"));
 	        driver = ini.get("jdbc", "driver", String.class);
 	        host = ini.get("jdbc", "host", String.class);
 	        name = ini.get("jdbc", "name", String.class);
@@ -107,6 +126,8 @@ public class MySqlUtil {
 	public int insert(String query) {
 		int id = 0;
 		
+		System.out.println(query);
+		
 		Statement stmt = null;
 		
 		try {
@@ -157,8 +178,31 @@ public class MySqlUtil {
 	}
 	
 	public boolean exists(String tableName, String where) {
-		// TODO
-		return false;
+		boolean exists = false;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = (Statement) conn.createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE " + where);
+			if (rs.getFetchSize() == 1) {
+				exists = true;
+			} else if (rs.getFetchSize() > 1) {
+				System.out.println("ER IS IETS FOUT!!");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return exists;
 	}
 	
 	public int count(String tableName) {
@@ -184,5 +228,37 @@ public class MySqlUtil {
 		}
 
 		return count;
+	}
+	
+	public void truncateDatabase() {
+		try {
+			Statement stmt = (Statement) conn.createStatement();
+			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + CountryDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + GeoDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE twitter_tweet_keywords"); // TODO
+			stmt.executeQuery("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + UrlDao.TABLE_NAME);
+			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static String escape(String str) {
+		str = "\"" + str + "\"";
+		return str;
 	}
 }

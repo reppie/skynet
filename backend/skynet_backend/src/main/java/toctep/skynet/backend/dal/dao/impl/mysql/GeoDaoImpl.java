@@ -21,7 +21,7 @@ public class GeoDaoImpl extends GeoDao{
 		
 		int id = MySqlUtil.getInstance().insert(
 				"INSERT INTO " + tableName + " (geo_type_id, coordinates) " +
-				"VALUES (" + geo.getType() + ", '" 
+				"VALUES (" + geo.getType().getId() + ", '" 
 							+ geo.getCoordinates() + "')"					
 				);
 		geo.setId(id);

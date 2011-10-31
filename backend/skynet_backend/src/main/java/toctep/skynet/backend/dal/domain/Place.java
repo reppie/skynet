@@ -14,7 +14,7 @@ public class Place extends DomainStringPk {
 	private String postalCode;
 	private String phone;
 	private String twitter;
-	private String url;
+	private Url url;
 	private String appId;
 
 	public PlaceType getType() {
@@ -113,11 +113,11 @@ public class Place extends DomainStringPk {
 		this.twitter = twitter;
 	}
 
-	public String getUrl() {
+	public Url getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(Url url) {
 		this.url = url;
 	}
 
