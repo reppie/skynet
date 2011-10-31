@@ -51,6 +51,7 @@ public class TweetParser {
 	}
 	
 	public boolean parse(Status status) {
+		parsePlace(status.getPlace());
 		parseBoundingBoxType(status.getPlace());
 		parseBoundingBox(status.getPlace());
 		parseCountry(status.getPlace());
@@ -60,7 +61,6 @@ public class TweetParser {
 		parsePlaceType(status.getPlace());
 		parseSourceType(status);
 		parseTimeZone(status.getUser());
-		parsePlace(status.getPlace());
 		parseUser(status.getUser());
 		parseTweet(status);
 		parseUrl(status);
