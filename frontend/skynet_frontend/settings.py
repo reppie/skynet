@@ -28,6 +28,14 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
     }
+    'test_mysql': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test_skynet', 
+        'USER': 'skynet',
+        'PASSWORD': 'asdasd',
+        'HOST': '',
+        'PORT': '',
+    }
 }
 
 if 'test' in sys.argv:
