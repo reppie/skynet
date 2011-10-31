@@ -52,7 +52,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	@Override
 	public boolean exists(Domain domain) {
 		Place place = (Place) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + place.getId());
+		return MySqlUtil.getInstance().exists(tableName, "id = " + MySqlUtil.escape(place.getId()));
 	}
 
 	@Override
