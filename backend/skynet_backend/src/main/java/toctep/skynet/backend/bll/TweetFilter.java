@@ -3,6 +3,8 @@ package toctep.skynet.backend.bll;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import toctep.skynet.backend.dal.domain.Tweet;
+
 public class TweetFilter {
 	private String[] commonWords = { "de", "het", "een" };
 	private static final Pattern SPECIAL_CHAR_REGEX = Pattern.compile("[^@\\wa-zA-Z#\\w\\s]");
@@ -10,6 +12,12 @@ public class TweetFilter {
 	private static final Pattern MULTIPLE_SPACE_REGEX = Pattern.compile("\\s+");
 	private Matcher matcher;
 	
+	public String filterTweet(Tweet tweet) {
+		String filteredTweet = filterCommonWords(tweet.getText());
+		filteredTweet = filterSpecialCharacters(filteredTweet);
+		
+		return filteredTweet;
+	}
 	
 	public String filterCommonWords(String tweetText) {
 		String cleanTweet = tweetText;

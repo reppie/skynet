@@ -7,85 +7,33 @@ import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.PlaceType;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 public class PlaceTypeDaoImpl extends PlaceTypeDao {
 
 	@Override
-	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
-		PlaceType placeType = (PlaceType) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + placeType.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
-	}
-
-	@Override
 	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		PlaceType placeType = (PlaceType) domain;
 		
-		Statement stmt = null;
+		int id = MySqlUtil.getInstance().insert(
+			"INSERT INTO " + tableName + " (text) VALUES ('" + placeType.getText() + "')"
+		);
 		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-					"INSERT INTO " + tableName + " (text) VALUES ('" + placeType.getText() + "')",
-					Statement.RETURN_GENERATED_KEYS
-				);
-			placeType.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		placeType.setId(id);
 	}
 
 	@Override
 	public PlaceType select(long id) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
+		PlaceType placeType = new PlaceType();
 		
-		PlaceType placeType = null;
-		
-		Statement stmt = null;
-		ResultSet rs = null;
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);			
+
+		placeType.setId(id);
 		
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id = " + id);			
-			rs.first();
-			placeType = new PlaceType();
-			placeType.setId(id);
 			placeType.setText(rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
+		
 		return placeType;
 	}
 
@@ -96,6 +44,12 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	}
 
 	@Override
+	public void delete(Domain domain) {
+		PlaceType placeType = (PlaceType) domain;
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + placeType.getId());		
+	}
+	
+	@Override
 	public boolean exists(Domain domain) {
 		// TODO Auto-generated method stub
 		return false;
@@ -103,8 +57,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return MySqlUtil.getInstance().count(tableName);
 	}
 
 }

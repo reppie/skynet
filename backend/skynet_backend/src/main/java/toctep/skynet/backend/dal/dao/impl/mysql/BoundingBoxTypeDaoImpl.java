@@ -7,84 +7,36 @@ import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Domain;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
 public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
 	public void delete(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
-		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());	
 	}
 
 	@Override
 	public void insert(Domain domain) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
-		
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
+
+		int id = MySqlUtil.getInstance().insert(
+					"INSERT INTO " + tableName + " (text) VALUES ('" + boundingBoxType.getText() + "')"
+					);
 		
-		Statement stmt = null;
-		
-		try {
-			stmt = (Statement) conn.createStatement();
-			int id = stmt.executeUpdate(
-					"INSERT INTO " + tableName + " (text) VALUES ('" + boundingBoxType.getText() + "')",
-					Statement.RETURN_GENERATED_KEYS
-				);
-			boundingBoxType.setId(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		boundingBoxType.setId(id);
 	}
 
 	@Override
 	public BoundingBoxType select(long id) {
-		Connection conn = MySqlUtil.getInstance().getConnection();
+		BoundingBoxType boundingBoxType = new BoundingBoxType();
 		
-		BoundingBoxType boundingBoxType = null;
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
 		
-		Statement stmt = null;
-		ResultSet rs = null;
-		
+		boundingBoxType.setId(id);
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE id = " + id);			
-			rs.first();
-			boundingBoxType = new BoundingBoxType();
-			boundingBoxType.setId(id);
 			boundingBoxType.setText(rs.getString("text"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return boundingBoxType;
 	}
