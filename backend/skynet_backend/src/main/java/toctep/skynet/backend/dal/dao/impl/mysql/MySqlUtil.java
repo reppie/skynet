@@ -180,11 +180,13 @@ public class MySqlUtil {
 
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName + " WHERE " + where + ";");
-			if (rs.next()) {
+			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + where);
+			int counter = 0;
+			while (rs.next()) {
+				counter++;
+			}
+			if (counter > 0) {
 				exists = true;
-			} else if (rs.getFetchSize() > 1) {
-				System.out.println("ER IS IETS FOUT!!");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
