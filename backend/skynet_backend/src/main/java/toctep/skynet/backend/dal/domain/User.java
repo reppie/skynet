@@ -24,8 +24,8 @@ public class User extends DomainLongPk {
 	private boolean defaultProfileImage;
 	private int followersCount;
 	private boolean geoEnabled;
-	private String profileBackgroundImageUrl;
-	private String profileBackgroundImageUrlHttps;
+	private Url profileBackgroundImageUrl;
+	private Url profileBackgroundImageUrlHttps;
 	private boolean followRequestSent;
 	private Url url;
 	private TimeZone timeZone;
@@ -34,8 +34,8 @@ public class User extends DomainLongPk {
 	private int friendsCount;
 	private String profileSideBarFillColor;
 	private String screenName;
-	private String profileImageUrl;
-	private String profileImageUrlHttps;
+	private Url profileImageUrl;
+	private Url profileImageUrlHttps;
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
 	private int listedCount;
@@ -200,20 +200,20 @@ public class User extends DomainLongPk {
 		this.geoEnabled = geoEnabled;
 	}
 
-	public String getProfileBackgroundImageUrl() {
+	public Url getProfileBackgroundImageUrl() {
 		return profileBackgroundImageUrl;
 	}
 
-	public void setProfileBackgroundImageUrl(String profileBackgroundImageUrl) {
+	public void setProfileBackgroundImageUrl(Url profileBackgroundImageUrl) {
 		this.profileBackgroundImageUrl = profileBackgroundImageUrl;
 	}
 
-	public String getProfileBackgroundImageUrlHttps() {
+	public Url getProfileBackgroundImageUrlHttps() {
 		return profileBackgroundImageUrlHttps;
 	}
 
 	public void setProfileBackgroundImageUrlHttps(
-			String profileBackgroundImageUrlHttps) {
+			Url profileBackgroundImageUrlHttps) {
 		this.profileBackgroundImageUrlHttps = profileBackgroundImageUrlHttps;
 	}
 
@@ -281,19 +281,19 @@ public class User extends DomainLongPk {
 		this.screenName = screenName;
 	}
 
-	public String getProfileImageUrl() {
+	public Url getProfileImageUrl() {
 		return profileImageUrl;
 	}
 
-	public void setProfileImageUrl(String profileImageUrl) {
+	public void setProfileImageUrl(Url profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
 	}
 	
-	public String getProfileImageUrlHttps() {
+	public Url getProfileImageUrlHttps() {
 		return profileImageUrlHttps;
 	}	
 	
-	public void setProfileImageUrlHttps(String profileImageUrlHttps) {
+	public void setProfileImageUrlHttps(Url profileImageUrlHttps) {
 		this.profileImageUrlHttps = profileImageUrlHttps;
 	}
 
@@ -332,10 +332,18 @@ public class User extends DomainLongPk {
 		language.save();
 		url.save();
 		timeZone.save();	
+		profileBackgroundImageUrl.save();
+		profileBackgroundImageUrlHttps.save();
+		profileImageUrl.save();
+		profileImageUrlHttps.save();
 		this.place.setId(place.getId());
 		this.language.setId(language.getId());
 		this.url.setId(url.getId());
 		this.timeZone.setId(timeZone.getId());
+		this.profileBackgroundImageUrl.setId(profileBackgroundImageUrl.getId());
+		this.profileBackgroundImageUrlHttps.setId(profileBackgroundImageUrlHttps.getId());
+		this.profileImageUrl.setId(profileImageUrl.getId());
+		this.profileImageUrlHttps.setId(profileImageUrlHttps.getId());
 		super.save();
 	}	
 }

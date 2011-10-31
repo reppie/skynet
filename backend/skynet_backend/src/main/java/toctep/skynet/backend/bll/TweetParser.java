@@ -195,16 +195,36 @@ public class TweetParser {
         user.setDefaultProfileImage(false); //Twitter4j has no support for this?
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
-        user.setProfileBackgroundImageUrl(userStatus.getProfileBackgroundImageUrl());
-        user.setProfileBackgroundImageUrlHttps(userStatus.getProfileBackgroundImageUrlHttps());
+        
+        Url profileBgUrl = new Url();
+        if(userStatus.getProfileBackgroundImageUrl() != null) {
+        	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
+        }
+        user.setProfileBackgroundImageUrl(profileBgUrl);
+
+        Url profileBgUrlHttps = new Url();
+        if(userStatus.getProfileBackgroundImageUrlHttps() != null) {
+        	profileBgUrlHttps.setId(userStatus.getProfileBackgroundImageUrlHttps());
+        }
+        
+        user.setProfileBackgroundImageUrl(profileBgUrl);
         user.setFollowRequestSent(userStatus.isFollowRequestSent());
         user.setNotifications(0); //Twitter4j has no support for this?
         user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
         user.setFriendsCount(userStatus.getFriendsCount());
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
         user.setScreenName(userStatus.getScreenName());
-        user.setProfileImageUrl(userStatus.getProfileImageURL().toExternalForm());
-        user.setProfileImageUrlHttps(userStatus.getProfileImageUrlHttps().toExternalForm());
+        
+        Url profileImageUrl = new Url();
+        if(userStatus.getProfileImageURL().toExternalForm() != null) {
+        	profileImageUrl.setId(userStatus.getProfileImageURL().toExternalForm());
+        }        
+        
+        Url profileImageUrlHttps = new Url();
+        if(userStatus.getProfileImageUrlHttps().toExternalForm() != null) {
+        	profileImageUrlHttps.setId(userStatus.getProfileImageUrlHttps().toExternalForm());
+        } 
+        
         user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
         user.setTranslator(userStatus.isTranslator());
         user.setListedCount(userStatus.getListedCount());   
