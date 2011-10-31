@@ -1,6 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.BoundingBox;
+import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Place;
 import toctep.skynet.backend.dal.domain.PlaceType;
@@ -39,6 +40,7 @@ public class PlaceTest extends DomainTest{
 		place.setType(placeType);
 		
 		boundingBox = new BoundingBox();
+		boundingBox.setType(new BoundingBoxType());
 		place.setBoundingBox(boundingBox);
 		
 		name = "TestName";
@@ -137,7 +139,7 @@ public class PlaceTest extends DomainTest{
 	public void testDelete() {
 		place.save();
 		assertEquals(1, placeDao.count());
-		placeDao.delete(place);
+		place.delete();
 		assertEquals(0, placeDao.count());
 	}
 	

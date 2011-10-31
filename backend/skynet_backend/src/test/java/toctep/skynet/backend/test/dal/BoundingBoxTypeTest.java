@@ -33,7 +33,7 @@ public class BoundingBoxTypeTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		boundingBoxTypeDao.insert(boundingBoxType);
+		boundingBoxType.save();
 		
 		BoundingBoxType postBoundingBoxType = (BoundingBoxType) boundingBoxTypeDao.select(boundingBoxType.getId());
 		
@@ -48,9 +48,9 @@ public class BoundingBoxTypeTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		boundingBoxTypeDao.insert(boundingBoxType);
+		boundingBoxType.save();
 		assertEquals(1, boundingBoxTypeDao.count());
-		boundingBoxTypeDao.delete(boundingBoxType);
+		boundingBoxType.delete();
 		assertEquals(0, boundingBoxTypeDao.count());		
 	}
 	

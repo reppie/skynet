@@ -52,8 +52,8 @@ public class LanguageDaoImpl extends LanguageDao{
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		Language language = (Language) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + language.getId());
 	}
 
 	@Override

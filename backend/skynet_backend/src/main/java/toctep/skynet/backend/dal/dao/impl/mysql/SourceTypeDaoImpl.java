@@ -51,8 +51,8 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		SourceType sourceType = (SourceType) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + sourceType.getId());
 	}
 
 	@Override

@@ -2,10 +2,18 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
+import toctep.skynet.backend.dal.domain.BoundingBox;
+import toctep.skynet.backend.dal.domain.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Geo;
+import toctep.skynet.backend.dal.domain.GeoType;
+import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
+import toctep.skynet.backend.dal.domain.PlaceType;
 import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.TimeZone;
 import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.User;
 
 public class TweetTest extends DomainTest {
@@ -40,7 +48,7 @@ public class TweetTest extends DomainTest {
 		tweet.setText(text);
 		
 		geo = new Geo();
-		geo.setId(1);
+		geo.setType(new GeoType());
 		tweet.setGeo(geo);
 		
 		truncated = false;
@@ -64,13 +72,23 @@ public class TweetTest extends DomainTest {
 		retweetCount = 0L;
 		tweet.setRetweetCount(retweetCount);
 		
-		createdAt = new java.sql.Date(0);
+		createdAt = new Date(0);
 		tweet.setCreatedAt(createdAt);
-		
+				
 		place = new Place();
+		place.setType(new PlaceType());
+		BoundingBox boundingBox = new BoundingBox();
+		boundingBox.setType(new BoundingBoxType());
+		place.setBoundingBox(boundingBox);
+		place.setUrl(new Url());
+		place.setCountry(new Country());
 		tweet.setPlace(place);
 		
 		user = new User();
+		user.setPlace(place);
+		user.setLanguage(new Language());
+		user.setUrl(new Url());
+		user.setTimeZone(new TimeZone());
 		tweet.setUser(user);
 		
 		coordinates = "test";
@@ -132,7 +150,7 @@ public class TweetTest extends DomainTest {
 	public void testDelete() {
 		tweet.save();
 		assertEquals(1, tweetDao.count());
-		tweetDao.delete(tweet);
+		tweet.delete();
 		assertEquals(0, tweetDao.count());
 	}
 

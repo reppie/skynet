@@ -93,8 +93,8 @@ public class UserDaoImpl extends UserDao {
 
 	@Override
 	public boolean exists(Domain domain) {
-		// TODO Auto-generated method stub
-		return false;
+		User user = (User) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id = " + user.getId());
 	}
 
 	@Override

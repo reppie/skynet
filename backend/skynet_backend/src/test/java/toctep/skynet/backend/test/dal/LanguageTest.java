@@ -33,7 +33,7 @@ public class LanguageTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		languageDao.insert(language);
+		language.save();
 		
 		Language postLanguage = (Language) languageDao.select(language.getId());
 		
@@ -48,9 +48,9 @@ public class LanguageTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		languageDao.insert(language);
+		language.save();
 		assertEquals(1, languageDao.count());
-		languageDao.delete(language);
+		language.delete();
 		assertEquals(0, languageDao.count());		
 	}
 
