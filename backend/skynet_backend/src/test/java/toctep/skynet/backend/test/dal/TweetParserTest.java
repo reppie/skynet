@@ -48,10 +48,12 @@ public class TweetParserTest {
 		keyword.save();
 		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
 		
+		keyword = new Keyword();
 		keyword.setKeyword("elfSTEDENtocht");
 		keyword.save();
 		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
 		
+		keyword = new Keyword();
 		keyword.setKeyword("wilfried");
 		keyword.save();
 		assertEquals("keyword count: ", 2, MySqlUtil.getInstance().count("twitter_keyword"));
