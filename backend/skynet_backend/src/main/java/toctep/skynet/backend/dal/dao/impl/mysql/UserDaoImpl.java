@@ -13,11 +13,49 @@ public class UserDaoImpl extends UserDao {
 	public void insert(Domain domain) {
 		User user = (User) domain;
 		
-		int id = MySqlUtil.getInstance().insert(
-			"INSERT INTO " + tableName + " (name) VALUES ('" + user.getName() + "')"
-		);
+		String query = 
+			"INSERT INTO " + tableName + " " +
+			"VALUES " +
+				"(" +
+					user.getId() + "," +
+					user.getPlace().getId() + "," +
+					user.isDefaultProfile() + "," +
+					user.getStatusesCount() + "," +
+					user.getProfileBackgroundTile() + "," +
+					user.getLanguage().getId() + "," +
+					MySqlUtil.escape(user.getProfileLinkColor()) + "," +
+					user.getFollowing() + "," +
+					user.getFavouritesCount() + "," +
+					user.isProtected() + "," +
+					MySqlUtil.escape(user.getProfileTextColor()) + "," +
+					user.isVerified() + "," +
+					user.isContributorsEnabled() + "," +
+					MySqlUtil.escape(user.getDescription()) + "," +
+					MySqlUtil.escape(user.getName()) + "," +
+					MySqlUtil.escape(user.getProfileSidebarBorderColor()) + "," +
+					MySqlUtil.escape(user.getProfileBackgroundColor()) + "," +
+					user.getCreatedAt() + "," +
+					user.isDefaultProfileImage() + "," +
+					user.getFollowersCount() + "," +
+					user.getProfileImageUrl() + "," +
+					user.getProfileImageUrlHttps() + "," +
+					user.isGeoEnabled() + "," +
+					user.getProfileBackgroundImageUrl() + "," +
+					user.getProfileBackgroundImageUrlHttps() + "," +
+					user.isFollowRequestSent() + "," +
+					user.getUrl().getId() + "," +
+					user.getTimeZone().getId() + "," +
+					user.getNotifications() + "," +
+					user.isProfileUseBackgroundImage() + "," +
+					user.getFriendsCount() + "," +
+					user.getProfileSideBarFillColor() + "," +
+					user.getScreenName() + "," +
+					user.isShowAllInlineMedia() + "," +
+					user.isTranslator() + "," +
+					user.getListedCount() +
+				")";
 		
-		user.setId(id);
+		MySqlUtil.getInstance().insert(query);
 	}
 	
 	@Override
