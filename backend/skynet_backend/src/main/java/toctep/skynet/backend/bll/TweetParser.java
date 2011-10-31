@@ -41,8 +41,7 @@ public class TweetParser {
 		
 	private static TweetParser instance;
 	
-	private TweetParser() {
-	}
+	private TweetParser() { }
 	
 	public static TweetParser getInstance() {
 		if (instance == null) {
@@ -74,6 +73,7 @@ public class TweetParser {
 	private void parseBoundingBoxType(twitter4j.Place place) {
         boundingBoxType = new BoundingBoxType();
         boundingBoxType.setText(place.getBoundingBoxType());
+        boundingBoxType.save();
 	}
 	
 	private void parseBoundingBox(twitter4j.Place place) {
@@ -87,17 +87,20 @@ public class TweetParser {
         }        
         boundingBox.setCoordinates(coordinates);
         boundingBox.setType(boundingBoxType);
+        boundingBox.save();
 	}
 
     private void parseCountry(twitter4j.Place place) {
         country = new Country();
         country.setId(place.getCountryCode());
         country.setText(place.getCountry());
+        country.save();
     }
 
     private void parseGeoType(twitter4j.Place place) {        
         geoType = new GeoType();
         geoType.setText(place.getGeometryType());
+        geoType.save();
     }
 
     private void parseGeo(twitter4j.Place place) {
@@ -110,28 +113,33 @@ public class TweetParser {
         	}
         }        
         geo.setCoordinates(geoCoordinates);
-        geo.setType(geoType);    	
+        geo.setType(geoType);   
+        geo.save();
     }
 
     private void parseLanguage(twitter4j.User user) {
         language = new Language();
-        language.setText(user.getLang()); 
+        language.setText(user.getLang());
+        language.save();
     }
     
     private void parsePlaceType(twitter4j.Place place) {
         placeType = new PlaceType();
         placeType.setText(place.getPlaceType());
+        placeType.save();
     }
     
     private void parseSourceType(Status status) {
         sourceType = new SourceType();
         sourceType.setText(status.getSource());
+        sourceType.save();
     }
     
     private void parseTimeZone(twitter4j.User user) {
         timeZone = new TimeZone();
         timeZone.setTimeZone(user.getTimeZone());
-        timeZone.setUtcOffset(user.getUtcOffset()); 
+        timeZone.setUtcOffset(user.getUtcOffset());
+        timeZone.save();
     }
     
     private void parsePlace(twitter4j.Place placeStatus) {
@@ -151,6 +159,7 @@ public class TweetParser {
         place.setType(placeType);
         place.setBoundingBox(boundingBox);
         place.setCountry(country);
+        place.save();
     }
     
     private void parseUser(twitter4j.User userStatus) {
@@ -192,6 +201,7 @@ public class TweetParser {
         Url userUrl = new Url();
         userUrl.setId(userStatus.getURL().toExternalForm());
         user.setTimeZone(timeZone);
+        user.save();
     }
     
     private void parseTweet(Status status) {
@@ -208,15 +218,17 @@ public class TweetParser {
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
         tweet.setUser(user);
+        tweet.save();
     }
 
     private void parseUrl(Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
             Url url = new Url();
             url.setId(urlEntity.getDisplayURL());
-            TweetUrl tweetURL = new TweetUrl();
-            tweetURL.setTweet(tweet);
-            tweetURL.setUrl(url);
+            TweetUrl tweetUrl = new TweetUrl();
+            tweetUrl.setTweet(tweet);
+            tweetUrl.setUrl(url);
+            tweetUrl.save();
         }
     }
     
@@ -227,6 +239,7 @@ public class TweetParser {
             TweetHashtag tweetHashtag = new TweetHashtag();
             tweetHashtag.setHashtag(hashtag);
             tweetHashtag.setTweet(tweet);
+            tweetHashtag.save();
         } 
     }
 
@@ -235,6 +248,7 @@ public class TweetParser {
             TweetContributor tweetContributor = new TweetContributor();
             tweetContributor.setTweet(tweet);
             tweetContributor.setUserTwitterId(contributor);
+            tweetContributor.save();
         }
     }
     
@@ -243,6 +257,7 @@ public class TweetParser {
             TweetMention tweetMention = new TweetMention();
             tweetMention.setTweet(tweet);
             tweetMention.setUser(mentionEntity.getId());
+            tweetMention.save();
         }
     }	
 }
