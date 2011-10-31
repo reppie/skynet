@@ -3,12 +3,12 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Statement;
-
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 import toctep.skynet.backend.dal.domain.Keyword;
+
+import com.mysql.jdbc.Statement;
 
 public class KeywordDaoImpl extends KeywordDao {
 
@@ -26,8 +26,17 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public DomainLongPk select(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Keyword keyword = new Keyword();
+		
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		
+		keyword.setId(id);
+		try {
+			keyword.setKeyword(rs.getString("keyword"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return keyword;
 	}
 
 	@Override
