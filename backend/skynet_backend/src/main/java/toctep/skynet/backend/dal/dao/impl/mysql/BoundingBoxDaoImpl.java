@@ -21,7 +21,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao{
 		
 		int id = MySqlUtil.getInstance().insert(
 			"INSERT INTO " + tableName + " (bounding_box_type_id, coordinates) " +
-			"VALUES (" + boundingBox.getType() + ", '" + 
+			"VALUES (" + boundingBox.getType().getId() + ", '" + 
 					     boundingBox.getCoordinates() + "')"
 		);
 		boundingBox.setId(id);

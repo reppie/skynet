@@ -55,8 +55,6 @@ public class UserDaoImpl extends UserDao {
 					user.getListedCount() +
 				")";
 		
-		System.out.println(query);
-		
 		MySqlUtil.getInstance().insert(query);
 	}
 	

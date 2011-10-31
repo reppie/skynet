@@ -1,7 +1,5 @@
 package toctep.skynet.backend.test.dal;
 
-import java.sql.SQLException;
-
 import junit.framework.TestCase;
 
 import org.junit.After;
@@ -29,11 +27,10 @@ import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
-import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
+import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 public abstract class DomainTest extends TestCase {
 
@@ -105,32 +102,7 @@ public abstract class DomainTest extends TestCase {
 	}
 	
 	public void emptyDatabase() {
-		try {
-			Statement stmt = (Statement) conn.createStatement();
-			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE twitter_coordinates"); // TODO
-			stmt.executeQuery("TRUNCATE TABLE twitter_coordinatestype"); // TODO
-			stmt.executeQuery("TRUNCATE TABLE " + CountryDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + GeoDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE twitter_tweetindex"); // TODO
-			stmt.executeQuery("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + UrlDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		((MySqlUtil) conn).truncateDatabase();
 	}
 	
 	@Test
