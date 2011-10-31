@@ -157,8 +157,27 @@ public class MySqlUtil {
 	}
 	
 	public boolean exists(String tableName, String where) {
-		// TODO
-		return false;
+		boolean exists = false;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = (Statement) conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + where);
+			exists = rs.first();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return exists;
 	}
 	
 	public int count(String tableName) {

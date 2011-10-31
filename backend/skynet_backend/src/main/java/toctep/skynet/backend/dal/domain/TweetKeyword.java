@@ -2,14 +2,14 @@ package toctep.skynet.backend.dal.domain;
 
 public class TweetKeyword extends DomainLongPk {
 	
-	private int tweetId;
+	private long tweetId;
 	private String tweetKeywordValue;
-	private int keywordId;
+	private long keywordId;
 	
-	public int getTweetId() {
+	public long getTweetId() {
 		return tweetId;
 	}
-	public void setTweetId(int tweetId) {
+	public void setTweetId(long tweetId) {
 		this.tweetId = tweetId;
 	}
 	
@@ -20,10 +20,10 @@ public class TweetKeyword extends DomainLongPk {
 		this.tweetKeywordValue = tweetKeywordValue;
 	}
 	
-	public int getKeywordId() {
+	public long getKeywordId() {
 		return keywordId;
 	}
-	public void setKeywordId(int keywordId) {
+	public void setKeywordId(long keywordId) {
 		this.keywordId = keywordId;
 	}
 	@Override
