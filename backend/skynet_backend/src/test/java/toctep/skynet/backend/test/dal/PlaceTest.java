@@ -32,7 +32,7 @@ public class PlaceTest extends DomainTest{
 		
 		place = new Place();
 		
-		id = "0x20";
+		id = "0E";
 		place.setId(id);
 		
 		placeType = new PlaceType();

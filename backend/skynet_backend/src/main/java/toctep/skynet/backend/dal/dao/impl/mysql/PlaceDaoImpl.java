@@ -46,7 +46,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	@Override
 	public void delete(Domain domain) {
 		Place place = (Place) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + place.getId());
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + MySqlUtil.escape(place.getId()));
 	}
 
 	@Override
