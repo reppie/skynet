@@ -3,6 +3,8 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.Statement;
+
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
@@ -50,8 +52,33 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public boolean exists(Domain domain) {
-		Keyword keyword = (Keyword) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + keyword.getId());
+		boolean exists = false;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
+			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE keyword = '" + ((Keyword) domain).getKeyword() + "';");
+			int counter = 0;
+			while (rs.next()) {
+				counter++;
+			}
+			if (counter > 0) {
+				exists = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return exists;
 	}
 
 	@Override
