@@ -20,17 +20,13 @@ public abstract class Domain {
 	
 	public void save() {
 		if (dao.exists(this)) {
-			update();
+			dao.update(this);
 		} else {
 			dao.insert(this);
 		}
 	}
 	
-	public void update() {
-		dao.update(this);
-	}
-	
-	public void remove() {
+	public void delete() {
 		dao.delete(this);
 	}
 	

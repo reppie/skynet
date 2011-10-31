@@ -2,8 +2,12 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
+import toctep.skynet.backend.dal.domain.BoundingBox;
+import toctep.skynet.backend.dal.domain.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.Place;
+import toctep.skynet.backend.dal.domain.PlaceType;
 import toctep.skynet.backend.dal.domain.TimeZone;
 import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.User;
@@ -59,6 +63,12 @@ public class UserTest extends DomainTest {
 		user.setId(twitterId);
 		
 		place = new Place();
+		place.setType(new PlaceType());
+		BoundingBox boundingBox = new BoundingBox();
+		boundingBox.setType(new BoundingBoxType());
+		place.setBoundingBox(boundingBox);
+		place.setUrl(new Url());
+		place.setCountry(new Country());
 		user.setPlace(place);
 		
 		defaultProfile = false;
@@ -264,7 +274,7 @@ public class UserTest extends DomainTest {
 	public void testDelete() {
 		user.save();
 		assertEquals(1, userDao.count());
-		userDao.delete(user);
+		user.delete();
 		assertEquals(0, userDao.count());
 	}
 }

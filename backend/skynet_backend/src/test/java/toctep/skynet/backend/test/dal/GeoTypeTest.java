@@ -33,7 +33,7 @@ public class GeoTypeTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		geoTypeDao.insert(geoType);
+		geoType.save();
 		
 		GeoType postGeoType = (GeoType) geoTypeDao.select(geoType.getId());
 		
@@ -48,9 +48,9 @@ public class GeoTypeTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		geoTypeDao.insert(geoType);
+		geoType.save();
 		assertEquals(1, geoTypeDao.count());
-		geoTypeDao.delete(geoType);
+		geoType.delete();
 		assertEquals(0, geoTypeDao.count());		
 	}
 	

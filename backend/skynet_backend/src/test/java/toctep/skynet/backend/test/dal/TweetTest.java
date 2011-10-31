@@ -132,7 +132,7 @@ public class TweetTest extends DomainTest {
 	public void testDelete() {
 		tweet.save();
 		assertEquals(1, tweetDao.count());
-		tweetDao.delete(tweet);
+		tweet.delete();
 		assertEquals(0, tweetDao.count());
 	}
 

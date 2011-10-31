@@ -50,9 +50,9 @@ public class TweetMentionTest extends DomainTest {
 
 	@Override
 	public void testDelete() {
-		tweetMentionDao.insert(tweetMention);
+		tweetMention.save();
 		assertEquals(1, tweetMentionDao.count());
-		tweetMentionDao.delete(tweetMention);
+		tweetMention.delete();
 		assertEquals(0, tweetMentionDao.count());
 	}
 }
