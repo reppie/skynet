@@ -180,8 +180,12 @@ public class MySqlUtil {
 
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE " + where);
-			if (rs.getFetchSize() > 0) {
+			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + where);
+			int counter = 0;
+			while (rs.next()) {
+				counter++;
+			}
+			if (counter > 0) {
 				exists = true;
 			}
 		} catch (SQLException e) {
