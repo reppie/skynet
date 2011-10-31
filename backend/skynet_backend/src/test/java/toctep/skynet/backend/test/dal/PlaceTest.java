@@ -107,7 +107,7 @@ public class PlaceTest extends DomainTest{
 	
 	@Override
 	public void testSelect() {
-		placeDao.insert(place);
+		place.save();
 		
 		Place postPlace = (Place) placeDao.select(place.getId());
 		
@@ -135,7 +135,7 @@ public class PlaceTest extends DomainTest{
 	
 	@Override
 	public void testDelete() {
-		placeDao.insert(place);
+		place.save();
 		assertEquals(1, placeDao.count());
 		placeDao.delete(place);
 		assertEquals(0, placeDao.count());

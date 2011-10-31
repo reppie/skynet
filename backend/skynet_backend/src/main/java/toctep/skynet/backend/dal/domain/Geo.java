@@ -26,4 +26,11 @@ public class Geo extends DomainLongPk {
 		dao = daoFacade.getGeoDao();
 	}
 	
+	@Override
+	public void save() {
+		type.save();
+		this.type.setId(type.getId());
+		super.save();
+	}		
+	
 }

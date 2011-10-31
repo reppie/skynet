@@ -126,4 +126,17 @@ public class Tweet extends DomainLongPk {
 	public void setDao() {
 		dao = daoFacade.getTweetDao();
 	}
+	
+	@Override
+	public void save() {
+		geo.save();
+		place.save();
+		user.save();
+		sourceType.save();
+		this.geo.setId(geo.getId());
+		this.place.setId(place.getId());
+		this.user.setId(user.getId());
+		this.sourceType.setId(sourceType.getId());
+		super.save();
+	}	
 }

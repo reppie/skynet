@@ -133,4 +133,17 @@ public class Place extends DomainStringPk {
 	public void setDao() {
 		dao = daoFacade.getPlaceDao();		
 	}
+	
+	@Override
+	public void save() {
+		type.save();
+		boundingBox.save();
+		url.save();
+		country.save();
+		this.type.setId(type.getId());
+		this.boundingBox.setId(boundingBox.getId());
+		this.url.setId(url.getId());
+		this.country.setId(country.getId());
+		super.save();
+	}		
 }

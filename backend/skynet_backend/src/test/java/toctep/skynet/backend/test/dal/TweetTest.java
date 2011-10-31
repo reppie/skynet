@@ -130,7 +130,7 @@ public class TweetTest extends DomainTest {
 	
 	@Override
 	public void testDelete() {
-		tweetDao.insert(tweet);
+		tweet.save();
 		assertEquals(1, tweetDao.count());
 		tweetDao.delete(tweet);
 		assertEquals(0, tweetDao.count());
