@@ -1,5 +1,6 @@
 package toctep.skynet.backend.bll;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import twitter4j.FilterQuery;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -14,6 +15,7 @@ public class TweetRetriever implements Runnable {
 	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
+		MySqlUtil.getInstance().truncateDatabase();
 	    Initialize();
 	}
 	
@@ -57,7 +59,7 @@ public class TweetRetriever implements Runnable {
 	    //double[][] coords = { {6.45, 53.16}, {6.65, 53.26} }; // Groningen
 	    //double[][] coords = { {6.52, 53.23}, {6.55, 53.25} }; // Zernike Complex
 	    
-	    twitterStream.filter(new FilterQuery(0, /*new long[] { 397147205 }*/null, null, coords));
+	    twitterStream.filter(new FilterQuery(0, new long[] { 397147205 }, null, null));
 	}
 	
 }

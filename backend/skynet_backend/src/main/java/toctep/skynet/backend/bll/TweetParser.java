@@ -54,16 +54,16 @@ public class TweetParser {
 	}
 	
 	public boolean parse(Status status) {
+		parsePlace(status.getPlace());
+		parsePlaceType(status.getPlace());
 		parseBoundingBoxType(status.getPlace());
 		parseBoundingBox(status.getPlace());
 		parseCountry(status.getPlace());
 		parseGeoType(status.getPlace());
 		parseGeo(status.getPlace());
 		parseLanguage(status.getUser());
-		parsePlaceType(status.getPlace());
 		parseSourceType(status);
 		parseTimeZone(status.getUser());
-		parsePlace(status.getPlace());
 		parseUser(status.getUser());
 		parseTweet(status);
 		parseUrl(status);
