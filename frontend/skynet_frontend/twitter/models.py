@@ -168,6 +168,9 @@ class Tweet(models.Model):
             'text': self.text,
             'user_id': self.user_id,
         }
+        
+    class Meta:
+        ordering = ['-created_at']
 
 class TweetKeyword(models.Model):
     tweet = models.ForeignKey(Tweet)
