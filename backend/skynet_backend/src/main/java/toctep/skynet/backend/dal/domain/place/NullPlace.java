@@ -75,7 +75,7 @@ public class NullPlace implements IPlace{
 
 	@Override
 	public Url getUrl() {
-		return NullUrl();
+		return new NullUrl();
 	}
 	
 }
