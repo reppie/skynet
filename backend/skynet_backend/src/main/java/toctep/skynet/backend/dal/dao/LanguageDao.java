@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public abstract class LanguageDao extends DaoLongPk {
+public abstract class LanguageDao extends Dao<Long> {
 
 	public static final String TABLE_NAME = "twitter_language";
 	

@@ -1,17 +1,17 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class BoundingBox extends DomainLongPk implements IBoundingBox{
+public class BoundingBox extends Domain<Long> implements IBoundingBox<Long> {
 	
-	private IBoundingBoxType type;
+	private IBoundingBoxType<Long> type;
 	private String coordinates;
 	
-	public IBoundingBoxType getType() {
+	public IBoundingBoxType<Long> getType() {
 		return type;
 	}
 
-	public void setType(IBoundingBoxType type) {
+	public void setType(IBoundingBoxType<Long> type) {
 		this.type = type;
 	}
 

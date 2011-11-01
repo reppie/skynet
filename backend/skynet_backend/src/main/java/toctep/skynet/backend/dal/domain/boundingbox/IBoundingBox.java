@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
-public interface IBoundingBox {
-	public IBoundingBoxType getType();
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface IBoundingBox<T> extends IDomain<T> {
+	public IBoundingBoxType<T> getType();
 	public String getCoordinates();		
 }

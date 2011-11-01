@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class SourceType extends DomainLongPk implements ISourceType {
+public class SourceType extends Domain<Long> implements ISourceType {
 
 	public String text;
 

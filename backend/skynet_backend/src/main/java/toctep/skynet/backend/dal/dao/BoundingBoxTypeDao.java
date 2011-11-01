@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public abstract class BoundingBoxTypeDao extends DaoLongPk {
+public abstract class BoundingBoxTypeDao extends Dao<Long> {
 
 	public static final String TABLE_NAME = "twitter_boundingboxtype";
 	
