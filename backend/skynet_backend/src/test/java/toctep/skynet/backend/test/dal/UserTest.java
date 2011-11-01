@@ -16,7 +16,7 @@ public class UserTest extends DomainTest {
 	
 	private User user;
 	
-	private long twitterId;
+	private long id;
 	private Place place;
 	private boolean defaultProfile;
 	private int statusesCount;
@@ -59,8 +59,8 @@ public class UserTest extends DomainTest {
 		
 		user = new User();
 		
-		twitterId = 0L;
-		user.setId(twitterId);
+		id = 0L;
+		user.setId(id);
 		
 		place = new Place();
 		place.setType(new PlaceType());
@@ -177,7 +177,7 @@ public class UserTest extends DomainTest {
 	@Override
 	public void testCreate() {
 		assertNotNull(user);
-		assertTrue(new Long(1).equals(user.getId()));
+		assertTrue(new Long(id).equals(user.getId()));
 		assertTrue(place.equals(user.getPlace()));
 		assertTrue(user.isDefaultProfile() == defaultProfile);
 		assertEquals(statusesCount, user.getStatusesCount());

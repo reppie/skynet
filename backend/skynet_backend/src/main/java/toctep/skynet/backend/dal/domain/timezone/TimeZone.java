@@ -4,8 +4,8 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class TimeZone extends Domain<Long> implements ITimeZone{
 
-	private int utcOffset;
-	private String timeZone;
+	private int utcOffset 	= 0;
+	private String timeZone = "";
 
 	public int getUtcOffset() {
 		return utcOffset;

@@ -4,8 +4,8 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Geo extends Domain<Long> implements IGeo {
 	
-	private IGeoType type;
-	private String coordinates;
+	private IGeoType type 		= new NullGeoType();
+	private String coordinates	= "";
 
 	public IGeoType getType() {
 		return type;

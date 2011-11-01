@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Hashtag extends Domain<Long> implements IHashtag {
 
-	public String text;
+	public String text = "";
 	
 	public String getText() {
 		return text;

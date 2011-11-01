@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class BoundingBoxType extends Domain<Long> implements IBoundingBoxType {
 
-	private String text;
+	private String text = "";
 
 	public String getText() {
 		return text;

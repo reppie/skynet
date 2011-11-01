@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Language extends Domain<Long> implements ILanguage {
 
-	public String text;
+	public String text = "";
 	
 	public String getText() {
 		return text;

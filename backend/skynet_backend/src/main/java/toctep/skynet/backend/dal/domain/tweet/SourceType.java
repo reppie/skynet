@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class SourceType extends Domain<Long> implements ISourceType {
 
-	public String text;
+	public String text = "";
 
 	@Override
 	public String getText() {
