@@ -3,20 +3,19 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Statement;
-
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.DomainLongPk;
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
+
+import com.mysql.jdbc.Statement;
 
 public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		Keyword keyword = (Keyword) domain;
 		
-		int id = MySqlUtil.getInstance().insert(
+		long id = MySqlUtil.getInstance().insert(
 				"INSERT INTO " + tableName + " (keyword) " +
 				"VALUES ('" + keyword.getKeyword() + "');" 
 				);
@@ -25,7 +24,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	}
 
 	@Override
-	public DomainLongPk select(long id) {
+	public Keyword select(Long id) {
 		Keyword keyword = new Keyword();
 		
 		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
@@ -36,22 +35,23 @@ public class KeywordDaoImpl extends KeywordDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return keyword;
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		//we don't update keywords
 	}
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		boolean exists = false;
 		
 		Statement stmt = null;

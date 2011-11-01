@@ -10,10 +10,10 @@ import toctep.skynet.backend.dal.domain.tweet.SourceType;
 public class SourceTypeDaoImpl extends SourceTypeDao {
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		SourceType sourceType = (SourceType) domain;
 		
-		int id = MySqlUtil.getInstance().insert(
+		long id = MySqlUtil.getInstance().insert(
 			"INSERT INTO " + tableName + " (text) VALUES ('" + sourceType.getText() + "')"
 		);
 		
@@ -21,7 +21,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	}
 
 	@Override
-	public SourceType select(long id) {
+	public SourceType select(Long id) {
 		SourceType sourceType = new SourceType();
 		
 		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);			
@@ -38,19 +38,19 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 
 	}
 	
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		SourceType sourceType = (SourceType) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + sourceType.getId());		
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		SourceType sourceType = (SourceType) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + sourceType.getId());
 	}
