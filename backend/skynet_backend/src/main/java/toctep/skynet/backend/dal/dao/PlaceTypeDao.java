@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public abstract class PlaceTypeDao extends DaoLongPk {
+public abstract class PlaceTypeDao extends Dao<Long> {
 
 	public static final String TABLE_NAME = "twitter_placetype";
 	

@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.dao;
 
 import toctep.skynet.backend.dal.domain.Domain;
 
-public abstract class Dao {
+public abstract class Dao<T> {
 	
 	protected String tableName;
 	
@@ -12,11 +12,12 @@ public abstract class Dao {
 	
 	protected abstract void setTableName();
 	
-	public abstract void insert(Domain domain);
-	public abstract void update(Domain domain);
-	public abstract void delete(Domain domain);
+	public abstract void insert(Domain<T> domain);
+	public abstract Domain<T> select(T id);
+	public abstract void update(Domain<T> domain);
+	public abstract void delete(Domain<T> domain);
 		
-	public abstract boolean exists(Domain domain);
+	public abstract boolean exists(Domain<T> domain);
 	public abstract int count();
 	
 }

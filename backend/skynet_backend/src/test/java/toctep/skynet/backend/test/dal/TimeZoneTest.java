@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.TimeZone;
+import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 
 public class TimeZoneTest extends DomainTest {
 
@@ -33,7 +33,7 @@ public class TimeZoneTest extends DomainTest {
 	public void testInsert() {
 		timeZone.save();
 		assertEquals(1, timeZoneDao.count());
-		assertEquals(1, timeZone.getId());
+		assertTrue(new Long(1).equals(timeZone.getId()));
 	}
 	
 	@Override

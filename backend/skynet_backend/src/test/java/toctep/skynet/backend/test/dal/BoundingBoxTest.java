@@ -1,7 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 
 public class BoundingBoxTest extends DomainTest{
 
@@ -34,7 +34,7 @@ public class BoundingBoxTest extends DomainTest{
 	public void testInsert() {	
 		boundingBox.save();
 		assertEquals(1, boundingBoxDao.count());
-		assertEquals(1, boundingBox.getId());
+		assertTrue(new Long(1).equals(boundingBox.getId()));
 	}
 
 	@Override

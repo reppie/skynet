@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserDaoImpl extends UserDao {
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		User user = (User) domain;
 		
 		String query = 
@@ -59,7 +59,7 @@ public class UserDaoImpl extends UserDao {
 	}
 	
 	@Override
-	public User select(long id) {
+	public User select(Long id) {
 		User user = new User();
 		
 		ResultSet rs = MySqlUtil.getInstance().select(
@@ -80,19 +80,19 @@ public class UserDaoImpl extends UserDao {
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		User user = (User) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + user.getId());	
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		User user = (User) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + user.getId());
 	}

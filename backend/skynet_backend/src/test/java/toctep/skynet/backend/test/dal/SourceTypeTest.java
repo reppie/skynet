@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.tweet.SourceType;
 
 public class SourceTypeTest extends DomainTest {
 
@@ -28,7 +28,7 @@ public class SourceTypeTest extends DomainTest {
 	public void testInsert() {
 		sourceType.save();
 		assertEquals(1, sourceTypeDao.count());
-		assertEquals(1, sourceType.getId());
+		assertTrue(new Long(1).equals(sourceType.getId()));
 	}
 	
 	@Override

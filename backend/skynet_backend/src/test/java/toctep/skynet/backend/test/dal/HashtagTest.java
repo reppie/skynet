@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Hashtag;
+import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 
 public class HashtagTest extends DomainTest{
 
@@ -28,7 +28,7 @@ public class HashtagTest extends DomainTest{
 	public void testInsert() {
 		hashtag.save();
 		assertEquals(1, hashtagDao.count());
-		assertEquals(1, hashtag.getId());
+		assertTrue(new Long(1).equals(hashtag.getId()));
 	}
 	
 	@Override

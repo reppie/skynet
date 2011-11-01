@@ -2,13 +2,12 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.DomainStringPk;
-import toctep.skynet.backend.dal.domain.Place;
+import toctep.skynet.backend.dal.domain.place.Place;
 
 public class PlaceDaoImpl extends PlaceDao {
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<String> domain) {
 		Place place = (Place) domain;
 		
 		String query = "INSERT INTO " + tableName +	" VALUES ("
@@ -32,25 +31,25 @@ public class PlaceDaoImpl extends PlaceDao {
 	}
 
 	@Override
-	public DomainStringPk select(String id) {
+	public Place select(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<String> domain) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<String> domain) {
 		Place place = (Place) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + MySqlUtil.escape(place.getId()));
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<String> domain) {
 		Place place = (Place) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + MySqlUtil.escape(place.getId()));
 	}

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.GeoType;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
 
 public class GeoTypeTest extends DomainTest{
 
@@ -28,7 +28,7 @@ public class GeoTypeTest extends DomainTest{
 	public void testInsert() {
 		geoType.save();
 		assertEquals(1, geoTypeDao.count());
-		assertEquals(1, geoType.getId());
+		assertTrue(new Long(1).equals(geoType.getId()));
 	}
 	
 	@Override

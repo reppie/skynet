@@ -2,19 +2,12 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
-import toctep.skynet.backend.dal.domain.Country;
-import toctep.skynet.backend.dal.domain.Geo;
-import toctep.skynet.backend.dal.domain.GeoType;
-import toctep.skynet.backend.dal.domain.Language;
-import toctep.skynet.backend.dal.domain.Place;
-import toctep.skynet.backend.dal.domain.PlaceType;
-import toctep.skynet.backend.dal.domain.SourceType;
-import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.Tweet;
-import toctep.skynet.backend.dal.domain.Url;
-import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.tweet.SourceType;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetTest extends DomainTest {
 
@@ -27,8 +20,8 @@ public class TweetTest extends DomainTest {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private long inReplyToTweetTwitterId;
-	private long inReplyToUserTwitterId;
+	private Tweet inReplyToTweetTwitter;
+	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
 	private Place place;
@@ -63,11 +56,13 @@ public class TweetTest extends DomainTest {
 		favorited = false;
 		tweet.setFavorited(favorited);
 		
-		inReplyToTweetTwitterId = 0L;
-		tweet.setInReplyToTweetTwitterId(inReplyToTweetTwitterId);
+		inReplyToTweetTwitter = new Tweet();
+		inReplyToTweetTwitter.setId(new Long(0));
+		tweet.setInReplyToTweetTwitter(inReplyToTweetTwitter);
 		
-		inReplyToUserTwitterId = 0L;
-		tweet.setInReplyToUserTwitterId(inReplyToUserTwitterId);
+		inReplyToUserTwitter = new User();
+		inReplyToUserTwitter.setId(new Long(0));
+		tweet.setInReplyToUserTwitter(inReplyToUserTwitter);
 		
 		retweetCount = 0L;
 		tweet.setRetweetCount(retweetCount);
@@ -76,24 +71,11 @@ public class TweetTest extends DomainTest {
 		tweet.setCreatedAt(createdAt);
 				
 		place = new Place();
-		place.setType(new PlaceType());
-		BoundingBox boundingBox = new BoundingBox();
-		boundingBox.setType(new BoundingBoxType());
-		place.setBoundingBox(boundingBox);
-		place.setUrl(new Url());
-		place.setCountry(new Country());
+		place.setId("AA");
 		tweet.setPlace(place);
 		
 		user = new User();
-		user.setPlace(place);
-		user.setLanguage(new Language());
-		user.setUrl(new Url());
-		user.setProfileBackgroundImageUrl(new Url());
-		user.setProfileBackgroundImageUrlHttps(new Url());
-		user.setProfileImageUrl(new Url());
-		user.setProfileImageUrlHttps(new Url());
-		user.setTimeZone(new TimeZone());
-		user.setCreatedAt(new Date(0));
+		user.setId(new Long(0));
 		tweet.setUser(user);
 		
 		coordinates = "test";
@@ -103,15 +85,15 @@ public class TweetTest extends DomainTest {
 	@Override
 	public void testCreate() {
 		assertNotNull(tweet);
-		assertEquals(id, tweet.getId());
+		assertTrue(new Long(id).equals(tweet.getId()));
 		assertTrue(text.equals(tweet.getText()));
 		assertTrue(geo.equals(tweet.getGeo()));
 		assertTrue(truncated == tweet.isTruncated());
 		assertEquals(twitterId, tweet.getTwitterId());
 		assertTrue(sourceType.equals(tweet.getSourceType()));
 		assertTrue(favorited == tweet.isFavorited());
-		assertEquals(inReplyToTweetTwitterId, tweet.getInReplyToTweetTwitterId());
-		assertEquals(inReplyToUserTwitterId, tweet.getInReplyToUserTwitterId());
+		assertEquals(inReplyToTweetTwitter, tweet.getInReplyToTweetTwitter());
+		assertEquals(inReplyToUserTwitter, tweet.getInReplyToUserTwitter());
 		assertEquals(retweetCount, tweet.getRetweetCount());
 		assertTrue(createdAt.equals(tweet.getCreatedAt()));
 		assertTrue(place.equals(tweet.getPlace()));
@@ -137,8 +119,8 @@ public class TweetTest extends DomainTest {
 		assertEquals(postTweet.getTwitterId(), tweet.getTwitterId());
 		assertEquals(postTweet.getSourceType().getId(), tweet.getSourceType().getId());
 		assertTrue(postTweet.isFavorited() == tweet.isFavorited());
-		assertEquals(postTweet.getInReplyToTweetTwitterId(), tweet.getInReplyToTweetTwitterId());
-		assertEquals(postTweet.getInReplyToUserTwitterId(), tweet.getInReplyToUserTwitterId());
+		assertEquals(postTweet.getInReplyToTweetTwitter(), tweet.getInReplyToTweetTwitter());
+		assertEquals(postTweet.getInReplyToUserTwitter(), tweet.getInReplyToUserTwitter());
 		assertEquals(postTweet.getRetweetCount(), tweet.getRetweetCount());
 		assertTrue(postTweet.getCreatedAt().equals(tweet.getCreatedAt()));
 		assertTrue(postTweet.getPlace().getId().equals(tweet.getPlace().getId()));

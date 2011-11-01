@@ -5,15 +5,15 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.PlaceType;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
 
 public class PlaceTypeDaoImpl extends PlaceTypeDao {
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		PlaceType placeType = (PlaceType) domain;
 		
-		int id = MySqlUtil.getInstance().insert(
+		long id = MySqlUtil.getInstance().insert(
 			"INSERT INTO " + tableName + " (text) VALUES ('" + placeType.getText() + "')"
 		);
 		
@@ -21,7 +21,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	}
 
 	@Override
-	public PlaceType select(long id) {
+	public PlaceType select(Long id) {
 		PlaceType placeType = new PlaceType();
 		
 		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);			
@@ -38,19 +38,19 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		PlaceType placeType = (PlaceType) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + placeType.getId());		
 	}
 	
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		PlaceType placeType = (PlaceType) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + placeType.getId());
 	}

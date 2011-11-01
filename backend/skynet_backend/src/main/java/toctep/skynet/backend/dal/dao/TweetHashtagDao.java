@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public abstract class TweetHashtagDao extends DaoLongPk {
+public abstract class TweetHashtagDao extends Dao<Long> {
 
 	public static final String TABLE_NAME = "twitter_tweet_hashtags";
 	

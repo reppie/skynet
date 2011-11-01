@@ -3,7 +3,7 @@ package toctep.skynet.backend.bll;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
 public class TweetFilter {
 	private static String[] commonWords = { " de ", " het ", " een " };

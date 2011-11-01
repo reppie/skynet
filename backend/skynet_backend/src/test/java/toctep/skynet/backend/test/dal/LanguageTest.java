@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Language;
+import toctep.skynet.backend.dal.domain.language.Language;
 
 public class LanguageTest extends DomainTest{
 
@@ -28,7 +28,7 @@ public class LanguageTest extends DomainTest{
 	public void testInsert() {
 		language.save();
 		assertEquals(1, languageDao.count());
-		assertEquals(1, language.getId());
+		assertTrue(new Long(1).equals(language.getId()));
 	}
 	
 	@Override

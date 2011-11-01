@@ -5,30 +5,31 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Geo;
+import toctep.skynet.backend.dal.domain.geo.Geo;
 
-public class GeoDaoImpl extends GeoDao{
+public class GeoDaoImpl extends GeoDao {
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		Geo geo = (Geo) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geo.getId());
 	}
 	
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		Geo geo = (Geo) domain;
 		
-		int id = MySqlUtil.getInstance().insert(
+		long id = MySqlUtil.getInstance().insert(
 				"INSERT INTO " + tableName + " (geo_type_id, coordinates) " +
 				"VALUES (" + geo.getType().getId() + ", '" 
 							+ geo.getCoordinates() + "')"					
 				);
+		
 		geo.setId(id);
 	}
 
 	@Override
-	public Geo select(long id) {
+	public Geo select(Long id) {
 		Geo geo = new Geo();
 		
 		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
@@ -45,13 +46,13 @@ public class GeoDaoImpl extends GeoDao{
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		Geo geo = (Geo) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + geo.getId());
 	}

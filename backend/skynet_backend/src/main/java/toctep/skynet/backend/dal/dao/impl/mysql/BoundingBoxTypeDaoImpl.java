@@ -4,22 +4,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 
 public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());	
 	}
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 
-		int id = MySqlUtil.getInstance().insert(
+		long id = MySqlUtil.getInstance().insert(
 					"INSERT INTO " + tableName + " (text) VALUES ('" + boundingBoxType.getText() + "')"
 					);
 		
@@ -27,7 +27,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	}
 
 	@Override
-	public BoundingBoxType select(long id) {
+	public BoundingBoxType select(Long id) {
 		BoundingBoxType boundingBoxType = new BoundingBoxType();
 		
 		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
@@ -38,17 +38,18 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return boundingBoxType;
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + boundingBoxType.getId());
 	}

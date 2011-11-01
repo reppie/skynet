@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
+import toctep.skynet.backend.Main;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -37,8 +38,6 @@ public class MySqlUtil {
 
 	private static MySqlUtil instance;
 	
-	public static final String MYSQL_CONFIG = "conf/mysql.ini";
-	
 	private String driver;
 	private String host;
 	private String name;
@@ -49,7 +48,7 @@ public class MySqlUtil {
 	
 	private MySqlUtil() {
 		try {
-		    Wini ini = new Wini(new File(MYSQL_CONFIG));
+		    Wini ini = new Wini(new File(Main.DB_PROPERTIES));
 	        driver = ini.get("jdbc", "driver", String.class);
 	        host = ini.get("jdbc", "host", String.class);
 	        name = ini.get("jdbc", "name", String.class);
@@ -128,13 +127,16 @@ public class MySqlUtil {
 	public int insert(String query) {
 		int id = 0;
 		
-		System.out.println(query);
-		
 		Statement stmt = null;
+		
+		System.out.println(query);
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			id = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next())
+				id = rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -258,8 +260,10 @@ public class MySqlUtil {
 		}
 	}
 	
-	public static String escape(String str) {
-		str = "\"" + (str != null ? str.replace("\"", "\\\"") : "") + "\"";
-		return str;
+	public static String escape(Object str) {
+		if(str instanceof String) {
+			str = "\"" + (str != null ? ((String) str).replace("\"", "\\\"") : "") + "\"";
+		}
+		return (String) str;
 	}
 }
