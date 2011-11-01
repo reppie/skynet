@@ -5,6 +5,10 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.language.Language;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserDaoImpl extends UserDao {
@@ -18,11 +22,11 @@ public class UserDaoImpl extends UserDao {
 			"VALUES " +
 				"(" +
 					user.getId() + "," +
-					MySqlUtil.escape(user.getPlace().getId()) + "," +
+					MySqlUtil.escape(((Place) user.getPlace()).getId()) + "," +
 					user.isDefaultProfile() + "," +
 					user.getStatusesCount() + "," +
 					user.getProfileBackgroundTile() + "," +
-					user.getLanguage().getId() + "," +
+					((Language) user.getLanguage()).getId() + "," +
 					MySqlUtil.escape(user.getProfileLinkColor()) + "," +
 					user.getFollowing() + "," +
 					user.getFavouritesCount() + "," +
@@ -37,14 +41,14 @@ public class UserDaoImpl extends UserDao {
 					MySqlUtil.escape(user.getCreatedAt().toString()) + "," +
 					user.isDefaultProfileImage() + "," +
 					user.getFollowersCount() + "," +
-					MySqlUtil.escape(user.getProfileImageUrl().getId()) + "," +
-					MySqlUtil.escape(user.getProfileImageUrlHttps().getId()) + "," +
+					MySqlUtil.escape(((Url) user.getProfileImageUrl()).getId()) + "," +
+					MySqlUtil.escape(((Url) user.getProfileImageUrlHttps()).getId()) + "," +
 					user.isGeoEnabled() + "," +
-					MySqlUtil.escape(user.getProfileBackgroundImageUrl().getId()) + "," +
-					MySqlUtil.escape(user.getProfileBackgroundImageUrlHttps().getId()) + "," +
+					MySqlUtil.escape(((Url) user.getProfileBackgroundImageUrl()).getId()) + "," +
+					MySqlUtil.escape(((Url) user.getProfileBackgroundImageUrlHttps()).getId()) + "," +
 					user.isFollowRequestSent() + "," +
-					MySqlUtil.escape(user.getUrl().getId()) + "," +
-					user.getTimeZone().getId() + "," +
+					MySqlUtil.escape(((Url) user.getUrl()).getId()) + "," +
+					((TimeZone) user.getTimeZone()).getId() + "," +
 					user.getNotifications() + "," +
 					user.isProfileUseBackgroundImage() + "," +
 					user.getFriendsCount() + "," +
