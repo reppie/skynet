@@ -21,7 +21,7 @@ public abstract class Domain<T> {
 		return id;
 	}
 	
-	public void setId(T id) { 
+	public void setId(T id) {
 		this.id = id;
 	}
 	
