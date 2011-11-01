@@ -3,8 +3,10 @@ package toctep.skynet.backend.dal.domain.user;
 import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.Language;
-import toctep.skynet.backend.dal.domain.TimeZone;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.dal.domain.url.NullUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 
 public class NullUser implements IUser{
