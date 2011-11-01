@@ -15,8 +15,8 @@ public interface ITweet {
 	public long getTwitterId();
 	public SourceType getSourceType();
 	public boolean isFavorited();
-	public long getInReplyToTweetTwitterId();
-	public long getInReplyToUserTwitterId();
+	public Tweet getInReplyToTweetTwitter();
+	public User getInReplyToUserTwitter();
 	public long getRetweetCount();
 	public Date getCreatedAt();
 	public Place getPlace();
