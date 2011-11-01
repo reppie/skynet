@@ -8,7 +8,6 @@ import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.SourceType;
 import toctep.skynet.backend.dal.domain.TimeZone;
 import toctep.skynet.backend.dal.domain.Url;
-import toctep.skynet.backend.dal.domain.User;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.geo.Geo;
@@ -20,6 +19,7 @@ import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
 import toctep.skynet.backend.dal.domain.tweet.TweetMention;
 import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
+import toctep.skynet.backend.dal.domain.user.User;
 import twitter4j.GeoLocation;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
@@ -40,6 +40,8 @@ public class TweetParser {
 	private Place place;
 	private User user;
 	private Tweet tweet;
+	private User inReplyToUser;
+	private Tweet inReplyToTweet;
 	
 	private static TweetParser instance;
 	
@@ -237,8 +239,15 @@ public class TweetParser {
         tweet.setText(status.getText());
         tweet.setTruncated(status.isTruncated());
         tweet.setFavorited(status.isFavorited());
-        tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
-        tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
+        
+        inReplyToTweet = new Tweet();
+        inReplyToTweet.setId(status.getInReplyToStatusId());
+        tweet.setInReplyToTweetTwitter(inReplyToTweet);
+        
+        inReplyToUser = new User();
+        inReplyToUser.setId(status.getInReplyToUserId());       
+        tweet.setInReplyToUserTwitter(inReplyToUser);
+        
         tweet.setRetweetCount(status.getRetweetCount());
         tweet.setCreatedAt(new java.sql.Date(status.getCreatedAt().getDate()));
         tweet.setGeo(geo);

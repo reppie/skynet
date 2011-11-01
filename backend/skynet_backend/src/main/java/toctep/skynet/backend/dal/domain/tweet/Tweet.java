@@ -4,9 +4,9 @@ import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 import toctep.skynet.backend.dal.domain.SourceType;
-import toctep.skynet.backend.dal.domain.User;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class Tweet extends DomainLongPk implements ITweet {
 
@@ -16,8 +16,8 @@ public class Tweet extends DomainLongPk implements ITweet {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private long inReplyToTweetTwitterId;
-	private long inReplyToUserTwitterId;
+	private Tweet inReplyToTweetTwitter;
+	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
 	private Place place;
@@ -72,20 +72,20 @@ public class Tweet extends DomainLongPk implements ITweet {
 		this.favorited = favorited;
 	}
 
-	public long getInReplyToTweetTwitterId() {
-		return inReplyToTweetTwitterId;
+	public Tweet getInReplyToTweetTwitter() {
+		return inReplyToTweetTwitter;
 	}
 
-	public void setInReplyToTweetTwitterId(long inReplyToTweetTwitterId) {
-		this.inReplyToTweetTwitterId = inReplyToTweetTwitterId;
+	public void setInReplyToTweetTwitter(Tweet inReplyToTweetTwitter) {
+		this.inReplyToTweetTwitter = inReplyToTweetTwitter;
 	}
 
-	public long getInReplyToUserTwitterId() {
-		return inReplyToUserTwitterId;
+	public User getInReplyToUserTwitter() {
+		return inReplyToUserTwitter;
 	}
 
-	public void setInReplyToUserTwitterId(long inReplyToUserTwitterId) {
-		this.inReplyToUserTwitterId = inReplyToUserTwitterId;
+	public void setInReplyToUserTwitter(User inReplyToUserTwitter) {
+		this.inReplyToUserTwitter = inReplyToUserTwitter;
 	}
 
 	public long getRetweetCount() {
