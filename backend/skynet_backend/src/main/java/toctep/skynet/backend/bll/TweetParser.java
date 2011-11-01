@@ -154,9 +154,11 @@ public class TweetParser {
         place.setPostalCode(""); //Twitter4j has no support for this?
         place.setPhone(""); //Twitter4j has no support for this?
         place.setTwitter(""); //Twitter4j has no support for this?
-        Url placeUrl = new Url();
-        placeUrl.setId(placeStatus.getURL());
-        place.setUrl(placeUrl);
+        if(placeStatus.getURL() != null) {
+        	Url placeUrl = new Url();
+        	placeUrl.setId(placeStatus.getURL());
+        	place.setUrl(placeUrl);
+        }
         place.setAppId(""); //Twitter4j has no support for this?
         place.setType(placeType);
         place.setBoundingBox(boundingBox);
@@ -185,18 +187,17 @@ public class TweetParser {
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
         
-        Url profileBgUrl = new Url();
         if(userStatus.getProfileBackgroundImageUrl() != null) {
+            Url profileBgUrl = new Url();
         	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
+            user.setProfileBackgroundImageUrl(profileBgUrl);
         }
-        user.setProfileBackgroundImageUrl(profileBgUrl);
 
-        Url profileBgUrlHttps = new Url();
         if(userStatus.getProfileBackgroundImageUrlHttps() != null) {
+            Url profileBgUrlHttps = new Url();
         	profileBgUrlHttps.setId(userStatus.getProfileBackgroundImageUrlHttps());
+            user.setProfileBackgroundImageUrlHttps(profileBgUrlHttps);
         }
-        
-        user.setProfileBackgroundImageUrlHttps(profileBgUrl);
         
         user.setFollowRequestSent(userStatus.isFollowRequestSent());
         user.setNotifications(0); //Twitter4j has no support for this?
@@ -205,18 +206,17 @@ public class TweetParser {
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
         user.setScreenName(userStatus.getScreenName());
         
-        Url profileImageUrl = new Url();
         if(userStatus.getProfileImageURL().toExternalForm() != null) {
+            Url profileImageUrl = new Url();
         	profileImageUrl.setId(userStatus.getProfileImageURL().toExternalForm());
-        }     
-        user.setProfileImageUrl(profileImageUrl);
-        
-        Url profileImageUrlHttps = new Url();
+            user.setProfileImageUrl(profileImageUrl);
+        }
         
         if(userStatus.getProfileImageUrlHttps().toExternalForm() != null) {
+            Url profileImageUrlHttps = new Url();
         	profileImageUrlHttps.setId(userStatus.getProfileImageUrlHttps().toExternalForm());
+        	user.setProfileImageUrlHttps(profileImageUrlHttps);
         } 
-        user.setProfileImageUrlHttps(profileImageUrlHttps);
         
         user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
         user.setTranslator(userStatus.isTranslator());
@@ -224,11 +224,11 @@ public class TweetParser {
         user.setPlace(place);
         user.setLanguage(language);
         
-        Url userUrl = new Url();
         if (userStatus.getURL() != null) {
-	        userUrl.setId(userStatus.getURL().toExternalForm());
+            Url userUrl = new Url();
+        	userUrl.setId(userStatus.getURL().toExternalForm());
+            user.setUrl(userUrl);
         }
-        user.setUrl(userUrl);
         
         user.setTimeZone(timeZone);
     }

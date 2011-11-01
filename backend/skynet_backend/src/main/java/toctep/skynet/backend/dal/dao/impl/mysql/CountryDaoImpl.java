@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -10,17 +11,17 @@ import toctep.skynet.backend.dal.domain.country.Country;
 public class CountryDaoImpl extends CountryDao{
 
 	@Override
-	public void delete(Domain<String> domain) {
-		Country country = (Country) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE code = " + MySqlUtil.escape(country.getId()));
-	}
-
-	@Override
 	public void insert(Domain<String> domain) {
 		Country country = (Country) domain;
 		
-		MySqlUtil.getInstance().insert("INSERT INTO " + tableName + " (code, text) " +
-					"VALUES ('" + country.getId() + "', '" + country.getText() + "')");
+		String query = "INSERT INTO " + tableName + "(code, text) VALUES(?, ?)";
+		
+		Param[] params = new Param[] {
+			new Param(country.getId(), Types.VARCHAR),
+			new Param(country.getText(), Types.VARCHAR)
+		};
+			
+		MySqlUtil.getInstance().insert(query, params);
 	}
 
 	@Override
@@ -42,6 +43,12 @@ public class CountryDaoImpl extends CountryDao{
 	public void update(Domain<String> domain) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void delete(Domain<String> domain) {
+		Country country = (Country) domain;
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE code = " + MySqlUtil.escape(country.getId()));
 	}
 
 	@Override

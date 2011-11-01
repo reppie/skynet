@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
+import java.sql.Types;
+
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.place.Place;
@@ -10,24 +12,31 @@ public class PlaceDaoImpl extends PlaceDao {
 	public void insert(Domain<String> domain) {
 		Place place = (Place) domain;
 		
-		String query = "INSERT INTO " + tableName +	" VALUES ("
-		+ MySqlUtil.escape(place.getId()) + ", "
-		+ place.getType().getId() + ", "
-		+ place.getBoundingBox().getId() + ", "
-		+ MySqlUtil.escape(place.getName()) + ", "
-		+ MySqlUtil.escape(place.getUrl().getId()) + ", "
-		+ MySqlUtil.escape(place.getFullName()) + ", "
-		+ MySqlUtil.escape(place.getCountry().getId()) + ", "
-		+ MySqlUtil.escape(place.getStreetAddress()) + ", "
-		+ MySqlUtil.escape(place.getLocality()) + ", "
-		+ MySqlUtil.escape(place.getRegion()) + ", "
-		+ MySqlUtil.escape(place.getIso3()) + ", "
-		+ MySqlUtil.escape(place.getPostalCode()) + ", "
-		+ MySqlUtil.escape(place.getPhone()) + ", "
-		+ MySqlUtil.escape(place.getTwitter()) + ", "
-		+ MySqlUtil.escape(place.getAppId()) + ")";
+		String query = 
+			"INSERT INTO " + tableName + 
+				"(place_id, place_type_id, bounding_box_id, name, url, full_name, country_id, street_address, locality, region, iso3, postal_code, phone, twitter, appid) " +
+			"VALUES" +
+				"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
-		MySqlUtil.getInstance().insert(query);
+		Param[] params = new Param[] {
+			new Param(place.getId(), Types.VARCHAR),
+			new Param(place.getType().getId(), Types.BIGINT),
+			new Param(place.getBoundingBox().getId(), Types.BIGINT),
+			new Param(place.getName(), Types.VARCHAR),
+			new Param(place.getUrl().getId(), Types.VARCHAR),
+			new Param(place.getFullName(), Types.VARCHAR),
+			new Param(place.getCountry().getId(), Types.BIGINT),
+			new Param(place.getStreetAddress(), Types.VARCHAR),
+			new Param(place.getLocality(), Types.VARCHAR),
+			new Param(place.getRegion(), Types.VARCHAR),
+			new Param(place.getIso3(), Types.VARCHAR),
+			new Param(place.getPostalCode(), Types.VARCHAR),
+			new Param(place.getPhone(), Types.VARCHAR),
+			new Param(place.getTwitter(), Types.VARCHAR),
+			new Param(place.getAppId(), Types.VARCHAR)
+		};
+			
+		MySqlUtil.getInstance().insert(query, params);
 	}
 
 	@Override

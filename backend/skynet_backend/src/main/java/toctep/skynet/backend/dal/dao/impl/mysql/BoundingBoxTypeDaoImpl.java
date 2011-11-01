@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -10,18 +11,16 @@ import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 
 	@Override
-	public void delete(Domain<Long> domain) {
-		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());	
-	}
-
-	@Override
 	public void insert(Domain<Long> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 
-		long id = MySqlUtil.getInstance().insert(
-					"INSERT INTO " + tableName + " (text) VALUES ('" + boundingBoxType.getText() + "')"
-					);
+		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
+		
+		Param[] params = new Param[] {
+			new Param(boundingBoxType.getText(), Types.VARCHAR)
+		};
+			
+		Long id = MySqlUtil.getInstance().insert(query, params);
 		
 		boundingBoxType.setId(id);
 	}
@@ -46,6 +45,12 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void delete(Domain<Long> domain) {
+		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());	
 	}
 
 	@Override

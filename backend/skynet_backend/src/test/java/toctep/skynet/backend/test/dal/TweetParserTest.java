@@ -21,13 +21,7 @@ public class TweetParserTest {
 	
 	@Before
 	public void setup() {
-		Connection conn = MySqlUtil.getInstance(
-				"mysql",
-				"localhost",
-				"skynet_test",
-				"skynet",
-				"asdasd"
-			).getConnection();
+		Connection conn = MySqlUtil.getInstance("mysql_test.properties").getConnection();
 	}
 
 	@Test
