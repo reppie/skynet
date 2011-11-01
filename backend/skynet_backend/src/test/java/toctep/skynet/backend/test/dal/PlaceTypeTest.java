@@ -28,7 +28,7 @@ public class PlaceTypeTest extends DomainTest{
 	public void testInsert() {
 		placeType.save();
 		assertEquals(1, placeTypeDao.count());
-		assertEquals(1, placeType.getId());
+		assertTrue(new Long(1).equals(placeType.getId()));
 	}
 	
 	@Override

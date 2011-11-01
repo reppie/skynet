@@ -1,10 +1,5 @@
 package toctep.skynet.backend.test.dal;
 
-<<<<<<< HEAD
-import toctep.skynet.backend.dal.domain.Country;
-=======
-import toctep.skynet.backend.dal.domain.Url;
->>>>>>> 4cb405d1eb350d14b4c957c920eb8b62a3390943
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.country.Country;

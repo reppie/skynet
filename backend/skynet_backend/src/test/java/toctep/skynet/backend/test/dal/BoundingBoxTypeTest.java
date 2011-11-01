@@ -28,7 +28,7 @@ public class BoundingBoxTypeTest extends DomainTest{
 	public void testInsert() {
 		boundingBoxType.save();
 		assertEquals(1, boundingBoxTypeDao.count());
-		assertEquals(1, boundingBoxType.getId());
+		assertTrue(new Long(1).equals(boundingBoxType.getId()));
 	}
 	
 	@Override

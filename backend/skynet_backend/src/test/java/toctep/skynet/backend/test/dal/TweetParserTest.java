@@ -35,7 +35,7 @@ public class TweetParserTest {
 		TweetIndexer indexer = new TweetIndexer();
 		Tweet tweet = new Tweet();
 		
-		tweet.setId(1001);
+		tweet.setId(new Long(1001));
 		tweet.setText("wilfried elfstedentocht jager braam grietje horse");
 		
 		assertEquals("keyword count: ", 0, MySqlUtil.getInstance().count("twitter_keyword"));

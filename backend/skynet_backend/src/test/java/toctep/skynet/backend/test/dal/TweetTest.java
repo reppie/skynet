@@ -2,11 +2,6 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-<<<<<<< HEAD
-import toctep.skynet.backend.dal.domain.TimeZone;
-=======
-import toctep.skynet.backend.dal.domain.Language;
->>>>>>> a3b075fa2512f58ed2a08a792cef5e016cefbb71
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.country.Country;
@@ -117,15 +112,15 @@ public class TweetTest extends DomainTest {
 	@Override
 	public void testCreate() {
 		assertNotNull(tweet);
-		assertEquals(id, tweet.getId());
+		assertTrue(new Long(1).equals(tweet.getId()));
 		assertTrue(text.equals(tweet.getText()));
 		assertTrue(geo.equals(tweet.getGeo()));
 		assertTrue(truncated == tweet.isTruncated());
 		assertEquals(twitterId, tweet.getTwitterId());
 		assertTrue(sourceType.equals(tweet.getSourceType()));
 		assertTrue(favorited == tweet.isFavorited());
-		assertEquals(inReplyToTweetTwitterId, tweet.getInReplyToTweetTwitterId());
-		assertEquals(inReplyToUserTwitterId, tweet.getInReplyToUserTwitterId());
+		assertEquals(inReplyToTweetTwitter, tweet.getInReplyToTweetTwitter());
+		assertEquals(inReplyToUserTwitter, tweet.getInReplyToUserTwitter());
 		assertEquals(retweetCount, tweet.getRetweetCount());
 		assertTrue(createdAt.equals(tweet.getCreatedAt()));
 		assertTrue(place.equals(tweet.getPlace()));
@@ -151,8 +146,8 @@ public class TweetTest extends DomainTest {
 		assertEquals(postTweet.getTwitterId(), tweet.getTwitterId());
 		assertEquals(postTweet.getSourceType().getId(), tweet.getSourceType().getId());
 		assertTrue(postTweet.isFavorited() == tweet.isFavorited());
-		assertEquals(postTweet.getInReplyToTweetTwitterId(), tweet.getInReplyToTweetTwitterId());
-		assertEquals(postTweet.getInReplyToUserTwitterId(), tweet.getInReplyToUserTwitterId());
+		assertEquals(postTweet.getInReplyToTweetTwitter(), tweet.getInReplyToTweetTwitter());
+		assertEquals(postTweet.getInReplyToUserTwitter(), tweet.getInReplyToUserTwitter());
 		assertEquals(postTweet.getRetweetCount(), tweet.getRetweetCount());
 		assertTrue(postTweet.getCreatedAt().equals(tweet.getCreatedAt()));
 		assertTrue(postTweet.getPlace().getId().equals(tweet.getPlace().getId()));

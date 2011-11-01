@@ -28,7 +28,7 @@ public class LanguageTest extends DomainTest{
 	public void testInsert() {
 		language.save();
 		assertEquals(1, languageDao.count());
-		assertEquals(1, language.getId());
+		assertTrue(new Long(1).equals(language.getId()));
 	}
 	
 	@Override
