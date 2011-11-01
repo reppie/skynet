@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.place;
 
-public interface IPlaceType {
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface IPlaceType extends IDomain<Long> {
 
 	public String getText();
 	

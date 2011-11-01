@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
-public class NullBoundingBox implements IBoundingBox<Long> {
+public class NullBoundingBox implements IBoundingBox {
 
 	@Override
 	public Long getId() {
@@ -13,7 +13,7 @@ public class NullBoundingBox implements IBoundingBox<Long> {
 	}
 
 	@Override
-	public IBoundingBoxType<Long> getType() {
+	public IBoundingBoxType getType() {
 		return new NullBoundingBoxType();
 	}
 	

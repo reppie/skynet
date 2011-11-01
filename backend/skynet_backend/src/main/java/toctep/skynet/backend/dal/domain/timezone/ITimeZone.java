@@ -1,6 +1,10 @@
 package toctep.skynet.backend.dal.domain.timezone;
 
-public interface ITimeZone {
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface ITimeZone extends IDomain<Long> {
+	
 	public int getUtcOffset();
 	public String getTimeZone();
+
 }
