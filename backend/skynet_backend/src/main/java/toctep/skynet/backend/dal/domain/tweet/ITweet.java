@@ -2,25 +2,24 @@ package toctep.skynet.backend.dal.domain.tweet;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.SourceType;
-import toctep.skynet.backend.dal.domain.User;
-import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.geo.IGeo;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.user.IUser;
 
 public interface ITweet {
 
 	public String getText();
-	public Geo getGeo();
+	public IGeo getGeo();
 	public boolean isTruncated();
 	public long getTwitterId();
-	public SourceType getSourceType();
+	public ISourceType getSourceType();
 	public boolean isFavorited();
-	public Tweet getInReplyToTweetTwitter();
-	public User getInReplyToUserTwitter();
+	public ITweet getInReplyToTweetTwitter();
+	public IUser getInReplyToUserTwitter();
 	public long getRetweetCount();
 	public Date getCreatedAt();
-	public Place getPlace();
-	public User getUser();
+	public IPlace getPlace();
+	public IUser getUser();
 	public String getCoordinates();
 	
 }

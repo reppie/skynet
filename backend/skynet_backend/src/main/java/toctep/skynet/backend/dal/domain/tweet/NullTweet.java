@@ -2,10 +2,12 @@ package toctep.skynet.backend.dal.domain.tweet;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.SourceType;
-import toctep.skynet.backend.dal.domain.User;
-import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.geo.IGeo;
+import toctep.skynet.backend.dal.domain.geo.NullGeo;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 
 public class NullTweet implements ITweet {
 
@@ -15,7 +17,7 @@ public class NullTweet implements ITweet {
 	}
 
 	@Override
-	public Geo getGeo() {
+	public IGeo getGeo() {
 		return new NullGeo();
 	}
 
@@ -30,8 +32,8 @@ public class NullTweet implements ITweet {
 	}
 
 	@Override
-	public SourceType getSourceType() {
-		return new NullSourceType()
+	public ISourceType getSourceType() {
+		return new NullSourceType();
 	}
 
 	@Override
@@ -40,13 +42,13 @@ public class NullTweet implements ITweet {
 	}
 
 	@Override
-	public long getInReplyToTweetTwitterId() {
-		return 0;
+	public ITweet getInReplyToTweetTwitter() {
+		return new NullTweet();
 	}
 
 	@Override
-	public long getInReplyToUserTwitterId() {
-		return 0;
+	public IUser getInReplyToUserTwitter() {
+		return new NullUser();
 	}
 
 	@Override
@@ -60,13 +62,13 @@ public class NullTweet implements ITweet {
 	}
 
 	@Override
-	public Place getPlace() {
+	public IPlace getPlace() {
 		return new NullPlace();
 	}
 
 	@Override
-	public User getUser() {
-		return NullUser();
+	public IUser getUser() {
+		return new NullUser();
 	}
 
 	@Override
