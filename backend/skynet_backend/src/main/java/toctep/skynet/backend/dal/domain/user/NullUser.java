@@ -2,12 +2,15 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.language.ILanguage;
+import toctep.skynet.backend.dal.domain.language.NullLanguage;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public class NullUser implements IUser{
+public class NullUser implements IUser {
 
 	@Override
 	public Date getCreatedAt() {
@@ -40,7 +43,7 @@ public class NullUser implements IUser{
 	}
 
 	@Override
-	public Language getLanguage() {
+	public ILanguage getLanguage() {
 		return new NullLanguage();
 	}
 
@@ -60,7 +63,7 @@ public class NullUser implements IUser{
 	}
 
 	@Override
-	public Place getPlace() {
+	public IPlace getPlace() {
 		return new NullPlace();
 	}
 
@@ -70,12 +73,12 @@ public class NullUser implements IUser{
 	}
 
 	@Override
-	public Url getProfileBackgroundImageUrl() {
+	public IUrl getProfileBackgroundImageUrl() {
 		return new NullUrl();
 	}
 
 	@Override
-	public Url getProfileBackgroundImageUrlHttps() {
+	public IUrl getProfileBackgroundImageUrlHttps() {
 		return new NullUrl();
 	}
 
@@ -85,12 +88,12 @@ public class NullUser implements IUser{
 	}
 
 	@Override
-	public Url getProfileImageUrl() {
+	public IUrl getProfileImageUrl() {
 		return new NullUrl();
 	}
 
 	@Override
-	public Url getProfileImageUrlHttps() {
+	public IUrl getProfileImageUrlHttps() {
 		return new NullUrl();
 	}
 
@@ -130,7 +133,7 @@ public class NullUser implements IUser{
 	}
 
 	@Override
-	public Url getUrl() {
+	public IUrl getUrl() {
 		return new NullUrl();
 	}
 

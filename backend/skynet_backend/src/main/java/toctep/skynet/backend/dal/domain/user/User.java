@@ -3,8 +3,9 @@ package toctep.skynet.backend.dal.domain.user;
 import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.DomainLongPk;
-import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.TimeZone;
+import toctep.skynet.backend.dal.domain.language.ILanguage;
+import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.url.Url;
 
@@ -14,7 +15,7 @@ public class User extends DomainLongPk implements IUser  {
 	private boolean defaultProfile;
 	private int statusesCount;
 	private long profileBackgroundTile;
-	private Language language;
+	private ILanguage language;
 	private String profileLinkColor;
 	private int following;
 	private int favouritesCount;
@@ -78,7 +79,7 @@ public class User extends DomainLongPk implements IUser  {
 		this.profileBackgroundTile = profileBackgroundTile;
 	}
 
-	public Language getLanguage() {
+	public ILanguage getLanguage() {
 		return language;
 	}
 

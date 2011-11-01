@@ -2,18 +2,18 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.language.ILanguage;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.url.IUrl;
 
 public interface IUser{
 
-	public Place getPlace();
+	public IPlace getPlace();
 	public boolean isDefaultProfile();
 	public int getStatusesCount();
 	public long getProfileBackgroundTile();
-	public Language getLanguage();
+	public ILanguage getLanguage();
 	public String getProfileLinkColor();
 	public int getFollowing();
 	public int getFavouritesCount();
@@ -29,18 +29,18 @@ public interface IUser{
 	public boolean isDefaultProfileImage();
 	public int getFollowersCount();
 	public boolean isGeoEnabled();
-	public Url getProfileBackgroundImageUrl();
-	public Url getProfileBackgroundImageUrlHttps();
+	public IUrl getProfileBackgroundImageUrl();
+	public IUrl getProfileBackgroundImageUrlHttps();
 	public boolean isFollowRequestSent();
-	public Url getUrl();
+	public IUrl getUrl();
 	public TimeZone getTimeZone();
 	public long getNotifications();
 	public boolean isProfileUseBackgroundImage();
 	public int getFriendsCount();
 	public String getProfileSideBarFillColor();
 	public String getScreenName();
-	public Url getProfileImageUrl();
-	public Url getProfileImageUrlHttps();
+	public IUrl getProfileImageUrl();
+	public IUrl getProfileImageUrlHttps();
 	public boolean isShowAllInlineMedia();
 	public boolean isTranslator();
 	public int getListedCount();

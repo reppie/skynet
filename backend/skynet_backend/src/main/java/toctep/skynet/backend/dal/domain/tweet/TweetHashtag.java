@@ -1,7 +1,7 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Hashtag;
+import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 
 public class TweetHashtag extends Domain {
 	

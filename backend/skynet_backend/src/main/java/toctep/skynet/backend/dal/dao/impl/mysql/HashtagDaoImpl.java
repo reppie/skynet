@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Hashtag;
+import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 
 public class HashtagDaoImpl extends HashtagDao{
 

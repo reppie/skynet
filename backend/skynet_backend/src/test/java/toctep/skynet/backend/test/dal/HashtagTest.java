@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Hashtag;
+import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 
 public class HashtagTest extends DomainTest{
 

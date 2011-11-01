@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Language;
+import toctep.skynet.backend.dal.domain.language.Language;
 
 public class LanguageTest extends DomainTest{
 

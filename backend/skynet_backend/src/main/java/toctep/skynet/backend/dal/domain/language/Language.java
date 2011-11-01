@@ -1,6 +1,8 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.language;
 
-public class Language extends DomainLongPk {
+import toctep.skynet.backend.dal.domain.DomainLongPk;
+
+public class Language extends DomainLongPk implements ILanguage {
 
 	public String text;
 	
