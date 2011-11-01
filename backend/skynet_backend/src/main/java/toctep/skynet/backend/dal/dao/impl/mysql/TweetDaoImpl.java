@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.tweet.Tweet;
 public class TweetDaoImpl extends TweetDao {
 	
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
 		
 		String query = "INSERT INTO " + tableName +	" VALUES ("
@@ -32,7 +32,7 @@ public class TweetDaoImpl extends TweetDao {
 	}
 
 	@Override
-	public Tweet select(long id) {
+	public Tweet select(Long id) {
 		Tweet tweet = new Tweet();
 		
 		ResultSet rs = MySqlUtil.getInstance().select("SELECT id, text FROM " + tableName + " WHERE id = " + id);
@@ -49,18 +49,18 @@ public class TweetDaoImpl extends TweetDao {
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<Long> domain) {
 		// TODO
 	}
 	
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweet.getId());
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
 		return MySqlUtil.getInstance().exists(tableName, "id = " + tweet.getId());
 	}
