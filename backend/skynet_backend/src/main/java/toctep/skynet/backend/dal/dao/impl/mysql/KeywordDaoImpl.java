@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -15,10 +16,13 @@ public class KeywordDaoImpl extends KeywordDao {
 	public void insert(Domain<Long> domain) {
 		Keyword keyword = (Keyword) domain;
 		
-		long id = MySqlUtil.getInstance().insert(
-				"INSERT INTO " + tableName + " (keyword) " +
-				"VALUES ('" + keyword.getKeyword() + "');" 
-				);
+		String query = "INSERT INTO " + tableName + "(keyword) VALUES(?)";
+		
+		Param[] params = new Param[] {
+			new Param(keyword.getKeyword(), Types.VARCHAR)
+		};
+			
+		Long id = MySqlUtil.getInstance().insert(query, params);
 		
 		keyword.setId(id);
 	}

@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -13,9 +14,13 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	public void insert(Domain<Long> domain) {
 		PlaceType placeType = (PlaceType) domain;
 		
-		long id = MySqlUtil.getInstance().insert(
-			"INSERT INTO " + tableName + " (text) VALUES ('" + placeType.getText() + "')"
-		);
+		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
+		
+		Param[] params = new Param[] {
+			new Param(placeType.getText(), Types.VARCHAR)
+		};
+			
+		Long id = MySqlUtil.getInstance().insert(query, params);
 		
 		placeType.setId(id);
 	}

@@ -2,28 +2,26 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 
 public class GeoDaoImpl extends GeoDao {
-
-	@Override
-	public void delete(Domain<Long> domain) {
-		Geo geo = (Geo) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geo.getId());
-	}
 	
 	@Override
 	public void insert(Domain<Long> domain) {
 		Geo geo = (Geo) domain;
 		
-		long id = MySqlUtil.getInstance().insert(
-				"INSERT INTO " + tableName + " (geo_type_id, coordinates) " +
-				"VALUES (" + geo.getType().getId() + ", '" 
-							+ geo.getCoordinates() + "')"					
-				);
+		String query = "INSERT INTO " + tableName + "(geo_type_id, coordinates) VALUES(?, ?)";
+		
+		Param[] params = new Param[] {
+			new Param(geo.getId(), Types.BIGINT),
+			new Param(geo.getCoordinates(), Types.VARCHAR)
+		};
+			
+		Long id = MySqlUtil.getInstance().insert(query, params);
 		
 		geo.setId(id);
 	}
@@ -49,6 +47,12 @@ public class GeoDaoImpl extends GeoDao {
 	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void delete(Domain<Long> domain) {
+		Geo geo = (Geo) domain;
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geo.getId());
 	}
 	
 	@Override
