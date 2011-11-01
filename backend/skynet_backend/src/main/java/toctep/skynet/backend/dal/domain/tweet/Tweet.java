@@ -8,7 +8,7 @@ import toctep.skynet.backend.dal.domain.User;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.place.Place;
 
-public class Tweet extends DomainLongPk {
+public class Tweet extends DomainLongPk implements ITweet {
 
 	private String text;
 	private Geo geo;
