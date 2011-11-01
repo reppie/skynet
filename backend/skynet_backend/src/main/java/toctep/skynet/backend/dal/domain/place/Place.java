@@ -142,12 +142,15 @@ public class Place extends DomainStringPk implements IPlace{
 	
 	@Override
 	public void save() {
+		if (boundingBox instanceof BoundingBox) {
+			((BoundingBox)boundingBox).save();
+			((BoundingBox) this.boundingBox).setId(((BoundingBox)boundingBox).getId());
+		}
+		
 		type.save();
-		((BoundingBox)boundingBox).save();
 		url.save();
 		country.save();
 		this.type.setId(type.getId());
-		((BoundingBox)this.boundingBox).setId(boundingBox.getId());
 		this.url.setId(url.getId());
 		this.country.setId(country.getId());
 		super.save();
