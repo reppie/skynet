@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserDaoImpl extends UserDao {
 

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Keyword;
+import toctep.skynet.backend.dal.domain.tweet.Keyword;
 
 public class KeywordTest extends DomainTest {
 	private Keyword keyword;

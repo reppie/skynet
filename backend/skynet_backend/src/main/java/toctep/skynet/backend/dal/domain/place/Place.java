@@ -1,6 +1,11 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.place;
 
-public class Place extends DomainStringPk {
+import toctep.skynet.backend.dal.domain.Country;
+import toctep.skynet.backend.dal.domain.DomainStringPk;
+import toctep.skynet.backend.dal.domain.Url;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+
+public class Place extends DomainStringPk implements IPlace{
 
 	private PlaceType type;
 	private BoundingBox boundingBox;

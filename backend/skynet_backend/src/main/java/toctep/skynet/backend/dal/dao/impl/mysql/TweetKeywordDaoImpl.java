@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
-import toctep.skynet.backend.dal.domain.TweetKeyword;
+import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetKeywordDaoImpl extends TweetKeywordDao {
 

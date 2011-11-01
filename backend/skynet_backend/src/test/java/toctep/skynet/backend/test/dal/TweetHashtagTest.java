@@ -1,8 +1,8 @@
 package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.Hashtag;
-import toctep.skynet.backend.dal.domain.Tweet;
-import toctep.skynet.backend.dal.domain.TweetHashtag;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
 
 public class TweetHashtagTest extends DomainTest {
 

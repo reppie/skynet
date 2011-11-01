@@ -1,15 +1,18 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.boundingbox;
 
-public class Geo extends DomainLongPk {
+import toctep.skynet.backend.dal.domain.DomainLongPk;
+
+
+public class BoundingBox extends DomainLongPk {
 	
-	private GeoType type;
+	private BoundingBoxType type;
 	private String coordinates;
-
-	public GeoType getType() {
+	
+	public BoundingBoxType getType() {
 		return type;
 	}
 
-	public void setType(GeoType type) {
+	public void setType(BoundingBoxType type) {
 		this.type = type;
 	}
 
@@ -20,10 +23,10 @@ public class Geo extends DomainLongPk {
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
 	}
-
+	
 	@Override
 	public void setDao() {
-		dao = daoFacade.getGeoDao();
+		dao = daoFacade.getBoundingBoxDao();
 	}
 	
 	@Override
@@ -31,6 +34,5 @@ public class Geo extends DomainLongPk {
 		type.save();
 		this.type.setId(type.getId());
 		super.save();
-	}		
-	
+	}	
 }

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Geo;
+import toctep.skynet.backend.dal.domain.geo.Geo;
 
 public class GeoDaoImpl extends GeoDao{
 
