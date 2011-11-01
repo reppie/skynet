@@ -37,7 +37,7 @@ public class MySqlUtil {
 
 	private static MySqlUtil instance;
 	
-	public static final String MYSQL_CONFIG = "conf/mysql.ini";
+	public static final String MYSQL_CONFIG = "mysql.properties";
 	
 	private String driver;
 	private String host;
