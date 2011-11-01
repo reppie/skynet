@@ -5,17 +5,20 @@ import java.sql.Date;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.Language;
+import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 
 public class User extends DomainLongPk implements IUser  {
 
-	private Place place;
+	private IPlace place;
 	private boolean defaultProfile;
 	private int statusesCount;
 	private long profileBackgroundTile;
-	private Language language;
+	private ILanguage language;
 	private String profileLinkColor;
 	private int following;
 	private int favouritesCount;
@@ -31,27 +34,27 @@ public class User extends DomainLongPk implements IUser  {
 	private boolean defaultProfileImage;
 	private int followersCount;
 	private boolean geoEnabled;
-	private Url profileBackgroundImageUrl;
-	private Url profileBackgroundImageUrlHttps;
+	private IUrl profileBackgroundImageUrl;
+	private IUrl profileBackgroundImageUrlHttps;
 	private boolean followRequestSent;
-	private Url url;
-	private TimeZone timeZone;
+	private IUrl url;
+	private ITimeZone timeZone;
 	private long notifications;
 	private boolean profileUseBackgroundImage;
 	private int friendsCount;
 	private String profileSideBarFillColor;
 	private String screenName;
-	private Url profileImageUrl;
-	private Url profileImageUrlHttps;
+	private IUrl profileImageUrl;
+	private IUrl profileImageUrlHttps;
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
 	private int listedCount;
 
-	public Place getPlace() {
+	public IPlace getPlace() {
 		return place;
 	}
 
-	public void setPlace(Place place) {
+	public void setPlace(IPlace place) {
 		this.place = place;
 	}
 
@@ -83,7 +86,7 @@ public class User extends DomainLongPk implements IUser  {
 		return language;
 	}
 
-	public void setLanguage(Language language) {
+	public void setLanguage(ILanguage language) {
 		this.language = language;
 	}
 
@@ -207,20 +210,20 @@ public class User extends DomainLongPk implements IUser  {
 		this.geoEnabled = geoEnabled;
 	}
 
-	public Url getProfileBackgroundImageUrl() {
+	public IUrl getProfileBackgroundImageUrl() {
 		return profileBackgroundImageUrl;
 	}
 
-	public void setProfileBackgroundImageUrl(Url profileBackgroundImageUrl) {
+	public void setProfileBackgroundImageUrl(IUrl profileBackgroundImageUrl) {
 		this.profileBackgroundImageUrl = profileBackgroundImageUrl;
 	}
 
-	public Url getProfileBackgroundImageUrlHttps() {
+	public IUrl getProfileBackgroundImageUrlHttps() {
 		return profileBackgroundImageUrlHttps;
 	}
 
 	public void setProfileBackgroundImageUrlHttps(
-			Url profileBackgroundImageUrlHttps) {
+			IUrl profileBackgroundImageUrlHttps) {
 		this.profileBackgroundImageUrlHttps = profileBackgroundImageUrlHttps;
 	}
 
@@ -232,19 +235,19 @@ public class User extends DomainLongPk implements IUser  {
 		this.followRequestSent = followRequestSent;
 	}
 
-	public Url getUrl() {
+	public IUrl getUrl() {
 		return url;
 	}
 
-	public void setUrl(Url url) {
+	public void setUrl(IUrl url) {
 		this.url = url;
 	}
 
-	public TimeZone getTimeZone() {
+	public ITimeZone getTimeZone() {
 		return timeZone;
 	}
 
-	public void setTimeZone(TimeZone timeZone) {
+	public void setTimeZone(ITimeZone timeZone) {
 		this.timeZone = timeZone;
 	}
 
@@ -288,19 +291,19 @@ public class User extends DomainLongPk implements IUser  {
 		this.screenName = screenName;
 	}
 
-	public Url getProfileImageUrl() {
+	public IUrl getProfileImageUrl() {
 		return profileImageUrl;
 	}
 
-	public void setProfileImageUrl(Url profileImageUrl) {
+	public void setProfileImageUrl(IUrl profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
 	}
 	
-	public Url getProfileImageUrlHttps() {
+	public IUrl getProfileImageUrlHttps() {
 		return profileImageUrlHttps;
 	}	
 	
-	public void setProfileImageUrlHttps(Url profileImageUrlHttps) {
+	public void setProfileImageUrlHttps(IUrl profileImageUrlHttps) {
 		this.profileImageUrlHttps = profileImageUrlHttps;
 	}
 
@@ -335,22 +338,46 @@ public class User extends DomainLongPk implements IUser  {
 	
 	@Override
 	public void save() {
-		place.save();
-		language.save();
-		url.save();
-		timeZone.save();	
-		profileBackgroundImageUrl.save();
-		profileBackgroundImageUrlHttps.save();
-		profileImageUrl.save();
-		profileImageUrlHttps.save();
-		this.place.setId(place.getId());
-		this.language.setId(language.getId());
-		this.url.setId(url.getId());
-		this.timeZone.setId(timeZone.getId());
-		this.profileBackgroundImageUrl.setId(profileBackgroundImageUrl.getId());
-		this.profileBackgroundImageUrlHttps.setId(profileBackgroundImageUrlHttps.getId());
-		this.profileImageUrl.setId(profileImageUrl.getId());
-		this.profileImageUrlHttps.setId(profileImageUrlHttps.getId());
+		if(place instanceof Place) {
+			((Place)place).save();	
+			((Place)this.place).setId(((Place)place).getId());
+		}
+		
+		if(language instanceof Language) {
+			((Language)language).save();
+			((Language)this.language).setId(((Language)language).getId());
+		}
+		
+		if(url instanceof Url) {
+			((Url)url).save();
+			((Url)this.url).setId(((Url)url).getId());
+		}
+		
+		if(timeZone instanceof TimeZone) {
+			((TimeZone)timeZone).save();
+			((TimeZone)this.timeZone).setId(((TimeZone)timeZone).getId());
+		}
+		
+		if(profileBackgroundImageUrl instanceof Url) {
+			((Url)profileBackgroundImageUrl).save();
+			((Url)this.profileBackgroundImageUrl).setId(((Url)profileBackgroundImageUrl).getId());
+		}
+		
+		if(profileBackgroundImageUrlHttps instanceof Url) {
+			((Url)profileBackgroundImageUrlHttps).save();
+			((Url)this.profileBackgroundImageUrlHttps).setId(((Url)profileBackgroundImageUrlHttps).getId());
+		}
+		
+		if(profileImageUrl instanceof Url) {
+			((Url)profileImageUrl).save();
+			((Url)this.profileImageUrl).setId(((Url)profileImageUrl).getId());
+		}
+		
+		if(profileImageUrlHttps instanceof Url) {
+			((Url)profileImageUrlHttps).save();
+			((Url)this.profileImageUrlHttps).setId(((Url)profileImageUrlHttps).getId());
+		}
+		
 		super.save();
 	}	
 }
