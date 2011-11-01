@@ -69,12 +69,13 @@ public class NullPlace implements IPlace{
 	}
 
 	@Override
-	public PlaceType getType() {
-		return NullPlaceType();
+	public IPlaceType getType() {
+		return new NullPlaceType();
 	}
 
 	@Override
 	public Url getUrl() {
 		return NullUrl();
 	}
+	
 }

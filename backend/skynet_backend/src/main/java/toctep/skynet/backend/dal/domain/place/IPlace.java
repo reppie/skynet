@@ -6,7 +6,7 @@ import toctep.skynet.backend.dal.domain.country.ICountry;
 
 public interface IPlace {
 	
-	public PlaceType getType();
+	public IPlaceType getType();
 	public IBoundingBox getBoundingBox();
 	public String getName();
 	public String getFullName();
