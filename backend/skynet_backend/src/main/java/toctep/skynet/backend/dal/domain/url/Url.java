@@ -8,4 +8,5 @@ public class Url extends Domain<String> implements IUrl{
 	public void setDao() {
 		dao = daoFacade.getUrlDao();
 	}
+	
 }
