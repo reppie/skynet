@@ -1,10 +1,9 @@
 package toctep.skynet.backend.dal.domain.place;
 
-import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
 import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.country.ICountry;
 
 public class Place extends DomainStringPk implements IPlace{
 
@@ -12,7 +11,7 @@ public class Place extends DomainStringPk implements IPlace{
 	private IBoundingBox boundingBox;
 	private String name;
 	private String fullName;
-	private Country country;
+	private ICountry country;
 	private String streetAddress;
 	private String locality;
 	private String region;
@@ -55,11 +54,11 @@ public class Place extends DomainStringPk implements IPlace{
 		this.fullName = fullName;
 	}
 
-	public Country getCountry() {
+	public ICountry getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(ICountry country) {
 		this.country = country;
 	}
 
