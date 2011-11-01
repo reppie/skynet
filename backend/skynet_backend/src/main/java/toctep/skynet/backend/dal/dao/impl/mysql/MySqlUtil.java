@@ -128,7 +128,7 @@ public class MySqlUtil {
 	public int insert(String query) {
 		int id = 0;
 		
-		System.out.println(query);
+		//System.out.println(query);
 		
 		Statement stmt = null;
 		
