@@ -175,7 +175,7 @@ public class TweetParser {
         user.setVerified(userStatus.isVerified());
         user.setContributorsEnabled(userStatus.isContributorsEnabled());
         user.setDescription(user.getDescription());
-        user.setName(userStatus.getScreenName());
+        user.setName(userStatus.getName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
         user.setCreatedAt(new java.sql.Date(userStatus.getCreatedAt().getDate()));
@@ -201,7 +201,7 @@ public class TweetParser {
         user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
         user.setFriendsCount(userStatus.getFriendsCount());
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
-        user.setScreenName(userStatus.getName());
+        user.setScreenName(userStatus.getScreenName());
         
         Url profileImageUrl = new Url();
         if(userStatus.getProfileImageURL().toExternalForm() != null) {
