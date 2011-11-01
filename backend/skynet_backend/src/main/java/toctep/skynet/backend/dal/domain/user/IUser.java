@@ -2,12 +2,13 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
+import toctep.skynet.backend.dal.domain.IDomain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 
-public interface IUser{
+public interface IUser extends IDomain<Long> {
 
 	public IPlace getPlace();
 	public boolean isDefaultProfile();

@@ -12,6 +12,11 @@ import toctep.skynet.backend.dal.domain.user.NullUser;
 public class NullTweet implements ITweet {
 
 	@Override
+	public Long getId() {
+		return 0L;
+	}
+	
+	@Override
 	public String getText() {
 		return "";
 	}

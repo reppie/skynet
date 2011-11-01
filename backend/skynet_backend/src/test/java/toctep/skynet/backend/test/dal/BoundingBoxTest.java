@@ -34,7 +34,7 @@ public class BoundingBoxTest extends DomainTest{
 	public void testInsert() {	
 		boundingBox.save();
 		assertEquals(1, boundingBoxDao.count());
-		assertEquals(1, boundingBox.getId());
+		assertTrue(new Long(1).equals(boundingBox.getId()));
 	}
 
 	@Override

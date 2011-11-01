@@ -129,6 +129,8 @@ public class MySqlUtil {
 		
 		Statement stmt = null;
 		
+		System.out.println(query);
+		
 		try {
 			stmt = (Statement) conn.createStatement();
 			stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);

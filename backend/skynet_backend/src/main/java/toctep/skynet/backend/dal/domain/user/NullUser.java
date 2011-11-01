@@ -15,6 +15,11 @@ import toctep.skynet.backend.dal.domain.url.NullUrl;
 public class NullUser implements IUser {
 
 	@Override
+	public Long getId() {
+		return 0L;
+	}
+	
+	@Override
 	public Date getCreatedAt() {
 		return new java.sql.Date(0);
 	}
@@ -188,4 +193,5 @@ public class NullUser implements IUser {
 	public boolean isVerified() {
 		return false;
 	}
+
 }
