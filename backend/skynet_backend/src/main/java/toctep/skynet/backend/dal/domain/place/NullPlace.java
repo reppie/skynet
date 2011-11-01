@@ -7,7 +7,6 @@ import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
-import toctep.skynet.backend.dal.domain.url.Url;
 
 public class NullPlace implements IPlace{
 
