@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Url;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
 

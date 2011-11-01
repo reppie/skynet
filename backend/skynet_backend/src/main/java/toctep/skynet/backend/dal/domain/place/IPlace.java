@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
-import toctep.skynet.backend.dal.domain.country.Country;
+import toctep.skynet.backend.dal.domain.country.ICountry;
 
 public interface IPlace {
 	
@@ -20,4 +20,5 @@ public interface IPlace {
 	public String getTwitter();
 	public Url getUrl();
 	public String getAppId();
+	
 }
