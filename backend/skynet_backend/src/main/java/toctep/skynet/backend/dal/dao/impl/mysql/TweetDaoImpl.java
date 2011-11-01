@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
 public class TweetDaoImpl extends TweetDao {
 	
@@ -20,8 +20,8 @@ public class TweetDaoImpl extends TweetDao {
 		+ tweet.isTruncated() + ", "
 		+ tweet.getSourceType().getId() + ", "
 		+ tweet.isFavorited() + ", "
-		+ tweet.getInReplyToTweetTwitterId() + ", "
-		+ tweet.getInReplyToUserTwitterId() + ", "
+		+ tweet.getInReplyToTweetTwitter() + ", "
+		+ tweet.getInReplyToUserTwitter() + ", "
 		+ tweet.getRetweetCount() + ", "
 		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", "
 		+ MySqlUtil.escape(tweet.getPlace().getId()) + ", "

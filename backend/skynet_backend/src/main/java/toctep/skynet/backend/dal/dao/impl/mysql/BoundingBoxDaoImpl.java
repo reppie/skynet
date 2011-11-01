@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
-import toctep.skynet.backend.dal.domain.BoundingBox;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 
 public class BoundingBoxDaoImpl extends BoundingBoxDao{
 

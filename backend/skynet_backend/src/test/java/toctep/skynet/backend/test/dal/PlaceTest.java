@@ -1,11 +1,16 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
+<<<<<<< HEAD
 import toctep.skynet.backend.dal.domain.Country;
-import toctep.skynet.backend.dal.domain.Place;
-import toctep.skynet.backend.dal.domain.PlaceType;
+=======
 import toctep.skynet.backend.dal.domain.Url;
+>>>>>>> 4cb405d1eb350d14b4c957c920eb8b62a3390943
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.country.Country;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class PlaceTest extends DomainTest{
 

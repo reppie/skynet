@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.tweet.SourceType;
 
 public class SourceTypeDaoImpl extends SourceTypeDao {
 

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.PlaceType;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
 
 public class PlaceTypeTest extends DomainTest{
 

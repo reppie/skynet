@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.TimeZone;
+import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 
 public class TimeZoneDaoImpl extends TimeZoneDao {
 
