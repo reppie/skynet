@@ -2,22 +2,15 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
-<<<<<<< HEAD
-import toctep.skynet.backend.dal.domain.TimeZone;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
+import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
-=======
-import toctep.skynet.backend.dal.domain.Language;
-import toctep.skynet.backend.dal.domain.place.NullPlace;
-import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.timezone.TimeZone;
-import toctep.skynet.backend.dal.domain.url.NullUrl;
-import toctep.skynet.backend.dal.domain.url.Url;
->>>>>>> a3b075fa2512f58ed2a08a792cef5e016cefbb71
+
 
 public class NullUser implements IUser {
 
@@ -137,7 +130,7 @@ public class NullUser implements IUser {
 	}
 
 	@Override
-	public TimeZone getTimeZone() {
+	public ITimeZone getTimeZone() {
 		return new NullTimeZone();
 	}
 
