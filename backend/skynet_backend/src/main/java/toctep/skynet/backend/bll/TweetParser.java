@@ -175,7 +175,7 @@ public class TweetParser {
         user.setVerified(userStatus.isVerified());
         user.setContributorsEnabled(userStatus.isContributorsEnabled());
         user.setDescription(user.getDescription());
-        user.setName(userStatus.getName());
+        user.setName(userStatus.getScreenName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
         user.setCreatedAt(new java.sql.Date(userStatus.getCreatedAt().getDate()));
@@ -194,23 +194,27 @@ public class TweetParser {
         	profileBgUrlHttps.setId(userStatus.getProfileBackgroundImageUrlHttps());
         }
         
-        user.setProfileBackgroundImageUrl(profileBgUrl);
+        user.setProfileBackgroundImageUrlHttps(profileBgUrl);
+        
         user.setFollowRequestSent(userStatus.isFollowRequestSent());
         user.setNotifications(0); //Twitter4j has no support for this?
         user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
         user.setFriendsCount(userStatus.getFriendsCount());
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
-        user.setScreenName(userStatus.getScreenName());
+        user.setScreenName(userStatus.getName());
         
         Url profileImageUrl = new Url();
         if(userStatus.getProfileImageURL().toExternalForm() != null) {
         	profileImageUrl.setId(userStatus.getProfileImageURL().toExternalForm());
-        }        
+        }     
+        user.setProfileImageUrl(profileImageUrl);
         
         Url profileImageUrlHttps = new Url();
+        
         if(userStatus.getProfileImageUrlHttps().toExternalForm() != null) {
         	profileImageUrlHttps.setId(userStatus.getProfileImageUrlHttps().toExternalForm());
         } 
+        user.setProfileImageUrlHttps(profileImageUrlHttps);
         
         user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
         user.setTranslator(userStatus.isTranslator());
