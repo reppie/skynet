@@ -27,12 +27,11 @@
 		
 		<div class="container">
 			<header class="span-24">
-				<img class="twitter-logo" src="/site_media/img/twitter_newbird_blue.png"/>
 				{% block header %}<h1>Social Media Lab</h1>{% endblock %}
 			</header>
 			<section class="span-18 main">
 				{% block searchbar %}
-				<form method="get" action="/twitter/search">
+				<form id="keyword-search-form" method="get" action="/twitter/search">
 					<input type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
 					{% if search_string %}
 						value="{{ search_string }}" 
@@ -54,7 +53,6 @@
 					<section id="tag-cloud">
 						<h1 class="title">Tag cloud</h1>
 						{% block tag-cloud %}
-							vandalisme fiets FC weer natuur
 						{% endblock %}
 					</section>
 					<section id="moodgraph">
