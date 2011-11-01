@@ -130,7 +130,7 @@ class Keyword(models.Model):
         min_font_size = settings.TWITTER['keywordcloud']['min_font_size']
         max_font_size = settings.TWITTER['keywordcloud']['max_font_size']
         
-        return KeywordCloud(query_set=query_set, min_font_size=min_font_size, max_font_size=max_font_size)
+        return KeywordCloud(query_set=query_set, min_font_size=min_font_size, max_font_size=max_font_size, num_keywords=20)
         
     def __unicode__(self):
         return self.keyword

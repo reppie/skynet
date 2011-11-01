@@ -6,7 +6,8 @@ class KeywordCloud:
     """ A list with the generated KeywordFontSizes """
     items = None
     
-    def __init__(self, query_set, min_font_size=14, max_font_size=30):
+    def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=20):
+        query_set = query_set.all()[:num_keywords]
         self.items = self.__generate(query_set, min_font_size, max_font_size)
 
     def __generate(self, query_set, min_font_size, max_font_size):
