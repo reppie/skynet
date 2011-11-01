@@ -1,10 +1,13 @@
 package toctep.skynet.backend.dal.domain.place;
 
-import toctep.skynet.backend.dal.domain.Country;
+
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
+import toctep.skynet.backend.dal.domain.country.ICountry;
+import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class NullPlace implements IPlace{
 
@@ -19,7 +22,7 @@ public class NullPlace implements IPlace{
 	}
 
 	@Override
-	public Country getCountry() {
+	public ICountry getCountry() {
 		return new NullCountry();
 	}
 
@@ -68,8 +71,8 @@ public class NullPlace implements IPlace{
 		return "";
 	}
 
-	@Override
-	public PlaceType getType() {
+
+	public IPlaceType getType() {
 		return new NullPlaceType();
 	}
 
@@ -77,4 +80,5 @@ public class NullPlace implements IPlace{
 	public IUrl getUrl() {
 		return new NullUrl();
 	}
+	
 }

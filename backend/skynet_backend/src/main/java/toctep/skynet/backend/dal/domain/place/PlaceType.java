@@ -2,10 +2,11 @@ package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 
-public class PlaceType extends DomainLongPk {
+public class PlaceType extends DomainLongPk implements IPlaceType {
 
 	public String text;
 	
+	@Override
 	public String getText() {
 		return text;
 	}

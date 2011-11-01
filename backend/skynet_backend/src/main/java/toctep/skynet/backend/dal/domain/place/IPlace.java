@@ -1,16 +1,17 @@
 package toctep.skynet.backend.dal.domain.place;
 
-import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
+
 
 public interface IPlace {
 	
-	public PlaceType getType();
+	public IPlaceType getType();
 	public IBoundingBox getBoundingBox();
 	public String getName();
 	public String getFullName();
-	public Country getCountry();
+	public ICountry getCountry();
 	public String getStreetAddress();
 	public String getLocality();
 	public String getRegion();
@@ -20,4 +21,5 @@ public interface IPlace {
 	public String getTwitter();
 	public IUrl getUrl();
 	public String getAppId();
+	
 }

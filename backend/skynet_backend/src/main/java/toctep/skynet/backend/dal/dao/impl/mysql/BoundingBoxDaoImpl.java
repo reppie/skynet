@@ -7,8 +7,6 @@ import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 
-import com.mysql.jdbc.PreparedStatement;
-
 public class BoundingBoxDaoImpl extends BoundingBoxDao{
 
 	@Override
