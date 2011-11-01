@@ -6,7 +6,7 @@ public class Url extends Domain<String> implements IUrl{
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getUrlDao();
+		dao = getDaoFacade().getUrlDao();
 	}
 	
 }

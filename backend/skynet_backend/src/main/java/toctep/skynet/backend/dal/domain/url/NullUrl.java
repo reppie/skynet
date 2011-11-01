@@ -4,7 +4,7 @@ public class NullUrl implements IUrl{
 
 	@Override
 	public String getId() {
-		return "NULL";
+		return null;
 	}
 
 }

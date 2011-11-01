@@ -16,7 +16,7 @@ public class TweetDaoImpl extends TweetDao {
 		
 		String query = 
 			"INSERT INTO " + tableName + 
-				"(tweet_id, text, geo_id, truncated, source_type_id, favorited, in_reply_to_tweet_id, in_reply_to_user_id, retweet_count, created_at, place_id, user_id, coordinates) " +
+				"(id, text, geo_id, truncated, source_type_id, favorited, in_reply_to_tweet_id, in_reply_to_user_id, retweet_count, created_at, place_id, user_id, coordinates) " +
 			"VALUES" +
 				"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			

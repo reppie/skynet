@@ -1,13 +1,14 @@
 package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBoxType;
 
 public class BoundingBoxTest extends DomainTest{
 
 	private BoundingBox boundingBox;
 	
-	private BoundingBoxType boundingBoxType;
+	private IBoundingBoxType boundingBoxType;
 	private String coordinates;
 	
 	@Override
@@ -16,7 +17,7 @@ public class BoundingBoxTest extends DomainTest{
 		
 		boundingBox = new BoundingBox();
 		
-		boundingBoxType = new BoundingBoxType();
+		boundingBoxType = new NullBoundingBoxType();
 		boundingBox.setType(boundingBoxType);
 		
 		coordinates = "58.17, 68.20";

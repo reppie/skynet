@@ -15,8 +15,8 @@ import toctep.skynet.backend.dal.domain.url.NullUrl;
 public class NullUser implements IUser {
 
 	@Override
-	public String getId() {
-		return "NULL";
+	public Long getId() {
+		return null;
 	}
 	
 	@Override

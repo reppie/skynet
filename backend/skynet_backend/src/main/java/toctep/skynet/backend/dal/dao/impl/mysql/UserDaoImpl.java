@@ -16,7 +16,7 @@ public class UserDaoImpl extends UserDao {
 		
 		String query = 
 			"INSERT INTO " + tableName + 
-				"(user_id, place_id, default_profile, statuses_count, profile_background_tile, language_id, profile_link_color, following, favourites_count, protected, " +
+				"(id, place_id, default_profile, statuses_count, profile_background_tile, language_id, profile_link_color, following, favourites_count, protected, " +
 				"profile_text_color, verified, contributors_enabled, description, name, profile_sidebar_border_color, profile_background_color, created_at, default_profile_image, " +
 				"followers_count, profile_image_url_id, profile_image_url_https_id, geo_enabled, profile_background_image_url_id, profile_background_image_url_https_id, " +
 				"follow_request_sent, url_id, time_zone_id, notifications, profile_use_background_image, friends_count, profile_sidebar_fill_color, screen_name, show_all_inline_media," +
@@ -30,7 +30,7 @@ public class UserDaoImpl extends UserDao {
 			
 		Param[] params = new Param[] {
 			new Param(user.getId(), Types.BIGINT),
-			new Param(user.getPlace().getId(), Types.BIGINT),
+			new Param(user.getPlace().getId(), Types.VARCHAR),
 			new Param(user.isDefaultProfile(), Types.BOOLEAN),
 			new Param(user.getStatusesCount(), Types.INTEGER),
 			new Param(user.getProfileBackgroundTile(), Types.BIGINT),
@@ -51,14 +51,14 @@ public class UserDaoImpl extends UserDao {
 			new Param(user.isDefaultProfile(), Types.BOOLEAN),
 			
 			new Param(user.getFollowersCount(), Types.INTEGER),
-			new Param(user.getProfileImageUrl().getId(), Types.BIGINT),
-			new Param(user.getProfileImageUrlHttps().getId(), Types.BIGINT),
+			new Param(user.getProfileImageUrl().getId(), Types.VARCHAR),
+			new Param(user.getProfileImageUrlHttps().getId(), Types.VARCHAR),
 			new Param(user.isGeoEnabled(), Types.BOOLEAN),
-			new Param(user.getProfileBackgroundImageUrl().getId(), Types.BIGINT),
-			new Param(user.getProfileBackgroundImageUrlHttps(), Types.BIGINT),
+			new Param(user.getProfileBackgroundImageUrl().getId(), Types.VARCHAR),
+			new Param(user.getProfileBackgroundImageUrlHttps().getId(), Types.VARCHAR),
 			
 			new Param(user.isFollowRequestSent(), Types.BOOLEAN),
-			new Param(user.getUrl().getId(), Types.BIGINT),
+			new Param(user.getUrl().getId(), Types.VARCHAR),
 			new Param(user.getTimeZone().getId(), Types.BIGINT),
 			new Param(user.getNotifications(), Types.INTEGER),
 			new Param(user.isProfileUseBackgroundImage(), Types.BOOLEAN),

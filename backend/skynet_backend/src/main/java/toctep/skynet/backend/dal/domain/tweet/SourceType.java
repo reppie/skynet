@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class SourceType extends Domain<Long> implements ISourceType {
 
-	public String text = "";
+	private String text = "";
 
 	@Override
 	public String getText() {
@@ -17,7 +17,7 @@ public class SourceType extends Domain<Long> implements ISourceType {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getSourceTypeDao();
+		dao = getDaoFacade().getSourceTypeDao();
 	}
 	
 }

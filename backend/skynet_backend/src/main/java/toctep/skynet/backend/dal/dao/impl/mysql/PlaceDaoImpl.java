@@ -14,7 +14,7 @@ public class PlaceDaoImpl extends PlaceDao {
 		
 		String query = 
 			"INSERT INTO " + tableName + 
-				"(place_id, place_type_id, bounding_box_id, name, url, full_name, country_id, street_address, locality, region, iso3, postal_code, phone, twitter, appid) " +
+				"(id, place_type_id, bounding_box_id, name, url_id, full_name, country_id, street_address, locality, region, iso3, postal_code, phone, twitter, appid) " +
 			"VALUES" +
 				"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
@@ -25,7 +25,7 @@ public class PlaceDaoImpl extends PlaceDao {
 			new Param(place.getName(), Types.VARCHAR),
 			new Param(place.getUrl().getId(), Types.VARCHAR),
 			new Param(place.getFullName(), Types.VARCHAR),
-			new Param(place.getCountry().getId(), Types.BIGINT),
+			new Param(place.getCountry().getId(), Types.VARCHAR),
 			new Param(place.getStreetAddress(), Types.VARCHAR),
 			new Param(place.getLocality(), Types.VARCHAR),
 			new Param(place.getRegion(), Types.VARCHAR),

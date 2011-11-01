@@ -26,6 +26,6 @@ public class TweetHashtag extends Domain {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTweetHashtagDao();
+		dao = getDaoFacade().getTweetHashtagDao();
 	}
 }

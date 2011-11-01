@@ -1,13 +1,14 @@
 package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.geo.IGeoType;
+import toctep.skynet.backend.dal.domain.geo.NullGeoType;
 
 public class GeoTest extends DomainTest{
 
 	private Geo geo;
 	
-	private GeoType geoType;
+	private IGeoType geoType;
 	private String coordinates;
 	
 	@Override
@@ -16,7 +17,7 @@ public class GeoTest extends DomainTest{
 		
 		geo = new Geo();
 		
-		geoType = new GeoType();
+		geoType = new NullGeoType();
 		geo.setType(geoType);
 		
 		coordinates = "58.17, 68.20";

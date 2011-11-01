@@ -25,6 +25,6 @@ public class TweetContributor extends Domain {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTweetContributorDao();
+		dao = getDaoFacade().getTweetContributorDao();
 	}
 }

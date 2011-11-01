@@ -17,7 +17,7 @@ public class Country extends Domain<String> implements ICountry {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getCountryDao();		
+		dao = getDaoFacade().getCountryDao();		
 	}
 	
 }

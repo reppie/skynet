@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Language extends Domain<Long> implements ILanguage {
 
-	public String text = "";
+	private String text = "";
 	
 	public String getText() {
 		return text;
@@ -16,7 +16,7 @@ public class Language extends Domain<Long> implements ILanguage {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getLanguageDao();
+		dao = getDaoFacade().getLanguageDao();
 	}
 }
 

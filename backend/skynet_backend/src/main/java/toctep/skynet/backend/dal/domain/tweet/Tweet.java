@@ -148,7 +148,7 @@ public class Tweet extends Domain<Long> implements ITweet {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTweetDao();
+		dao = getDaoFacade().getTweetDao();
 	}
 	
 	@Override

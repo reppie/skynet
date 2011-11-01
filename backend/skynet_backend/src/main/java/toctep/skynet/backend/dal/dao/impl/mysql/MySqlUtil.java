@@ -113,14 +113,15 @@ public class MySqlUtil {
 			pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			
 			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i].value, params[i].type);
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
 			}
 			
 			pstmt.executeUpdate();
 			
 			rs = pstmt.getGeneratedKeys();
-			rs.first();
-			id = rs.getLong(1);
+			if (rs.first()) {
+				id = (long) rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

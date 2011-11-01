@@ -1,22 +1,25 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
-import toctep.skynet.backend.dal.domain.country.Country;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
+import toctep.skynet.backend.dal.domain.country.ICountry;
+import toctep.skynet.backend.dal.domain.country.NullCountry;
+import toctep.skynet.backend.dal.domain.place.IPlaceType;
+import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.place.PlaceType;
-import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.NullUrl;
 
 public class PlaceTest extends DomainTest{
 
 	private Place place;
 	
 	private String id;
-	private PlaceType placeType;
-	private BoundingBox boundingBox;
+	private IPlaceType placeType;
+	private IBoundingBox boundingBox;
 	private String name;
 	private String fullName;
-	private Country country;
+	private ICountry country;
 	private String streetAddress;
 	private String locality;
 	private String region;
@@ -24,7 +27,7 @@ public class PlaceTest extends DomainTest{
 	private String postalCode;
 	private String phone;
 	private String twitter;
-	private Url url;
+	private IUrl url;
 	private String appId;
 	
 	@Override
@@ -36,11 +39,10 @@ public class PlaceTest extends DomainTest{
 		id = "0E";
 		place.setId(id);
 		
-		placeType = new PlaceType();
+		placeType = new NullPlaceType();
 		place.setType(placeType);
 		
-		boundingBox = new BoundingBox();
-		boundingBox.setType(new BoundingBoxType());
+		boundingBox = new NullBoundingBox();
 		place.setBoundingBox(boundingBox);
 		
 		name = "TestName";
@@ -49,7 +51,7 @@ public class PlaceTest extends DomainTest{
 		fullName = "TestFullName";
 		place.setFullName(fullName);
 		
-		country = new Country();
+		country = new NullCountry();
 		place.setCountry(country);
 		
 		streetAddress = "Teststreet";
@@ -73,7 +75,7 @@ public class PlaceTest extends DomainTest{
 		twitter = "TestTwitter";
 		place.setTwitter(twitter);
 		
-		url = new Url();
+		url = new NullUrl();
 		place.setUrl(url);
 		
 		appId = "TestAppId";

@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Hashtag extends Domain<Long> implements IHashtag {
 
-	public String text = "";
+	private String text = "";
 	
 	public String getText() {
 		return text;
@@ -16,6 +16,7 @@ public class Hashtag extends Domain<Long> implements IHashtag {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getHashtagDao();
+		dao = getDaoFacade().getHashtagDao();
 	}
+	
 }

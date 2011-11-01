@@ -16,7 +16,7 @@ public class BoundingBoxType extends Domain<Long> implements IBoundingBoxType {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getBoundingBoxTypeDao();		
+		dao = getDaoFacade().getBoundingBoxTypeDao();		
 	}
 	
 }

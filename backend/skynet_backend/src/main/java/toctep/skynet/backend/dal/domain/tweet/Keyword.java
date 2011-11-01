@@ -25,6 +25,6 @@ public class Keyword extends Domain<Long> {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getKeywordDao();
+		dao = getDaoFacade().getKeywordDao();
 	}
 }

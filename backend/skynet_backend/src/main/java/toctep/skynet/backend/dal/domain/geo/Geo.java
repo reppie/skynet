@@ -25,7 +25,7 @@ public class Geo extends Domain<Long> implements IGeo {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getGeoDao();
+		dao = getDaoFacade().getGeoDao();
 	}
 	
 	@Override

@@ -25,6 +25,6 @@ public class TimeZone extends Domain<Long> implements ITimeZone{
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTimeZoneDao();
+		dao = getDaoFacade().getTimeZoneDao();
 	}
 }

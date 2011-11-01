@@ -2,13 +2,14 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.geo.IGeo;
+import toctep.skynet.backend.dal.domain.geo.NullGeo;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.tweet.ISourceType;
 import toctep.skynet.backend.dal.domain.tweet.ITweet;
+import toctep.skynet.backend.dal.domain.tweet.NullSourceType;
 import toctep.skynet.backend.dal.domain.tweet.NullTweet;
-import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
@@ -19,10 +20,10 @@ public class TweetTest extends DomainTest {
 	
 	private long id;
 	private String text;
-	private Geo geo;
+	private IGeo geo;
 	private boolean truncated;
 	private long twitterId;
-	private SourceType sourceType;
+	private ISourceType sourceType;
 	private boolean favorited;
 	private ITweet inReplyToTweetTwitter;
 	private IUser inReplyToUserTwitter;
@@ -44,8 +45,7 @@ public class TweetTest extends DomainTest {
 		text = "test";
 		tweet.setText(text);
 		
-		geo = new Geo();
-		geo.setType(new GeoType());
+		geo = new NullGeo();
 		tweet.setGeo(geo);
 		
 		truncated = false;
@@ -54,7 +54,7 @@ public class TweetTest extends DomainTest {
 		twitterId = 0L;
 		tweet.setTwitterId(twitterId);
 		
-		sourceType = new SourceType();
+		sourceType = new NullSourceType();
 		tweet.setSourceType(sourceType);
 		
 		favorited = false;

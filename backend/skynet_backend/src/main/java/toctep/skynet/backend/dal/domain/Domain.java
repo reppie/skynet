@@ -8,7 +8,7 @@ public abstract class Domain<T> implements IDomain<T> {
 	
 	private T id;
 	
-	protected DaoFacade daoFacade;
+	private DaoFacade daoFacade;
 	protected Dao<T> dao;
 	
 	public Domain() {
@@ -37,5 +37,10 @@ public abstract class Domain<T> implements IDomain<T> {
 		dao.delete(this);
 	}
 	
+	public DaoFacade getDaoFacade() {
+		return daoFacade;
+	}
+	
 	public abstract void setDao();
+
 }
