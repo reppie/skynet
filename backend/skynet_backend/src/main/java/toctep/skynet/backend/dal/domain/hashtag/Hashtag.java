@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.hashtag;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class Hashtag extends DomainLongPk implements IHashtag {
+public class Hashtag extends Domain<Long> implements IHashtag {
 
 	public String text;
 	

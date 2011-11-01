@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
-public interface IBoundingBoxType {
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface IBoundingBoxType<T> extends IDomain<Long> {
 	public String getText();
 }

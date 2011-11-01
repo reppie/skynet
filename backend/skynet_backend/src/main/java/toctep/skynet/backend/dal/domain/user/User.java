@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.IPlace;
@@ -12,7 +12,7 @@ import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 
-public class User extends DomainLongPk implements IUser  {
+public class User extends Domain<Long> implements IUser  {
 
 	private IPlace place;
 	private boolean defaultProfile;

@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class BoundingBoxType extends DomainLongPk implements IBoundingBoxType {
+public class BoundingBoxType extends Domain<Long> implements IBoundingBoxType<Long> {
 
 	private String text;
 

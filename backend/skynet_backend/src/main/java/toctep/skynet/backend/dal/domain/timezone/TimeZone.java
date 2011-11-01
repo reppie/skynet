@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.timezone;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class TimeZone extends DomainLongPk implements ITimeZone{
+public class TimeZone extends Domain<Long> implements ITimeZone{
 
 	private int utcOffset;
 	private String timeZone;

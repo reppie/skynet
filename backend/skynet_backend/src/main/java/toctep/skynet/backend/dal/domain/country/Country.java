@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.country;
 
-import toctep.skynet.backend.dal.domain.DomainStringPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class Country extends DomainStringPk implements ICountry {
+public class Country extends Domain<String> implements ICountry {
 
 	private String text;
 

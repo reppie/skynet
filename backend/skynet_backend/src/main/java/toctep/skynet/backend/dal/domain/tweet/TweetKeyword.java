@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.Domain;
 
-public class TweetKeyword extends DomainLongPk {
+public class TweetKeyword extends Domain<Long> {
 	
 	private Tweet tweet;
 	private String tweetKeywordValue;
