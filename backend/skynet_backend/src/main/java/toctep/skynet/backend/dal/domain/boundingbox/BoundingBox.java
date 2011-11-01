@@ -32,8 +32,8 @@ public class BoundingBox extends DomainLongPk implements IBoundingBox{
 	@Override
 	public void save() {
 		if(type instanceof BoundingBoxType) {
-			type.save();
-			this.type.setId(type.getId());
+			((BoundingBoxType)type).save();
+			((BoundingBoxType)this.type).setId(((BoundingBoxType)type).getId());
 		}
 		super.save();
 	}	
