@@ -129,14 +129,14 @@ public class Tweet extends DomainLongPk {
 	
 	@Override
 	public void save() {
+		sourceType.save();
 		geo.save();
 		place.save();
 		user.save();
-		sourceType.save();
+		this.sourceType.setId(sourceType.getId());
 		this.geo.setId(geo.getId());
 		this.place.setId(place.getId());
 		this.user.setId(user.getId());
-		this.sourceType.setId(sourceType.getId());
 		super.save();
 	}	
 }
