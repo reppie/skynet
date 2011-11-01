@@ -13,11 +13,13 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public void insert(Domain<Long> domain) {
 		TweetKeyword tweetKeyword = (TweetKeyword) domain;
 		
+		long tid = tweetKeyword.getKeyword().getId();
+		
 		long id = MySqlUtil.getInstance().insert(
 			"INSERT INTO " + tableName + " (tweet_id, value, keyword_id) " +
 			"VALUES (" + tweetKeyword.getTweet().getId() + ", " + 
-                         MySqlUtil.escape(tweetKeyword.getTweetKeywordValue()) + ", "+
-						 tweetKeyword.getKeyword().getId()+")"
+                         MySqlUtil.escape(tweetKeyword.getTweetKeywordValue()) + ", " +
+						 tid + ")"
 		);
 		
 		tweetKeyword.setId(id);
