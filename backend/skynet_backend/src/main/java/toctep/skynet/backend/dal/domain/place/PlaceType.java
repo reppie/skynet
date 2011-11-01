@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class PlaceType extends Domain<Long> implements IPlaceType {
 
-	public String text;
+	public String text = "";
 	
 	@Override
 	public String getText() {

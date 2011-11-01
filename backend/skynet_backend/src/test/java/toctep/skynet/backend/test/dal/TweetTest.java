@@ -114,7 +114,7 @@ public class TweetTest extends DomainTest {
 	@Override
 	public void testCreate() {
 		assertNotNull(tweet);
-		assertTrue(new Long(1).equals(tweet.getId()));
+		assertTrue(new Long(id).equals(tweet.getId()));
 		assertTrue(text.equals(tweet.getText()));
 		assertTrue(geo.equals(tweet.getGeo()));
 		assertTrue(truncated == tweet.isTruncated());

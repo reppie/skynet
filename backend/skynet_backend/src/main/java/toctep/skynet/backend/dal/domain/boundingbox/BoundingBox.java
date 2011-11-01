@@ -4,8 +4,8 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class BoundingBox extends Domain<Long> implements IBoundingBox {
 	
-	private IBoundingBoxType type;
-	private String coordinates;
+	private IBoundingBoxType type 	= new NullBoundingBoxType();
+	private String coordinates		= "";
 	
 	public IBoundingBoxType getType() {
 		return type;

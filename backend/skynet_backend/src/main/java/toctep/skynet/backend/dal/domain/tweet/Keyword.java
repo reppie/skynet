@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Keyword extends Domain<Long> {
 	
-	private String keyword;
+	private String keyword = "";
 	
 	public Keyword() {
 		super();

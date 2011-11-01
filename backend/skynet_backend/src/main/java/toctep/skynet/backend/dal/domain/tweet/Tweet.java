@@ -5,26 +5,29 @@ import java.sql.Date;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
+import toctep.skynet.backend.dal.domain.geo.NullGeo;
 import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class Tweet extends Domain<Long> implements ITweet {
 
-	private String text;
-	private IGeo geo;
-	private boolean truncated;
-	private long twitterId;
-	private ISourceType sourceType;
-	private boolean favorited;
-	private ITweet inReplyToTweetTwitter;
-	private IUser inReplyToUserTwitter;
-	private long retweetCount;
-	private Date createdAt;
-	private IPlace place;
-	private IUser user;
-	private String coordinates;
+	private String text 					= "";
+	private IGeo geo 						= new NullGeo();
+	private boolean truncated 				= false;
+	private long twitterId					= 0L;
+	private ISourceType sourceType 			= new NullSourceType();
+	private boolean favorited				= false;
+	private ITweet inReplyToTweetTwitter 	= new NullTweet();
+	private IUser inReplyToUserTwitter 		= new NullUser();
+	private long retweetCount				= 0L;
+	private Date createdAt					= new Date(0);
+	private IPlace place 					= new NullPlace();
+	private IUser user 						= new NullUser();
+	private String coordinates				= "";
 	
 	@Override
 	public String getText() {

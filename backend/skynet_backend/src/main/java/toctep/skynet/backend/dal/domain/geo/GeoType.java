@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class GeoType extends Domain<Long> implements IGeoType {
 
-	private String text;
+	private String text = "";
 
 	public String getText() {
 		return text;

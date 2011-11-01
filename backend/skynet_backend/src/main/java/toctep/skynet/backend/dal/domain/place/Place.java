@@ -3,27 +3,30 @@ package toctep.skynet.backend.dal.domain.place;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.country.ICountry;
+import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.NullUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 
 public class Place extends Domain<String> implements IPlace{
 
-	private IPlaceType type;
-	private IBoundingBox boundingBox;
-	private String name;
-	private String fullName;
-	private ICountry country;
-	private String streetAddress;
-	private String locality;
-	private String region;
-	private String iso3;
-	private String postalCode;
-	private String phone;
-	private String twitter;
-	private IUrl url;
-	private String appId;
+	private IPlaceType type 			= new NullPlaceType();
+	private IBoundingBox boundingBox 	= new NullBoundingBox();
+	private String name					= "";
+	private String fullName				= "";
+	private ICountry country 			= new NullCountry();
+	private String streetAddress		= "";
+	private String locality				= "";
+	private String region				= "";
+	private String iso3					= "";
+	private String postalCode			= "";
+	private String phone				= "";
+	private String twitter				= "";
+	private IUrl url 					= new NullUrl();
+	private String appId				= "";
 
 	public IPlaceType getType() {
 		return type;
