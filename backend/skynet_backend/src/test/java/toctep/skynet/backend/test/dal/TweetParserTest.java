@@ -1,6 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +42,6 @@ public class TweetParserTest {
 		
 		Keyword keyword = new Keyword();
 		keyword.setKeyword("elfstedentocht");
-		assertFalse(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht'"));
 		keyword.save();
 		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
 		assertTrue(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht';"));
@@ -61,6 +64,17 @@ public class TweetParserTest {
 		indexer.indexTweetKeywords(tweet);
 		
 		assertEquals("keyword count: ", 6, MySqlUtil.getInstance().count("twitter_keyword"));
+		
+		long wilfried_id = keyword.getId();
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM twitter_tweet_keywords WHERE keyword_id=" + wilfried_id);
+		try {
+			while(rs.next()) {
+				System.out.println(rs.getString("tweet_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
 	}
 	
 	@After

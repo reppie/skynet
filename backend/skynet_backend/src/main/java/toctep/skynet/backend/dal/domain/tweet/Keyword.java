@@ -6,6 +6,15 @@ public class Keyword extends Domain<Long> {
 	
 	private String keyword;
 	
+	public Keyword() {
+		super();
+	}
+	
+	public Keyword(String keyword) {
+		super();
+		this.keyword = keyword.toLowerCase();
+	}
+	
 	public String getKeyword() {
 		return keyword;
 	}

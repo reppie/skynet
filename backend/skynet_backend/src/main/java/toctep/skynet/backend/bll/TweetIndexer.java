@@ -11,25 +11,23 @@ public class TweetIndexer {
     	String[] keywordStrings = TweetSplitter.splitTweet(filteredTweetBody);
     	
     	for(String keywordString: keywordStrings) {
-    		Keyword keyword = getKeyword(keywordString);
-    		saveTweetKeyword(keywordString, keyword, tweet);
+    		saveKeyword(keywordString, tweet);
     	}
     }
     
-    private Keyword getKeyword(String keywordString) {
-    	Keyword keyword = new Keyword();
-    	keyword.setKeyword(keywordString.toLowerCase());
-    	keyword.save();
-    	
-    	return keyword;
+    private void saveKeyword(String keywordString, Tweet tweet) {
+		Keyword keyword = new Keyword(keywordString);
+		keyword.save();
+		saveTweetKeywordRelation(keywordString, keyword, tweet);
     }
     
-    private void saveTweetKeyword(String keywordString, Keyword keyword, Tweet tweet) {
+    private void saveTweetKeywordRelation(String keywordString, Keyword keyword, Tweet tweet) {
     	TweetKeyword tweetKeyword = new TweetKeyword();
     	    	
     	tweetKeyword.setKeyword(keyword);
     	tweetKeyword.setTweet(tweet);
     	tweetKeyword.setTweetKeywordValue(keywordString);
+    	tweetKeyword.save();
     }
 
 }
