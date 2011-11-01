@@ -4,10 +4,14 @@ import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
-import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.tweet.ITweet;
+import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.user.User;
+import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 
 public class TweetTest extends DomainTest {
 
@@ -20,12 +24,12 @@ public class TweetTest extends DomainTest {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private Tweet inReplyToTweetTwitter;
-	private User inReplyToUserTwitter;
+	private ITweet inReplyToTweetTwitter;
+	private IUser inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
-	private Place place;
-	private User user;
+	private IPlace place;
+	private IUser user;
 	private String coordinates;
 	
 	@Override
@@ -56,12 +60,10 @@ public class TweetTest extends DomainTest {
 		favorited = false;
 		tweet.setFavorited(favorited);
 		
-		inReplyToTweetTwitter = new Tweet();
-		inReplyToTweetTwitter.setId(new Long(0));
+		inReplyToTweetTwitter = new NullTweet();
 		tweet.setInReplyToTweetTwitter(inReplyToTweetTwitter);
 		
-		inReplyToUserTwitter = new User();
-		inReplyToUserTwitter.setId(new Long(0));
+		inReplyToUserTwitter = new NullUser();
 		tweet.setInReplyToUserTwitter(inReplyToUserTwitter);
 		
 		retweetCount = 0L;
@@ -70,12 +72,10 @@ public class TweetTest extends DomainTest {
 		createdAt = new Date(0);
 		tweet.setCreatedAt(createdAt);
 				
-		place = new Place();
-		place.setId("AA");
+		place = new NullPlace();
 		tweet.setPlace(place);
 		
-		user = new User();
-		user.setId(new Long(0));
+		user = new NullUser();
 		tweet.setUser(user);
 		
 		coordinates = "test";

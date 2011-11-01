@@ -18,7 +18,10 @@ public class UserDaoImpl extends UserDao {
 			"VALUES " +
 				"(" +
 					user.getId() + "," +
-					MySqlUtil.escape(user.getPlace().getId()) + "," +
+					
+					(user.getPlace().getId().equals("NULL") ? user.getPlace().getId() : 
+						MySqlUtil.escape(user.getPlace().getId())) + ", " +
+						
 					user.isDefaultProfile() + "," +
 					user.getStatusesCount() + "," +
 					user.getProfileBackgroundTile() + "," +
@@ -37,13 +40,27 @@ public class UserDaoImpl extends UserDao {
 					MySqlUtil.escape(user.getCreatedAt().toString()) + "," +
 					user.isDefaultProfileImage() + "," +
 					user.getFollowersCount() + "," +
-					MySqlUtil.escape(user.getProfileImageUrl().getId()) + "," +
-					MySqlUtil.escape(user.getProfileImageUrlHttps().getId()) + "," +
+					
+										
+					(user.getProfileImageUrl().getId().equals("NULL") ? user.getProfileImageUrl().getId() : 
+						MySqlUtil.escape(user.getProfileImageUrl().getId())) + ", " +
+					
+					(user.getProfileImageUrlHttps().getId().equals("NULL") ? user.getProfileImageUrlHttps().getId() : 
+						MySqlUtil.escape(user.getProfileImageUrlHttps().getId())) + ", " +	
+						
 					user.isGeoEnabled() + "," +
-					MySqlUtil.escape(user.getProfileBackgroundImageUrl().getId()) + "," +
-					MySqlUtil.escape(user.getProfileBackgroundImageUrlHttps().getId()) + "," +
+					
+					(user.getProfileBackgroundImageUrl().getId().equals("NULL") ? user.getProfileBackgroundImageUrl().getId() : 
+						MySqlUtil.escape(user.getProfileBackgroundImageUrl().getId())) + ", " +						
+					
+					(user.getProfileBackgroundImageUrlHttps().getId().equals("NULL") ? user.getProfileBackgroundImageUrlHttps().getId() : 
+						MySqlUtil.escape(user.getProfileBackgroundImageUrlHttps().getId())) + ", " +		
+						
 					user.isFollowRequestSent() + "," +
-					MySqlUtil.escape(user.getUrl().getId()) + "," +
+					
+					(user.getUrl().getId().equals("NULL") ? user.getUrl().getId() : 
+						MySqlUtil.escape(user.getUrl().getId())) + ", " +					
+					
 					user.getTimeZone().getId() + "," +
 					user.getNotifications() + "," +
 					user.isProfileUseBackgroundImage() + "," +

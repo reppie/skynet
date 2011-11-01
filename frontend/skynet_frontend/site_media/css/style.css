@@ -1,6 +1,12 @@
+body
+{
+	background-color: #ddd;
+}
+
 header
 {
 	height: 150px;
+	background-image: url("../img/some_logo_trans.png") !important;
 }
 
 footer
@@ -11,44 +17,89 @@ footer
 
 aside section
 {
-	background-color: #dddddd;
+	background-color: #00adef;
+	border: 1px solid #009fdc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: 10px;
+    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#keyword-search-form input
+{
+	height: 30px;
+}
+
+#keyword-search-form input[type=text]
+{
+	width: 90%;
+}
+
+#keyword-search-form input[type=submit]
+{
+}
+
+aside section p
+{
+	margin: 0px;
+	padding: 0px 0 5px 5px;
+}
+
+aside section .title
+{
+	padding: 5px 0 5px 5px;
 }
 
 aside section h1.title
 {
+	font-weight: bold;
 	font-size: 1.5em;
+	color: white;
+	border-bottom: 1px dotted white;
+}
+
+aside section#region-name h1
+{
+	color: white;
+	margin: 0px;
+	text-align: center; 
 }
 
 .cloud-element
 {
-	display: inline;
-	color: #666;
+	color: white;
+	text-decoration: none;
 }
 
-.container{
+.cloud-element:hover
+{
+	color: #fcf387;
+	text-decoration: underline;
+}
+
+.container
+{
     background-color: #eee;         
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;         
-    -moz-box-shadow: 10px 10px 5px #000;    
-    -webkit-box-shadow: 10px 10px 5px #000;
-    box-shadow: 10px 10px 10px #000;
-    padding: 2%;
+    -moz-box-shadow: 1px 1px 10px #333;  
+    -webkit-box-shadow: 1px 1px 10px #333;
+    box-shadow: 1px 1px 10px #333;
+    padding: 40px;
 	margin-top: 5%;
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 	bottom: 0px;
 }
 
-body{
-	background-color: #ddd;
-
-}
 .twitter-logo{
 	float:right;
 	position: relative;
 	top: -50px;
 	width:200px;
 	height: 200px;
-	
 }
