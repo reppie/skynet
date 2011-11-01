@@ -30,6 +30,7 @@ public class TweetIndexer {
     	tweetKeyword.setKeyword(keyword);
     	tweetKeyword.setTweet(tweet);
     	tweetKeyword.setTweetKeywordValue(keywordString);
+    	tweetKeyword.save();
     }
 
 }
