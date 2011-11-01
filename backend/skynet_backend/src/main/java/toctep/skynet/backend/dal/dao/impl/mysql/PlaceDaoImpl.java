@@ -2,10 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.place.PlaceType;
-import toctep.skynet.backend.dal.domain.url.Url;
 
 public class PlaceDaoImpl extends PlaceDao {
 
@@ -15,12 +12,12 @@ public class PlaceDaoImpl extends PlaceDao {
 		
 		String query = "INSERT INTO " + tableName +	" VALUES ("
 		+ MySqlUtil.escape(place.getId()) + ", "
-		+ ((PlaceType) place.getType()).getId() + ", "
+		+ place.getType().getId() + ", "
 		+ place.getBoundingBox().getId() + ", "
 		+ MySqlUtil.escape(place.getName()) + ", "
-		+ MySqlUtil.escape(((Url) place.getUrl()).getId()) + ", "
+		+ MySqlUtil.escape(place.getUrl().getId()) + ", "
 		+ MySqlUtil.escape(place.getFullName()) + ", "
-		+ MySqlUtil.escape(((Country) place.getCountry()).getId()) + ", "
+		+ MySqlUtil.escape(place.getCountry().getId()) + ", "
 		+ MySqlUtil.escape(place.getStreetAddress()) + ", "
 		+ MySqlUtil.escape(place.getLocality()) + ", "
 		+ MySqlUtil.escape(place.getRegion()) + ", "

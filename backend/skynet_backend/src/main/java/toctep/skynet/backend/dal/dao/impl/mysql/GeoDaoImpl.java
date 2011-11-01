@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.geo.GeoType;
 
 public class GeoDaoImpl extends GeoDao {
 
@@ -22,7 +21,7 @@ public class GeoDaoImpl extends GeoDao {
 		
 		long id = MySqlUtil.getInstance().insert(
 				"INSERT INTO " + tableName + " (geo_type_id, coordinates) " +
-				"VALUES (" + ((GeoType) geo.getType()).getId() + ", '" 
+				"VALUES (" + geo.getType().getId() + ", '" 
 							+ geo.getCoordinates() + "')"					
 				);
 		
