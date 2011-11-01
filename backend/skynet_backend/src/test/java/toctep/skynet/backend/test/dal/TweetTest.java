@@ -2,19 +2,19 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
-import toctep.skynet.backend.dal.domain.Geo;
-import toctep.skynet.backend.dal.domain.GeoType;
 import toctep.skynet.backend.dal.domain.Language;
-import toctep.skynet.backend.dal.domain.Place;
-import toctep.skynet.backend.dal.domain.PlaceType;
 import toctep.skynet.backend.dal.domain.SourceType;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.Tweet;
 import toctep.skynet.backend.dal.domain.Url;
-import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetTest extends DomainTest {
 
@@ -27,8 +27,8 @@ public class TweetTest extends DomainTest {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private long inReplyToTweetTwitterId;
-	private long inReplyToUserTwitterId;
+	private Tweet inReplyToTweetTwitter;
+	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
 	private Place place;
@@ -66,8 +66,17 @@ public class TweetTest extends DomainTest {
 		inReplyToTweetTwitterId = 0L;
 		tweet.setInReplyToTweetTwitterId(inReplyToTweetTwitterId);
 		
-		inReplyToUserTwitterId = 0L;
-		tweet.setInReplyToUserTwitterId(inReplyToUserTwitterId);
+		inReplyToUserTwitter = new User();
+		inReplyToUserTwitter.setPlace(place);
+		inReplyToUserTwitter.setLanguage(new Language());
+		inReplyToUserTwitter.setUrl(new Url());
+		inReplyToUserTwitter.setProfileBackgroundImageUrl(new Url());
+		inReplyToUserTwitter.setProfileBackgroundImageUrlHttps(new Url());
+		inReplyToUserTwitter.setProfileImageUrl(new Url());
+		inReplyToUserTwitter.setProfileImageUrlHttps(new Url());
+		inReplyToUserTwitter.setTimeZone(new TimeZone());
+		inReplyToUserTwitter.setCreatedAt(new Date(0));
+		tweet.setInReplyToUserTwitter(inReplyToUserTwitter);
 		
 		retweetCount = 0L;
 		tweet.setRetweetCount(retweetCount);

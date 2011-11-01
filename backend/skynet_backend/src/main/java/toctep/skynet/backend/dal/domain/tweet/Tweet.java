@@ -1,6 +1,12 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.tweet;
 
 import java.sql.Date;
+
+import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class Tweet extends DomainLongPk {
 
@@ -10,8 +16,8 @@ public class Tweet extends DomainLongPk {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private long inReplyToTweetTwitterId;
-	private long inReplyToUserTwitterId;
+	private Tweet inReplyToTweetTwitter;
+	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
 	private Place place;
@@ -66,20 +72,20 @@ public class Tweet extends DomainLongPk {
 		this.favorited = favorited;
 	}
 
-	public long getInReplyToTweetTwitterId() {
-		return inReplyToTweetTwitterId;
+	public Tweet getInReplyToTweetTwitter() {
+		return inReplyToTweetTwitter;
 	}
 
-	public void setInReplyToTweetTwitterId(long inReplyToTweetTwitterId) {
-		this.inReplyToTweetTwitterId = inReplyToTweetTwitterId;
+	public void setInReplyToTweetTwitter(Tweet inReplyToTweetTwitter) {
+		this.inReplyToTweetTwitter = inReplyToTweetTwitter;
 	}
 
-	public long getInReplyToUserTwitterId() {
-		return inReplyToUserTwitterId;
+	public User getInReplyToUserTwitter() {
+		return inReplyToUserTwitter;
 	}
 
-	public void setInReplyToUserTwitterId(long inReplyToUserTwitterId) {
-		this.inReplyToUserTwitterId = inReplyToUserTwitterId;
+	public void setInReplyToUserTwitter(User inReplyToUserTwitter) {
+		this.inReplyToUserTwitter = inReplyToUserTwitter;
 	}
 
 	public long getRetweetCount() {
@@ -129,14 +135,14 @@ public class Tweet extends DomainLongPk {
 	
 	@Override
 	public void save() {
+		sourceType.save();
 		geo.save();
 		place.save();
 		user.save();
-		sourceType.save();
+		this.sourceType.setId(sourceType.getId());
 		this.geo.setId(geo.getId());
 		this.place.setId(place.getId());
 		this.user.setId(user.getId());
-		this.sourceType.setId(sourceType.getId());
 		super.save();
 	}	
 }

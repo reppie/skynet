@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.PlaceType;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
 
 public class PlaceTypeDaoImpl extends PlaceTypeDao {
 

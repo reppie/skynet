@@ -2,24 +2,24 @@ package toctep.skynet.backend.bll;
 
 import java.text.ParseException;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.Country;
-import toctep.skynet.backend.dal.domain.Geo;
-import toctep.skynet.backend.dal.domain.GeoType;
 import toctep.skynet.backend.dal.domain.Hashtag;
 import toctep.skynet.backend.dal.domain.Language;
-import toctep.skynet.backend.dal.domain.Place;
-import toctep.skynet.backend.dal.domain.PlaceType;
 import toctep.skynet.backend.dal.domain.SourceType;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.Tweet;
-import toctep.skynet.backend.dal.domain.TweetContributor;
-import toctep.skynet.backend.dal.domain.TweetHashtag;
-import toctep.skynet.backend.dal.domain.TweetMention;
-import toctep.skynet.backend.dal.domain.TweetUrl;
 import toctep.skynet.backend.dal.domain.Url;
-import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
+import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
+import toctep.skynet.backend.dal.domain.tweet.TweetMention;
+import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
+import toctep.skynet.backend.dal.domain.user.User;
 import twitter4j.GeoLocation;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
@@ -40,6 +40,8 @@ public class TweetParser {
 	private Place place;
 	private User user;
 	private Tweet tweet;
+	private User inReplyToUser;
+	private Tweet inReplyToTweet;
 	
 	private static TweetParser instance;
 	
@@ -175,7 +177,7 @@ public class TweetParser {
         user.setVerified(userStatus.isVerified());
         user.setContributorsEnabled(userStatus.isContributorsEnabled());
         user.setDescription(user.getDescription());
-        user.setName(userStatus.getScreenName());
+        user.setName(userStatus.getName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
         user.setCreatedAt(new java.sql.Date(userStatus.getCreatedAt().getDate()));
@@ -201,7 +203,7 @@ public class TweetParser {
         user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
         user.setFriendsCount(userStatus.getFriendsCount());
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
-        user.setScreenName(userStatus.getName());
+        user.setScreenName(userStatus.getScreenName());
         
         Url profileImageUrl = new Url();
         if(userStatus.getProfileImageURL().toExternalForm() != null) {
@@ -237,8 +239,15 @@ public class TweetParser {
         tweet.setText(status.getText());
         tweet.setTruncated(status.isTruncated());
         tweet.setFavorited(status.isFavorited());
-        tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
-        tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
+        
+        inReplyToTweet = new Tweet();
+        inReplyToTweet.setId(status.getInReplyToStatusId());
+        tweet.setInReplyToTweetTwitter(inReplyToTweet);
+        
+        inReplyToUser = new User();
+        inReplyToUser.setId(status.getInReplyToUserId());       
+        tweet.setInReplyToUserTwitter(inReplyToUser);
+        
         tweet.setRetweetCount(status.getRetweetCount());
         tweet.setCreatedAt(new java.sql.Date(status.getCreatedAt().getDate()));
         tweet.setGeo(geo);

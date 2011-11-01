@@ -1,4 +1,6 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.place;
+
+import toctep.skynet.backend.dal.domain.DomainLongPk;
 
 public class PlaceType extends DomainLongPk {
 

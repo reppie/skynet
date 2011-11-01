@@ -1,8 +1,8 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.dal.domain.Keyword;
-import toctep.skynet.backend.dal.domain.Tweet;
-import toctep.skynet.backend.dal.domain.TweetKeyword;
+import toctep.skynet.backend.dal.domain.tweet.Keyword;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetIndexer {
 	
