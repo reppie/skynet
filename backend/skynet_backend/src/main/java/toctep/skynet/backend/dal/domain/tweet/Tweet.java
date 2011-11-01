@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.user.IUser;
@@ -12,17 +13,17 @@ import toctep.skynet.backend.dal.domain.user.User;
 public class Tweet extends DomainLongPk implements ITweet {
 
 	private String text;
-	private Geo geo;
+	private IGeo geo;
 	private boolean truncated;
 	private long twitterId;
-	private SourceType sourceType;
+	private ISourceType sourceType;
 	private boolean favorited;
-	private Tweet inReplyToTweetTwitter;
-	private User inReplyToUserTwitter;
+	private ITweet inReplyToTweetTwitter;
+	private IUser inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
-	private Place place;
-	private User user;
+	private IPlace place;
+	private IUser user;
 	private String coordinates;
 	
 	@Override
@@ -35,11 +36,11 @@ public class Tweet extends DomainLongPk implements ITweet {
 	}
 
 	@Override
-	public Geo getGeo() {
+	public IGeo getGeo() {
 		return geo;
 	}
 
-	public void setGeo(Geo geo) {
+	public void setGeo(IGeo geo) {
 		this.geo = geo;
 	}
 
@@ -66,7 +67,7 @@ public class Tweet extends DomainLongPk implements ITweet {
 		return sourceType;
 	}
 
-	public void setSourceType(SourceType sourceType) {
+	public void setSourceType(ISourceType sourceType) {
 		this.sourceType = sourceType;
 	}
 
@@ -84,7 +85,7 @@ public class Tweet extends DomainLongPk implements ITweet {
 		return inReplyToTweetTwitter;
 	}
 
-	public void setInReplyToTweetTwitter(Tweet inReplyToTweetTwitter) {
+	public void setInReplyToTweetTwitter(ITweet inReplyToTweetTwitter) {
 		this.inReplyToTweetTwitter = inReplyToTweetTwitter;
 	}
 
@@ -93,7 +94,7 @@ public class Tweet extends DomainLongPk implements ITweet {
 		return inReplyToUserTwitter;
 	}
 
-	public void setInReplyToUserTwitter(User inReplyToUserTwitter) {
+	public void setInReplyToUserTwitter(IUser inReplyToUserTwitter) {
 		this.inReplyToUserTwitter = inReplyToUserTwitter;
 	}
 
@@ -120,7 +121,7 @@ public class Tweet extends DomainLongPk implements ITweet {
 		return place;
 	}
 
-	public void setPlace(Place place) {
+	public void setPlace(IPlace place) {
 		this.place = place;
 	}
 
@@ -129,7 +130,7 @@ public class Tweet extends DomainLongPk implements ITweet {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(IUser user) {
 		this.user = user;
 	}
 
@@ -149,14 +150,26 @@ public class Tweet extends DomainLongPk implements ITweet {
 	
 	@Override
 	public void save() {
-		sourceType.save();
-		geo.save();
-		place.save();
-		user.save();
-		this.sourceType.setId(sourceType.getId());
-		this.geo.setId(geo.getId());
-		this.place.setId(place.getId());
-		this.user.setId(user.getId());
+		if (sourceType instanceof SourceType) {
+			((SourceType) sourceType).save();
+			((SourceType) this.sourceType).setId(((SourceType) sourceType).getId());
+		}
+		
+		if (geo instanceof Geo) {
+			((Geo) geo).save();
+			((Geo) this.geo).setId(((Geo) geo).getId());
+		}
+		
+		if (place instanceof Place) {
+			((Place) place).save();
+			((Place) this.place).setId(((Place) place).getId());
+		}
+		
+		if (user instanceof User) {
+			((User) user).save();
+			((User) this.user).setId(((User) user).getId());
+		}
+		
 		super.save();
 	}	
 }

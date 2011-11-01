@@ -11,11 +11,11 @@ import toctep.skynet.backend.dal.domain.url.Url;
 
 public class Place extends DomainStringPk implements IPlace{
 
-	private PlaceType type;
-	private BoundingBox boundingBox;
+	private IPlaceType type;
+	private IBoundingBox boundingBox;
 	private String name;
 	private String fullName;
-	private Country country;
+	private ICountry country;
 	private String streetAddress;
 	private String locality;
 	private String region;
@@ -23,14 +23,14 @@ public class Place extends DomainStringPk implements IPlace{
 	private String postalCode;
 	private String phone;
 	private String twitter;
-	private Url url;
+	private IUrl url;
 	private String appId;
 
-	public PlaceType getType() {
+	public IPlaceType getType() {
 		return type;
 	}
 
-	public void setType(PlaceType placeType) {
+	public void setType(IPlaceType placeType) {
 		this.type = placeType;
 	}
 
@@ -38,7 +38,7 @@ public class Place extends DomainStringPk implements IPlace{
 		return boundingBox;
 	}
 
-	public void setBoundingBox(BoundingBox boundingBox) {
+	public void setBoundingBox(IBoundingBox boundingBox) {
 		this.boundingBox = boundingBox;
 	}
 
@@ -62,7 +62,7 @@ public class Place extends DomainStringPk implements IPlace{
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(ICountry country) {
 		this.country = country;
 	}
 
@@ -126,7 +126,7 @@ public class Place extends DomainStringPk implements IPlace{
 		return url;
 	}
 
-	public void setUrl(Url url) {
+	public void setUrl(IUrl url) {
 		this.url = url;
 	}
 
@@ -146,23 +146,23 @@ public class Place extends DomainStringPk implements IPlace{
 	@Override
 	public void save() {
 		if (boundingBox instanceof BoundingBox) {
-			boundingBox.save();
-			this.boundingBox.setId(boundingBox.getId());
+			((BoundingBox) boundingBox).save();
+			((BoundingBox) this.boundingBox).setId(((BoundingBox) boundingBox).getId());
 		}
 		
 		if (url instanceof Url) {
-			url.save();
-			this.url.setId(url.getId());
+			((Url) url).save();
+			((Url) this.url).setId(((Url) url).getId());
 		}
 		
 		if (type instanceof PlaceType) {
-			type.save();
-			this.type.setId(type.getId());
+			((PlaceType) type).save();
+			((PlaceType) this.type).setId(((PlaceType) type).getId());
 		}
 		
 		if (country instanceof Country) {
-			country.save();
-			this.country.setId(country.getId());
+			((Country) country).save();
+			((Country) this.country).setId(((Country) country).getId());
 		}
 		
 		super.save();

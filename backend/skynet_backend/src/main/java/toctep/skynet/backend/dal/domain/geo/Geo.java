@@ -4,14 +4,14 @@ import toctep.skynet.backend.dal.domain.DomainLongPk;
 
 public class Geo extends DomainLongPk implements IGeo {
 	
-	private GeoType type;
+	private IGeoType type;
 	private String coordinates;
 
-	public GeoType getType() {
+	public IGeoType getType() {
 		return type;
 	}
 
-	public void setType(GeoType type) {
+	public void setType(IGeoType type) {
 		this.type = type;
 	}
 
@@ -30,8 +30,11 @@ public class Geo extends DomainLongPk implements IGeo {
 	
 	@Override
 	public void save() {
-		type.save();
-		this.type.setId(type.getId());
+		if (type instanceof GeoType) {
+			((GeoType) type).save();
+			((GeoType) this.type).setId(((GeoType) type).getId());
+		}
+		
 		super.save();
 	}		
 	
