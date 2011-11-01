@@ -1,11 +1,11 @@
 package toctep.skynet.backend.dal.domain.place;
 
+import toctep.skynet.backend.dal.domain.IDomain;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 
-
-public interface IPlace {
+public interface IPlace extends IDomain<String> {
 	
 	public IPlaceType getType();
 	public IBoundingBox getBoundingBox();

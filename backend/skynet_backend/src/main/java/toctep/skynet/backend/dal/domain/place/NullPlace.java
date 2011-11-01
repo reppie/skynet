@@ -11,6 +11,11 @@ import toctep.skynet.backend.dal.domain.url.NullUrl;
 public class NullPlace implements IPlace{
 
 	@Override
+	public String getId() {
+		return "";
+	}
+	
+	@Override
 	public String getAppId() {
 		return "";
 	}

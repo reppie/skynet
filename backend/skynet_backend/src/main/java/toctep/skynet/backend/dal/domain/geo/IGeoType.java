@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.geo;
 
-public interface IGeoType {
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface IGeoType extends IDomain<Long> {
 
 	public String getText();
 	

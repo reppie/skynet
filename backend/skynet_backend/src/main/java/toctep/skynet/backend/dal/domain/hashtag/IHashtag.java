@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.hashtag;
 
-public interface IHashtag {
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface IHashtag extends IDomain<Long> {
 
 	public String getText();
 	

@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.language;
 
-public interface ILanguage {
+import toctep.skynet.backend.dal.domain.IDomain;
+
+public interface ILanguage extends IDomain<Long> {
 	
 	public String getText();
 	
