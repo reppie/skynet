@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.GeoType;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
 
 public class GeoTypeTest extends DomainTest{
 

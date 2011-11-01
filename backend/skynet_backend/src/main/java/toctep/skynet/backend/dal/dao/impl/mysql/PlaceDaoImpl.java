@@ -3,7 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
-import toctep.skynet.backend.dal.domain.Place;
+import toctep.skynet.backend.dal.domain.place.Place;
 
 public class PlaceDaoImpl extends PlaceDao {
 

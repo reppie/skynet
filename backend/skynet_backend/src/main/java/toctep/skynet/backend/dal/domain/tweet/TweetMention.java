@@ -1,4 +1,6 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.tweet;
+
+import toctep.skynet.backend.dal.domain.Domain;
 
 public class TweetMention extends Domain {
 	

@@ -1,7 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Tweet;
-import toctep.skynet.backend.dal.domain.TweetContributor;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 
 public class TweetContributorTest extends DomainTest {
 

@@ -1,6 +1,12 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.tweet;
 
 import java.sql.Date;
+
+import toctep.skynet.backend.dal.domain.DomainLongPk;
+import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.User;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.place.Place;
 
 public class Tweet extends DomainLongPk {
 

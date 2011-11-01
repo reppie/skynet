@@ -1,4 +1,6 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.geo;
+
+import toctep.skynet.backend.dal.domain.DomainLongPk;
 
 public class GeoType extends DomainLongPk {
 

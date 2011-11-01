@@ -1,7 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.BoundingBox;
-import toctep.skynet.backend.dal.domain.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 
 public class BoundingBoxTest extends DomainTest{
 

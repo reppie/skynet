@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import toctep.skynet.backend.bll.TweetIndexer;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
-import toctep.skynet.backend.dal.domain.Keyword;
-import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.Keyword;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
 import com.mysql.jdbc.Connection;
 
