@@ -1,9 +1,10 @@
 package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Country;
-import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
+import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.NullUrl;
 
 public class NullPlace implements IPlace{
 
@@ -69,11 +70,11 @@ public class NullPlace implements IPlace{
 
 	@Override
 	public PlaceType getType() {
-		return NullPlaceType();
+		return new NullPlaceType();
 	}
 
 	@Override
-	public Url getUrl() {
-		return NullUrl();
+	public IUrl getUrl() {
+		return new NullUrl();
 	}
 }

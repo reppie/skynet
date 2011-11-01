@@ -5,8 +5,8 @@ import java.sql.Date;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class User extends DomainLongPk implements IUser  {
 

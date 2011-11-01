@@ -1,8 +1,8 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class TweetUrlTest extends DomainTest {
 	

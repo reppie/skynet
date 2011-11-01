@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.Url;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class UrlTest extends DomainTest {
 	

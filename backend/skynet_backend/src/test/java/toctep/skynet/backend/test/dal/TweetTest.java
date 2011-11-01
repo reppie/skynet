@@ -5,7 +5,6 @@ import java.sql.Date;
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Language;
 import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.geo.Geo;
@@ -14,6 +13,7 @@ import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetTest extends DomainTest {

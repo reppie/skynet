@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Country;
-import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.url.IUrl;
 
 public interface IPlace {
 	
@@ -18,6 +18,6 @@ public interface IPlace {
 	public String getPostalCode();
 	public String getPhone();
 	public String getTwitter();
-	public Url getUrl();
+	public IUrl getUrl();
 	public String getAppId();
 }

@@ -2,9 +2,10 @@ package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
-import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class Place extends DomainStringPk implements IPlace{
 
@@ -20,7 +21,7 @@ public class Place extends DomainStringPk implements IPlace{
 	private String postalCode;
 	private String phone;
 	private String twitter;
-	private Url url;
+	private IUrl url;
 	private String appId;
 
 	public PlaceType getType() {
@@ -119,11 +120,11 @@ public class Place extends DomainStringPk implements IPlace{
 		this.twitter = twitter;
 	}
 
-	public Url getUrl() {
+	public IUrl getUrl() {
 		return url;
 	}
 
-	public void setUrl(Url url) {
+	public void setUrl(IUrl url) {
 		this.url = url;
 	}
 
@@ -146,12 +147,14 @@ public class Place extends DomainStringPk implements IPlace{
 			((BoundingBox)boundingBox).save();
 			((BoundingBox) this.boundingBox).setId(((BoundingBox)boundingBox).getId());
 		}
+		if (url instanceof Url) {
+			((Url)url).save();
+			((Url)this.url).setId(((Url)url).getId());
+		}
 		
 		type.save();
-		url.save();
 		country.save();
 		this.type.setId(type.getId());
-		this.url.setId(url.getId());
 		this.country.setId(country.getId());
 		super.save();
 	}		

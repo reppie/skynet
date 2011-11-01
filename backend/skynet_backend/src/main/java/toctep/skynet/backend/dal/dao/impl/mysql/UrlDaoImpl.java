@@ -3,7 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
-import toctep.skynet.backend.dal.domain.Url;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class UrlDaoImpl extends UrlDao {
 

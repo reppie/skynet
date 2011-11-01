@@ -1,7 +1,7 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.Url;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class TweetUrl extends Domain {
 	
