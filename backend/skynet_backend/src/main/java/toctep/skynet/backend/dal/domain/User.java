@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain;
 
 import java.sql.Date;
 
-public class User extends DomainLongPk {
+public class User extends DomainLongPk implements IUser  {
 
 	private Place place;
 	private boolean defaultProfile;

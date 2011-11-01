@@ -27,8 +27,8 @@ public class TweetTest extends DomainTest {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private long inReplyToTweetTwitterId;
-	private long inReplyToUserTwitterId;
+	private Tweet inReplyToTweetTwitter;
+	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
 	private Place place;
@@ -66,8 +66,17 @@ public class TweetTest extends DomainTest {
 		inReplyToTweetTwitterId = 0L;
 		tweet.setInReplyToTweetTwitterId(inReplyToTweetTwitterId);
 		
-		inReplyToUserTwitterId = 0L;
-		tweet.setInReplyToUserTwitterId(inReplyToUserTwitterId);
+		inReplyToUserTwitter = new User();
+		inReplyToUserTwitter.setPlace(place);
+		inReplyToUserTwitter.setLanguage(new Language());
+		inReplyToUserTwitter.setUrl(new Url());
+		inReplyToUserTwitter.setProfileBackgroundImageUrl(new Url());
+		inReplyToUserTwitter.setProfileBackgroundImageUrlHttps(new Url());
+		inReplyToUserTwitter.setProfileImageUrl(new Url());
+		inReplyToUserTwitter.setProfileImageUrlHttps(new Url());
+		inReplyToUserTwitter.setTimeZone(new TimeZone());
+		inReplyToUserTwitter.setCreatedAt(new Date(0));
+		tweet.setInReplyToUserTwitter(inReplyToUserTwitter);
 		
 		retweetCount = 0L;
 		tweet.setRetweetCount(retweetCount);

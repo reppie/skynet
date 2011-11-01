@@ -40,6 +40,8 @@ public class TweetParser {
 	private Place place;
 	private User user;
 	private Tweet tweet;
+	private User inReplyToUser;
+	private Tweet inReplyToTweet;
 	
 	private static TweetParser instance;
 	
@@ -237,8 +239,15 @@ public class TweetParser {
         tweet.setText(status.getText());
         tweet.setTruncated(status.isTruncated());
         tweet.setFavorited(status.isFavorited());
-        tweet.setInReplyToTweetTwitterId(status.getInReplyToStatusId());
-        tweet.setInReplyToUserTwitterId(status.getInReplyToUserId());
+        
+        inReplyToTweet = new Tweet();
+        inReplyToTweet.setId(status.getInReplyToStatusId());
+        tweet.setInReplyToTweetTwitter(inReplyToTweet);
+        
+        inReplyToUser = new User();
+        inReplyToUser.setId(status.getInReplyToUserId());       
+        tweet.setInReplyToUserTwitter(inReplyToUser);
+        
         tweet.setRetweetCount(status.getRetweetCount());
         tweet.setCreatedAt(new java.sql.Date(status.getCreatedAt().getDate()));
         tweet.setGeo(geo);
