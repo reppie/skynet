@@ -11,6 +11,8 @@ import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.dal.domain.tweet.ITweet;
+import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.url.Url;
@@ -27,7 +29,7 @@ public class TweetTest extends DomainTest {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private Tweet inReplyToTweetTwitter;
+	private ITweet inReplyToTweetTwitter;
 	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
@@ -63,8 +65,8 @@ public class TweetTest extends DomainTest {
 		favorited = false;
 		tweet.setFavorited(favorited);
 		
-		inReplyToTweetTwitterId = 0L;
-		tweet.setInReplyToTweetTwitterId(inReplyToTweetTwitterId);
+		inReplyToTweetTwitter = new NullTweet();
+		tweet.setInReplyToTweetTwitter(inReplyToTweetTwitter);
 		
 		inReplyToUserTwitter = new User();
 		inReplyToUserTwitter.setPlace(place);

@@ -2,11 +2,6 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-<<<<<<< HEAD
-import toctep.skynet.backend.dal.domain.TimeZone;
-=======
-import toctep.skynet.backend.dal.domain.Language;
->>>>>>> a3b075fa2512f58ed2a08a792cef5e016cefbb71
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.country.Country;
@@ -182,7 +177,7 @@ public class UserTest extends DomainTest {
 	@Override
 	public void testCreate() {
 		assertNotNull(user);
-		assertEquals(twitterId, user.getId());
+		assertTrue(new Long(1).equals(user.getId()));
 		assertTrue(place.equals(user.getPlace()));
 		assertTrue(user.isDefaultProfile() == defaultProfile);
 		assertEquals(statusesCount, user.getStatusesCount());
