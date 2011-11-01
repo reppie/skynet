@@ -2,7 +2,8 @@ package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Url;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 
 public class NullPlace implements IPlace{
 
@@ -12,7 +13,7 @@ public class NullPlace implements IPlace{
 	}
 
 	@Override
-	public BoundingBox getBoundingBox() {
+	public IBoundingBox getBoundingBox() {
 		return new NullBoundingBox();
 	}
 
@@ -23,68 +24,56 @@ public class NullPlace implements IPlace{
 
 	@Override
 	public String getFullName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getIso3() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getLocality() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getPhone() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getPostalCode() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getRegion() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getStreetAddress() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public String getTwitter() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
 	public PlaceType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return NullPlaceType();
 	}
 
 	@Override
 	public Url getUrl() {
-		// TODO Auto-generated method stub
-		return null;
+		return NullUrl();
 	}
-
 }
