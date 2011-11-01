@@ -2,12 +2,12 @@ package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.Url;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 
 public interface IPlace {
 	
 	public PlaceType getType();
-	public BoundingBox getBoundingBox();
+	public IBoundingBox getBoundingBox();
 	public String getName();
 	public String getFullName();
 	public Country getCountry();

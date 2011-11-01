@@ -3,16 +3,16 @@ package toctep.skynet.backend.dal.domain.boundingbox;
 import toctep.skynet.backend.dal.domain.DomainLongPk;
 
 
-public class BoundingBox extends DomainLongPk {
+public class BoundingBox extends DomainLongPk implements IBoundingBox{
 	
-	private BoundingBoxType type;
+	private IBoundingBoxType type;
 	private String coordinates;
 	
-	public BoundingBoxType getType() {
+	public IBoundingBoxType getType() {
 		return type;
 	}
 
-	public void setType(BoundingBoxType type) {
+	public void setType(IBoundingBoxType type) {
 		this.type = type;
 	}
 
@@ -31,8 +31,10 @@ public class BoundingBox extends DomainLongPk {
 	
 	@Override
 	public void save() {
-		type.save();
-		this.type.setId(type.getId());
+		if(type instanceof BoundingBoxType) {
+			((BoundingBoxType)type).save();
+			((BoundingBoxType)this.type).setId(((BoundingBoxType)type).getId());
+		}
 		super.save();
 	}	
 }

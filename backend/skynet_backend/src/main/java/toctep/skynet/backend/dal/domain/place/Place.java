@@ -4,11 +4,12 @@ import toctep.skynet.backend.dal.domain.Country;
 import toctep.skynet.backend.dal.domain.DomainStringPk;
 import toctep.skynet.backend.dal.domain.Url;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 
 public class Place extends DomainStringPk implements IPlace{
 
 	private PlaceType type;
-	private BoundingBox boundingBox;
+	private IBoundingBox boundingBox;
 	private String name;
 	private String fullName;
 	private Country country;
@@ -30,11 +31,11 @@ public class Place extends DomainStringPk implements IPlace{
 		this.type = placeType;
 	}
 
-	public BoundingBox getBoundingBox() {
+	public IBoundingBox getBoundingBox() {
 		return boundingBox;
 	}
 
-	public void setBoundingBox(BoundingBox boundingBox) {
+	public void setBoundingBox(IBoundingBox boundingBox) {
 		this.boundingBox = boundingBox;
 	}
 
@@ -141,12 +142,15 @@ public class Place extends DomainStringPk implements IPlace{
 	
 	@Override
 	public void save() {
+		if (boundingBox instanceof BoundingBox) {
+			((BoundingBox)boundingBox).save();
+			((BoundingBox) this.boundingBox).setId(((BoundingBox)boundingBox).getId());
+		}
+		
 		type.save();
-		boundingBox.save();
 		url.save();
 		country.save();
 		this.type.setId(type.getId());
-		this.boundingBox.setId(boundingBox.getId());
 		this.url.setId(url.getId());
 		this.country.setId(country.getId());
 		super.save();
