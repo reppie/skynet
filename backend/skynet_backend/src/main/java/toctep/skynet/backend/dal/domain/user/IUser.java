@@ -1,11 +1,6 @@
 package toctep.skynet.backend.dal.domain.user;
 
-import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.TimeZone;
-import toctep.skynet.backend.dal.domain.language.ILanguage;
-import toctep.skynet.backend.dal.domain.place.IPlace;
-import toctep.skynet.backend.dal.domain.url.IUrl;
 
 public interface IUser{
 
