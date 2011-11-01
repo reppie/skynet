@@ -3,7 +3,7 @@ package toctep.skynet.backend;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import toctep.skynet.backend.dal.domain.user.User;
+import toctep.skynet.backend.bll.TweetRetriever;
 
 public class Main {
 
@@ -15,11 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		PropertyConfigurator.configure(LOG_PROPERTIES);
 				
-		//new Thread(new TweetRetriever()).start();
-		
-		User t = new User();
-		t.setId(0L);
-		t.save();
+		new Thread(new TweetRetriever()).start();
 	}
 
 }
