@@ -260,8 +260,10 @@ public class MySqlUtil {
 		}
 	}
 	
-	public static String escape(String str) {
-		str = "\"" + (str != null ? str.replace("\"", "\\\"") : "") + "\"";
-		return str;
+	public static String escape(Object str) {
+		if(str instanceof String) {
+			str = "\"" + (str != null ? ((String) str).replace("\"", "\\\"") : "") + "\"";
+		}
+		return (String) str;
 	}
 }

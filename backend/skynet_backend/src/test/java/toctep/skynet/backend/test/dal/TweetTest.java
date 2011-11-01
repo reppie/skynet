@@ -2,20 +2,11 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
-import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
-import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.place.PlaceType;
-import toctep.skynet.backend.dal.domain.timezone.TimeZone;
-import toctep.skynet.backend.dal.domain.tweet.ITweet;
-import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetTest extends DomainTest {
@@ -29,7 +20,7 @@ public class TweetTest extends DomainTest {
 	private long twitterId;
 	private SourceType sourceType;
 	private boolean favorited;
-	private ITweet inReplyToTweetTwitter;
+	private Tweet inReplyToTweetTwitter;
 	private User inReplyToUserTwitter;
 	private long retweetCount;
 	private Date createdAt;
@@ -65,19 +56,12 @@ public class TweetTest extends DomainTest {
 		favorited = false;
 		tweet.setFavorited(favorited);
 		
-		inReplyToTweetTwitter = new NullTweet();
+		inReplyToTweetTwitter = new Tweet();
+		inReplyToTweetTwitter.setId(new Long(0));
 		tweet.setInReplyToTweetTwitter(inReplyToTweetTwitter);
 		
 		inReplyToUserTwitter = new User();
-		inReplyToUserTwitter.setPlace(place);
-		inReplyToUserTwitter.setLanguage(new Language());
-		inReplyToUserTwitter.setUrl(new Url());
-		inReplyToUserTwitter.setProfileBackgroundImageUrl(new Url());
-		inReplyToUserTwitter.setProfileBackgroundImageUrlHttps(new Url());
-		inReplyToUserTwitter.setProfileImageUrl(new Url());
-		inReplyToUserTwitter.setProfileImageUrlHttps(new Url());
-		inReplyToUserTwitter.setTimeZone(new TimeZone());
-		inReplyToUserTwitter.setCreatedAt(new Date(0));
+		inReplyToUserTwitter.setId(new Long(0));
 		tweet.setInReplyToUserTwitter(inReplyToUserTwitter);
 		
 		retweetCount = 0L;
@@ -87,24 +71,11 @@ public class TweetTest extends DomainTest {
 		tweet.setCreatedAt(createdAt);
 				
 		place = new Place();
-		place.setType(new PlaceType());
-		BoundingBox boundingBox = new BoundingBox();
-		boundingBox.setType(new BoundingBoxType());
-		place.setBoundingBox(boundingBox);
-		place.setUrl(new Url());
-		place.setCountry(new Country());
+		place.setId("AA");
 		tweet.setPlace(place);
 		
 		user = new User();
-		user.setPlace(place);
-		user.setLanguage(new Language());
-		user.setUrl(new Url());
-		user.setProfileBackgroundImageUrl(new Url());
-		user.setProfileBackgroundImageUrlHttps(new Url());
-		user.setProfileImageUrl(new Url());
-		user.setProfileImageUrlHttps(new Url());
-		user.setTimeZone(new TimeZone());
-		user.setCreatedAt(new Date(0));
+		user.setId(new Long(0));
 		tweet.setUser(user);
 		
 		coordinates = "test";

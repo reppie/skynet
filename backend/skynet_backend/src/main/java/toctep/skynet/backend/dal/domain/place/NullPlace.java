@@ -12,7 +12,7 @@ public class NullPlace implements IPlace{
 
 	@Override
 	public String getId() {
-		return "";
+		return "NULL";
 	}
 	
 	@Override

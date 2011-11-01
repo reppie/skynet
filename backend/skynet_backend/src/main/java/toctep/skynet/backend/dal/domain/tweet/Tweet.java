@@ -153,6 +153,17 @@ public class Tweet extends Domain<Long> implements ITweet {
 	
 	@Override
 	public void save() {
+		
+		if (inReplyToTweetTwitter instanceof Tweet) {
+			((Tweet) inReplyToTweetTwitter).save();
+			((Tweet) this.inReplyToTweetTwitter).setId(((Tweet) inReplyToTweetTwitter).getId());
+		}
+		
+		if (inReplyToUserTwitter instanceof User) {
+			((User) inReplyToUserTwitter).save();
+			((User) this.inReplyToUserTwitter).setId(((User) inReplyToUserTwitter).getId());
+		}	
+		
 		if (sourceType instanceof SourceType) {
 			((SourceType) sourceType).save();
 			((SourceType) this.sourceType).setId(((SourceType) sourceType).getId());

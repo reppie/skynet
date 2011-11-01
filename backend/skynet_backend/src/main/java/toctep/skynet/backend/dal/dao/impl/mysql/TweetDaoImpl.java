@@ -20,7 +20,7 @@ public class TweetDaoImpl extends TweetDao {
 		+ tweet.isTruncated() + ", "
 		+ tweet.getSourceType().getId() + ", "
 		+ tweet.isFavorited() + ", "
-		+ tweet.getInReplyToTweetTwitter().getId() + ", "
+		+ tweet.getInReplyToTweetTwitter().getId() + ", "		
 		+ tweet.getInReplyToUserTwitter().getId() + ", "
 		+ tweet.getRetweetCount() + ", "
 		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", "
