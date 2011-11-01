@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import toctep.skynet.backend.dal.domain.SourceType;
+import toctep.skynet.backend.dal.domain.tweet.SourceType;
 
 public class SourceTypeTest extends DomainTest {
 

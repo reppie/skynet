@@ -1,9 +1,12 @@
-package toctep.skynet.backend.dal.domain;
+package toctep.skynet.backend.dal.domain.tweet;
 
-public class SourceType extends DomainLongPk {
+import toctep.skynet.backend.dal.domain.DomainLongPk;
+
+public class SourceType extends DomainLongPk implements ISourceType {
 
 	public String text;
 
+	@Override
 	public String getText() {
 		return text;
 	}
@@ -15,5 +18,6 @@ public class SourceType extends DomainLongPk {
 	@Override
 	public void setDao() {
 		dao = daoFacade.getSourceTypeDao();
-	}	
+	}
+	
 }

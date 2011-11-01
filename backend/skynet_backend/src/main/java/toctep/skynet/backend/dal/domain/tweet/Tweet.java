@@ -3,12 +3,13 @@ package toctep.skynet.backend.dal.domain.tweet;
 import java.sql.Date;
 
 import toctep.skynet.backend.dal.domain.DomainLongPk;
-import toctep.skynet.backend.dal.domain.SourceType;
 import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.User;
 
-public class Tweet extends DomainLongPk {
+public class Tweet extends DomainLongPk implements ITweet {
 
 	private String text;
 	private Geo geo;
@@ -24,6 +25,7 @@ public class Tweet extends DomainLongPk {
 	private User user;
 	private String coordinates;
 	
+	@Override
 	public String getText() {
 		return text;
 	}
@@ -32,6 +34,7 @@ public class Tweet extends DomainLongPk {
 		this.text = text;
 	}
 
+	@Override
 	public Geo getGeo() {
 		return geo;
 	}
@@ -40,6 +43,7 @@ public class Tweet extends DomainLongPk {
 		this.geo = geo;
 	}
 
+	@Override
 	public boolean isTruncated() {
 		return truncated;
 	}
@@ -48,6 +52,7 @@ public class Tweet extends DomainLongPk {
 		this.truncated = truncated;
 	}
 
+	@Override
 	public long getTwitterId() {
 		return twitterId;
 	}
@@ -56,7 +61,8 @@ public class Tweet extends DomainLongPk {
 		this.twitterId = twitterId;
 	}
 
-	public SourceType getSourceType() {
+	@Override
+	public ISourceType getSourceType() {
 		return sourceType;
 	}
 
@@ -64,6 +70,7 @@ public class Tweet extends DomainLongPk {
 		this.sourceType = sourceType;
 	}
 
+	@Override
 	public boolean isFavorited() {
 		return favorited;
 	}
@@ -72,7 +79,8 @@ public class Tweet extends DomainLongPk {
 		this.favorited = favorited;
 	}
 
-	public Tweet getInReplyToTweetTwitter() {
+	@Override
+	public ITweet getInReplyToTweetTwitter() {
 		return inReplyToTweetTwitter;
 	}
 
@@ -80,7 +88,8 @@ public class Tweet extends DomainLongPk {
 		this.inReplyToTweetTwitter = inReplyToTweetTwitter;
 	}
 
-	public User getInReplyToUserTwitter() {
+	@Override
+	public IUser getInReplyToUserTwitter() {
 		return inReplyToUserTwitter;
 	}
 
@@ -88,6 +97,7 @@ public class Tweet extends DomainLongPk {
 		this.inReplyToUserTwitter = inReplyToUserTwitter;
 	}
 
+	@Override
 	public long getRetweetCount() {
 		return retweetCount;
 	}
@@ -96,6 +106,7 @@ public class Tweet extends DomainLongPk {
 		this.retweetCount = retweetCount;
 	}
 
+	@Override
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -104,7 +115,8 @@ public class Tweet extends DomainLongPk {
 		this.createdAt = createdAt;
 	}
 
-	public Place getPlace() {
+	@Override
+	public IPlace getPlace() {
 		return place;
 	}
 
@@ -112,7 +124,8 @@ public class Tweet extends DomainLongPk {
 		this.place = place;
 	}
 
-	public User getUser() {
+	@Override
+	public IUser getUser() {
 		return user;
 	}
 
@@ -120,6 +133,7 @@ public class Tweet extends DomainLongPk {
 		this.user = user;
 	}
 
+	@Override
 	public String getCoordinates() {
 		return coordinates;
 	}
