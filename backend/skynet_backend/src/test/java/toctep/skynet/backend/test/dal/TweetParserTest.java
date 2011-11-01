@@ -2,14 +2,19 @@ package toctep.skynet.backend.test.dal;
 
 import static org.junit.Assert.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import toctep.skynet.backend.bll.TweetIndexer;
+import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.Keyword;
 import toctep.skynet.backend.dal.domain.Tweet;
+import toctep.skynet.backend.dal.domain.TweetKeyword;
 
 import com.mysql.jdbc.Connection;
 
@@ -38,7 +43,6 @@ public class TweetParserTest {
 		
 		Keyword keyword = new Keyword();
 		keyword.setKeyword("elfstedentocht");
-		assertFalse(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht'"));
 		keyword.save();
 		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
 		assertTrue(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht';"));
@@ -61,6 +65,17 @@ public class TweetParserTest {
 		indexer.indexTweetKeywords(tweet);
 		
 		assertEquals("keyword count: ", 6, MySqlUtil.getInstance().count("twitter_keyword"));
+		
+		long wilfried_id = keyword.getId();
+		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM twitter_tweet_keywords WHERE keyword_id=" + wilfried_id);
+		try {
+			while(rs.next()) {
+				System.out.println(rs.getString("tweet_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
 	}
 	
 	@After

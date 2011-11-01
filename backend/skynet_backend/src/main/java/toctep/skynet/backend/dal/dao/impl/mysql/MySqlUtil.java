@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import org.ini4j.InvalidFileFormatException;
@@ -127,13 +128,14 @@ public class MySqlUtil {
 	public int insert(String query) {
 		int id = 0;
 		
-		//System.out.println(query);
-		
 		Statement stmt = null;
 		
 		try {
 			stmt = (Statement) conn.createStatement();
-			id = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next())
+				id = rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
