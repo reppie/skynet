@@ -16,9 +16,9 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		
 		int id = MySqlUtil.getInstance().insert(
 			"INSERT INTO " + tableName + " (tweet_id, value, keyword_id) " +
-			"VALUES (" + tweetKeyword.getTweetId() + ", " + 
+			"VALUES (" + tweetKeyword.getTweet().getId() + ", " + 
                          MySqlUtil.escape(tweetKeyword.getTweetKeywordValue()) + ", "+
-						 tweetKeyword.getKeywordId()+")"
+						 tweetKeyword.getKeyword().getId()+")"
 		);
 		
 		tweetKeyword.setId(id);
@@ -32,8 +32,8 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		
 		tweetKeyword.setId(id);
 		try {
-			tweetKeyword.setKeywordId(rs.getInt("keyword_id"));
-			tweetKeyword.setTweetId(rs.getLong("tweet_id"));
+//			tweetKeyword.setKeywordId(rs.getInt("keyword_id"));
+//			tweetKeyword.setTweetId(rs.getLong("tweet_id"));
 			tweetKeyword.setTweetKeywordValue(rs.getString("value"));
 		} catch (SQLException e) {
 			e.printStackTrace();

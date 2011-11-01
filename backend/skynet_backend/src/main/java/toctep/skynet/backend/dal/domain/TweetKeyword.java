@@ -2,15 +2,15 @@ package toctep.skynet.backend.dal.domain;
 
 public class TweetKeyword extends DomainLongPk {
 	
-	private long tweetId;
+	private Tweet tweet;
 	private String tweetKeywordValue;
-	private long keywordId;
+	private Keyword keyword;
 	
-	public long getTweetId() {
-		return tweetId;
+	public Tweet getTweet() {
+		return tweet;
 	}
-	public void setTweetId(long tweetId) {
-		this.tweetId = tweetId;
+	public void setTweet(Tweet tweet) {
+		this.tweet = tweet;
 	}
 	
 	public String getTweetKeywordValue() {
@@ -20,14 +20,23 @@ public class TweetKeyword extends DomainLongPk {
 		this.tweetKeywordValue = tweetKeywordValue;
 	}
 	
-	public long getKeywordId() {
-		return keywordId;
+	public Keyword getKeyword() {
+		return keyword;
 	}
-	public void setKeywordId(long keywordId) {
-		this.keywordId = keywordId;
+	public void setKeyword(Keyword keyword) {
+		this.keyword = keyword;
 	}
 	@Override
 	public void setDao() {
 		dao = daoFacade.getTweetKeywordDao();
 	}
+	
+	@Override
+	public void save() {
+		tweet.save();
+		keyword.save();
+		this.tweet.setId(tweet.getId());
+		this.keyword.setId(keyword.getId());
+		super.save();
+	}	
 }

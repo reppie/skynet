@@ -175,23 +175,47 @@ public class TweetParser {
         user.setVerified(userStatus.isVerified());
         user.setContributorsEnabled(userStatus.isContributorsEnabled());
         user.setDescription(user.getDescription());
-        user.setName(userStatus.getName());
+        user.setName(userStatus.getScreenName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
         user.setCreatedAt(new java.sql.Date(userStatus.getCreatedAt().getDate()));
         user.setDefaultProfileImage(false); //Twitter4j has no support for this?
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
-        user.setProfileBackgroundImageUrl(userStatus.getProfileBackgroundImageUrl());
-        user.setProfileBackgroundImageUrlHttps(userStatus.getProfileBackgroundImageUrlHttps());
+        
+        Url profileBgUrl = new Url();
+        if(userStatus.getProfileBackgroundImageUrl() != null) {
+        	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
+        }
+        user.setProfileBackgroundImageUrl(profileBgUrl);
+
+        Url profileBgUrlHttps = new Url();
+        if(userStatus.getProfileBackgroundImageUrlHttps() != null) {
+        	profileBgUrlHttps.setId(userStatus.getProfileBackgroundImageUrlHttps());
+        }
+        
+        user.setProfileBackgroundImageUrlHttps(profileBgUrl);
+        
         user.setFollowRequestSent(userStatus.isFollowRequestSent());
         user.setNotifications(0); //Twitter4j has no support for this?
         user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
         user.setFriendsCount(userStatus.getFriendsCount());
         user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
-        user.setScreenName(userStatus.getScreenName());
-        user.setProfileImageUrl(userStatus.getProfileImageURL().toExternalForm());
-        user.setProfileImageUrlHttps(userStatus.getProfileImageUrlHttps().toExternalForm());
+        user.setScreenName(userStatus.getName());
+        
+        Url profileImageUrl = new Url();
+        if(userStatus.getProfileImageURL().toExternalForm() != null) {
+        	profileImageUrl.setId(userStatus.getProfileImageURL().toExternalForm());
+        }     
+        user.setProfileImageUrl(profileImageUrl);
+        
+        Url profileImageUrlHttps = new Url();
+        
+        if(userStatus.getProfileImageUrlHttps().toExternalForm() != null) {
+        	profileImageUrlHttps.setId(userStatus.getProfileImageUrlHttps().toExternalForm());
+        } 
+        user.setProfileImageUrlHttps(profileImageUrlHttps);
+        
         user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
         user.setTranslator(userStatus.isTranslator());
         user.setListedCount(userStatus.getListedCount());   
