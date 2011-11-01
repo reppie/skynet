@@ -2,13 +2,12 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.DomainStringPk;
 import toctep.skynet.backend.dal.domain.url.Url;
 
 public class UrlDaoImpl extends UrlDao {
 
 	@Override
-	public void insert(Domain domain) {
+	public void insert(Domain<String> domain) {
 		Url url = (Url) domain;
 
 		MySqlUtil.getInstance().insert("INSERT INTO " 
@@ -19,25 +18,24 @@ public class UrlDaoImpl extends UrlDao {
 	}
 
 	@Override
-	public DomainStringPk select(String id) {
-		// TODO Auto-generated method stub
+	public Url select(String id) {
 		return null;
 	}
 
 	@Override
-	public void update(Domain domain) {
+	public void update(Domain<String> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Domain domain) {
+	public void delete(Domain<String> domain) {
 		Url url = (Url) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE text = " + MySqlUtil.escape(url.getId()));
 	}
 
 	@Override
-	public boolean exists(Domain domain) {
+	public boolean exists(Domain<String> domain) {
 		Url url = (Url) domain;
 		return MySqlUtil.getInstance().exists(tableName, "text = " + MySqlUtil.escape(url.getId()));
 	}
