@@ -39,23 +39,18 @@ public class MySqlUtil {
 
 	private static MySqlUtil instance;
 	
-	private String driver;
-	private String host;
-	private String name;
-	private String user;
-	private String pass;
-	
 	private Connection conn;
 	
 	private MySqlUtil(String properties) {
 		try {
 		    Wini ini = new Wini(new File(properties));
-	        driver = ini.get("jdbc", "driver", String.class);
-	        host = ini.get("jdbc", "host", String.class);
-	        name = ini.get("jdbc", "name", String.class);
-	        user = ini.get("jdbc", "user", String.class);
-	        pass = ini.get("jdbc", "pass", String.class);
 		    
+	        String driver = ini.get("jdbc", "driver", String.class);
+	        String host = ini.get("jdbc", "host", String.class);
+	        String name = ini.get("jdbc", "name", String.class);
+	        String user = ini.get("jdbc", "user", String.class);
+	        String pass = ini.get("jdbc", "pass", String.class);
+	        
 	        String url = "jdbc:" + driver + "://" + host + "/" + name;
 	        
 	        conn = (Connection) DriverManager.getConnection(url, user, pass);
@@ -252,4 +247,5 @@ public class MySqlUtil {
 		}
 		return (String) str;
 	}
+
 }

@@ -11,7 +11,6 @@ import twitter4j.TwitterStreamFactory;
 public class TweetRetriever implements Runnable {
 
 	private TweetParser tweetParser;
-	private StatusListener statusListerner;
 	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
@@ -25,7 +24,7 @@ public class TweetRetriever implements Runnable {
 		
 		tweetParser = TweetParser.getInstance();
 		
-		statusListerner = new StatusListener() {
+		StatusListener statusListerner = new StatusListener() {
 	        public void onStatus(Status status) {
 	            tweetParser.parse(status);
 	        }

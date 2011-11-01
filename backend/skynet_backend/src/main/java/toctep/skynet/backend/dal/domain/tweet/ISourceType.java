@@ -4,6 +4,6 @@ import toctep.skynet.backend.dal.domain.IDomain;
 
 public interface ISourceType extends IDomain<Long> {
 
-	public String getText();
+	String getText();
 	
 }

@@ -128,7 +128,7 @@ public class TweetParser {
     
     private void parsePlaceType(twitter4j.Place place) {
         placeType = new PlaceType();
-        placeType.setText(place.getPlaceType());;
+        placeType.setText(place.getPlaceType());
     }
     
     private void parseSourceType(Status status) {
