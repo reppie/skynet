@@ -23,6 +23,7 @@ public class TweetKeywordTest extends DomainTest {
 		
 		keyword = new Keyword();
 		keyword.setId(0);
+		keyword.setKeyword(keywordValue);
 		
 		tweetKeyword.setTweet(tweet);
 		tweetKeyword.setTweetKeywordValue(keywordValue);
@@ -50,8 +51,9 @@ public class TweetKeywordTest extends DomainTest {
 		
 		TweetKeyword postTweetKeyword = (TweetKeyword) tweetKeywordDao.select(tweetKeyword.getId());
 		
-		assertTrue(postTweetKeyword.getTweet().equals(tweetKeyword.getTweet()));
-		assertTrue(postTweetKeyword.getKeyword().equals(tweetKeyword.getKeyword()));
+		assertTrue(postTweetKeyword.getTweet().getId().equals(tweetKeyword.getTweet().getId()));
+		assertTrue(postTweetKeyword.getTweetKeywordValue().equals(tweetKeyword.getTweetKeywordValue()));
+		assertTrue(postTweetKeyword.getKeyword().getId().equals(tweetKeyword.getKeyword().getId()));
 	}
 
 	@Override

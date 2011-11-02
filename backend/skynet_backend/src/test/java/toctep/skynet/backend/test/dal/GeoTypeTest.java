@@ -28,7 +28,7 @@ public class GeoTypeTest extends DomainTest{
 	public void testInsert() {
 		geoType.save();
 		assertEquals(1, geoTypeDao.count());
-		assertTrue(new Long(1).equals(geoType.getId()));
+		assertTrue(new Integer(1).equals(geoType.getId()));
 	}
 	
 	@Override

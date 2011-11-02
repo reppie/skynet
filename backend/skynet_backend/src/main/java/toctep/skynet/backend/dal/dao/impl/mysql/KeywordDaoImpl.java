@@ -35,7 +35,7 @@ public class KeywordDaoImpl extends KeywordDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(id, Types.BIGINT)
+			new Param(id, Types.INTEGER)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
@@ -88,7 +88,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "keyword=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

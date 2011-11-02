@@ -37,7 +37,7 @@ public class GeoDaoImpl extends GeoDao {
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
-		System.out.println("test: " + (Long) record.get(1));
+		
 		geo.setId(id);
 		geo.setType(GeoType.select((Integer) record.get(1)));
 		geo.setCoordinates((String) record.get(2));

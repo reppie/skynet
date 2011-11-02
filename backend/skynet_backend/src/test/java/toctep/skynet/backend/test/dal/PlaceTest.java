@@ -121,10 +121,10 @@ public class PlaceTest extends DomainTest{
 		assertTrue(postPlace.getFullName().equals(place.getFullName()));
 		assertTrue(postPlace.getCountry().equals(place.getCountry()));
 		assertTrue(postPlace.getStreetAddress().equals(place.getStreetAddress()));
-		assertTrue(postPlace.getLocality().equals(place.getStreetAddress()));
+		assertTrue(postPlace.getLocality().equals(place.getLocality()));
 		assertTrue(postPlace.getRegion().equals(place.getRegion()));
 		assertTrue(postPlace.getIso3().equals(place.getIso3()));
-		assertTrue(postPlace.getPostalCode().equals(place.getIso3()));
+		assertTrue(postPlace.getPostalCode().equals(place.getPostalCode()));
 		assertTrue(postPlace.getPhone().equals(place.getPhone()));
 		assertTrue(postPlace.getTwitter().equals(place.getTwitter()));
 		assertTrue(postPlace.getUrl().equals(place.getUrl()));
