@@ -35,8 +35,6 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		
 		tweetKeyword.setId(id);
 		try {
-//			tweetKeyword.setKeywordId(rs.getInt("keyword_id"));
-//			tweetKeyword.setTweetId(rs.getLong("tweet_id"));
 			tweetKeyword.setTweetKeywordValue(rs.getString("value"));
 		} catch (SQLException e) {
 			e.printStackTrace();
