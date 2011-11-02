@@ -1,7 +1,19 @@
 package toctep.skynet.backend.dal.domain.timezone;
 
+
 public class NullTimeZone implements ITimeZone {
 
+	private static NullTimeZone instance;
+	
+	public static NullTimeZone getInstance() {
+		if (instance == null) {
+			instance = new NullTimeZone();
+		}
+		return instance;
+	}
+	
+	private NullTimeZone() { }
+	
 	@Override
 	public Long getId() {
 		return null;

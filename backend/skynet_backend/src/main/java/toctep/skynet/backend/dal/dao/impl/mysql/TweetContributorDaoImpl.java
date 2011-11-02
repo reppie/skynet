@@ -35,6 +35,12 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean exists(Long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public int count() {

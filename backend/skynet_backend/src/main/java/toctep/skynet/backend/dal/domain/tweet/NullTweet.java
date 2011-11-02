@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
@@ -11,6 +11,17 @@ import toctep.skynet.backend.dal.domain.user.NullUser;
 
 public class NullTweet implements ITweet {
 
+	private static NullTweet instance;
+	
+	public static NullTweet getInstance() {
+		if (instance == null) {
+			instance = new NullTweet();
+		}
+		return instance;
+	}
+	
+	private NullTweet() { }
+	
 	@Override
 	public Long getId() {
 		return null;
@@ -23,7 +34,7 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public IGeo getGeo() {
-		return new NullGeo();
+		return NullGeo.getInstance();
 	}
 
 	@Override
@@ -38,7 +49,7 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public ISourceType getSourceType() {
-		return new NullSourceType();
+		return NullSourceType.getInstance();
 	}
 
 	@Override
@@ -48,12 +59,12 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public ITweet getInReplyToTweetTwitter() {
-		return new NullTweet();
+		return NullTweet.getInstance();
 	}
 
 	@Override
 	public IUser getInReplyToUserTwitter() {
-		return new NullUser();
+		return NullUser.getInstance();
 	}
 
 	@Override
@@ -62,18 +73,18 @@ public class NullTweet implements ITweet {
 	}
 
 	@Override
-	public Date getCreatedAt() {
-		return new Date(0);
+	public Timestamp getCreatedAt() {
+		return new Timestamp(0);
 	}
 
 	@Override
 	public IPlace getPlace() {
-		return new NullPlace();
+		return NullPlace.getInstance();
 	}
 
 	@Override
 	public IUser getUser() {
-		return new NullUser();
+		return NullUser.getInstance();
 	}
 
 	@Override

@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -31,17 +30,13 @@ public class CountryDaoImpl extends CountryDao{
 		String query = "SELECT * FROM " + tableName + " WHERE code=?";
 		
 		Param[] params = new Param[] {
-			new Param(country.getId(), Types.VARCHAR)
+			new Param(id, Types.VARCHAR)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		country.setId(id);
-		try {
-			country.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		country.setText((String) record.get(1));
 		
 		return country;
 	}
@@ -61,7 +56,12 @@ public class CountryDaoImpl extends CountryDao{
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Country country = (Country) domain;
-		return MySqlUtil.getInstance().exists(tableName, "code = " + MySqlUtil.escape(country.getId()));
+		return this.exists(country.getId());
+	}
+	
+	@Override
+	public boolean exists(String id) {
+		return MySqlUtil.getInstance().exists(tableName, "code=" + id);
 	}
 
 	@Override

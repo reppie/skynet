@@ -1,7 +1,5 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.UrlDao;
@@ -33,13 +31,9 @@ public class UrlDaoImpl extends UrlDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		MySqlUtil.getInstance().select(query, params);
 		
-		try {
-			url.setId(rs.getString("id"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		url.setId(id);
 		
 		return url;
 	}
@@ -59,8 +53,13 @@ public class UrlDaoImpl extends UrlDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Url url = (Url) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text = " + MySqlUtil.escape(url.getId()));
+		return this.exists(url.getId());
 	}
+	
+	@Override
+	public boolean exists(String id) {
+		return MySqlUtil.getInstance().exists(tableName, "text=" + id);
+	}	
 
 	@Override
 	public int count() {

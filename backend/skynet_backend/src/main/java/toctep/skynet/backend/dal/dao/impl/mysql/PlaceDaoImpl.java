@@ -1,12 +1,15 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class PlaceDaoImpl extends PlaceDao {
 
@@ -51,14 +54,23 @@ public class PlaceDaoImpl extends PlaceDao {
 			new Param(id, Types.VARCHAR)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		place.setId(id);
-		try {
-			place.setName(rs.getString("name"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		place.setType(PlaceType.select((Long) record.get(2)));
+		place.setBoundingBox(BoundingBox.select((Long) record.get(3)));
+		place.setName((String) record.get(4));
+		place.setUrl(Url.select((String) record.get(5)));
+		place.setFullName((String) record.get(6));
+		place.setCountry(Country.select((String) record.get(7)));
+		place.setStreetAddress((String) record.get(8));
+		place.setLocality((String) record.get(9));
+		place.setRegion((String) record.get(10));
+		place.setIso3((String) record.get(11));
+		place.setPostalCode((String) record.get(12));
+		place.setPhone((String) record.get(13));
+		place.setTwitter((String) record.get(14));
+		place.setAppId((String) record.get(15));
 		
 		return place;
 	}
@@ -78,7 +90,12 @@ public class PlaceDaoImpl extends PlaceDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Place place = (Place) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + MySqlUtil.escape(place.getId()));
+		return this.exists(place.getId());
+	}
+	
+	@Override
+	public boolean exists(String id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

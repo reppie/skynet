@@ -18,6 +18,8 @@ public abstract class Dao<T> {
 	public abstract void delete(Domain<T> domain);
 		
 	public abstract boolean exists(Domain<T> domain);
+	public abstract boolean exists(T id);
+	
 	public abstract int count();
 	
 }

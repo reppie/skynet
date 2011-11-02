@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -32,17 +31,13 @@ public class HashtagDaoImpl extends HashtagDao{
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(hashtag.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);		
+		List<Object> record = MySqlUtil.getInstance().select(query, params);		
 		
 		hashtag.setId(id);
-		try {
-			hashtag.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		hashtag.setText((String) record.get(1));
 
 		return hashtag;
 	}
@@ -62,7 +57,12 @@ public class HashtagDaoImpl extends HashtagDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Hashtag hashtag = (Hashtag) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + hashtag.getId());
+		return this.exists(hashtag.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

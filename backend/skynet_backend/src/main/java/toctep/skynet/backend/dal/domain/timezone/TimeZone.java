@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.domain.timezone;
 
+import toctep.skynet.backend.dal.dao.TimeZoneDao;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class TimeZone extends Domain<Long> implements ITimeZone{
@@ -25,6 +27,17 @@ public class TimeZone extends Domain<Long> implements ITimeZone{
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getTimeZoneDao();
+		dao = DaoFacadeImpl.getInstance().getTimeZoneDao();
 	}
+	
+	public static ITimeZone select(Long id) {
+		TimeZoneDao dao = DaoFacadeImpl.getInstance().getTimeZoneDao();
+		
+		if (dao.exists(id)) {
+			return (TimeZone) dao.select(id);
+		}
+		
+		return NullTimeZone.getInstance();
+	}
+	
 }

@@ -1,44 +1,61 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class TweetKeyword extends Domain<Long> {
 	
-	private Tweet tweet;
+	private ITweet tweet;
 	private String tweetKeywordValue;
-	private Keyword keyword;
+	private IKeyword keyword;
 	
-	public Tweet getTweet() {
+	public ITweet getTweet() {
 		return tweet;
 	}
-	public void setTweet(Tweet tweet) {
+	
+	public void setTweet(ITweet tweet) {
 		this.tweet = tweet;
 	}
 	
 	public String getTweetKeywordValue() {
 		return tweetKeywordValue;
 	}
+	
 	public void setTweetKeywordValue(String tweetKeywordValue) {
 		this.tweetKeywordValue = tweetKeywordValue;
 	}
 	
-	public Keyword getKeyword() {
+	public IKeyword getKeyword() {
 		return keyword;
 	}
-	public void setKeyword(Keyword keyword) {
+	
+	public void setKeyword(IKeyword keyword) {
 		this.keyword = keyword;
 	}
+	
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getTweetKeywordDao();
+		dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
 	}
 	
 	@Override
 	public void save() {
-		tweet.save();
-		keyword.save();
-		this.tweet.setId(tweet.getId());
-		this.keyword.setId(keyword.getId());
+		if (tweet instanceof Tweet) {
+			((Tweet) tweet).save();
+			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+		}
+		
+		if (keyword instanceof Keyword) {
+			((Keyword) keyword).save();
+			((Keyword) this.keyword).setId(((Keyword) keyword).getId());
+		}
+		
 		super.save();
-	}	
+	}
+	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }

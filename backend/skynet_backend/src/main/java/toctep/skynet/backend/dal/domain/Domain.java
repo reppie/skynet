@@ -1,19 +1,14 @@
 package toctep.skynet.backend.dal.domain;
 
 import toctep.skynet.backend.dal.dao.Dao;
-import toctep.skynet.backend.dal.dao.DaoFacade;
-import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 
 public abstract class Domain<T> implements IDomain<T> {
 	
 	private T id;
 	
-	private DaoFacade daoFacade;
 	protected Dao<T> dao;
 	
 	public Domain() {
-		daoFacade = new DaoFacadeImpl();
-		
 		setDao();
 	}
 	
@@ -35,10 +30,6 @@ public abstract class Domain<T> implements IDomain<T> {
 	
 	public void delete() {
 		dao.delete(this);
-	}
-	
-	public DaoFacade getDaoFacade() {
-		return daoFacade;
 	}
 	
 	public abstract void setDao();

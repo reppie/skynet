@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -32,17 +31,13 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(boundingBoxType.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBoxType.setId(id);
-		try {
-			boundingBoxType.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		boundingBoxType.setText((String) record.get(1));
 		
 		return boundingBoxType;
 	}
@@ -62,7 +57,12 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + boundingBoxType.getId());
+		return this.exists(boundingBoxType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

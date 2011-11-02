@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -33,18 +32,14 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(timeZone.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		timeZone.setId(id);
-		try {
-			timeZone.setUtcOffset(rs.getInt("utc_offset"));
-			timeZone.setTimeZone((rs.getString("time_zone")));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		timeZone.setUtcOffset((Integer) record.get(1));
+		timeZone.setTimeZone((String) record.get(2));
 		
 		return timeZone;
 	}
@@ -64,7 +59,12 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		TimeZone timeZone = (TimeZone) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + timeZone.getId());
+		return this.exists(timeZone.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 	
 	@Override

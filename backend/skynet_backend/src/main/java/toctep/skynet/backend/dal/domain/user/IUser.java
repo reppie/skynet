@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.user;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.IDomain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
@@ -26,7 +26,7 @@ public interface IUser extends IDomain<Long> {
 	String getName();
 	String getProfileSidebarBorderColor();
 	String getProfileBackgroundColor();
-	Date getCreatedAt();
+	Timestamp getCreatedAt();
 	boolean isDefaultProfileImage();
 	int getFollowersCount();
 	boolean isGeoEnabled();

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
@@ -33,7 +33,7 @@ public class UserTest extends DomainTest {
 	private String name;
 	private String profileSidebarBorderColor;
 	private String profileBackgroundColor;
-	private Date createdAt;
+	private Timestamp createdAt;
 	private boolean defaultProfileImage;
 	private int followersCount;
 	private boolean geoEnabled;
@@ -62,7 +62,7 @@ public class UserTest extends DomainTest {
 		id = 0L;
 		user.setId(id);
 		
-		place = new NullPlace();
+		place = NullPlace.getInstance();
 		user.setPlace(place);
 		
 		defaultProfile = false;
@@ -74,7 +74,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundTile = 0L;
 		user.setProfileBackgroundTile(profileBackgroundTile);
 		
-		language = new NullLanguage();
+		language = NullLanguage.getInstance();
 		user.setLanguage(language);
 		
 		profileLinkColor = "test";
@@ -110,7 +110,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundColor = "test";
 		user.setProfileBackgroundColor(profileBackgroundColor);
 	
-		createdAt = new Date(0);
+		createdAt = new Timestamp(0);
 		user.setCreatedAt(createdAt);
 		
 		defaultProfileImage = false;
@@ -122,19 +122,19 @@ public class UserTest extends DomainTest {
 		geoEnabled = false;
 		user.setGeoEnabled(geoEnabled);
 		
-		profileBackgroundImageUrl = new NullUrl();
+		profileBackgroundImageUrl = NullUrl.getInstance();
 		user.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
 		
-		profileBackgroundImageUrlHttps = new NullUrl();
+		profileBackgroundImageUrlHttps = NullUrl.getInstance();
 		user.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
 	
 		followRequestSent = false;
 		user.setFollowRequestSent(followRequestSent);
 		
-		url = new NullUrl();
+		url = NullUrl.getInstance();
 		user.setUrl(url);
 		
-		timeZone = new NullTimeZone();
+		timeZone = NullTimeZone.getInstance();
 		user.setTimeZone(timeZone);
 		
 		notifications = 0L;
@@ -152,10 +152,10 @@ public class UserTest extends DomainTest {
 		screenName = "test";
 		user.setScreenName(screenName);
 		
-		profileImageUrl = new NullUrl();
+		profileImageUrl = NullUrl.getInstance();
 		user.setProfileImageUrl(profileImageUrl);
 		
-		profileImageUrlHttps = new NullUrl();
+		profileImageUrlHttps = NullUrl.getInstance();
 		user.setProfileImageUrlHttps(profileImageUrlHttps);
 		
 		showAllInlineMedia = false;
@@ -222,7 +222,7 @@ public class UserTest extends DomainTest {
 		User postUser = (User) userDao.select(user.getId());
 		
 		assertEquals(postUser.getId(), user.getId());
-		assertEquals(postUser.getPlace().getId(), user.getPlace().getId());
+		assertTrue(postUser.getPlace().getId().equals(user.getPlace().getId()));
 		assertTrue(postUser.isDefaultProfile() == user.isDefaultProfile());
 		assertEquals(postUser.getStatusesCount(), user.getStatusesCount());
 		assertEquals(postUser.getProfileBackgroundTile(), user.getProfileBackgroundTile());
@@ -242,8 +242,8 @@ public class UserTest extends DomainTest {
 		assertTrue(postUser.isDefaultProfileImage() == user.isDefaultProfileImage());
 		assertEquals(postUser.getFollowersCount(), user.getFollowersCount());
 		assertTrue(postUser.isGeoEnabled() == user.isGeoEnabled());
-		assertEquals(postUser.getProfileBackgroundImageUrl(), user.getProfileBackgroundImageUrl());
-		assertEquals(postUser.getProfileBackgroundImageUrlHttps(), user.getProfileBackgroundImageUrlHttps());
+		assertTrue(postUser.getProfileBackgroundImageUrl().equals(user.getProfileBackgroundImageUrl()));
+		assertTrue(postUser.getProfileBackgroundImageUrlHttps().equals(user.getProfileBackgroundImageUrlHttps()));
 		assertTrue(postUser.isFollowRequestSent() == user.isFollowRequestSent());
 		assertTrue(postUser.getUrl().equals(user.getUrl()));
 		assertTrue(postUser.getTimeZone().equals(user.getTimeZone()));
@@ -252,8 +252,8 @@ public class UserTest extends DomainTest {
 		assertEquals(postUser.getFriendsCount(), user.getFriendsCount());
 		assertEquals(postUser.getProfileSideBarFillColor(), user.getProfileSideBarFillColor());
 		assertEquals(postUser.getScreenName(), user.getScreenName());
-		assertEquals(postUser.getProfileImageUrl(), user.getProfileImageUrl());
-		assertEquals(postUser.getProfileImageUrlHttps(), user.getProfileImageUrlHttps());
+		assertTrue(postUser.getProfileImageUrl().equals(user.getProfileImageUrl()));
+		assertTrue(postUser.getProfileImageUrlHttps().equals(user.getProfileImageUrlHttps()));
 		assertTrue(postUser.isShowAllInlineMedia() == user.isShowAllInlineMedia());
 		assertTrue(postUser.isTranslator() == user.isTranslator());
 		assertEquals(postUser.getListedCount(), user.getListedCount());

@@ -1,10 +1,15 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.language.Language;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserDaoImpl extends UserDao {
@@ -86,7 +91,45 @@ public class UserDaoImpl extends UserDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		user.setId(id);
-		user.setName((String) record.get(1));
+		user.setPlace(Place.select((String) record.get(2)));
+		user.setDefaultProfile((Boolean) record.get(3));
+		user.setStatusesCount((Integer) record.get(4));
+		user.setProfileBackgroundTile((Long) record.get(5));
+		user.setLanguage(Language.select((Long) record.get(6)));
+		user.setProfileLinkColor((String) record.get(7));
+		user.setFollowing((Integer) record.get(8));
+		user.setFavouritesCount((Integer) record.get(9));
+		user.setProtected((Boolean) record.get(10));
+				
+		user.setProfileTextColor((String) record.get(11));
+		user.setVerified((Boolean) record.get(12));
+		user.setContributorsEnabled((Boolean) record.get(13));
+		user.setDescription((String) record.get(14));
+		user.setName((String) record.get(15));
+		user.setProfileSidebarBorderColor((String) record.get(16));
+		user.setProfileBackgroundColor((String) record.get(17));
+		user.setCreatedAt((Timestamp) record.get(18));
+		user.setDefaultProfile((Boolean) record.get(19));
+		
+		user.setFollowersCount((Integer) record.get(20));
+		user.setProfileImageUrl(Url.select((String) record.get(21)));
+		user.setProfileImageUrlHttps(Url.select((String) record.get(22)));
+		user.setGeoEnabled((Boolean) record.get(23));
+		user.setProfileBackgroundImageUrl(Url.select((String) record.get(24)));
+		user.setProfileBackgroundImageUrlHttps(Url.select((String) record.get(25)));
+		
+		user.setFollowRequestSent((Boolean) record.get(26));
+		user.setUrl(Url.select((String) record.get(27)));
+		user.setTimeZone(TimeZone.select((Long) record.get(28)));
+		user.setNotifications((Long) record.get(29));
+		user.setProfileUseBackgroundImage((Boolean) record.get(30));
+		user.setFriendsCount((Integer) record.get(31));
+		user.setProfileSideBarFillColor((String) record.get(32));
+		user.setScreenName((String) record.get(33));
+		user.setShowAllInlineMedia((Boolean) record.get(34));
+		
+		user.setTranslator((Boolean) record.get(35));
+		user.setListedCount((Integer) record.get(36));
 		
 		return user;
 	}
@@ -106,8 +149,13 @@ public class UserDaoImpl extends UserDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		User user = (User) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + user.getId());
+		return this.exists(user.getId());
 	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+	}	
 
 	@Override
 	public int count() {

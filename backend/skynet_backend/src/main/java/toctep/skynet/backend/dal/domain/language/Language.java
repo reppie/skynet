@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.domain.language;
 
+import toctep.skynet.backend.dal.dao.LanguageDao;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class Language extends Domain<Long> implements ILanguage {
@@ -16,7 +18,18 @@ public class Language extends Domain<Long> implements ILanguage {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getLanguageDao();
+		dao = DaoFacadeImpl.getInstance().getLanguageDao();
 	}
+	
+	public static ILanguage select(Long id) {
+		LanguageDao dao = DaoFacadeImpl.getInstance().getLanguageDao();
+		
+		if (dao.exists(id)) {
+			return (Language) dao.select(id);
+		}
+		
+		return NullLanguage.getInstance();
+	}
+	
 }
 

@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -32,17 +31,13 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(geoType.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		geoType.setId(id);
-		try {
-			geoType.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		geoType.setText((String) record.get(1));
 		
 		return geoType;
 	}
@@ -62,7 +57,12 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		GeoType geoType = (GeoType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + geoType.getId());
+		return this.exists(geoType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -32,17 +31,13 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(placeType.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		placeType.setId(id);
-		try {
-			placeType.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		placeType.setText((String) record.get(1));
 		
 		return placeType;
 	}
@@ -62,7 +57,12 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		PlaceType placeType = (PlaceType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + placeType.getId());
+		return this.exists(placeType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

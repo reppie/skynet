@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -34,17 +35,13 @@ public class KeywordDaoImpl extends KeywordDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(keyword.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		keyword.setId(id);
-		try {
-			keyword.setKeyword(rs.getString("keyword"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		keyword.setKeyword((String) record.get(2));
 		
 		return keyword;
 	}
@@ -85,33 +82,13 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		boolean exists = false;
-		
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		try {
-			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE keyword = '" + ((Keyword) domain).getKeyword() + "';");
-			int counter = 0;
-			while (rs.next()) {
-				counter++;
-			}
-			if (counter > 0) {
-				exists = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return exists;
+		Keyword keyword = (Keyword) domain;
+		return this.exists(keyword.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "keyword=" + id);
 	}
 
 	@Override

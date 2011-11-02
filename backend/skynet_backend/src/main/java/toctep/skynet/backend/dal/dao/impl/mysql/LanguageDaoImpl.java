@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.LanguageDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -32,17 +31,13 @@ public class LanguageDaoImpl extends LanguageDao{
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(language.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		language.setId(id);
-		try {
-			language.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		language.setText((String) record.get(1));
 		
 		return language;
 	}
@@ -62,7 +57,12 @@ public class LanguageDaoImpl extends LanguageDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Language language = (Language) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + language.getId());
+		return this.exists(language.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -32,17 +31,13 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(sourceType.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		sourceType.setId(id);	
-		try {
-			sourceType.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		sourceType.setText((String) record.get(1));
 		
 		return sourceType;
 	}
@@ -62,7 +57,12 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		SourceType sourceType = (SourceType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + sourceType.getId());
+		return this.exists(sourceType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.user.User;
 
@@ -26,6 +27,12 @@ public class TweetContributor extends Domain {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getTweetContributorDao();
+		dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 	}
+	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }

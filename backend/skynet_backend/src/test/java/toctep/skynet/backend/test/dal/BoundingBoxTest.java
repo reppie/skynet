@@ -17,7 +17,7 @@ public class BoundingBoxTest extends DomainTest{
 		
 		boundingBox = new BoundingBox();
 		
-		boundingBoxType = new NullBoundingBoxType();
+		boundingBoxType = NullBoundingBoxType.getInstance();
 		boundingBox.setType(boundingBoxType);
 		
 		coordinates = "58.17, 68.20";
@@ -27,7 +27,7 @@ public class BoundingBoxTest extends DomainTest{
 	@Override
 	public void testCreate() {
 		assertNotNull(boundingBox);
-		assertTrue(boundingBox.getType() == boundingBoxType);
+		assertTrue(boundingBox.getType().equals(boundingBoxType));
 		assertTrue(coordinates.equals(boundingBox.getCoordinates()));
 	}
 
