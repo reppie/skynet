@@ -37,7 +37,7 @@ public class UserDaoImpl extends UserDao {
 			new Param(user.getPlace().getId(), Types.VARCHAR),
 			new Param(user.isDefaultProfile(), Types.BOOLEAN),
 			new Param(user.getStatusesCount(), Types.INTEGER),
-			new Param(user.getProfileBackgroundTile(), Types.BIGINT),
+			new Param(user.isProfileBackgroundTiled(), Types.BOOLEAN),
 			new Param(user.getLanguage().getId(), Types.BIGINT),
 			new Param(user.getProfileLinkColor(), Types.VARCHAR),
 			new Param(user.getFollowing(), Types.INTEGER),
@@ -91,45 +91,45 @@ public class UserDaoImpl extends UserDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		user.setId(id);
-		user.setPlace(Place.select((String) record.get(2)));
-		user.setDefaultProfile((Boolean) record.get(3));
-		user.setStatusesCount((Integer) record.get(4));
-		user.setProfileBackgroundTile((Long) record.get(5));
-		user.setLanguage(Language.select((Long) record.get(6)));
-		user.setProfileLinkColor((String) record.get(7));
-		user.setFollowing((Integer) record.get(8));
-		user.setFavouritesCount((Integer) record.get(9));
-		user.setProtected((Boolean) record.get(10));
+		user.setPlace(Place.select((String) record.get(1)));
+		user.setDefaultProfile((Boolean) record.get(2));
+		user.setStatusesCount((Integer) record.get(3));
+		user.setProfileBackgroundTiled((Boolean) record.get(4));
+		user.setLanguage(Language.select((Long) record.get(5)));
+		user.setProfileLinkColor((String) record.get(6));
+		user.setFollowing((Integer) record.get(7));
+		user.setFavouritesCount((Integer) record.get(8));
+		user.setProtected((Boolean) record.get(9));
 				
-		user.setProfileTextColor((String) record.get(11));
-		user.setVerified((Boolean) record.get(12));
-		user.setContributorsEnabled((Boolean) record.get(13));
-		user.setDescription((String) record.get(14));
-		user.setName((String) record.get(15));
-		user.setProfileSidebarBorderColor((String) record.get(16));
-		user.setProfileBackgroundColor((String) record.get(17));
-		user.setCreatedAt((Timestamp) record.get(18));
-		user.setDefaultProfile((Boolean) record.get(19));
+		user.setProfileTextColor((String) record.get(10));
+		user.setVerified((Boolean) record.get(11));
+		user.setContributorsEnabled((Boolean) record.get(12));
+		user.setDescription((String) record.get(13));
+		user.setName((String) record.get(14));
+		user.setProfileSidebarBorderColor((String) record.get(15));
+		user.setProfileBackgroundColor((String) record.get(16));
+		user.setCreatedAt((Timestamp) record.get(17));
+		user.setDefaultProfile((Boolean) record.get(18));
 		
-		user.setFollowersCount((Integer) record.get(20));
-		user.setProfileImageUrl(Url.select((String) record.get(21)));
-		user.setProfileImageUrlHttps(Url.select((String) record.get(22)));
-		user.setGeoEnabled((Boolean) record.get(23));
-		user.setProfileBackgroundImageUrl(Url.select((String) record.get(24)));
-		user.setProfileBackgroundImageUrlHttps(Url.select((String) record.get(25)));
+		user.setFollowersCount((Integer) record.get(19));
+		user.setProfileImageUrl(Url.select((String) record.get(20)));
+		user.setProfileImageUrlHttps(Url.select((String) record.get(21)));
+		user.setGeoEnabled((Boolean) record.get(22));
+		user.setProfileBackgroundImageUrl(Url.select((String) record.get(23)));
+		user.setProfileBackgroundImageUrlHttps(Url.select((String) record.get(24)));
 		
-		user.setFollowRequestSent((Boolean) record.get(26));
-		user.setUrl(Url.select((String) record.get(27)));
-		user.setTimeZone(TimeZone.select((Long) record.get(28)));
-		user.setNotifications((Long) record.get(29));
-		user.setProfileUseBackgroundImage((Boolean) record.get(30));
-		user.setFriendsCount((Integer) record.get(31));
-		user.setProfileSideBarFillColor((String) record.get(32));
-		user.setScreenName((String) record.get(33));
-		user.setShowAllInlineMedia((Boolean) record.get(34));
+		user.setFollowRequestSent((Boolean) record.get(25));
+		user.setUrl(Url.select((String) record.get(26)));
+		user.setTimeZone(TimeZone.select((Long) record.get(27)));
+		user.setNotifications((Integer) record.get(28));
+		user.setProfileUseBackgroundImage((Boolean) record.get(29));
+		user.setFriendsCount((Integer) record.get(30));
+		user.setProfileSideBarFillColor((String) record.get(31));
+		user.setScreenName((String) record.get(32));
+		user.setShowAllInlineMedia((Boolean) record.get(33));
 		
-		user.setTranslator((Boolean) record.get(35));
-		user.setListedCount((Integer) record.get(36));
+		user.setTranslator((Boolean) record.get(34));
+		user.setListedCount((Integer) record.get(35));
 		
 		return user;
 	}

@@ -15,11 +15,16 @@ public class TweetUrlTest extends DomainTest {
 	public void setUp() {
 		super.setUp();
 		
-		tweet = new Tweet();
-		tweetUrl.setTweet(tweet);
+		tweetUrl = new TweetUrl();
 		
+		tweet = new Tweet();
+		tweet.setId(new Long(0));
+				
 		url = new Url();
+		url.setId("Test");
+		
 		tweetUrl.setUrl(url);
+		tweetUrl.setTweet(tweet);
 	}
 	
 	@Override

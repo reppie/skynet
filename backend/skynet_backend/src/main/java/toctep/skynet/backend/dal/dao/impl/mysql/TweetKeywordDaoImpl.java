@@ -35,7 +35,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(tweetKeyword.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);

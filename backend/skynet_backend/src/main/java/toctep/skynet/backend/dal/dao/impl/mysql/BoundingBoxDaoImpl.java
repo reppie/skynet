@@ -39,7 +39,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBox.setId(id);
-		boundingBox.setType(BoundingBoxType.select((Long) record.get(2)));
+		boundingBox.setType(BoundingBoxType.select((Long) record.get(1)));
 		boundingBox.setCoordinates((String) record.get(2));
 		
 		return boundingBox;

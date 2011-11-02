@@ -171,7 +171,7 @@ public class TweetParser {
         user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
         user.setStatusesCount(userStatus.getStatusesCount());    
-        user.setProfileBackgroundTile(0); //Twitter4j has no support for this?
+        user.setProfileBackgroundTiled(userStatus.isProfileBackgroundTiled());
         user.setProfileLinkColor(userStatus.getProfileLinkColor());
         user.setFollowing(userStatus.getFollowersCount());
         user.setFavouritesCount(userStatus.getFavouritesCount());

@@ -13,7 +13,7 @@ public interface IUser extends IDomain<Long> {
 	IPlace getPlace();
 	boolean isDefaultProfile();
 	int getStatusesCount();
-	long getProfileBackgroundTile();
+	boolean isProfileBackgroundTiled();
 	ILanguage getLanguage();
 	String getProfileLinkColor();
 	int getFollowing();
@@ -35,7 +35,7 @@ public interface IUser extends IDomain<Long> {
 	boolean isFollowRequestSent();
 	IUrl getUrl();
 	ITimeZone getTimeZone();
-	long getNotifications();
+	int getNotifications();
 	boolean isProfileUseBackgroundImage();
 	int getFriendsCount();
 	String getProfileSideBarFillColor();

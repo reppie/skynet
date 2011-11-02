@@ -25,10 +25,10 @@ public class UrlDaoImpl extends UrlDao {
 	public Url select(String id) {
 		Url url = new Url();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + tableName + " WHERE text=?";
 		
 		Param[] params = new Param[] {
-			new Param(id, Types.BIGINT)
+			new Param(id, Types.VARCHAR)
 		};
 		
 		MySqlUtil.getInstance().select(query, params);
@@ -58,7 +58,7 @@ public class UrlDaoImpl extends UrlDao {
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "text=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "text=" + MySqlUtil.escape(id));
 	}	
 
 	@Override
