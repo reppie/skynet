@@ -76,7 +76,7 @@ public class NullUser implements IUser {
 	}
 
 	@Override
-	public long getNotifications() {
+	public int getNotifications() {
 		return 0;
 	}
 
@@ -101,8 +101,8 @@ public class NullUser implements IUser {
 	}
 
 	@Override
-	public long getProfileBackgroundTile() {
-		return 0;
+	public boolean isProfileBackgroundTiled() {
+		return false;
 	}
 
 	@Override
