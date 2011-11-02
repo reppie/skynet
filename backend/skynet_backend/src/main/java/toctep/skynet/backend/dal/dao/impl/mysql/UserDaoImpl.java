@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -81,19 +80,13 @@ public class UserDaoImpl extends UserDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(user.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		user.setId(id);
-		try {
-			user.setName(rs.getString("name"));
-			
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		user.setName((String) record.get(1));
 		
 		return user;
 	}
