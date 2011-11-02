@@ -56,8 +56,11 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public void delete(Domain<Integer> domain) {
-		TweetKeyword tweetkeyword = (TweetKeyword) domain;	
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetkeyword.getId());
+		TweetKeyword tweetkeyword = (TweetKeyword) domain;
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(tweetkeyword.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

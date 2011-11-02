@@ -54,7 +54,10 @@ public class GeoDaoImpl extends GeoDao {
 	@Override
 	public void delete(Domain<Integer> domain) {
 		Geo geo = (Geo) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geo.getId());
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(geo.getId(), Types.INTEGER) }
+		);
 	}
 	
 	@Override

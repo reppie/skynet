@@ -11,8 +11,7 @@ import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-
-public class NullUser implements IUser {
+public final class NullUser implements IUser {
 
 	private static NullUser instance;
 	

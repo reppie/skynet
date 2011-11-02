@@ -55,7 +55,10 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 	@Override
 	public void delete(Domain<Integer> domain) {
 		TweetUrl tweetUrl = (TweetUrl) domain;	
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetUrl.getId());
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(tweetUrl.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

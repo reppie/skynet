@@ -9,7 +9,7 @@ import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 
-public class NullTweet implements ITweet {
+public final class NullTweet implements ITweet {
 
 	private static NullTweet instance;
 	

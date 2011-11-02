@@ -143,7 +143,10 @@ public class UserDaoImpl extends UserDao {
 	@Override
 	public void delete(Domain<Long> domain) {
 		User user = (User) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + user.getId());	
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(user.getId(), Types.BIGINT) }
+		);
 	}
 
 	@Override

@@ -51,7 +51,10 @@ public class HashtagDaoImpl extends HashtagDao{
 	@Override
 	public void delete(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + hashtag.getId());
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(hashtag.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

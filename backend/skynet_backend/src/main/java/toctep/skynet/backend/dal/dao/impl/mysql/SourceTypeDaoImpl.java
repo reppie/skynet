@@ -51,7 +51,10 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	@Override
 	public void delete(Domain<Integer> domain) {
 		SourceType sourceType = (SourceType) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + sourceType.getId());		
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(sourceType.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

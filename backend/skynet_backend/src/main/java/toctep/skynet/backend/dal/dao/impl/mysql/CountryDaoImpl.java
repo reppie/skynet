@@ -50,7 +50,10 @@ public class CountryDaoImpl extends CountryDao {
 	@Override
 	public void delete(Domain<String> domain) {
 		Country country = (Country) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE code = " + MySqlUtil.escape(country.getId()));
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE code=?",
+			new Param[] { new Param(country.getId(), Types.VARCHAR) }
+		);
 	}
 
 	@Override

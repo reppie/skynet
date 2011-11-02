@@ -51,7 +51,10 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 	@Override
 	public void delete(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geoType.getId());
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(geoType.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

@@ -27,7 +27,7 @@ import twitter4j.Status;
 import twitter4j.URLEntity;
 import twitter4j.UserMentionEntity;
 
-public class TweetParser {
+public final class TweetParser {
 	
 	private BoundingBoxType boundingBoxType;
 	private BoundingBox boundingBox;

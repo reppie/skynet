@@ -37,34 +37,10 @@ import toctep.skynet.backend.dal.dao.UserDao;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class MySqlUtil {
+public final class MySqlUtil {
 
 	private static MySqlUtil instance;
-	
-	private Connection conn;
-	
-	private MySqlUtil(String properties) {
-		try {
-		    Wini ini = new Wini(new File(properties));
-		    
-	        String driver = ini.get("jdbc", "driver", String.class);
-	        String host = ini.get("jdbc", "host", String.class);
-	        String name = ini.get("jdbc", "name", String.class);
-	        String user = ini.get("jdbc", "user", String.class);
-	        String pass = ini.get("jdbc", "pass", String.class);
-	        
-	        String url = "jdbc:" + driver + "://" + host + "/" + name;
-	        
-	        conn = (Connection) DriverManager.getConnection(url, user, pass);
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		} catch (InvalidFileFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
+		
 	public static MySqlUtil getInstance(String properties) {
 		if (instance == null) {
 			instance = new MySqlUtil(properties);
@@ -76,23 +52,74 @@ public class MySqlUtil {
 		return MySqlUtil.getInstance(Main.DB_PROPERTIES);
 	}
 	
+	private String properties;
+	
+	private Wini ini;
+	
+	private String driver;
+	private String host;
+	private String name;
+	private String user;
+	private String pass;
+	
+	private Connection conn;
+	
+	private MySqlUtil(String properties) {
+		this.properties = properties;
+		
+		try {
+			initialize();
+			connect();
+		} catch (InvalidFileFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void initialize() throws InvalidFileFormatException, IOException {
+		ini = new Wini(new File(properties));
+		
+		driver = getIniValue("driver");
+        host = getIniValue("host");
+        name = getIniValue("name");
+        user = getIniValue("user");
+        pass = getIniValue("pass");
+	}
+	
+	private String getIniValue(String optionName) {
+		return ini.get("jdbc", optionName, String.class);
+	}
+	
+	private void connect() throws SQLException {
+		String url = "jdbc:" + driver + "://" + host + "/" + name;
+		conn = (Connection) DriverManager.getConnection(url, user, pass);
+	}
+	
 	public Connection getConnection() {
 		return conn;
 	}
 	
-	public int query(String query) {
+	public int query(String query, Param[] params) {
 		int result = 0;
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		
 		try {
-			stmt = (Statement) conn.createStatement();
-			result = stmt.executeUpdate(query);
+			pstmt = conn.prepareStatement(query);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -167,12 +194,12 @@ public class MySqlUtil {
 		return record;
 	}
 	
-	public int update(String query) {
-		return this.query(query);
+	public int update(String query, Param[] params) {
+		return this.query(query, params);
 	}
 	
-	public int delete(String query) {
-		return this.query(query);
+	public int delete(String query, Param[] params) {
+		return this.query(query, params);
 	}
 	
 	public boolean exists(String tableName, String where) {
@@ -232,8 +259,9 @@ public class MySqlUtil {
 	}
 	
 	public void truncateDatabase() {
+		Statement stmt = null;
 		try {
-			Statement stmt = (Statement) conn.createStatement();
+			stmt = (Statement) conn.createStatement();
 			stmt.executeQuery("set foreign_key_checks=0");
 			stmt.executeQuery("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);
 			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
@@ -258,6 +286,12 @@ public class MySqlUtil {
 			stmt.executeQuery("set foreign_key_checks=1");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

@@ -55,7 +55,10 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	@Override
 	public void delete(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;	
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetHashtag.getId());
+		MySqlUtil.getInstance().delete(
+				"DELETE FROM " + tableName + " WHERE id=?",
+				new Param[] { new Param(tweetHashtag.getId(), Types.INTEGER) }
+			);
 	}
 
 	@Override

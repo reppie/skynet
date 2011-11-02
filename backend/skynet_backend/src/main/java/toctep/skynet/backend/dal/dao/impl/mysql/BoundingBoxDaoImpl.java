@@ -53,8 +53,11 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	
 	@Override
 	public void delete(Domain<Integer> domain) {
-		BoundingBox boundingBox = (BoundingBox) domain;	
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBox.getId());
+		BoundingBox boundingBox = (BoundingBox) domain;
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(boundingBox.getId(), Types.INTEGER) }
+		);
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-public class NullKeyword implements IKeyword {
+public final class NullKeyword implements IKeyword {
 
 	private static NullKeyword instance;
 	

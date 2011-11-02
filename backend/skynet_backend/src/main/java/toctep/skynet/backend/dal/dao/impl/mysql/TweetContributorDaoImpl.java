@@ -54,8 +54,11 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 
 	@Override
 	public void delete(Domain<Integer> domain) {
-		TweetContributor tweetContributor = (TweetContributor) domain;	
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetContributor.getId());
+		TweetContributor tweetContributor = (TweetContributor) domain;
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(tweetContributor.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override
