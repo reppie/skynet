@@ -31,7 +31,7 @@ public class LanguageDaoImpl extends LanguageDao{
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(language.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
@@ -57,7 +57,12 @@ public class LanguageDaoImpl extends LanguageDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Language language = (Language) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + language.getId());
+		return this.exists(language.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.country;
 
+import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
@@ -19,6 +20,16 @@ public class Country extends Domain<String> implements ICountry {
 	@Override
 	public void setDao() {
 		dao = DaoFacadeImpl.getInstance().getCountryDao();		
+	}
+	
+	public static ICountry select(String id) {
+		CountryDao dao = DaoFacadeImpl.getInstance().getCountryDao();
+		
+		if (dao.exists(id)) {
+			return (Country) dao.select(id);
+		}
+		
+		return NullCountry.getInstance();
 	}
 	
 }

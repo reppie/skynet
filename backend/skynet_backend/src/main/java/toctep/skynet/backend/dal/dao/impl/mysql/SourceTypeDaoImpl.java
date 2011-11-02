@@ -31,7 +31,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(sourceType.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
@@ -57,7 +57,12 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		SourceType sourceType = (SourceType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + sourceType.getId());
+		return this.exists(sourceType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

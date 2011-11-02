@@ -1,17 +1,16 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.geo.NullGeo;
-import toctep.skynet.backend.dal.domain.place.NullPlace;
-import toctep.skynet.backend.dal.domain.tweet.NullSourceType;
-import toctep.skynet.backend.dal.domain.tweet.NullTweet;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.user.NullUser;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetDaoImpl extends TweetDao {
 	
@@ -51,23 +50,23 @@ public class TweetDaoImpl extends TweetDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(tweet.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		tweet.setId(id);
 		tweet.setText((String) record.get(1));
-		tweet.setGeo(new NullGeo()); //TODO
+		tweet.setGeo(Geo.select((Long) record.get(2)));
 		tweet.setTruncated((Boolean) record.get(3));
-		tweet.setSourceType(new NullSourceType()); //TODO
+		tweet.setSourceType(SourceType.select((Long) record.get(4)));
 		tweet.setFavorited((Boolean) record.get(5));
-		tweet.setInReplyToTweetTwitter(new NullTweet()); //TODO
-		tweet.setInReplyToUserTwitter(new NullUser()); //TODO
+		tweet.setInReplyToTweetTwitter(Tweet.select((Long) record.get(6)));
+		tweet.setInReplyToUserTwitter(User.select((Long) record.get(7)));
 		tweet.setRetweetCount((Integer) record.get(8));
-		tweet.setCreatedAt((Date) record.get(9));
-		tweet.setPlace(new NullPlace()); //TODO
-		tweet.setUser(new NullUser()); //TODO
+		tweet.setCreatedAt((Timestamp) record.get(9));
+		tweet.setPlace(Place.select((String) record.get(10)));
+		tweet.setUser(User.select((Long) record.get(11)));
 		tweet.setCoordinates((String) record.get(12));
 		
 		return tweet;
@@ -87,7 +86,12 @@ public class TweetDaoImpl extends TweetDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + tweet.getId());
+		return this.exists(tweet.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

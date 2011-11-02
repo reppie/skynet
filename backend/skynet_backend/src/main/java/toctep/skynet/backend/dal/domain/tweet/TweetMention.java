@@ -29,4 +29,10 @@ public class TweetMention extends Domain {
 	public void setDao() {
 		dao = DaoFacadeImpl.getInstance().getTweetMentionDao();
 	}
+	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }

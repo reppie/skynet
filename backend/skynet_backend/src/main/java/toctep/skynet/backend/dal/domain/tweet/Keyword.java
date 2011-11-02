@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
@@ -29,4 +30,15 @@ public class Keyword extends Domain<Long> implements IKeyword {
 	public void setDao() {
 		dao = DaoFacadeImpl.getInstance().getKeywordDao();
 	}
+	
+	public static IKeyword select(Long id) {
+		KeywordDao dao = DaoFacadeImpl.getInstance().getKeywordDao();
+		
+		if (dao.exists(id)) {
+			return (Keyword) dao.select(id);
+		}
+		
+		return NullKeyword.getInstance();
+	}
+	
 }

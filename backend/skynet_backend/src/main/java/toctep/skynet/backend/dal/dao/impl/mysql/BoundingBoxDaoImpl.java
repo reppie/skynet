@@ -6,7 +6,7 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 
 public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	
@@ -33,13 +33,13 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(boundingBox.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBox.setId(id);
-		boundingBox.setType(new NullBoundingBoxType()); //TODO
+		boundingBox.setType(BoundingBoxType.select((Long) record.get(2)));
 		boundingBox.setCoordinates((String) record.get(2));
 		
 		return boundingBox;

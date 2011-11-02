@@ -30,7 +30,7 @@ public class CountryDaoImpl extends CountryDao{
 		String query = "SELECT * FROM " + tableName + " WHERE code=?";
 		
 		Param[] params = new Param[] {
-			new Param(country.getId(), Types.VARCHAR)
+			new Param(id, Types.VARCHAR)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
@@ -56,7 +56,12 @@ public class CountryDaoImpl extends CountryDao{
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Country country = (Country) domain;
-		return MySqlUtil.getInstance().exists(tableName, "code = " + MySqlUtil.escape(country.getId()));
+		return this.exists(country.getId());
+	}
+	
+	@Override
+	public boolean exists(String id) {
+		return MySqlUtil.getInstance().exists(tableName, "code=" + id);
 	}
 
 	@Override

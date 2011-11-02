@@ -29,4 +29,10 @@ public class TweetHashtag extends Domain {
 	public void setDao() {
 		dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 	}
+	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }

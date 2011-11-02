@@ -6,7 +6,7 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.geo.NullGeoType;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
 
 public class GeoDaoImpl extends GeoDao {
 	
@@ -33,14 +33,14 @@ public class GeoDaoImpl extends GeoDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(geo.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		geo.setId(id);
-		geo.setType(new NullGeoType()); //TODO
-		geo.setCoordinates((String) record.get(2));
+		geo.setType(GeoType.select((Long) record.get(2)));
+		geo.setCoordinates((String) record.get(3));
 		
 		return geo;
 	}
@@ -60,8 +60,14 @@ public class GeoDaoImpl extends GeoDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Geo geo = (Geo) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + geo.getId());
+		return this.exists(geo.getId());
 	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+	}
+	
 	@Override
 	public int count() {
 		return MySqlUtil.getInstance().count(tableName);

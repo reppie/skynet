@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.IDomain;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
@@ -18,7 +18,7 @@ public interface ITweet extends IDomain<Long> {
 	ITweet getInReplyToTweetTwitter();
 	IUser getInReplyToUserTwitter();
 	long getRetweetCount();
-	Date getCreatedAt();
+	Timestamp getCreatedAt();
 	IPlace getPlace();
 	IUser getUser();
 	String getCoordinates();

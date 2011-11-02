@@ -1,7 +1,8 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
+import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
@@ -17,17 +18,17 @@ import toctep.skynet.backend.dal.domain.user.User;
 public class Tweet extends Domain<Long> implements ITweet {
 
 	private String text 					= "";
-	private IGeo geo 						= new NullGeo();
+	private IGeo geo 						= NullGeo.getInstance();
 	private boolean truncated 				= false;
 	private long twitterId					= 0L;
-	private ISourceType sourceType 			= new NullSourceType();
+	private ISourceType sourceType 			= NullSourceType.getInstance();
 	private boolean favorited				= false;
-	private ITweet inReplyToTweetTwitter 	= new NullTweet();
-	private IUser inReplyToUserTwitter 		= new NullUser();
+	private ITweet inReplyToTweetTwitter 	= NullTweet.getInstance();
+	private IUser inReplyToUserTwitter 		= NullUser.getInstance();
 	private long retweetCount				= 0L;
-	private Date createdAt					= new Date(0);
-	private IPlace place 					= new NullPlace();
-	private IUser user 						= new NullUser();
+	private Timestamp createdAt				= new Timestamp(0);
+	private IPlace place 					= NullPlace.getInstance();
+	private IUser user 						= NullUser.getInstance();
 	private String coordinates				= "";
 	
 	@Override
@@ -112,11 +113,11 @@ public class Tweet extends Domain<Long> implements ITweet {
 	}
 
 	@Override
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -186,5 +187,16 @@ public class Tweet extends Domain<Long> implements ITweet {
 		}
 		
 		super.save();
-	}	
+	}
+	
+	public static ITweet select(Long id) {
+		TweetDao dao = DaoFacadeImpl.getInstance().getTweetDao();
+		
+		if (dao.exists(id)) {
+			return (Tweet) dao.select(id);
+		}
+		
+		return NullTweet.getInstance();
+	}
+	
 }

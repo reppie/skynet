@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.place;
 
+import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
@@ -14,11 +15,11 @@ import toctep.skynet.backend.dal.domain.url.Url;
 
 public class Place extends Domain<String> implements IPlace{
 
-	private IPlaceType type 			= new NullPlaceType();
-	private IBoundingBox boundingBox 	= new NullBoundingBox();
+	private IPlaceType type 			= NullPlaceType.getInstance();
+	private IBoundingBox boundingBox 	= NullBoundingBox.getInstance();
 	private String name					= "";
 	private String fullName				= "";
-	private ICountry country 			= new NullCountry();
+	private ICountry country 			= NullCountry.getInstance();
 	private String streetAddress		= "";
 	private String locality				= "";
 	private String region				= "";
@@ -26,7 +27,7 @@ public class Place extends Domain<String> implements IPlace{
 	private String postalCode			= "";
 	private String phone				= "";
 	private String twitter				= "";
-	private IUrl url 					= new NullUrl();
+	private IUrl url 					= NullUrl.getInstance();
 	private String appId				= "";
 
 	public IPlaceType getType() {
@@ -169,5 +170,17 @@ public class Place extends Domain<String> implements IPlace{
 		}
 		
 		super.save();
-	}		
+	}
+	
+	
+	public static IPlace select(String id) {
+		PlaceDao dao = DaoFacadeImpl.getInstance().getPlaceDao();
+		
+		if (dao.exists(id)) {
+			return (Place) dao.select(id);
+		}
+		
+		return NullPlace.getInstance();
+	}
+	
 }

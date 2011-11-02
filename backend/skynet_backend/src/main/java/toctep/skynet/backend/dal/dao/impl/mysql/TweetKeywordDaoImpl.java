@@ -41,9 +41,9 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		tweetKeyword.setId(id);
-		tweetKeyword.setTweet(new NullTweet()); //TODO
+		tweetKeyword.setTweet(NullTweet.getInstance()); //TODO
 		tweetKeyword.setTweetKeywordValue((String) record.get(2));
-		tweetKeyword.setKeyword(new NullKeyword()); //TODO
+		tweetKeyword.setKeyword(NullKeyword.getInstance()); //TODO
 		
 		return tweetKeyword;
 	}
@@ -62,6 +62,13 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

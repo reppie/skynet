@@ -31,7 +31,7 @@ public class HashtagDaoImpl extends HashtagDao{
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(hashtag.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);		
@@ -57,7 +57,12 @@ public class HashtagDaoImpl extends HashtagDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Hashtag hashtag = (Hashtag) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + hashtag.getId());
+		return this.exists(hashtag.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

@@ -39,10 +39,10 @@ public class PlaceTest extends DomainTest{
 		id = "0E";
 		place.setId(id);
 		
-		placeType = new NullPlaceType();
+		placeType = NullPlaceType.getInstance();
 		place.setType(placeType);
 		
-		boundingBox = new NullBoundingBox();
+		boundingBox = NullBoundingBox.getInstance();
 		place.setBoundingBox(boundingBox);
 		
 		name = "TestName";
@@ -51,7 +51,7 @@ public class PlaceTest extends DomainTest{
 		fullName = "TestFullName";
 		place.setFullName(fullName);
 		
-		country = new NullCountry();
+		country = NullCountry.getInstance();
 		place.setCountry(country);
 		
 		streetAddress = "Teststreet";
@@ -75,7 +75,7 @@ public class PlaceTest extends DomainTest{
 		twitter = "TestTwitter";
 		place.setTwitter(twitter);
 		
-		url = new NullUrl();
+		url = NullUrl.getInstance();
 		place.setUrl(url);
 		
 		appId = "TestAppId";
@@ -86,11 +86,11 @@ public class PlaceTest extends DomainTest{
 	public void testCreate() { 
 		assertNotNull(place);
 		assertTrue(id.equals(place.getId()));
-		assertTrue(place.getType() == placeType);
-		assertTrue(place.getBoundingBox() == boundingBox);
+		assertTrue(place.getType().equals(placeType));
+		assertTrue(place.getBoundingBox().equals(boundingBox));
 		assertTrue(name.equals(place.getName()));
 		assertTrue(fullName.equals(place.getFullName()));
-		assertTrue(place.getCountry() == country);
+		assertTrue(place.getCountry().equals(country));
 		assertTrue(streetAddress.equals(place.getStreetAddress()));
 		assertTrue(locality.equals(place.getLocality()));
 		assertTrue(region.equals(place.getRegion()));

@@ -32,7 +32,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(timeZone.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
@@ -59,7 +59,12 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		TimeZone timeZone = (TimeZone) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + timeZone.getId());
+		return this.exists(timeZone.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 	
 	@Override
