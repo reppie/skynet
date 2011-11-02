@@ -4,7 +4,6 @@ import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.url.IUrl;
-import toctep.skynet.backend.dal.domain.url.Url;
 
 public class TweetUrl extends Domain<Integer> {
 	
@@ -15,7 +14,7 @@ public class TweetUrl extends Domain<Integer> {
 		return tweet;
 	}
 
-	public void setTweet(Tweet tweet) {
+	public void setTweet(ITweet tweet) {
 		this.tweet = tweet;
 	}
 
@@ -23,7 +22,7 @@ public class TweetUrl extends Domain<Integer> {
 		return url;
 	}
 
-	public void setUrl(Url url) {
+	public void setUrl(IUrl url) {
 		this.url = url;
 	}
 
