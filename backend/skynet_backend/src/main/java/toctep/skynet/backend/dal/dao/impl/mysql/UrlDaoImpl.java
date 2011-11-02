@@ -58,7 +58,7 @@ public class UrlDaoImpl extends UrlDao {
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "text=" + id);
 	}	
 
 	@Override

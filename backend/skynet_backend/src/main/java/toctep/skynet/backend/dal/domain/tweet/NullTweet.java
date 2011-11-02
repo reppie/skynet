@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
@@ -11,6 +11,17 @@ import toctep.skynet.backend.dal.domain.user.NullUser;
 
 public class NullTweet implements ITweet {
 
+	private static NullTweet instance;
+	
+	public static NullTweet getInstance() {
+		if (instance == null) {
+			instance = new NullTweet();
+		}
+		return instance;
+	}
+	
+	private NullTweet() { }
+	
 	@Override
 	public Long getId() {
 		return null;
@@ -62,8 +73,8 @@ public class NullTweet implements ITweet {
 	}
 
 	@Override
-	public Date getCreatedAt() {
-		return new Date(0);
+	public Timestamp getCreatedAt() {
+		return new Timestamp(0);
 	}
 
 	@Override

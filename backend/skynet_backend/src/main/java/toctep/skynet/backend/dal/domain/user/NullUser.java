@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.user;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
@@ -20,8 +20,8 @@ public class NullUser implements IUser {
 	}
 	
 	@Override
-	public Date getCreatedAt() {
-		return new java.sql.Date(0);
+	public Timestamp getCreatedAt() {
+		return new Timestamp(0);
 	}
 
 	@Override

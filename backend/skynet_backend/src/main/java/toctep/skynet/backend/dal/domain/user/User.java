@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.user;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
@@ -36,7 +36,7 @@ public class User extends Domain<Long> implements IUser  {
 	private String name							= "";
 	private String profileSidebarBorderColor	= "";
 	private String profileBackgroundColor		= "";
-	private Date createdAt						= new Date(0);
+	private Timestamp createdAt					= new Timestamp(0);
 	private boolean defaultProfileImage			= false;
 	private int followersCount					= 0;
 	private boolean geoEnabled					= false;
@@ -184,11 +184,11 @@ public class User extends Domain<Long> implements IUser  {
 		this.profileBackgroundColor = profileBackgroundColor;
 	}
 
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 

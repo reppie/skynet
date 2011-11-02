@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
@@ -33,7 +33,7 @@ public class UserTest extends DomainTest {
 	private String name;
 	private String profileSidebarBorderColor;
 	private String profileBackgroundColor;
-	private Date createdAt;
+	private Timestamp createdAt;
 	private boolean defaultProfileImage;
 	private int followersCount;
 	private boolean geoEnabled;
@@ -110,7 +110,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundColor = "test";
 		user.setProfileBackgroundColor(profileBackgroundColor);
 	
-		createdAt = new Date(0);
+		createdAt = new Timestamp(0);
 		user.setCreatedAt(createdAt);
 		
 		defaultProfileImage = false;

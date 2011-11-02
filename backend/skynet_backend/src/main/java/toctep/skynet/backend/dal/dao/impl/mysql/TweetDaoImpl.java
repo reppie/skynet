@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class TweetDaoImpl extends TweetDao {
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
 		Param[] params = new Param[] {
-			new Param(tweet.getId(), Types.BIGINT)
+			new Param(id, Types.BIGINT)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
@@ -64,7 +64,7 @@ public class TweetDaoImpl extends TweetDao {
 		tweet.setInReplyToTweetTwitter(Tweet.select((Long) record.get(6)));
 		tweet.setInReplyToUserTwitter(User.select((Long) record.get(7)));
 		tweet.setRetweetCount((Integer) record.get(8));
-		tweet.setCreatedAt((Date) record.get(9));
+		tweet.setCreatedAt((Timestamp) record.get(9));
 		tweet.setPlace(Place.select((String) record.get(10)));
 		tweet.setUser(User.select((Long) record.get(11)));
 		tweet.setCoordinates((String) record.get(12));

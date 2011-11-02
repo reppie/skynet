@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 
@@ -89,7 +89,7 @@ public class UserDaoImpl extends UserDao {
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
-				
+		
 		user.setId(id);
 		user.setPlace(Place.select((String) record.get(2)));
 		user.setDefaultProfile((Boolean) record.get(3));
@@ -108,7 +108,7 @@ public class UserDaoImpl extends UserDao {
 		user.setName((String) record.get(15));
 		user.setProfileSidebarBorderColor((String) record.get(16));
 		user.setProfileBackgroundColor((String) record.get(17));
-		user.setCreatedAt((Date) record.get(18));
+		user.setCreatedAt((Timestamp) record.get(18));
 		user.setDefaultProfile((Boolean) record.get(19));
 		
 		user.setFollowersCount((Integer) record.get(20));

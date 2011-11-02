@@ -30,7 +30,7 @@ public class CountryDaoImpl extends CountryDao{
 		String query = "SELECT * FROM " + tableName + " WHERE code=?";
 		
 		Param[] params = new Param[] {
-			new Param(country.getId(), Types.VARCHAR)
+			new Param(id, Types.VARCHAR)
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);

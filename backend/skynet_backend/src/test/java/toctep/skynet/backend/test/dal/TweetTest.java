@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.dal;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
@@ -28,7 +28,7 @@ public class TweetTest extends DomainTest {
 	private ITweet inReplyToTweetTwitter;
 	private IUser inReplyToUserTwitter;
 	private long retweetCount;
-	private Date createdAt;
+	private Timestamp createdAt;
 	private IPlace place;
 	private IUser user;
 	private String coordinates;
@@ -60,7 +60,7 @@ public class TweetTest extends DomainTest {
 		favorited = false;
 		tweet.setFavorited(favorited);
 		
-		inReplyToTweetTwitter = new NullTweet();
+		inReplyToTweetTwitter = NullTweet.getInstance();
 		tweet.setInReplyToTweetTwitter(inReplyToTweetTwitter);
 		
 		inReplyToUserTwitter = new NullUser();
@@ -69,7 +69,7 @@ public class TweetTest extends DomainTest {
 		retweetCount = 0L;
 		tweet.setRetweetCount(retweetCount);
 		
-		createdAt = new Date(0);
+		createdAt = new Timestamp(0);
 		tweet.setCreatedAt(createdAt);
 				
 		place = new NullPlace();
@@ -119,8 +119,8 @@ public class TweetTest extends DomainTest {
 		assertEquals(postTweet.getTwitterId(), tweet.getTwitterId());
 		assertEquals(postTweet.getSourceType().getId(), tweet.getSourceType().getId());
 		assertTrue(postTweet.isFavorited() == tweet.isFavorited());
-		assertEquals(postTweet.getInReplyToTweetTwitter(), tweet.getInReplyToTweetTwitter());
-		assertEquals(postTweet.getInReplyToUserTwitter(), tweet.getInReplyToUserTwitter());
+		assertTrue(postTweet.getInReplyToTweetTwitter().equals(tweet.getInReplyToTweetTwitter()));
+		assertTrue(postTweet.getInReplyToUserTwitter().equals(tweet.getInReplyToUserTwitter()));
 		assertEquals(postTweet.getRetweetCount(), tweet.getRetweetCount());
 		assertTrue(postTweet.getCreatedAt().equals(tweet.getCreatedAt()));
 		assertTrue(postTweet.getPlace().getId().equals(tweet.getPlace().getId()));

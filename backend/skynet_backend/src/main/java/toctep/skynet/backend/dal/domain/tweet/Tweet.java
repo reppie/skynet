@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
@@ -23,10 +23,10 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private long twitterId					= 0L;
 	private ISourceType sourceType 			= new NullSourceType();
 	private boolean favorited				= false;
-	private ITweet inReplyToTweetTwitter 	= new NullTweet();
+	private ITweet inReplyToTweetTwitter 	= NullTweet.getInstance();
 	private IUser inReplyToUserTwitter 		= new NullUser();
 	private long retweetCount				= 0L;
-	private Date createdAt					= new Date(0);
+	private Timestamp createdAt				= new Timestamp(0);
 	private IPlace place 					= new NullPlace();
 	private IUser user 						= new NullUser();
 	private String coordinates				= "";
@@ -113,11 +113,11 @@ public class Tweet extends Domain<Long> implements ITweet {
 	}
 
 	@Override
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -196,7 +196,7 @@ public class Tweet extends Domain<Long> implements ITweet {
 			return (Tweet) dao.select(id);
 		}
 		
-		return new NullTweet();
+		return NullTweet.getInstance();
 	}
 	
 }
