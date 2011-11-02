@@ -1,11 +1,12 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.tweet.NullKeyword;
+import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetKeywordDaoImpl extends TweetKeywordDao {
@@ -37,14 +38,12 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 			new Param(tweetKeyword.getId(), Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		tweetKeyword.setId(id);
-		try {
-			tweetKeyword.setTweetKeywordValue(rs.getString("value"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		tweetKeyword.setTweet(new NullTweet()); //TODO
+		tweetKeyword.setTweetKeywordValue((String) record.get(2));
+		tweetKeyword.setKeyword(new NullKeyword()); //TODO
 		
 		return tweetKeyword;
 	}

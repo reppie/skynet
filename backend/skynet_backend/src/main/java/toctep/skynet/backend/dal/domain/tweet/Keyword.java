@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain.tweet;
 
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class Keyword extends Domain<Long> {
+public class Keyword extends Domain<Long> implements IKeyword {
 	
 	private String keyword = "";
 	
@@ -15,6 +15,7 @@ public class Keyword extends Domain<Long> {
 		this.keyword = keyword.toLowerCase();
 	}
 	
+	@Override
 	public String getKeyword() {
 		return keyword;
 	}
