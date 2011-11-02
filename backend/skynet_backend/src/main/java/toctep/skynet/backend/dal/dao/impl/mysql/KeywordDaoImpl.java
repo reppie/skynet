@@ -76,8 +76,8 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public void delete(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-		
+		Keyword keyword = (Keyword) domain;	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + keyword.getId());
 	}
 
 	@Override
