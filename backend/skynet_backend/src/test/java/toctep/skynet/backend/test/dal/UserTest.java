@@ -222,7 +222,7 @@ public class UserTest extends DomainTest {
 		User postUser = (User) userDao.select(user.getId());
 		
 		assertEquals(postUser.getId(), user.getId());
-		assertEquals(postUser.getPlace().getId(), user.getPlace().getId());
+		assertTrue(postUser.getPlace().getId().equals(user.getPlace().getId()));
 		assertTrue(postUser.isDefaultProfile() == user.isDefaultProfile());
 		assertEquals(postUser.getStatusesCount(), user.getStatusesCount());
 		assertEquals(postUser.getProfileBackgroundTile(), user.getProfileBackgroundTile());
@@ -242,8 +242,8 @@ public class UserTest extends DomainTest {
 		assertTrue(postUser.isDefaultProfileImage() == user.isDefaultProfileImage());
 		assertEquals(postUser.getFollowersCount(), user.getFollowersCount());
 		assertTrue(postUser.isGeoEnabled() == user.isGeoEnabled());
-		assertEquals(postUser.getProfileBackgroundImageUrl(), user.getProfileBackgroundImageUrl());
-		assertEquals(postUser.getProfileBackgroundImageUrlHttps(), user.getProfileBackgroundImageUrlHttps());
+		assertTrue(postUser.getProfileBackgroundImageUrl().equals(user.getProfileBackgroundImageUrl()));
+		assertTrue(postUser.getProfileBackgroundImageUrlHttps().equals(user.getProfileBackgroundImageUrlHttps()));
 		assertTrue(postUser.isFollowRequestSent() == user.isFollowRequestSent());
 		assertTrue(postUser.getUrl().equals(user.getUrl()));
 		assertTrue(postUser.getTimeZone().equals(user.getTimeZone()));
@@ -252,8 +252,8 @@ public class UserTest extends DomainTest {
 		assertEquals(postUser.getFriendsCount(), user.getFriendsCount());
 		assertEquals(postUser.getProfileSideBarFillColor(), user.getProfileSideBarFillColor());
 		assertEquals(postUser.getScreenName(), user.getScreenName());
-		assertEquals(postUser.getProfileImageUrl(), user.getProfileImageUrl());
-		assertEquals(postUser.getProfileImageUrlHttps(), user.getProfileImageUrlHttps());
+		assertTrue(postUser.getProfileImageUrl().equals(user.getProfileImageUrl()));
+		assertTrue(postUser.getProfileImageUrlHttps().equals(user.getProfileImageUrlHttps()));
 		assertTrue(postUser.isShowAllInlineMedia() == user.isShowAllInlineMedia());
 		assertTrue(postUser.isTranslator() == user.isTranslator());
 		assertEquals(postUser.getListedCount(), user.getListedCount());

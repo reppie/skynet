@@ -27,7 +27,7 @@ public class GeoTest extends DomainTest{
 	@Override
 	public void testCreate() {
 		assertNotNull(geo);
-		assertTrue(geo.getType() == geoType);
+		assertTrue(geo.getType().equals(geoType));
 		assertTrue(coordinates.equals(geo.getCoordinates()));
 	}
 

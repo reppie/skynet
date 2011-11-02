@@ -92,8 +92,8 @@ public class TweetTest extends DomainTest {
 		assertEquals(twitterId, tweet.getTwitterId());
 		assertTrue(sourceType.equals(tweet.getSourceType()));
 		assertTrue(favorited == tweet.isFavorited());
-		assertEquals(inReplyToTweetTwitter, tweet.getInReplyToTweetTwitter());
-		assertEquals(inReplyToUserTwitter, tweet.getInReplyToUserTwitter());
+		assertTrue(inReplyToTweetTwitter.equals(tweet.getInReplyToTweetTwitter()));
+		assertTrue(inReplyToUserTwitter.equals(tweet.getInReplyToUserTwitter()));
 		assertEquals(retweetCount, tweet.getRetweetCount());
 		assertTrue(createdAt.equals(tweet.getCreatedAt()));
 		assertTrue(place.equals(tweet.getPlace()));

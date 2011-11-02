@@ -86,11 +86,11 @@ public class PlaceTest extends DomainTest{
 	public void testCreate() { 
 		assertNotNull(place);
 		assertTrue(id.equals(place.getId()));
-		assertTrue(place.getType() == placeType);
-		assertTrue(place.getBoundingBox() == boundingBox);
+		assertTrue(place.getType().equals(placeType));
+		assertTrue(place.getBoundingBox().equals(boundingBox));
 		assertTrue(name.equals(place.getName()));
 		assertTrue(fullName.equals(place.getFullName()));
-		assertTrue(place.getCountry() == country);
+		assertTrue(place.getCountry().equals(country));
 		assertTrue(streetAddress.equals(place.getStreetAddress()));
 		assertTrue(locality.equals(place.getLocality()));
 		assertTrue(region.equals(place.getRegion()));
