@@ -24,6 +24,7 @@ public class Keyword extends Domain<Integer> implements IKeyword {
 	
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+		this.keyword = keyword.toLowerCase();
 	}
 
 	@Override
