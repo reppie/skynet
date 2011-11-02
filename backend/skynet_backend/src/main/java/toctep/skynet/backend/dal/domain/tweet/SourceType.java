@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class SourceType extends Domain<Long> implements ISourceType {
+public class SourceType extends Domain<Integer> implements ISourceType {
 
 	private String text = "";
 
@@ -22,7 +22,7 @@ public class SourceType extends Domain<Long> implements ISourceType {
 		dao = DaoFacadeImpl.getInstance().getSourceTypeDao();
 	}
 	
-	public static ISourceType select(Long id) {
+	public static ISourceType select(Integer id) {
 		SourceTypeDao dao = DaoFacadeImpl.getInstance().getSourceTypeDao();
 		
 		if (dao.exists(id)) {

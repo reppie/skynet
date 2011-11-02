@@ -15,7 +15,7 @@ public class NullBoundingBox implements IBoundingBox {
 	private NullBoundingBox() { }	
 	
 	@Override
-	public Long getId() {
+	public Integer getId() {
 		return null;
 	}
 	

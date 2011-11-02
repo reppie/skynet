@@ -50,6 +50,16 @@
 		}
 		return tweetList;
     };
+    
+    $.fn.TagCloud = function(cloud) {
+    	this.empty();
+    	for(var index in cloud){
+			var tag = cloud[index];
+	    	var $tag = $("#tagTemplate").tmpl(tag);
+	    	$tag.appendTo(this).data('tag', tag);
+    	}
+		return this;
+    };
 	
 	api.TweetList.prototype.reset = function(tweetIds){
 		
@@ -167,7 +177,7 @@
 		var This = this;
 		var tweet = api.cache.get('api.Tweet', tweetId);
 		if(tweet){
-			console.log("serving Tweet with id: "+tweetId+" from cache.;")
+			console.log("serving Tweet with id: "+tweetId+" from cache");
 			callback.call(This,tweet);
 			return;
 		}
@@ -187,7 +197,7 @@
 		var This = this;
 		var user = api.cache.get('api.User', userId);
 		if(user){
-			console.log("serving User with id: "+userId+" from cache.;")
+			console.log("serving User with id: "+userId+" from cache");
 			callback.call(This, user);
 			return;
 		}
@@ -217,6 +227,8 @@
 		  },
 	  	});
 	}
+	
+	
 	
 })(jQuery);
 

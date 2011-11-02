@@ -3,7 +3,7 @@ package toctep.skynet.backend.dal.domain.tweet;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class TweetKeyword extends Domain<Long> {
+public class TweetKeyword extends Domain<Integer> {
 	
 	private ITweet tweet;
 	private String tweetKeywordValue;
@@ -53,7 +53,7 @@ public class TweetKeyword extends Domain<Long> {
 		super.save();
 	}
 	
-	public static Object select(Long id) {
+	public static Object select(Integer id) {
 		//TODO
 		return null;
 	}

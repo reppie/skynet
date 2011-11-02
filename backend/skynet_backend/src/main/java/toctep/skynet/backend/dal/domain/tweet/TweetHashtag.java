@@ -5,7 +5,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 
-public class TweetHashtag extends Domain<Long> {
+public class TweetHashtag extends Domain<Integer> {
 	
 	private ITweet tweet;
 	private IHashtag hashtag;
@@ -31,7 +31,7 @@ public class TweetHashtag extends Domain<Long> {
 		dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 	}
 	
-	public static Object select(Long id) {
+	public static Object select(Integer id) {
 		//TODO
 		return null;
 	}

@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class Hashtag extends Domain<Long> implements IHashtag {
+public class Hashtag extends Domain<Integer> implements IHashtag {
 
 	private String text = "";
 	
@@ -21,7 +21,7 @@ public class Hashtag extends Domain<Long> implements IHashtag {
 		dao = DaoFacadeImpl.getInstance().getHashtagDao();
 	}
 	
-	public static IHashtag select(Long id) {
+	public static IHashtag select(Integer id) {
 		HashtagDao dao = DaoFacadeImpl.getInstance().getHashtagDao();
 		
 		if (dao.exists(id)) {

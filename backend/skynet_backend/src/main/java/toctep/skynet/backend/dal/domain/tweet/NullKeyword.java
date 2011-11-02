@@ -14,7 +14,7 @@ public class NullKeyword implements IKeyword {
 	private NullKeyword() { }
 	
 	@Override
-	public Long getId() {
+	public Integer getId() {
 		return null;
 	}
 	

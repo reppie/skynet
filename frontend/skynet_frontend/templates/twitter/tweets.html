@@ -3,9 +3,11 @@
 
 {% block tag-cloud %}
 	{% if keywordcloud.items %}
+		<div class="tag-cloud">
 		{% for item in keywordcloud.items %}
-			<p class="cloud-element" style="font-size: {{ item.font_size }}px !important }">{{ item.keyword }}</p>
+			<a class="cloud-element" data-keyword="{{ item.keyword }}" href="#" style="font-size: {{ item.font_size }}px !important }">{{ item.keyword }}</a>
 		{% endfor %}
+		</div>
 	{% else %}
 		<p>{% trans "No tweets indexed yet" %}</p>
 	{% endif %}
