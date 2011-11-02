@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class BoundingBox extends Domain<Long> implements IBoundingBox {
@@ -25,7 +26,7 @@ public class BoundingBox extends Domain<Long> implements IBoundingBox {
 	
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getBoundingBoxDao();
+		dao = DaoFacadeImpl.getInstance().getBoundingBoxDao();
 	}
 	
 	@Override

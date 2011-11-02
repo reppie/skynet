@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.domain.tweet;
 
 import java.sql.Date;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
@@ -148,7 +149,7 @@ public class Tweet extends Domain<Long> implements ITweet {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getTweetDao();
+		dao = DaoFacadeImpl.getInstance().getTweetDao();
 	}
 	
 	@Override

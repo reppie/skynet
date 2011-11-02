@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class TweetKeyword extends Domain<Long> {
@@ -34,7 +35,7 @@ public class TweetKeyword extends Domain<Long> {
 	
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getTweetKeywordDao();
+		dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
 	}
 	
 	@Override

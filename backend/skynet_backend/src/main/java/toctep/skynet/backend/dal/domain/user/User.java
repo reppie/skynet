@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.Language;
@@ -337,7 +338,7 @@ public class User extends Domain<Long> implements IUser  {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getUserDao();
+		dao = DaoFacadeImpl.getInstance().getUserDao();
 	}
 	
 	@Override

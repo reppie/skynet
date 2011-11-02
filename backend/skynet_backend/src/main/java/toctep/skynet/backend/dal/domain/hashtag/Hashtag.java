@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.hashtag;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class Hashtag extends Domain<Long> implements IHashtag {
@@ -16,7 +17,7 @@ public class Hashtag extends Domain<Long> implements IHashtag {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getHashtagDao();
+		dao = DaoFacadeImpl.getInstance().getHashtagDao();
 	}
 	
 }

@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.geo;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class GeoType extends Domain<Long> implements IGeoType {
@@ -16,7 +17,7 @@ public class GeoType extends Domain<Long> implements IGeoType {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getGeoTypeDao();	
+		dao = DaoFacadeImpl.getInstance().getGeoTypeDao();	
 	}
 	
 }
