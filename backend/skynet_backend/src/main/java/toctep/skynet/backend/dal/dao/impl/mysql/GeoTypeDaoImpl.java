@@ -7,7 +7,7 @@ import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 
-public class GeoTypeDaoImpl extends GeoTypeDao{
+public class GeoTypeDaoImpl extends GeoTypeDao {
 
 	@Override
 	public void insert(Domain<Long> domain) {

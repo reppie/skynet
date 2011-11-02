@@ -17,7 +17,7 @@ public class GeoDaoImpl extends GeoDao {
 		String query = "INSERT INTO " + tableName + "(geo_type_id, coordinates) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
-			new Param(geo.getId(), Types.BIGINT),
+			new Param(geo.getType().getId(), Types.BIGINT),
 			new Param(geo.getCoordinates(), Types.VARCHAR)
 		};
 			
@@ -37,7 +37,7 @@ public class GeoDaoImpl extends GeoDao {
 		};
 		
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
-		
+		System.out.println("test: " + (Long) record.get(1));
 		geo.setId(id);
 		geo.setType(GeoType.select((Long) record.get(1)));
 		geo.setCoordinates((String) record.get(2));
