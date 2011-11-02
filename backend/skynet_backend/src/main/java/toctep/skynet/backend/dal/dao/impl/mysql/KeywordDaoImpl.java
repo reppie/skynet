@@ -14,7 +14,7 @@ import com.mysql.jdbc.Statement;
 public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;
 		
 		String query = "INSERT INTO " + tableName + " (keyword) VALUES(?)";
@@ -23,13 +23,13 @@ public class KeywordDaoImpl extends KeywordDao {
 			new Param(keyword.getKeyword(), Types.VARCHAR)
 		};
 		
-		long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		keyword.setId(id);
 	}
 
 	@Override
-	public Keyword select(Long id) {
+	public Keyword select(Integer id) {
 		Keyword keyword = new Keyword();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -47,11 +47,11 @@ public class KeywordDaoImpl extends KeywordDao {
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		searchKeyword(domain);
 	}
 	
-	private void searchKeyword(Domain<Long> domain) {
+	private void searchKeyword(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;
 		
 		Statement stmt = null;
@@ -81,13 +81,13 @@ public class KeywordDaoImpl extends KeywordDao {
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;
 		return this.exists(keyword.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "keyword=" + id);
 	}
 

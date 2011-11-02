@@ -7,37 +7,37 @@ import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
 public class TweetHashtagDaoImpl extends TweetHashtagDao {
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public TweetHashtag select(Long id) {
+	public TweetHashtag select(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;	
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetHashtag.getId());
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;
 		return this.exists(tweetHashtag.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 

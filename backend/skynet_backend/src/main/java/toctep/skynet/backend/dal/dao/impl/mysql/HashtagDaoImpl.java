@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 public class HashtagDaoImpl extends HashtagDao{
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
 		
 		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
@@ -19,13 +19,13 @@ public class HashtagDaoImpl extends HashtagDao{
 			new Param(hashtag.getText(), Types.VARCHAR)
 		};
 			
-		long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		hashtag.setId(id);
 	}
 
 	@Override
-	public Hashtag select(Long id) {
+	public Hashtag select(Integer id) {
 		Hashtag hashtag = new Hashtag();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -43,25 +43,25 @@ public class HashtagDaoImpl extends HashtagDao{
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + hashtag.getId());
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
 		return this.exists(hashtag.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 

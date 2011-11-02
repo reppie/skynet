@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 public class TimeZoneDaoImpl extends TimeZoneDao {
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
 		
 		String query = "INSERT INTO " + tableName + "(utc_offset, time_zone) VALUES(?, ?)";
@@ -20,13 +20,13 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 			new Param(timeZone.getTimeZone(), Types.VARCHAR)
 		};
 			
-		long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		timeZone.setId(id);
 	}
 
 	@Override
-	public TimeZone select(Long id) {
+	public TimeZone select(Integer id) {
 		TimeZone timeZone = new TimeZone();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -45,25 +45,25 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 
 	}
 	
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + timeZone.getId());	
 	}
 	
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
 		return this.exists(timeZone.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 	

@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.tweet.SourceType;
 public class SourceTypeDaoImpl extends SourceTypeDao {
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		SourceType sourceType = (SourceType) domain;
 		
 		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
@@ -19,13 +19,13 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 			new Param(sourceType.getText(), Types.VARCHAR)
 		};
 			
-		long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		sourceType.setId(id);
 	}
 
 	@Override
-	public SourceType select(Long id) {
+	public SourceType select(Integer id) {
 		SourceType sourceType = new SourceType();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -43,25 +43,25 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 
 	}
 	
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		SourceType sourceType = (SourceType) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + sourceType.getId());		
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		SourceType sourceType = (SourceType) domain;
 		return this.exists(sourceType.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
