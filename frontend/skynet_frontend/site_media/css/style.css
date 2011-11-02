@@ -51,7 +51,6 @@ aside section
 {
 	height: 30px;
 	width: 550px;
-	display: inline;
 	padding-left: 15px;
 	font-size: 1.3em;
 	color: #aaa;
@@ -60,10 +59,9 @@ aside section
 
 #searchbutton
 {
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-	margin-left: 5px;
 	width: 100px;
 	height: 34px;
+	margin-left: 5px;
 	border: 1px solid #009FDC;
 	background: #00ADEF;
 	font-size: 1.5em;
@@ -77,16 +75,22 @@ aside section p
 	color: white;
 }
 
-aside section .title
+aside section p,
+aside section h1
 {
-	padding: 5px 0 5px 5px;
+	color: white;
+}
+
+aside section h1
+{
+	
 }
 
 aside section h1.title
 {
+	padding: 5px 0 5px 5px;
 	font-weight: bold;
 	font-size: 1.5em;
-	color: white;
 	border-bottom: 1px dotted white;
 }
 
