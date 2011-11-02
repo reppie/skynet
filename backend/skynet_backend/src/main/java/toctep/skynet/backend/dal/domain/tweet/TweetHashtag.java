@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 
@@ -26,6 +27,6 @@ public class TweetHashtag extends Domain {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getTweetHashtagDao();
+		dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 	}
 }

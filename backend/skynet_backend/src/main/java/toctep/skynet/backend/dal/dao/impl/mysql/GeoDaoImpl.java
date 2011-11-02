@@ -1,12 +1,12 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.geo.NullGeoType;
 
 public class GeoDaoImpl extends GeoDao {
 	
@@ -36,14 +36,11 @@ public class GeoDaoImpl extends GeoDao {
 			new Param(geo.getId(), Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		geo.setId(id);
-		try {
-			geo.setCoordinates(rs.getString("coordinates"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		geo.setType(new NullGeoType()); //TODO
+		geo.setCoordinates((String) record.get(2));
 		
 		return geo;
 	}

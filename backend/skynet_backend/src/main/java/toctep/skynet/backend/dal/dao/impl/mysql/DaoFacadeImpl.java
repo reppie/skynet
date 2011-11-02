@@ -24,6 +24,15 @@ import toctep.skynet.backend.dal.dao.UserDao;
 
 public class DaoFacadeImpl implements DaoFacade {
 	
+	private static DaoFacadeImpl instance;
+	
+	public static DaoFacadeImpl getInstance() {
+		if (instance == null) {
+			instance = new DaoFacadeImpl();
+		}
+		return instance;
+	}
+	
 	private BoundingBoxDao boundingBoxDao;
 	private BoundingBoxTypeDao boundingBoxTypeDao;
 	private CountryDao countryDao;
@@ -45,7 +54,7 @@ public class DaoFacadeImpl implements DaoFacade {
 	private TweetKeywordDao tweetKeywordDao;
 	private KeywordDao keywordDao;
 	
-	public DaoFacadeImpl() {
+	private DaoFacadeImpl() {
 		boundingBoxDao = new BoundingBoxDaoImpl();
 		boundingBoxTypeDao = new BoundingBoxTypeDaoImpl();
 		countryDao = new CountryDaoImpl();

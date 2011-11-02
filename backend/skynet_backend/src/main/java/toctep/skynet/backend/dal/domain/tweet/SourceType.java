@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
 public class SourceType extends Domain<Long> implements ISourceType {
@@ -17,7 +18,7 @@ public class SourceType extends Domain<Long> implements ISourceType {
 
 	@Override
 	public void setDao() {
-		dao = getDaoFacade().getSourceTypeDao();
+		dao = DaoFacadeImpl.getInstance().getSourceTypeDao();
 	}
 	
 }

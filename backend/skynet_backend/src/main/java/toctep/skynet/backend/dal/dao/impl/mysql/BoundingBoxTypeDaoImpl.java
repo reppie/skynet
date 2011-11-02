@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -35,14 +34,10 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 			new Param(boundingBoxType.getId(), Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBoxType.setId(id);
-		try {
-			boundingBoxType.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		boundingBoxType.setText((String) record.get(1));
 		
 		return boundingBoxType;
 	}

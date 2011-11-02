@@ -1,8 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -36,15 +35,11 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 			new Param(timeZone.getId(), Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		timeZone.setId(id);
-		try {
-			timeZone.setUtcOffset(rs.getInt("utc_offset"));
-			timeZone.setTimeZone((rs.getString("time_zone")));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		timeZone.setUtcOffset((Integer) record.get(1));
+		timeZone.setTimeZone((String) record.get(2));
 		
 		return timeZone;
 	}

@@ -1,12 +1,17 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.sql.Types;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.geo.NullGeo;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.tweet.NullSourceType;
+import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 
 public class TweetDaoImpl extends TweetDao {
 	
@@ -49,14 +54,21 @@ public class TweetDaoImpl extends TweetDao {
 			new Param(tweet.getId(), Types.BIGINT)
 		};
 		
-		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		tweet.setId(id);
-		try {
-			tweet.setText(rs.getString("text"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		tweet.setText((String) record.get(1));
+		tweet.setGeo(new NullGeo()); //TODO
+		tweet.setTruncated((Boolean) record.get(3));
+		tweet.setSourceType(new NullSourceType()); //TODO
+		tweet.setFavorited((Boolean) record.get(5));
+		tweet.setInReplyToTweetTwitter(new NullTweet()); //TODO
+		tweet.setInReplyToUserTwitter(new NullUser()); //TODO
+		tweet.setRetweetCount((Integer) record.get(8));
+		tweet.setCreatedAt((Date) record.get(9));
+		tweet.setPlace(new NullPlace()); //TODO
+		tweet.setUser(new NullUser()); //TODO
+		tweet.setCoordinates((String) record.get(12));
 		
 		return tweet;
 	}
