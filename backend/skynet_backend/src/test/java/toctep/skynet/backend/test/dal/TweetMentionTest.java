@@ -62,4 +62,5 @@ public class TweetMentionTest extends DomainTest {
 		tweetMention.delete();
 		assertEquals(0, tweetMentionDao.count());
 	}
+	
 }

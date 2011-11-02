@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.TweetHashtagDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 
 public class TweetHashtag extends Domain<Integer> {
@@ -14,7 +14,7 @@ public class TweetHashtag extends Domain<Integer> {
 		return tweet;
 	}
 
-	public void setTweet(Tweet tweet) {
+	public void setTweet(ITweet tweet) {
 		this.tweet = tweet;
 	}
 
@@ -22,7 +22,7 @@ public class TweetHashtag extends Domain<Integer> {
 		return hashtag;
 	}
 
-	public void setHashtag(Hashtag hashtag) {
+	public void setHashtag(IHashtag hashtag) {
 		this.hashtag = hashtag;
 	}
 
@@ -31,8 +31,13 @@ public class TweetHashtag extends Domain<Integer> {
 		dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 	}
 	
-	public static Object select(Integer id) {
-		//TODO
+	public static TweetHashtag select(Integer id) {
+		TweetHashtagDao dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
+		
+		if (dao.exists(id)) {
+			return (TweetHashtag) dao.select(id);
+		}
+		
 		return null;
 	}
 	
