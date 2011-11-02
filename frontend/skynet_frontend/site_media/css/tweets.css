@@ -2,12 +2,26 @@
 	padding: 10px 20px;
 	font-size: 15px;
 	position: relative;
+	height: 72px;
 }
 .tweet.loading{
 	display:none;
 	
 }
+.tweet>div{
+	float:left;
+	
+}
+.tweet .tweet-content{
+	margin-left: 8px;	
+}
+
 .tweet.error{
 	background-color: red;
 	color: #000;
+}
+
+.tweet .tweet-footer{
+	font-size: 9px;
+	
 }

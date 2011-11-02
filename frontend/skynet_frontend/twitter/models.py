@@ -4,6 +4,9 @@ from skynet_frontend import settings
 
 class Url(models.Model):
     text = models.CharField(primary_key=True, max_length=255, blank=True, null=True);
+    
+    def to_json(self):
+        return self.text;
 
 class Hashtag(models.Model):
     text = models.CharField(max_length=139, blank=True, null=True)
@@ -99,11 +102,11 @@ class User(models.Model):
 
     def to_json(self):
         return {
-            'id': self.id,
+            'id': str(self.id),
             'name': self.name,
             'screen_name': self.screen_name,
-        }
-    
+            'profile_image_url': self.profile_image_url_https,
+            }  
 
 class Keyword(models.Model):
     keyword = models.CharField(max_length=140)
@@ -172,9 +175,10 @@ class Tweet(models.Model):
     
     def to_json(self):
         return {
-            'id': self.id,
+            'id': str(self.id),
             'text': self.text,
             'user_id': self.user_id,
+            'created_at': self.created_at,
         }
         
     class Meta:

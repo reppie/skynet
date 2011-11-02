@@ -2,6 +2,7 @@
 #   original code: http://trac.pyworks.org/pyjamas/wiki/DjangoWithPyJamas
 #   also from: http://www.pimentech.fr/technologies/outils
 from django.utils import simplejson
+from django.core.serializers.json import DjangoJSONEncoder
 import sys
 
 # JSONRPCService and jsonremote are used in combination to drastically
@@ -25,12 +26,15 @@ import json
 to_json_implementation = 'to_json'
 from_json_implementation = 'from_json'
 
-class CustomEncoder(json.JSONEncoder):
+class CustomEncoder(DjangoJSONEncoder):
     def default(self, obj):
         impl = getattr(obj, to_json_implementation, None)
         if impl and callable(impl):
             return impl()
-        return json.JSONEncoder.default(self, obj)
+        if hasattr(obj, 'isoformat'):
+            return obj.isoformat()
+    
+        return DjangoJSONEncoder.default(self, obj)
 
 def response(id, result):
     return json.dumps({'jsonrpc': version, 'id':id,
