@@ -45,7 +45,7 @@ public class TweetTest extends DomainTest {
 		text = "test";
 		tweet.setText(text);
 		
-		geo = new NullGeo();
+		geo = NullGeo.getInstance();
 		tweet.setGeo(geo);
 		
 		truncated = false;

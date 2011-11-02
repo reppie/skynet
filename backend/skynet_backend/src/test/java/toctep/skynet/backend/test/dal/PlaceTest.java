@@ -42,7 +42,7 @@ public class PlaceTest extends DomainTest{
 		placeType = new NullPlaceType();
 		place.setType(placeType);
 		
-		boundingBox = new NullBoundingBox();
+		boundingBox = NullBoundingBox.getInstance();
 		place.setBoundingBox(boundingBox);
 		
 		name = "TestName";
@@ -51,7 +51,7 @@ public class PlaceTest extends DomainTest{
 		fullName = "TestFullName";
 		place.setFullName(fullName);
 		
-		country = new NullCountry();
+		country = NullCountry.getInstance();
 		place.setCountry(country);
 		
 		streetAddress = "Teststreet";

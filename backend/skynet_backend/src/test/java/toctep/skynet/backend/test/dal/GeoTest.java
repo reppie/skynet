@@ -17,7 +17,7 @@ public class GeoTest extends DomainTest{
 		
 		geo = new Geo();
 		
-		geoType = new NullGeoType();
+		geoType = NullGeoType.getInstance();
 		geo.setType(geoType);
 		
 		coordinates = "58.17, 68.20";

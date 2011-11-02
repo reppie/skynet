@@ -2,7 +2,6 @@ package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetKeywordTest extends DomainTest {
