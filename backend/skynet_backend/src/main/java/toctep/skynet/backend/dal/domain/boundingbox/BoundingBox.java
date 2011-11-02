@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class BoundingBox extends Domain<Long> implements IBoundingBox {
+public class BoundingBox extends Domain<Integer> implements IBoundingBox {
 	
 	private IBoundingBoxType type 	= NullBoundingBoxType.getInstance();
 	private String coordinates		= "";
@@ -40,7 +40,7 @@ public class BoundingBox extends Domain<Long> implements IBoundingBox {
 		super.save();
 	}
 	
-	public static IBoundingBox select(Long id) {
+	public static IBoundingBox select(Integer id) {
 		BoundingBoxDao dao = DaoFacadeImpl.getInstance().getBoundingBoxDao();
 		
 		if (dao.exists(id)) {

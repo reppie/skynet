@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
 		String query = "INSERT INTO " + tableName + "(bounding_box_type_id, coordinates) VALUES(?, ?)";
@@ -21,13 +21,13 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 			new Param(boundingBox.getCoordinates(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		((BoundingBox) boundingBox).setId(id);
 	}
 
 	@Override
-	public BoundingBox select(Long id) {
+	public BoundingBox select(Integer id) {
 		BoundingBox boundingBox = new BoundingBox();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -39,32 +39,32 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBox.setId(id);
-		boundingBox.setType(BoundingBoxType.select((Long) record.get(1)));
+		boundingBox.setType(BoundingBoxType.select((Integer) record.get(1)));
 		boundingBox.setCoordinates((String) record.get(2));
 		
 		return boundingBox;
 	}
 	
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;	
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBox.getId());
 	}
 	
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		return this.exists(boundingBox.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 	

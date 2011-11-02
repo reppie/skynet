@@ -14,7 +14,7 @@ public class NullGeoType implements IGeoType {
 	private NullGeoType() { }	
 	
 	@Override
-	public Long getId() {
+	public Integer getId() {
 		return null;
 	}
 	
