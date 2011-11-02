@@ -18,19 +18,19 @@ body
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 	bottom: 0px;
-	
-background: #eeeeee; /* Old browsers */
-background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 72%, #f7f7f7 72%, #f7f7f7 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eeeeee), color-stop(72%,#eeeeee), color-stop(72%,#f7f7f7), color-stop(100%,#f7f7f7)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* IE10+ */
-background: linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#f7f7f7',GradientType=1 ); /* IE6-9 */
-
+	background: #eee; /* Old browsers */
 }
 
-
+.oldcontainer
+{
+	background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 72%, #f7f7f7 72%, #f7f7f7 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eeeeee), color-stop(72%,#eeeeee), color-stop(72%,#f7f7f7), color-stop(100%,#f7f7f7)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* IE10+ */
+	background: linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#f7f7f7',GradientType=1 ); /* IE6-9 */
+}
 
 #logo
 {
@@ -45,32 +45,6 @@ footer
 	margin-top: 10%;
 	height: 20px;
 }
-
-aside section
-{
-	background-color: #ccc;
-/*	border: 1px solid #009fdc;*/
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    margin-top: 7px;
-    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-/*aside section
-{
-	background-color: #00adef;
-	border: 1px solid #009fdc;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    margin-top: 7px;
-    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-}*/
 
 #keyword-search-form input
 {
@@ -113,17 +87,39 @@ aside section
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/*aside section
+{
+	background-color: #00adef;
+	border: 1px solid #009fdc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    margin-top: 7px;
+    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}*/
+
+aside section
+{
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+    margin-top: 7px;
+    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
 aside section p
 {
 	margin: 0px;
 	padding: 0px 0 5px 5px;
-	color: white;
 }
 
 aside section p,
 aside section h1
 {
-	color: white;
+	color: #222;
 }
 
 aside section h1
@@ -133,27 +129,32 @@ aside section h1
 
 aside section h1.title
 {
-	padding: 5px 0 5px 5px;
-	font-weight: bold;
+    -moz-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.1);
+	background: #ddd;
+	padding: 5px 0 5px 15px;
 	font-size: 1.5em;
-	border-bottom: 1px dotted white;
+	border-bottom: 1px solid #ccc;
 }
 
-aside section#region-name h1
+#current-region
 {
-	color: white;
+	font-size: 2em;
+	font-weight: bold;
 	margin: 0px;
-	text-align: center; 
+	text-align: center;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .cloud-element
 {
-	color: white;
+/*	color: white;*/
 	text-decoration: none;
 }
 
 .cloud-element:hover
 {
-	color: #fcf387;
+	color: #ef7b00;
 	text-decoration: underline;
 }
