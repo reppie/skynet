@@ -15,13 +15,13 @@ public class TweetMentionTest extends DomainTest {
 	public void setUp() {
 		super.setUp();
 		
-		TweetMention tweetMention = new TweetMention();
+		tweetMention = new TweetMention();
 		
-		User user = new User();
+		user = new User();
 		user.setId(new Long(1));
 		tweetMention.setUser(user);
 		
-		Tweet tweet = new Tweet();
+		tweet = new Tweet();
 		tweet.setId(new Long(1));
 		tweetMention.setTweet(tweet);
 	}
