@@ -32,8 +32,11 @@ public class KeywordTest extends DomainTest {
 
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		keyword.save();
 		
+		Keyword postKeyword = (Keyword) keywordDao.select(keyword.getId());
+		
+		assertTrue(postKeyword.getKeyword().equals(postKeyword.getKeyword()));
 	}
 
 	@Override
