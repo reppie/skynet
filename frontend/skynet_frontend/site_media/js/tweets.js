@@ -15,11 +15,16 @@
 			api.Base.prototype.constructor.call(this, json);
 			
 		},
+		'CrumblePath': function(element){
+			this.$path = element;
+			this.chain = [];
+			this.build();
+		},
 		'TweetList': function(element, tweets){
 			this.$tweetList = element;
 			this.reset(tweets);
 		},
-		cache:{
+		'cache':{
 			'collections':{},
 			'get': function(type, id){
 				var item = null;				
@@ -37,6 +42,20 @@
 				col[""+item.id] = item;
 			}
 		},
+		'cloud': function(callback){
+			var This = this;
+			$.jsonRPC.request('cloud', {
+			  	params: [],
+			  	success: function(result){
+			  		callback.call(This, result.result);
+			  },
+			  error: function(result){
+		  		callback.call(This, null);
+			  },
+		  	});
+			
+			
+		}
 		
 	});
 	var tweetListKey = "__TweetList";
@@ -49,6 +68,15 @@
 			tweetList.reset(tweetIds);
 		}
 		return tweetList;
+    };
+    var crumblePathKey = "__TweetList";
+	$.fn.CrumblePath = function() {
+		var path = this.data(crumblePathKey);
+		if(!path){
+			path = new api.CrumblePath(this);
+			this.data(crumblePathKey, path);
+		}
+		return path;
     };
     
     $.fn.TagCloud = function(cloud) {
@@ -159,6 +187,15 @@
          }
         }
  	});
+ 	api.CrumblePath.prototype.path = function(){
+ 		
+ 		return this.chain;
+ 	}
+ 	api.CrumblePath.prototype.build = function(){
+ 		
+ 		//return this.chain;
+ 	}
+ 	
 	api.Tweet.prototype.getUser = function(callback){
 		
 		var This = this;
@@ -227,8 +264,6 @@
 		  },
 	  	});
 	}
-	
-	
 	
 })(jQuery);
 

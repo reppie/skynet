@@ -61,7 +61,7 @@ class JSONRPCService:
         data = simplejson.loads(request.raw_post_data)
         # Altered to forward the request parameter when a member method
         # is invoked <julien@pimentech.net>
-        id, method, params = data["id"],data["method"], data["params"] or request.REQUEST.values()
+        id, method, params = data["id"],data["method"], data["params"] or []
         if method in self.method_map:
             try:
                 result = self.method_map[method](*params)
