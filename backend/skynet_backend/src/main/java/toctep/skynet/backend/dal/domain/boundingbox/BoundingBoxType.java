@@ -28,7 +28,7 @@ public class BoundingBoxType extends Domain<Long> implements IBoundingBoxType {
 			return (BoundingBoxType) dao.select(id);
 		}
 		
-		return new NullBoundingBoxType();
+		return NullBoundingBoxType.getInstance();
 	}
 	
 }

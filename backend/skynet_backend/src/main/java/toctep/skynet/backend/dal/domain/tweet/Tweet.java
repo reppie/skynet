@@ -18,7 +18,7 @@ import toctep.skynet.backend.dal.domain.user.User;
 public class Tweet extends Domain<Long> implements ITweet {
 
 	private String text 					= "";
-	private IGeo geo 						= new NullGeo();
+	private IGeo geo 						= NullGeo.getInstance();
 	private boolean truncated 				= false;
 	private long twitterId					= 0L;
 	private ISourceType sourceType 			= NullSourceType.getInstance();

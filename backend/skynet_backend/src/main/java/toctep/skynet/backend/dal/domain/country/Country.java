@@ -29,7 +29,7 @@ public class Country extends Domain<String> implements ICountry {
 			return (Country) dao.select(id);
 		}
 		
-		return new NullCountry();
+		return NullCountry.getInstance();
 	}
 	
 }

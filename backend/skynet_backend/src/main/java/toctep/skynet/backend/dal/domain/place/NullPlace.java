@@ -33,12 +33,12 @@ public class NullPlace implements IPlace {
 
 	@Override
 	public IBoundingBox getBoundingBox() {
-		return new NullBoundingBox();
+		return NullBoundingBox.getInstance();
 	}
 
 	@Override
 	public ICountry getCountry() {
-		return new NullCountry();
+		return NullCountry.getInstance();
 	}
 
 	@Override

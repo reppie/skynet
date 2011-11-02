@@ -28,7 +28,7 @@ public class GeoType extends Domain<Long> implements IGeoType {
 			return (GeoType) dao.select(id);
 		}
 		
-		return new NullGeoType();
+		return NullGeoType.getInstance();
 	}
 	
 }

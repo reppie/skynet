@@ -6,7 +6,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Geo extends Domain<Long> implements IGeo {
 	
-	private IGeoType type 		= new NullGeoType();
+	private IGeoType type 		= NullGeoType.getInstance();
 	private String coordinates	= "";
 
 	public IGeoType getType() {
@@ -47,7 +47,7 @@ public class Geo extends Domain<Long> implements IGeo {
 			return (Geo) dao.select(id);
 		}
 		
-		return new NullGeo();
+		return NullGeo.getInstance();
 	}
 	
 }
