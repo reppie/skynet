@@ -15,7 +15,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	public void insert(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;
 		
-		String query = "INSERT INTO " + tableName + "(tweet_id, hastag_id) VALUES(?, ?)";
+		String query = "INSERT INTO " + tableName + "(tweet_id, hashtag_id) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(tweetHashtag.getTweet().getId(), Types.BIGINT),
