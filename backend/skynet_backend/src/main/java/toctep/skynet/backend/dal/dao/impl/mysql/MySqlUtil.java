@@ -101,10 +101,10 @@ public class MySqlUtil {
 		return result;
 	}
 	
-	public Long insert(String query, Param[] params) {
+	public int insert(String query, Param[] params) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Long id = null;
+		int id = 0;
 		
 		try {
 			pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -113,13 +113,11 @@ public class MySqlUtil {
 				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
 			}
 			
-			System.out.println(pstmt);
-			
 			pstmt.executeUpdate();		
 			
 			rs = pstmt.getGeneratedKeys();
 			if (rs.first()) {
-				id = (long) rs.getInt(1);
+				id = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,7 +5,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 
-public class TweetUrl extends Domain<Long> {
+public class TweetUrl extends Domain<Integer> {
 	
 	private ITweet tweet;
 	private IUrl url;
@@ -31,7 +31,7 @@ public class TweetUrl extends Domain<Long> {
 		dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
 	}
 	
-	public static Object select(Long id) {
+	public static Object select(Integer id) {
 		//TODO
 		return null;
 	}

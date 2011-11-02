@@ -12,7 +12,7 @@ import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		TweetKeyword tweetKeyword = (TweetKeyword) domain;
 		
 		String query = "INSERT INTO " + tableName + "(tweet_id, value, keyword_id) VALUES(?, ?, ?)";
@@ -23,13 +23,13 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 			new Param(tweetKeyword.getKeyword().getId(), Types.BIGINT)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		tweetKeyword.setId(id);
 	}
 
 	@Override
-	public TweetKeyword select(Long id) {
+	public TweetKeyword select(Integer id) {
 		TweetKeyword tweetKeyword = new TweetKeyword();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -43,31 +43,31 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		tweetKeyword.setId(id);
 		tweetKeyword.setTweet(Tweet.select((Long) record.get(1)));
 		tweetKeyword.setTweetKeywordValue((String) record.get(2));
-		tweetKeyword.setKeyword(Keyword.select((Long) record.get(3)));
+		tweetKeyword.setKeyword(Keyword.select((Integer) record.get(3)));
 		
 		return tweetKeyword;
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		TweetKeyword tweetkeyword = (TweetKeyword) domain;	
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetkeyword.getId());
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		TweetKeyword tweetkeyword = (TweetKeyword) domain;
 		return this.exists(tweetkeyword.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 

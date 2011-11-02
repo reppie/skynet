@@ -95,7 +95,7 @@ public class UserDaoImpl extends UserDao {
 		user.setDefaultProfile((Boolean) record.get(2));
 		user.setStatusesCount((Integer) record.get(3));
 		user.setProfileBackgroundTiled((Boolean) record.get(4));
-		user.setLanguage(Language.select((Long) record.get(5)));
+		user.setLanguage(Language.select((Integer) record.get(5)));
 		user.setProfileLinkColor((String) record.get(6));
 		user.setFollowing((Integer) record.get(7));
 		user.setFavouritesCount((Integer) record.get(8));
@@ -120,7 +120,7 @@ public class UserDaoImpl extends UserDao {
 		
 		user.setFollowRequestSent((Boolean) record.get(25));
 		user.setUrl(Url.select((String) record.get(26)));
-		user.setTimeZone(TimeZone.select((Long) record.get(27)));
+		user.setTimeZone(TimeZone.select((Integer) record.get(27)));
 		user.setNotifications((Integer) record.get(28));
 		user.setProfileUseBackgroundImage((Boolean) record.get(29));
 		user.setFriendsCount((Integer) record.get(30));

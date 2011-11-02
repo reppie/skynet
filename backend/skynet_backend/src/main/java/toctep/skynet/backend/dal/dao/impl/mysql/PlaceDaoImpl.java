@@ -57,8 +57,8 @@ public class PlaceDaoImpl extends PlaceDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		place.setId(id);
-		place.setType(PlaceType.select((Long) record.get(1)));
-		place.setBoundingBox(BoundingBox.select((Long) record.get(2)));
+		place.setType(PlaceType.select((Integer) record.get(1)));
+		place.setBoundingBox(BoundingBox.select((Integer) record.get(2)));
 		place.setName((String) record.get(3));
 		place.setUrl(Url.select((String) record.get(4)));
 		place.setFullName((String) record.get(5));

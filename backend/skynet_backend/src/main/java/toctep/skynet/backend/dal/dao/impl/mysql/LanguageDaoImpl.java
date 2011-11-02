@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.language.Language;
 public class LanguageDaoImpl extends LanguageDao{
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		Language language = (Language) domain;
 		
 		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
@@ -19,13 +19,13 @@ public class LanguageDaoImpl extends LanguageDao{
 			new Param(language.getText(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		language.setId(id);
 	}
 
 	@Override
-	public Language select(Long id) {
+	public Language select(Integer id) {
 		Language language = new Language();
 		
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -43,25 +43,25 @@ public class LanguageDaoImpl extends LanguageDao{
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		Language language = (Language) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + language.getId());
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		Language language = (Language) domain;
 		return this.exists(language.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 

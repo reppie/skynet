@@ -5,7 +5,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.User;
 
-public class TweetContributor extends Domain<Long> {
+public class TweetContributor extends Domain<Integer> {
 
 	private ITweet tweet;
 	private IUser user;
@@ -31,7 +31,7 @@ public class TweetContributor extends Domain<Long> {
 		dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 	}
 	
-	public static Object select(Long id) {
+	public static Object select(Integer id) {
 		//TODO
 		return null;
 	}

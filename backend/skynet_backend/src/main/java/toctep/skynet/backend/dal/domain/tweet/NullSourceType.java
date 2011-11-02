@@ -15,7 +15,7 @@ public class NullSourceType implements ISourceType {
 	private NullSourceType() { }
 	
 	@Override
-	public Long getId() {
+	public Integer getId() {
 		return null;
 	}
 	

@@ -57,9 +57,9 @@ public class TweetDaoImpl extends TweetDao {
 		
 		tweet.setId(id);
 		tweet.setText((String) record.get(1));
-		tweet.setGeo(Geo.select((Long) record.get(2)));
+		tweet.setGeo(Geo.select((Integer) record.get(2)));
 		tweet.setTruncated((Boolean) record.get(3));
-		tweet.setSourceType(SourceType.select((Long) record.get(4)));
+		tweet.setSourceType(SourceType.select((Integer) record.get(4)));
 		tweet.setFavorited((Boolean) record.get(5));
 		tweet.setInReplyToTweetTwitter(Tweet.select((Long) record.get(6)));
 		tweet.setInReplyToUserTwitter(User.select((Long) record.get(7)));

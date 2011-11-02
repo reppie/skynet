@@ -7,7 +7,7 @@ import toctep.skynet.backend.dal.dao.CountryDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.country.Country;
 
-public class CountryDaoImpl extends CountryDao{
+public class CountryDaoImpl extends CountryDao {
 
 	@Override
 	public void insert(Domain<String> domain) {
