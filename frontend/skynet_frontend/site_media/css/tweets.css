@@ -3,7 +3,7 @@
 	font-size: 15px;
 	position: relative;
 	height: 72px;
-	border-bottom: solid 1px #CCCCCC	;
+	border-bottom: dotted 1px #ccc;
 }
 .tweet.loading{
 	display:none;
@@ -25,4 +25,14 @@
 .tweet .tweet-footer{
 	font-size: 9px;
 	
+}
+
+.main .tweet:nth-child(even)
+{
+	background-color: #f2f2f2;
+}
+
+.main .tweet:nth-child(odd)
+{
+	background-color: #e8e8e8;
 }

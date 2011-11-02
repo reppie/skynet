@@ -32,39 +32,35 @@
 				</a>
 				{% endblock %}
 			</header>
-			<section class="span-18 main">
+			<section class="span-15 main">
 				<div class="crumble-path"></div>
 				
 				{% block searchbar %}
-				<form id="keyword-search-form" method="get">
-					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
-					{% if search_string %}
-						value="{{ search_string }}" 
-					{% endif %}
-					/>
-					<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
-				</form>
-				
+					<form id="keyword-search-form" method="get">
+						<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
+						{% if search_string %}
+							value="{{ search_string }}" 
+						{% endif %}
+						/>
+						<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
+					</form>
  				{% endblock %}
+ 				
  				<div class="tag-cloud main-tag-cloud"></div>
+ 				
 				{% block main %}The center column{% endblock %}
 			</section>
-			<aside class="span-6 last">
+			<aside class="span-9 last">
 				{% block sidebar %}
 					<section id="region-name">
 						{% block region-name %}
-							<h1>Nederland</h1>
+							<h1 class="title">Current Region</h1>
+							<p id="current-region">Nederland</h1>
 						{% endblock %}
 					</section>
 					<section id="tag-cloud">
 						<h1 class="title">Tag cloud</h1>
 						{% block tag-cloud %}
-						{% endblock %}
-					</section>
-					<section id="moodgraph">
-						<h1 class="title">Mood graph</h1>
-						{% block moodgraph %}
-							<img src="/site_media/img/dummy/graph.png"/>
 						{% endblock %}
 					</section>
 				{% endblock %}
