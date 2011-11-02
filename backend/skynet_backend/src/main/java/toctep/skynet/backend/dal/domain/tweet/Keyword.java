@@ -38,7 +38,7 @@ public class Keyword extends Domain<Long> implements IKeyword {
 			return (Keyword) dao.select(id);
 		}
 		
-		return new NullKeyword();
+		return NullKeyword.getInstance();
 	}
 	
 }

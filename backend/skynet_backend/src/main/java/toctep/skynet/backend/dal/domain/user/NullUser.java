@@ -14,6 +14,17 @@ import toctep.skynet.backend.dal.domain.url.NullUrl;
 
 public class NullUser implements IUser {
 
+	private static NullUser instance;
+	
+	public static NullUser getInstance() {
+		if (instance == null) {
+			instance = new NullUser();
+		}
+		return instance;
+	}
+	
+	private NullUser() { }
+	
 	@Override
 	public Long getId() {
 		return null;
@@ -51,7 +62,7 @@ public class NullUser implements IUser {
 
 	@Override
 	public ILanguage getLanguage() {
-		return new NullLanguage();
+		return NullLanguage.getInstance();
 	}
 
 	@Override
@@ -71,7 +82,7 @@ public class NullUser implements IUser {
 
 	@Override
 	public IPlace getPlace() {
-		return new NullPlace();
+		return NullPlace.getInstance();
 	}
 
 	@Override
@@ -81,12 +92,12 @@ public class NullUser implements IUser {
 
 	@Override
 	public IUrl getProfileBackgroundImageUrl() {
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 
 	@Override
 	public IUrl getProfileBackgroundImageUrlHttps() {
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 
 	@Override
@@ -96,12 +107,12 @@ public class NullUser implements IUser {
 
 	@Override
 	public IUrl getProfileImageUrl() {
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 
 	@Override
 	public IUrl getProfileImageUrlHttps() {
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 
 	@Override
@@ -136,12 +147,12 @@ public class NullUser implements IUser {
 
 	@Override
 	public ITimeZone getTimeZone() {
-		return new NullTimeZone();
+		return NullTimeZone.getInstance();
 	}
 
 	@Override
 	public IUrl getUrl() {
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 
 	@Override

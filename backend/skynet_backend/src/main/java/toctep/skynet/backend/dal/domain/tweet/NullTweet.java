@@ -49,7 +49,7 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public ISourceType getSourceType() {
-		return new NullSourceType();
+		return NullSourceType.getInstance();
 	}
 
 	@Override
@@ -59,12 +59,12 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public ITweet getInReplyToTweetTwitter() {
-		return new NullTweet();
+		return NullTweet.getInstance();
 	}
 
 	@Override
 	public IUser getInReplyToUserTwitter() {
-		return new NullUser();
+		return NullUser.getInstance();
 	}
 
 	@Override
@@ -79,12 +79,12 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public IPlace getPlace() {
-		return new NullPlace();
+		return NullPlace.getInstance();
 	}
 
 	@Override
 	public IUser getUser() {
-		return new NullUser();
+		return NullUser.getInstance();
 	}
 
 	@Override

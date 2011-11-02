@@ -20,11 +20,11 @@ import toctep.skynet.backend.dal.domain.url.Url;
 
 public class User extends Domain<Long> implements IUser  {
 
-	private IPlace place 						= new NullPlace();
+	private IPlace place 						= NullPlace.getInstance();
 	private boolean defaultProfile				= false;
 	private int statusesCount					= 0;	
 	private long profileBackgroundTile			= 0L;
-	private ILanguage language 					= new NullLanguage();
+	private ILanguage language 					= NullLanguage.getInstance();
 	private String profileLinkColor				= "";
 	private int following						= 0;
 	private int favouritesCount					= 0;
@@ -40,18 +40,18 @@ public class User extends Domain<Long> implements IUser  {
 	private boolean defaultProfileImage			= false;
 	private int followersCount					= 0;
 	private boolean geoEnabled					= false;
-	private IUrl profileBackgroundImageUrl 		= new NullUrl();
-	private IUrl profileBackgroundImageUrlHttps = new NullUrl();
+	private IUrl profileBackgroundImageUrl 		= NullUrl.getInstance();
+	private IUrl profileBackgroundImageUrlHttps = NullUrl.getInstance();
 	private boolean followRequestSent			= false;
-	private IUrl url 							= new NullUrl();
-	private ITimeZone timeZone 					= new NullTimeZone();
+	private IUrl url 							= NullUrl.getInstance();
+	private ITimeZone timeZone 					= NullTimeZone.getInstance();
 	private long notifications					= 0L;
 	private boolean profileUseBackgroundImage	= false;
 	private int friendsCount					= 0;
 	private String profileSideBarFillColor		= "";
 	private String screenName					= "";
-	private IUrl profileImageUrl 				= new NullUrl();
-	private IUrl profileImageUrlHttps 			= new NullUrl();
+	private IUrl profileImageUrl 				= NullUrl.getInstance();
+	private IUrl profileImageUrlHttps 			= NullUrl.getInstance();
 	private boolean showAllInlineMedia			= false;
 	private boolean isTranslator				= false;
 	private int listedCount						= 0;
@@ -394,7 +394,7 @@ public class User extends Domain<Long> implements IUser  {
 			return (User) dao.select(id);
 		}
 		
-		return new NullUser();
+		return NullUser.getInstance();
 	}
 	
 }

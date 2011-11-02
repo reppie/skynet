@@ -8,8 +8,19 @@ import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public class NullPlace implements IPlace{
+public class NullPlace implements IPlace {
 
+	private static NullPlace instance;
+	
+	public static NullPlace getInstance() {
+		if (instance == null) {
+			instance = new NullPlace();
+		}
+		return instance;
+	}
+	
+	private NullPlace() { }
+	
 	@Override
 	public String getId() {
 		return null;
@@ -77,12 +88,12 @@ public class NullPlace implements IPlace{
 
 
 	public IPlaceType getType() {
-		return new NullPlaceType();
+		return NullPlaceType.getInstance();
 	}
 
 	@Override
 	public IUrl getUrl() {
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 	
 }

@@ -18,7 +18,7 @@ public class Url extends Domain<String> implements IUrl{
 			return (Url) dao.select(id);
 		}
 		
-		return new NullUrl();
+		return NullUrl.getInstance();
 	}
 	
 }
