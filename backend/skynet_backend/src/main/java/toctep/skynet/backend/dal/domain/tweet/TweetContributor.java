@@ -29,4 +29,10 @@ public class TweetContributor extends Domain {
 	public void setDao() {
 		dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 	}
+	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }

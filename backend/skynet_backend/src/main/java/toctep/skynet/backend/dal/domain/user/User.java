@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Date;
 
+import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
@@ -384,5 +385,16 @@ public class User extends Domain<Long> implements IUser  {
 		}
 		
 		super.save();
-	}	
+	}
+	
+	public static IUser select(Long id) {
+		UserDao dao = DaoFacadeImpl.getInstance().getUserDao();
+		
+		if (dao.exists(id)) {
+			return (User) dao.select(id);
+		}
+		
+		return new NullUser();
+	}
+	
 }

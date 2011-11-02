@@ -5,7 +5,6 @@ import java.sql.Types;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.url.Url;
-import toctep.skynet.backend.dal.domain.user.User;
 
 public class UrlDaoImpl extends UrlDao {
 

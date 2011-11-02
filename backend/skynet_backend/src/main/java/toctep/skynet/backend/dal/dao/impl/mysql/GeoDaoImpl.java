@@ -6,7 +6,7 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
-import toctep.skynet.backend.dal.domain.geo.NullGeoType;
+import toctep.skynet.backend.dal.domain.geo.GeoType;
 
 public class GeoDaoImpl extends GeoDao {
 	
@@ -39,8 +39,8 @@ public class GeoDaoImpl extends GeoDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		geo.setId(id);
-		geo.setType(new NullGeoType()); //TODO
-		geo.setCoordinates((String) record.get(2));
+		geo.setType(GeoType.select((Long) record.get(2)));
+		geo.setCoordinates((String) record.get(3));
 		
 		return geo;
 	}

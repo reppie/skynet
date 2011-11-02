@@ -30,4 +30,9 @@ public class TweetUrl extends Domain {
 		dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
 	}
 	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }

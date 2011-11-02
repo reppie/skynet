@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.place;
 
+import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
@@ -169,5 +170,17 @@ public class Place extends Domain<String> implements IPlace{
 		}
 		
 		super.save();
-	}		
+	}
+	
+	
+	public static IPlace select(String id) {
+		PlaceDao dao = DaoFacadeImpl.getInstance().getPlaceDao();
+		
+		if (dao.exists(id)) {
+			return (Place) dao.select(id);
+		}
+		
+		return new NullPlace();
+	}
+	
 }

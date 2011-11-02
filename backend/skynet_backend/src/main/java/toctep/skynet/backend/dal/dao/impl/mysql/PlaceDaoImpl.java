@@ -5,10 +5,10 @@ import java.util.List;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
-import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
 public class PlaceDaoImpl extends PlaceDao {
@@ -57,20 +57,20 @@ public class PlaceDaoImpl extends PlaceDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		place.setId(id);
-		place.setType(new NullPlaceType()); //TODO
-		place.setBoundingBox(new NullBoundingBox()); //TODO
-		place.setName((String) record.get(3));
+		place.setType(PlaceType.select((Long) record.get(2)));
+		place.setBoundingBox(BoundingBox.select((Long) record.get(3)));
+		place.setName((String) record.get(4));
 		place.setUrl(new NullUrl()); //TODO
-		place.setFullName((String) record.get(5));
+		place.setFullName((String) record.get(6));
 		place.setCountry(new NullCountry()); //TODO
-		place.setStreetAddress((String) record.get(7));
-		place.setLocality((String) record.get(8));
-		place.setRegion((String) record.get(9));
-		place.setIso3((String) record.get(10));
-		place.setPostalCode((String) record.get(11));
-		place.setPhone((String) record.get(12));
-		place.setTwitter((String) record.get(13));
-		place.setAppId((String) record.get(14));
+		place.setStreetAddress((String) record.get(8));
+		place.setLocality((String) record.get(9));
+		place.setRegion((String) record.get(10));
+		place.setIso3((String) record.get(11));
+		place.setPostalCode((String) record.get(12));
+		place.setPhone((String) record.get(13));
+		place.setTwitter((String) record.get(14));
+		place.setAppId((String) record.get(15));
 		
 		return place;
 	}

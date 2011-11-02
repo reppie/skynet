@@ -51,5 +51,11 @@ public class TweetKeyword extends Domain<Long> {
 		}
 		
 		super.save();
-	}	
+	}
+	
+	public static Object select(Long id) {
+		//TODO
+		return null;
+	}
+	
 }
