@@ -41,7 +41,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 		
 		tweetHashtag.setId(id);
 		tweetHashtag.setTweet(Tweet.select((Long) record.get(1)));
-		tweetHashtag.setHashtag(Hashtag.select((Integer) record.get(3)));
+		tweetHashtag.setHashtag(Hashtag.select((Integer) record.get(2)));
 		
 		return tweetHashtag;
 	}
