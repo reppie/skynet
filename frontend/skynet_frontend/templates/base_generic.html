@@ -26,14 +26,14 @@
 	<body>
 		
 		<div class="container">
-			<header class="span-18">
+			<header class="span-24">
 				{% block header %}
 				<a href="/" >
 					<div id="logo"></div>
 				</a>
 				{% endblock %}
 			</header>
-			<section class="span-18 main last">
+			<section class="span-18 main">
 				{% block searchbar %}
 				<form id="keyword-search-form" method="get" action="/twitter/search">
 					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
@@ -47,7 +47,7 @@
  
 				{% block main %}The center column{% endblock %}
 			</section>
-			<aside class="span-6">
+			<aside class="span-6 last">
 				{% block sidebar %}
 					<section id="region-name">
 						{% block region-name %}
@@ -66,13 +66,13 @@
 						{% endblock %}
 					</section>
 				{% endblock %}
-				<footer class="span-24">
+			</aside>
+			<footer class="span-18">
 				{% block footer %}
 				<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
 				<p>&copy; Hanzehogeschool Groningen</p>
 				{% endblock %}
-				</footer>
-			</aside>
+			</footer>
 		</div>
 		{% csrf_token %}
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
