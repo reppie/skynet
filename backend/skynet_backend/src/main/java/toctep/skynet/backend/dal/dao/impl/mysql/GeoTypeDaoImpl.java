@@ -7,10 +7,10 @@ import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 
-public class GeoTypeDaoImpl extends GeoTypeDao{
+public class GeoTypeDaoImpl extends GeoTypeDao {
 
 	@Override
-	public void insert(Domain<Long> domain) {
+	public void insert(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
 		
 		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
@@ -19,13 +19,13 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 			new Param(geoType.getText(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		int id = MySqlUtil.getInstance().insert(query, params);
 		
 		geoType.setId(id);
 	}
 
 	@Override
-	public GeoType select(Long id) {
+	public GeoType select(Integer id) {
 		GeoType geoType = new GeoType();
 
 		String query = "SELECT * FROM " + tableName + " WHERE id=?";
@@ -43,25 +43,25 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 	}
 
 	@Override
-	public void update(Domain<Long> domain) {
+	public void update(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
 		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + geoType.getId());
 	}
 
 	@Override
-	public boolean exists(Domain<Long> domain) {
+	public boolean exists(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
 		return this.exists(geoType.getId());
 	}
 	
 	@Override
-	public boolean exists(Long id) {
+	public boolean exists(Integer id) {
 		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 

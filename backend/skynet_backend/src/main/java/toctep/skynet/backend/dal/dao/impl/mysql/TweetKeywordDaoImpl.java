@@ -23,7 +23,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 			new Param(tweetKeyword.getKeyword().getId(), Types.BIGINT)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		tweetKeyword.setId(id);
 	}

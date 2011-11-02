@@ -19,7 +19,7 @@ public class LanguageDaoImpl extends LanguageDao{
 			new Param(language.getText(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		language.setId(id);
 	}

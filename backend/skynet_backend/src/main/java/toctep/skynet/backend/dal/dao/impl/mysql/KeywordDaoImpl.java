@@ -23,7 +23,7 @@ public class KeywordDaoImpl extends KeywordDao {
 			new Param(keyword.getKeyword(), Types.VARCHAR)
 		};
 		
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		keyword.setId(id);
 	}

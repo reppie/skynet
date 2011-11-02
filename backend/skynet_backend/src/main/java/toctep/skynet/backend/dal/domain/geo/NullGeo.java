@@ -15,7 +15,7 @@ public class NullGeo implements IGeo {
 	private NullGeo() { }
 	
 	@Override
-	public Long getId() {
+	public Integer getId() {
 		return null;
 	}
 	

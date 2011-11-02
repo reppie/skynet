@@ -20,7 +20,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 			new Param(timeZone.getTimeZone(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		timeZone.setId(id);
 	}

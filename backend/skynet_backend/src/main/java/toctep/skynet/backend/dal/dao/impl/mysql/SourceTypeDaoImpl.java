@@ -19,7 +19,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 			new Param(sourceType.getText(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		sourceType.setId(id);
 	}

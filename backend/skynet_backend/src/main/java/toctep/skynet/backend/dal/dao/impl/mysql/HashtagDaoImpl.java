@@ -19,7 +19,7 @@ public class HashtagDaoImpl extends HashtagDao{
 			new Param(hashtag.getText(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		hashtag.setId(id);
 	}

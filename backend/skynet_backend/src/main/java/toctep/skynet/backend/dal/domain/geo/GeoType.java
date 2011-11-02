@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class GeoType extends Domain<Long> implements IGeoType {
+public class GeoType extends Domain<Integer> implements IGeoType {
 
 	private String text = "";
 
@@ -21,7 +21,7 @@ public class GeoType extends Domain<Long> implements IGeoType {
 		dao = DaoFacadeImpl.getInstance().getGeoTypeDao();	
 	}
 	
-	public static IGeoType select(Long id) {
+	public static IGeoType select(Integer id) {
 		GeoTypeDao dao = DaoFacadeImpl.getInstance().getGeoTypeDao();
 		
 		if (dao.exists(id)) {

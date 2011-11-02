@@ -19,7 +19,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 			new Param(placeType.getText(), Types.VARCHAR)
 		};
 			
-		Long id = MySqlUtil.getInstance().insert(query, params);
+		long id = MySqlUtil.getInstance().insert(query, params);
 		
 		placeType.setId(id);
 	}
