@@ -3,9 +3,6 @@ package toctep.skynet.backend.test.bll;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +12,10 @@ import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
-import com.mysql.jdbc.Connection;
-
 public class TweetParserTest {
 	
 	@Before
 	public void setup() {
-		Connection conn = MySqlUtil.getInstance("mysql_test.properties").getConnection();
 	}
 
 	@Test
@@ -57,18 +51,7 @@ public class TweetParserTest {
 		
 		indexer.indexTweetKeywords(tweet);
 		
-		assertEquals("keyword count: ", 6, MySqlUtil.getInstance().count("twitter_keyword"));
-		
-		long wilfried_id = keyword.getId();
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM twitter_tweet_keywords WHERE keyword_id=" + wilfried_id);
-		try {
-			while(rs.next()) {
-				System.out.println(rs.getString("tweet_id"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-			
+		assertEquals("keyword count: ", 6, MySqlUtil.getInstance().count("twitter_keyword"));			
 	}
 	
 	@After
