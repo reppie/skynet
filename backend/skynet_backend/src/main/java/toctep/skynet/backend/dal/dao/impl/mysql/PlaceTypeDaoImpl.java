@@ -57,7 +57,12 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		PlaceType placeType = (PlaceType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + placeType.getId());
+		return this.exists(placeType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

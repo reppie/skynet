@@ -57,7 +57,12 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		SourceType sourceType = (SourceType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + sourceType.getId());
+		return this.exists(sourceType.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

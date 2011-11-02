@@ -59,7 +59,12 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		TimeZone timeZone = (TimeZone) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + timeZone.getId());
+		return this.exists(timeZone.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 	
 	@Override

@@ -62,6 +62,13 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

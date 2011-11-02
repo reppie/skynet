@@ -60,8 +60,14 @@ public class GeoDaoImpl extends GeoDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Geo geo = (Geo) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + geo.getId());
+		return this.exists(geo.getId());
 	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+	}
+	
 	@Override
 	public int count() {
 		return MySqlUtil.getInstance().count(tableName);

@@ -57,7 +57,12 @@ public class HashtagDaoImpl extends HashtagDao{
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Hashtag hashtag = (Hashtag) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + hashtag.getId());
+		return this.exists(hashtag.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

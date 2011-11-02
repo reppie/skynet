@@ -82,33 +82,13 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		boolean exists = false;
-		
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		try {
-			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE keyword = '" + ((Keyword) domain).getKeyword() + "';");
-			int counter = 0;
-			while (rs.next()) {
-				counter++;
-			}
-			if (counter > 0) {
-				exists = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return exists;
+		Keyword keyword = (Keyword) domain;
+		return this.exists(keyword.getId());
+	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "keyword=" + id);
 	}
 
 	@Override
