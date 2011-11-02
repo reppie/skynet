@@ -30,10 +30,15 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	public BoundingBox select(Long id) {
 		BoundingBox boundingBox = new BoundingBox();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(boundingBox.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBox.setId(id);
-		//boundingBox.setType(); 
 		try {
 			boundingBox.setCoordinates(rs.getString("coordinates"));
 		} catch (SQLException e) {

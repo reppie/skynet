@@ -29,10 +29,15 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	public SourceType select(Long id) {
 		SourceType sourceType = new SourceType();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);			
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
-		sourceType.setId(id);
+		Param[] params = new Param[] {
+			new Param(sourceType.getId(), Types.BIGINT)
+		};
 		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		
+		sourceType.setId(id);	
 		try {
 			sourceType.setText(rs.getString("text"));
 		} catch (SQLException e) {

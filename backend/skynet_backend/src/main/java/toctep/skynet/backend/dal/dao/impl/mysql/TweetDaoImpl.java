@@ -43,10 +43,15 @@ public class TweetDaoImpl extends TweetDao {
 	public Tweet select(Long id) {
 		Tweet tweet = new Tweet();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT id, text FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		tweet.setId(id);
-		
 		try {
 			tweet.setText(rs.getString("text"));
 		} catch (SQLException e) {

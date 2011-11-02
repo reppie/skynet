@@ -131,14 +131,18 @@ public class MySqlUtil {
 		return id;
 	}
 	
-	public ResultSet select(String query) {
+	public ResultSet select(String query, Param[] params) {
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		Statement stmt = null;
-		
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			rs = pstmt.executeQuery();
 			rs.first();
 		} catch (SQLException e) {
 			e.printStackTrace();

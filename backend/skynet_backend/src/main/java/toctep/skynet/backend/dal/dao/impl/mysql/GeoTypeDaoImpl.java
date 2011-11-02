@@ -28,7 +28,14 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 	@Override
 	public GeoType select(Long id) {
 		GeoType geoType = new GeoType();
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(geoType.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		geoType.setId(id);
 		try {
@@ -36,6 +43,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return geoType;
 	}
 

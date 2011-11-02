@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
@@ -41,8 +43,24 @@ public class PlaceDaoImpl extends PlaceDao {
 
 	@Override
 	public Place select(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Place place = new Place();
+		
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(id, Types.VARCHAR)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		
+		place.setId(id);
+		try {
+			place.setName(rs.getString("name"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return place;
 	}
 
 	@Override

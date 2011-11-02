@@ -78,12 +78,15 @@ public class UserDaoImpl extends UserDao {
 	public User select(Long id) {
 		User user = new User();
 		
-		ResultSet rs = MySqlUtil.getInstance().select(
-			"SELECT name FROM " + tableName + " WHERE id = " + id
-		);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(user.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		user.setId(id);
-		
 		try {
 			user.setName(rs.getString("name"));
 			

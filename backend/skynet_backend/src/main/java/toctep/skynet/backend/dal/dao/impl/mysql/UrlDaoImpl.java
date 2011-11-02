@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.UrlDao;
@@ -23,8 +25,23 @@ public class UrlDaoImpl extends UrlDao {
 
 	@Override
 	public Url select(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Url url = new Url();
+		
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(id, Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		
+		try {
+			url.setId(rs.getString("id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return url;
 	}
 
 	@Override

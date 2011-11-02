@@ -30,10 +30,15 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	public TimeZone select(Long id) {
 		TimeZone timeZone = new TimeZone();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(timeZone.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		timeZone.setId(id);
-		
 		try {
 			timeZone.setUtcOffset(rs.getInt("utc_offset"));
 			timeZone.setTimeZone((rs.getString("time_zone")));
