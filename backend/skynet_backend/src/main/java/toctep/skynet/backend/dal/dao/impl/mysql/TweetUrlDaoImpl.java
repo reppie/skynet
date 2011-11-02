@@ -35,6 +35,12 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean exists(Long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
 	public int count() {
