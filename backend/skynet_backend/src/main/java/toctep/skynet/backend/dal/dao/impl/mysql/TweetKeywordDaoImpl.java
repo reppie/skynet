@@ -5,8 +5,8 @@ import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.tweet.NullKeyword;
-import toctep.skynet.backend.dal.domain.tweet.NullTweet;
+import toctep.skynet.backend.dal.domain.tweet.Keyword;
+import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetKeywordDaoImpl extends TweetKeywordDao {
@@ -41,9 +41,9 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		List<Object> record = MySqlUtil.getInstance().select(query, params);
 		
 		tweetKeyword.setId(id);
-		tweetKeyword.setTweet(NullTweet.getInstance()); //TODO
+		tweetKeyword.setTweet(Tweet.select((Long) record.get(1)));
 		tweetKeyword.setTweetKeywordValue((String) record.get(2));
-		tweetKeyword.setKeyword(NullKeyword.getInstance()); //TODO
+		tweetKeyword.setKeyword(Keyword.select((Long) record.get(3)));
 		
 		return tweetKeyword;
 	}
@@ -56,20 +56,19 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public void delete(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		
+		TweetKeyword tweetkeyword = (TweetKeyword) domain;	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetkeyword.getId());
 	}
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		return false;
+		TweetKeyword tweetkeyword = (TweetKeyword) domain;
+		return this.exists(tweetkeyword.getId());
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

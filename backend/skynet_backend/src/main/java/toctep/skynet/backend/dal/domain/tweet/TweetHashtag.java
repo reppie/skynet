@@ -3,13 +3,14 @@ package toctep.skynet.backend.dal.domain.tweet;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
+import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 
-public class TweetHashtag extends Domain {
+public class TweetHashtag extends Domain<Long> {
 	
-	private Tweet tweet;
-	private Hashtag hashtag;
+	private ITweet tweet;
+	private IHashtag hashtag;
 	
-	public Tweet getTweet() {
+	public ITweet getTweet() {
 		return tweet;
 	}
 
@@ -17,7 +18,7 @@ public class TweetHashtag extends Domain {
 		this.tweet = tweet;
 	}
 
-	public Hashtag getHashtag() {
+	public IHashtag getHashtag() {
 		return hashtag;
 	}
 

@@ -2,14 +2,15 @@ package toctep.skynet.backend.dal.domain.tweet;
 
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 
-public class TweetUrl extends Domain {
+public class TweetUrl extends Domain<Long> {
 	
-	private Tweet tweet;
-	private Url url;
+	private ITweet tweet;
+	private IUrl url;
 
-	public Tweet getTweet() {
+	public ITweet getTweet() {
 		return tweet;
 	}
 
@@ -17,7 +18,7 @@ public class TweetUrl extends Domain {
 		this.tweet = tweet;
 	}
 
-	public Url getUrl() {
+	public IUrl getUrl() {
 		return url;
 	}
 
