@@ -63,6 +63,13 @@ footer
 	border: 1px solid #ccc;
 }
 
+#searchbar.loading
+{
+	background-image: url("../img/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position: 455px;
+}
+
 #searchbutton
 {
 	width: 100px;
