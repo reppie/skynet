@@ -16,17 +16,17 @@ public class MysqlUtilTest extends TestCase {
 		MySqlUtil mysql = MySqlUtil.getInstance();
 		mysql.truncateDatabase();
 		
-		Long id = mysql.insert(
+		int id = mysql.insert(
 			"INSERT INTO twitter_keyword(keyword) VALUES(?)", 
 			new Param[]{new Param("keyword1", Types.VARCHAR)}
 		);
-		assertTrue("ID: ", new Long(1).equals(id));
+		assertEquals("ID: ", 1, id);
 		
 		id = mysql.insert(
 			"INSERT INTO twitter_keyword(keyword) VALUES(?)",
 			new Param[]{new Param("keyword2", Types.VARCHAR)}
 		);
-		assertTrue("ID: ", new Long(2).equals(id));
+		assertEquals("ID: ", 2, id);
 	}
 	
 }

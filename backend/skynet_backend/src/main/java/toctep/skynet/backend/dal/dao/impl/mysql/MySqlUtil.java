@@ -113,8 +113,6 @@ public class MySqlUtil {
 				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
 			}
 			
-			System.out.println(pstmt);
-			
 			pstmt.executeUpdate();		
 			
 			rs = pstmt.getGeneratedKeys();

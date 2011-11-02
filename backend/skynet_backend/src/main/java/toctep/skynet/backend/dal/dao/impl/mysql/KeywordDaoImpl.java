@@ -61,7 +61,7 @@ public class KeywordDaoImpl extends KeywordDao {
 			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
 			rs = stmt.executeQuery("SELECT id FROM " + tableName + " WHERE keyword = '" + keyword.getKeyword() + "';");
 			rs.first();
-			keyword.setId(rs.getLong("id"));
+			keyword.setId(rs.getInt("id"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -75,7 +75,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	}
 
 	@Override
-	public void delete(Domain<Long> domain) {
+	public void delete(Domain<Integer> domain) {
 		// TODO Auto-generated method stub
 		
 	}
