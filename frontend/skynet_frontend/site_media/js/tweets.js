@@ -163,20 +163,6 @@
 		});
 	}
 	
-	api.Tweet.since = function(created_at){
-		
-		var second = 1000;
-		
-		var date = new Date(Date.parse(created_at));
-		var span = new Date(new Date() - date);
-		console.log(date);
-		
-		var ret =  date.toString("yyyy-MM-dd") +" "+ (span.getYear()-1970>0?date.getYear():"");
-		console.log(date.tos );
-		return ret;
-	}
-	
-	
 	api.Tweet.get = function(tweetId, callback) {
 		var This = this;
 		var tweet = api.cache.get('api.Tweet', tweetId);
@@ -219,11 +205,12 @@
 	}
 	api.Tweet.search = function(filters, callback) {
 		var This = this;
-		$.jsonRPC.request('search_tweet', {
+		$.jsonRPC.request('search_tweets', {
 		  	params: [filters],
 		  	success: function(result){
-		  		var tweetIds = result.result;
-		  		callback.call(This, tweetIds);
+		  		var tweetIds = result.result.tweet_ids;
+		  		var cloud = result.result.cloud;
+		  		callback.call(This, tweetIds,cloud);
 		  },
 		  error: function(result){
 	  		callback.call(This, null);

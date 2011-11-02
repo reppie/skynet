@@ -1,43 +1,13 @@
-/* Author:
-
-*/
-/*
-api.Tweet.get(1, function(tweet){
+$("form#keyword-search-form").submit(function(){
+	var value = $(this).find("input#searchbar").val();
+	console.log(value);
+		
+	var filters = [{'type':'keyword','value':value}];
 	
-	console.log(tweet);
-	
-	if(tweet) {
-		tweet.getUser(function(user){
-			console.log(user);
-			api.Tweet.get(1, function(tweet){
-				if(tweet) {
-					tweet.getUser(function(user){
-						console.log(user);
-						
-					});
-				
-				}
-			});
-		});
-	}
-});
-
-api.Tweet.get(1, function(tweet){
-	
-	console.log(tweet);
-	
-	if(tweet) {
-		tweet.getUser(function(user){
-			console.log(user);
-			
-		});
-	}
-});
-*/
-
-
-
-
-
-
-
+	api.Tweet.search(filters, function(twitterIds){
+		console.log(twitterIds);
+		$(".tweets").TweetList(twitterIds);
+		
+	});
+	return false;
+})
