@@ -26,10 +26,14 @@
 	<body>
 		
 		<div class="container">
-			<header class="span-24">
-				{% block header %}<h1>Social Media Lab</h1>{% endblock %}
+			<header class="span-18">
+				{% block header %}
+				<a href="/" >
+					<div id="logo"></div>
+				</a>
+				{% endblock %}
 			</header>
-			<section class="span-18 main">
+			<section class="span-18 main last">
 				{% block searchbar %}
 				<form id="keyword-search-form" method="get" action="/twitter/search">
 					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
@@ -43,7 +47,7 @@
  
 				{% block main %}The center column{% endblock %}
 			</section>
-			<aside class="span-6 last">
+			<aside class="span-6">
 				{% block sidebar %}
 					<section id="region-name">
 						{% block region-name %}
@@ -69,7 +73,6 @@
 				{% endblock %}
 				</footer>
 			</aside>
-			
 		</div>
 		{% csrf_token %}
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
