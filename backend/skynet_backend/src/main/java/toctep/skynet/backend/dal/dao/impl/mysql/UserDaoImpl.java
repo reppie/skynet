@@ -149,8 +149,13 @@ public class UserDaoImpl extends UserDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		User user = (User) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id = " + user.getId());
+		return this.exists(user.getId());
 	}
+	
+	@Override
+	public boolean exists(Long id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+	}	
 
 	@Override
 	public int count() {

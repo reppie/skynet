@@ -5,6 +5,7 @@ import java.sql.Types;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class UrlDaoImpl extends UrlDao {
 
@@ -53,8 +54,13 @@ public class UrlDaoImpl extends UrlDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Url url = (Url) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text = " + MySqlUtil.escape(url.getId()));
+		return this.exists(url.getId());
 	}
+	
+	@Override
+	public boolean exists(String id) {
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+	}	
 
 	@Override
 	public int count() {
