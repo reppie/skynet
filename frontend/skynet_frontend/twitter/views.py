@@ -80,6 +80,13 @@ class TwitterRpcMethods(object):
                     'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
                     'cloud':cloud,
             }
-    
+    @staticmethod
+    @jsonremote(service)
+    def cloud():
+        tweets = Tweet.objects.all()
+        tweet_ids = tweets.values_list('id', flat=True)                
+        keywords = Keyword.get_all_in_tweets(tweet_ids)
+        cloud = KeywordCloud(keywords)
+        return cloud
     
     

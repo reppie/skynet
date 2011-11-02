@@ -33,17 +33,21 @@
 				{% endblock %}
 			</header>
 			<section class="span-15 main">
+				<div class="crumble-path"></div>
+				
 				{% block searchbar %}
-				<form id="keyword-search-form" method="get">
-					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
-					{% if search_string %}
-						value="{{ search_string }}" 
-					{% endif %}
-					/>
-					<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
-				</form>
+					<form id="keyword-search-form" method="get">
+						<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
+						{% if search_string %}
+							value="{{ search_string }}" 
+						{% endif %}
+						/>
+						<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
+					</form>
  				{% endblock %}
- 
+ 				
+ 				<div class="tag-cloud main-tag-cloud"></div>
+ 				
 				{% block main %}The center column{% endblock %}
 			</section>
 			<aside class="span-9 last">

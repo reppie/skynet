@@ -21,9 +21,20 @@ $(function(){
 		api.Tweet.search(filters, function(twitterIds, cloud){
 		
 			$(".tweets").TweetList(twitterIds);
-			$(".tag-cloud").TagCloud(cloud);
+			$(".mini-tag-cloud").TagCloud(cloud);
 		});	
 		return false;
 		
 	});
 });
+
+var crumblePath = $(".crumble-path").CrumblePath();
+if(!crumblePath.path().length){
+	//$(".tweets").hide();
+	api.cloud(function(cloud){
+		console.log(cloud);
+		$(".main-tag-cloud").TagCloud(cloud);
+		
+	});
+}
+

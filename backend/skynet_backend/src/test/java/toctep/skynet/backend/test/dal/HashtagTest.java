@@ -28,7 +28,7 @@ public class HashtagTest extends DomainTest{
 	public void testInsert() {
 		hashtag.save();
 		assertEquals(1, hashtagDao.count());
-		assertTrue(new Long(1).equals(hashtag.getId()));
+		assertTrue(new Integer(1).equals(hashtag.getId()));
 	}
 	
 	@Override
