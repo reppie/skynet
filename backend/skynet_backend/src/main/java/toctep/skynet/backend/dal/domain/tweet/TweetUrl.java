@@ -4,6 +4,7 @@ import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class TweetUrl extends Domain<Integer> {
 	
@@ -30,6 +31,21 @@ public class TweetUrl extends Domain<Integer> {
 	public void setDao() {
 		dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
 	}
+	
+	@Override
+	public void save() {
+		
+		if (tweet instanceof Tweet) {
+			((Tweet) tweet).save();
+			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+		}
+		
+		if (url instanceof Url) {
+			((Url) url).save();
+			((Url) this.url).setId(((Url) url).getId());
+		}		
+		super.save();
+	}	
 	
 	public static TweetUrl select(Integer id) {
 		TweetUrlDao dao = DaoFacadeImpl.getInstance().getTweetUrlDao();

@@ -3,7 +3,10 @@ package toctep.skynet.backend.dal.domain.tweet;
 import toctep.skynet.backend.dal.dao.TweetContributorDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetContributor extends Domain<Integer> {
 
@@ -31,6 +34,21 @@ public class TweetContributor extends Domain<Integer> {
 		dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 	}
 	
+	@Override
+	public void save() {
+		
+		if (tweet instanceof Tweet) {
+			((Tweet) tweet).save();
+			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+		}
+		
+		if (user instanceof User) {
+			((User) user).save();
+			((User) this.user).setId(((User) user).getId());
+		}		
+		super.save();
+	}	
+	
 	public static TweetContributor select(Integer id) {
 		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 		
@@ -39,6 +57,5 @@ public class TweetContributor extends Domain<Integer> {
 		}
 		
 		return null;
-	}
-	
+	}	
 }
