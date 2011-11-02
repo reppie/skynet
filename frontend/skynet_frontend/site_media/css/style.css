@@ -31,15 +31,36 @@ aside section
 #keyword-search-form input
 {
 	height: 30px;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+	border-radius: 10px;
 }
 
-#keyword-search-form input[type=text]
+#searchbar
 {
-	width: 90%;
+	width: 520px;
+	display: inline;
+	padding-left: 15px;
+	font-size: 1.3em;
+	color: #aaa;
 }
 
-#keyword-search-form input[type=submit]
+#searchbar:focus
 {
+    -moz-box-shadow: 0px 0px 3px rgba(0, 173, 239, 1);
+    -webkit-box-shadow: 0px 0px 3px rgba(0, 173, 239, 1);
+    box-shadow: 0px 0px 5px rgba(0, 173, 239, 1);
+}
+
+#searchbutton
+{
+	width: 100px;
+	height: 32px;
+	border: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	background: #00ADEF;
+	font-size: 1.5em;
+	color: white;
 }
 
 aside section p
@@ -86,9 +107,9 @@ aside section#region-name h1
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;         
-    -moz-box-shadow: 1px 1px 10px #333;  
-    -webkit-box-shadow: 1px 1px 10px #333;
-    box-shadow: 1px 1px 10px #333;
+    -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
     padding: 40px;
 	margin-top: 5%;
 	border-bottom-right-radius: 0;
@@ -96,7 +117,8 @@ aside section#region-name h1
 	bottom: 0px;
 }
 
-.twitter-logo{
+.twitter-logo
+{
 	float:right;
 	position: relative;
 	top: -50px;

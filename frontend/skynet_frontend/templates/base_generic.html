@@ -32,12 +32,12 @@
 			<section class="span-18 main">
 				{% block searchbar %}
 				<form id="keyword-search-form" method="get" action="/twitter/search">
-					<input type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
+					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
 					{% if search_string %}
 						value="{{ search_string }}" 
 					{% endif %}
 					/>
-					<input type="submit" value="{% trans 'Search' %}" />		
+					<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
 				</form>
  				{% endblock %}
  
