@@ -2,12 +2,13 @@ package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetMention;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetMentionTest extends DomainTest {
 
 	private TweetMention tweetMention;
 	
-	private long userTwitterId;
+	private User user;
 	private Tweet tweet;
 	
 	@Override
@@ -16,8 +17,8 @@ public class TweetMentionTest extends DomainTest {
 		
 		TweetMention tweetMention = new TweetMention();
 		
-		long userTwitterId = 123456789;
-		tweetMention.setUser(userTwitterId);
+		User user = new User();
+		tweetMention.setUser(user);
 		
 		Tweet tweet = new Tweet();
 		tweetMention.setTweet(tweet);
@@ -27,7 +28,7 @@ public class TweetMentionTest extends DomainTest {
 	public void testCreate() {
 		assertNotNull(tweetMention);
 		assertEquals("getTweet: ", tweet, tweetMention.getTweet());
-		assertEquals("getUser: ", userTwitterId, tweetMention.getUser());
+		assertEquals("getUser: ", user, tweetMention.getUser());
 	}
 
 	@Override
@@ -38,8 +39,12 @@ public class TweetMentionTest extends DomainTest {
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		tweetMention.save();
 		
+		TweetMention postTweetMention = (TweetMention) tweetMentionDao.select(tweetMention.getId());
+		
+		assertTrue(postTweetMention.getTweet().equals(tweetMention.getTweet()));
+		assertTrue(postTweetMention.getUser().equals(tweetMention.getUser()));	
 	}
 
 	@Override

@@ -2,12 +2,13 @@ package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetContributorTest extends DomainTest {
 
 	private TweetContributor tweetContributor;
 	
-	private long userTwitterId;
+	private User user;
 	private Tweet tweet;
 	
 	@Override
@@ -16,8 +17,8 @@ public class TweetContributorTest extends DomainTest {
 		
 		tweetContributor = new TweetContributor();
 		
-		userTwitterId = 123456789;
-		tweetContributor.setUserTwitterId(userTwitterId);
+		user = new User();
+		tweetContributor.setUser(user);
 		
 		tweet = new Tweet();
 		tweetContributor.setTweet(tweet);
@@ -27,7 +28,7 @@ public class TweetContributorTest extends DomainTest {
 	public void testCreate() {
 		assertNotNull(tweetContributor);
 		assertEquals("getTweet: ", tweet, tweetContributor.getTweet());
-		assertEquals("getUserTwitterId: ", userTwitterId, tweetContributor.getUserTwitterId());
+		assertEquals("getUserTwitterId: ", user, tweetContributor.getUser());
 	}
 
 	@Override
@@ -38,8 +39,12 @@ public class TweetContributorTest extends DomainTest {
 	
 	@Override
 	public void testSelect() {
-		// TODO Auto-generated method stub
+		tweetContributor.save();
 		
+		TweetContributor postTweetContributor = (TweetContributor) tweetContributorDao.select(tweetContributor.getId());
+		
+		assertTrue(postTweetContributor.getTweet().equals(tweetContributor.getTweet()));
+		assertTrue(postTweetContributor.getUser().equals(tweetContributor.getUser()));		
 	}
 
 	@Override
