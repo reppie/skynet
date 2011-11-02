@@ -26,20 +26,19 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 
 	@Override
 	public void delete(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-
+		TweetHashtag tweetHashtag = (TweetHashtag) domain;	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetHashtag.getId());
 	}
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		return false;
+		TweetHashtag tweetHashtag = (TweetHashtag) domain;
+		return this.exists(tweetHashtag.getId());
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override
