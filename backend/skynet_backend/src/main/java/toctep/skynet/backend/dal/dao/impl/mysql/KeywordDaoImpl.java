@@ -16,12 +16,12 @@ public class KeywordDaoImpl extends KeywordDao {
 	public void insert(Domain<Long> domain) {
 		Keyword keyword = (Keyword) domain;
 		
-		String query = "INSERT INTO " + tableName + "(keyword) VALUES(?)";
+		String query = "INSERT INTO " + tableName + " (keyword) VALUES(?)";
 		
 		Param[] params = new Param[] {
 			new Param(keyword.getKeyword(), Types.VARCHAR)
 		};
-			
+		
 		Long id = MySqlUtil.getInstance().insert(query, params);
 		
 		keyword.setId(id);
@@ -51,7 +51,30 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public void update(Domain<Long> domain) {
-		//we don't update keywords
+		searchKeyword(domain);
+	}
+	
+	private void searchKeyword(Domain<Long> domain) {
+		Keyword keyword = (Keyword) domain;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
+			rs = stmt.executeQuery("SELECT id FROM " + tableName + " WHERE keyword = '" + keyword.getKeyword() + "';");
+			rs.first();
+			keyword.setId(rs.getLong("id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
