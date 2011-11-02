@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class PlaceType extends Domain<Long> implements IPlaceType {
+public class PlaceType extends Domain<Integer> implements IPlaceType {
 
 	private String text = "";
 	
@@ -22,7 +22,7 @@ public class PlaceType extends Domain<Long> implements IPlaceType {
 		dao = DaoFacadeImpl.getInstance().getPlaceTypeDao();
 	}
 	
-	public static IPlaceType select(Long id) {
+	public static IPlaceType select(Integer id) {
 		PlaceTypeDao dao = DaoFacadeImpl.getInstance().getPlaceTypeDao();
 		
 		if (dao.exists(id)) {
