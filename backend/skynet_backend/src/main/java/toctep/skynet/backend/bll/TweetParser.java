@@ -1,5 +1,6 @@
 package toctep.skynet.backend.bll;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
@@ -182,7 +183,7 @@ public class TweetParser {
         user.setName(userStatus.getName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
-        user.setCreatedAt(new java.sql.Date(userStatus.getCreatedAt().getDate()));
+        user.setCreatedAt(new Timestamp(userStatus.getCreatedAt().getTime()));
         user.setDefaultProfileImage(false); //Twitter4j has no support for this?
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
@@ -249,7 +250,7 @@ public class TweetParser {
         tweet.setInReplyToUserTwitter(inReplyToUser);
         
         tweet.setRetweetCount(status.getRetweetCount());
-        tweet.setCreatedAt(new java.sql.Date(status.getCreatedAt().getDate()));
+        tweet.setCreatedAt(new Timestamp(status.getCreatedAt().getTime()));
         tweet.setGeo(geo);
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);

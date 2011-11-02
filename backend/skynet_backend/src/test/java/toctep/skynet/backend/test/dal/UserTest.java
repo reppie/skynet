@@ -62,7 +62,7 @@ public class UserTest extends DomainTest {
 		id = 0L;
 		user.setId(id);
 		
-		place = new NullPlace();
+		place = NullPlace.getInstance();
 		user.setPlace(place);
 		
 		defaultProfile = false;
@@ -74,7 +74,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundTile = 0L;
 		user.setProfileBackgroundTile(profileBackgroundTile);
 		
-		language = new NullLanguage();
+		language = NullLanguage.getInstance();
 		user.setLanguage(language);
 		
 		profileLinkColor = "test";
@@ -122,19 +122,19 @@ public class UserTest extends DomainTest {
 		geoEnabled = false;
 		user.setGeoEnabled(geoEnabled);
 		
-		profileBackgroundImageUrl = new NullUrl();
+		profileBackgroundImageUrl = NullUrl.getInstance();
 		user.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
 		
-		profileBackgroundImageUrlHttps = new NullUrl();
+		profileBackgroundImageUrlHttps = NullUrl.getInstance();
 		user.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
 	
 		followRequestSent = false;
 		user.setFollowRequestSent(followRequestSent);
 		
-		url = new NullUrl();
+		url = NullUrl.getInstance();
 		user.setUrl(url);
 		
-		timeZone = new NullTimeZone();
+		timeZone = NullTimeZone.getInstance();
 		user.setTimeZone(timeZone);
 		
 		notifications = 0L;
@@ -152,10 +152,10 @@ public class UserTest extends DomainTest {
 		screenName = "test";
 		user.setScreenName(screenName);
 		
-		profileImageUrl = new NullUrl();
+		profileImageUrl = NullUrl.getInstance();
 		user.setProfileImageUrl(profileImageUrl);
 		
-		profileImageUrlHttps = new NullUrl();
+		profileImageUrlHttps = NullUrl.getInstance();
 		user.setProfileImageUrlHttps(profileImageUrlHttps);
 		
 		showAllInlineMedia = false;

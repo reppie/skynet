@@ -54,7 +54,7 @@ public class TweetTest extends DomainTest {
 		twitterId = 0L;
 		tweet.setTwitterId(twitterId);
 		
-		sourceType = new NullSourceType();
+		sourceType = NullSourceType.getInstance();
 		tweet.setSourceType(sourceType);
 		
 		favorited = false;
@@ -63,7 +63,7 @@ public class TweetTest extends DomainTest {
 		inReplyToTweetTwitter = NullTweet.getInstance();
 		tweet.setInReplyToTweetTwitter(inReplyToTweetTwitter);
 		
-		inReplyToUserTwitter = new NullUser();
+		inReplyToUserTwitter = NullUser.getInstance();
 		tweet.setInReplyToUserTwitter(inReplyToUserTwitter);
 		
 		retweetCount = 0L;
@@ -72,10 +72,10 @@ public class TweetTest extends DomainTest {
 		createdAt = new Timestamp(0);
 		tweet.setCreatedAt(createdAt);
 				
-		place = new NullPlace();
+		place = NullPlace.getInstance();
 		tweet.setPlace(place);
 		
-		user = new NullUser();
+		user = NullUser.getInstance();
 		tweet.setUser(user);
 		
 		coordinates = "test";
