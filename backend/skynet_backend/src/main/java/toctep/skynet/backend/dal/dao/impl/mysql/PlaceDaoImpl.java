@@ -6,10 +6,10 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.country.NullCountry;
+import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
-import toctep.skynet.backend.dal.domain.url.NullUrl;
+import toctep.skynet.backend.dal.domain.url.Url;
 
 public class PlaceDaoImpl extends PlaceDao {
 
@@ -60,9 +60,9 @@ public class PlaceDaoImpl extends PlaceDao {
 		place.setType(PlaceType.select((Long) record.get(2)));
 		place.setBoundingBox(BoundingBox.select((Long) record.get(3)));
 		place.setName((String) record.get(4));
-		place.setUrl(new NullUrl()); //TODO
+		place.setUrl(Url.select((String) record.get(5)));
 		place.setFullName((String) record.get(6));
-		place.setCountry(new NullCountry()); //TODO
+		place.setCountry(Country.select((String) record.get(7)));
 		place.setStreetAddress((String) record.get(8));
 		place.setLocality((String) record.get(9));
 		place.setRegion((String) record.get(10));
