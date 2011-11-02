@@ -33,7 +33,7 @@ public class TimeZoneTest extends DomainTest {
 	public void testInsert() {
 		timeZone.save();
 		assertEquals(1, timeZoneDao.count());
-		assertTrue(new Long(1).equals(timeZone.getId()));
+		assertTrue(new Integer(1).equals(timeZone.getId()));
 	}
 	
 	@Override

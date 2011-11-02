@@ -35,7 +35,7 @@ public class GeoTest extends DomainTest{
 	public void testInsert() {
 		geo.save();
 		assertEquals(1, geoDao.count());
-		assertTrue(new Long(1).equals(geo.getId()));
+		assertTrue(new Integer(1).equals(geo.getId()));
 	}
 	
 	@Override
@@ -44,7 +44,7 @@ public class GeoTest extends DomainTest{
 		
 		Geo postGeo = (Geo) geoDao.select(geo.getId());
 		
-		assertTrue(postGeo.getType().equals(geo.getType()));
+		assertTrue(postGeo.getType().getId().equals(geo.getType().getId()));
 		assertTrue(postGeo.getCoordinates().equals(geo.getCoordinates()));
 	}
 
