@@ -6,7 +6,7 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class BoundingBox extends Domain<Long> implements IBoundingBox {
 	
-	private IBoundingBoxType type 	= new NullBoundingBoxType();
+	private IBoundingBoxType type 	= NullBoundingBoxType.getInstance();
 	private String coordinates		= "";
 	
 	public IBoundingBoxType getType() {
@@ -47,7 +47,7 @@ public class BoundingBox extends Domain<Long> implements IBoundingBox {
 			return (BoundingBox) dao.select(id);
 		}
 		
-		return new NullBoundingBox();
+		return NullBoundingBox.getInstance();
 	}
 	
 }

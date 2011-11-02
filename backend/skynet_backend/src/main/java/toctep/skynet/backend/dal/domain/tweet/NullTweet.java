@@ -34,7 +34,7 @@ public class NullTweet implements ITweet {
 
 	@Override
 	public IGeo getGeo() {
-		return new NullGeo();
+		return NullGeo.getInstance();
 	}
 
 	@Override

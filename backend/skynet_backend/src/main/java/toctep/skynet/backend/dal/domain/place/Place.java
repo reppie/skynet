@@ -16,10 +16,10 @@ import toctep.skynet.backend.dal.domain.url.Url;
 public class Place extends Domain<String> implements IPlace{
 
 	private IPlaceType type 			= new NullPlaceType();
-	private IBoundingBox boundingBox 	= new NullBoundingBox();
+	private IBoundingBox boundingBox 	= NullBoundingBox.getInstance();
 	private String name					= "";
 	private String fullName				= "";
-	private ICountry country 			= new NullCountry();
+	private ICountry country 			= NullCountry.getInstance();
 	private String streetAddress		= "";
 	private String locality				= "";
 	private String region				= "";
