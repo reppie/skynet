@@ -46,8 +46,8 @@ public class TweetUrlTest extends DomainTest {
 		
 		TweetUrl postTweetUrl = (TweetUrl) tweetUrlDao.select(tweetUrl.getId());
 		
-		assertTrue(postTweetUrl.getTweet().equals(tweetUrl.getTweet()));
-		assertTrue(postTweetUrl.getUrl().equals(tweetUrl.getUrl()));	
+		assertTrue(postTweetUrl.getTweet().getId().equals(tweetUrl.getTweet().getId()));
+		assertTrue(postTweetUrl.getUrl().getId().equals(tweetUrl.getUrl().getId()));	
 	}
 
 	@Override

@@ -18,9 +18,11 @@ public class TweetHashtagTest extends DomainTest {
 		tweetHashtag = new TweetHashtag();
 		
 		tweet = new Tweet();
+		tweet.setId(new Long(1));
 		tweetHashtag.setTweet(tweet);
 		
 		hashtag = new Hashtag();
+		hashtag.setId(1);
 		tweetHashtag.setHashtag(hashtag);
 	}
 	
@@ -43,8 +45,8 @@ public class TweetHashtagTest extends DomainTest {
 		
 		TweetHashtag postTweetHashtag = (TweetHashtag) tweetHashtagDao.select(tweetHashtag.getId());
 		
-		assertTrue(postTweetHashtag.getTweet().equals(tweetHashtag.getTweet()));
-		assertTrue(postTweetHashtag.getHashtag().equals(tweetHashtag.getHashtag()));		
+		assertTrue(postTweetHashtag.getTweet().getId().equals(tweetHashtag.getTweet().getId()));
+		assertTrue(postTweetHashtag.getHashtag().getId().equals(tweetHashtag.getHashtag().getId()));		
 	}
 
 	@Override

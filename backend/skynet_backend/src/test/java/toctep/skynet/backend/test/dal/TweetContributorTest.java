@@ -18,9 +18,11 @@ public class TweetContributorTest extends DomainTest {
 		tweetContributor = new TweetContributor();
 		
 		user = new User();
+		user.setId(new Long(1));
 		tweetContributor.setUser(user);
 		
 		tweet = new Tweet();
+		tweet.setId(new Long(1));
 		tweetContributor.setTweet(tweet);
 	}
 	
@@ -43,8 +45,8 @@ public class TweetContributorTest extends DomainTest {
 		
 		TweetContributor postTweetContributor = (TweetContributor) tweetContributorDao.select(tweetContributor.getId());
 		
-		assertTrue(postTweetContributor.getTweet().equals(tweetContributor.getTweet()));
-		assertTrue(postTweetContributor.getUser().equals(tweetContributor.getUser()));		
+		assertTrue(postTweetContributor.getTweet().getId().equals(tweetContributor.getTweet().getId()));
+		assertTrue(postTweetContributor.getUser().getId().equals(tweetContributor.getUser().getId()));		
 	}
 
 	@Override
