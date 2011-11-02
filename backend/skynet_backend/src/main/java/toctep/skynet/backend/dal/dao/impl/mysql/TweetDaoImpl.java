@@ -6,12 +6,11 @@ import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.geo.NullGeo;
-import toctep.skynet.backend.dal.domain.place.NullPlace;
-import toctep.skynet.backend.dal.domain.tweet.NullSourceType;
-import toctep.skynet.backend.dal.domain.tweet.NullTweet;
+import toctep.skynet.backend.dal.domain.geo.Geo;
+import toctep.skynet.backend.dal.domain.place.Place;
+import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.user.NullUser;
+import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetDaoImpl extends TweetDao {
 	
@@ -58,16 +57,16 @@ public class TweetDaoImpl extends TweetDao {
 		
 		tweet.setId(id);
 		tweet.setText((String) record.get(1));
-		tweet.setGeo(new NullGeo()); //TODO
+		tweet.setGeo(Geo.select((Long) record.get(2)));
 		tweet.setTruncated((Boolean) record.get(3));
-		tweet.setSourceType(new NullSourceType()); //TODO
+		tweet.setSourceType(SourceType.select((Long) record.get(4)));
 		tweet.setFavorited((Boolean) record.get(5));
-		tweet.setInReplyToTweetTwitter(new NullTweet()); //TODO
-		tweet.setInReplyToUserTwitter(new NullUser()); //TODO
+		tweet.setInReplyToTweetTwitter(Tweet.select((Long) record.get(6)));
+		tweet.setInReplyToUserTwitter(User.select((Long) record.get(7)));
 		tweet.setRetweetCount((Integer) record.get(8));
 		tweet.setCreatedAt((Date) record.get(9));
-		tweet.setPlace(new NullPlace()); //TODO
-		tweet.setUser(new NullUser()); //TODO
+		tweet.setPlace(Place.select((String) record.get(10)));
+		tweet.setUser(User.select((Long) record.get(11)));
 		tweet.setCoordinates((String) record.get(12));
 		
 		return tweet;
