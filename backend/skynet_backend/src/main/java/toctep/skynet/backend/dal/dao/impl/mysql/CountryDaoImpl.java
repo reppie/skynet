@@ -61,7 +61,7 @@ public class CountryDaoImpl extends CountryDao{
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "code=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "code=" + MySqlUtil.escape(id));
 	}
 
 	@Override

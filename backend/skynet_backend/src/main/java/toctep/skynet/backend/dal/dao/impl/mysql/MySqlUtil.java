@@ -112,7 +112,7 @@ public class MySqlUtil {
 			for (int i = 0; i < params.length; i++) {
 				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
 			}
-			System.out.println(pstmt);
+			
 			pstmt.executeUpdate();
 			
 			rs = pstmt.getGeneratedKeys();
@@ -180,8 +180,6 @@ public class MySqlUtil {
 		
 		Statement stmt = null;
 		ResultSet rs = null;
-
-		System.out.println("SELECT * FROM " + tableName + " WHERE " + where);
 		
 		try {
 			stmt = (Statement) conn.createStatement();
