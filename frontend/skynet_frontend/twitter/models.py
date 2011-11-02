@@ -110,7 +110,7 @@ class Keyword(models.Model):
 
     @staticmethod
     def get_all_with_count():
-        return Keyword.objects.values('keyword').annotate(count=Count('keyword'))
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).order_by('-count')
 
     @staticmethod
     def get_all_since(datetime_since):
