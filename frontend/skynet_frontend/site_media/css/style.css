@@ -1,8 +1,23 @@
 body
 {
-	background-color: #ddd;
-	background-image: url("../img/bg_pattern_blue.png");
+	background-image: url("../img/bg_pattern_orange.png");
 	background-repeat: repeat;
+}
+
+.container
+{
+    background-color: #eee;         
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;         
+    -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+    padding: 40px;
+	margin-top: 5%;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	bottom: 0px;
 }
 
 #logo
@@ -17,19 +32,6 @@ footer
 {
 	margin-top: 10%;
 	height: 20px;
-}
-
-aside section
-{
-	background-color: #00adef;
-	border: 1px solid #009fdc;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    margin-top: 7px;
-    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 #keyword-search-form input
@@ -54,11 +56,18 @@ aside section
 #searchbar
 {
 	height: 30px;
-	width: 550px;
+	width: 465px;
 	padding-left: 15px;
 	font-size: 1.3em;
 	color: #aaa;
 	border: 1px solid #ccc;
+}
+
+#searchbar.loading
+{
+	background-image: url("../img/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position: 455px;
 }
 
 #searchbutton
@@ -73,72 +82,69 @@ aside section
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+aside section
+{
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+    margin-top: 7px;
+    margin-left: 30px;
+    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
 aside section p
 {
 	margin: 0px;
 	padding: 0px 0 5px 5px;
-	color: white;
 }
 
 aside section p,
 aside section h1
 {
-	color: white;
+	color: #222;
 }
 
 aside section h1
 {
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 aside section h1.title
 {
-	padding: 5px 0 5px 5px;
+    -moz-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.1);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+	background: #ddd;
+	padding: 5px 0 5px 15px;
+	font-size: 1.3em;
 	font-weight: bold;
-	font-size: 1.5em;
-	border-bottom: 1px dotted white;
+	border: 1px solid #f7f7f7;
+	border-bottom: 1px solid #ccc;
 }
 
-aside section#region-name h1
+#current-region
 {
-	color: white;
+	font-size: 2em;
+	font-weight: bold;
 	margin: 0px;
-	text-align: center; 
+	text-align: center;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .cloud-element
 {
-	color: white;
 	text-decoration: none;
 }
 
 .cloud-element:hover
 {
-	color: #fcf387;
+	color: #ef7b00;
 	text-decoration: underline;
-}
-
-.container
-{
-    background-color: #eee;         
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;         
-    -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
-    -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
-    padding: 40px;
-	margin-top: 5%;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-	bottom: 0px;
-}
-
-.twitter-logo
-{
-	float:right;
-	position: relative;
-	top: -50px;
-	width:200px;
-	height: 200px;
 }
