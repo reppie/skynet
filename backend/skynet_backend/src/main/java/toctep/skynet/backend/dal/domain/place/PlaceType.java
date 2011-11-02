@@ -29,7 +29,7 @@ public class PlaceType extends Domain<Long> implements IPlaceType {
 			return (PlaceType) dao.select(id);
 		}
 		
-		return new NullPlaceType();
+		return NullPlaceType.getInstance();
 	}
 	
 }

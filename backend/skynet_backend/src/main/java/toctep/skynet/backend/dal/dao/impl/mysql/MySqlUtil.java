@@ -146,17 +146,13 @@ public class MySqlUtil {
 				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
 			}
 			
-			System.out.println("q:"+pstmt);
 			rs = pstmt.executeQuery();
-			System.out.println("coln:" + rs.getMetaData().getColumnCount());
 			
 			rs.first();
 			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 Object value = rs.getObject(i);
                 record.add(value);
 			}
-			
-			System.out.println("recordn:" + record.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

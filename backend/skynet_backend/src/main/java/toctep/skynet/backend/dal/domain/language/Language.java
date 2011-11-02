@@ -28,7 +28,7 @@ public class Language extends Domain<Long> implements ILanguage {
 			return (Language) dao.select(id);
 		}
 		
-		return new NullLanguage();
+		return NullLanguage.getInstance();
 	}
 	
 }

@@ -39,7 +39,7 @@ public class PlaceTest extends DomainTest{
 		id = "0E";
 		place.setId(id);
 		
-		placeType = new NullPlaceType();
+		placeType = NullPlaceType.getInstance();
 		place.setType(placeType);
 		
 		boundingBox = NullBoundingBox.getInstance();
@@ -75,7 +75,7 @@ public class PlaceTest extends DomainTest{
 		twitter = "TestTwitter";
 		place.setTwitter(twitter);
 		
-		url = new NullUrl();
+		url = NullUrl.getInstance();
 		place.setUrl(url);
 		
 		appId = "TestAppId";

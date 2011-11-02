@@ -15,7 +15,7 @@ import toctep.skynet.backend.dal.domain.url.Url;
 
 public class Place extends Domain<String> implements IPlace{
 
-	private IPlaceType type 			= new NullPlaceType();
+	private IPlaceType type 			= NullPlaceType.getInstance();
 	private IBoundingBox boundingBox 	= NullBoundingBox.getInstance();
 	private String name					= "";
 	private String fullName				= "";
@@ -27,7 +27,7 @@ public class Place extends Domain<String> implements IPlace{
 	private String postalCode			= "";
 	private String phone				= "";
 	private String twitter				= "";
-	private IUrl url 					= new NullUrl();
+	private IUrl url 					= NullUrl.getInstance();
 	private String appId				= "";
 
 	public IPlaceType getType() {
@@ -180,7 +180,7 @@ public class Place extends Domain<String> implements IPlace{
 			return (Place) dao.select(id);
 		}
 		
-		return new NullPlace();
+		return NullPlace.getInstance();
 	}
 	
 }

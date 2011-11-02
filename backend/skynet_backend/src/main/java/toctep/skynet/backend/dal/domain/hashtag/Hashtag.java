@@ -28,7 +28,7 @@ public class Hashtag extends Domain<Long> implements IHashtag {
 			return (Hashtag) dao.select(id);
 		}
 		
-		return new NullHashtag();
+		return NullHashtag.getInstance();
 	}
 	
 }

@@ -37,7 +37,7 @@ public class TimeZone extends Domain<Long> implements ITimeZone{
 			return (TimeZone) dao.select(id);
 		}
 		
-		return new NullTimeZone();
+		return NullTimeZone.getInstance();
 	}
 	
 }

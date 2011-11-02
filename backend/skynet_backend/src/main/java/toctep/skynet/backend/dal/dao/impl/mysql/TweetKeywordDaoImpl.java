@@ -43,7 +43,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		tweetKeyword.setId(id);
 		tweetKeyword.setTweet(NullTweet.getInstance()); //TODO
 		tweetKeyword.setTweetKeywordValue((String) record.get(2));
-		tweetKeyword.setKeyword(new NullKeyword()); //TODO
+		tweetKeyword.setKeyword(NullKeyword.getInstance()); //TODO
 		
 		return tweetKeyword;
 	}

@@ -21,14 +21,14 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private IGeo geo 						= NullGeo.getInstance();
 	private boolean truncated 				= false;
 	private long twitterId					= 0L;
-	private ISourceType sourceType 			= new NullSourceType();
+	private ISourceType sourceType 			= NullSourceType.getInstance();
 	private boolean favorited				= false;
 	private ITweet inReplyToTweetTwitter 	= NullTweet.getInstance();
-	private IUser inReplyToUserTwitter 		= new NullUser();
+	private IUser inReplyToUserTwitter 		= NullUser.getInstance();
 	private long retweetCount				= 0L;
 	private Timestamp createdAt				= new Timestamp(0);
-	private IPlace place 					= new NullPlace();
-	private IUser user 						= new NullUser();
+	private IPlace place 					= NullPlace.getInstance();
+	private IUser user 						= NullUser.getInstance();
 	private String coordinates				= "";
 	
 	@Override

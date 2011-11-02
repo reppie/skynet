@@ -29,7 +29,7 @@ public class SourceType extends Domain<Long> implements ISourceType {
 			return (SourceType) dao.select(id);
 		}
 		
-		return new NullSourceType();
+		return NullSourceType.getInstance();
 	}
 	
 }
