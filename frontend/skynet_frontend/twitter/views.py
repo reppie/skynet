@@ -61,9 +61,25 @@ class TwitterRpcMethods(object):
     @jsonremote(service)
     def search_tweets(filters):
         for filter in filters:
-            pass
-        
-        return Tweet.objects.values('id').all()
+            if filter['type']=='keyword':
+                search_string = filter['value']
+                tweets = Tweet.objects.all()
+                
+                if(search_string.startswith('@')):
+                    tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string[1:]))
+                else:
+                    tweets = tweets.distinct().filter(keywords__keyword=search_string)
+                    
+                tweet_ids = tweets.values_list('id', flat=True)
+                
+                
+                keywords = Keyword.get_all_in_tweets(tweet_ids)
+                cloud = KeywordCloud(keywords)
+                
+            return {
+                    'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
+                    'cloud':cloud,
+            }
     
     
     

@@ -68,6 +68,8 @@ class KeywordCloud:
             tweet_index_count_array.append(KeywordFontSize(keyword=row["keyword"], font_size=new_font_size))
             
         return tweet_index_count_array
+    def to_json(self):
+        return self.items
 
 """
 This class is used to store the font sizes of the given keywords in a cloud
@@ -82,3 +84,10 @@ class KeywordFontSize:
         
     def __unicode__(self):
         return self.keyword + ": " + self.font_size + "px"
+    
+    def to_json(self):
+        return {
+            'keyword':self.keyword,
+            'font_size':self.font_size,
+                
+        }
