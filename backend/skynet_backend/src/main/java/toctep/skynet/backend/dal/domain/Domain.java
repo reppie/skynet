@@ -22,7 +22,7 @@ public abstract class Domain<T> implements IDomain<T> {
 	
 	public void save() {
 		if (dao.exists(this)) {
-			dao.update(this);
+			dao.update(this);			
 		} else {
 			dao.insert(this);
 		}

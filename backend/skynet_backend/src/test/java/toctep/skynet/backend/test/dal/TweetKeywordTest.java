@@ -20,20 +20,22 @@ public class TweetKeywordTest extends DomainTest {
 		tweet.setId(new Long(0));
 		
 		keywordValue = "testValue";
-		keyword = new Keyword();
 		
-		tweetKeyword.setKeyword(keyword);
+		keyword = new Keyword();
+		keyword.setId(new Long(0));
+		
 		tweetKeyword.setTweet(tweet);
 		tweetKeyword.setTweetKeywordValue(keywordValue);
+		tweetKeyword.setKeyword(keyword);
 	}
 
 	@Override
 	public void testCreate() {
 		assertNotNull(tweetKeyword);
 		
-		assertEquals("getKeywordId: ", keyword, tweetKeyword.getKeyword());
+		assertEquals("getKeyword: ", keyword, tweetKeyword.getKeyword());
 		assertEquals("getKeywordValue: ", keywordValue, tweetKeyword.getTweetKeywordValue());
-		assertEquals("getTweetId: ", tweet, tweetKeyword.getTweet());
+		assertEquals("getTweet: ", tweet, tweetKeyword.getTweet());
 	}
 
 	@Override

@@ -34,7 +34,7 @@
 			</header>
 			<section class="span-18 main">
 				{% block searchbar %}
-				<form id="keyword-search-form" method="get" action="/twitter/search">
+				<form id="keyword-search-form" method="get">
 					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
 					{% if search_string %}
 						value="{{ search_string }}" 
@@ -91,7 +91,7 @@
   					<div class="tweet-footer">
   						<time datetime="${created_at+'Z'}"></time>
   						op
-  						<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>					
+  							<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>					
   					</div>
 				</div>
     		</div>

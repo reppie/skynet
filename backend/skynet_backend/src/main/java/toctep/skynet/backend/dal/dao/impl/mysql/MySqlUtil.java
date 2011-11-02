@@ -113,7 +113,9 @@ public class MySqlUtil {
 				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
 			}
 			
-			pstmt.executeUpdate();
+			System.out.println(pstmt);
+			
+			pstmt.executeUpdate();		
 			
 			rs = pstmt.getGeneratedKeys();
 			if (rs.first()) {
@@ -180,7 +182,7 @@ public class MySqlUtil {
 		
 		Statement stmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 			stmt = (Statement) conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + where);

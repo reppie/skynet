@@ -53,6 +53,9 @@ class KeywordCloud:
         return value_sum
     
     def __calculate_font_size_increment(self, occurance, max_font_size, min_font_size):
+        if occurance == 1:
+            return 0.001 # Hack gedoogd
+        
         return (log(occurance)-log(self.smallest))/(log(self.largest)-log(self.smallest));
     
     def __calculate_font_size(self, min_font_size, max_font_size, step):
@@ -68,6 +71,8 @@ class KeywordCloud:
             tweet_index_count_array.append(KeywordFontSize(keyword=row["keyword"], font_size=new_font_size))
             
         return tweet_index_count_array
+    def to_json(self):
+        return self.items
 
 """
 This class is used to store the font sizes of the given keywords in a cloud
@@ -82,3 +87,10 @@ class KeywordFontSize:
         
     def __unicode__(self):
         return self.keyword + ": " + self.font_size + "px"
+    
+    def to_json(self):
+        return {
+            'keyword':self.keyword,
+            'font_size':self.font_size,
+                
+        }
