@@ -26,20 +26,19 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 
 	@Override
 	public void delete(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		
+		TweetMention tweetMention = (TweetMention) domain;	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetMention.getId());
 	}
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		return false;
+		TweetMention tweetMention = (TweetMention) domain;
+		return this.exists(tweetMention.getId());
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

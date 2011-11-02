@@ -26,20 +26,19 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 
 	@Override
 	public void delete(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-
+		TweetContributor tweetContributor = (TweetContributor) domain;	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetContributor.getId());
 	}
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		return false;
+		TweetContributor tweetContributor = (TweetContributor) domain;
+		return this.exists(tweetContributor.getId());
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

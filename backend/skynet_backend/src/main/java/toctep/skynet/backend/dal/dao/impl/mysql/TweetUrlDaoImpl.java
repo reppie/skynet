@@ -26,20 +26,19 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 
 	@Override
 	public void delete(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		
+		TweetUrl tweetUrl = (TweetUrl) domain;	
+		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetUrl.getId());
 	}
 
 	@Override
 	public boolean exists(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		return false;
+		TweetUrl tweetUrl = (TweetUrl) domain;
+		return this.exists(tweetUrl.getId());
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
 	}
 
 	@Override

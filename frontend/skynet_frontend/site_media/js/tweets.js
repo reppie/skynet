@@ -52,33 +52,69 @@
     };
 	
 	api.TweetList.prototype.reset = function(tweetIds){
+		
 		var tweetList = this;
 		this.$tweetList.empty();
 		this.tweetIds = tweetIds || [];
 		
 		for(var index in tweetIds){
 			var tweetId = tweetIds[index];
-			var $tweet = $('<div/>').addClass('tweet loading').attr('data-tweet-id', tweetId).html(""+tweetId);
-			this.$tweetList.append($tweet);
-			api.Tweet.get.call($tweet, tweetId, function(tweet){
+			//var $tweet = $('<div/>').addClass('tweet loading').attr('data-tweet-id', tweetId).html(""+tweetId);
+			//this.$tweetList.append($tweet);
+			api.Tweet.get(tweetId, function(tweet){
 				
-				var $tweet = this;
-				
+				//var $tweet = this;
 				if(tweet){
-					$tweet.data('tweet', tweet);
-					$tweet.html(tweet.text);
-					
-				}else{
+					console.log(tweet);
+					tweet.getUser(function(user){
+						console.log(user);
+						if(user){
+							console.log("yey");
+							var $tweet = $("#tweetTemplate").tmpl(tweet);
+							$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+							
+							$tweet.find('time').localize(function () {
+							  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
+							    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
+							    names = 'seconde minuut uur dag week maand jaar'.split(' '),
+							    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
+							    round = Math.round;
+							
+							  return function (date) {
+							    var
+							      delta = round((date - new Date) / 1000) || -1,
+							      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
+							      i = units.length, n, seconds;
+							
+							    while (i--) {
+							      seconds = units[i];
+							      if (!i || delta > seconds) {
+							        n = round(delta / seconds);
+							        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
+							      }
+							    }
+							  };
+							}());
+							$tweet.slideDown(250, function(){
+								$tweet.removeClass("loading");
+							});
+						}
+					});
+						
+				} else {
+					/*
 					var tweetId = $tweet.data("tweetId");
 					$tweet.html("error retrieving tweet id: "+tweetId);
 					$tweet.addClass("error");
+					$tweet.slideDown(250, function(){
+						$tweet.removeClass("loading");
+					});
+					*/
 				}
-				$tweet.slideDown(250, function(){
-					$tweet.removeClass("loading");
-				});
-				
 			});
+			
 		}
+		
 	}
 	
 	$.jsonRPC.setup({
@@ -126,6 +162,20 @@
 			callback.call(This, user);
 		});
 	}
+	
+	api.Tweet.since = function(created_at){
+		
+		var second = 1000;
+		
+		var date = new Date(Date.parse(created_at));
+		var span = new Date(new Date() - date);
+		console.log(date);
+		
+		var ret =  date.toString("yyyy-MM-dd") +" "+ (span.getYear()-1970>0?date.getYear():"");
+		console.log(date.tos );
+		return ret;
+	}
+	
 	
 	api.Tweet.get = function(tweetId, callback) {
 		var This = this;

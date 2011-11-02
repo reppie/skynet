@@ -24,20 +24,23 @@
 		<script src="/site_media/js/libs/modernizr-2.0.6.min.js"></script>
 	</head>
 	<body>
-		
 		<div class="container">
 			<header class="span-24">
-				{% block header %}<h1>Social Media Lab</h1>{% endblock %}
+				{% block header %}
+				<a href="/" >
+					<div id="logo"></div>
+				</a>
+				{% endblock %}
 			</header>
 			<section class="span-18 main">
 				{% block searchbar %}
 				<form id="keyword-search-form" method="get" action="/twitter/search">
-					<input type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
+					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
 					{% if search_string %}
 						value="{{ search_string }}" 
 					{% endif %}
 					/>
-					<input type="submit" value="{% trans 'Search' %}" />		
+					<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
 				</form>
  				{% endblock %}
  
@@ -62,27 +65,42 @@
 						{% endblock %}
 					</section>
 				{% endblock %}
-				<footer class="span-24">
+			</aside>
+			<footer class="span-18">
 				{% block footer %}
 				<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
 				<p>&copy; Hanzehogeschool Groningen</p>
 				{% endblock %}
-				</footer>
-			</aside>
-			
+			</footer>
 		</div>
 		{% csrf_token %}
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="/site_media/js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 		<script id="tweetTemplate" type="text/x-jquery-tmpl">
-    		<div class="tweet" data-tweet-id="${id}">
-    			${text}
+    		<div class="tweet" data-tweet-id="${id}" data-user-id="${user.id}">
+    			<div class="tweet-image"><img height="48" width="48" src="${user.profile_image_url}"/></div>
+    			<div class="tweet-content">
+    				<div class="tweet-user"><span class=​"tweet-user-name">​
+    					<span class="tweet-user-name">
+						  <a class="tweet-screen-name" href="http://twitter.com/#!/${user.name}/">${user.screen_name}</a>
+						  <span class="tweet-full-name">${user.name}</span>
+					  	</span>
+				  	</div>
+  					<div class="tweet-text">${text}</div>
+  					<div class="tweet-footer">
+  						<time datetime="${created_at+'Z'}"></time>
+  						op
+  						<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>					
+  					</div>
+				</div>
     		</div>
 		</script>
 		<!-- scripts concatenated and minified via ant build script-->
 		
 		<script src="/site_media/js/libs/jquery.jsonrpc.js"></script>
 		<script src="/site_media/js/libs/jquery.tmpl.js"></script>
+		<script src="/site_media/js/libs/jquery.localize.js"></script>
+		<script src="/site_media/js/libs/iso8601.js"></script>
 		<script src="/site_media/js/tweets.js"></script>
 		
 		<script src="/site_media/js/plugins.js"></script>
