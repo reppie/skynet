@@ -11,6 +11,7 @@ public class UrlTest extends DomainTest {
 		super.setUp();
 		
 		url = new Url();
+		url.setId("url://");
 	}
 	
 	@Override

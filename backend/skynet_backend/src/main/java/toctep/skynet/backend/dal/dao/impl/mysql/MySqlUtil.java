@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -38,24 +39,21 @@ public class MySqlUtil {
 
 	private static MySqlUtil instance;
 	
-	private String driver;
-	private String host;
-	private String name;
-	private String user;
-	private String pass;
-	
 	private Connection conn;
 	
-	private MySqlUtil() {
+	private MySqlUtil(String properties) {
 		try {
-		    Wini ini = new Wini(new File(Main.DB_PROPERTIES));
-	        driver = ini.get("jdbc", "driver", String.class);
-	        host = ini.get("jdbc", "host", String.class);
-	        name = ini.get("jdbc", "name", String.class);
-	        user = ini.get("jdbc", "user", String.class);
-	        pass = ini.get("jdbc", "pass", String.class);
+		    Wini ini = new Wini(new File(properties));
 		    
-	        connect();
+	        String driver = ini.get("jdbc", "driver", String.class);
+	        String host = ini.get("jdbc", "host", String.class);
+	        String name = ini.get("jdbc", "name", String.class);
+	        String user = ini.get("jdbc", "user", String.class);
+	        String pass = ini.get("jdbc", "pass", String.class);
+	        
+	        String url = "jdbc:" + driver + "://" + host + "/" + name;
+	        
+	        conn = (Connection) DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		} catch (InvalidFileFormatException e) {
@@ -65,38 +63,15 @@ public class MySqlUtil {
 		}
 	}
 	
-	private MySqlUtil(String driver, String host, String name, String user, String pass) {
-		try {	        
-			this.driver = driver;
-			this.host = host;
-			this.name = name;
-			this.user = user;
-			this.pass = pass;
-			
-			connect();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
-	}
-	
-	private void connect() throws SQLException {
-		String url = "jdbc:" + driver + "://" + host + "/" + name;
-		
-		conn = (Connection) DriverManager.getConnection(url, user, pass);
-	}
-	
-	public static MySqlUtil getInstance(String driver, String host, String name, String user, String pass) {
+	public static MySqlUtil getInstance(String properties) {
 		if (instance == null) {
-			instance = new MySqlUtil(driver, host, name, user, pass);
+			instance = new MySqlUtil(properties);
 		}
 		return instance;
 	}
 	
 	public static MySqlUtil getInstance() {
-		if (instance == null) {
-			instance = new MySqlUtil();
-		}
-		return instance;
+		return MySqlUtil.getInstance(Main.DB_PROPERTIES);
 	}
 	
 	public Connection getConnection() {
@@ -124,24 +99,30 @@ public class MySqlUtil {
 		return result;
 	}
 	
-	public int insert(String query) {
-		int id = 0;
-		
-		Statement stmt = null;
-		
-		System.out.println(query);
+	public Long insert(String query, Param[] params) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Long id = null;
 		
 		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-			ResultSet rs = stmt.getGeneratedKeys();
-			if(rs.next())
-				id = rs.getInt(1);
+			pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			pstmt.executeUpdate();
+			
+			rs = pstmt.getGeneratedKeys();
+			if (rs.first()) {
+				id = (long) rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
+				rs.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -266,4 +247,5 @@ public class MySqlUtil {
 		}
 		return (String) str;
 	}
+
 }

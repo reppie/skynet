@@ -337,7 +337,7 @@ public class User extends Domain<Long> implements IUser  {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getUserDao();
+		dao = getDaoFacade().getUserDao();
 	}
 	
 	@Override

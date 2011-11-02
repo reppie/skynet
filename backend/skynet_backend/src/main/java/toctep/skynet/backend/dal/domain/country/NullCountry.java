@@ -4,7 +4,7 @@ public class NullCountry implements ICountry {
 
 	@Override
 	public String getId() {
-		return "";
+		return null;
 	}
 	
 	@Override

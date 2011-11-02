@@ -2,25 +2,25 @@ package toctep.skynet.backend.dal.dao;
 
 public interface DaoFacade {
 
-	public BoundingBoxDao getBoundingBoxDao();
-	public BoundingBoxTypeDao getBoundingBoxTypeDao();
-	public CountryDao getCountryDao();
-	public GeoDao getGeoDao();
-	public GeoTypeDao getGeoTypeDao();
-	public HashtagDao getHashtagDao();
-	public LanguageDao getLanguageDao();
-	public PlaceDao getPlaceDao();	
-	public PlaceTypeDao getPlaceTypeDao();	
-	public SourceTypeDao getSourceTypeDao();
-	public TimeZoneDao getTimeZoneDao();
-	public TweetContributorDao getTweetContributorDao();
-	public TweetHashtagDao getTweetHashtagDao();
-	public TweetMentionDao getTweetMentionDao();
-	public TweetDao getTweetDao();
-	public TweetUrlDao getTweetUrlDao();
-	public UrlDao getUrlDao();
-	public UserDao getUserDao();
-	public TweetKeywordDao getTweetKeywordDao();
-	public KeywordDao getKeywordDao();
+	BoundingBoxDao getBoundingBoxDao();
+	BoundingBoxTypeDao getBoundingBoxTypeDao();
+	CountryDao getCountryDao();
+	GeoDao getGeoDao();
+	GeoTypeDao getGeoTypeDao();
+	HashtagDao getHashtagDao();
+	LanguageDao getLanguageDao();
+	PlaceDao getPlaceDao();	
+	PlaceTypeDao getPlaceTypeDao();	
+	SourceTypeDao getSourceTypeDao();
+	TimeZoneDao getTimeZoneDao();
+	TweetContributorDao getTweetContributorDao();
+	TweetHashtagDao getTweetHashtagDao();
+	TweetMentionDao getTweetMentionDao();
+	TweetDao getTweetDao();
+	TweetUrlDao getTweetUrlDao();
+	UrlDao getUrlDao();
+	UserDao getUserDao();
+	TweetKeywordDao getTweetKeywordDao();
+	KeywordDao getKeywordDao();
 	
 }

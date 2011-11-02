@@ -30,7 +30,7 @@ public class TweetKeyword extends Domain<Long> {
 	}
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTweetKeywordDao();
+		dao = getDaoFacade().getTweetKeywordDao();
 	}
 	
 	@Override

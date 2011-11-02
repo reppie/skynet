@@ -16,6 +16,7 @@ public class GeoType extends Domain<Long> implements IGeoType {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getGeoTypeDao();	
-	}	
+		dao = getDaoFacade().getGeoTypeDao();	
+	}
+	
 }

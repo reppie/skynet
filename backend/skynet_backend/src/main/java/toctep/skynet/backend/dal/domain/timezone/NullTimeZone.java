@@ -3,8 +3,8 @@ package toctep.skynet.backend.dal.domain.timezone;
 public class NullTimeZone implements ITimeZone {
 
 	@Override
-	public String getId() {
-		return "NULL";
+	public Long getId() {
+		return null;
 	}
 	
 	@Override

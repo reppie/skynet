@@ -62,13 +62,7 @@ public abstract class DomainTest extends TestCase {
 	
 	@Before
 	public void setUp() {
-		mySqlUtil = MySqlUtil.getInstance(
-				"mysql",
-				"localhost",
-				"skynet_test",
-				"skynet",
-				"asdasd"
-			);
+		mySqlUtil = MySqlUtil.getInstance("mysql_test.properties");
 		conn = mySqlUtil.getConnection();
 		
 		emptyDatabase();

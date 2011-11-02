@@ -2,14 +2,14 @@ package toctep.skynet.backend.test.dal;
 
 import java.sql.Date;
 
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
-import toctep.skynet.backend.dal.domain.country.Country;
-import toctep.skynet.backend.dal.domain.language.Language;
-import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.place.PlaceType;
-import toctep.skynet.backend.dal.domain.timezone.TimeZone;
-import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.language.ILanguage;
+import toctep.skynet.backend.dal.domain.language.NullLanguage;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
+import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
+import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.NullUrl;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserTest extends DomainTest {
@@ -17,11 +17,11 @@ public class UserTest extends DomainTest {
 	private User user;
 	
 	private long id;
-	private Place place;
+	private IPlace place;
 	private boolean defaultProfile;
 	private int statusesCount;
 	private long profileBackgroundTile;
-	private Language language;
+	private ILanguage language;
 	private String profileLinkColor;
 	private int following;
 	private int favouritesCount;
@@ -37,18 +37,18 @@ public class UserTest extends DomainTest {
 	private boolean defaultProfileImage;
 	private int followersCount;
 	private boolean geoEnabled;
-	private Url profileBackgroundImageUrl;
-	private Url profileBackgroundImageUrlHttps;
+	private IUrl profileBackgroundImageUrl;
+	private IUrl profileBackgroundImageUrlHttps;
 	private boolean followRequestSent;
-	private Url url;
-	private TimeZone timeZone;
+	private IUrl url;
+	private ITimeZone timeZone;
 	private long notifications;
 	private boolean profileUseBackgroundImage;
 	private int friendsCount;
 	private String profileSideBarFillColor;
 	private String screenName;
-	private Url profileImageUrl;
-	private Url profileImageUrlHttps;
+	private IUrl profileImageUrl;
+	private IUrl profileImageUrlHttps;
 	private boolean showAllInlineMedia;
 	private boolean isTranslator;
 	private int listedCount;
@@ -62,13 +62,7 @@ public class UserTest extends DomainTest {
 		id = 0L;
 		user.setId(id);
 		
-		place = new Place();
-		place.setType(new PlaceType());
-		BoundingBox boundingBox = new BoundingBox();
-		boundingBox.setType(new BoundingBoxType());
-		place.setBoundingBox(boundingBox);
-		place.setUrl(new Url());
-		place.setCountry(new Country());
+		place = new NullPlace();
 		user.setPlace(place);
 		
 		defaultProfile = false;
@@ -80,7 +74,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundTile = 0L;
 		user.setProfileBackgroundTile(profileBackgroundTile);
 		
-		language = new Language();
+		language = new NullLanguage();
 		user.setLanguage(language);
 		
 		profileLinkColor = "test";
@@ -116,7 +110,7 @@ public class UserTest extends DomainTest {
 		profileBackgroundColor = "test";
 		user.setProfileBackgroundColor(profileBackgroundColor);
 	
-		createdAt = new java.sql.Date(0);
+		createdAt = new Date(0);
 		user.setCreatedAt(createdAt);
 		
 		defaultProfileImage = false;
@@ -128,19 +122,19 @@ public class UserTest extends DomainTest {
 		geoEnabled = false;
 		user.setGeoEnabled(geoEnabled);
 		
-		profileBackgroundImageUrl = new Url();
+		profileBackgroundImageUrl = new NullUrl();
 		user.setProfileBackgroundImageUrl(profileBackgroundImageUrl);
 		
-		profileBackgroundImageUrlHttps = new Url();
+		profileBackgroundImageUrlHttps = new NullUrl();
 		user.setProfileBackgroundImageUrlHttps(profileBackgroundImageUrlHttps);
 	
 		followRequestSent = false;
 		user.setFollowRequestSent(followRequestSent);
 		
-		url = new Url();
+		url = new NullUrl();
 		user.setUrl(url);
 		
-		timeZone = new TimeZone();
+		timeZone = new NullTimeZone();
 		user.setTimeZone(timeZone);
 		
 		notifications = 0L;
@@ -158,10 +152,10 @@ public class UserTest extends DomainTest {
 		screenName = "test";
 		user.setScreenName(screenName);
 		
-		profileImageUrl = new Url();
+		profileImageUrl = new NullUrl();
 		user.setProfileImageUrl(profileImageUrl);
 		
-		profileImageUrlHttps = new Url();
+		profileImageUrlHttps = new NullUrl();
 		user.setProfileImageUrlHttps(profileImageUrlHttps);
 		
 		showAllInlineMedia = false;

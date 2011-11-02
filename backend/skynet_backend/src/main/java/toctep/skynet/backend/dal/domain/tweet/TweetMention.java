@@ -25,6 +25,6 @@ public class TweetMention extends Domain {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTweetMentionDao();
+		dao = getDaoFacade().getTweetMentionDao();
 	}
 }

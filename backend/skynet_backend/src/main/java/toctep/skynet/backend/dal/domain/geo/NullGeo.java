@@ -3,8 +3,8 @@ package toctep.skynet.backend.dal.domain.geo;
 public class NullGeo implements IGeo {
 
 	@Override
-	public String getId() {
-		return "NULL";
+	public Long getId() {
+		return null;
 	}
 	
 	@Override

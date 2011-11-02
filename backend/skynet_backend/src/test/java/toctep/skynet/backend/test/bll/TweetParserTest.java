@@ -1,4 +1,4 @@
-package toctep.skynet.backend.test.dal;
+package toctep.skynet.backend.test.bll;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -21,13 +21,7 @@ public class TweetParserTest {
 	
 	@Before
 	public void setup() {
-		Connection conn = MySqlUtil.getInstance(
-				"mysql",
-				"localhost",
-				"skynet_test",
-				"skynet",
-				"asdasd"
-			).getConnection();
+		Connection conn = MySqlUtil.getInstance("mysql_test.properties").getConnection();
 	}
 
 	@Test

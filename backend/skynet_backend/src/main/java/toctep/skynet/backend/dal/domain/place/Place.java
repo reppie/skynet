@@ -142,7 +142,7 @@ public class Place extends Domain<String> implements IPlace{
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getPlaceDao();		
+		dao = getDaoFacade().getPlaceDao();		
 	}
 	
 	@Override

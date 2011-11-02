@@ -26,6 +26,7 @@ public class TweetUrl extends Domain {
 
 	@Override
 	public void setDao() {
-		dao = daoFacade.getTweetUrlDao();
+		dao = getDaoFacade().getTweetUrlDao();
 	}
+	
 }

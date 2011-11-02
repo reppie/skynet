@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -13,14 +14,15 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public void insert(Domain<Long> domain) {
 		TweetKeyword tweetKeyword = (TweetKeyword) domain;
 		
-		long tid = tweetKeyword.getKeyword().getId();
+		String query = "INSERT INTO " + tableName + "(tweet_id, value, keyword_id) VALUES(?, ?, ?)";
 		
-		long id = MySqlUtil.getInstance().insert(
-			"INSERT INTO " + tableName + " (tweet_id, value, keyword_id) " +
-			"VALUES (" + tweetKeyword.getTweet().getId() + ", " + 
-                         MySqlUtil.escape(tweetKeyword.getTweetKeywordValue()) + ", " +
-						 tid + ")"
-		);
+		Param[] params = new Param[] {
+			new Param(tweetKeyword.getTweet().getId(), Types.BIGINT),
+			new Param(tweetKeyword.getTweetKeywordValue(), Types.VARCHAR),
+			new Param(tweetKeyword.getKeyword().getId(), Types.BIGINT)
+		};
+			
+		Long id = MySqlUtil.getInstance().insert(query, params);
 		
 		tweetKeyword.setId(id);
 	}
@@ -33,8 +35,6 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		
 		tweetKeyword.setId(id);
 		try {
-//			tweetKeyword.setKeywordId(rs.getInt("keyword_id"));
-//			tweetKeyword.setTweetId(rs.getLong("tweet_id"));
 			tweetKeyword.setTweetKeywordValue(rs.getString("value"));
 		} catch (SQLException e) {
 			e.printStackTrace();

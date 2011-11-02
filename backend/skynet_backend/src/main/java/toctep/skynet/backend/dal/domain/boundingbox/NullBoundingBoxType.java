@@ -3,8 +3,8 @@ package toctep.skynet.backend.dal.domain.boundingbox;
 public class NullBoundingBoxType implements IBoundingBoxType {
 
 	@Override
-	public String getId() {
-		return "NULL";
+	public Long getId() {
+		return null;
 	}
 	
 	@Override

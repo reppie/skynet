@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -13,22 +14,29 @@ public class TweetDaoImpl extends TweetDao {
 	public void insert(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
 		
-		String query = "INSERT INTO " + tableName +	" VALUES ("
-		+ tweet.getId() + ", "
-		+ MySqlUtil.escape(tweet.getText()) + ", "
-		+ tweet.getGeo().getId() + ", "
-		+ tweet.isTruncated() + ", "
-		+ tweet.getSourceType().getId() + ", "
-		+ tweet.isFavorited() + ", "
-		+ tweet.getInReplyToTweetTwitter().getId() + ", "		
-		+ tweet.getInReplyToUserTwitter().getId() + ", "
-		+ tweet.getRetweetCount() + ", "
-		+ MySqlUtil.escape(tweet.getCreatedAt().toString()) + ", "
-		+ MySqlUtil.escape(tweet.getPlace().getId()) + ", "
-		+ tweet.getUser().getId() + ", "
-		+ MySqlUtil.escape(tweet.getCoordinates()) + ")";
-		
-		MySqlUtil.getInstance().insert(query);
+		String query = 
+			"INSERT INTO " + tableName + 
+				"(id, text, geo_id, truncated, source_type_id, favorited, in_reply_to_tweet_id, in_reply_to_user_id, retweet_count, created_at, place_id, user_id, coordinates) " +
+			"VALUES" +
+				"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT),
+			new Param(tweet.getText(), Types.VARCHAR),
+			new Param(tweet.getGeo().getId(), Types.BIGINT),
+			new Param(tweet.isTruncated(), Types.BOOLEAN),
+			new Param(tweet.getSourceType().getId(), Types.BIGINT),
+			new Param(tweet.isFavorited(), Types.BOOLEAN),
+			new Param(tweet.getInReplyToTweetTwitter().getId(), Types.BIGINT),
+			new Param(tweet.getInReplyToUserTwitter().getId(), Types.BIGINT),
+			new Param(tweet.getRetweetCount(), Types.INTEGER),
+			new Param(tweet.getCreatedAt(), Types.DATE),
+			new Param(tweet.getPlace().getId(), Types.VARCHAR),
+			new Param(tweet.getUser().getId(), Types.BIGINT),
+			new Param(tweet.getCoordinates(), Types.VARCHAR)
+		};
+			
+		MySqlUtil.getInstance().insert(query, params);
 	}
 
 	@Override
