@@ -1,3 +1,4 @@
+from math import log
 """
 This class is used to generate a keywordcloud for the website. It receives the minimum and maximum font size that should be used and 
 a querySet with the keywords and their respective counts. Then, it generates the cloud and stores it in `items`.
@@ -5,6 +6,9 @@ a querySet with the keywords and their respective counts. Then, it generates the
 class KeywordCloud:
     """ A list with the generated KeywordFontSizes """
     items = None
+    smallest = None
+    largest = None
+    step = None
     
     def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=20):
         query_set = query_set.all()[:num_keywords]
@@ -13,12 +17,10 @@ class KeywordCloud:
     def __generate(self, query_set, min_font_size, max_font_size):
         keyword_map = self.__get_map_from_query_set(query_set)
 
-        largest = self.__get_largest_value_from_map(keyword_map)
-        smallest = self.__get_smallest_value_from_map(keyword_map)
-        spread = self.__calculate_spread(largest, smallest)
-        step = self.__calculate_font_size_increment(max_font_size, min_font_size, spread)
+        self.largest = self.__get_largest_value_from_map(keyword_map)
+        self.smallest = self.__get_smallest_value_from_map(keyword_map)
         
-        return self.__generate_item_list(query_set, min_font_size, smallest, step)
+        return self.__generate_item_list(query_set, min_font_size, max_font_size, self.smallest)
 
     def __get_largest_value_from_map(self, a_map):
         if not a_map:
@@ -50,22 +52,22 @@ class KeywordCloud:
             
         return value_sum
     
-    def __calculate_spread(self, largest, smallest):
-        spread = largest - smallest
-        if(spread < 1):
-            spread = 1
-            
-        return spread
+    def __calculate_font_size_increment(self, occurance, max_font_size, min_font_size):
+        if occurance == 1:
+            return 0.001 # Hack gedoogd
+        
+        return (log(occurance)-log(self.smallest))/(log(self.largest)-log(self.smallest));
     
-    def __calculate_font_size_increment(self, max_font_size, min_font_size, spread):
-        return (max_font_size - min_font_size) / spread
+    def __calculate_font_size(self, min_font_size, max_font_size, step):
+        return min_font_size + int(round((max_font_size-min_font_size)*self.step));
     
-    def __generate_item_list(self, the_query_set, min_font_size, smallest_value, step):
+    def __generate_item_list(self, the_query_set, min_font_size, max_font_size, smallest_value):
         tweet_index_count_array = []
         if len(the_query_set) == 0:
             return []
         for row in the_query_set:
-            new_font_size = min_font_size + (row['count'] - smallest_value) * step
+            self.step = self.__calculate_font_size_increment(row['count'], max_font_size, min_font_size)
+            new_font_size = self.__calculate_font_size(min_font_size, max_font_size, self.step)
             tweet_index_count_array.append(KeywordFontSize(keyword=row["keyword"], font_size=new_font_size))
             
         return tweet_index_count_array

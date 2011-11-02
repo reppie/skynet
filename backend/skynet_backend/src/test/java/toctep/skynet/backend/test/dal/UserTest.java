@@ -20,7 +20,7 @@ public class UserTest extends DomainTest {
 	private IPlace place;
 	private boolean defaultProfile;
 	private int statusesCount;
-	private long profileBackgroundTile;
+	private boolean profileBackgroundTiled;
 	private ILanguage language;
 	private String profileLinkColor;
 	private int following;
@@ -42,7 +42,7 @@ public class UserTest extends DomainTest {
 	private boolean followRequestSent;
 	private IUrl url;
 	private ITimeZone timeZone;
-	private long notifications;
+	private int notifications;
 	private boolean profileUseBackgroundImage;
 	private int friendsCount;
 	private String profileSideBarFillColor;
@@ -71,8 +71,8 @@ public class UserTest extends DomainTest {
 		statusesCount = 1;
 		user.setStatusesCount(statusesCount);
 		
-		profileBackgroundTile = 0L;
-		user.setProfileBackgroundTile(profileBackgroundTile);
+		profileBackgroundTiled = false;
+		user.setProfileBackgroundTiled(profileBackgroundTiled);
 		
 		language = NullLanguage.getInstance();
 		user.setLanguage(language);
@@ -137,7 +137,7 @@ public class UserTest extends DomainTest {
 		timeZone = NullTimeZone.getInstance();
 		user.setTimeZone(timeZone);
 		
-		notifications = 0L;
+		notifications = 0;
 		user.setNotifications(notifications);
 		
 		profileUseBackgroundImage = false;
@@ -175,7 +175,7 @@ public class UserTest extends DomainTest {
 		assertTrue(place.equals(user.getPlace()));
 		assertTrue(user.isDefaultProfile() == defaultProfile);
 		assertEquals(statusesCount, user.getStatusesCount());
-		assertEquals(profileBackgroundTile, user.getProfileBackgroundTile());
+		assertTrue(profileBackgroundTiled == user.isProfileBackgroundTiled());
 		assertEquals(language, user.getLanguage());
 		assertTrue(profileLinkColor.equals(user.getProfileLinkColor()));
 		assertEquals(following, user.getFollowing());
@@ -222,10 +222,10 @@ public class UserTest extends DomainTest {
 		User postUser = (User) userDao.select(user.getId());
 		
 		assertEquals(postUser.getId(), user.getId());
-		assertTrue(postUser.getPlace().getId().equals(user.getPlace().getId()));
+		assertTrue(postUser.getPlace().equals(user.getPlace()));
 		assertTrue(postUser.isDefaultProfile() == user.isDefaultProfile());
 		assertEquals(postUser.getStatusesCount(), user.getStatusesCount());
-		assertEquals(postUser.getProfileBackgroundTile(), user.getProfileBackgroundTile());
+		assertTrue(postUser.isProfileBackgroundTiled() == user.isProfileBackgroundTiled());
 		assertTrue(postUser.getLanguage().equals(user.getLanguage()));
 		assertEquals(postUser.getProfileLinkColor(), user.getProfileLinkColor());
 		assertEquals(postUser.getFollowing(), user.getFollowing());
@@ -238,7 +238,7 @@ public class UserTest extends DomainTest {
 		assertEquals(postUser.getName(), user.getName());
 		assertEquals(postUser.getProfileSidebarBorderColor(), user.getProfileSidebarBorderColor());
 		assertEquals(postUser.getProfileBackgroundColor(), user.getProfileBackgroundColor());
-		assertTrue(postUser.getCreatedAt().equals(user.getCreatedAt()));
+		assertEquals(postUser.getCreatedAt().getDate(), user.getCreatedAt().getDate());
 		assertTrue(postUser.isDefaultProfileImage() == user.isDefaultProfileImage());
 		assertEquals(postUser.getFollowersCount(), user.getFollowersCount());
 		assertTrue(postUser.isGeoEnabled() == user.isGeoEnabled());

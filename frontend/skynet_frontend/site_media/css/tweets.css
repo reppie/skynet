@@ -3,6 +3,7 @@
 	font-size: 15px;
 	position: relative;
 	height: 72px;
+	border-bottom: solid 1px #CCCCCC	;
 }
 .tweet.loading{
 	display:none;

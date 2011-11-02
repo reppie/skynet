@@ -23,7 +23,7 @@ public class User extends Domain<Long> implements IUser  {
 	private IPlace place 						= NullPlace.getInstance();
 	private boolean defaultProfile				= false;
 	private int statusesCount					= 0;	
-	private long profileBackgroundTile			= 0L;
+	private boolean profileBackgroundTiled		= false;
 	private ILanguage language 					= NullLanguage.getInstance();
 	private String profileLinkColor				= "";
 	private int following						= 0;
@@ -45,7 +45,7 @@ public class User extends Domain<Long> implements IUser  {
 	private boolean followRequestSent			= false;
 	private IUrl url 							= NullUrl.getInstance();
 	private ITimeZone timeZone 					= NullTimeZone.getInstance();
-	private long notifications					= 0L;
+	private int notifications					= 0;
 	private boolean profileUseBackgroundImage	= false;
 	private int friendsCount					= 0;
 	private String profileSideBarFillColor		= "";
@@ -80,12 +80,12 @@ public class User extends Domain<Long> implements IUser  {
 		this.statusesCount = statusesCount;
 	}
 
-	public long getProfileBackgroundTile() {
-		return profileBackgroundTile;
+	public boolean isProfileBackgroundTiled() {
+		return profileBackgroundTiled;
 	}
 
-	public void setProfileBackgroundTile(long profileBackgroundTile) {
-		this.profileBackgroundTile = profileBackgroundTile;
+	public void setProfileBackgroundTiled(boolean profileBackgroundTiled) {
+		this.profileBackgroundTiled = profileBackgroundTiled;
 	}
 
 	public ILanguage getLanguage() {
@@ -257,11 +257,11 @@ public class User extends Domain<Long> implements IUser  {
 		this.timeZone = timeZone;
 	}
 
-	public long getNotifications() {
+	public int getNotifications() {
 		return notifications;
 	}
 
-	public void setNotifications(long notifications) {
+	public void setNotifications(int notifications) {
 		this.notifications = notifications;
 	}
 
