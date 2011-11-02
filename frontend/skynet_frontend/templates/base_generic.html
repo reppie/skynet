@@ -32,7 +32,7 @@
 				</a>
 				{% endblock %}
 			</header>
-			<section class="span-18 main">
+			<section class="span-15 main">
 				{% block searchbar %}
 				<form id="keyword-search-form" method="get">
 					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
@@ -46,7 +46,7 @@
  
 				{% block main %}The center column{% endblock %}
 			</section>
-			<aside class="span-6 last">
+			<aside class="span-9 last">
 				{% block sidebar %}
 					<section id="region-name">
 						{% block region-name %}
@@ -57,12 +57,6 @@
 					<section id="tag-cloud">
 						<h1 class="title">Tag cloud</h1>
 						{% block tag-cloud %}
-						{% endblock %}
-					</section>
-					<section id="moodgraph">
-						<h1 class="title">Mood graph</h1>
-						{% block moodgraph %}
-							<img src="/site_media/img/dummy/graph.png"/>
 						{% endblock %}
 					</section>
 				{% endblock %}

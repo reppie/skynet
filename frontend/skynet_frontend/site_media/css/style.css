@@ -1,12 +1,12 @@
 body
 {
-	background-image: url("../img/bg_pattern_blue.png");
+	background-image: url("../img/bg_pattern_orange.png");
 	background-repeat: repeat;
 }
 
 .container
 {
-/*    background-color: #eee;         */
+    background-color: #eee;         
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;         
@@ -18,18 +18,6 @@ body
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 	bottom: 0px;
-	background: #eee; /* Old browsers */
-}
-
-.oldcontainer
-{
-	background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 72%, #f7f7f7 72%, #f7f7f7 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eeeeee), color-stop(72%,#eeeeee), color-stop(72%,#f7f7f7), color-stop(100%,#f7f7f7)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* IE10+ */
-	background: linear-gradient(left,  #eeeeee 0%,#eeeeee 72%,#f7f7f7 72%,#f7f7f7 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#f7f7f7',GradientType=1 ); /* IE6-9 */
 }
 
 #logo
@@ -68,7 +56,7 @@ footer
 #searchbar
 {
 	height: 30px;
-	width: 550px;
+	width: 465px;
 	padding-left: 15px;
 	font-size: 1.3em;
 	color: #aaa;
@@ -87,27 +75,18 @@ footer
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/*aside section
-{
-	background-color: #00adef;
-	border: 1px solid #009fdc;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    margin-top: 7px;
-    -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-}*/
-
 aside section
 {
 	background-color: #f7f7f7;
 	border: 1px solid #ccc;
     margin-top: 7px;
+    margin-left: 30px;
     -moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 aside section p
@@ -124,7 +103,7 @@ aside section h1
 
 aside section h1
 {
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 aside section h1.title
@@ -132,9 +111,14 @@ aside section h1.title
     -moz-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.1);
     box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.1);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 	background: #ddd;
 	padding: 5px 0 5px 15px;
-	font-size: 1.5em;
+	font-size: 1.3em;
+	font-weight: bold;
+	border: 1px solid #f7f7f7;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -149,7 +133,6 @@ aside section h1.title
 
 .cloud-element
 {
-/*	color: white;*/
 	text-decoration: none;
 }
 
