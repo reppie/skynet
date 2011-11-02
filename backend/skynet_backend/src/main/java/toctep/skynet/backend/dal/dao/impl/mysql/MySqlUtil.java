@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
@@ -131,20 +133,38 @@ public class MySqlUtil {
 		return id;
 	}
 	
-	public ResultSet select(String query) {
+	public List<Object> select(String query, Param[] params) {
+		List<Object> record = new ArrayList<Object>();
+		
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		Statement stmt = null;
-		
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			rs = pstmt.executeQuery();
+			
 			rs.first();
+			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                Object value = rs.getObject(i);
+                record.add(value);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
-		return rs;
+		return record;
 	}
 	
 	public int update(String query) {

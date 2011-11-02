@@ -283,7 +283,9 @@ public class TweetParser {
 	        for(long contributor : status.getContributors()) {
 	            TweetContributor tweetContributor = new TweetContributor();
 	            tweetContributor.setTweet(tweet);
-	            tweetContributor.setUserTwitterId(contributor);
+	            User contributorUser  = new User();
+	            contributorUser.setId(contributor);
+	            tweetContributor.setUser(contributorUser);
 	        }
     	}
     }
@@ -292,7 +294,9 @@ public class TweetParser {
         for(UserMentionEntity mentionEntity : status.getUserMentionEntities()) {
             TweetMention tweetMention = new TweetMention();
             tweetMention.setTweet(tweet);
-            tweetMention.setUser(mentionEntity.getId());
+            User mentionedUser = new User();
+            mentionedUser.setId(mentionEntity.getId());
+            tweetMention.setUser(mentionedUser);
         }
     }
     

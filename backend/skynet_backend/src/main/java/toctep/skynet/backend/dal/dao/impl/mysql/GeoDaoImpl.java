@@ -30,16 +30,21 @@ public class GeoDaoImpl extends GeoDao {
 	public Geo select(Long id) {
 		Geo geo = new Geo();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(geo.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		geo.setId(id);
-//		geo.setType(); // TODO!
 		try {
 			geo.setCoordinates(rs.getString("coordinates"));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return geo;
 	}
 

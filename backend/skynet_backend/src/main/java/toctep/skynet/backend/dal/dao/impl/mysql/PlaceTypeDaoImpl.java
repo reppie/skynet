@@ -29,10 +29,15 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 	public PlaceType select(Long id) {
 		PlaceType placeType = new PlaceType();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);			
-
-		placeType.setId(id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
 		
+		Param[] params = new Param[] {
+			new Param(placeType.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
+		
+		placeType.setId(id);
 		try {
 			placeType.setText(rs.getString("text"));
 		} catch (SQLException e) {

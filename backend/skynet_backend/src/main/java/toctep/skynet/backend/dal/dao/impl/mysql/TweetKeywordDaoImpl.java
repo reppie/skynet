@@ -31,7 +31,13 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public TweetKeyword select(Long id) {
 		TweetKeyword tweetKeyword = new TweetKeyword();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweetKeyword.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		tweetKeyword.setId(id);
 		try {
@@ -39,6 +45,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return tweetKeyword;
 	}
 

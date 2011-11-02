@@ -29,7 +29,13 @@ public class HashtagDaoImpl extends HashtagDao{
 	public Hashtag select(Long id) {
 		Hashtag hashtag = new Hashtag();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(hashtag.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);		
 		
 		hashtag.setId(id);
 		try {

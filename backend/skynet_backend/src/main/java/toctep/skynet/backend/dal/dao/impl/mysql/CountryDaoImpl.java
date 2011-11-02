@@ -28,7 +28,13 @@ public class CountryDaoImpl extends CountryDao{
 	public Country select(String id) {
 		Country country = new Country();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE code = " + MySqlUtil.escape(id));
+		String query = "SELECT * FROM " + tableName + " WHERE code=?";
+		
+		Param[] params = new Param[] {
+			new Param(country.getId(), Types.VARCHAR)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		country.setId(id);
 		try {
@@ -36,6 +42,7 @@ public class CountryDaoImpl extends CountryDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return country;
 	}
 

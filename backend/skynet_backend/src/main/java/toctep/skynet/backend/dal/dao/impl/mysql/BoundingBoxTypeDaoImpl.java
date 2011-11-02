@@ -29,7 +29,13 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	public BoundingBoxType select(Long id) {
 		BoundingBoxType boundingBoxType = new BoundingBoxType();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(boundingBoxType.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		boundingBoxType.setId(id);
 		try {

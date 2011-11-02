@@ -29,10 +29,15 @@ public class LanguageDaoImpl extends LanguageDao{
 	public Language select(Long id) {
 		Language language = new Language();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);			
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(language.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		language.setId(id);
-		
 		try {
 			language.setText(rs.getString("text"));
 		} catch (SQLException e) {

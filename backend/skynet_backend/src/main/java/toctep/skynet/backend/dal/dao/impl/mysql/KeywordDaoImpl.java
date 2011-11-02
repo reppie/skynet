@@ -31,7 +31,13 @@ public class KeywordDaoImpl extends KeywordDao {
 	public Keyword select(Long id) {
 		Keyword keyword = new Keyword();
 		
-		ResultSet rs = MySqlUtil.getInstance().select("SELECT * FROM " + tableName + " WHERE id = " + id);
+		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		
+		Param[] params = new Param[] {
+			new Param(keyword.getId(), Types.BIGINT)
+		};
+		
+		ResultSet rs = MySqlUtil.getInstance().select(query, params);
 		
 		keyword.setId(id);
 		try {
