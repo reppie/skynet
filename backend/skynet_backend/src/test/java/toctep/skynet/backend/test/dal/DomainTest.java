@@ -30,11 +30,8 @@ import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 
-import com.mysql.jdbc.Connection;
-
 public abstract class DomainTest extends TestCase {
 
-	private Connection conn;
 	private MySqlUtil mySqlUtil;
 	
 	private DaoFacade daoFacade;
@@ -63,11 +60,10 @@ public abstract class DomainTest extends TestCase {
 	@Before
 	public void setUp() {
 		mySqlUtil = MySqlUtil.getInstance("mysql_test.properties");
-		conn = mySqlUtil.getConnection();
 		
 		emptyDatabase();
 		
-		daoFacade = new DaoFacadeImpl();
+		daoFacade = DaoFacadeImpl.getInstance();
 		
 		boundingBoxDao = daoFacade.getBoundingBoxDao();
 		boundingBoxTypeDao = daoFacade.getBoundingBoxTypeDao();
