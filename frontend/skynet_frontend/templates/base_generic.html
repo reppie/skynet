@@ -33,6 +33,8 @@
 				{% endblock %}
 			</header>
 			<section class="span-18 main">
+				<div class="crumble-path"></div>
+				
 				{% block searchbar %}
 				<form id="keyword-search-form" method="get">
 					<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
@@ -42,8 +44,9 @@
 					/>
 					<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
 				</form>
+				
  				{% endblock %}
- 
+ 				<div class="tag-cloud main-tag-cloud"></div>
 				{% block main %}The center column{% endblock %}
 			</section>
 			<aside class="span-6 last">
