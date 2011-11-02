@@ -53,6 +53,9 @@ class KeywordCloud:
         return value_sum
     
     def __calculate_font_size_increment(self, occurance, max_font_size, min_font_size):
+        if occurance == 1:
+            return 0.001 # Hack gedoogd
+        
         return (log(occurance)-log(self.smallest))/(log(self.largest)-log(self.smallest));
     
     def __calculate_font_size(self, min_font_size, max_font_size, step):
