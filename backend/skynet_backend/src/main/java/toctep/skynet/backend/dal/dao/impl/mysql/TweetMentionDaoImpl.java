@@ -87,7 +87,7 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetMention tweetMention = (TweetMention) domain;
-		return this.exists(tweetMention.getId());
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetMention.getId(), Types.INTEGER));
 	}
 	
 	@Override

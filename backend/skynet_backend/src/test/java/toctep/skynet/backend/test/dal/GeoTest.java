@@ -61,5 +61,11 @@ public class GeoTest extends DomainTest{
 		geo.delete();
 		assertEquals(0, geoDao.count());		
 	}
+
+	@Override
+	public void testExists() {
+		geo.save();
+		assertTrue(geoDao.exists(geo));
+	}
 	
 }

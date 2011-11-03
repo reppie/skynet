@@ -86,7 +86,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;
-		return this.exists(tweetHashtag.getId());
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetHashtag.getId(), Types.INTEGER));
 	}
 	
 	@Override

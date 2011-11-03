@@ -56,7 +56,7 @@ public class UrlDaoImpl extends UrlDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Url url = (Url) domain;
-		return this.exists(url.getId());
+		return MySqlUtil.getInstance().exists(tableName, "text", new Param(url.getId(), Types.VARCHAR));
 	}
 	
 	@Override

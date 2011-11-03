@@ -60,4 +60,10 @@ public class TimeZoneTest extends DomainTest {
 		assertEquals(0, timeZoneDao.count());
 	}
 
+	@Override
+	public void testExists() {
+		timeZone.save();
+		assertTrue(timeZoneDao.exists(timeZone));
+	}
+
 }

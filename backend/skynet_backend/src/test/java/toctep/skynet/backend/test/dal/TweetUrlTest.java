@@ -88,4 +88,10 @@ public class TweetUrlTest extends DomainTest {
 		assertEquals(0, tweetUrlDao.count());
 	}
 
+	@Override
+	public void testExists() {
+		tweetUrl.save();
+		assertTrue(tweetUrlDao.exists(tweetUrl));
+	}
+
 }

@@ -144,5 +144,11 @@ public class PlaceTest extends DomainTest{
 		place.delete();
 		assertEquals(0, placeDao.count());
 	}
+
+	@Override
+	public void testExists() {
+		place.save();
+		assertTrue(placeDao.exists(place));
+	}
 	
 }
