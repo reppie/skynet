@@ -1,7 +1,9 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -63,7 +65,10 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
-		return this.exists(boundingBox.getId());
+		Map<String, Param> params = new HashMap<String, Param>();
+		params.put("bounding_box_type_id", new Param(boundingBox.getType().getId(), Types.INTEGER));
+		params.put("coordinates", new Param(boundingBox.getCoordinates(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(tableName, params);
 	}
 	
 	@Override
