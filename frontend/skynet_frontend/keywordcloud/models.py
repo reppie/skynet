@@ -12,7 +12,15 @@ class KeywordCloud:
     step = None
     
     def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=20):
-        query_set = query_set.all()[:num_keywords]
+        from skynet_frontend.twitter.models import Keyword
+        from datetime import datetime, timedelta
+        blacklist_query = Keyword.get_all_since(datetime.now() - timedelta(days=1))
+        blacklist_query = blacklist_query[:len(blacklist_query)/100*3]
+        blacklist = []
+        for item in blacklist_query:
+            blacklist.append(item['keyword'])
+            
+        query_set = query_set.all().exclude(keyword__in=blacklist)[:num_keywords]
         self.items = self.__generate(query_set, min_font_size, max_font_size)
 
     def __generate(self, query_set, min_font_size, max_font_size):

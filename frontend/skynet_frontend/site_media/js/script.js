@@ -1,8 +1,37 @@
 var crumblePath = $(".crumble-path").CrumblePath();
 $(function(){
 	
+	function getFilters(){
+		
+		
+		var $searchbar = $("form#keyword-search-form").find("input#searchbar");
+		$searchbar.addClass("loading");
+		var filters = [].concat(crumblePath.path());
+		var search = $searchbar.val();
+		var query = search.split(' ');
+		for(var index in query){
+			var value = query[index];
+			if(value.length>=2){
+				var filter = null;
+				if(value.substring(0,1)=='@'){
+					filter = new api.filters.User(value.substring(1));
+				} if(value.substring(0,1)=='^'){
+					filter = new api.filters.Geo(value.substring(1), "NL", value.substring(1));
+				} else {
+					filter = new api.filters.Keyword(value);
+				}
+				filters.push(filter);
+			}
+		}
+		return filters;
+	}
+	
+	
 	var $search = $("form#keyword-search-form").submit(function(){
 		
+		
+		var $searchbar = $(this).find("input#searchbar");
+		/*
 		$(".main-tag-cloud").hide();
 		
 		var $searchbar = $(this).find("input#searchbar");
@@ -26,7 +55,15 @@ $(function(){
 		}
 		for (var index in filters){
 			var filter = filters[index];
-			if(filter instanceof api.filters.Geo){
+			if(filter.type=='geo'){
+ 				$("section#region-name").find("p#current-region").html(filter.label);
+ 			}
+		}*/
+		
+		var filters = getFilters();
+		for (var index in filters){
+			var filter = filters[index];
+			if(filter.type=='geo'){
  				$("section#region-name").find("p#current-region").html(filter.label);
  			}
 		}
@@ -79,6 +116,17 @@ $(function(){
 		}else{
 			$search.submit();
 		}
+		
+		var filters = getFilters();
+		for (var index in filters){
+			var filter = filters[index];
+			if(filter.type=='geo'){
+ 				$("section#region-name").find("p#current-region").html(filter.label);
+ 			}
+		}
+		
+		
+		
 		return false;
 	});
 });
