@@ -56,7 +56,9 @@ class TwitterRpcMethods(object):
             'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids[:20]],
             'cloud':cloud,
         }
+    
             
+    
             
     @staticmethod
     @jsonremote(service)
