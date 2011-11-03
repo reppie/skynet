@@ -1,6 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetHashtagDao;
@@ -45,6 +46,27 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 		
 		return tweetHashtag;
 	}
+	
+	public List<TweetHashtag> select(Tweet tweet) {
+		List<TweetHashtag> tweetHashtags = new ArrayList<TweetHashtag>();
+		
+		String query = "SELECT id, hashtag_id FROM " + tableName + " WHERE tweet_id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT)
+		};
+		
+		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		
+		for(List<Object> record : records) {
+			TweetHashtag tweetHashtag = new TweetHashtag();
+			tweetHashtag.setId((Integer) record.get(0));
+			tweetHashtag.setTweet(tweet);
+			tweetHashtag.setHashtag(Hashtag.select((Integer) record.get(1)));
+			tweetHashtags.add(tweetHashtag);
+		}
+		return tweetHashtags;
+	}	
 
 	@Override
 	public void update(Domain<Integer> domain) {

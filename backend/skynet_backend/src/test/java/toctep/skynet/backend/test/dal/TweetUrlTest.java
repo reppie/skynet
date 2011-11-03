@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
@@ -48,6 +50,28 @@ public class TweetUrlTest extends DomainTest {
 		
 		assertTrue(postTweetUrl.getTweet().getId().equals(tweetUrl.getTweet().getId()));
 		assertTrue(postTweetUrl.getUrl().getId().equals(tweetUrl.getUrl().getId()));	
+	}
+	
+	@Test
+	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		Url url = new Url();
+		url.setId("asd");
+		
+		TweetUrl tweetUrl = new TweetUrl();
+		tweetUrl.setTweet(tweet);
+		tweetUrl.setUrl(url);
+		
+		tweet.addUrl(tweetUrl);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getUrls().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getUrls().size());
 	}
 
 	@Override
