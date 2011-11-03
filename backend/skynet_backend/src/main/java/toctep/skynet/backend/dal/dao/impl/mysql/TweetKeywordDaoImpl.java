@@ -1,6 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
@@ -47,6 +48,28 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		
 		return tweetKeyword;
 	}
+	
+	public List<TweetKeyword> select(Tweet tweet) {
+		List<TweetKeyword> tweetKeywords = new ArrayList<TweetKeyword>();
+		
+		String query = "SELECT id, value, keyword_id FROM " + tableName + " WHERE tweet_id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT)
+		};
+		
+		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		
+		for(List<Object> record : records) {
+			TweetKeyword tweetKeyword = new TweetKeyword();
+			tweetKeyword.setId((Integer) record.get(0));
+			tweetKeyword.setTweet(tweet);
+			tweetKeyword.setTweetKeywordValue((String) record.get(1));
+			tweetKeyword.setKeyword(Keyword.select((Integer) record.get(2)));
+			tweetKeywords.add(tweetKeyword);
+		}
+		return tweetKeywords;
+	}	
 
 	@Override
 	public void update(Domain<Integer> domain) {
