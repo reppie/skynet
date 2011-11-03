@@ -297,36 +297,47 @@ public final class MySqlUtil {
 	}
 	
 	public void truncateDatabase() {
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		try {
-			stmt = (Statement) conn.createStatement();
-			stmt.executeQuery("set foreign_key_checks=0");
-			stmt.executeQuery("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + UserDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + CountryDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + GeoDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + UrlDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + KeywordDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);
-			stmt.executeQuery("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);
-			stmt.executeQuery("set foreign_key_checks=1");
+			conn.setAutoCommit(false);
+			
+			pstmt = conn.prepareStatement("set foreign_key_checks=0");							pstmt.execute();
+			
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME); 		pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);		pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetDao.TABLE_NAME);				pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + UserDao.TABLE_NAME);				pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);				pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + CountryDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + GeoDao.TABLE_NAME);				pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);		pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);	pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);		pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);		pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + UrlDao.TABLE_NAME);				pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + KeywordDao.TABLE_NAME);			pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);		pstmt.execute();
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);	pstmt.execute();
+			
+			pstmt = conn.prepareStatement("set foreign_key_checks=1");							pstmt.execute();
+			
+			conn.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
-				stmt.close();
+				pstmt.close();
+				conn.setAutoCommit(true);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
