@@ -1,7 +1,7 @@
 $(function(){
 	$("form#keyword-search-form").submit(function(){
 		
-		var filters [];
+		var filters =[];
 		var search = $(this).find("input#searchbar").val();
 		
 		var query = search.split(' ');
