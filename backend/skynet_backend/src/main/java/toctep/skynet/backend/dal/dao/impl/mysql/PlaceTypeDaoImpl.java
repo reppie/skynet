@@ -34,7 +34,7 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		placeType.setId(id);
 		placeType.setText((String) record.get(1));

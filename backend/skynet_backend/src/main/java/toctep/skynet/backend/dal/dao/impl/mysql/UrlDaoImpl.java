@@ -31,7 +31,7 @@ public class UrlDaoImpl extends UrlDao {
 			new Param(id, Types.VARCHAR)
 		};
 		
-		MySqlUtil.getInstance().select(query, params);
+		MySqlUtil.getInstance().selectRecord(query, params);
 		
 		url.setId(id);
 		

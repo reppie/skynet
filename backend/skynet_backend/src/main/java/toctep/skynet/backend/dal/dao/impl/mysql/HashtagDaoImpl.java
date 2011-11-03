@@ -34,7 +34,7 @@ public class HashtagDaoImpl extends HashtagDao{
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);		
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);		
 		
 		hashtag.setId(id);
 		hashtag.setText((String) record.get(1));

@@ -34,7 +34,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		geoType.setId(id);
 		geoType.setText((String) record.get(1));

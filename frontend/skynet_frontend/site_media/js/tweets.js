@@ -67,12 +67,12 @@
 			},
 			'User': function(user){
 				api.filters.Base.prototype.constructor.call(this, 'user');
-				this.user = user;
+				this.value = user;
 				
 			},
 			'Geo': function(location){
 				api.filters.Base.prototype.constructor.call(this, 'geo');
-				this.location = location;
+				this.value = location;
 			}
 		}
 	});
@@ -168,6 +168,11 @@
 	
 	api.Tweet.prototype = api.Base;
 	api.User.prototype = api.Base;
+	
+	api.filters.Keyword.prototype = api.filters.Base;
+	api.filters.User.prototype = api.filters.Base;
+	api.filters.Geo.prototype = api.filters.Base;
+	
 	/*
 	 * Send along CSRF security token otherwise requests will fail
 	 */
@@ -271,7 +276,6 @@
 		  },
 	  	});
 	}
-	
 })(jQuery);
 
 

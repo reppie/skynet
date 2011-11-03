@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.user.User;
@@ -18,11 +20,11 @@ public class TweetContributorTest extends DomainTest {
 		tweetContributor = new TweetContributor();
 		
 		user = new User();
-		user.setId(new Long(1));
+		user.setId(new Long(2));
 		tweetContributor.setUser(user);
 		
 		tweet = new Tweet();
-		tweet.setId(new Long(1));
+		tweet.setId(new Long(2));
 		tweetContributor.setTweet(tweet);
 	}
 	
@@ -43,10 +45,32 @@ public class TweetContributorTest extends DomainTest {
 	public void testSelect() {
 		tweetContributor.save();
 		
-		TweetContributor postTweetContributor = (TweetContributor) tweetContributorDao.select(tweetContributor.getId());
+		TweetContributor postTweetContributor = TweetContributor.select(tweetContributor.getId());
 		
 		assertTrue(postTweetContributor.getTweet().getId().equals(tweetContributor.getTweet().getId()));
 		assertTrue(postTweetContributor.getUser().getId().equals(tweetContributor.getUser().getId()));		
+	}
+	
+	@Test
+	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		User user = new User();
+		user.setId(new Long(1));
+		
+		TweetContributor tweetContributorOne = new TweetContributor();
+		tweetContributorOne.setTweet(tweet);
+		tweetContributorOne.setUser(user);
+		
+		tweet.addContributor(tweetContributorOne);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getContributors().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getContributors().size());
 	}
 
 	@Override

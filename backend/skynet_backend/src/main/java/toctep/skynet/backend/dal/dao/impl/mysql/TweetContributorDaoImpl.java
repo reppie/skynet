@@ -1,6 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetContributorDao;
@@ -37,7 +38,7 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		tweetContributor.setId(id);
 		tweetContributor.setTweet(Tweet.select((Long) record.get(1)));
@@ -45,6 +46,27 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 		
 		return tweetContributor;
 	}
+	
+	public List<TweetContributor> select(Tweet tweet) {
+		List<TweetContributor> tweetContributors = new ArrayList<TweetContributor>();
+		
+		String query = "SELECT id, user_id FROM " + tableName + " WHERE tweet_id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT)
+		};
+		
+		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		
+		for(List<Object> record : records) {
+			TweetContributor tweetContributor = new TweetContributor();
+			tweetContributor.setId((Integer) record.get(0));
+			tweetContributor.setTweet(tweet);
+			tweetContributor.setUser(User.select((Long) record.get(1)));
+			tweetContributors.add(tweetContributor);
+		}
+		return tweetContributors;
+	}	
 
 	@Override
 	public void update(Domain<Integer> domain) {

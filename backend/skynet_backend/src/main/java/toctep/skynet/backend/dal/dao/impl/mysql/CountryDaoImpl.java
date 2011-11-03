@@ -33,7 +33,7 @@ public class CountryDaoImpl extends CountryDao {
 			new Param(id, Types.VARCHAR)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		country.setId(id);
 		country.setText((String) record.get(1));

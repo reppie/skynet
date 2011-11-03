@@ -39,29 +39,44 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private List<TweetMention> tweetMentions = new ArrayList<TweetMention>();
 	private List<TweetUrl> tweetUrls = new ArrayList<TweetUrl>();
 	
-	public void addContributor(TweetContributor tweetContributor)
-	{
+	public void addContributor(TweetContributor tweetContributor) {
 		tweetContributors.add(tweetContributor);
 	}
 	
-	public void addHashtag(TweetHashtag tweetHashtag)
-	{
+	public void addHashtag(TweetHashtag tweetHashtag) {
 		tweetHashtags.add(tweetHashtag);
 	}
 	
-	public void addKeyword(TweetKeyword tweetKeyword)
-	{
+	public void addKeyword(TweetKeyword tweetKeyword) {
 		tweetKeywords.add(tweetKeyword);
 	}
 	
-	public void addMention(TweetMention tweetMention)
-	{
+	public void addMention(TweetMention tweetMention) {
 		tweetMentions.add(tweetMention);
 	}
 	
-	public void addUrl(TweetUrl tweetUrl)
-	{
+	public void addUrl(TweetUrl tweetUrl) {
 		tweetUrls.add(tweetUrl);
+	}
+	
+	public List<TweetContributor> getContributors() {
+		return tweetContributors;
+	}
+	
+	public List<TweetHashtag> getHashtags() {
+		return tweetHashtags;
+	}
+	
+	public List<TweetKeyword> getKeywords() {
+		return tweetKeywords;
+	}
+	
+	public List<TweetMention> getMentions() {
+		return tweetMentions;
+	}
+	
+	public List<TweetUrl> getUrls() {
+		return tweetUrls;
 	}
 	
 	@Override
@@ -251,13 +266,15 @@ public class Tweet extends Domain<Long> implements ITweet {
 			((User) this.user).setId(((User) user).getId());
 		}
 		
+		if (isDirty()) {
+			super.save();
+		}
+		
 		saveContributors();
 		saveHashtags();
 		saveKeywords();
 		saveMentions();
 		saveUrls();
-		
-		super.save();
 	}
 
 	public static ITweet select(Long id) {
