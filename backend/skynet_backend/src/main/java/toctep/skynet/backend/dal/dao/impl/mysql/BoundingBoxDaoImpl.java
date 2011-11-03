@@ -66,7 +66,6 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	public boolean exists(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		Map<String, Param> params = new HashMap<String, Param>();
-		params.put("bounding_box_type_id", new Param(boundingBox.getType().getId(), Types.INTEGER));
 		params.put("coordinates", new Param(boundingBox.getCoordinates(), Types.VARCHAR));
 		return MySqlUtil.getInstance().exists(tableName, params);
 	}

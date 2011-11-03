@@ -66,7 +66,6 @@ public class GeoDaoImpl extends GeoDao {
 	public boolean exists(Domain<Integer> domain) {
 		Geo geo = (Geo) domain;
 		Map<String, Param> params = new HashMap<String, Param>();
-		params.put("geo_type_id", new Param(geo.getType().getId(), Types.INTEGER));
 		params.put("coordinates", new Param(geo.getCoordinates(), Types.VARCHAR));
 		return MySqlUtil.getInstance().exists(tableName, params);
 	}
