@@ -54,6 +54,13 @@ class Place(models.Model):
     phone = models.CharField(max_length=255, blank=True, null=True)
     twitter = models.CharField(max_length=255, blank=True, null=True)
     appid = models.CharField(max_length=255, blank=True, null=True)
+    
+    def to_json(self):
+        return {
+            'id': str(self.id),
+            'country': self.country.text,
+            'name': self.name,
+        }
 
 class Geo(models.Model):
     geo_type = models.ForeignKey(GeoType, blank=True, null=True)
@@ -179,6 +186,7 @@ class Tweet(models.Model):
             'text': self.text,
             'user_id': self.user_id,
             'created_at': self.created_at,
+            'place': self.place
         }
         
     class Meta:

@@ -35,8 +35,6 @@ class TwitterRpcMethods(object):
         user = User.objects.get(pk=user_id)
         return user
     
-    
-    
     @staticmethod
     @jsonremote(service)
     def search_tweets(filters):
@@ -57,9 +55,7 @@ class TwitterRpcMethods(object):
         
         last = datetime.fromtimestamp(last)
         tweets = TwitterRpcMethods.do_query(filters)
-        
         tweets.distinct().filter(created_at__gt=last)
-        
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords)
@@ -90,9 +86,7 @@ class TwitterRpcMethods(object):
                     search_string = filter['value']
                     tweets = tweets.distinct().filter(place__name=search_string)
         
-        
         return tweets        
-    
             
     @staticmethod
     @jsonremote(service)

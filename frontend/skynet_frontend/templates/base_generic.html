@@ -87,9 +87,11 @@
 				  	</div>
   					<div class="tweet-text">${text}</div>
   					<div class="tweet-footer">
+  						<span class="tweet-location">${place.name}, ${place.country}</span>
   						<time datetime="${created_at+'Z'}"></time>
   						op
-						<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>					
+						<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>
+											
   					</div>
 				</div>
     		</div>
@@ -100,7 +102,7 @@
 		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
 			<ul>
 				{% templatetag openvariable %}each chain{% templatetag closevariable %}
-					<li><a type="" href="#">${label} &raquo;</a></li>
+					<li><a data-index="${$index}" type="" href="#">${label} &raquo;</a></li>
 				{% templatetag openvariable %}/each{% templatetag closevariable %}
 			</ul> 
 		</script>

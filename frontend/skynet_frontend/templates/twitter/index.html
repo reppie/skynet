@@ -2,15 +2,10 @@
 {% load i18n %}
 
 {% block tag-cloud %}
-	{% if keywordcloud.items %}
-		<div class="tag-cloud mini-tag-cloud">
-		{% for item in keywordcloud.items %}
-			<a class="cloud-element" data-keyword="{{ item.keyword }}" href="#" style="font-size: {{ item.font_scale }}px !important }">{{ item.keyword }}</a>
-		{% endfor %}
-		</div>
-	{% else %}
-		<p>{% trans "No tweets indexed yet" %}</p>
-	{% endif %}
+	<div class="tag-cloud mini-tag-cloud">
+		
+	</div>
+	
 {% endblock %}
 
 {% block title %} Social Media Lab {% endblock %}
