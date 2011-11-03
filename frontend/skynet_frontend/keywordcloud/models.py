@@ -1,3 +1,4 @@
+from django.db import models
 from math import log
 """
 This class is used to generate a keywordcloud for the website. It receives the minimum and maximum font size that should be used and 
@@ -53,13 +54,13 @@ class KeywordCloud:
         return value_sum
     
     def __calculate_font_size_increment(self, occurance, max_font_size, min_font_size):
-        if occurance == 1:
-            return 0.001 # Hack gedoogd
+        if self.smallest == self.largest:
+            return 1 # Hack gedoogd door Wytse Visser
         
         return (log(occurance)-log(self.smallest))/(log(self.largest)-log(self.smallest));
     
     def __calculate_font_size(self, min_font_size, max_font_size, step):
-        return min_font_size + int(round((max_font_size-min_font_size)*self.step));
+        return round((min_font_size + (max_font_size-min_font_size)*self.step)/min_font_size*100)
     
     def __generate_item_list(self, the_query_set, min_font_size, max_font_size, smallest_value):
         tweet_index_count_array = []
@@ -68,7 +69,7 @@ class KeywordCloud:
         for row in the_query_set:
             self.step = self.__calculate_font_size_increment(row['count'], max_font_size, min_font_size)
             new_font_size = self.__calculate_font_size(min_font_size, max_font_size, self.step)
-            tweet_index_count_array.append(KeywordFontSize(keyword=row["keyword"], font_size=new_font_size))
+            tweet_index_count_array.append(KeywordFontSize(keyword=row["keyword"], font_scale=new_font_size))
             
         return tweet_index_count_array
     def to_json(self):
@@ -77,20 +78,23 @@ class KeywordCloud:
 """
 This class is used to store the font sizes of the given keywords in a cloud
 """
-class KeywordFontSize:
+class KeywordFontSize(models.Model):
     keyword = None
-    font_size = None
+    font_scale = None
     
-    def __init__(self, keyword, font_size):
+    def __init__(self, keyword, font_scale):
         self.keyword = keyword
-        self.font_size = font_size
+        self.font_scale = font_scale
         
     def __unicode__(self):
-        return self.keyword + ": " + self.font_size + "px"
+        return self.keyword + ": " + str(self.font_scale) + "px"
     
     def to_json(self):
         return {
             'keyword':self.keyword,
-            'font_size':self.font_size,
+            'font_scale':self.font_scale,
                 
         }
+    
+    class Meta:
+        managed = False
