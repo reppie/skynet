@@ -58,7 +58,7 @@ class TwitterRpcMethods(object):
         last = datetime.fromtimestamp(last)
         tweets = TwitterRpcMethods.do_query(filters)
         
-        tweets.distinct().filter(created_at__gte=last)
+        tweets.distinct().filter(created_at__gt=last)
         
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
