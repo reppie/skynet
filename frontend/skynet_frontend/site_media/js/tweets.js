@@ -149,7 +149,6 @@
 							      delta = round((date - new Date) / 1000) || -1,
 							      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
 							      i = units.length, n, seconds;
-							
 							    while (i--) {
 							      seconds = units[i];
 							      if (!i || delta > seconds) {
