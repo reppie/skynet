@@ -31,9 +31,8 @@ $(function(){
 		
 		var keyword = $(this).data("keyword");
 		var filter = new api.filters.Keyword(keyword);
-		crumblePath.path().add(filter);
+		crumblePath.add(filter);
 		var filters = crumblePath.path();
-		filters.push(keywordFilter);
 		
 		api.Tweet.search(filters, function(twitterIds, cloud){
 			$(".tweets").TweetList(twitterIds);

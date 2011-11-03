@@ -97,6 +97,16 @@
 		<script id="tagTemplate" type="text/x-jquery-tmpl">
 			<a class="cloud-element" data-keyword="${ keyword }" href="#" style="font-size: ${ font_scale }% !important">${ keyword }</a>
 		</script>
+		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
+			<ul>
+				{% templatetag openvariable %}each chain{% templatetag closevariable %}
+					<li>${label} &raquo;</li>
+				{% templatetag openvariable %}/each{% templatetag closevariable %}
+			</ul> 
+		</script>
+		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
+			
+		</script>
 		<!-- scripts concatenated and minified via ant build script-->		
 		<script src="/site_media/js/libs/jquery.jsonrpc.js"></script>
 		<script src="/site_media/js/libs/jquery.tmpl.js"></script>

@@ -18,6 +18,11 @@
 		'CrumblePath': function(element){
 			this.$path = element;
 			this.chain = [];
+			
+			var nl = new api.filters.Geo("Nederland", "nl");
+			nl.removable = false;
+			this.chain.push(nl);
+			
 			this.build();
 		},
 		'TweetList': function(element, tweets){
@@ -56,23 +61,27 @@
 				
 		},
 		'filters': {
-			'Base': function(type){
+			'Base': function(type, label, value){
 				var base = this;
-				this['type']=type;
-			},
-			'Keyword': function(value){
-				api.filters.Base.prototype.constructor.call(this, 'keyword');
+				this.type = type;
+				this.label = label;
+				this.removable = true;
 				this.value = value;
+				this.equals = function(filter){
+					return this.type == filter.type && this.value == filter.value;
+				}
+				
+			},
+			'Keyword': function(keyword){
+				api.filters.Base.prototype.constructor.call(this, 'keyword', keyword, keyword);
 				
 			},
 			'User': function(user){
-				api.filters.Base.prototype.constructor.call(this, 'user');
-				this.value = user;
+				api.filters.Base.prototype.constructor.call(this, 'user', "@" + user, user);
 				
 			},
-			'Geo': function(location){
-				api.filters.Base.prototype.constructor.call(this, 'geo');
-				this.value = location;
+			'Geo': function(label, location){
+				api.filters.Base.prototype.constructor.call(this, 'geo', label, location);
 			}
 		}
 	});
@@ -169,6 +178,7 @@
 	api.Tweet.prototype = api.Base;
 	api.User.prototype = api.Base;
 	
+	
 	api.filters.Keyword.prototype = api.filters.Base;
 	api.filters.User.prototype = api.filters.Base;
 	api.filters.Geo.prototype = api.filters.Base;
@@ -203,9 +213,21 @@
  		
  		return this.chain;
  	}
+ 	api.CrumblePath.prototype.add = function(filter){
+ 		for(var index in this.chain){
+ 			var f = this.chain[index];
+ 			if(filter.equals(f)){
+ 				return;
+ 			}
+ 		}
+ 		this.chain.push(filter);
+ 		this.build();
+ 	}
+ 	
  	api.CrumblePath.prototype.build = function(){
- 		
- 		//return this.chain;
+ 		this.$path.empty();
+ 		var $crumblePath = $("#crumblePathTemplate").tmpl(this);
+ 		$crumblePath.appendTo(this.$path);
  	}
  	
 	api.Tweet.prototype.getUser = function(callback){
