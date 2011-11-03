@@ -28,9 +28,10 @@ $(function(){
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
-
+		
 		var keyword = $(this).data("keyword");
-		var keywordFilter = new api.filters.Keyword(keyword);
+		var filter = new api.filters.Keyword(keyword);
+		crumblePath.path().add(filter);
 		var filters = crumblePath.path();
 		filters.push(keywordFilter);
 		

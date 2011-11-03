@@ -44,11 +44,9 @@ class TwitterRpcMethods(object):
                 search_string = filter['value']
                 tweets = tweets.distinct().filter(keywords__keyword=search_string)
                 
-                
             if filter['type']=='user':
                 search_string = filter['value']
-                tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string[1:]))
-                
+                tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string))
                 
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
