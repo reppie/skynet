@@ -5,7 +5,7 @@ import java.util.List;
 
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.tweet.SourceType;
+import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 
 public class SourceTypeDaoImpl extends SourceTypeDao {
 

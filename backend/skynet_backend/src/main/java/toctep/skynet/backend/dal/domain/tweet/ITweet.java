@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import toctep.skynet.backend.dal.domain.IDomain;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.sourcetype.ISourceType;
 import toctep.skynet.backend.dal.domain.user.IUser;
 
 public interface ITweet extends IDomain<Long> {

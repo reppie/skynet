@@ -30,7 +30,7 @@ public class TweetRetriever implements Runnable {
 	        public void onScrubGeo(long userId, long upToStatusId) { }
 	
 	        public void onException(Exception e) {
-	            Skynet.log.error(e.getMessage(), e);
+	            Skynet.LOG.error(e.getMessage(), e);
 	        }
 	    };
 	    

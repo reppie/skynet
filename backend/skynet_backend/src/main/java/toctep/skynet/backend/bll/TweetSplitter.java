@@ -2,7 +2,7 @@ package toctep.skynet.backend.bll;
 
 import java.util.regex.Pattern;
 
-public class TweetSplitter {
+public final class TweetSplitter {
 	
 	private TweetSplitter() { }
 	

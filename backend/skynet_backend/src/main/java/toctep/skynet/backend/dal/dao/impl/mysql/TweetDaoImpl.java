@@ -8,7 +8,7 @@ import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.place.Place;
-import toctep.skynet.backend.dal.domain.tweet.SourceType;
+import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;

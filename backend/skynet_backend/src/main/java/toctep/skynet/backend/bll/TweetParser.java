@@ -14,8 +14,8 @@ import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
-import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
@@ -76,7 +76,7 @@ public final class TweetParser {
 			parseMention(status);
 			parseKeyword(tweet);
 		} catch (ParseException e) {
-			Skynet.log.error(e.getMessage(), e);
+			Skynet.LOG.error(e.getMessage(), e);
 		}
 		
 		tweet.save();

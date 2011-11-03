@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
-public class TweetFilter {
+public final class TweetFilter {
 	
 	private TweetFilter() { }
 	

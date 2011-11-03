@@ -5,6 +5,8 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.keyword.IKeyword;
+import toctep.skynet.backend.dal.domain.keyword.Keyword;
 
 public class TweetKeyword extends Domain<Integer> {
 	

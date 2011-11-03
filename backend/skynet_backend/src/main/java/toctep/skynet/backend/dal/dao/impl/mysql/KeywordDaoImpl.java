@@ -8,7 +8,7 @@ import java.util.List;
 import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.tweet.Keyword;
+import toctep.skynet.backend.dal.domain.keyword.Keyword;
 
 import com.mysql.jdbc.Statement;
 
@@ -64,13 +64,13 @@ public class KeywordDaoImpl extends KeywordDao {
 			rs.first();
 			keyword.setId(rs.getInt("id"));
 		} catch (SQLException e) {
-			Skynet.log.error(e.getMessage(), e);
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				stmt.close();
 				rs.close();
 			} catch (SQLException e) {
-				Skynet.log.error(e.getMessage(), e);
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 	}

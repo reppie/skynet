@@ -6,7 +6,7 @@ import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.tweet.Keyword;
+import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 

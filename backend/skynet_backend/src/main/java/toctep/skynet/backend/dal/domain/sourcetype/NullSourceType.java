@@ -1,4 +1,4 @@
-package toctep.skynet.backend.dal.domain.tweet;
+package toctep.skynet.backend.dal.domain.sourcetype;
 
 
 public final class NullSourceType implements ISourceType {
