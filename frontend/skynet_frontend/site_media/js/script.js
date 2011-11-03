@@ -9,7 +9,7 @@ $(function(){
 			var value = query[index];
 			if(value.length>=2){
 				var filter = null;
-				if(value.substring(0,0)=='@'){
+				if(value.substring(0,1)=='@'){
 					filter = new api.filters.User(value.substring(1));
 				} else {
 					filter = new api.filters.Keyword(value);
@@ -27,12 +27,16 @@ $(function(){
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
+		
+		var crumblePath = $(".crumble-path").CrumblePath();
 
 		var keyword = $(this).data("keyword");
 		
 		var keywordFilter = new api.filters.Keyword(keyword);
 		
-		var filters = [keywordFilter];
+		var filters = crumblePath.path();
+		
+		filters.push([keywordFilter]);
 		
 		api.Tweet.search(filters, function(twitterIds, cloud){
 		
