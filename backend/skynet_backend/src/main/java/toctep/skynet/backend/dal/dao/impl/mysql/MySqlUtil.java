@@ -265,7 +265,6 @@ public final class MySqlUtil {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
 			for (int i = 0; i < params.size(); i++) {
 				String key = params.keySet().toArray()[i].toString();
 				pstmt.setObject(i + 1, params.get(key).getValue(), params.get(key).getType());
