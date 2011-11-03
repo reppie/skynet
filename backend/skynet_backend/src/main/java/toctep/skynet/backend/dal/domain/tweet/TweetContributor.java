@@ -37,11 +37,9 @@ public class TweetContributor extends Domain<Integer> {
 	@Override
 	public void save() {
 		
-		if (tweet instanceof Tweet) {
-			if (((Tweet) tweet).isDirty()) {
-				((Tweet) tweet).save();
-				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
-			}
+		if (tweet instanceof Tweet && ((Tweet) tweet).isDirty()) {
+			((Tweet) tweet).save();
+			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
 		}
 		
 		if (user instanceof User) {

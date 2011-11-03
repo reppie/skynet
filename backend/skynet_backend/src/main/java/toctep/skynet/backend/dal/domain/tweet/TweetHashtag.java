@@ -37,17 +37,16 @@ public class TweetHashtag extends Domain<Integer> {
 	@Override
 	public void save() {
 		
-		if (tweet instanceof Tweet) {
-			if (((Tweet) tweet).isDirty()) {
-				((Tweet) tweet).save();
-				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
-			}
+		if (tweet instanceof Tweet && ((Tweet) tweet).isDirty()) {
+			((Tweet) tweet).save();
+			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
 		}
 		
 		if (hashtag instanceof Hashtag) {
 			((Hashtag) hashtag).save();
 			((Hashtag) this.hashtag).setId(((Hashtag) hashtag).getId());
-		}		
+		}
+		
 		super.save();
 	}	
 	
