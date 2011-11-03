@@ -37,14 +37,18 @@ $(function(){
 	})
 	$("div.tag-cloud a").live('click', function(){
 		
+		var $searchbar = $(this).find("input#searchbar");
+		$searchbar.addClass("loading");
+		
 		var keyword = $(this).data("keyword");
 		var filter = new api.filters.Keyword(keyword);
 		crumblePath.add(filter);
 		var filters = crumblePath.path();
 		
-		
 		api.Tweet.search(filters, function(twitterIds, cloud){
-			$(".tweets").TweetList(twitterIds);
+			$(".tweets").TweetList(twitterIds, function(){
+				$searchbar.removeClass("loading");
+			});
 			$(".mini-tag-cloud").TagCloud(cloud);
 		});	
 		$search.submit();
@@ -61,12 +65,10 @@ $(function(){
 	});
 });
 
-if(!crumblePath.path().length){
-	//$(".tweets").hide();
-	api.cloud(function(cloud){
-		console.log(cloud);
-		$(".main-tag-cloud").TagCloud(cloud);
-		
-	});
-}
+
+api.cloud(function(cloud){
+	$(".main-tag-cloud").TagCloud(cloud);
+	
+});
+
 

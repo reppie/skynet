@@ -2,7 +2,7 @@
 	padding: 10px 20px;
 	font-size: 15px;
 	position: relative;
-	height: 72px;
+	height: 85px;
 	border-bottom: dotted 1px #ccc;
 }
 .tweet.loading{
@@ -44,7 +44,7 @@
 }
 .tag-cloud{
 	text-align:center;
-	word-wrap: break-word;	
+	word-wrap: break-word;
 	padding: 8px;
 }
 .tag-cloud a{
@@ -55,10 +55,15 @@
 	display: inline;
 	
 }
+.crumble-path ul{
+	margin-bottom: 0.5em;
+	
+}
 .crumble-path a{
 	color: #06c;
 	font-weight: bold;
 	text-decoration: none;
+	font-size: 1.25em;
 }
 .crumble-path a:hover{
 	text-decoration: underline;
