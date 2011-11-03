@@ -47,6 +47,7 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 		return tweetContributor;
 	}
 	
+	@Override
 	public List<TweetContributor> select(Tweet tweet) {
 		List<TweetContributor> tweetContributors = new ArrayList<TweetContributor>();
 		
@@ -66,7 +67,7 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 			tweetContributors.add(tweetContributor);
 		}
 		return tweetContributors;
-	}	
+	}
 
 	@Override
 	public void update(Domain<Integer> domain) {

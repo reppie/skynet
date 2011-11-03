@@ -1,6 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
@@ -44,6 +45,28 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 		tweetMention.setUser(User.select((Long) record.get(2)));
 		
 		return tweetMention;
+	}
+	
+	@Override
+	public List<TweetMention> select(Tweet tweet) {
+		List<TweetMention> tweetMentions = new ArrayList<TweetMention>();
+		
+		String query = "SELECT id, user_id FROM " + tableName + " WHERE tweet_id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT)
+		};
+		
+		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		
+		for(List<Object> record : records) {
+			TweetMention tweetMention = new TweetMention();
+			tweetMention.setId((Integer) record.get(0));
+			tweetMention.setTweet(tweet);
+			tweetMention.setUser(User.select((Long) record.get(1)));
+			tweetMentions.add(tweetMention);
+		}
+		return tweetMentions;
 	}
 
 	@Override
