@@ -12,6 +12,8 @@ $(function(){
 				var filter = null;
 				if(value.substring(0,1)=='@'){
 					filter = new api.filters.User(value.substring(1));
+				} if(value.substring(0,1)=='^'){
+					filter = new api.filters.Geo(value.substring(1), "NL", value.substring(1));
 				} else {
 					filter = new api.filters.Keyword(value);
 				}

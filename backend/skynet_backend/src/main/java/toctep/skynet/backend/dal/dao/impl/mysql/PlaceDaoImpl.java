@@ -98,7 +98,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "id=" + MySqlUtil.escape(id));
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.VARCHAR));
 	}
 
 	@Override

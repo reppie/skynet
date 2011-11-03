@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import toctep.skynet.backend.bll.TweetIndexer;
+import toctep.skynet.backend.dal.dao.KeywordDao;
+import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
@@ -17,9 +19,16 @@ import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetParserTest {
 	
+	private MySqlUtil mysql;
+	
+	private KeywordDao keywordDao;
+	
 	@Before
 	public void setUp() {
-		MySqlUtil.getInstance("mysql_test.properties").truncateDatabase();
+		mysql = MySqlUtil.getInstance("mysql_test.properties");
+		mysql.truncateDatabase();
+		
+		keywordDao = DaoFacadeImpl.getInstance().getKeywordDao();
 	}
 	
 	@Test
@@ -36,7 +45,7 @@ public class TweetParserTest {
 		keyword.setKeyword("elfstedentocht");
 		keyword.save();
 		assertEquals("keyword count: ", 1, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
-		assertTrue(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht';"));
+		assertTrue(keywordDao.exists(keyword));
 		
 		keyword = new Keyword();
 		keyword.setKeyword("elfstedentocht");
@@ -60,7 +69,7 @@ public class TweetParserTest {
 	
 	@After
 	public void tearDown() {
-		MySqlUtil.getInstance("mysql_test.properties").truncateDatabase();
+		mysql.truncateDatabase();
 	}
 
 }
