@@ -1,10 +1,23 @@
 $(function(){
 	$("form#keyword-search-form").submit(function(){
-		var value = $(this).find("input#searchbar").val();
-		console.log(value);
-			
-		var filters = [{'type':'keyword','value':value}];
 		
+		var filters [];
+		var search = $(this).find("input#searchbar").val();
+		
+		var query = search.split(' ');
+		for(var index in query){
+			var value = query[index];
+			if(value.length>=2){
+				var filter = null;
+				if(value.substring(0,0)=='@'){
+					filter = new api.filters.User(value.substring(1));
+				} else {
+					filter = new api.filters.Keyword(value);
+				}
+				filters.push(filter);
+			}
+		}
+			
 		api.Tweet.search(filters, function(twitterIds, cloud){
 		
 			$(".tweets").TweetList(twitterIds);
