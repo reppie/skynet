@@ -260,8 +260,6 @@ public final class MySqlUtil {
 			}
 		}
 		
-		System.out.println(query);
-		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -269,7 +267,8 @@ public final class MySqlUtil {
 			pstmt = conn.prepareStatement(query);
 			
 			for (int i = 0; i < params.size(); i++) {
-				pstmt.setObject(i + 1, params.get(i).getValue(), params.get(i).getType());
+				String key = params.keySet().toArray()[i].toString();
+				pstmt.setObject(i + 1, params.get(key).getValue(), params.get(key).getType());
 			}
 			
 			rs = pstmt.executeQuery();
