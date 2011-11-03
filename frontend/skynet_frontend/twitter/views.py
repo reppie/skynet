@@ -10,30 +10,7 @@ from jsonrpc import JSONRPCService, jsonremote
 
 
 def index(request):
-    return render_to_response("twitter/index.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
-
-def search(request):
-    search_string = request.GET.get('q')
-    tweets = Tweet.objects.all()
-    if(search_string):
-        if(search_string.startswith('@')):
-            tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string[1:]))
-        else:
-            tweets = tweets.distinct().filter(keywords__keyword=search_string)
-    
-    tweet_ids = tweets.values_list('id', flat=True)
-    keywords = Keyword.get_all_in_tweets(tweet_ids)
-    cloud = KeywordCloud(keywords)
-    
-    return render_to_response("twitter/tweets.html", {
-                                                      'search_string': search_string,
-                                                      'keywordcloud': cloud,
-                                                      'tweet_ids': tweet_ids
-                                                      }, context_instance=RequestContext(request))
-
-def tweets(request):
-    return render_to_response("twitter/tweets.html", { 'keywordcloud': Keyword.get_keyword_cloud(), 'tweets': Tweet.objects.all() }, context_instance=RequestContext(request)) 
-
+    return render_to_response("twitter/index.html", { }, context_instance=RequestContext(request)) 
 
 service = JSONRPCService()
 

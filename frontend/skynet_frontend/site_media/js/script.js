@@ -17,7 +17,10 @@ $(function(){
 
 		var keyword = $(this).data("keyword");
 		
-		var filters = [{'type':'keyword','value':""+keyword}];
+		var keywordFilter = new api.filters.Keyword(keyword);
+		
+		var filters = [keywordFilter];
+		
 		api.Tweet.search(filters, function(twitterIds, cloud){
 		
 			$(".tweets").TweetList(twitterIds);

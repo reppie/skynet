@@ -55,7 +55,7 @@
 					<section id="region-name">
 						{% block region-name %}
 							<h1 class="title">Current Region</h1>
-							<p id="current-region">Nederland</h1>
+							<p id="current-region">Nederland</p>
 						{% endblock %}
 					</section>
 					<section id="tag-cloud">
@@ -63,14 +63,14 @@
 						{% block tag-cloud %}
 						{% endblock %}
 					</section>
+					<footer class="span-6">
+						{% block footer %}
+							<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
+							<p>&copy; Toctep Software</p>
+						{% endblock %}
+					</footer>
 				{% endblock %}
 			</aside>
-			<footer class="span-18">
-				{% block footer %}
-				<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
-				<p>&copy; Hanzehogeschool Groningen</p>
-				{% endblock %}
-			</footer>
 		</div>
 		{% csrf_token %}
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>

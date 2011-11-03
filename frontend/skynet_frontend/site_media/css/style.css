@@ -96,6 +96,11 @@ aside section
     border-radius: 3px;
 }
 
+aside footer
+{
+	margin-left: 37px;
+}
+
 aside section p
 {
 	margin: 0px;

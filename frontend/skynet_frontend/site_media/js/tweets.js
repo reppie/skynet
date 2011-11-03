@@ -51,12 +51,30 @@
 			  },
 			  error: function(result){
 		  		callback.call(This, null);
-			  },
+			  }
 		  	});
-			
-			
+				
+		},
+		'filters': {
+			'Base': function(type){
+				var base = this;
+				this['type']=type;
+			},
+			'Keyword': function(value){
+				api.filters.Base.prototype.constructor.call(this, 'keyword');
+				this.value = value;
+				
+			},
+			'User': function(user){
+				api.filters.Base.prototype.constructor.call(this, 'user');
+				this.user = user;
+				
+			},
+			'Geo': function(location){
+				api.filters.Base.prototype.constructor.call(this, 'geo');
+				this.location = location;
+			}
 		}
-		
 	});
 	var tweetListKey = "__TweetList";
 	$.fn.TweetList = function(tweetIds) {
@@ -69,7 +87,7 @@
 		}
 		return tweetList;
     };
-    var crumblePathKey = "__TweetList";
+    var crumblePathKey = "__CrumbleList";
 	$.fn.CrumblePath = function() {
 		var path = this.data(crumblePathKey);
 		if(!path){

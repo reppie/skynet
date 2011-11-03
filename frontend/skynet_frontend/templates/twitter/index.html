@@ -1,14 +1,13 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
-{% load url from future %}
 
 {% block tag-cloud %}
 	{% if keywordcloud.items %}
-		<p>
+		<div class="tag-cloud mini-tag-cloud">
 		{% for item in keywordcloud.items %}
-			<a class="cloud-element" href="twitter/search?q={{ item.keyword }}" style="font-size: {{ item.font_size }}px !important }">{{ item.keyword }}</a>
+			<a class="cloud-element" data-keyword="{{ item.keyword }}" href="#" style="font-size: {{ item.font_size }}px !important }">{{ item.keyword }}</a>
 		{% endfor %}
-		</p>
+		</div>
 	{% else %}
 		<p>{% trans "No tweets indexed yet" %}</p>
 	{% endif %}
@@ -16,8 +15,11 @@
 
 {% block title %} Social Media Lab {% endblock %}
 
-{% block main %}
-	{% for tweet in tweets %}
-		<div class="tweet">{{ tweet.text }}</div>
-	{% endfor %}
+{% block main %} 
+	<div class="tweets">
+	</div>
+{% endblock %}
+ 
+{% block scripts %} 
+	
 {% endblock %}
