@@ -86,6 +86,12 @@ public class TweetHashtagTest extends DomainTest {
 		tweetHashtag.delete();
 		assertEquals(0, tweetHashtagDao.count());
 	}
+
+	@Override
+	public void testExists() {
+		tweetHashtag.save();
+		assertTrue(tweetHashtagDao.exists(tweetHashtag));
+	}
 	
 
 }

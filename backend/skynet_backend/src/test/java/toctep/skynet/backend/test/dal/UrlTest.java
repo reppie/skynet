@@ -48,5 +48,11 @@ public class UrlTest extends DomainTest {
 		assertEquals(0, urlDao.count());
 	}
 
+	@Override
+	public void testExists() {
+		url.save();
+		assertTrue(urlDao.exists(url));
+	}
+
 }
 

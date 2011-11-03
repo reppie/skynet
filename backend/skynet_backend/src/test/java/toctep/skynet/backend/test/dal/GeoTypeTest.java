@@ -53,5 +53,11 @@ public class GeoTypeTest extends DomainTest{
 		geoType.delete();
 		assertEquals(0, geoTypeDao.count());		
 	}
+
+	@Override
+	public void testExists() {
+		geoType.save();
+		assertTrue(geoTypeDao.exists(geoType));
+	}
 	
 }

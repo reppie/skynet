@@ -271,4 +271,11 @@ public class UserTest extends DomainTest {
 		user.delete();
 		assertEquals(0, userDao.count());
 	}
+
+	@Override
+	public void testExists() {
+		user.save();
+		assertTrue(userDao.exists(user));
+	}
+	
 }

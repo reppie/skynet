@@ -54,4 +54,10 @@ public class HashtagTest extends DomainTest{
 		assertEquals(0, hashtagDao.count());	
 	}
 
+	@Override
+	public void testExists() {
+		hashtag.save();
+		assertTrue(hashtagDao.exists(hashtag));
+	}
+
 }

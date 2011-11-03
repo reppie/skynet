@@ -53,5 +53,11 @@ public class PlaceTypeTest extends DomainTest{
 		placeType.delete();
 		assertEquals(0, placeTypeDao.count());
 	}
+
+	@Override
+	public void testExists() {
+		placeType.save();
+		assertTrue(placeTypeDao.exists(placeType));
+	}
 	
 }

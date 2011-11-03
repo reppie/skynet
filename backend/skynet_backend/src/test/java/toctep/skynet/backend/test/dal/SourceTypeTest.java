@@ -53,5 +53,11 @@ public class SourceTypeTest extends DomainTest {
 		sourceType.delete();
 		assertEquals(0, sourceTypeDao.count());
 	}
+
+	@Override
+	public void testExists() {
+		sourceType.save();
+		assertTrue(sourceTypeDao.exists(sourceType));
+	}
 	
 }

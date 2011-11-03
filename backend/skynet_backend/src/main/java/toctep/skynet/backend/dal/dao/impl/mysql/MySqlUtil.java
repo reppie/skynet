@@ -270,7 +270,7 @@ public final class MySqlUtil {
 				String key = params.keySet().toArray()[i].toString();
 				pstmt.setObject(i + 1, params.get(key).getValue(), params.get(key).getType());
 			}
-			
+			System.out.println(pstmt);
 			rs = pstmt.executeQuery();
 			
 			int counter = 0;

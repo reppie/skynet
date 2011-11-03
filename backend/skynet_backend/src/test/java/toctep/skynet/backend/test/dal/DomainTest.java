@@ -112,4 +112,7 @@ public abstract class DomainTest extends TestCase {
 	@Test
 	public abstract void testDelete();
 	
+	@Test
+	public abstract void testExists();
+	
 }

@@ -3,6 +3,7 @@ package toctep.skynet.backend.test.dal;
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
 
 public class KeywordTest extends DomainTest {
+	
 	private Keyword keyword;
 	private String keywordValue;
 
@@ -49,6 +50,12 @@ public class KeywordTest extends DomainTest {
 	public void testDelete() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void testExists() {
+		keyword.save();
+		assertTrue(keywordDao.exists(keyword));
 	}
 
 }
