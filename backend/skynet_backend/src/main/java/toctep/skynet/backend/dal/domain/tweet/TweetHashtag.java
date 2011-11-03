@@ -38,8 +38,10 @@ public class TweetHashtag extends Domain<Integer> {
 	public void save() {
 		
 		if (tweet instanceof Tweet) {
-			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			if (((Tweet) tweet).isDirty()) {
+				((Tweet) tweet).save();
+				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			}
 		}
 		
 		if (hashtag instanceof Hashtag) {
@@ -62,6 +64,6 @@ public class TweetHashtag extends Domain<Integer> {
 	public static List<TweetHashtag> select(Tweet tweet) {
 		TweetHashtagDao dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 		return dao.select(tweet);
-	}	
+	}
 	
 }

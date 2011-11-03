@@ -1,6 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
@@ -44,6 +45,28 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 		tweetUrl.setUrl(Url.select((String) record.get(2)));
 		
 		return tweetUrl;
+	}
+	
+	@Override
+	public List<TweetUrl> select(Tweet tweet) {
+		List<TweetUrl> tweetUrls = new ArrayList<TweetUrl>();
+		
+		String query = "SELECT id, url_id FROM " + tableName + " WHERE tweet_id=?";
+		
+		Param[] params = new Param[] {
+			new Param(tweet.getId(), Types.BIGINT)
+		};
+		
+		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		
+		for(List<Object> record : records) {
+			TweetUrl tweetUrl = new TweetUrl();
+			tweetUrl.setId((Integer) record.get(0));
+			tweetUrl.setTweet(tweet);
+			tweetUrl.setUrl(Url.select((String) record.get(1)));
+			tweetUrls.add(tweetUrl);
+		}
+		return tweetUrls;
 	}
 
 	@Override

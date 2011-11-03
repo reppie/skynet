@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import java.util.List;
+
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -36,8 +38,10 @@ public class TweetMention extends Domain<Integer> {
 	public void save() {
 		
 		if (tweet instanceof Tweet) {
-			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			if (((Tweet) tweet).isDirty()) {
+				((Tweet) tweet).save();
+				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			}
 		}
 		
 		if (user instanceof User) {
@@ -55,6 +59,11 @@ public class TweetMention extends Domain<Integer> {
 		}
 		
 		return null;
+	}
+	
+	public static List<TweetMention> select(Tweet tweet) {
+		TweetMentionDao dao = DaoFacadeImpl.getInstance().getTweetMentionDao();
+		return dao.select(tweet);
 	}
 	
 }
