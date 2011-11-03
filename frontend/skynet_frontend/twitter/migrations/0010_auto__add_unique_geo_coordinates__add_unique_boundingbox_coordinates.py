@@ -1,63 +1,71 @@
 # encoding: utf-8
 import datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
-import sys
 
-class Migration(DataMigration):
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        if not 'test' in sys.argv:
-            from django.core import management
-            management.call_command('loaddata', 'data.json')
+        
+        # Adding unique constraint on 'Geo', fields ['coordinates']
+        db.create_unique('twitter_geo', ['coordinates'])
+
+        # Adding unique constraint on 'BoundingBox', fields ['coordinates']
+        db.create_unique('twitter_boundingbox', ['coordinates'])
+
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        
+        # Removing unique constraint on 'BoundingBox', fields ['coordinates']
+        db.delete_unique('twitter_boundingbox', ['coordinates'])
+
+        # Removing unique constraint on 'Geo', fields ['coordinates']
+        db.delete_unique('twitter_geo', ['coordinates'])
 
 
     models = {
         'twitter.boundingbox': {
             'Meta': {'object_name': 'BoundingBox'},
             'bounding_box_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.BoundingBoxType']", 'null': 'True', 'blank': 'True'}),
-            'coordinates': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'coordinates': ('django.db.models.fields.CharField', [], {'max_length': '255', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'twitter.boundingboxtype': {
             'Meta': {'object_name': 'BoundingBoxType'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.country': {
             'Meta': {'object_name': 'Country'},
             'code': ('django.db.models.fields.CharField', [], {'max_length': '4', 'null': 'True', 'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.geo': {
             'Meta': {'object_name': 'Geo'},
-            'coordinates': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'coordinates': ('django.db.models.fields.CharField', [], {'max_length': '255', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'geo_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['twitter.GeoType']", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'twitter.geotype': {
             'Meta': {'object_name': 'GeoType'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.hashtag': {
             'Meta': {'object_name': 'Hashtag'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '139', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '139', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.keyword': {
             'Meta': {'object_name': 'Keyword'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'keyword': ('django.db.models.fields.CharField', [], {'max_length': '140'})
+            'keyword': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '140'})
         },
         'twitter.language': {
             'Meta': {'object_name': 'Language'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '4', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '4', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.place': {
             'Meta': {'object_name': 'Place'},
@@ -80,17 +88,17 @@ class Migration(DataMigration):
         'twitter.placetype': {
             'Meta': {'object_name': 'PlaceType'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '10', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.sourcetype': {
             'Meta': {'object_name': 'SourceType'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'twitter.timezone': {
             'Meta': {'object_name': 'TimeZone'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'time_zone': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'time_zone': ('django.db.models.fields.CharField', [], {'max_length': '255', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'utc_offset': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'})
         },
         'twitter.tweet': {

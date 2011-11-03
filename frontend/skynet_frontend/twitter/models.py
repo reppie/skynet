@@ -9,34 +9,34 @@ class Url(models.Model):
         return self.text;
 
 class Hashtag(models.Model):
-    text = models.CharField(max_length=139, blank=True, null=True)
+    text = models.CharField(max_length=139, blank=True, null=True, unique=True)
 
 class Country(models.Model):
     code = models.CharField(primary_key=True, max_length=4, blank=True, null=True)
-    text = models.CharField(max_length=255, blank=True, null=True)
+    text = models.CharField(max_length=255, blank=True, null=True, unique=True)
     
 class PlaceType(models.Model):
-    text = models.CharField(max_length=10, blank=True, null=True)
+    text = models.CharField(max_length=10, blank=True, null=True, unique=True)
     
 class GeoType(models.Model):
-    text = models.CharField(max_length=10, blank=True, null=True)
+    text = models.CharField(max_length=10, blank=True, null=True, unique=True)
 
 class BoundingBoxType(models.Model):
-    text = models.CharField(max_length=10, blank=True, null=True)
+    text = models.CharField(max_length=10, blank=True, null=True, unique=True)
 
 class BoundingBox(models.Model):
     bounding_box_type = models.ForeignKey(BoundingBoxType, blank=True, null=True)
-    coordinates = models.TextField(blank=True, null=True)
+    coordinates = models.CharField(max_length=255, blank=True, null=True, unique=True)
 
 class Language(models.Model):
-    text = models.CharField(max_length=4, blank=True, null=True)
+    text = models.CharField(max_length=4, blank=True, null=True, unique=True)
 
 class SourceType(models.Model):
-    text = models.CharField(max_length=255, blank=True, null=True)
+    text = models.CharField(max_length=255, blank=True, null=True, unique=True)
 
 class TimeZone(models.Model):
     utc_offset = models.IntegerField(blank=True, default=0)
-    time_zone = models.CharField(max_length=255, blank=True, null=True)
+    time_zone = models.CharField(max_length=255, blank=True, null=True, unique=True)
 
 class Place(models.Model):
     id = models.CharField(primary_key=True, max_length=255, blank=True, null=True)
@@ -57,7 +57,7 @@ class Place(models.Model):
 
 class Geo(models.Model):
     geo_type = models.ForeignKey(GeoType, blank=True, null=True)
-    coordinates = models.TextField(blank=True, null=True)
+    coordinates = models.CharField(max_length=255, blank=True, null=True, unique=True)
 
 class User(models.Model):
     id = models.BigIntegerField(primary_key=True)
@@ -109,7 +109,7 @@ class User(models.Model):
             }  
 
 class Keyword(models.Model):
-    keyword = models.CharField(max_length=140)
+    keyword = models.CharField(max_length=140, unique=True)
 
     @staticmethod
     def get_all_with_count():
