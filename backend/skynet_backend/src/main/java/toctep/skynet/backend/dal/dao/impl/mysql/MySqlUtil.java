@@ -241,15 +241,18 @@ public final class MySqlUtil {
 		return this.query(query, params);
 	}
 	
-	public boolean exists(String tableName, String where) {
+	public boolean exists(String tableName, String column, Param param) {
 		boolean exists = false;
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM " + tableName + " WHERE " + where);
+			pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE " + column + "=?");
+			
+			pstmt.setObject(1, param.getValue(), param.getType());
+			
+			rs = pstmt.executeQuery();
 			
 			int counter = 0;
 			while (rs.next()) {
@@ -262,8 +265,8 @@ public final class MySqlUtil {
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt.close();
 				rs.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
