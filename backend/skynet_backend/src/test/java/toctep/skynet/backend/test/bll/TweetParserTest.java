@@ -3,6 +3,8 @@ package toctep.skynet.backend.test.bll;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +13,7 @@ import toctep.skynet.backend.bll.TweetIndexer;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetParserTest {
 	
@@ -49,9 +52,9 @@ public class TweetParserTest {
 		keyword.save();
 		assertEquals("keyword count: ", 2, MySqlUtil.getInstance().count("twitter_keyword"));
 		
-		indexer.indexTweetKeywords(tweet);
+		List<TweetKeyword> kws = indexer.indexTweetKeywords(tweet);
 		
-		assertEquals("keyword count: ", 6, MySqlUtil.getInstance().count("twitter_keyword"));			
+		assertEquals("keyword count: ", 6, kws.size());			
 	}
 	
 	@After

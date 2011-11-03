@@ -54,18 +54,18 @@
 				{% block sidebar %}
 					<section id="region-name">
 						{% block region-name %}
-							<h1 class="title">Current Region</h1>
+							<h1 class="title">{% trans "Current Region" %}</h1>
 							<p id="current-region">Nederland</p>
 						{% endblock %}
 					</section>
 					<section id="tag-cloud">
-						<h1 class="title">Tag cloud</h1>
+						<h1 class="title">{% trans "Tag cloud" %}</h1>
 						{% block tag-cloud %}
 						{% endblock %}
 					</section>
 					<footer class="span-6">
 						{% block footer %}
-							<p>Powered by <a href="http://www.twitter.com">twitter.com</a></p>
+							<p>{% trans "Powered by" %} <a href="http://www.twitter.com">twitter.com</a></p>
 							<p>&copy; Toctep Software</p>
 						{% endblock %}
 					</footer>
