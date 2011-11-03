@@ -21,9 +21,8 @@
 			
 			var nl = new api.filters.Geo("Nederland", "NL", null);
 			nl.removable = false;
-			this.chain.push(nl);
+			this.add(nl);
 			
-			this.build();
 		},
 		'TweetList': function(element, tweets, callback){
 			this.$tweetList = element;
@@ -92,6 +91,7 @@
 	var tweetListKey = "__TweetList";
 	$.fn.TweetList = function(tweetIds, callback) {
 		var tweetList = this.data(tweetListKey);
+		this.show();
 		if(!tweetList){
 			tweetList = new api.TweetList(this, tweetIds, callback);
 			this.data(tweetListKey, tweetList);
@@ -287,7 +287,7 @@
 		var This = this;
 		var tweet = api.cache.get('api.Tweet', tweetId);
 		if(tweet){
-			console.log("serving Tweet with id: "+tweetId+" from cache");
+			//console.log("serving Tweet with id: "+tweetId+" from cache");
 			callback.call(This,tweet);
 			return;
 		}
@@ -307,7 +307,7 @@
 		var This = this;
 		var user = api.cache.get('api.User', userId);
 		if(user){
-			console.log("serving User with id: "+userId+" from cache");
+			//console.log("serving User with id: "+userId+" from cache");
 			callback.call(This, user);
 			return;
 		}
