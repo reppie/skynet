@@ -1,5 +1,7 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import java.util.List;
+
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -55,6 +57,11 @@ public class TweetUrl extends Domain<Integer> {
 		}
 		
 		return null;
+	}
+	
+	public static List<TweetUrl> select(Tweet tweet) {
+		TweetUrlDao dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
+		return dao.select(tweet);
 	}
 	
 }
