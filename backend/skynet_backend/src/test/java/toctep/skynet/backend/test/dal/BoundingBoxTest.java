@@ -44,7 +44,7 @@ public class BoundingBoxTest extends DomainTest{
 		
 		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(boundingBox.getId());
 		
-		assertTrue(postBoundingBox.getType().equals(boundingBox.getType()));
+		assertTrue(postBoundingBox.getType().getId().equals(boundingBox.getType().getId()));
 		assertTrue(postBoundingBox.getCoordinates().equals(boundingBox.getCoordinates()));
 	}
 	
