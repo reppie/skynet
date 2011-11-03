@@ -3,7 +3,7 @@ $(function(){
 	
 	$("form#keyword-search-form").submit(function(){
 		
-		var filters = crumblePath.path();
+		var filters = [].concat(crumblePath.path());
 		var search = $(this).find("input#searchbar").val();
 		var query = search.split(' ');
 		for(var index in query){
