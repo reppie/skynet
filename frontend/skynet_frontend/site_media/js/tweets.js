@@ -25,9 +25,9 @@
 			
 			this.build();
 		},
-		'TweetList': function(element, tweets){
+		'TweetList': function(element, tweets, callback){
 			this.$tweetList = element;
-			this.reset(tweets);
+			this.reset(tweets, callback);
 		},
 		'cache':{
 			'collections':{},
@@ -90,13 +90,13 @@
 		}
 	});
 	var tweetListKey = "__TweetList";
-	$.fn.TweetList = function(tweetIds) {
+	$.fn.TweetList = function(tweetIds, callback) {
 		var tweetList = this.data(tweetListKey);
 		if(!tweetList){
-			tweetList = new api.TweetList(this, tweetIds);
+			tweetList = new api.TweetList(this, tweetIds, callback);
 			this.data(tweetListKey, tweetList);
 		}else if (tweetIds){
-			tweetList.reset(tweetIds);
+			tweetList.reset(tweetIds, callback);
 		}
 		return tweetList;
     };
@@ -120,11 +120,19 @@
 		return this;
     };
 	
-	api.TweetList.prototype.reset = function(tweetIds){
+	api.TweetList.prototype.reset = function(tweetIds, callback){
 		
 		var tweetList = this;
 		this.$tweetList.empty();
 		this.tweetIds = tweetIds || [];
+		this.loaded = 0;
+		this.callback = callback;
+		if(!tweetIds.length){
+			if(callback){
+				callback.call(this);
+			}
+			
+		}
 		
 		for(var index in tweetIds){
 			var tweetId = tweetIds[index];
@@ -133,34 +141,38 @@
 				if(tweet){
 					tweet.getUser(function(user){
 						if(user){
-							
-							var $tweet = $("#tweetTemplate").tmpl(tweet);
-							$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
-							
-							$tweet.find('time').localize(function () {
-							  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
-							    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
-							    names = 'seconde minuut uur dag week maand jaar'.split(' '),
-							    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
-							    round = Math.round;
-							
-							  return function (date) {
-							    var
-							      delta = round((date - new Date) / 1000) || -1,
-							      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
-							      i = units.length, n, seconds;
-							    while (i--) {
-							      seconds = units[i];
-							      if (!i || delta > seconds) {
-							        n = round(delta / seconds);
-							        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
-							      }
-							    }
-							  };
-							}());
-							$tweet.slideDown(250, function(){
-								$tweet.removeClass("loading");
-							});
+							if(tweetList.tweetIds.indexOf(this.id)>-1){
+								tweetList.loaded++;
+								var $tweet = $("#tweetTemplate").tmpl(tweet);
+								$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+								
+								$tweet.find('time').localize(function () {
+								  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
+								    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
+								    names = 'seconde minuut uur dag week maand jaar'.split(' '),
+								    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
+								    round = Math.round;
+								
+								  return function (date) {
+								    var
+								      delta = round((date - new Date) / 1000) || -1,
+								      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
+								      i = units.length, n, seconds;
+								    while (i--) {
+								      seconds = units[i];
+								      if (!i || delta > seconds) {
+								        n = round(delta / seconds);
+								        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
+								      }
+								    }
+								  };
+								}());
+								if(tweetList.loaded>=tweetList.tweetIds.length){
+									if(tweetList.callback){
+										tweetList.callback.call(tweetList);
+									}
+								}
+							}
 						}
 					});
 						
@@ -243,7 +255,7 @@
  		var newChain = [];
  		for(var index in this.chain){
  			var f = this.chain[index];
- 			if(!filter.equals(f)){
+ 			if(!filter.equals(f)||!f.removable){
  				newChain.push(f);
  			}
  		}
