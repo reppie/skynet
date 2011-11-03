@@ -51,7 +51,7 @@ public class UserDaoImpl extends UserDao {
 			new Param(user.getName(), Types.VARCHAR),
 			new Param(user.getProfileSidebarBorderColor(), Types.VARCHAR),
 			new Param(user.getProfileBackgroundColor(), Types.VARCHAR),
-			new Param(user.getCreatedAt(), Types.DATE),
+			new Param(user.getCreatedAt(), Types.TIMESTAMP),
 			new Param(user.isDefaultProfile(), Types.BOOLEAN),
 			
 			new Param(user.getFollowersCount(), Types.INTEGER),
