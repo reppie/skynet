@@ -3,8 +3,8 @@ $(function(){
 	
 	var $search = $("form#keyword-search-form").submit(function(){
 		
+		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
-		var $searchbar = $(this).find("input#searchbar")
 		var filters = [].concat(crumblePath.path());
 		var search = $searchbar.val();
 		var query = search.split(' ');
@@ -29,6 +29,7 @@ $(function(){
 			$(".tweets").TweetList(twitterIds, function(){
 				$searchbar.removeClass("loading");
 			});
+			
 			$(".mini-tag-cloud").TagCloud(cloud);
 			
 		});	

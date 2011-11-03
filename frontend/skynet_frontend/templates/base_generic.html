@@ -36,8 +36,8 @@
 				<div class="crumble-path"></div>
 				
 				{% block searchbar %}
-					<form id="keyword-search-form" method="get">
-						<input id="searchbar" type="text" name="q" placeholder="{% trans 'Search for tweets' %}" 
+					<form id="keyword-search-form" method="get" action="#">
+						<input id="searchbar" type="text" placeholder="{% trans 'Search for tweets' %}" 
 						{% if search_string %}
 							value="{{ search_string }}" 
 						{% endif %}
