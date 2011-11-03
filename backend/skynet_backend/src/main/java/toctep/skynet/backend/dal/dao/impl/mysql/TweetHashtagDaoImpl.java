@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.TweetHashtagDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -38,11 +39,11 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		tweetHashtag.setId(id);
-		tweetHashtag.setTweet(Tweet.select((Long) record.get(1)));
-		tweetHashtag.setHashtag(Hashtag.select((Integer) record.get(2)));
+		tweetHashtag.setTweet(Tweet.select((Long) row.get("tweet_id")));
+		tweetHashtag.setHashtag(Hashtag.select((Integer) row.get("hashtag_id")));
 		
 		return tweetHashtag;
 	}
@@ -56,13 +57,13 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 			new Param(tweet.getId(), Types.BIGINT)
 		};
 		
-		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		List<Map<String, Object>> rows = MySqlUtil.getInstance().select(query, params);
 		
-		for(List<Object> record : records) {
+		for(Map<String, Object> row : rows) {
 			TweetHashtag tweetHashtag = new TweetHashtag();
-			tweetHashtag.setId((Integer) record.get(0));
+			tweetHashtag.setId((Integer) row.get("id"));
 			tweetHashtag.setTweet(tweet);
-			tweetHashtag.setHashtag(Hashtag.select((Integer) record.get(1)));
+			tweetHashtag.setHashtag(Hashtag.select((Integer) row.get("hashtag_id")));
 			tweetHashtags.add(tweetHashtag);
 		}
 		return tweetHashtags;

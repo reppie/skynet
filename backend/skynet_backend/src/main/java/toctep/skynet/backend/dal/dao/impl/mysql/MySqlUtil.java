@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -131,11 +133,57 @@ public final class MySqlUtil {
 		
 		return result;
 	}
+		
+	public Map<String, Object> selectRow(String query, Param[] params) {
+		return this.select(query, params).get(0);
+	}
 	
-	public int insert(String query, Param[] params) {
+	public List<Map<String, Object>> select(String query, Param[] params) {
+		List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			ResultSetMetaData rsmd = rs.getMetaData();
+		    int numColumns = rsmd.getColumnCount();
+			
+			while (rs.next()) {
+				Map<String, Object> row = new LinkedHashMap<String, Object>();
+				for (int i = 0; i < numColumns; ++i) {
+					String column = rsmd.getColumnName(i+1);
+					Object value = rs.getObject(i+1);
+					row.put(column, value);
+				}
+				rows.add(row);
+			}
+		} catch (SQLException e) {
+			Skynet.LOG.error(e.getMessage(), e);
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				Skynet.LOG.error(e.getMessage(), e);
+			}
+		}
+		
+		return rows;
+	}
+	
+	public int insert(String query, Param[] params) {
 		int id = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -162,79 +210,6 @@ public final class MySqlUtil {
 		}
 		
 		return id;
-	}
-	
-	public List<Object> selectRecord(String query, Param[] params) {
-		List<Object> record = new ArrayList<Object>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
-			}
-			
-			rs = pstmt.executeQuery();
-			
-			rs.first();
-			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                Object value = rs.getObject(i);
-                record.add(value);
-			}
-		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
-			}
-		}
-		
-		return record;
-	}
-	
-	public List<List<Object>> select(String query, Param[] params) {
-		List<List<Object>> records = new ArrayList<List<Object>>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
-			}
-			
-			rs = pstmt.executeQuery();
-			
-			rs.beforeFirst();
-			
-			while (rs.next()) {
-				List<Object> record = new ArrayList<Object>();
-				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-	                Object value = rs.getObject(i);
-	                record.add(value);
-				}
-				records.add(record);
-			}
-			
-		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
-			}
-		}
-		return records;
 	}
 	
 	public int update(String query, Param[] params) {
@@ -269,7 +244,7 @@ public final class MySqlUtil {
 			pstmt = conn.prepareStatement(query);
 			for (int i = 0; i < params.size(); i++) {
 				String key = params.keySet().toArray()[i].toString();
-				pstmt.setObject(i + 1, params.get(key).getValue(), params.get(key).getType());
+				pstmt.setObject(i+1, params.get(key).getValue(), params.get(key).getType());
 			}
 			rs = pstmt.executeQuery();
 			

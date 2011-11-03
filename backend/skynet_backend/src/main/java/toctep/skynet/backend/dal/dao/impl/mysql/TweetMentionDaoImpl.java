@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -38,11 +39,11 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		tweetMention.setId(id);
-		tweetMention.setTweet(Tweet.select((Long) record.get(1)));
-		tweetMention.setUser(User.select((Long) record.get(2)));
+		tweetMention.setTweet(Tweet.select((Long) row.get("tweet_id")));
+		tweetMention.setUser(User.select((Long) row.get("user_id")));
 		
 		return tweetMention;
 	}
@@ -57,13 +58,13 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 			new Param(tweet.getId(), Types.BIGINT)
 		};
 		
-		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		List<Map<String, Object>> rows = MySqlUtil.getInstance().select(query, params);
 		
-		for(List<Object> record : records) {
+		for(Map<String, Object> row : rows) {
 			TweetMention tweetMention = new TweetMention();
-			tweetMention.setId((Integer) record.get(0));
+			tweetMention.setId((Integer) row.get("id"));
 			tweetMention.setTweet(tweet);
-			tweetMention.setUser(User.select((Long) record.get(1)));
+			tweetMention.setUser(User.select((Long) row.get("user_id")));
 			tweetMentions.add(tweetMention);
 		}
 		return tweetMentions;

@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -58,21 +59,21 @@ public class TweetDaoImpl extends TweetDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		tweet.setId(id);
-		tweet.setText((String) record.get(1));
-		tweet.setGeo(Geo.select((Integer) record.get(2)));
-		tweet.setTruncated((Boolean) record.get(3));
-		tweet.setSourceType(SourceType.select((Integer) record.get(4)));
-		tweet.setFavorited((Boolean) record.get(5));
-		tweet.setInReplyToTweetTwitter(Tweet.select((Long) record.get(6)));
-		tweet.setInReplyToUserTwitter(User.select((Long) record.get(7)));
-		tweet.setRetweetCount((Integer) record.get(8));
-		tweet.setCreatedAt((Timestamp) record.get(9));
-		tweet.setPlace(Place.select((String) record.get(10)));
-		tweet.setUser(User.select((Long) record.get(11)));
-		tweet.setCoordinates((String) record.get(12));
+		tweet.setText((String) row.get("text"));
+		tweet.setGeo(Geo.select((Integer) row.get("geo_id")));
+		tweet.setTruncated((Boolean) row.get("truncated"));
+		tweet.setSourceType(SourceType.select((Integer) row.get("source_type_id")));
+		tweet.setFavorited((Boolean) row.get("favorited"));
+		tweet.setInReplyToTweetTwitter(Tweet.select((Long) row.get("in_reply_to_tweet_id")));
+		tweet.setInReplyToUserTwitter(User.select((Long) row.get("in_reply_to_user_id")));
+		tweet.setRetweetCount((Integer) row.get("retweet_count"));
+		tweet.setCreatedAt((Timestamp) row.get("created_at"));
+		tweet.setPlace(Place.select((String) row.get("place_id")));
+		tweet.setUser(User.select((Long) row.get("user_id")));
+		tweet.setCoordinates((String) row.get("coordinates"));
 		
 		List<TweetContributor> tweetContributors = TweetContributor.select(tweet);
 		for (TweetContributor tweetContributor : tweetContributors) {

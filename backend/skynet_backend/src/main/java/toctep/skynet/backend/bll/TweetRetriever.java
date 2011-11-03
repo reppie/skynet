@@ -13,7 +13,7 @@ public class TweetRetriever implements Runnable {
 	private TweetParser tweetParser;
 	private TwitterStream twitterStream;
 	
-	private final static double[][] NETHERLANDS_COORDS = new double[][] { {3.39, 51.17}, {7.29, 53.51} };
+	private static final double[][] NETHERLANDS_COORDS = new double[][] { {3.39, 51.17}, {7.29, 53.51} };
 	//private final static double[][] GRONINGEN_PROVINCE_COORDS = { {6.19, 53.09}, {7.22, 53.51} };
 	//private final static double[][] GRONINGEN_CITY_COORDS = new double[][] { {6.45, 53.16}, {6.65, 53.26} };
 	//private final static double[][] GRONINGEN_ZERNIKE_COORDS = new double[][] { {6.52, 53.23}, {6.55, 53.25} };

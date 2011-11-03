@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -38,11 +39,11 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		tweetUrl.setId(id);
-		tweetUrl.setTweet(Tweet.select((Long) record.get(1)));
-		tweetUrl.setUrl(Url.select((String) record.get(2)));
+		tweetUrl.setTweet(Tweet.select((Long) row.get("tweet_id")));
+		tweetUrl.setUrl(Url.select((String) row.get("url_id")));
 		
 		return tweetUrl;
 	}
@@ -57,13 +58,13 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 			new Param(tweet.getId(), Types.BIGINT)
 		};
 		
-		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		List<Map<String, Object>> rows = MySqlUtil.getInstance().select(query, params);
 		
-		for(List<Object> record : records) {
+		for(Map<String, Object> row : rows) {
 			TweetUrl tweetUrl = new TweetUrl();
-			tweetUrl.setId((Integer) record.get(0));
+			tweetUrl.setId((Integer) row.get(0));
 			tweetUrl.setTweet(tweet);
-			tweetUrl.setUrl(Url.select((String) record.get(1)));
+			tweetUrl.setUrl(Url.select((String) row.get(1)));
 			tweetUrls.add(tweetUrl);
 		}
 		return tweetUrls;

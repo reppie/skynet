@@ -1,7 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
-import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -54,23 +54,23 @@ public class PlaceDaoImpl extends PlaceDao {
 			new Param(id, Types.VARCHAR)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		place.setId(id);
-		place.setType(PlaceType.select((Integer) record.get(1)));
-		place.setBoundingBox(BoundingBox.select((Integer) record.get(2)));
-		place.setName((String) record.get(3));
-		place.setUrl(Url.select((String) record.get(4)));
-		place.setFullName((String) record.get(5));
-		place.setCountry(Country.select((String) record.get(6)));
-		place.setStreetAddress((String) record.get(7));
-		place.setLocality((String) record.get(8));
-		place.setRegion((String) record.get(9));
-		place.setIso3((String) record.get(10));
-		place.setPostalCode((String) record.get(11));
-		place.setPhone((String) record.get(12));
-		place.setTwitter((String) record.get(13));
-		place.setAppId((String) record.get(14));
+		place.setType(PlaceType.select((Integer) row.get("place_type_id")));
+		place.setBoundingBox(BoundingBox.select((Integer) row.get("bounding_box_id")));
+		place.setName((String) row.get("name"));
+		place.setUrl(Url.select((String) row.get("url_id")));
+		place.setFullName((String) row.get("full_name"));
+		place.setCountry(Country.select((String) row.get("country_id")));
+		place.setStreetAddress((String) row.get("street_address"));
+		place.setLocality((String) row.get("locality"));
+		place.setRegion((String) row.get("region"));
+		place.setIso3((String) row.get("iso3"));
+		place.setPostalCode((String) row.get("postal_code"));
+		place.setPhone((String) row.get("phone"));
+		place.setTwitter((String) row.get("twitter"));
+		place.setAppId((String) row.get("app_id"));
 		
 		return place;
 	}

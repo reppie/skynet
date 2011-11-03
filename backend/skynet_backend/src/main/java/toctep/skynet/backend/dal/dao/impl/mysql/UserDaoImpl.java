@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Timestamp;
 import java.sql.Types;
-import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -88,48 +88,48 @@ public class UserDaoImpl extends UserDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> record = MySqlUtil.getInstance().selectRow(query, params);
 		
 		user.setId(id);
-		user.setPlace(Place.select((String) record.get(1)));
-		user.setDefaultProfile((Boolean) record.get(2));
-		user.setStatusesCount((Integer) record.get(3));
-		user.setProfileBackgroundTiled((Boolean) record.get(4));
-		user.setLanguage(Language.select((Integer) record.get(5)));
-		user.setProfileLinkColor((String) record.get(6));
-		user.setFollowing((Integer) record.get(7));
-		user.setFavouritesCount((Integer) record.get(8));
-		user.setProtected((Boolean) record.get(9));
+		user.setPlace(Place.select((String) record.get("place_id")));
+		user.setDefaultProfile((Boolean) record.get("default_profile"));
+		user.setStatusesCount((Integer) record.get("statuses_count"));
+		user.setProfileBackgroundTiled((Boolean) record.get("profile_background_tile"));
+		user.setLanguage(Language.select((Integer) record.get("language_id")));
+		user.setProfileLinkColor((String) record.get("profile_link_color"));
+		user.setFollowing((Integer) record.get("following"));
+		user.setFavouritesCount((Integer) record.get("favourites_count"));
+		user.setProtected((Boolean) record.get("protected"));
 				
-		user.setProfileTextColor((String) record.get(10));
-		user.setVerified((Boolean) record.get(11));
-		user.setContributorsEnabled((Boolean) record.get(12));
-		user.setDescription((String) record.get(13));
-		user.setName((String) record.get(14));
-		user.setProfileSidebarBorderColor((String) record.get(15));
-		user.setProfileBackgroundColor((String) record.get(16));
-		user.setCreatedAt((Timestamp) record.get(17));
-		user.setDefaultProfile((Boolean) record.get(18));
+		user.setProfileTextColor((String) record.get("profile_text_color"));
+		user.setVerified((Boolean) record.get("verified"));
+		user.setContributorsEnabled((Boolean) record.get("contributors_enabled"));
+		user.setDescription((String) record.get("description"));
+		user.setName((String) record.get("name"));
+		user.setProfileSidebarBorderColor((String) record.get("profile_sidebar_border_color"));
+		user.setProfileBackgroundColor((String) record.get("profile_background_color"));
+		user.setCreatedAt((Timestamp) record.get("created_at"));
+		user.setDefaultProfile((Boolean) record.get("default_profile_image"));
 		
-		user.setFollowersCount((Integer) record.get(19));
-		user.setProfileImageUrl(Url.select((String) record.get(20)));
-		user.setProfileImageUrlHttps(Url.select((String) record.get(21)));
-		user.setGeoEnabled((Boolean) record.get(22));
-		user.setProfileBackgroundImageUrl(Url.select((String) record.get(23)));
-		user.setProfileBackgroundImageUrlHttps(Url.select((String) record.get(24)));
+		user.setFollowersCount((Integer) record.get("followers_count"));
+		user.setProfileImageUrl(Url.select((String) record.get("profile_image_url_id")));
+		user.setProfileImageUrlHttps(Url.select((String) record.get("profile_image_url_https_id")));
+		user.setGeoEnabled((Boolean) record.get("geo_enabled"));
+		user.setProfileBackgroundImageUrl(Url.select((String) record.get("profile_background_image_url_id")));
+		user.setProfileBackgroundImageUrlHttps(Url.select((String) record.get("profile_background_image_url_https_id")));
 		
-		user.setFollowRequestSent((Boolean) record.get(25));
-		user.setUrl(Url.select((String) record.get(26)));
-		user.setTimeZone(TimeZone.select((Integer) record.get(27)));
-		user.setNotifications((Integer) record.get(28));
-		user.setProfileUseBackgroundImage((Boolean) record.get(29));
-		user.setFriendsCount((Integer) record.get(30));
-		user.setProfileSideBarFillColor((String) record.get(31));
-		user.setScreenName((String) record.get(32));
-		user.setShowAllInlineMedia((Boolean) record.get(33));
+		user.setFollowRequestSent((Boolean) record.get("follow_request_sent"));
+		user.setUrl(Url.select((String) record.get("url_id")));
+		user.setTimeZone(TimeZone.select((Integer) record.get("time_zone_id")));
+		user.setNotifications((Integer) record.get("notifications"));
+		user.setProfileUseBackgroundImage((Boolean) record.get("profile_use_background_image"));
+		user.setFriendsCount((Integer) record.get("friends_count"));
+		user.setProfileSideBarFillColor((String) record.get("profile_sidebar_fill_color"));
+		user.setScreenName((String) record.get("screen_name"));
+		user.setShowAllInlineMedia((Boolean) record.get("show_all_inline_media"));
 		
-		user.setTranslator((Boolean) record.get(34));
-		user.setListedCount((Integer) record.get(35));
+		user.setTranslator((Boolean) record.get("is_translator"));
+		user.setListedCount((Integer) record.get("listed_count"));
 		
 		return user;
 	}

@@ -3,7 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.KeywordDao;
@@ -39,10 +39,10 @@ public class KeywordDaoImpl extends KeywordDao {
 			new Param(id, Types.INTEGER)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		keyword.setId(id);
-		keyword.setKeyword((String) record.get(1));
+		keyword.setKeyword((String) row.get("keyword"));
 		
 		return keyword;
 	}

@@ -3,6 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -39,12 +40,12 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		tweetKeyword.setId(id);
-		tweetKeyword.setTweet(Tweet.select((Long) record.get(1)));
-		tweetKeyword.setTweetKeywordValue((String) record.get(2));
-		tweetKeyword.setKeyword(Keyword.select((Integer) record.get(3)));
+		tweetKeyword.setTweet(Tweet.select((Long) row.get("tweet_id")));
+		tweetKeyword.setTweetKeywordValue((String) row.get("value"));
+		tweetKeyword.setKeyword(Keyword.select((Integer) row.get("keyword_id")));
 		
 		return tweetKeyword;
 	}
@@ -58,14 +59,14 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 			new Param(tweet.getId(), Types.BIGINT)
 		};
 		
-		List<List<Object>> records = MySqlUtil.getInstance().select(query, params);
+		List<Map<String, Object>> rows = MySqlUtil.getInstance().select(query, params);
 		
-		for(List<Object> record : records) {
+		for(Map<String, Object> row : rows) {
 			TweetKeyword tweetKeyword = new TweetKeyword();
-			tweetKeyword.setId((Integer) record.get(0));
+			tweetKeyword.setId((Integer) row.get("id"));
 			tweetKeyword.setTweet(tweet);
-			tweetKeyword.setTweetKeywordValue((String) record.get(1));
-			tweetKeyword.setKeyword(Keyword.select((Integer) record.get(2)));
+			tweetKeyword.setTweetKeywordValue((String) row.get("value"));
+			tweetKeyword.setKeyword(Keyword.select((Integer) row.get("keyword_id")));
 			tweetKeywords.add(tweetKeyword);
 		}
 		
