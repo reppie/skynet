@@ -36,3 +36,12 @@
 {
 	background-color: #e8e8e8;
 }
+.tag-cloud{
+	text-align:center;
+	word-wrap: break-word;	
+	padding: 8px;
+}
+.tag-cloud a{
+	padding: 4px;
+
+}

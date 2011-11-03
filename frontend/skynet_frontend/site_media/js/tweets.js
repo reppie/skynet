@@ -97,11 +97,9 @@
 		
 		for(var index in tweetIds){
 			var tweetId = tweetIds[index];
-			//var $tweet = $('<div/>').addClass('tweet loading').attr('data-tweet-id', tweetId).html(""+tweetId);
-			//this.$tweetList.append($tweet);
+			
 			api.Tweet.get(tweetId, function(tweet){
 				
-				//var $tweet = this;
 				if(tweet){
 					console.log(tweet);
 					tweet.getUser(function(user){
@@ -139,15 +137,6 @@
 						}
 					});
 						
-				} else {
-					/*
-					var tweetId = $tweet.data("tweetId");
-					$tweet.html("error retrieving tweet id: "+tweetId);
-					$tweet.addClass("error");
-					$tweet.slideDown(250, function(){
-						$tweet.removeClass("loading");
-					});
-					*/
 				}
 			});
 			
