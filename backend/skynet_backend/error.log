@@ -1,0 +1,140 @@
+0    [Twitter Stream consumer-1[initializing]] INFO  twitter4j.TwitterStreamImpl  - Establishing connection.
+1    [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.TwitterStreamImpl  - Twitter Stream consumer-1[Establishing connection]
+146  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Request: 
+146  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - POST https://stream.twitter.com/1/statuses/filter.json
+147  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.auth.OAuthAuthorization  - OAuth base string: POST&https%3A%2F%2Fstream.twitter.com%2F1%2Fstatuses%2Ffilter.json&count%3D0%26follow%3D397147205%26locations%3D3.39%252C51.17%252C7.29%252C53.51%26oauth_consumer_key%3DSmHwapq0wS4WK3PrfmWVA%26oauth_nonce%3D1747586580%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1320338690%26oauth_token%3D397147205-fxD7DZV4CGppd4MyVDV4aMmT7KXkJvnrvfwX2AqH%26oauth_version%3D1.0
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.auth.OAuthAuthorization  - OAuth signature: c3RIOL4PUY6NMi9+0gKLz1jS9Lw=
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Authorization: *********************************************************************************************************************************************************************************************************************************************************************************
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - X-Twitter-Client-URL: http://twitter4j.org/en/twitter4j-2.2.5.xml
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - X-Twitter-Client: Twitter4J
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Accept-Encoding: gzip
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - User-Agent: twitter4j http://twitter4j.org/ /2.2.5
+208  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - X-Twitter-Client-Version: 2.2.5
+209  [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Post Params: count=0&follow=397147205&locations=3.39%2C51.17%2C7.29%2C53.51
+1121 [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Response: 
+1121 [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - HTTP/1.1 200 OK
+1122 [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Transfer-Encoding: chunked
+1122 [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Content-Type: application/json
+1122 [Twitter Stream consumer-1[Establishing connection]] DEBUG twitter4j.internal.http.HttpClientImpl  - Server: Jetty(6.1.25)
+1122 [Twitter Stream consumer-1[Establishing connection]] INFO  twitter4j.TwitterStreamImpl  - Connection established.
+1122 [Twitter Stream consumer-1[Establishing connection]] INFO  twitter4j.TwitterStreamImpl  - Receiving status stream.
+1122 [Twitter Stream consumer-1[Receiving stream]] DEBUG twitter4j.TwitterStreamImpl  - Twitter Stream consumer-1[Receiving stream]
+1130 [Twitter4J Async Dispatcher[0]] DEBUG twitter4j.StatusStreamImpl  - Received:{"contributors":null,"text":"@RemcoCox flosje^^","geo":null,"retweeted":false,"in_reply_to_screen_name":"RemcoCox","truncated":false,"entities":{"urls":[],"hashtags":[],"user_mentions":[{"id":239905332,"name":"Remco Cox","indices":[0,9],"screen_name":"RemcoCox","id_str":"239905332"}]},"in_reply_to_status_id_str":"132135980244279296","id":132136171584225282,"in_reply_to_user_id_str":"239905332","source":"web","favorited":false,"in_reply_to_status_id":132135980244279296,"in_reply_to_user_id":239905332,"created_at":"Thu Nov 03 16:44:52 +0000 2011","retweet_count":0,"id_str":"132136171584225282","place":{"id":"8d86d7237a5ce3d7","place_type":"city","bounding_box":{"type":"Polygon","coordinates":[[[5.5701169,51.4379875],[5.7360856,51.4379875],[5.7360856,51.5092101],[5.5701169,51.5092101]]]},"name":"Helmond","attributes":{},"country_code":"NL","url":"http://api.twitter.com/1/geo/id/8d86d7237a5ce3d7.json","country":"The Netherlands","full_name":"Helmond"},"user":{"location":"The Netherlands","default_profile":false,"statuses_count":888,"profile_background_tile":false,"lang":"en","profile_link_color":"3c00ff","id":214235683,"following":null,"favourites_count":4,"protected":false,"profile_text_color":"ff0000","verified":false,"contributors_enabled":false,"description":"","name":"Giovanni","profile_sidebar_border_color":"fa0000","profile_background_color":"000000","created_at":"Wed Nov 10 22:31:21 +0000 2010","default_profile_image":false,"followers_count":20,"geo_enabled":true,"profile_image_url_https":"https://si0.twimg.com/profile_images/1592880954/URRQ022f_normal","profile_background_image_url":"http://a0.twimg.com/profile_background_images/188511911/1148100078_5_h3_A.jpeg","profile_background_image_url_https":"https://si0.twimg.com/profile_background_images/188511911/1148100078_5_h3_A.jpeg","follow_request_sent":null,"url":null,"utc_offset":3600,"time_zone":"Amsterdam","notifications":null,"friends_count":144,"profile_use_background_image":false,"profile_sidebar_fill_color":"2feb00","screen_name":"Mentalgio","id_str":"214235683","profile_image_url":"http://a0.twimg.com/profile_images/1592880954/URRQ022f_normal","show_all_inline_media":false,"is_translator":false,"listed_count":0},"coordinates":null}
+1299 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - Access denied for user 'skynet'@'localhost' (using password: YES)
+java.sql.SQLException: Access denied for user 'skynet'@'localhost' (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1073)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3609)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3541)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:943)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:4113)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1308)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2336)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2369)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2153)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:792)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:381)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.connect(MySqlUtil.java:100)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.<init>(MySqlUtil.java:74)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.getInstance(MySqlUtil.java:48)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.getInstance(MySqlUtil.java:54)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
+1301 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - 
+java.lang.NullPointerException
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:285)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:249)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
+1661 [Twitter4J Async Dispatcher[0]] DEBUG twitter4j.StatusStreamImpl  - Received:{"contributors":null,"text":"staat er nog steeds niet opp... @kusxsoof","geo":null,"retweeted":false,"in_reply_to_screen_name":null,"truncated":false,"entities":{"urls":[],"hashtags":[],"user_mentions":[{"id":356416068,"name":"Sophie","indices":[32,41],"screen_name":"kusxsoof","id_str":"356416068"}]},"in_reply_to_status_id_str":null,"id":132136174008541185,"in_reply_to_user_id_str":null,"source":"web","favorited":false,"in_reply_to_status_id":null,"retweet_count":0,"created_at":"Thu Nov 03 16:44:53 +0000 2011","in_reply_to_user_id":null,"id_str":"132136174008541185","place":{"id":"8cb67e5457853086","place_type":"city","bounding_box":{"type":"Polygon","coordinates":[[[4.1903465,52.0148713],[4.4224441,52.0148713],[4.4224441,52.1388646],[4.1903465,52.1388646]]]},"name":"The Hague","attributes":{},"country_code":"NL","url":"http://api.twitter.com/1/geo/id/8cb67e5457853086.json","country":"The Netherlands","full_name":"The Hague"},"user":{"location":"Den Haag","default_profile":false,"profile_background_tile":true,"statuses_count":456,"lang":"en","profile_link_color":"a911db","id":342297272,"following":null,"favourites_count":2,"protected":false,"profile_text_color":"f75ee5","verified":false,"contributors_enabled":false,"description":"Dalton Den Haag|Brugger|Craeyenhout hockey| Den Haag 070|12 jaar|Blond|Blauwe ogen|Te druk leven|Prinsesje|i love you|Van me schaatjes houden|Hooii. ?jeweethet?","profile_sidebar_border_color":"CC3366","name":"Veerle","profile_background_color":"ff47bf","created_at":"Mon Jul 25 19:54:18 +0000 2011","default_profile_image":false,"followers_count":59,"geo_enabled":true,"profile_image_url_https":"https://si0.twimg.com/profile_images/1607712724/1425921826_5_KT5P_1__normal.jpg","profile_background_image_url":"http://a1.twimg.com/profile_background_images/355983539/1420012432_5_dtPE_1_.jpg","profile_background_image_url_https":"https://si0.twimg.com/profile_background_images/355983539/1420012432_5_dtPE_1_.jpg","follow_request_sent":null,"url":null,"utc_offset":3600,"time_zone":"Amsterdam","notifications":null,"friends_count":132,"profile_use_background_image":true,"profile_sidebar_fill_color":"ff3bb1","screen_name":"kusxveer","id_str":"342297272","profile_image_url":"http://a1.twimg.com/profile_images/1607712724/1425921826_5_KT5P_1__normal.jpg","show_all_inline_media":false,"is_translator":false,"listed_count":1},"coordinates":null}
+1662 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - 
+java.lang.NullPointerException
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:285)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:249)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
+1877 [Twitter4J Async Dispatcher[0]] DEBUG twitter4j.StatusStreamImpl  - Received:{"contributors":null,"text":"mams net weg lesgeven sporten nu wachten op paps","geo":null,"retweeted":false,"in_reply_to_screen_name":null,"truncated":false,"entities":{"urls":[],"hashtags":[],"user_mentions":[]},"in_reply_to_status_id_str":null,"id":132136174872567808,"in_reply_to_user_id_str":null,"source":"web","favorited":false,"in_reply_to_status_id":null,"retweet_count":0,"created_at":"Thu Nov 03 16:44:53 +0000 2011","in_reply_to_user_id":null,"id_str":"132136174872567808","place":{"id":"2e5d44a2ba796b59","place_type":"city","bounding_box":{"type":"Polygon","coordinates":[[[6.2897168,51.8271744],[6.5326899,51.8271744],[6.5326899,51.97811],[6.2897168,51.97811]]]},"name":"Oude IJsselstreek","attributes":{},"country_code":"NL","url":"http://api.twitter.com/1/geo/id/2e5d44a2ba796b59.json","country":"The Netherlands","full_name":"Oude IJsselstreek, Gelderland"},"user":{"location":"gendringen ","default_profile":true,"profile_background_tile":false,"statuses_count":695,"lang":"nl","profile_link_color":"0084B4","id":311984051,"following":null,"favourites_count":140,"protected":false,"profile_text_color":"333333","verified":false,"contributors_enabled":false,"description":"","profile_sidebar_border_color":"C0DEED","name":"jaimy hebinck","profile_background_color":"C0DEED","created_at":"Mon Jun 06 11:54:01 +0000 2011","default_profile_image":false,"followers_count":147,"geo_enabled":true,"profile_image_url_https":"https://si0.twimg.com/profile_images/1575086818/631566462_5_wg2I_1_1__normal.jpg","profile_background_image_url":"http://a0.twimg.com/images/themes/theme1/bg.png","profile_background_image_url_https":"https://si0.twimg.com/images/themes/theme1/bg.png","follow_request_sent":null,"url":"http://www.jaimy--blackyman.hyves.nl","utc_offset":3600,"time_zone":"Amsterdam","notifications":null,"friends_count":256,"profile_use_background_image":true,"profile_sidebar_fill_color":"DDEEF6","screen_name":"blackyjaimy","id_str":"311984051","profile_image_url":"http://a1.twimg.com/profile_images/1575086818/631566462_5_wg2I_1_1__normal.jpg","show_all_inline_media":false,"is_translator":false,"listed_count":0},"coordinates":null}
+1878 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - 
+java.lang.NullPointerException
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:285)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:249)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
+2702 [Twitter4J Async Dispatcher[0]] DEBUG twitter4j.StatusStreamImpl  - Received:{"contributors":null,"text":"Home sweet home! (@ Casa di bnafets & blubje) http://t.co/Ccdg5eAz","geo":{"type":"Point","coordinates":[51.196729,4.483451]},"retweeted":false,"in_reply_to_screen_name":null,"possibly_sensitive":false,"truncated":false,"entities":{"urls":[{"expanded_url":"http://4sq.com/sgmqXT","indices":[46,66],"display_url":"4sq.com/sgmqXT","url":"http://t.co/Ccdg5eAz"}],"hashtags":[],"user_mentions":[]},"in_reply_to_status_id_str":null,"id":132136178387386369,"in_reply_to_user_id_str":null,"source":"<a href=\"http://foursquare.com\" rel=\"nofollow\">foursquare<\/a>","favorited":false,"in_reply_to_status_id":null,"in_reply_to_user_id":null,"created_at":"Thu Nov 03 16:44:54 +0000 2011","retweet_count":0,"id_str":"132136178387386369","place":{"id":"746f4265dc14bbf1","place_type":"city","bounding_box":{"type":"Polygon","coordinates":[[[4.4698469,51.1807157],[4.5091775,51.1807157],[4.5091775,51.2038862],[4.4698469,51.2038862]]]},"name":"Borsbeek","attributes":{},"country_code":"BE","url":"http://api.twitter.com/1/geo/id/746f4265dc14bbf1.json","country":"Belgium","full_name":"Borsbeek, Antwerp"},"user":{"location":"Essen, Belgium","default_profile":false,"statuses_count":4597,"profile_background_tile":false,"lang":"en","profile_link_color":"D02B55","id":17214560,"following":null,"favourites_count":16,"protected":false,"profile_text_color":"3E4415","verified":false,"contributors_enabled":false,"description":"Amateur Photographer - IAM Consultant - Sports Enthousiast","name":"Stefan Bocken","profile_sidebar_border_color":"829D5E","profile_background_color":"352726","created_at":"Thu Nov 06 17:05:26 +0000 2008","default_profile_image":false,"followers_count":168,"geo_enabled":true,"profile_image_url_https":"https://si0.twimg.com/profile_images/1072290300/74790b07-70e6-4bcf-b389-e4a9c5e49845_normal.jpg","profile_background_image_url":"http://a1.twimg.com/images/themes/theme5/bg.gif","profile_background_image_url_https":"https://si0.twimg.com/images/themes/theme5/bg.gif","follow_request_sent":null,"url":"http://about.me/bnafets","utc_offset":3600,"time_zone":"Brussels","notifications":null,"friends_count":135,"profile_use_background_image":true,"profile_sidebar_fill_color":"99CC33","screen_name":"BnafetS","id_str":"17214560","profile_image_url":"http://a0.twimg.com/profile_images/1072290300/74790b07-70e6-4bcf-b389-e4a9c5e49845_normal.jpg","show_all_inline_media":false,"is_translator":false,"listed_count":4},"coordinates":{"type":"Point","coordinates":[4.483451,51.196729]}}
+2704 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - 
+java.lang.NullPointerException
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:285)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:249)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
+3357 [Twitter4J Async Dispatcher[0]] DEBUG twitter4j.StatusStreamImpl  - Received:{"contributors":null,"text":"@jarikeen DHAURISSA@hoimail.com","geo":null,"retweeted":false,"in_reply_to_screen_name":"jarikeen","truncated":false,"entities":{"urls":[],"hashtags":[],"user_mentions":[{"id":290674714,"name":"jari","indices":[0,9],"screen_name":"jarikeen","id_str":"290674714"}]},"in_reply_to_status_id_str":"132132751469064192","id":132136180794929152,"in_reply_to_user_id_str":"290674714","source":"web","favorited":false,"in_reply_to_status_id":132132751469064192,"retweet_count":0,"created_at":"Thu Nov 03 16:44:55 +0000 2011","in_reply_to_user_id":290674714,"id_str":"132136180794929152","place":{"id":"879d7cfc66c9c290","place_type":"country","bounding_box":{"type":"Polygon","coordinates":[[[3.2976616,50.750449],[7.2276122,50.750449],[7.2276122,53.5757042],[3.2976616,53.5757042]]]},"name":"The Netherlands","attributes":{},"country_code":"NL","url":"http://api.twitter.com/1/geo/id/879d7cfc66c9c290.json","country":"The Netherlands","full_name":"The Netherlands"},"user":{"location":"ASSEN","default_profile":false,"profile_background_tile":false,"statuses_count":6840,"lang":"en","profile_link_color":"0b2024","id":263214883,"following":null,"favourites_count":6,"protected":false,"profile_text_color":"1c0c40","verified":false,"contributors_enabled":false,"description":"*Dubstep*Huf*10Deep*Woei*Jordans*Nike air max 1*Lacoste*FEYENOORDROTTERDAM-FACK020","profile_sidebar_border_color":"021717","name":"Die Ene ","profile_background_color":"021114","created_at":"Wed Mar 09 16:31:04 +0000 2011","default_profile_image":false,"followers_count":102,"geo_enabled":true,"profile_image_url_https":"https://si0.twimg.com/profile_images/1585322660/void_4__normal.jpg","profile_background_image_url":"http://a1.twimg.com/profile_background_images/216071490/woeigiveaway1.jpg","profile_background_image_url_https":"https://si0.twimg.com/profile_background_images/216071490/woeigiveaway1.jpg","follow_request_sent":null,"url":null,"utc_offset":-10800,"time_zone":"Greenland","notifications":null,"friends_count":55,"profile_use_background_image":true,"profile_sidebar_fill_color":"95E8EC","screen_name":"DHAURISSA","id_str":"263214883","profile_image_url":"http://a3.twimg.com/profile_images/1585322660/void_4__normal.jpg","show_all_inline_media":false,"is_translator":false,"listed_count":0},"coordinates":null}
+3358 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - 
+java.lang.NullPointerException
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:285)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:249)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
+4752 [Twitter4J Async Dispatcher[0]] DEBUG twitter4j.StatusStreamImpl  - Received:{"contributors":null,"text":"; grappie hij lag boven onder me deken","geo":null,"retweeted":false,"in_reply_to_screen_name":null,"truncated":false,"entities":{"urls":[],"hashtags":[],"user_mentions":[]},"in_reply_to_status_id_str":null,"id":132136187010887684,"in_reply_to_user_id_str":null,"source":"web","favorited":false,"in_reply_to_status_id":null,"retweet_count":0,"created_at":"Thu Nov 03 16:44:56 +0000 2011","in_reply_to_user_id":null,"id_str":"132136187010887684","place":{"id":"ea0a61fa0c646676","place_type":"city","bounding_box":{"type":"Polygon","coordinates":[[[3.9418364,51.8421131],[4.6013785,51.8421131],[4.6013785,52.0068016],[3.9418364,52.0068016]]]},"name":"Rotterdam","attributes":{},"country_code":"NL","url":"http://api.twitter.com/1/geo/id/ea0a61fa0c646676.json","country":"The Netherlands","full_name":"Rotterdam"},"user":{"location":"","default_profile":false,"profile_background_tile":false,"statuses_count":6678,"lang":"en","profile_link_color":"0084B4","id":236809476,"following":null,"favourites_count":8,"protected":false,"profile_text_color":"333333","verified":false,"contributors_enabled":false,"description":"","profile_sidebar_border_color":"C0DEED","name":"'kleeinemeid","profile_background_color":"C0DEED","created_at":"Tue Jan 11 12:27:53 +0000 2011","default_profile_image":false,"followers_count":147,"geo_enabled":true,"profile_image_url_https":"https://si0.twimg.com/profile_images/1599485057/Picture0002_normal.jpg","profile_background_image_url":"http://a2.twimg.com/profile_background_images/209191056/animaatjes-chanel-45233.jpg","profile_background_image_url_https":"https://si0.twimg.com/profile_background_images/209191056/animaatjes-chanel-45233.jpg","follow_request_sent":null,"url":null,"utc_offset":-10800,"time_zone":"Greenland","notifications":null,"friends_count":203,"profile_use_background_image":true,"profile_sidebar_fill_color":"DDEEF6","screen_name":"kleeinemeidx","id_str":"236809476","profile_image_url":"http://a1.twimg.com/profile_images/1599485057/Picture0002_normal.jpg","show_all_inline_media":false,"is_translator":false,"listed_count":0},"coordinates":null}
+4753 [Twitter4J Async Dispatcher[0]] ERROR toctep.skynet.backend.Skynet  - 
+java.lang.NullPointerException
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:285)
+	at toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil.exists(MySqlUtil.java:249)
+	at toctep.skynet.backend.dal.dao.impl.mysql.TweetDaoImpl.exists(TweetDaoImpl.java:122)
+	at toctep.skynet.backend.dal.domain.Domain.save(Domain.java:40)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:270)
+	at toctep.skynet.backend.dal.domain.tweet.Tweet.save(Tweet.java:240)
+	at toctep.skynet.backend.bll.TweetParser.parse(TweetParser.java:84)
+	at toctep.skynet.backend.bll.TweetRetriever$1.onStatus(TweetRetriever.java:25)
+	at twitter4j.StatusStreamImpl.onStatus(StatusStreamImpl.java:78)
+	at twitter4j.AbstractStreamImplementation$1.run(AbstractStreamImplementation.java:107)
+	at twitter4j.internal.async.ExecuteThread.run(DispatcherImpl.java:114)
