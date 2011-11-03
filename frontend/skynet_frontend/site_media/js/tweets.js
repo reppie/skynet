@@ -19,7 +19,7 @@
 			this.$path = element;
 			this.chain = [];
 			
-			var nl = new api.filters.Geo("Nederland", "nl");
+			var nl = new api.filters.Geo("Nederland", "NL", null);
 			nl.removable = false;
 			this.chain.push(nl);
 			
@@ -80,8 +80,9 @@
 				api.filters.Base.prototype.constructor.call(this, 'user', "@" + user, user);
 				
 			},
-			'Geo': function(label, location){
-				api.filters.Base.prototype.constructor.call(this, 'geo', label, location);
+			'Geo': function(label, country, place){
+				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
+				this.country = country;
 			}
 		}
 	});
