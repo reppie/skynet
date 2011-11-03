@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
@@ -30,6 +32,37 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private IPlace place 					= NullPlace.getInstance();
 	private IUser user 						= NullUser.getInstance();
 	private String coordinates				= "";
+	
+	private List<TweetContributor> tweetContributors = new ArrayList<TweetContributor>();
+	private List<TweetHashtag> tweetHashtags = new ArrayList<TweetHashtag>();
+	private List<TweetKeyword> tweetKeywords = new ArrayList<TweetKeyword>();
+	private List<TweetMention> tweetMentions = new ArrayList<TweetMention>();
+	private List<TweetUrl> tweetUrls = new ArrayList<TweetUrl>();
+	
+	public void addContributor(TweetContributor tweetContributor)
+	{
+		tweetContributors.add(tweetContributor);
+	}
+	
+	public void addHashtag(TweetHashtag tweetHashtag)
+	{
+		tweetHashtags.add(tweetHashtag);
+	}
+	
+	public void addKeyword(TweetKeyword tweetKeyword)
+	{
+		tweetKeywords.add(tweetKeyword);
+	}
+	
+	public void addMention(TweetMention tweetMention)
+	{
+		tweetMentions.add(tweetMention);
+	}
+	
+	public void addUrl(TweetUrl tweetUrl)
+	{
+		tweetUrls.add(tweetUrl);
+	}
 	
 	@Override
 	public String getText() {
@@ -153,6 +186,38 @@ public class Tweet extends Domain<Long> implements ITweet {
 		dao = DaoFacadeImpl.getInstance().getTweetDao();
 	}
 	
+
+	private void saveContributors() {
+		for(TweetContributor tweetContributor : tweetContributors) {
+			tweetContributor.save();
+		}
+	}
+	
+	private void saveHashtags() {
+		for(TweetHashtag tweetHashtag : tweetHashtags) {
+			tweetHashtag.save();
+		}
+	}
+
+	private void saveMentions() {
+		for(TweetMention tweetMention : tweetMentions) {
+			tweetMention.save();
+		}
+		
+	}	
+	
+	private void saveUrls() {
+		for(TweetUrl tweetUrl : tweetUrls) {
+			tweetUrl.save();
+		}
+	}
+
+	private void saveKeywords() {
+		for(TweetKeyword tweetKeyword : tweetKeywords) {
+			tweetKeyword.save();
+		}
+	}
+	
 	@Override
 	public void save() {
 		
@@ -186,9 +251,15 @@ public class Tweet extends Domain<Long> implements ITweet {
 			((User) this.user).setId(((User) user).getId());
 		}
 		
+		saveContributors();
+		saveHashtags();
+		saveKeywords();
+		saveMentions();
+		saveUrls();
+		
 		super.save();
 	}
-	
+
 	public static ITweet select(Long id) {
 		TweetDao dao = DaoFacadeImpl.getInstance().getTweetDao();
 		
