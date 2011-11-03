@@ -1,5 +1,8 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import java.util.List;
+
+import toctep.skynet.backend.dal.dao.TweetKeywordDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
@@ -41,8 +44,10 @@ public class TweetKeyword extends Domain<Integer> {
 	@Override
 	public void save() {
 		if (tweet instanceof Tweet) {
-			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			if (((Tweet) tweet).isDirty()) {
+				((Tweet) tweet).save();
+				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			}
 		}
 		
 		if (keyword instanceof Keyword) {
@@ -53,9 +58,19 @@ public class TweetKeyword extends Domain<Integer> {
 		super.save();
 	}
 	
-	public static Object select(Integer id) {
-		//TODO
+	public static TweetKeyword select(Integer id) {
+		TweetKeywordDao dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
+		
+		if (dao.exists(id)) {
+			return (TweetKeyword) dao.select(id);
+		}
+		
 		return null;
+	}
+	
+	public static List<TweetKeyword> select(Tweet tweet) {
+		TweetKeywordDao dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
+		return dao.select(tweet);
 	}
 	
 }

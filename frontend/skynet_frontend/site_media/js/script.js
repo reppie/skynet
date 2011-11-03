@@ -28,11 +28,12 @@ $(function(){
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
-
-		var keyword = $(this).data("keyword");s
-		var keywordFilter = new api.filters.Keyword(keyword);
+		
+		var keyword = $(this).data("keyword");
+		var filter = new api.filters.Keyword(keyword);
+		crumblePath.path().add(filter);
 		var filters = crumblePath.path();
-		filters.push([keywordFilter]);
+		filters.push(keywordFilter);
 		
 		api.Tweet.search(filters, function(twitterIds, cloud){
 			$(".tweets").TweetList(twitterIds);

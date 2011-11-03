@@ -24,7 +24,7 @@ public class TweetFilter {
 		
 		for(String commonWord: commonWords) {
 			if(cleanTweet.contains(commonWord)) {
-				cleanTweet = cleanTweet.replaceAll(commonWord, "");
+				cleanTweet = cleanTweet.replaceAll(commonWord, " ");
 			}
 		}
 		cleanTweet = removeMultipleSpaces(cleanTweet);

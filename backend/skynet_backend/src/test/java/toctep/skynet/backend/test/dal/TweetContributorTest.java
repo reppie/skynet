@@ -59,11 +59,11 @@ public class TweetContributorTest extends DomainTest {
 		User user = new User();
 		user.setId(new Long(1));
 		
-		TweetContributor tweetContributorOne = new TweetContributor();
-		tweetContributorOne.setTweet(tweet);
-		tweetContributorOne.setUser(user);
+		TweetContributor tweetContributor = new TweetContributor();
+		tweetContributor.setTweet(tweet);
+		tweetContributor.setUser(user);
 		
-		tweet.addContributor(tweetContributorOne);
+		tweet.addContributor(tweetContributor);
 		
 		tweet.save();
 		
