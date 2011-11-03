@@ -24,7 +24,6 @@ public class TweetKeywordTest extends DomainTest {
 		keywordValue = "testValue";
 		
 		keyword = new Keyword();
-		keyword.setId(0);
 		keyword.setKeyword(keywordValue);
 		
 		tweetKeyword.setTweet(tweet);
