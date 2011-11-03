@@ -37,26 +37,29 @@ class TwitterRpcMethods(object):
     @staticmethod
     @jsonremote(service)
     def search_tweets(filters):
+        tweets = Tweet.objects.all()
+        
         for filter in filters:
             if filter['type']=='keyword':
                 search_string = filter['value']
-                tweets = Tweet.objects.all()
-                
-                if(search_string.startswith('@')):
-                    tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string[1:]))
-                else:
-                    tweets = tweets.distinct().filter(keywords__keyword=search_string)
-                    
-                tweet_ids = tweets.values_list('id', flat=True)
+                tweets = tweets.distinct().filter(keywords__keyword=search_string)
                 
                 
-                keywords = Keyword.get_all_in_tweets(tweet_ids)
-                cloud = KeywordCloud(keywords)
+            if filter['type']=='user':
+                search_string = filter['value']
+                tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string[1:]))
                 
-            return {
-                    'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
-                    'cloud':cloud,
-            }
+                
+        tweet_ids = tweets.values_list('id', flat=True)
+        keywords = Keyword.get_all_in_tweets(tweet_ids)
+        cloud = KeywordCloud(keywords)
+            
+        return {
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
+            'cloud':cloud,
+        }
+            
+            
     @staticmethod
     @jsonremote(service)
     def cloud():
