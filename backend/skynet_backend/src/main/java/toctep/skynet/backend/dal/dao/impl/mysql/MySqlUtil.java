@@ -219,6 +219,7 @@ public final class MySqlUtil {
 				}
 				records.add(record);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

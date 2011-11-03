@@ -61,7 +61,7 @@ public class UrlDaoImpl extends UrlDao {
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "text=" + MySqlUtil.escape(id));
+		return MySqlUtil.getInstance().exists(tableName, "text", new Param(id, Types.VARCHAR));
 	}	
 
 	@Override
