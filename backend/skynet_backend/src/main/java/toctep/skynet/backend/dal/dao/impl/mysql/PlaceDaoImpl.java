@@ -70,7 +70,7 @@ public class PlaceDaoImpl extends PlaceDao {
 		place.setPostalCode((String) row.get("postal_code"));
 		place.setPhone((String) row.get("phone"));
 		place.setTwitter((String) row.get("twitter"));
-		place.setAppId((String) row.get("app_id"));
+		place.setAppId((String) row.get("appid"));
 		
 		return place;
 	}
