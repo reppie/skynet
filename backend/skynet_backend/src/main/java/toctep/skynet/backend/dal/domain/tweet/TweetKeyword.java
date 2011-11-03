@@ -44,8 +44,10 @@ public class TweetKeyword extends Domain<Integer> {
 	@Override
 	public void save() {
 		if (tweet instanceof Tweet) {
-			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			if (((Tweet) tweet).isDirty()) {
+				((Tweet) tweet).save();
+				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			}
 		}
 		
 		if (keyword instanceof Keyword) {

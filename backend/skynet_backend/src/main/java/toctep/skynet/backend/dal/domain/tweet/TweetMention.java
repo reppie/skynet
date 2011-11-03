@@ -38,8 +38,10 @@ public class TweetMention extends Domain<Integer> {
 	public void save() {
 		
 		if (tweet instanceof Tweet) {
-			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			if (((Tweet) tweet).isDirty()) {
+				((Tweet) tweet).save();
+				((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+			}
 		}
 		
 		if (user instanceof User) {
