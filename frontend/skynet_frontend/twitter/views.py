@@ -87,7 +87,8 @@ class TwitterRpcMethods(object):
                 search_string = filter['country']
                 tweets = tweets.distinct().filter(place__country=search_string)
                 if filter['value']:
-                    tweets = tweets.distinct().filter(place__name=filter['value'])
+                    search_string = filter['value']
+                    tweets = tweets.distinct().filter(place__name=search_string)
         
         
         return tweets        
