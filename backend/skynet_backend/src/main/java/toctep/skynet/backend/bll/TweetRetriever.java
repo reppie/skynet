@@ -14,7 +14,7 @@ public class TweetRetriever implements Runnable {
 	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
-		MySqlUtil.getInstance().truncateDatabase();
+		MySqlUtil.getInstance().truncateDatabase(); // TODO !
 	    initialize();
 	}
 	

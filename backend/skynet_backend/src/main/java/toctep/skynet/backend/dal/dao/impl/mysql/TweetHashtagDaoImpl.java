@@ -37,7 +37,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		tweetHashtag.setId(id);
 		tweetHashtag.setTweet(Tweet.select((Long) record.get(1)));

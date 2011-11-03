@@ -37,7 +37,7 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		tweetMention.setId(id);
 		tweetMention.setTweet(Tweet.select((Long) record.get(1)));

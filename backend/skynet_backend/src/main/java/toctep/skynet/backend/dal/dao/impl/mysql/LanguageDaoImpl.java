@@ -34,7 +34,7 @@ public class LanguageDaoImpl extends LanguageDao{
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		language.setId(id);
 		language.setText((String) record.get(1));

@@ -36,7 +36,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		boundingBox.setId(id);
 		boundingBox.setType(BoundingBoxType.select((Integer) record.get(1)));

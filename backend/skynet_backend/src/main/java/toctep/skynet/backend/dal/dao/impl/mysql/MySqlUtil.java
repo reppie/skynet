@@ -160,7 +160,7 @@ public final class MySqlUtil {
 		return id;
 	}
 	
-	public List<Object> select(String query, Param[] params) {
+	public List<Object> selectRecord(String query, Param[] params) {
 		List<Object> record = new ArrayList<Object>();
 		
 		PreparedStatement pstmt = null;
@@ -192,6 +192,44 @@ public final class MySqlUtil {
 		}
 		
 		return record;
+	}
+	
+	public List<List<Object>> select(String query, Param[] params) {
+		List<List<Object>> records = new ArrayList<List<Object>>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			rs.beforeFirst();
+			
+			while (rs.next()) {
+				List<Object> record = new ArrayList<Object>();
+				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+	                Object value = rs.getObject(i);
+	                record.add(value);
+				}
+				records.add(record);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return records;
 	}
 	
 	public int update(String query, Param[] params) {

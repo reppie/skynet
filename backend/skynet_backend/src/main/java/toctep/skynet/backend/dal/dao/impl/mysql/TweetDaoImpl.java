@@ -10,6 +10,7 @@ import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
+import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetDaoImpl extends TweetDao {
@@ -53,7 +54,7 @@ public class TweetDaoImpl extends TweetDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		tweet.setId(id);
 		tweet.setText((String) record.get(1));
@@ -68,6 +69,11 @@ public class TweetDaoImpl extends TweetDao {
 		tweet.setPlace(Place.select((String) record.get(10)));
 		tweet.setUser(User.select((Long) record.get(11)));
 		tweet.setCoordinates((String) record.get(12));
+		
+		List<TweetContributor> tweetContributors = TweetContributor.select(tweet);
+		for (TweetContributor tweetContributor : tweetContributors) {
+			tweet.addContributor(tweetContributor);
+		}
 		
 		return tweet;
 	}
