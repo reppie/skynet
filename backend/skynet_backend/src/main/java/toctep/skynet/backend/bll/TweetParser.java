@@ -2,6 +2,7 @@ package toctep.skynet.backend.bll;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.util.List;
 
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
@@ -17,6 +18,7 @@ import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
+import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 import toctep.skynet.backend.dal.domain.tweet.TweetMention;
 import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
@@ -73,6 +75,7 @@ public final class TweetParser {
 			parseHashtag(status);
 			parseContributor(status);
 			parseMention(status);
+			parseKeyword(tweet);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -255,18 +258,19 @@ public final class TweetParser {
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
         tweet.setUser(user);
-        tweet.save();
-        new TweetIndexer().indexTweetKeywords(tweet);
     }
     
-    private void parseUrl(Status status) {
-        for(URLEntity urlEntity : status.getURLEntities()) {
-            Url url = new Url();
-            url.setId(urlEntity.getDisplayURL());
-            TweetUrl tweetUrl = new TweetUrl();
-            tweetUrl.setTweet(tweet);
-            tweetUrl.setUrl(url);
-        }
+    private void parseContributor(Status status) {
+    	if (status.getContributors() != null) {
+	        for(long contributor : status.getContributors()) {
+	            TweetContributor tweetContributor = new TweetContributor();
+	            tweetContributor.setTweet(tweet);
+	            User contributorUser  = new User();
+	            contributorUser.setId(contributor);
+	            tweetContributor.setUser(contributorUser);
+	            tweet.addContributor(tweetContributor);
+	        }
+    	}
     }
     
     private void parseHashtag(Status status) {
@@ -276,19 +280,16 @@ public final class TweetParser {
             TweetHashtag tweetHashtag = new TweetHashtag();
             tweetHashtag.setHashtag(hashtag);
             tweetHashtag.setTweet(tweet);
+            tweet.addHashtag(tweetHashtag);
         } 
     }
-
-    private void parseContributor(Status status) {
-    	if (status.getContributors() != null) {
-	        for(long contributor : status.getContributors()) {
-	            TweetContributor tweetContributor = new TweetContributor();
-	            tweetContributor.setTweet(tweet);
-	            User contributorUser  = new User();
-	            contributorUser.setId(contributor);
-	            tweetContributor.setUser(contributorUser);
-	        }
-    	}
+    
+    private void parseKeyword(Tweet tweet) {
+        List<TweetKeyword> tweetKeywords = new TweetIndexer().indexTweetKeywords(tweet);
+        
+        for(TweetKeyword tweetKeyword : tweetKeywords) {
+        	tweet.addKeyword(tweetKeyword);
+        }
     }
     
     private void parseMention(Status status) {
@@ -298,7 +299,18 @@ public final class TweetParser {
             User mentionedUser = new User();
             mentionedUser.setId(mentionEntity.getId());
             tweetMention.setUser(mentionedUser);
+            tweet.addMention(tweetMention);
         }
     }
     
+    private void parseUrl(Status status) {
+        for(URLEntity urlEntity : status.getURLEntities()) {
+            Url url = new Url();
+            url.setId(urlEntity.getDisplayURL());
+            TweetUrl tweetUrl = new TweetUrl();
+            tweetUrl.setTweet(tweet);
+            tweetUrl.setUrl(url);
+            tweet.addUrl(tweetUrl);
+        }
+    }    
 }
