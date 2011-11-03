@@ -89,8 +89,8 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 
 	@Override
 	public boolean exists(Domain<Integer> domain) {
-		TweetKeyword tweetkeyword = (TweetKeyword) domain;
-		return this.exists(tweetkeyword.getId());
+		TweetKeyword tweetKeyword = (TweetKeyword) domain;
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetKeyword.getId(), Types.INTEGER));
 	}
 	
 	@Override

@@ -141,4 +141,10 @@ public class TweetTest extends DomainTest {
 		assertEquals(0, tweetDao.count());
 	}
 
+	@Override
+	public void testExists() {
+		tweet.save();
+		assertTrue(tweetDao.exists(tweet));
+	}
+
 }

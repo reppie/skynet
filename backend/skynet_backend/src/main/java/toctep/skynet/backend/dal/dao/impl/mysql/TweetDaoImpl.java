@@ -119,7 +119,7 @@ public class TweetDaoImpl extends TweetDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
-		return this.exists(tweet.getId());
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweet.getId(), Types.BIGINT));
 	}
 	
 	@Override

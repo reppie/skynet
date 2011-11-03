@@ -1,8 +1,8 @@
 package toctep.skynet.backend.test.dal;
 
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
-import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBoxType;
 
 public class BoundingBoxTest extends DomainTest{
 
@@ -17,7 +17,7 @@ public class BoundingBoxTest extends DomainTest{
 		
 		boundingBox = new BoundingBox();
 		
-		boundingBoxType = NullBoundingBoxType.getInstance();
+		boundingBoxType = new BoundingBoxType();
 		boundingBox.setType(boundingBoxType);
 		
 		coordinates = "58.17, 68.20";
@@ -44,7 +44,7 @@ public class BoundingBoxTest extends DomainTest{
 		
 		BoundingBox postBoundingBox = (BoundingBox) boundingBoxDao.select(boundingBox.getId());
 		
-		assertTrue(postBoundingBox.getType().equals(boundingBox.getType()));
+		assertTrue(postBoundingBox.getType().getId().equals(boundingBox.getType().getId()));
 		assertTrue(postBoundingBox.getCoordinates().equals(boundingBox.getCoordinates()));
 	}
 	
@@ -61,4 +61,11 @@ public class BoundingBoxTest extends DomainTest{
 		boundingBox.delete();
 		assertEquals(0, boundingBoxDao.count());		
 	}
+
+	@Override
+	public void testExists() {
+		boundingBox.save();
+		assertTrue(boundingBoxDao.exists(boundingBox));
+	}
+	
 }

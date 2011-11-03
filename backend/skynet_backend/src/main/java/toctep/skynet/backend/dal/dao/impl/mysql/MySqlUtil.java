@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
@@ -242,16 +244,31 @@ public final class MySqlUtil {
 	}
 	
 	public boolean exists(String tableName, String column, Param param) {
+		Map<String, Param> map = new HashMap<String, Param>();
+		map.put(column, param);
+		return this.exists(tableName, map);
+	}
+	
+	public boolean exists(String tableName, Map<String, Param> params) {
 		boolean exists = false;
+		
+		String query = "SELECT * FROM " + tableName + " WHERE ";
+		for (int i = 0; i < params.size(); i++) {
+			query += params.keySet().toArray()[i] + "=?";
+			if (i < params.size() - 1) {
+				query += " AND ";
+			}
+		}
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			pstmt = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE " + column + "=?");
-			
-			pstmt.setObject(1, param.getValue(), param.getType());
-			
+			pstmt = conn.prepareStatement(query);
+			for (int i = 0; i < params.size(); i++) {
+				String key = params.keySet().toArray()[i].toString();
+				pstmt.setObject(i + 1, params.get(key).getValue(), params.get(key).getType());
+			}
 			rs = pstmt.executeQuery();
 			
 			int counter = 0;

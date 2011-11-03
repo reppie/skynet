@@ -60,7 +60,7 @@ public class LanguageDaoImpl extends LanguageDao{
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		Language language = (Language) domain;
-		return this.exists(language.getId());
+		return MySqlUtil.getInstance().exists(tableName, "text", new Param(language.getText(), Types.VARCHAR));
 	}
 	
 	@Override

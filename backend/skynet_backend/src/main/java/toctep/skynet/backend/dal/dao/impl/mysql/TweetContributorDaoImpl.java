@@ -87,7 +87,7 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetContributor tweetContributor = (TweetContributor) domain;
-		return this.exists(tweetContributor.getId());
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetContributor.getId(), Types.INTEGER));
 	}
 	
 	@Override

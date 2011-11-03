@@ -53,5 +53,11 @@ public class BoundingBoxTypeTest extends DomainTest{
 		boundingBoxType.delete();
 		assertEquals(0, boundingBoxTypeDao.count());		
 	}
+
+	@Override
+	public void testExists() {
+		boundingBoxType.save();
+		assertTrue(boundingBoxTypeDao.exists(boundingBoxType));
+	}
 	
 }
