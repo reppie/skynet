@@ -15,31 +15,23 @@ public class TweetRetriever implements Runnable {
 	
 	public TweetRetriever() {
 		MySqlUtil.getInstance().truncateDatabase();
-	    Initialize();
+	    initialize();
 	}
 	
-	private void Initialize() {
+	private void initialize() {
 		// Disable twitter4j logging
 		System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory"); 
 		
 		tweetParser = TweetParser.getInstance();
 		
-		StatusListener statusListerner = new StatusListener() {
+		StatusListener statusListener = new StatusListener() {
 	        public void onStatus(Status status) {
 	            tweetParser.parse(status);
 	        }
 	
-	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
-	            System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
-	        }
-	
-	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
-	            System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
-	        }
-	
-	        public void onScrubGeo(long userId, long upToStatusId) {
-	            System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
-	        }
+	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) { }
+	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) { }
+	        public void onScrubGeo(long userId, long upToStatusId) { }
 	
 	        public void onException(Exception ex) {
 	            ex.printStackTrace();
@@ -47,7 +39,7 @@ public class TweetRetriever implements Runnable {
 	    };
 	    
 	    twitterStream = new TwitterStreamFactory().getInstance();
-	    twitterStream.addListener(statusListerner);
+	    twitterStream.addListener(statusListener);
 	}
 
 	@Override

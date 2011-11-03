@@ -47,7 +47,10 @@ public class UrlDaoImpl extends UrlDao {
 	@Override
 	public void delete(Domain<String> domain) {
 		Url url = (Url) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE text = " + MySqlUtil.escape(url.getId()));
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE text=?",
+			new Param[] { new Param(url.getId(), Types.VARCHAR) }
+		);
 	}
 
 	@Override

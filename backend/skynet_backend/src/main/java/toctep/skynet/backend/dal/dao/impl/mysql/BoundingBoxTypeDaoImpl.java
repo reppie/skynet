@@ -51,7 +51,10 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	@Override
 	public void delete(Domain<Integer> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + boundingBoxType.getId());	
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(boundingBoxType.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

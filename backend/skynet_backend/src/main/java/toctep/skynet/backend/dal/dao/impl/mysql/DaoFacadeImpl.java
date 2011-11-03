@@ -22,7 +22,7 @@ import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 
-public class DaoFacadeImpl implements DaoFacade {
+public final class DaoFacadeImpl implements DaoFacade {
 	
 	private static DaoFacadeImpl instance;
 	

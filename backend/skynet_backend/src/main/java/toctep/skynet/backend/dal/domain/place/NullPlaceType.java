@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.domain.place;
 
-public class NullPlaceType implements IPlaceType {
+public final class NullPlaceType implements IPlaceType {
 
 	private static NullPlaceType instance;
 	

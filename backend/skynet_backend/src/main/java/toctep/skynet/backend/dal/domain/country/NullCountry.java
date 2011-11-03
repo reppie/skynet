@@ -1,7 +1,6 @@
 package toctep.skynet.backend.dal.domain.country;
 
-
-public class NullCountry implements ICountry {
+public final class NullCountry implements ICountry {
 
 	private static NullCountry instance;
 	

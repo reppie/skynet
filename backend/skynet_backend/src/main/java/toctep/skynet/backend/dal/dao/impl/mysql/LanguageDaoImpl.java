@@ -51,7 +51,10 @@ public class LanguageDaoImpl extends LanguageDao{
 	@Override
 	public void delete(Domain<Integer> domain) {
 		Language language = (Language) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + language.getId());
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(language.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

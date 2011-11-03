@@ -54,8 +54,11 @@ public class TweetMentionDaoImpl extends TweetMentionDao {
 
 	@Override
 	public void delete(Domain<Integer> domain) {
-		TweetMention tweetMention = (TweetMention) domain;	
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + tweetMention.getId());
+		TweetMention tweetMention = (TweetMention) domain;
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(tweetMention.getId(), Types.INTEGER) }
+		);
 	}
 
 	@Override

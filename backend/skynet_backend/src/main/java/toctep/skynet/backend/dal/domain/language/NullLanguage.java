@@ -1,7 +1,7 @@
 package toctep.skynet.backend.dal.domain.language;
 
 
-public class NullLanguage implements ILanguage {
+public final class NullLanguage implements ILanguage {
 
 	private static NullLanguage instance;
 	

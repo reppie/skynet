@@ -53,7 +53,10 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	@Override
 	public void delete(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
-		MySqlUtil.getInstance().delete("DELETE FROM " + tableName + " WHERE id = " + timeZone.getId());	
+		MySqlUtil.getInstance().delete(
+			"DELETE FROM " + tableName + " WHERE id=?",
+			new Param[] { new Param(timeZone.getId(), Types.INTEGER) }
+		);
 	}
 	
 	@Override

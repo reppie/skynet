@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.tweet;
 
+import toctep.skynet.backend.dal.dao.TweetContributorDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.user.IUser;
@@ -14,7 +15,7 @@ public class TweetContributor extends Domain<Integer> {
 		return tweet;
 	}
 
-	public void setTweet(Tweet tweet) {
+	public void setTweet(ITweet tweet) {
 		this.tweet = tweet;
 	}
 
@@ -22,7 +23,7 @@ public class TweetContributor extends Domain<Integer> {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(IUser user) {
 		this.user = user;
 	}
 
@@ -31,9 +32,28 @@ public class TweetContributor extends Domain<Integer> {
 		dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 	}
 	
-	public static Object select(Integer id) {
-		//TODO
-		return null;
-	}
+	@Override
+	public void save() {
+		
+		if (tweet instanceof Tweet) {
+			((Tweet) tweet).save();
+			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
+		}
+		
+		if (user instanceof User) {
+			((User) user).save();
+			((User) this.user).setId(((User) user).getId());
+		}		
+		super.save();
+	}	
 	
+	public static TweetContributor select(Integer id) {
+		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
+		
+		if (dao.exists(id)) {
+			return (TweetContributor) dao.select(id);
+		}
+		
+		return null;
+	}	
 }

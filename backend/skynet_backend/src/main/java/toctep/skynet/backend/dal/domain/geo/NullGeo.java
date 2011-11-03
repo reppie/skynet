@@ -1,7 +1,6 @@
 package toctep.skynet.backend.dal.domain.geo;
 
-
-public class NullGeo implements IGeo {
+public final class NullGeo implements IGeo {
 
 	private static NullGeo instance;
 	

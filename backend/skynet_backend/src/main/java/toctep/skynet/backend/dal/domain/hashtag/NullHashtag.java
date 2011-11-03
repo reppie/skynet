@@ -1,7 +1,6 @@
 package toctep.skynet.backend.dal.domain.hashtag;
 
-
-public class NullHashtag implements IHashtag {
+public final class NullHashtag implements IHashtag {
 
 	private static NullHashtag instance;
 	

@@ -15,12 +15,14 @@ public class TweetMentionTest extends DomainTest {
 	public void setUp() {
 		super.setUp();
 		
-		TweetMention tweetMention = new TweetMention();
+		tweetMention = new TweetMention();
 		
-		User user = new User();
+		user = new User();
+		user.setId(new Long(1));
 		tweetMention.setUser(user);
 		
-		Tweet tweet = new Tweet();
+		tweet = new Tweet();
+		tweet.setId(new Long(1));
 		tweetMention.setTweet(tweet);
 	}
 	
@@ -43,8 +45,8 @@ public class TweetMentionTest extends DomainTest {
 		
 		TweetMention postTweetMention = (TweetMention) tweetMentionDao.select(tweetMention.getId());
 		
-		assertTrue(postTweetMention.getTweet().equals(tweetMention.getTweet()));
-		assertTrue(postTweetMention.getUser().equals(tweetMention.getUser()));	
+		assertTrue(postTweetMention.getTweet().getId().equals(tweetMention.getTweet().getId()));
+		assertTrue(postTweetMention.getUser().getId().equals(tweetMention.getUser().getId()));	
 	}
 
 	@Override
@@ -60,4 +62,5 @@ public class TweetMentionTest extends DomainTest {
 		tweetMention.delete();
 		assertEquals(0, tweetMentionDao.count());
 	}
+	
 }
