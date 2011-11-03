@@ -7,6 +7,7 @@ import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetKeywordTest extends DomainTest {
+	
 	private TweetKeyword tweetKeyword;
 	private Tweet tweet;
 	private String keywordValue;
@@ -93,6 +94,12 @@ public class TweetKeywordTest extends DomainTest {
 	public void testDelete() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void testExists() {
+		tweetKeyword.save();
+		assertTrue(tweetKeywordDao.exists(tweetKeyword));
 	}
 
 }

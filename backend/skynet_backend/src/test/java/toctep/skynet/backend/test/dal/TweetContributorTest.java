@@ -86,5 +86,11 @@ public class TweetContributorTest extends DomainTest {
 		tweetContributor.delete();
 		assertEquals(0, tweetContributorDao.count());
 	}
+
+	@Override
+	public void testExists() {
+		tweetContributor.save();
+		assertTrue(tweetContributorDao.exists(tweetContributor));
+	}
 	
 }

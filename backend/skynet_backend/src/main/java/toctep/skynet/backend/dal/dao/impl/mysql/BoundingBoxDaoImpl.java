@@ -25,7 +25,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 			
 		int id = MySqlUtil.getInstance().insert(query, params);
 		
-		((BoundingBox) boundingBox).setId(id);
+		boundingBox.setId(id);
 	}
 
 	@Override

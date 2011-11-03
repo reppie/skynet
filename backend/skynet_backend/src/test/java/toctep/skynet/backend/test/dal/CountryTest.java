@@ -56,5 +56,11 @@ public class CountryTest extends DomainTest{
 		country.delete();
 		assertEquals(0, countryDao.count());		
 	}
+
+	@Override
+	public void testExists() {
+		country.save();
+		assertTrue(countryDao.exists(country));
+	}
 	
 }

@@ -54,4 +54,10 @@ public class LanguageTest extends DomainTest{
 		assertEquals(0, languageDao.count());		
 	}
 
+	@Override
+	public void testExists() {
+		language.save();
+		assertTrue(languageDao.exists(language));
+	}
+
 }
