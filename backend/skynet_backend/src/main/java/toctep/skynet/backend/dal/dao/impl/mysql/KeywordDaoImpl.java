@@ -86,11 +86,11 @@ public class KeywordDaoImpl extends KeywordDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;
-		return MySqlUtil.getInstance().exists(tableName, "keyword=" + keyword.getKeyword());
+		return this.exists(keyword.getId());
 	}
 	
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override

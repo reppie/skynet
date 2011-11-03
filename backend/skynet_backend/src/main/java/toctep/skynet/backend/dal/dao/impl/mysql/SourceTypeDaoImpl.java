@@ -65,7 +65,7 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override

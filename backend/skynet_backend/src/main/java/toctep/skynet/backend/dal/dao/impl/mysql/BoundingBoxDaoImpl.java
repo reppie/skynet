@@ -63,7 +63,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
-		return false;
+		return this.exists(boundingBox.getId());
 	}
 	
 	@Override
