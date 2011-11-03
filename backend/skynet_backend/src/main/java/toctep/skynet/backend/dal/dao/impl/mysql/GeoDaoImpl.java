@@ -1,7 +1,9 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -63,7 +65,10 @@ public class GeoDaoImpl extends GeoDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		Geo geo = (Geo) domain;
-		return this.exists(geo.getId());
+		Map<String, Param> params = new HashMap<String, Param>();
+		params.put("geo_type_id", new Param(geo.getType().getId(), Types.INTEGER));
+		params.put("coordinates", new Param(geo.getCoordinates(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(tableName, params);
 	}
 	
 	@Override
