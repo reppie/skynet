@@ -3,6 +3,8 @@ $(function(){
 	
 	var $search = $("form#keyword-search-form").submit(function(){
 		
+		$(".main-tag-cloud").hide();
+		
 		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
 		var filters = [].concat(crumblePath.path());
@@ -22,20 +24,26 @@ $(function(){
 				filters.push(filter);
 			}
 		}
+		for (var index in filters){
+			var filter = filters[index];
+			if(filter instanceof api.filters.Geo){
+ 				$("section#region-name").find("p#current-region").html(filter.label);
+ 			}
+		}
 		
 		api.Tweet.search(filters, function(twitterIds, cloud){
-		
-			console.log(cloud);
 			$(".tweets").TweetList(twitterIds, function(){
 				$searchbar.removeClass("loading");
 			});
 			
 			$(".mini-tag-cloud").TagCloud(cloud);
+			$("section#tag-cloud").show();
 			
 		});	
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
+		$(".main-tag-cloud").hide();
 		
 		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
@@ -49,7 +57,9 @@ $(function(){
 			$(".tweets").TweetList(twitterIds, function(){
 				$searchbar.removeClass("loading");
 			});
+			
 			$(".mini-tag-cloud").TagCloud(cloud);
+			$("section#tag-cloud").show();
 		});	
 		$search.submit();
 		return false;
@@ -57,10 +67,18 @@ $(function(){
 	$(".crumble-path a").live('click', function(){
 		
 		var index = $(this).data("index");
+		
+		
 		var clicked = crumblePath.path()[index];
 		crumblePath.removeAfter(clicked);
 		
-		$search.submit();
+		if(index==0){
+			$(".tweets").hide().empty();
+			$("section#tag-cloud").hide();
+			$(".main-tag-cloud").show();
+		}else{
+			$search.submit();
+		}
 		return false;
 	});
 });
@@ -68,7 +86,7 @@ $(function(){
 
 api.cloud(function(cloud){
 	$(".main-tag-cloud").TagCloud(cloud);
-	
+	$("section#tag-cloud").hide();
 });
 
 

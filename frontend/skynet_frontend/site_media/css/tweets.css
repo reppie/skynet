@@ -5,6 +5,10 @@
 	height: 85px;
 	border-bottom: dotted 1px #ccc;
 }
+section#tag-cloud{
+	display:none;
+}
+
 .tweet.loading{
 	display:none;
 	
