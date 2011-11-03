@@ -10,7 +10,7 @@ public class TweetFilterTest {
 	
 	@Test
 	public void filterCommonWordsTest() {
-		String rawTweet = "de slimme vos uit het bos, springt over een hoog hek";
+		String rawTweet = "slimme vos uit het bos, springt over een hoog hek";
 		String cleanTweet = "slimme vos uit bos, springt over hoog hek";
 		
 		assertEquals("filter result: ", cleanTweet, TweetFilter.filterCommonWords(rawTweet));
