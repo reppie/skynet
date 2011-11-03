@@ -157,7 +157,7 @@ public class UserDaoImpl extends UserDao {
 	
 	@Override
 	public boolean exists(Long id) {
-		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.BIGINT));
 	}	
 
 	@Override
