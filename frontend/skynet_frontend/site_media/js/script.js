@@ -1,9 +1,10 @@
+var crumblePath = $(".crumble-path").CrumblePath();
 $(function(){
+	
 	$("form#keyword-search-form").submit(function(){
 		
-		var filters =[];
+		var filters = crumblePath.path();
 		var search = $(this).find("input#searchbar").val();
-		
 		var query = search.split(' ');
 		for(var index in query){
 			var value = query[index];
@@ -27,28 +28,20 @@ $(function(){
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
-		
-		var crumblePath = $(".crumble-path").CrumblePath();
 
 		var keyword = $(this).data("keyword");
-		
 		var keywordFilter = new api.filters.Keyword(keyword);
-		
 		var filters = crumblePath.path();
-		
-		filters.push([keywordFilter]);
+		filters.push(keywordFilter);
 		
 		api.Tweet.search(filters, function(twitterIds, cloud){
-		
 			$(".tweets").TweetList(twitterIds);
 			$(".mini-tag-cloud").TagCloud(cloud);
 		});	
 		return false;
-		
 	});
 });
 
-var crumblePath = $(".crumble-path").CrumblePath();
 if(!crumblePath.path().length){
 	//$(".tweets").hide();
 	api.cloud(function(cloud){
