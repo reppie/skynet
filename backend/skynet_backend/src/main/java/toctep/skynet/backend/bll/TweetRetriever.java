@@ -1,5 +1,6 @@
 package toctep.skynet.backend.bll;
 
+import toctep.skynet.backend.Skynet;
 import twitter4j.FilterQuery;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -17,9 +18,6 @@ public class TweetRetriever implements Runnable {
 	}
 	
 	private void initialize() {
-		// Disable twitter4j logging
-		System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory"); 
-		
 		tweetParser = TweetParser.getInstance();
 		
 		StatusListener statusListener = new StatusListener() {
@@ -31,8 +29,8 @@ public class TweetRetriever implements Runnable {
 	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) { }
 	        public void onScrubGeo(long userId, long upToStatusId) { }
 	
-	        public void onException(Exception ex) {
-	            ex.printStackTrace();
+	        public void onException(Exception e) {
+	            Skynet.log.error(e.getMessage(), e);
 	        }
 	    };
 	    

@@ -14,7 +14,7 @@ import java.util.Map;
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
-import toctep.skynet.backend.Main;
+import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -51,7 +51,7 @@ public final class MySqlUtil {
 	}
 	
 	public static MySqlUtil getInstance() {
-		return MySqlUtil.getInstance(Main.DB_PROPERTIES);
+		return MySqlUtil.getInstance(Skynet.DB_CONFIG);
 	}
 	
 	private String properties;
@@ -73,11 +73,11 @@ public final class MySqlUtil {
 			initialize();
 			connect();
 		} catch (InvalidFileFormatException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -118,12 +118,12 @@ public final class MySqlUtil {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -149,13 +149,13 @@ public final class MySqlUtil {
 				id = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -183,13 +183,13 @@ public final class MySqlUtil {
                 record.add(value);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -223,13 +223,13 @@ public final class MySqlUtil {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 		return records;
@@ -279,13 +279,13 @@ public final class MySqlUtil {
 				exists = true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 
@@ -304,13 +304,13 @@ public final class MySqlUtil {
 			rs.next();
 			count = rs.getInt(1);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				stmt.close();
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -322,54 +322,65 @@ public final class MySqlUtil {
 		try {
 			conn.setAutoCommit(false);
 			
-			pstmt = conn.prepareStatement("set foreign_key_checks=0");							pstmt.execute();
+			pstmt = conn.prepareStatement("set foreign_key_checks=0");
+			pstmt.execute();
 			
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME); 		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + UserDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + CountryDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + GeoDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);	pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + UrlDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + KeywordDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);	pstmt.execute();
+			this.truncateTable(BoundingBoxDao.TABLE_NAME);
+			this.truncateTable(BoundingBoxTypeDao.TABLE_NAME);
+			this.truncateTable(CountryDao.TABLE_NAME);
+			this.truncateTable(GeoDao.TABLE_NAME);
+			this.truncateTable(GeoTypeDao.TABLE_NAME);
+			this.truncateTable(HashtagDao.TABLE_NAME);
+			this.truncateTable(KeywordDao.TABLE_NAME);
+			this.truncateTable(LanguageDao.TABLE_NAME);
+			this.truncateTable(PlaceDao.TABLE_NAME);
+			this.truncateTable(PlaceTypeDao.TABLE_NAME);
+			this.truncateTable(SourceTypeDao.TABLE_NAME);
+			this.truncateTable(TimeZoneDao.TABLE_NAME);
+			this.truncateTable(TweetContributorDao.TABLE_NAME);
+			this.truncateTable(TweetDao.TABLE_NAME);
+			this.truncateTable(TweetHashtagDao.TABLE_NAME);
+			this.truncateTable(TweetKeywordDao.TABLE_NAME);
+			this.truncateTable(TweetMentionDao.TABLE_NAME);
+			this.truncateTable(TweetUrlDao.TABLE_NAME);
+			this.truncateTable(UrlDao.TABLE_NAME);
+			this.truncateTable(UserDao.TABLE_NAME);
 			
-			pstmt = conn.prepareStatement("set foreign_key_checks=1");							pstmt.execute();
+			pstmt = conn.prepareStatement("set foreign_key_checks=1");
+			pstmt.execute();
 			
 			conn.commit();
 		} catch (SQLException e) {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				Skynet.log.error(e1.getMessage(), e);
 			}
+			Skynet.log.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 				conn.setAutoCommit(true);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.log.error(e.getMessage(), e);
 			}
 		}
 	}
 	
-	public static String escape(Object str) {
-		if(str instanceof String) {
-			str = "\"" + (str != null ? ((String) str).replace("\"", "\\\"") : "") + "\"";
+	public void truncateTable(String tableName) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + tableName);
+			pstmt.execute();
+		} catch (SQLException e) {
+			Skynet.log.error(e.getMessage(), e);
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				Skynet.log.error(e.getMessage(), e);
+			}
 		}
-		return (String) str;
 	}
 
 }

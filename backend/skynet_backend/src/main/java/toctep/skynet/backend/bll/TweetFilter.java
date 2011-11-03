@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
 public class TweetFilter {
+	
+	private TweetFilter() { }
+	
 	private static String[] commonWords = { " de ", " het ", " een " };
 	private static final Pattern SPECIAL_CHAR_REGEX = Pattern.compile("[^@\\wa-zA-Z#\\w\\s]");
 	private static final Pattern SINGLE_CHAR_REGEX = Pattern.compile("\\s[\\w]\\s");
