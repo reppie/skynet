@@ -15,6 +15,8 @@
 }
 .tweet .tweet-content{
 	margin-left: 8px;	
+	overflow:hidden;
+	max-width:88%;
 }
 
 .tweet.error{
@@ -45,3 +47,8 @@
 	padding: 4px;
 
 }
+.crumble-path li{
+	display: inline;
+	
+}
+
