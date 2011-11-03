@@ -18,9 +18,10 @@ import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 public class TweetParserTest {
 	
 	@Before
-	public void setup() {
+	public void setUp() {
+		MySqlUtil.getInstance("mysql_test.properties").truncateDatabase();
 	}
-
+	
 	@Test
 	public void indexTweetKeywordsText() {
 		TweetIndexer indexer = new TweetIndexer();
@@ -29,28 +30,28 @@ public class TweetParserTest {
 		tweet.setId(new Long(1001));
 		tweet.setText("wilfried elfstedentocht jager braam grietje horse");
 		
-		assertEquals("keyword count: ", 0, MySqlUtil.getInstance().count("twitter_keyword"));
+		assertEquals("keyword count: ", 0, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		
 		Keyword keyword = new Keyword();
 		keyword.setKeyword("elfstedentocht");
 		keyword.save();
-		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
+		assertEquals("keyword count: ", 1, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		assertTrue(MySqlUtil.getInstance().exists("twitter_keyword", "keyword = 'elfstedentocht';"));
 		
 		keyword = new Keyword();
 		keyword.setKeyword("elfstedentocht");
 		keyword.save();
-		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
+		assertEquals("keyword count: ", 1, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		
 		keyword = new Keyword();
 		keyword.setKeyword("elfSTEDENtocht");
 		keyword.save();
-		assertEquals("keyword count: ", 1, MySqlUtil.getInstance().count("twitter_keyword"));
+		assertEquals("keyword count: ", 1, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		
 		keyword = new Keyword();
 		keyword.setKeyword("wilfried");
 		keyword.save();
-		assertEquals("keyword count: ", 2, MySqlUtil.getInstance().count("twitter_keyword"));
+		assertEquals("keyword count: ", 2, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		
 		List<TweetKeyword> kws = indexer.indexTweetKeywords(tweet);
 		
@@ -59,7 +60,7 @@ public class TweetParserTest {
 	
 	@After
 	public void tearDown() {
-		MySqlUtil.getInstance().truncateDatabase();
+		MySqlUtil.getInstance("mysql_test.properties").truncateDatabase();
 	}
 
 }

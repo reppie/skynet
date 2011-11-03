@@ -3,12 +3,14 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
+import sys
 
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        from django.core import management
-        management.call_command('loaddata', 'data.json')
+        if not 'test' in sys.argv:
+            from django.core import management
+            management.call_command('loaddata', 'data.json')
 
     def backwards(self, orm):
         "Write your backwards methods here."

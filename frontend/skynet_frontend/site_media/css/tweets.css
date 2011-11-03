@@ -15,6 +15,8 @@
 }
 .tweet .tweet-content{
 	margin-left: 8px;	
+	overflow:hidden;
+	max-width:88%;
 }
 
 .tweet.error{
@@ -24,7 +26,6 @@
 
 .tweet .tweet-footer{
 	font-size: 9px;
-	
 }
 
 .main .tweet:nth-child(even)
@@ -45,3 +46,8 @@
 	padding: 4px;
 
 }
+.crumble-path li{
+	display: inline;
+	
+}
+

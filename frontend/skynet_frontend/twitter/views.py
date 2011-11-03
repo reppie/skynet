@@ -48,12 +48,18 @@ class TwitterRpcMethods(object):
                 search_string = filter['value']
                 tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string))
                 
+            if filter['type']=='geo':
+                search_string = filter['country']
+                tweets = tweets.distinct().filter(place__country=search_string)
+                if filter['value']:
+                    tweets = tweets.distinct().filter(place__name=filter['value'])
+                
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords)
             
         return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids[:20]],
             'cloud':cloud,
         }
             
