@@ -1,6 +1,5 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import twitter4j.FilterQuery;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -14,7 +13,6 @@ public class TweetRetriever implements Runnable {
 	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
-		MySqlUtil.getInstance().truncateDatabase(); // TODO !
 	    initialize();
 	}
 	
