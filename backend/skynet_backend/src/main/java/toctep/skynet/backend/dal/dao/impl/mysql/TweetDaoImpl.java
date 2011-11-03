@@ -39,7 +39,7 @@ public class TweetDaoImpl extends TweetDao {
 			new Param(tweet.getInReplyToTweetTwitter().getId(), Types.BIGINT),
 			new Param(tweet.getInReplyToUserTwitter().getId(), Types.BIGINT),
 			new Param(tweet.getRetweetCount(), Types.INTEGER),
-			new Param(tweet.getCreatedAt(), Types.DATE),
+			new Param(tweet.getCreatedAt(), Types.TIMESTAMP),
 			new Param(tweet.getPlace().getId(), Types.VARCHAR),
 			new Param(tweet.getUser().getId(), Types.BIGINT),
 			new Param(tweet.getCoordinates(), Types.VARCHAR)
