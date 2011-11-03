@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
@@ -47,6 +49,28 @@ public class TweetHashtagTest extends DomainTest {
 		
 		assertTrue(postTweetHashtag.getTweet().getId().equals(tweetHashtag.getTweet().getId()));
 		assertTrue(postTweetHashtag.getHashtag().getId().equals(tweetHashtag.getHashtag().getId()));		
+	}
+	
+	@Test
+	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		Hashtag hashtag = new Hashtag();
+		hashtag.setId(1);
+		
+		TweetHashtag tweetHashtag = new TweetHashtag();
+		tweetHashtag.setTweet(tweet);
+		tweetHashtag.setHashtag(hashtag);
+		
+		tweet.addHashtag(tweetHashtag);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getHashtags().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getHashtags().size());
 	}
 
 	@Override

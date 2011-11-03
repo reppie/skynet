@@ -11,6 +11,10 @@ import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
+import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
+import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
+import toctep.skynet.backend.dal.domain.tweet.TweetMention;
+import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetDaoImpl extends TweetDao {
@@ -73,6 +77,26 @@ public class TweetDaoImpl extends TweetDao {
 		List<TweetContributor> tweetContributors = TweetContributor.select(tweet);
 		for (TweetContributor tweetContributor : tweetContributors) {
 			tweet.addContributor(tweetContributor);
+		}
+		
+		List<TweetHashtag> tweetHashtags = TweetHashtag.select(tweet);
+		for (TweetHashtag tweetHashtag : tweetHashtags) {
+			tweet.addHashtag(tweetHashtag);
+		}
+		
+		List<TweetKeyword> tweetKeywords = TweetKeyword.select(tweet);
+		for (TweetKeyword tweetKeyword : tweetKeywords) {
+			tweet.addKeyword(tweetKeyword);
+		}
+		
+		List<TweetMention> tweetMentions = TweetMention.select(tweet);
+		for (TweetMention tweetMention : tweetMentions) {
+			tweet.addMention(tweetMention);
+		}
+		
+		List<TweetUrl> tweetUrls = TweetUrl.select(tweet);
+		for (TweetUrl tweetUrl : tweetUrls) {
+			tweet.addUrl(tweetUrl);
 		}
 		
 		return tweet;

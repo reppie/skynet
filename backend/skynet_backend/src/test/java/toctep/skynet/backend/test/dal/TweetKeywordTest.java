@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.tweet.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
@@ -54,6 +56,28 @@ public class TweetKeywordTest extends DomainTest {
 		assertTrue(postTweetKeyword.getTweet().getId().equals(tweetKeyword.getTweet().getId()));
 		assertTrue(postTweetKeyword.getTweetKeywordValue().equals(tweetKeyword.getTweetKeywordValue()));
 		assertTrue(postTweetKeyword.getKeyword().getId().equals(tweetKeyword.getKeyword().getId()));
+	}
+	
+	@Test
+	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		Keyword keyword = new Keyword();
+		keyword.setId(1);
+		
+		TweetKeyword tweetKeyword = new TweetKeyword();
+		tweetKeyword.setTweet(tweet);
+		tweetKeyword.setKeyword(keyword);
+		
+		tweet.addKeyword(tweetKeyword);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getKeywords().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getKeywords().size());
 	}
 
 	@Override
