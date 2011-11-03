@@ -16,7 +16,7 @@
 .tweet .tweet-content{
 	margin-left: 8px;	
 	overflow:hidden;
-	max-width:88%;
+	width:88%;
 }
 
 .tweet.error{
@@ -25,7 +25,12 @@
 }
 
 .tweet .tweet-footer{
+	padding-top: 3px;
 	font-size: 9px;
+}
+
+.tweet .tweet-location{
+	float: right;
 }
 
 .main .tweet:nth-child(even)
@@ -49,5 +54,13 @@
 .crumble-path li{
 	display: inline;
 	
+}
+.crumble-path a{
+	color: #06c;
+	font-weight: bold;
+	text-decoration: none;
+}
+.crumble-path a:hover{
+	text-decoration: underline;
 }
 

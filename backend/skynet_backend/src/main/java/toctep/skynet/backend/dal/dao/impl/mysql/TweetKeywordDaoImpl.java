@@ -21,7 +21,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 		Param[] params = new Param[] {
 			new Param(tweetKeyword.getTweet().getId(), Types.BIGINT),
 			new Param(tweetKeyword.getTweetKeywordValue(), Types.VARCHAR),
-			new Param(tweetKeyword.getKeyword().getId(), Types.BIGINT)
+			new Param(tweetKeyword.getKeyword().getId(), Types.INTEGER)
 		};
 			
 		int id = MySqlUtil.getInstance().insert(query, params);
@@ -68,6 +68,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 			tweetKeyword.setKeyword(Keyword.select((Integer) record.get(2)));
 			tweetKeywords.add(tweetKeyword);
 		}
+		
 		return tweetKeywords;
 	}	
 
@@ -94,7 +95,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id=" + id);
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override

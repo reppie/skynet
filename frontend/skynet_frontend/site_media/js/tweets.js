@@ -82,6 +82,9 @@
 			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
+				this.equals = function(filter){
+					return this.type == filter.type && this.value == filter.value && this.country == filter.country;
+				}
 				this.country = country;
 			}
 		}
@@ -127,13 +130,10 @@
 			var tweetId = tweetIds[index];
 			
 			api.Tweet.get(tweetId, function(tweet){
-				
 				if(tweet){
-					console.log(tweet);
 					tweet.getUser(function(user){
-						console.log(user);
 						if(user){
-							console.log("yey");
+							
 							var $tweet = $("#tweetTemplate").tmpl(tweet);
 							$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
 							
@@ -222,6 +222,33 @@
  			}
  		}
  		this.chain.push(filter);
+ 		this.build();
+ 	}
+ 	api.CrumblePath.prototype.removeAfter = function(filter){
+ 		var after = false;
+ 		var newChain = [];
+ 		for(var index in this.chain){
+ 			var f = this.chain[index];
+ 			if(!after){
+ 				newChain.push(f);
+ 			}
+ 			if(filter.equals(f)){
+ 				after = true;
+ 			}
+ 		}
+ 		this.chain = newChain;
+ 		this.build();
+ 		
+ 	}
+ 	api.CrumblePath.prototype.remove = function(filter){
+ 		var newChain = [];
+ 		for(var index in this.chain){
+ 			var f = this.chain[index];
+ 			if(!filter.equals(f)){
+ 				newChain.push(f);
+ 			}
+ 		}
+ 		this.chain = newChain;
  		this.build();
  	}
  	
