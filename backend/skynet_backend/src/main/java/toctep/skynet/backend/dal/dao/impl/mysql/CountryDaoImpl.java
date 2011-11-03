@@ -59,7 +59,7 @@ public class CountryDaoImpl extends CountryDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Country country = (Country) domain;
-		return this.exists(country.getId());
+		return MySqlUtil.getInstance().exists(tableName, "text", new Param(country.getText(), Types.VARCHAR));
 	}
 	
 	@Override

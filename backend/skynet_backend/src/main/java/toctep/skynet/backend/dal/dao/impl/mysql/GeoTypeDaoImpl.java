@@ -60,7 +60,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
-		return this.exists(geoType.getId());
+		return MySqlUtil.getInstance().exists(tableName, "text", new Param(geoType.getText(), Types.VARCHAR));
 	}
 	
 	@Override

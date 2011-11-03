@@ -87,7 +87,7 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetUrl tweetUrl = (TweetUrl) domain;
-		return this.exists(tweetUrl.getId());
+		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetUrl.getId(), Types.INTEGER));
 	}
 	
 	@Override
