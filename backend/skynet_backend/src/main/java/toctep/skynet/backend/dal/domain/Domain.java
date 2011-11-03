@@ -4,12 +4,27 @@ import toctep.skynet.backend.dal.dao.Dao;
 
 public abstract class Domain<T> implements IDomain<T> {
 	
+	private boolean dirty;
+	
 	private T id;
 	
 	protected Dao<T> dao;
 	
 	public Domain() {
+		setDirty();
 		setDao();
+	}
+	
+	public boolean isDirty() {
+		return dirty;
+	}
+	
+	public void setDirty() {
+		dirty = true;
+	}
+	
+	public void clearDirty() {
+		dirty = false;
 	}
 	
 	public T getId() {
@@ -21,10 +36,13 @@ public abstract class Domain<T> implements IDomain<T> {
 	}
 	
 	public void save() {
-		if (dao.exists(this)) {
-			dao.update(this);			
-		} else {
-			dao.insert(this);
+		if (isDirty()) {
+			if (dao.exists(this)) {
+				dao.update(this);			
+			} else {
+				dao.insert(this);
+			}
+			clearDirty();
 		}
 	}
 	

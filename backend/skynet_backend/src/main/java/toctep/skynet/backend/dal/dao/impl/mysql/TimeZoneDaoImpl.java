@@ -35,7 +35,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		timeZone.setId(id);
 		timeZone.setUtcOffset((Integer) record.get(1));

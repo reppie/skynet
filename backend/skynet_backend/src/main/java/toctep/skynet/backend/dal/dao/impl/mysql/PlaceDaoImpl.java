@@ -54,7 +54,7 @@ public class PlaceDaoImpl extends PlaceDao {
 			new Param(id, Types.VARCHAR)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		place.setId(id);
 		place.setType(PlaceType.select((Integer) record.get(1)));

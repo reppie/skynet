@@ -38,7 +38,7 @@ public class KeywordDaoImpl extends KeywordDao {
 			new Param(id, Types.INTEGER)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		keyword.setId(id);
 		keyword.setKeyword((String) record.get(1));

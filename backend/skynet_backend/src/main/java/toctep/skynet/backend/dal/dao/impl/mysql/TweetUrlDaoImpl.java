@@ -37,7 +37,7 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		tweetUrl.setId(id);
 		tweetUrl.setTweet(Tweet.select((Long) record.get(1)));

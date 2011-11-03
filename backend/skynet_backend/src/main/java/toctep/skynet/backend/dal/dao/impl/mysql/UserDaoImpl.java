@@ -88,7 +88,7 @@ public class UserDaoImpl extends UserDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		user.setId(id);
 		user.setPlace(Place.select((String) record.get(1)));

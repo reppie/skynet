@@ -36,7 +36,7 @@ public class GeoDaoImpl extends GeoDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().select(query, params);
+		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
 		
 		geo.setId(id);
 		geo.setType(GeoType.select((Integer) record.get(1)));
