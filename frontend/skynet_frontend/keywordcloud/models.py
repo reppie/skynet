@@ -11,7 +11,7 @@ class KeywordCloud:
     largest = None
     step = None
     
-    def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=20):
+    def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=50):
         from skynet_frontend.twitter.models import Keyword
         from datetime import datetime, timedelta
         blacklist_query = Keyword.get_all_since(datetime.now() - timedelta(days=1))
