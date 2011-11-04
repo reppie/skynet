@@ -77,7 +77,7 @@ class TwitterRpcMethods(object):
                 
             if filter['type']=='user':
                 search_string = filter['value']
-                tweets = tweets.distinct().filter(Q(keywords__keyword=search_string) | Q(user__name=search_string))
+                tweets = tweets.distinct().filter(Q(keywords__keyword="@"+search_string) | Q(user__screen_name=search_string))
                 
             if filter['type']=='geo':
                 search_string = filter['country']
