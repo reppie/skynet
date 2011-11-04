@@ -136,16 +136,14 @@
 		this.tweetIds = tweetIds || [];
 		this.loaded = 0;
 		this.callback = callback;
-		if(!tweetIds.length){
+		if(tweetIds.length==0){
 			if(callback){
 				callback.call(this);
 			}
-			
 		}
 		
 		for(var index in tweetIds){
 			var tweetId = tweetIds[index];
-			
 			api.Tweet.get(tweetId, function(tweet){
 				if(tweet){
 					tweet.getUser(function(user){
@@ -153,7 +151,9 @@
 							if(tweetList.tweetIds.indexOf(this.id)>-1){
 								tweetList.loaded++;
 								var $tweet = $("#tweetTemplate").tmpl(tweet);
-								$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+								if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
+									$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+								}
 								
 								$tweet.find('time').localize(function () {
 								  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,

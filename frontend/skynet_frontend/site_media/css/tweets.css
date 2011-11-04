@@ -9,6 +9,11 @@ section#tag-cloud{
 	display:none;
 }
 
+.search-result-status{
+	display: none;
+	margin: 10px;
+}
+
 .tweet.loading{
 	display:none;
 	
