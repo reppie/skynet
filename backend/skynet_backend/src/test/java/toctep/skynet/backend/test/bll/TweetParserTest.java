@@ -15,7 +15,6 @@ import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public class TweetParserTest {
 	
@@ -62,7 +61,7 @@ public class TweetParserTest {
 		keyword.save();
 		assertEquals("keyword count: ", 2, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		
-		List<TweetKeyword> kws = indexer.indexTweetKeywords(tweet);
+		List<Keyword> kws = indexer.indexTweetKeywords(tweet);
 		
 		assertEquals("keyword count: ", 6, kws.size());			
 	}

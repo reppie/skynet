@@ -69,12 +69,7 @@ public class TweetKeywordTest extends DomainTest {
 		keyword.setId(1);
 		keyword.setKeyword(word);
 		
-		TweetKeyword tweetKeyword = new TweetKeyword();
-		tweetKeyword.setTweet(tweet);
-		tweetKeyword.setTweetKeywordValue(word);
-		tweetKeyword.setKeyword(keyword);
-		
-		tweet.addKeyword(tweetKeyword);
+		tweet.addKeyword(keyword);
 		
 		tweet.save();
 		

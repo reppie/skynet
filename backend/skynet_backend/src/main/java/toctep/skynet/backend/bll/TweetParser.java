@@ -11,17 +11,13 @@ import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
+import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
-import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
-import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
-import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
-import toctep.skynet.backend.dal.domain.tweet.TweetMention;
-import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.User;
 import twitter4j.GeoLocation;
@@ -262,12 +258,9 @@ public final class TweetParser {
     private void parseContributor(Status status) {
     	if (status.getContributors() != null) {
 	        for(long contributor : status.getContributors()) {
-	            TweetContributor tweetContributor = new TweetContributor();
-	            tweetContributor.setTweet(tweet);
 	            User contributorUser  = new User();
 	            contributorUser.setId(contributor);
-	            tweetContributor.setUser(contributorUser);
-	            tweet.addContributor(tweetContributor);
+	            tweet.addContributor(contributorUser);
 	        }
     	}
     }
@@ -276,29 +269,23 @@ public final class TweetParser {
         for(HashtagEntity hashtagEntity : status.getHashtagEntities()) {
             Hashtag hashtag = new Hashtag();
             hashtag.setText(hashtagEntity.getText());
-            TweetHashtag tweetHashtag = new TweetHashtag();
-            tweetHashtag.setHashtag(hashtag);
-            tweetHashtag.setTweet(tweet);
-            tweet.addHashtag(tweetHashtag);
+            tweet.addHashtag(hashtag);
         } 
     }
     
     private void parseKeyword(Tweet tweet) {
-        List<TweetKeyword> tweetKeywords = new TweetIndexer().indexTweetKeywords(tweet);
+        List<Keyword> keywords = new TweetIndexer().indexTweetKeywords(tweet);
         
-        for(TweetKeyword tweetKeyword : tweetKeywords) {
-        	tweet.addKeyword(tweetKeyword);
+        for(Keyword keyword : keywords) {
+        	tweet.addKeyword(keyword);
         }
     }
     
     private void parseMention(Status status) {
         for(UserMentionEntity mentionEntity : status.getUserMentionEntities()) {
-            TweetMention tweetMention = new TweetMention();
-            tweetMention.setTweet(tweet);
             User mentionedUser = new User();
             mentionedUser.setId(mentionEntity.getId());
-            tweetMention.setUser(mentionedUser);
-            tweet.addMention(tweetMention);
+            tweet.addMention(mentionedUser);
         }
     }
     
@@ -306,10 +293,7 @@ public final class TweetParser {
         for(URLEntity urlEntity : status.getURLEntities()) {
             Url url = new Url();
             url.setId(urlEntity.getDisplayURL());
-            TweetUrl tweetUrl = new TweetUrl();
-            tweetUrl.setTweet(tweet);
-            tweetUrl.setUrl(url);
-            tweet.addUrl(tweetUrl);
+            tweet.addUrl(url);
         }
     }    
 }

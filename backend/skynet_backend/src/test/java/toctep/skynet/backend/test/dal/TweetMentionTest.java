@@ -59,11 +59,7 @@ public class TweetMentionTest extends DomainTest {
 		User user = new User();
 		user.setId(new Long(1));
 		
-		TweetMention tweetMention = new TweetMention();
-		tweetMention.setTweet(tweet);
-		tweetMention.setUser(user);
-		
-		tweet.addMention(tweetMention);
+		tweet.addMention(user);
 		
 		tweet.save();
 		
