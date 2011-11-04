@@ -59,11 +59,7 @@ public class TweetHashtagTest extends DomainTest {
 		Hashtag hashtag = new Hashtag();
 		hashtag.setId(1);
 		
-		TweetHashtag tweetHashtag = new TweetHashtag();
-		tweetHashtag.setTweet(tweet);
-		tweetHashtag.setHashtag(hashtag);
-		
-		tweet.addHashtag(tweetHashtag);
+		tweet.addHashtag(hashtag);
 		
 		tweet.save();
 		

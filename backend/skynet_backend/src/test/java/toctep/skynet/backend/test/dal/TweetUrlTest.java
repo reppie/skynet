@@ -60,11 +60,7 @@ public class TweetUrlTest extends DomainTest {
 		Url url = new Url();
 		url.setId("asd");
 		
-		TweetUrl tweetUrl = new TweetUrl();
-		tweetUrl.setTweet(tweet);
-		tweetUrl.setUrl(url);
-		
-		tweet.addUrl(tweetUrl);
+		tweet.addUrl(url);
 		
 		tweet.save();
 		

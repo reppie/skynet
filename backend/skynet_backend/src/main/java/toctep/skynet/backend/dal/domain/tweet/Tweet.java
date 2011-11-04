@@ -10,12 +10,15 @@ import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
+import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
+import toctep.skynet.backend.dal.domain.keyword.IKeyword;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.sourcetype.ISourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.NullSourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
+import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
@@ -36,29 +39,45 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private IUser user 						= NullUser.getInstance();
 	private String coordinates				= "";
 	
-	private List<TweetContributor> tweetContributors = new ArrayList<TweetContributor>();
-	private List<TweetHashtag> tweetHashtags = new ArrayList<TweetHashtag>();
-	private List<TweetKeyword> tweetKeywords = new ArrayList<TweetKeyword>();
-	private List<TweetMention> tweetMentions = new ArrayList<TweetMention>();
-	private List<TweetUrl> tweetUrls = new ArrayList<TweetUrl>();
+	private List<TweetContributor> tweetContributors 	= new ArrayList<TweetContributor>();
+	private List<TweetHashtag> tweetHashtags 			= new ArrayList<TweetHashtag>();
+	private List<TweetKeyword> tweetKeywords 			= new ArrayList<TweetKeyword>();
+	private List<TweetMention> tweetMentions 			= new ArrayList<TweetMention>();
+	private List<TweetUrl> tweetUrls 					= new ArrayList<TweetUrl>();
 	
-	public void addContributor(TweetContributor tweetContributor) {
+	public void addContributor(IUser contributor) {
+		TweetContributor tweetContributor = new TweetContributor();
+        tweetContributor.setTweet(this);
+        tweetContributor.setUser(contributor);
 		tweetContributors.add(tweetContributor);
 	}
 	
-	public void addHashtag(TweetHashtag tweetHashtag) {
+	public void addHashtag(IHashtag hashtag) {
+		TweetHashtag tweetHashtag = new TweetHashtag();
+        tweetHashtag.setHashtag(hashtag);
+        tweetHashtag.setTweet(this);
 		tweetHashtags.add(tweetHashtag);
 	}
 	
-	public void addKeyword(TweetKeyword tweetKeyword) {
+	public void addKeyword(IKeyword keyword) {
+		TweetKeyword tweetKeyword = new TweetKeyword();   	
+    	tweetKeyword.setKeyword(keyword);
+    	tweetKeyword.setTweetKeywordValue(keyword.getKeyword());
+    	tweetKeyword.setTweet(this);
 		tweetKeywords.add(tweetKeyword);
 	}
 	
-	public void addMention(TweetMention tweetMention) {
+	public void addMention(IUser mention) {
+		TweetMention tweetMention = new TweetMention();
+		tweetMention.setUser(mention);
+        tweetMention.setTweet(this);
 		tweetMentions.add(tweetMention);
 	}
 	
-	public void addUrl(TweetUrl tweetUrl) {
+	public void addUrl(IUrl url) {
+		TweetUrl tweetUrl = new TweetUrl();
+        tweetUrl.setUrl(url);
+        tweetUrl.setTweet(this);
 		tweetUrls.add(tweetUrl);
 	}
 	
