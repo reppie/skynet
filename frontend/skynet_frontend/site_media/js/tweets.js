@@ -256,6 +256,7 @@
  		this.build();
  		
  	}
+ 	
  	api.CrumblePath.prototype.remove = function(filter){
  		var newChain = [];
  		for(var index in this.chain){
@@ -297,17 +298,18 @@
 			return;
 		}
 		$.jsonRPC.request('load_tweet', {
-		  	params: [tweetId],
+	  		params: [tweetId],
 		  	success: function(result){
 		  		var tweet = new api.Tweet(result.result);
 		  		api.cache.set('api.Tweet', tweet);
 		  		callback.call(This, tweet);
 		  },
 		  error: function(result){
-	  		callback.call(This, null);
+	  			callback.call(This, null);
 		  },
 	  	});
 	}
+	
 	api.User.get = function(userId, callback) {
 		var This = this;
 		var user = api.cache.get('api.User', userId);
@@ -316,6 +318,7 @@
 			callback.call(This, user);
 			return;
 		}
+		
 		$.jsonRPC.request('load_user', {
 		  	params: [userId],
 		  	success: function(result){

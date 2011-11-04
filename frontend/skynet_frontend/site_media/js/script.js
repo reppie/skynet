@@ -4,7 +4,6 @@ $(function(){
 	var $searchbar = $search.find("input#searchbar");
 	
 	function getSearchFilters(){
-		
 		var filters = [];
 		var search = $searchbar.val();
 		var query = search.split(' ');
@@ -14,7 +13,7 @@ $(function(){
 				var filter = null;
 				if(value.substring(0,1)=='@'){
 					filter = new api.filters.User(value.substring(1));
-				} if(value.substring(0,1)=='^'){
+				} else if(value.substring(0,1)=='^'){
 					filter = new api.filters.Geo(value.substring(1), "NL", value.substring(1));
 				} else {
 					filter = new api.filters.Keyword(value);
@@ -26,7 +25,6 @@ $(function(){
 	}
 	
 	function getFilters(){
-				
 		var searchFilters = getSearchFilters();
 		var filters = [].concat(crumblePath.path(), searchFilters);
 		
@@ -41,16 +39,13 @@ $(function(){
  				$("section#region-name").find("p#current-region").html(filter.label);
  			}
 		}
-		
 	}
 	
 	var $search = $("form#keyword-search-form").submit(function(){
 		
 		$(".main-tag-cloud").hide();
 		$searchbar.addClass("loading");
-		
 		updateRegion();
-		
 		var filters = getFilters();
 		$(".search-result-status").hide();
 		api.Tweet.search(filters, function(twitterIds, cloud){
@@ -59,7 +54,6 @@ $(function(){
 				$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
 				$searchbar.removeClass("loading");
 			});
-			
 			$(".mini-tag-cloud").TagCloud(cloud);
 			$("section#tag-cloud").show();
 			
@@ -71,7 +65,6 @@ $(function(){
 		
 		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
-		
 		var keyword = $(this).data("keyword");
 		var filter = new api.filters.Keyword(keyword);
 		crumblePath.add(filter);
@@ -83,7 +76,6 @@ $(function(){
 				$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
 				$searchbar.removeClass("loading");
 			});
-			
 			$(".mini-tag-cloud").TagCloud(cloud);
 			$("section#tag-cloud").show();
 		});	
@@ -98,12 +90,10 @@ $(function(){
 		}
 		updateRegion();
 		$searchbar.val("");
-		
 	});
 	$(".crumble-path a").live('click', function(){
 		
 		var index = $(this).data("index");
-		
 		var clicked = crumblePath.path()[index];
 		crumblePath.removeAfter(clicked);
 		console.log(index);
@@ -121,10 +111,8 @@ $(function(){
 	});
 });
 
-
 api.cloud(function(cloud){
 	$(".main-tag-cloud").TagCloud(cloud);
 	$("section#tag-cloud").hide();
 });
-
 
