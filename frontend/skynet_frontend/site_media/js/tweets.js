@@ -18,7 +18,6 @@
 		'CrumblePath': function(element){
 			this.$path = element;
 			this.chain = [];
-			
 			var nl = new api.filters.Geo("Nederland", "NL", null);
 			nl.removable = false;
 			this.add(nl);
@@ -89,11 +88,11 @@
 		}
 	});
 	
-	Array.prototype.shuffle = function() {
+	var shuffle = function(array) {
 		var s = [];
-		while (this.length) s.push(this.splice(Math.random() * this.length, 1)[0]);
-		while (s.length) this.push(s.pop());
-		return this;
+		while (array.length) s.push(array.splice(Math.random() * array.length, 1)[0]);
+		while (s.length) array.push(s.pop());
+		return array;
 	}
 	
 	var tweetListKey = "__TweetList";
@@ -120,7 +119,7 @@
     
     $.fn.TagCloud = function(cloud) {
     	this.empty();
-    	cloud = cloud.shuffle();
+    	shuffle(cloud);
     	for(var index in cloud){
 			var tag = cloud[index];
 	    	var $tag = $("#tagTemplate").tmpl(tag);
@@ -184,12 +183,9 @@
 							}
 						}
 					});
-						
 				}
 			});
-			
 		}
-		
 	}
 	
 	$.jsonRPC.setup({
@@ -236,8 +232,8 @@
  	}
  	api.CrumblePath.prototype.add = function(filter){
  		for(var index in this.chain){
- 			var f = this.chain[index];
- 			if(filter.equals(f)){
+ 			var item = this.chain[index];
+ 			if(filter.equals(item)){
  				return;
  			}
  		}
