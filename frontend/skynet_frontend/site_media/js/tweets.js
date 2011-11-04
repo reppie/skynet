@@ -88,6 +88,14 @@
 			}
 		}
 	});
+	
+	Array.prototype.shuffle = function() {
+		var s = [];
+		while (this.length) s.push(this.splice(Math.random() * this.length, 1)[0]);
+		while (s.length) this.push(s.pop());
+		return this;
+	}
+	
 	var tweetListKey = "__TweetList";
 	$.fn.TweetList = function(tweetIds, callback) {
 		var tweetList = this.data(tweetListKey);
@@ -112,6 +120,7 @@
     
     $.fn.TagCloud = function(cloud) {
     	this.empty();
+    	cloud = cloud.shuffle();
     	for(var index in cloud){
 			var tag = cloud[index];
 	    	var $tag = $("#tagTemplate").tmpl(tag);
