@@ -23,12 +23,6 @@ public class TweetRetriever implements Runnable {
 	}
 	
 	private void initialize() {
-<<<<<<< HEAD
-		// Disable twitter4j logging
-		//System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory"); 
-		
-=======
->>>>>>> c5c2bfb99cb3b6f949f1b906e9b4156d62133e67
 		tweetParser = TweetParser.getInstance();
 		
 		StatusListener statusListener = new StatusListener() {
