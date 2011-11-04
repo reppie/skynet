@@ -20,7 +20,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 		
 		Param[] params = new Param[] {
 			new Param(tweetHashtag.getTweet().getId(), Types.BIGINT),
-			new Param(tweetHashtag.getHashtag().getId(), Types.BIGINT)
+			new Param(tweetHashtag.getHashtag().getId(), Types.INTEGER)
 		};
 			
 		int id = MySqlUtil.getInstance().insert(query, params);
