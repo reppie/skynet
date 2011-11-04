@@ -2,7 +2,10 @@ package toctep.skynet.backend.bll;
 
 import java.util.regex.Pattern;
 
-public class TweetSplitter {
+public final class TweetSplitter {
+	
+	private TweetSplitter() { }
+	
 	private static final Pattern SINGLE_SPACE_REGEX = Pattern.compile("\\s");
 	
 	public static String[] splitTweet(String tweetBody) {

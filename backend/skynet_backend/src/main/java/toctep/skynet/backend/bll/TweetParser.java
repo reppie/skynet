@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.List;
 
+import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.country.Country;
@@ -13,8 +14,8 @@ import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
-import toctep.skynet.backend.dal.domain.tweet.SourceType;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
@@ -43,8 +44,6 @@ public final class TweetParser {
 	private Place place;
 	private User user;
 	private Tweet tweet;
-	private User inReplyToUser;
-	private Tweet inReplyToTweet;
 	
 	private static TweetParser instance;
 	
@@ -77,7 +76,7 @@ public final class TweetParser {
 			parseMention(status);
 			parseKeyword(tweet);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			Skynet.LOG.error(e.getMessage(), e);
 		}
 		
 		tweet.save();
@@ -244,11 +243,11 @@ public final class TweetParser {
         tweet.setTruncated(status.isTruncated());
         tweet.setFavorited(status.isFavorited());
         
-        inReplyToTweet = new Tweet();
+        Tweet inReplyToTweet = new Tweet();
         inReplyToTweet.setId(status.getInReplyToStatusId());
         tweet.setInReplyToTweetTwitter(inReplyToTweet);
         
-        inReplyToUser = new User();
+        User inReplyToUser = new User();
         inReplyToUser.setId(status.getInReplyToUserId());       
         tweet.setInReplyToUserTwitter(inReplyToUser);
         

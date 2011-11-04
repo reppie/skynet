@@ -1,7 +1,7 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
-import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.PlaceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
@@ -34,10 +34,10 @@ public class PlaceTypeDaoImpl extends PlaceTypeDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		placeType.setId(id);
-		placeType.setText((String) record.get(1));
+		placeType.setText((String) row.get("text"));
 		
 		return placeType;
 	}

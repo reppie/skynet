@@ -15,15 +15,15 @@ public abstract class Domain<T> implements IDomain<T> {
 		setDao();
 	}
 	
-	public boolean isDirty() {
+	public final boolean isDirty() {
 		return dirty;
 	}
 	
-	public void setDirty() {
+	public final void setDirty() {
 		dirty = true;
 	}
 	
-	public void clearDirty() {
+	public final void clearDirty() {
 		dirty = false;
 	}
 	
@@ -34,6 +34,8 @@ public abstract class Domain<T> implements IDomain<T> {
 	public void setId(T id) {
 		this.id = id;
 	}
+	
+	public abstract void setDao();
 	
 	public void save() {
 		if (isDirty()) {
@@ -49,7 +51,5 @@ public abstract class Domain<T> implements IDomain<T> {
 	public void delete() {
 		dao.delete(this);
 	}
-	
-	public abstract void setDao();
 
 }

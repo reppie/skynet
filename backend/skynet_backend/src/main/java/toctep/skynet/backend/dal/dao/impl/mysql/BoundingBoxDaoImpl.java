@@ -2,7 +2,6 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
@@ -38,11 +37,11 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		boundingBox.setId(id);
-		boundingBox.setType(BoundingBoxType.select((Integer) record.get(1)));
-		boundingBox.setCoordinates((String) record.get(2));
+		boundingBox.setType(BoundingBoxType.select((Integer) row.get("bounding_box_type_id")));
+		boundingBox.setCoordinates((String) row.get("coordinates"));
 		
 		return boundingBox;
 	}

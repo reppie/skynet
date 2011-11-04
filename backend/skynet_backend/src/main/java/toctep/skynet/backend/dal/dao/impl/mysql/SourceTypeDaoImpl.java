@@ -1,11 +1,11 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
-import java.util.List;
+import java.util.Map;
 
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.tweet.SourceType;
+import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 
 public class SourceTypeDaoImpl extends SourceTypeDao {
 
@@ -34,10 +34,10 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 			new Param(id, Types.BIGINT)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		sourceType.setId(id);	
-		sourceType.setText((String) record.get(1));
+		sourceType.setText((String) row.get("text"));
 		
 		return sourceType;
 	}

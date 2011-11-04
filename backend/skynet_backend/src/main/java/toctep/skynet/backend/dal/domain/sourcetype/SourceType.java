@@ -1,4 +1,4 @@
-package toctep.skynet.backend.dal.domain.tweet;
+package toctep.skynet.backend.dal.domain.sourcetype;
 
 import toctep.skynet.backend.dal.dao.SourceTypeDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;

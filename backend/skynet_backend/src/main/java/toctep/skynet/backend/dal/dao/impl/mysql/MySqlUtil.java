@@ -5,16 +5,18 @@ import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
-import toctep.skynet.backend.Main;
+import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -51,7 +53,7 @@ public final class MySqlUtil {
 	}
 	
 	public static MySqlUtil getInstance() {
-		return MySqlUtil.getInstance(Main.DB_PROPERTIES);
+		return MySqlUtil.getInstance(Skynet.DB_CONFIG);
 	}
 	
 	private String properties;
@@ -69,35 +71,37 @@ public final class MySqlUtil {
 	private MySqlUtil(String properties) {
 		this.properties = properties;
 		
-		try {
-			initialize();
-			connect();
-		} catch (InvalidFileFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		initialize();
+		connect();
 	}
 	
-	private void initialize() throws InvalidFileFormatException, IOException {
-		ini = new Wini(new File(properties));
-		
-		driver = getIniValue("driver");
-        host = getIniValue("host");
-        name = getIniValue("name");
-        user = getIniValue("user");
-        pass = getIniValue("pass");
+	private void initialize() {
+		try {
+			ini = new Wini(new File(properties));
+			
+			driver = getIniValue("driver");
+	        host = getIniValue("host");
+	        name = getIniValue("name");
+	        user = getIniValue("user");
+	        pass = getIniValue("pass");
+		} catch (InvalidFileFormatException e) {
+			Skynet.LOG.error(e.getMessage(), e);
+		} catch (IOException e) {
+			Skynet.LOG.error(e.getMessage(), e);
+		}
 	}
 	
 	private String getIniValue(String optionName) {
 		return ini.get("jdbc", optionName, String.class);
 	}
 	
-	private void connect() throws SQLException {
-		String url = "jdbc:" + driver + "://" + host + "/" + name;
-		conn = (Connection) DriverManager.getConnection(url, user, pass);
+	private void connect() {
+		try {
+			String url = "jdbc:" + driver + "://" + host + "/" + name;
+			conn = (Connection) DriverManager.getConnection(url, user, pass);
+		} catch (SQLException e) {
+			Skynet.LOG.error(e.getMessage(), e);
+		}
 	}
 	
 	public Connection getConnection() {
@@ -118,22 +122,68 @@ public final class MySqlUtil {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 		
 		return result;
 	}
+		
+	public Map<String, Object> selectRow(String query, Param[] params) {
+		return this.select(query, params).get(0);
+	}
 	
-	public int insert(String query, Param[] params) {
+	public List<Map<String, Object>> select(String query, Param[] params) {
+		List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			for (int i = 0; i < params.length; i++) {
+				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			ResultSetMetaData rsmd = rs.getMetaData();
+		    int numColumns = rsmd.getColumnCount();
+			
+			while (rs.next()) {
+				Map<String, Object> row = new LinkedHashMap<String, Object>();
+				for (int i = 0; i < numColumns; ++i) {
+					String column = rsmd.getColumnName(i+1);
+					Object value = rs.getObject(i+1);
+					row.put(column, value);
+				}
+				rows.add(row);
+			}
+		} catch (SQLException e) {
+			Skynet.LOG.error(e.getMessage(), e);
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				Skynet.LOG.error(e.getMessage(), e);
+			}
+		}
+		
+		return rows;
+	}
+	
+	public int insert(String query, Param[] params) {
 		int id = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
 		try {
 			pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -149,90 +199,17 @@ public final class MySqlUtil {
 				id = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 		
 		return id;
-	}
-	
-	public List<Object> selectRecord(String query, Param[] params) {
-		List<Object> record = new ArrayList<Object>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
-			}
-			
-			rs = pstmt.executeQuery();
-			
-			rs.first();
-			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                Object value = rs.getObject(i);
-                record.add(value);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return record;
-	}
-	
-	public List<List<Object>> select(String query, Param[] params) {
-		List<List<Object>> records = new ArrayList<List<Object>>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			
-			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i].getValue(), params[i].getType());
-			}
-			
-			rs = pstmt.executeQuery();
-			
-			rs.beforeFirst();
-			
-			while (rs.next()) {
-				List<Object> record = new ArrayList<Object>();
-				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-	                Object value = rs.getObject(i);
-	                record.add(value);
-				}
-				records.add(record);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return records;
 	}
 	
 	public int update(String query, Param[] params) {
@@ -267,7 +244,7 @@ public final class MySqlUtil {
 			pstmt = conn.prepareStatement(query);
 			for (int i = 0; i < params.size(); i++) {
 				String key = params.keySet().toArray()[i].toString();
-				pstmt.setObject(i + 1, params.get(key).getValue(), params.get(key).getType());
+				pstmt.setObject(i+1, params.get(key).getValue(), params.get(key).getType());
 			}
 			rs = pstmt.executeQuery();
 			
@@ -279,13 +256,13 @@ public final class MySqlUtil {
 				exists = true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 
@@ -304,13 +281,13 @@ public final class MySqlUtil {
 			rs.next();
 			count = rs.getInt(1);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				stmt.close();
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 		
@@ -322,54 +299,65 @@ public final class MySqlUtil {
 		try {
 			conn.setAutoCommit(false);
 			
-			pstmt = conn.prepareStatement("set foreign_key_checks=0");							pstmt.execute();
+			pstmt = conn.prepareStatement("set foreign_key_checks=0");
+			pstmt.execute();
 			
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME); 		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetKeywordDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + UserDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + PlaceDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + CountryDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + GeoDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + GeoTypeDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + HashtagDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + LanguageDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + PlaceTypeDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + SourceTypeDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TimeZoneDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetContributorDao.TABLE_NAME);	pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetHashtagDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetMentionDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + TweetUrlDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + UrlDao.TABLE_NAME);				pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + KeywordDao.TABLE_NAME);			pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + BoundingBoxDao.TABLE_NAME);		pstmt.execute();
-			pstmt = conn.prepareStatement("TRUNCATE TABLE " + BoundingBoxTypeDao.TABLE_NAME);	pstmt.execute();
+			this.truncateTable(BoundingBoxDao.TABLE_NAME);
+			this.truncateTable(BoundingBoxTypeDao.TABLE_NAME);
+			this.truncateTable(CountryDao.TABLE_NAME);
+			this.truncateTable(GeoDao.TABLE_NAME);
+			this.truncateTable(GeoTypeDao.TABLE_NAME);
+			this.truncateTable(HashtagDao.TABLE_NAME);
+			this.truncateTable(KeywordDao.TABLE_NAME);
+			this.truncateTable(LanguageDao.TABLE_NAME);
+			this.truncateTable(PlaceDao.TABLE_NAME);
+			this.truncateTable(PlaceTypeDao.TABLE_NAME);
+			this.truncateTable(SourceTypeDao.TABLE_NAME);
+			this.truncateTable(TimeZoneDao.TABLE_NAME);
+			this.truncateTable(TweetContributorDao.TABLE_NAME);
+			this.truncateTable(TweetDao.TABLE_NAME);
+			this.truncateTable(TweetHashtagDao.TABLE_NAME);
+			this.truncateTable(TweetKeywordDao.TABLE_NAME);
+			this.truncateTable(TweetMentionDao.TABLE_NAME);
+			this.truncateTable(TweetUrlDao.TABLE_NAME);
+			this.truncateTable(UrlDao.TABLE_NAME);
+			this.truncateTable(UserDao.TABLE_NAME);
 			
-			pstmt = conn.prepareStatement("set foreign_key_checks=1");							pstmt.execute();
+			pstmt = conn.prepareStatement("set foreign_key_checks=1");
+			pstmt.execute();
 			
 			conn.commit();
 		} catch (SQLException e) {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				Skynet.LOG.error(e1.getMessage(), e);
 			}
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 				conn.setAutoCommit(true);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 	}
 	
-	public static String escape(Object str) {
-		if(str instanceof String) {
-			str = "\"" + (str != null ? ((String) str).replace("\"", "\\\"") : "") + "\"";
+	public void truncateTable(String tableName) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("TRUNCATE TABLE " + tableName);
+			pstmt.execute();
+		} catch (SQLException e) {
+			Skynet.LOG.error(e.getMessage(), e);
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				Skynet.LOG.error(e.getMessage(), e);
+			}
 		}
-		return (String) str;
 	}
 
 }

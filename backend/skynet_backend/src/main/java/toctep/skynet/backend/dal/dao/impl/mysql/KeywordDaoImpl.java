@@ -3,11 +3,12 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.List;
+import java.util.Map;
 
+import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.tweet.Keyword;
+import toctep.skynet.backend.dal.domain.keyword.Keyword;
 
 import com.mysql.jdbc.Statement;
 
@@ -38,10 +39,10 @@ public class KeywordDaoImpl extends KeywordDao {
 			new Param(id, Types.INTEGER)
 		};
 		
-		List<Object> record = MySqlUtil.getInstance().selectRecord(query, params);
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
 		
 		keyword.setId(id);
-		keyword.setKeyword((String) record.get(1));
+		keyword.setKeyword((String) row.get("keyword"));
 		
 		return keyword;
 	}
@@ -63,13 +64,13 @@ public class KeywordDaoImpl extends KeywordDao {
 			rs.first();
 			keyword.setId(rs.getInt("id"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Skynet.LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				stmt.close();
 				rs.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
 	}

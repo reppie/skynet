@@ -238,7 +238,7 @@ public class UserTest extends DomainTest {
 		assertEquals(postUser.getName(), user.getName());
 		assertEquals(postUser.getProfileSidebarBorderColor(), user.getProfileSidebarBorderColor());
 		assertEquals(postUser.getProfileBackgroundColor(), user.getProfileBackgroundColor());
-		assertEquals(postUser.getCreatedAt().getDate(), user.getCreatedAt().getDate());
+		assertEquals(postUser.getCreatedAt().getTime(), user.getCreatedAt().getTime());
 		assertTrue(postUser.isDefaultProfileImage() == user.isDefaultProfileImage());
 		assertEquals(postUser.getFollowersCount(), user.getFollowersCount());
 		assertTrue(postUser.isGeoEnabled() == user.isGeoEnabled());
