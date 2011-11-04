@@ -77,27 +77,27 @@ public class TweetDaoImpl extends TweetDao {
 		
 		List<TweetContributor> tweetContributors = TweetContributor.select(tweet);
 		for (TweetContributor tweetContributor : tweetContributors) {
-			tweet.addContributor(tweetContributor);
+			tweet.addContributor(tweetContributor.getUser());
 		}
 		
 		List<TweetHashtag> tweetHashtags = TweetHashtag.select(tweet);
 		for (TweetHashtag tweetHashtag : tweetHashtags) {
-			tweet.addHashtag(tweetHashtag);
+			tweet.addHashtag(tweetHashtag.getHashtag());
 		}
 		
 		List<TweetKeyword> tweetKeywords = TweetKeyword.select(tweet);
 		for (TweetKeyword tweetKeyword : tweetKeywords) {
-			tweet.addKeyword(tweetKeyword);
+			tweet.addKeyword(tweetKeyword.getKeyword());
 		}
 		
 		List<TweetMention> tweetMentions = TweetMention.select(tweet);
 		for (TweetMention tweetMention : tweetMentions) {
-			tweet.addMention(tweetMention);
+			tweet.addMention(tweetMention.getUser());
 		}
 		
 		List<TweetUrl> tweetUrls = TweetUrl.select(tweet);
 		for (TweetUrl tweetUrl : tweetUrls) {
-			tweet.addUrl(tweetUrl);
+			tweet.addUrl(tweetUrl.getUrl());
 		}
 		
 		return tweet;

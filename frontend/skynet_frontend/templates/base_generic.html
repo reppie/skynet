@@ -42,10 +42,11 @@
 							value="{{ search_string }}" 
 						{% endif %}
 						/>
-						<input id="crumblebutton" type="submit" value="{% trans '⇧' %}" />
+						<input id="crumblebutton" type="button" title="Bewaar" value="{% trans '⇧' %}" />
 						<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
 					</form>
  				{% endblock %}
+ 				<div class="search-result-status"></div>
  				
  				<div class="tag-cloud main-tag-cloud"></div>
  				

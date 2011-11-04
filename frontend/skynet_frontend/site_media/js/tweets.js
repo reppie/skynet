@@ -18,7 +18,6 @@
 		'CrumblePath': function(element){
 			this.$path = element;
 			this.chain = [];
-			
 			var nl = new api.filters.Geo("Nederland", "NL", null);
 			nl.removable = false;
 			this.add(nl);
@@ -89,11 +88,11 @@
 		}
 	});
 	
-	Array.prototype.shuffle = function() {
+	var shuffle = function(array) {
 		var s = [];
-		while (this.length) s.push(this.splice(Math.random() * this.length, 1)[0]);
-		while (s.length) this.push(s.pop());
-		return this;
+		while (array.length) s.push(array.splice(Math.random() * array.length, 1)[0]);
+		while (s.length) array.push(s.pop());
+		return array;
 	}
 	
 	var tweetListKey = "__TweetList";
@@ -120,7 +119,7 @@
     
     $.fn.TagCloud = function(cloud) {
     	this.empty();
-    	cloud = cloud.shuffle();
+    	shuffle(cloud);
     	for(var index in cloud){
 			var tag = cloud[index];
 	    	var $tag = $("#tagTemplate").tmpl(tag);
@@ -136,16 +135,14 @@
 		this.tweetIds = tweetIds || [];
 		this.loaded = 0;
 		this.callback = callback;
-		if(!tweetIds.length){
+		if(tweetIds.length==0){
 			if(callback){
 				callback.call(this);
 			}
-			
 		}
 		
 		for(var index in tweetIds){
 			var tweetId = tweetIds[index];
-			
 			api.Tweet.get(tweetId, function(tweet){
 				if(tweet){
 					tweet.getUser(function(user){
@@ -153,7 +150,9 @@
 							if(tweetList.tweetIds.indexOf(this.id)>-1){
 								tweetList.loaded++;
 								var $tweet = $("#tweetTemplate").tmpl(tweet);
-								$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+								if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
+									$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+								}
 								
 								$tweet.find('time').localize(function () {
 								  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
@@ -184,12 +183,9 @@
 							}
 						}
 					});
-						
 				}
 			});
-			
 		}
-		
 	}
 	
 	$.jsonRPC.setup({
@@ -236,8 +232,8 @@
  	}
  	api.CrumblePath.prototype.add = function(filter){
  		for(var index in this.chain){
- 			var f = this.chain[index];
- 			if(filter.equals(f)){
+ 			var item = this.chain[index];
+ 			if(filter.equals(item)){
  				return;
  			}
  		}

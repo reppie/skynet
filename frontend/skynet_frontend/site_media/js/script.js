@@ -1,12 +1,11 @@
 var crumblePath = $(".crumble-path").CrumblePath();
 $(function(){
+	var $search = $("form#keyword-search-form");
+	var $searchbar = $search.find("input#searchbar");
 	
-	function getFilters(){
+	function getSearchFilters(){
 		
-		
-		var $searchbar = $("form#keyword-search-form").find("input#searchbar");
-		
-		var filters = [].concat(crumblePath.path());
+		var filters = [];
 		var search = $searchbar.val();
 		var query = search.split(' ');
 		for(var index in query){
@@ -26,13 +25,15 @@ $(function(){
 		return filters;
 	}
 	
+	function getFilters(){
+				
+		var searchFilters = getSearchFilters();
+		var filters = [].concat(crumblePath.path(), searchFilters);
+		
+		return filters;
+	}
 	
-	var $search = $("form#keyword-search-form").submit(function(){
-		
-		$(".main-tag-cloud").hide();
-		var $searchbar = $(this).find("input#searchbar");
-		$searchbar.addClass("loading");
-		
+	function updateRegion(){
 		var filters = getFilters();
 		for (var index in filters){
 			var filter = filters[index];
@@ -41,8 +42,21 @@ $(function(){
  			}
 		}
 		
+	}
+	
+	var $search = $("form#keyword-search-form").submit(function(){
+		
+		$(".main-tag-cloud").hide();
+		$searchbar.addClass("loading");
+		
+		updateRegion();
+		
+		var filters = getFilters();
+		$(".search-result-status").hide();
 		api.Tweet.search(filters, function(twitterIds, cloud){
+			
 			$(".tweets").TweetList(twitterIds, function(){
+				$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
 				$searchbar.removeClass("loading");
 			});
 			
@@ -62,9 +76,11 @@ $(function(){
 		var filter = new api.filters.Keyword(keyword);
 		crumblePath.add(filter);
 		var filters = crumblePath.path();
-		
+		$(".search-result-status").hide();
+		updateRegion();
 		api.Tweet.search(filters, function(twitterIds, cloud){
 			$(".tweets").TweetList(twitterIds, function(){
+				$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
 				$searchbar.removeClass("loading");
 			});
 			
@@ -74,6 +90,16 @@ $(function(){
 		$search.submit();
 		return false;
 	});
+	$("input#crumblebutton").click(function(){
+		var filters = getSearchFilters();
+		for (var index in filters){
+			var filter = filters[index];
+			crumblePath.add(filter);
+		}
+		updateRegion();
+		$searchbar.val("");
+		
+	});
 	$(".crumble-path a").live('click', function(){
 		
 		var index = $(this).data("index");
@@ -82,21 +108,15 @@ $(function(){
 		crumblePath.removeAfter(clicked);
 		console.log(index);
 		if(index==0){
-			$search.find("input#searchbar").val("");
+			$searchbar.val("");
 			$(".tweets").hide().empty();
 			$("section#tag-cloud").hide();
 			$(".main-tag-cloud").show();
+			$(".search-result-status").hide();
 		} else {
 			$search.submit();
 		}
-		
-		var filters = getFilters();
-		for (var index in filters){
-			var filter = filters[index];
-			if(filter.type=='geo'){
- 				$("section#region-name").find("p#current-region").html(filter.label);
- 			}
-		}
+		updateRegion();
 		return false;
 	});
 });
