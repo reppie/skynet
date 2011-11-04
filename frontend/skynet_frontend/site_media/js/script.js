@@ -29,7 +29,7 @@ $(function(){
 	
 	var $search = $("form#keyword-search-form").submit(function(){
 		
-		
+		$(".main-tag-cloud").hide();
 		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
 		
