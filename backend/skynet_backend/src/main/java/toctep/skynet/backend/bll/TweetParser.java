@@ -185,7 +185,22 @@ public final class TweetParser {
         user.setDefaultProfileImage(false); //Twitter4j has no support for this?
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
-        
+        user.setFollowRequestSent(userStatus.isFollowRequestSent());
+        user.setNotifications(0); //Twitter4j has no support for this?
+        user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
+        user.setFriendsCount(userStatus.getFriendsCount());
+        user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
+        user.setScreenName(userStatus.getScreenName());
+        user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
+        user.setTranslator(userStatus.isTranslator());
+        user.setListedCount(userStatus.getListedCount());   
+        user.setPlace(place);
+        user.setLanguage(language);
+        user.setTimeZone(timeZone);
+        parseUserUrls(userStatus);
+    }
+    
+    private void parseUserUrls(twitter4j.User userStatus) {
         if(userStatus.getProfileBackgroundImageUrl() != null) {
             Url profileBgUrl = new Url();
         	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
@@ -197,14 +212,6 @@ public final class TweetParser {
         	profileBgUrlHttps.setId(userStatus.getProfileBackgroundImageUrlHttps());
             user.setProfileBackgroundImageUrlHttps(profileBgUrlHttps);
         }
-        
-        user.setFollowRequestSent(userStatus.isFollowRequestSent());
-        user.setNotifications(0); //Twitter4j has no support for this?
-        user.setProfileUseBackgroundImage(userStatus.isProfileUseBackgroundImage());
-        user.setFriendsCount(userStatus.getFriendsCount());
-        user.setProfileSideBarFillColor(userStatus.getProfileSidebarFillColor());
-        user.setScreenName(userStatus.getScreenName());
-        
         if(userStatus.getProfileImageURL().toExternalForm() != null) {
             Url profileImageUrl = new Url();
         	profileImageUrl.setId(userStatus.getProfileImageURL().toExternalForm());
@@ -215,24 +222,15 @@ public final class TweetParser {
             Url profileImageUrlHttps = new Url();
         	profileImageUrlHttps.setId(userStatus.getProfileImageUrlHttps().toExternalForm());
         	user.setProfileImageUrlHttps(profileImageUrlHttps);
-        } 
-        
-        user.setShowAllInlineMedia(userStatus.isShowAllInlineMedia());
-        user.setTranslator(userStatus.isTranslator());
-        user.setListedCount(userStatus.getListedCount());   
-        user.setPlace(place);
-        user.setLanguage(language);
-        
+        }
         if (userStatus.getURL() != null) {
             Url userUrl = new Url();
         	userUrl.setId(userStatus.getURL().toExternalForm());
             user.setUrl(userUrl);
-        }
-        
-        user.setTimeZone(timeZone);
-    }
-    
-    private void parseTweet(Status status) {
+        }        
+	}
+
+	private void parseTweet(Status status) {
         tweet = new Tweet();
         tweet.setId(status.getId());
         tweet.setText(status.getText());
