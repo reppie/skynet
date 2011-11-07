@@ -1,6 +1,5 @@
 package toctep.skynet.backend.dal.domain.keyword;
 
-import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;

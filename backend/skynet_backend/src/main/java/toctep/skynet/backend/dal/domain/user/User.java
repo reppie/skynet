@@ -2,7 +2,6 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Timestamp;
 
-import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
