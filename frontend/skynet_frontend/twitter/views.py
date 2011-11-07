@@ -39,7 +39,7 @@ class TwitterRpcMethods(object):
     @jsonremote(service)
     def search_tweets(filters):
         tweets = TwitterRpcMethods.do_query(filters)
-        
+                
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords)
