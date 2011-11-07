@@ -8,5 +8,7 @@ public abstract class HashtagDao extends Dao<Integer> {
 	protected void setTableName() {
 		this.tableName = TABLE_NAME;
 	}
+	
+	public abstract Integer select(String text);
 
 }
