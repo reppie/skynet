@@ -20,5 +20,7 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.2-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib/langdetect/langdetect.jar"/>
+	<classpathentry kind="lib" path="lib/langdetect/jsonic-1.2.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

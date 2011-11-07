@@ -54,8 +54,11 @@ public final class TweetParser {
 	
 	public void parse(Status status) {
 		try {
-			parseBoundingBoxType(status.getPlace());
-			parseBoundingBox(status.getPlace());
+			if (status.getPlace() != null) {
+				parseBoundingBoxType(status.getPlace());
+				parseBoundingBox(status.getPlace());
+			}	
+			
 			parseCountry(status.getPlace());
 			parseGeoType(status.getPlace());
 			parseGeo(status.getPlace());
