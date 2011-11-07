@@ -71,20 +71,21 @@ class TwitterRpcMethods(object):
         tweets = Tweet.objects.all()
         
         for filter in filters:
+            value = filter['value']
             if filter['type']=='keyword':
-                search_string = filter['value']
-                tweets = tweets.distinct().filter(keywords__keyword=search_string)
+                tweets = tweets.distinct().filter(keywords__keyword=value)
                 
             if filter['type']=='user':
-                search_string = filter['value']
-                tweets = tweets.distinct().filter(Q(keywords__keyword="@"+search_string) | Q(user__screen_name=search_string))
+                tweets = tweets.distinct().filter(Q(keywords__keyword="@"+value) | Q(user__screen_name=value))
+            
+            if filter['type']=='tag':
+                tweets = tweets.distinct().filter(hashtags__text=value)
                 
             if filter['type']=='geo':
-                search_string = filter['country']
-                tweets = tweets.distinct().filter(place__country=search_string)
+                country = filter['country']
+                tweets = tweets.distinct().filter(place__country=country)
                 if filter['value']:
-                    search_string = filter['value']
-                    tweets = tweets.distinct().filter(place__name=search_string)
+                    tweets = tweets.distinct().filter(place__name=value)
         
         return tweets        
             

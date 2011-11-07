@@ -78,6 +78,10 @@
 				api.filters.Base.prototype.constructor.call(this, 'user', "@" + user, user);
 				
 			},
+			'Tag': function(tag){
+				api.filters.Base.prototype.constructor.call(this, 'tag', "#" + tag, tag);
+				
+			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
 				this.equals = function(filter){
