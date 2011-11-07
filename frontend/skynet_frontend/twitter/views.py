@@ -39,10 +39,18 @@ class TwitterRpcMethods(object):
     @jsonremote(service)
     def search_tweets(filters):
         tweets = TwitterRpcMethods.do_query(filters)
+            
+        exclude = []    
+        for filter in filters:
+            if filter['type'] == 'keyword':
+                exclude.append(filter['value'])
+            elif filter['type'] == 'user':
+                print filter
+                exclude.append('@' + filter['value'])
         
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
-        cloud = KeywordCloud(keywords)
+        cloud = KeywordCloud(keywords, exclude=exclude)
             
         return {
             'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids[:20]],

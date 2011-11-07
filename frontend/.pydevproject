@@ -9,6 +9,6 @@
 <value>skynet_frontend/manage.py</value>
 </pydev_variables_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
-<path>/frontend</path>
+<path>/skynet_frontend</path>
 </pydev_pathproperty>
 </pydev_project>
