@@ -1,4 +1,6 @@
 from django.db import models
+from skynet_frontend.twitter.models import Keyword
+from datetime import datetime, timedelta
 from math import log
 """
 This class is used to generate a keywordcloud for the website. It receives the minimum and maximum font size that should be used and 
@@ -11,16 +13,13 @@ class KeywordCloud:
     largest = None
     step = None
     
-    def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=50):
-        from skynet_frontend.twitter.models import Keyword
-        from datetime import datetime, timedelta
+    def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=50, exclude=[]):
         blacklist_query = Keyword.get_all_since(datetime.now() - timedelta(days=1))
         blacklist_query = blacklist_query[:len(blacklist_query)/100*3]
-        blacklist = []
         for item in blacklist_query:
-            blacklist.append(item['keyword'])
-            
-        query_set = query_set.all().exclude(keyword__in=blacklist)[:num_keywords]
+            exclude.append(item['keyword'])
+
+        query_set = query_set.all().exclude(keyword__in=exclude)[:num_keywords]
         self.items = self.__generate(query_set, min_font_size, max_font_size)
 
     def __generate(self, query_set, min_font_size, max_font_size):
@@ -86,7 +85,7 @@ class KeywordCloud:
 """
 This class is used to store the font sizes of the given keywords in a cloud
 """
-class KeywordFontSize(models.Model):
+class KeywordFontSize():
     keyword = None
     font_scale = None
     
@@ -101,8 +100,4 @@ class KeywordFontSize(models.Model):
         return {
             'keyword':self.keyword,
             'font_scale':self.font_scale,
-                
         }
-    
-    class Meta:
-        managed = False
