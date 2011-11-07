@@ -3,7 +3,7 @@ package toctep.skynet.backend;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import toctep.skynet.backend.bll.TweetRetriever;
+import toctep.skynet.backend.bll.GeoTaggedTweetRetriever;
 
 public final class Skynet {
 
@@ -17,8 +17,8 @@ public final class Skynet {
 	
 	public static void main(String[] args) {
 		PropertyConfigurator.configure(LOG4J_CONFIG);
-				
-		new Thread(new TweetRetriever()).start();
+		
+		new Thread(new GeoTaggedTweetRetriever()).start();
 	}
 
 }

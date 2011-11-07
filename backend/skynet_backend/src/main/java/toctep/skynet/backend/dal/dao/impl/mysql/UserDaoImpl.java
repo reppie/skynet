@@ -135,6 +135,20 @@ public class UserDaoImpl extends UserDao {
 	}
 
 	@Override
+	public Long select(String screenName) {
+		String query = "SELECT id FROM " + tableName + " WHERE screen_name=?";
+		
+		Param[] params = new Param[] {
+			new Param(screenName, Types.VARCHAR)
+		};
+		
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
+		Long id = (Long) row.get("id");
+		
+		return id;
+	}
+	
+	@Override
 	public void update(Domain<Long> domain) {
 		// TODO Auto-generated method stub
 		
