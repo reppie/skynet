@@ -18,7 +18,8 @@ class KeywordCloud:
         blacklist_query = blacklist_query[:len(blacklist_query)/100*3]
         blacklist = []
         for item in blacklist_query:
-            blacklist.append(item['keyword'])
+            if len(item['keyword']) < 4:
+                blacklist.append(item['keyword'])
             
         query_set = query_set.all().exclude(keyword__in=blacklist)[:num_keywords]
         self.items = self.__generate(query_set, min_font_size, max_font_size)
@@ -86,7 +87,7 @@ class KeywordCloud:
 """
 This class is used to store the font sizes of the given keywords in a cloud
 """
-class KeywordFontSize(models.Model):
+class KeywordFontSize():
     keyword = None
     font_scale = None
     
@@ -101,8 +102,4 @@ class KeywordFontSize(models.Model):
         return {
             'keyword':self.keyword,
             'font_scale':self.font_scale,
-                
         }
-    
-    class Meta:
-        managed = False
