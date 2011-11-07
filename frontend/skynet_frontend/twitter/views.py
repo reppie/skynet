@@ -43,7 +43,10 @@ class TwitterRpcMethods(object):
         exclude = []    
         for filter in filters:
             if filter['type'] == 'keyword':
-                exclude.append(filter['value']) 
+                exclude.append(filter['value'])
+            elif filter['type'] == 'user':
+                print filter
+                exclude.append('@' + filter['value'])
         
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
