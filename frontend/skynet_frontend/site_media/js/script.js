@@ -3,6 +3,20 @@ $(function(){
 	var $search = $("form#keyword-search-form");
 	var $searchbar = $search.find("input#searchbar");
 	
+	function getFilter(value){
+		var filter = null;
+		if(value.substring(0,1)=='@'){
+			filter = new api.filters.User(value.substring(1));
+		} else if(value.substring(0,1)=='#'){
+			filter = new api.filters.Tag(value.substring(1));
+		} else if(value.substring(0,1)=='^'){
+			filter = new api.filters.Geo(value.substring(1), "NL", value.substring(1));
+		} else {
+			filter = new api.filters.Keyword(value);
+		}
+		return filter;
+	}
+	
 	function getSearchFilters(){
 		var filters = [];
 		var search = $searchbar.val();
@@ -10,14 +24,7 @@ $(function(){
 		for(var index in query){
 			var value = query[index];
 			if(value.length>=2){
-				var filter = null;
-				if(value.substring(0,1)=='@'){
-					filter = new api.filters.User(value.substring(1));
-				} else if(value.substring(0,1)=='^'){
-					filter = new api.filters.Geo(value.substring(1), "NL", value.substring(1));
-				} else {
-					filter = new api.filters.Keyword(value);
-				}
+				var filter = getFilter(value);
 				filters.push(filter);
 			}
 		}
@@ -66,7 +73,7 @@ $(function(){
 		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
 		var keyword = $(this).data("keyword");
-		var filter = new api.filters.Keyword(keyword);
+		var filter = getFilter(keyword);
 		crumblePath.add(filter);
 		var filters = crumblePath.path();
 		$(".search-result-status").hide();
