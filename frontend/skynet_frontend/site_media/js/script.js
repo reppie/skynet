@@ -1,9 +1,4 @@
-var crumblePath = $(".crumble-path").CrumblePath();
-$(function(){
-	var $search = $("form#keyword-search-form");
-	var $searchbar = $search.find("input#searchbar");
-	
-	function getFilter(value){
+window.getFilter = function (value){
 		var filter = null;
 		value = value + "";
 		if(value.substring(0,1)=='@'){
@@ -17,6 +12,11 @@ $(function(){
 		}
 		return filter;
 	}
+
+var crumblePath = $(".crumble-path").CrumblePath();
+$(function(){
+	var $search = $("form#keyword-search-form");
+	var $searchbar = $search.find("input#searchbar");
 	
 	function getSearchFilters(){
 		var filters = [];
@@ -117,11 +117,10 @@ $(function(){
 		updateRegion();
 		return false;
 	});
-});
-
-api.cloud(function(cloud){
+	api.cloud(function(cloud){
 	$(".main-tag-cloud").TagCloud(cloud);
 	$("section#tag-cloud").hide();
+	});
 });
 
 $("#searchbar").focusin(function() {
@@ -130,5 +129,3 @@ $("#searchbar").focusin(function() {
 $("#searchbar").focusout(function() {
 	$("#search-explanation").slideUp();
 });
-
-

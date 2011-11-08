@@ -118,6 +118,7 @@
     	shuffle(cloud);
     	for(var index in cloud){
 			var tag = cloud[index];
+			tag.filter = getFilter(tag.keyword);
 	    	var $tag = $("#tagTemplate").tmpl(tag);
 	    	$tag.appendTo(this).data('tag', tag);
     	}
