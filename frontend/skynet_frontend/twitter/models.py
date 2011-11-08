@@ -99,7 +99,7 @@ class User(models.Model):
     profile_use_background_image = models.BooleanField(blank=True)
     friends_count = models.IntegerField(blank=True, default=0)
     profile_sidebar_fill_color = models.CharField(max_length=255, blank=True, null=True)
-    screen_name = models.CharField(max_length=15, blank=True, null=True)
+    screen_name = models.CharField(max_length=15, blank=True, null=True, unique=True)
     show_all_inline_media = models.BooleanField(blank=True)
     is_translator = models.BooleanField(blank=True)
     listed_count = models.IntegerField(blank=True, default=0)
