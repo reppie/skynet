@@ -2,10 +2,12 @@ package toctep.skynet.backend.test.dal;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -59,7 +61,9 @@ public abstract class DomainTest extends TestCase {
 	
 	@Before
 	public void setUp() {
-		mySqlUtil = MySqlUtil.getInstance("mysql_test.properties");
+		PropertyConfigurator.configure(Skynet.LOG4J_CONFIG);
+		
+		mySqlUtil = MySqlUtil.getInstance(Skynet.DB_TEST_CONFIG);
 		
 		emptyDatabase();
 		

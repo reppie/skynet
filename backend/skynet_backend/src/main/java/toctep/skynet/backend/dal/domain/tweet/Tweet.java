@@ -297,6 +297,7 @@ public class Tweet extends Domain<Long> implements ITweet {
 				tweetKeyword.setKeyword(keyword);
 			}
 			
+			tweetKeyword.setTweetKeywordValue(keyword.getKeyword());
 			tweetKeyword.setTweet(this);
 			tweetKeyword.save();
 		}

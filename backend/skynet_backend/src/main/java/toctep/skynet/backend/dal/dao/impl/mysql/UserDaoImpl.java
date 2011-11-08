@@ -140,8 +140,6 @@ public class UserDaoImpl extends UserDao {
 	public IUser select(String screenName) {
 		String query = "SELECT id FROM " + tableName + " WHERE screen_name=?";
 		
-		System.out.println("sn: " + screenName);
-		
 		Param[] params = new Param[] {
 			new Param(screenName, Types.VARCHAR)
 		};
