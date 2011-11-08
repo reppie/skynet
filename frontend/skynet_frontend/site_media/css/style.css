@@ -191,6 +191,19 @@ aside section h1.title
 .cloud-element
 {
 	text-decoration: none;
+	float: left;
+	line-height: 15px;
+	margin-right: 10px;
+}
+
+.mini-tag-cloud .cloud-element
+{
+	margin-right: 0px;
+}
+
+.tag-cloud
+{
+	overflow: auto;
 }
 
 .cloud-element:hover
