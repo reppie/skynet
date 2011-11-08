@@ -41,6 +41,20 @@ public class HashtagDaoImpl extends HashtagDao{
 
 		return hashtag;
 	}
+	
+	@Override
+	public Integer select(String text) {
+		String query = "SELECT id FROM " + tableName + " WHERE text=?";
+		
+		Param[] params = new Param[] {
+			new Param(text, Types.VARCHAR)
+		};
+		
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
+		Integer id = (Integer) row.get("id");
+		
+		return id;
+	}
 
 	@Override
 	public void update(Domain<Integer> domain) {

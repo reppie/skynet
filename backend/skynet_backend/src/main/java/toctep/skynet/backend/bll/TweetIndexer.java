@@ -10,9 +10,9 @@ public class TweetIndexer {
 	
 	public List<Keyword> indexTweetKeywords(Tweet tweet) {
 		List<Keyword> tweetKeywords = new ArrayList<Keyword>();
-    	String filteredTweetBody = TweetFilter.filterTweet(tweet);
-    	String[] keywordStrings = TweetSplitter.splitTweet(filteredTweetBody);
-    	
+		ArrayList<String> keywordStrings = TweetSplitter.splitTweet(tweet.getText());
+		TweetFilter.filterTweet(keywordStrings);
+		
     	for(String keywordString: keywordStrings) {
     		tweetKeywords.add(new Keyword(keywordString));
     	}

@@ -8,5 +8,7 @@ public abstract class UserDao extends Dao<Long> {
 	protected void setTableName() {
 		this.tableName = TABLE_NAME;
 	}
+	
+	public abstract Long select(String screenName);
 
 }

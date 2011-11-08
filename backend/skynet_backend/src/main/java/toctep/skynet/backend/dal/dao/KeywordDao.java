@@ -9,4 +9,6 @@ public abstract class KeywordDao extends Dao<Integer> {
 		this.tableName = TABLE_NAME;
 	}
 	
+	public abstract Integer select(String keyword);
+	
 }

@@ -48,6 +48,20 @@ public class KeywordDaoImpl extends KeywordDao {
 	}
 
 	@Override
+	public Integer select(String keyword) {
+		String query = "SELECT id FROM " + tableName + " WHERE keyword=?";
+		
+		Param[] params = new Param[] {
+			new Param(keyword, Types.VARCHAR)
+		};
+		
+		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
+		Integer id = (Integer) row.get("id");
+		
+		return id;
+	}
+	
+	@Override
 	public void update(Domain<Integer> domain) {
 		searchKeyword(domain);
 	}

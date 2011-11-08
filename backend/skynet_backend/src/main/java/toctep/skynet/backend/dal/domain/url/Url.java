@@ -20,5 +20,4 @@ public class Url extends Domain<String> implements IUrl{
 		
 		return NullUrl.getInstance();
 	}
-	
 }

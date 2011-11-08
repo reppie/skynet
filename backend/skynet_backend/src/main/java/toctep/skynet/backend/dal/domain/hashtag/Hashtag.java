@@ -31,4 +31,8 @@ public class Hashtag extends Domain<Integer> implements IHashtag {
 		return NullHashtag.getInstance();
 	}
 	
+	public static Integer select(String text) {
+		HashtagDao dao = DaoFacadeImpl.getInstance().getHashtagDao();
+		return dao.select(text);
+	}
 }
