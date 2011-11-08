@@ -11,6 +11,10 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	
 	public static final String LANGDETECT_PROFILE_DIR = "lib/langdetect/profiles";
 	
+	public UserBioTweetRetriever() {
+		initialize();
+	}
+	
 	@Override
 	public void initialize() {
 		super.initialize();
