@@ -397,4 +397,9 @@ public class User extends Domain<Long> implements IUser  {
 		return NullUser.getInstance();
 	}
 	
+	
+	public static Long select(String screenName) {
+		UserDao dao = DaoFacadeImpl.getInstance().getUserDao();
+		return dao.select(screenName);
+	}	
 }

@@ -1,6 +1,5 @@
 package toctep.skynet.backend.bll;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.List;
 
@@ -54,8 +53,11 @@ public final class TweetParser {
 	
 	public void parse(Status status) {
 		try {
-			parseBoundingBoxType(status.getPlace());
-			parseBoundingBox(status.getPlace());
+			if (status.getPlace() != null) {
+				parseBoundingBoxType(status.getPlace());
+				parseBoundingBox(status.getPlace());
+			}	
+			
 			parseCountry(status.getPlace());
 			parseGeoType(status.getPlace());
 			parseGeo(status.getPlace());
@@ -181,7 +183,7 @@ public final class TweetParser {
         user.setName(userStatus.getName());
         user.setProfileSidebarBorderColor(userStatus.getProfileSidebarBorderColor());
         user.setProfileBackgroundColor(userStatus.getProfileBackgroundColor());
-        user.setCreatedAt(new Timestamp(userStatus.getCreatedAt().getTime()));
+        user.setCreatedAt(TweetUtils.createUTCTimeStamp(userStatus.getCreatedAt()));
         user.setDefaultProfileImage(false); //Twitter4j has no support for this?
         user.setFollowersCount(userStatus.getFollowersCount()); //Same as setFollowing?
         user.setGeoEnabled(userStatus.isGeoEnabled());
@@ -246,7 +248,7 @@ public final class TweetParser {
         tweet.setInReplyToUserTwitter(inReplyToUser);
         
         tweet.setRetweetCount(status.getRetweetCount());
-        tweet.setCreatedAt(new Timestamp(status.getCreatedAt().getTime()));
+        tweet.setCreatedAt(TweetUtils.createUTCTimeStamp(status.getCreatedAt()));
         tweet.setGeo(geo);
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);

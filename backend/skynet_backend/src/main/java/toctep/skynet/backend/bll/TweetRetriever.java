@@ -1,35 +1,36 @@
 package toctep.skynet.backend.bll;
 
 import toctep.skynet.backend.Skynet;
-import twitter4j.FilterQuery;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-public class TweetRetriever implements Runnable {
+public abstract class TweetRetriever implements Runnable {
 
 	private TweetParser tweetParser;
-	private TwitterStream twitterStream;
+	protected TwitterStream twitterStream;
 	
-	private static final double[][] NETHERLANDS_COORDS = new double[][] { {3.39, 51.17}, {7.29, 53.51} };
-	//private final static double[][] GRONINGEN_PROVINCE_COORDS = { {6.19, 53.09}, {7.22, 53.51} };
-	//private final static double[][] GRONINGEN_CITY_COORDS = new double[][] { {6.45, 53.16}, {6.65, 53.26} };
-	//private final static double[][] GRONINGEN_ZERNIKE_COORDS = new double[][] { {6.52, 53.23}, {6.55, 53.25} };
+	protected String id;
 	
 	public TweetRetriever() {
-	    initialize();
+		initialize();
 	}
 	
-	private void initialize() {
+	protected void initialize() {
+		System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory");
+				
 		tweetParser = TweetParser.getInstance();
 		
 		StatusListener statusListener = new StatusListener() {
-	        public void onStatus(Status status) {
-	            tweetParser.parse(status);
+			public void onStatus(Status status) {
+				if (isDutch(status)) {
+					Skynet.LOG.info(id);
+					tweetParser.parse(status);
+				}
 	        }
-	
+			
 	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) { }
 	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) { }
 	        public void onScrubGeo(long userId, long upToStatusId) { }
@@ -44,8 +45,8 @@ public class TweetRetriever implements Runnable {
 	}
 
 	@Override
-	public void run() {
-	    twitterStream.filter(new FilterQuery(0, null, null, NETHERLANDS_COORDS));
-	}
+	public abstract void run();
+	
+	public abstract boolean isDutch(Status status);
 	
 }
