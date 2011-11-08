@@ -14,7 +14,9 @@ public class TweetIndexer {
 		TweetFilter.filterTweet(keywordStrings);
 		
     	for(String keywordString: keywordStrings) {
-    		tweetKeywords.add(new Keyword(keywordString));
+    		Keyword keyword = new Keyword();
+    		keyword.setKeyword(keywordString);
+    		tweetKeywords.add(keyword);
     	}
     	
     	return tweetKeywords;
