@@ -45,6 +45,9 @@
 						<input id="crumblebutton" type="button" title="Bewaar" value="{% trans '⇧' %}" />
 						<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
 					</form>
+					<div id="search-explanation" style="display:none;">
+						<p>U kunt zoeken op gebruikers door een <span>@<span> voor uw zoekterm te zetten. Plaats een <span>^<span> voor uw zoekterm om alleen resultaten van een bepaalde locatie te tonen. (Voorbeelden: <span>@hfinkers</span> of <span>^Groningen</span>)</p>						
+					</div>
  				{% endblock %}
  				<div class="search-result-status"></div>
  				
