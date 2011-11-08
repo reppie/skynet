@@ -6,6 +6,8 @@ import java.util.Map;
 import toctep.skynet.backend.dal.dao.HashtagDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
+import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
+import toctep.skynet.backend.dal.domain.hashtag.NullHashtag;
 
 public class HashtagDaoImpl extends HashtagDao{
 
@@ -43,7 +45,7 @@ public class HashtagDaoImpl extends HashtagDao{
 	}
 	
 	@Override
-	public Integer select(String text) {
+	public IHashtag select(String text) {
 		String query = "SELECT id FROM " + tableName + " WHERE text=?";
 		
 		Param[] params = new Param[] {
@@ -51,9 +53,12 @@ public class HashtagDaoImpl extends HashtagDao{
 		};
 		
 		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
-		Integer id = (Integer) row.get("id");
 		
-		return id;
+		if (row.size() > 0) {
+			return select((Integer) row.get("id"));
+		} else {
+			return NullHashtag.getInstance();
+		}
 	}
 
 	@Override

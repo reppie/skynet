@@ -19,7 +19,7 @@ public abstract class TweetRetriever implements Runnable {
 	}
 	
 	protected void initialize() {
-		System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory");
+		//System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory");
 				
 		tweetParser = TweetParser.getInstance();
 		

@@ -10,8 +10,10 @@ import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
+import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 import toctep.skynet.backend.dal.domain.keyword.IKeyword;
+import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.place.Place;
@@ -19,6 +21,7 @@ import toctep.skynet.backend.dal.domain.sourcetype.ISourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.NullSourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.url.IUrl;
+import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
@@ -39,65 +42,59 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private IUser user 						= NullUser.getInstance();
 	private String coordinates				= "";
 	
-	private List<TweetContributor> tweetContributors 	= new ArrayList<TweetContributor>();
-	private List<TweetHashtag> tweetHashtags 			= new ArrayList<TweetHashtag>();
-	private List<TweetKeyword> tweetKeywords 			= new ArrayList<TweetKeyword>();
-	private List<TweetMention> tweetMentions 			= new ArrayList<TweetMention>();
-	private List<TweetUrl> tweetUrls 					= new ArrayList<TweetUrl>();
+	private List<User> tweetContributors 	= new ArrayList<User>();
+	private List<Hashtag> tweetHashtags 	= new ArrayList<Hashtag>();
+	private List<Keyword> tweetKeywords 	= new ArrayList<Keyword>();
+	private List<User> tweetMentions 		= new ArrayList<User>();
+	private List<Url> tweetUrls 			= new ArrayList<Url>();
 	
 	public void addContributor(IUser contributor) {
-		TweetContributor tweetContributor = new TweetContributor();
-        tweetContributor.setTweet(this);
-        tweetContributor.setUser(contributor);
-		tweetContributors.add(tweetContributor);
+		if (contributor instanceof User) {
+			tweetContributors.add((User) contributor);
+		}
 	}
 	
 	public void addHashtag(IHashtag hashtag) {
-		TweetHashtag tweetHashtag = new TweetHashtag();
-        tweetHashtag.setHashtag(hashtag);
-        tweetHashtag.setTweet(this);
-		tweetHashtags.add(tweetHashtag);
+		if (hashtag instanceof Hashtag) {
+			tweetHashtags.add((Hashtag) hashtag);
+		}
 	}
 	
 	public void addKeyword(IKeyword keyword) {
-		TweetKeyword tweetKeyword = new TweetKeyword();   	
-    	tweetKeyword.setKeyword(keyword);
-    	tweetKeyword.setTweetKeywordValue(keyword.getKeyword());
-    	tweetKeyword.setTweet(this);
-		tweetKeywords.add(tweetKeyword);
+		if (keyword instanceof Keyword) {
+			tweetKeywords.add((Keyword) keyword);
+		}
 	}
 	
 	public void addMention(IUser mention) {
-		TweetMention tweetMention = new TweetMention();
-		tweetMention.setUser(mention);
-        tweetMention.setTweet(this);
-		tweetMentions.add(tweetMention);
+		if (mention instanceof User) {
+			tweetMentions.add((User) mention);
+		}
 	}
 	
 	public void addUrl(IUrl url) {
-		TweetUrl tweetUrl = new TweetUrl();
-        tweetUrl.setUrl(url);
-        tweetUrl.setTweet(this);
-		tweetUrls.add(tweetUrl);
+		if (url instanceof Url) {
+			tweetUrls.add((Url) url);
+		}
 	}
 	
-	public List<TweetContributor> getContributors() {
+	public List<User> getContributors() {
 		return tweetContributors;
 	}
 	
-	public List<TweetHashtag> getHashtags() {
+	public List<Hashtag> getHashtags() {
 		return tweetHashtags;
 	}
 	
-	public List<TweetKeyword> getKeywords() {
+	public List<Keyword> getKeywords() {
 		return tweetKeywords;
 	}
 	
-	public List<TweetMention> getMentions() {
+	public List<User> getMentions() {
 		return tweetMentions;
 	}
 	
-	public List<TweetUrl> getUrls() {
+	public List<Url> getUrls() {
 		return tweetUrls;
 	}
 	
@@ -225,39 +222,89 @@ public class Tweet extends Domain<Long> implements ITweet {
 	
 
 	private void saveContributors() {
-		for(TweetContributor tweetContributor : tweetContributors) {
+		for(User contributor : tweetContributors) {
+			TweetContributor tweetContributor = new TweetContributor();
+			
+			IUser existingUser = User.select(contributor.getScreenName());
+			if (existingUser instanceof User) {
+				tweetContributor.setUser(existingUser);
+			} else {
+				tweetContributor.setUser(contributor);
+			}
+			
+			tweetContributor.setTweet(this);
 			tweetContributor.save();
 		}
 	}
 	
 	private void saveHashtags() {
-		for(TweetHashtag tweetHashtag : tweetHashtags) {
+		for(Hashtag hashtag : tweetHashtags) {
+			TweetHashtag tweetHashtag = new TweetHashtag();
+			
+			IHashtag existingHashtag = Hashtag.select(hashtag.getText());
+			if (existingHashtag instanceof Hashtag) {
+				tweetHashtag.setHashtag(existingHashtag);
+			} else {
+				tweetHashtag.setHashtag(hashtag);
+			}
+			
+			tweetHashtag.setTweet(this);
 			tweetHashtag.save();
 		}
 	}
 
 	private void saveMentions() {
-		for(TweetMention tweetMention : tweetMentions) {
+		for(User mention : tweetMentions) {
+			TweetMention tweetMention = new TweetMention();
+			
+			IUser existingUser = User.select(mention.getScreenName());
+			if (existingUser instanceof User) {
+				tweetMention.setUser(existingUser);
+			} else {
+				tweetMention.setUser(mention);
+			}
+			
+			tweetMention.setTweet(this);
 			tweetMention.save();
 		}
 		
 	}	
 	
 	private void saveUrls() {
-		for(TweetUrl tweetUrl : tweetUrls) {
+		for(Url url : tweetUrls) {
+			TweetUrl tweetUrl = new TweetUrl();
+			
+			IUrl existingUrl = Url.select(url.getId());
+			if (existingUrl instanceof Url) {
+				tweetUrl.setUrl(existingUrl);
+			} else {
+				tweetUrl.setUrl(url);
+			}
+			
+			tweetUrl.setTweet(this);
 			tweetUrl.save();
 		}
 	}
 
 	private void saveKeywords() {
-		for(TweetKeyword tweetKeyword : tweetKeywords) {
+		for(Keyword keyword : tweetKeywords) {
+			TweetKeyword tweetKeyword = new TweetKeyword();
+			
+			IKeyword existingKeyword = Keyword.select(keyword.getKeyword());
+			if (existingKeyword instanceof Keyword) {
+				tweetKeyword.setKeyword(existingKeyword);
+			} else {
+				tweetKeyword.setKeyword(keyword);
+			}
+			
+			tweetKeyword.setTweetKeywordValue(keyword.getKeyword());
+			tweetKeyword.setTweet(this);
 			tweetKeyword.save();
 		}
 	}
 	
 	@Override
 	public void save() {
-		
 		if (inReplyToTweetTwitter instanceof Tweet) {
 			((Tweet) inReplyToTweetTwitter).save();
 			((Tweet) this.inReplyToTweetTwitter).setId(((Tweet) inReplyToTweetTwitter).getId());
@@ -307,6 +354,15 @@ public class Tweet extends Domain<Long> implements ITweet {
 		}
 		
 		return NullTweet.getInstance();
+	}
+	
+	public static boolean exists(Long id) {
+		TweetDao dao = DaoFacadeImpl.getInstance().getTweetDao();
+		
+		if(dao.exists(id))
+			return true;
+		
+		return false;
 	}
 	
 }

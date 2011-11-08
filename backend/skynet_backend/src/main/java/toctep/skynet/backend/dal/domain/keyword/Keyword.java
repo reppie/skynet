@@ -43,7 +43,7 @@ public class Keyword extends Domain<Integer> implements IKeyword {
 	}
 	
 	
-	public static Integer select(String text) {
+	public static IKeyword select(String text) {
 		KeywordDao dao = DaoFacadeImpl.getInstance().getKeywordDao();
 		return dao.select(text);
 	}	

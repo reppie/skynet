@@ -62,11 +62,12 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 		
 		for(Map<String, Object> row : rows) {
 			TweetUrl tweetUrl = new TweetUrl();
-			tweetUrl.setId((Integer) row.get(0));
+			tweetUrl.setId((Integer) row.get("id"));
 			tweetUrl.setTweet(tweet);
-			tweetUrl.setUrl(Url.select((String) row.get(1)));
+			tweetUrl.setUrl(Url.select((String) row.get("url_id")));
 			tweetUrls.add(tweetUrl);
 		}
+		
 		return tweetUrls;
 	}
 

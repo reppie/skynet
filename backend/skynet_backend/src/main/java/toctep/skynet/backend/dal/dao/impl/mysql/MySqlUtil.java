@@ -135,7 +135,12 @@ public final class MySqlUtil {
 	}
 		
 	public Map<String, Object> selectRow(String query, Param[] params) {
-		return this.select(query, params).get(0);
+		List<Map<String, Object>> rows = this.select(query, params);
+		if (rows.size() > 0) {
+			return rows.get(0);
+		} else {
+			return new LinkedHashMap<String, Object>();
+		}
 	}
 	
 	public List<Map<String, Object>> select(String query, Param[] params) {
