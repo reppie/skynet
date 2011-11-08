@@ -1,8 +1,9 @@
 package toctep.skynet.backend.test.bll;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class TweetSplitterTest {
 	@Test
 	public void splitTweetTest() {
 		String tweetBody = "@georgeBaker looking back on the track for a little green bag #muziek";
-		ArrayList<String> presplitTweetBody = new ArrayList<String>();
+		List<String> presplitTweetBody = new ArrayList<String>();
 		presplitTweetBody.add("@georgeBaker"); 
 		presplitTweetBody.add("looking"); 
 		presplitTweetBody.add("back");	
@@ -27,7 +28,7 @@ public class TweetSplitterTest {
 		presplitTweetBody.add("bag");
 		presplitTweetBody.add("#muziek");
 		
-		ArrayList<String> tweetWordsAfterSplit = new ArrayList<String>();
+		List<String> tweetWordsAfterSplit = new ArrayList<String>();
 		
 		tweetWordsAfterSplit = TweetSplitter.splitTweet(tweetBody);
 		

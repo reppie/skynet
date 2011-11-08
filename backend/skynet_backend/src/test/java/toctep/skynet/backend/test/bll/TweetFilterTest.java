@@ -1,8 +1,9 @@
 package toctep.skynet.backend.test.bll;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ public class TweetFilterTest {
 	
 	@Test
 	public void filterCommonWordsTest() {
-		ArrayList<String> rawTweet = new ArrayList<String>(); 
+		List<String> rawTweet = new ArrayList<String>(); 
 		rawTweet.add("slimme");
 		rawTweet.add("vos");
 		rawTweet.add("uit");
@@ -24,7 +25,7 @@ public class TweetFilterTest {
 		rawTweet.add("hoog");
 		rawTweet.add("hek");
 		
-		ArrayList<String> cleanTweet = new ArrayList<String>(); 
+		List<String> cleanTweet = new ArrayList<String>(); 
 		cleanTweet.add("slimme");
 		cleanTweet.add("vos");
 		cleanTweet.add("uit");
@@ -34,7 +35,7 @@ public class TweetFilterTest {
 		cleanTweet.add("hoog");
 		cleanTweet.add("hek");
 	
-		ArrayList<String> filteredTweet = TweetFilter.filterTweet(rawTweet);
+		List<String> filteredTweet = TweetFilter.filterTweet(rawTweet);
 		assertEquals("list size: ", cleanTweet.size(), filteredTweet.size());
 		
 		for(int i = 0; i < cleanTweet.size(); i++) {
@@ -44,7 +45,7 @@ public class TweetFilterTest {
 	
 	@Test
 	public void filterSpecialCharactersTest() {
-		ArrayList<String> rawTweet = new ArrayList<String>();
+		List<String> rawTweet = new ArrayList<String>();
 		rawTweet.add("@georgeBaker");
 		rawTweet.add("@SjorsBakker");
 		rawTweet.add("little");
@@ -62,7 +63,7 @@ public class TweetFilterTest {
 		rawTweet.add("#7even");
 		rawTweet.add("#Herp^");
 		
-		ArrayList<String> cleanTweet = new ArrayList<String>();
+		List<String> cleanTweet = new ArrayList<String>();
 		cleanTweet.add("@georgeBaker");
 		cleanTweet.add("@SjorsBakker");
 		cleanTweet.add("little");
@@ -78,7 +79,7 @@ public class TweetFilterTest {
 		cleanTweet.add("#7even");
 		cleanTweet.add("#Herp");
 		
-		ArrayList<String> filteredTweets = TweetFilter.filterTweet(rawTweet);
+		List<String> filteredTweets = TweetFilter.filterTweet(rawTweet);
 		assertEquals("List size: ", cleanTweet.size(), filteredTweets.size());
 		
 		for(int i = 0; i < cleanTweet.size(); i++) {

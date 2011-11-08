@@ -57,14 +57,14 @@ $(function(){
 		var filters = getFilters();
 		$(".search-result-status").hide();
 		api.Tweet.search(filters, function(twitterIds, cloud){
-			
-			$(".tweets").TweetList(twitterIds, function(){
-				$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
-				$searchbar.removeClass("loading");
-			});
-			$(".mini-tag-cloud").TagCloud(cloud);
-			$("section#tag-cloud").show();
-			
+			if(twitterIds){
+				$(".tweets").TweetList(twitterIds, function(){
+					$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
+					$searchbar.removeClass("loading");
+				});
+				$(".mini-tag-cloud").TagCloud(cloud);
+				$("section#tag-cloud").show();
+			}
 		});	
 		return false;
 	})

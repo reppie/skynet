@@ -9,11 +9,9 @@
 		},
 		'Tweet': function(json){
 			api.Base.prototype.constructor.call(this, json);
-			
 		},
 		'User': function(json){
 			api.Base.prototype.constructor.call(this, json);
-			
 		},
 		'CrumblePath': function(element){
 			this.$path = element;
@@ -21,7 +19,6 @@
 			var nl = new api.filters.Geo("Nederland", "NL", null);
 			nl.removable = false;
 			this.add(nl);
-			
 		},
 		'TweetList': function(element, tweets, callback){
 			this.$tweetList = element;
@@ -56,7 +53,6 @@
 		  		callback.call(This, null);
 			  }
 		  	});
-				
 		},
 		'filters': {
 			'Base': function(type, label, value){
@@ -68,19 +64,15 @@
 				this.equals = function(filter){
 					return this.type == filter.type && this.value == filter.value;
 				}
-				
 			},
 			'Keyword': function(keyword){
 				api.filters.Base.prototype.constructor.call(this, 'keyword', keyword, keyword);
-				
 			},
 			'User': function(user){
 				api.filters.Base.prototype.constructor.call(this, 'user', "@" + user, user);
-				
 			},
 			'Tag': function(tag){
 				api.filters.Base.prototype.constructor.call(this, 'tag', "#" + tag, tag);
-				
 			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
@@ -131,6 +123,36 @@
     	}
 		return this;
     };
+    
+    api.TweetList.prototype.add = function(tweet){
+    	var tweetList = this;
+		if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
+			var $tweet = $("#tweetTemplate").tmpl(tweet);
+			$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+		
+			$tweet.find('time').localize(function () {
+			  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
+			    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
+			    names = 'seconde minuut uur dag week maand jaar'.split(' '),
+			    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
+			    round = Math.round;
+			
+			  return function (date) {
+			    var
+			      delta = round((date - new Date) / 1000) || -1,
+			      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
+			      i = units.length, n, seconds;
+			    while (i--) {
+			      seconds = units[i];
+			      if (!i || delta > seconds) {
+			        n = round(delta / seconds);
+			        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
+			      }
+			    }
+			  };
+			}());
+    	}
+    }
 	
 	api.TweetList.prototype.reset = function(tweetIds, callback){
 		
@@ -153,32 +175,7 @@
 						if(user){
 							if(tweetList.tweetIds.indexOf(this.id)>-1){
 								tweetList.loaded++;
-								var $tweet = $("#tweetTemplate").tmpl(tweet);
-								if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
-									$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
-								}
-								
-								$tweet.find('time').localize(function () {
-								  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
-								    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
-								    names = 'seconde minuut uur dag week maand jaar'.split(' '),
-								    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
-								    round = Math.round;
-								
-								  return function (date) {
-								    var
-								      delta = round((date - new Date) / 1000) || -1,
-								      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
-								      i = units.length, n, seconds;
-								    while (i--) {
-								      seconds = units[i];
-								      if (!i || delta > seconds) {
-								        n = round(delta / seconds);
-								        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
-								      }
-								    }
-								  };
-								}());
+								tweetList.add(tweet);
 								if(tweetList.loaded>=tweetList.tweetIds.length){
 									if(tweetList.callback){
 										tweetList.callback.call(tweetList);

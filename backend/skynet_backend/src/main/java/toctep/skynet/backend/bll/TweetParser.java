@@ -6,19 +6,38 @@ import java.util.List;
 import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBoxType;
 import toctep.skynet.backend.dal.domain.country.Country;
+import toctep.skynet.backend.dal.domain.country.ICountry;
+import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.geo.IGeo;
+import toctep.skynet.backend.dal.domain.geo.IGeoType;
+import toctep.skynet.backend.dal.domain.geo.NullGeo;
+import toctep.skynet.backend.dal.domain.geo.NullGeoType;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
+import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.Language;
+import toctep.skynet.backend.dal.domain.language.NullLanguage;
+import toctep.skynet.backend.dal.domain.place.IPlace;
+import toctep.skynet.backend.dal.domain.place.IPlaceType;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
+import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
+import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
+import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
 import twitter4j.GeoLocation;
@@ -43,20 +62,29 @@ public final class TweetParser {
 	}
 	
 	public Tweet parse(Status status) {
-			Tweet tweet = new Tweet();
+		Tweet tweet = new Tweet();
+		IBoundingBoxType boundingBoxType = NullBoundingBoxType.getInstance();
+		IBoundingBox boundingBox = NullBoundingBox.getInstance();
+		ICountry country = NullCountry.getInstance();
+		IGeoType geoType = NullGeoType.getInstance();
+		IGeo geo = NullGeo.getInstance();
+		IPlaceType placeType = NullPlaceType.getInstance();
+		IPlace place = NullPlace.getInstance();
 			
 		try {
-			BoundingBoxType boundingBoxType = parseBoundingBoxType(status.getPlace());
-			BoundingBox boundingBox = parseBoundingBox(boundingBoxType, status.getPlace());
-			Country country = parseCountry(status.getPlace());
-			GeoType geoType = parseGeoType(status.getPlace());
-			Geo geo = parseGeo(geoType, status.getPlace());
+			if(status.getPlace() != null) {
+				boundingBoxType = parseBoundingBoxType(status.getPlace());
+				boundingBox = parseBoundingBox(boundingBoxType, status.getPlace());
+				country = parseCountry(status.getPlace());
+				geoType = parseGeoType(status.getPlace());
+				geo = parseGeo(geoType, status.getPlace());
+				placeType = parsePlaceType(status.getPlace());
+				place = parsePlace(placeType, boundingBox, country, status.getPlace());
+			}
 			Language language = parseLanguage(status.getUser());
-			PlaceType placeType = parsePlaceType(status.getPlace());
 			SourceType sourceType = parseSourceType(status);
 			TimeZone timeZone = parseTimeZone(status.getUser());
-			Place place = parsePlace(placeType, boundingBox, country, status.getPlace());
-			User user = parseUser(place, language, timeZone, status.getUser());
+			IUser user = parseUser(place, language, timeZone, status.getUser());
 			tweet = parseTweet(user, geo, sourceType, place, status);
 			
 			parseUrl(tweet, status);
@@ -68,7 +96,7 @@ public final class TweetParser {
 		} catch (ParseException e) {
 			Skynet.LOG.error(e.getMessage(), e);
 		}
-		tweet.save();
+		
 		return tweet;
 	}
 	
@@ -78,7 +106,7 @@ public final class TweetParser {
         return boundingBoxType;
 	}
 	
-	private BoundingBox parseBoundingBox(BoundingBoxType type, twitter4j.Place place) {
+	private BoundingBox parseBoundingBox(IBoundingBoxType type, twitter4j.Place place) {
         BoundingBox boundingBox = new BoundingBox();
         String coordinates = "";
         GeoLocation[][] array = place.getBoundingBoxCoordinates();
@@ -105,7 +133,7 @@ public final class TweetParser {
         return geoType;
     }
 
-    private Geo parseGeo(GeoType type, twitter4j.Place place) {
+    private Geo parseGeo(IGeoType type, twitter4j.Place place) {
     	Geo geo = new Geo();
         String geoCoordinates = "";
         GeoLocation[][] geoArray = place.getBoundingBoxCoordinates();
@@ -125,7 +153,7 @@ public final class TweetParser {
         return language;
     }
     
-    private PlaceType parsePlaceType(twitter4j.Place place) {
+    private IPlaceType parsePlaceType(twitter4j.Place place) {
         PlaceType placeType = new PlaceType();
         placeType.setText(place.getPlaceType());
         return placeType;
@@ -144,7 +172,7 @@ public final class TweetParser {
         return timeZone;
     }
     
-    private Place parsePlace(PlaceType type, BoundingBox boundingBox, Country country, twitter4j.Place placeStatus) {
+    private Place parsePlace(IPlaceType type, IBoundingBox boundingBox, ICountry country, twitter4j.Place placeStatus) {
         Place place = new Place();
         place.setId(placeStatus.getId());
         place.setName(placeStatus.getName());
@@ -168,7 +196,7 @@ public final class TweetParser {
         return place;
     }
     
-    private User parseUser(Place place, Language language, TimeZone timeZone, twitter4j.User userStatus) throws ParseException {
+    private IUser parseUser(IPlace place, ILanguage language, ITimeZone timeZone, twitter4j.User userStatus) throws ParseException {
         User user = new User();
         user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
@@ -236,7 +264,7 @@ public final class TweetParser {
         return user;
 	}
 
-	private Tweet parseTweet(User user, Geo geo, SourceType sourceType, Place place, Status status) {
+	private Tweet parseTweet(IUser user, IGeo geo, SourceType sourceType, IPlace place, Status status) {
         Tweet tweet = new Tweet();
         tweet.setId(status.getId());
         tweet.setText(status.getText());
@@ -246,16 +274,8 @@ public final class TweetParser {
         if(Tweet.exists(status.getInReplyToStatusId())) {
             tweet.setInReplyToTweetTwitter((Tweet.select(status.getInReplyToStatusId())));
         }
-        else if (status.getInReplyToStatusId() == -1) {
-        	tweet.setInReplyToTweetTwitter(NullTweet.getInstance());
-        }
         else {
-        	try {
-				twitter4j.Status replyTweet = TwitterFactory.getSingleton().showStatus(status.getInReplyToStatusId());
-				tweet.setInReplyToTweetTwitter(parse(replyTweet));
-			} catch (TwitterException e) {
-				e.printStackTrace();
-			}
+        	tweet.setInReplyToTweetTwitter(NullTweet.getInstance());
         }
         
         if(User.exists(status.getInReplyToUserId())) {
@@ -266,10 +286,12 @@ public final class TweetParser {
         }
         else {
         	try {
-				twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
-				tweet.setInReplyToUserTwitter(parse(replyUser.getStatus()).getUser());
+    			twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
+    			tweet.setInReplyToUserTwitter(parseUser(NullPlace.getInstance(), NullLanguage.getInstance(), NullTimeZone.getInstance(), replyUser));
 			} catch (TwitterException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
+			} catch (ParseException e) {
+				Skynet.LOG.error(e.getMessage(), e);
 			}
         }
         

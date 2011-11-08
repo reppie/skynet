@@ -24,7 +24,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	
 	@Override
 	public void run() {
-		twitterStream.sample();
+		getTwitterStream().sample();
 	}
 	
 	@Override
@@ -41,11 +41,13 @@ public class UserBioTweetRetriever extends TweetRetriever {
 			Skynet.LOG.error(e.getMessage(), e);
 		}
 		
-		if (status.getUser().getLang().equalsIgnoreCase("nl")
-				|| status.getUser().getTimeZone().equalsIgnoreCase("amsterdam")
-				|| status.getUser().getLocation().toLowerCase().contains("netherland")
-				|| status.getUser().getLocation().toLowerCase().contains("nederland")
-				|| status.getUser().getLocation().toLowerCase().contains("holland")
+		twitter4j.User user = status.getUser();
+		
+		if (user.getLang().equalsIgnoreCase("nl")
+				|| user.getTimeZone().equalsIgnoreCase("amsterdam")
+				|| user.getLocation().toLowerCase().contains("netherland")
+				|| user.getLocation().toLowerCase().contains("nederland")
+				|| user.getLocation().toLowerCase().contains("holland")
 				|| lang.equalsIgnoreCase("nl")) {
 			return true;
     	}
