@@ -14,6 +14,12 @@ public class TweetKeyword extends Domain<Integer> {
 	private String tweetKeywordValue;
 	private IKeyword keyword;
 	
+	public TweetKeyword() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getTweetKeywordDao());
+	}
+	
 	public ITweet getTweet() {
 		return tweet;
 	}
@@ -36,11 +42,6 @@ public class TweetKeyword extends Domain<Integer> {
 	
 	public void setKeyword(IKeyword keyword) {
 		this.keyword = keyword;
-	}
-	
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
 	}
 	
 	@Override

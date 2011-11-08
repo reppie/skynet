@@ -13,6 +13,12 @@ public class TweetHashtag extends Domain<Integer> {
 	private ITweet tweet;
 	private IHashtag hashtag;
 	
+	public TweetHashtag() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getTweetHashtagDao());
+	}
+	
 	public ITweet getTweet() {
 		return tweet;
 	}
@@ -27,11 +33,6 @@ public class TweetHashtag extends Domain<Integer> {
 
 	public void setHashtag(IHashtag hashtag) {
 		this.hashtag = hashtag;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 	}
 	
 	@Override

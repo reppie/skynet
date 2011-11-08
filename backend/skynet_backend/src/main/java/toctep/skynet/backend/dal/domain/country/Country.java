@@ -8,6 +8,12 @@ public class Country extends Domain<String> implements ICountry {
 
 	private String text = "";
 
+	public Country() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getCountryDao());
+	}
+	
 	@Override
 	public String getText() {
 		return text;
@@ -15,11 +21,6 @@ public class Country extends Domain<String> implements ICountry {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getCountryDao();		
 	}
 	
 	public static ICountry select(String id) {

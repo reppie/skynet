@@ -9,6 +9,12 @@ public class BoundingBox extends Domain<Integer> implements IBoundingBox {
 	private IBoundingBoxType type 	= NullBoundingBoxType.getInstance();
 	private String coordinates		= "";
 	
+	public BoundingBox() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getBoundingBoxDao());
+	}
+	
 	public IBoundingBoxType getType() {
 		return type;
 	}
@@ -23,11 +29,6 @@ public class BoundingBox extends Domain<Integer> implements IBoundingBox {
 
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
-	}
-	
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getBoundingBoxDao();
 	}
 	
 	@Override

@@ -56,6 +56,12 @@ public class User extends Domain<Long> implements IUser  {
 	private boolean isTranslator				= false;
 	private int listedCount						= 0;
 
+	public User() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getUserDao());
+	}
+	
 	public IPlace getPlace() {
 		return place;
 	}
@@ -335,11 +341,6 @@ public class User extends Domain<Long> implements IUser  {
 
 	public void setListedCount(int listedCount) {
 		this.listedCount = listedCount;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getUserDao();
 	}
 	
 	@Override
