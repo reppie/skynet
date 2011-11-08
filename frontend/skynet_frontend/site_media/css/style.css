@@ -165,3 +165,14 @@ aside section h1.title
 	color: #ef7b00;
 	text-decoration: underline;
 }
+
+.filter-type-user
+{
+	color: #00ADEF;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.filter-type-tag
+{
+	color: #CD853F;
+}
