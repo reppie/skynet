@@ -126,17 +126,15 @@
     
     api.TweetList.prototype.add = function(tweet){
     	var tweetList = this;
-		if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
+		if(!$('.tweets .tweet[data-tweet-id="'+tweet.id+'"]').length){
 			var $tweet = $("#tweetTemplate").tmpl(tweet);
 			$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
-		
 			$tweet.find('time').localize(function () {
 			  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
 			    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
 			    names = 'seconde minuut uur dag week maand jaar'.split(' '),
 			    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
 			    round = Math.round;
-			
 			  return function (date) {
 			    var
 			      delta = round((date - new Date) / 1000) || -1,
