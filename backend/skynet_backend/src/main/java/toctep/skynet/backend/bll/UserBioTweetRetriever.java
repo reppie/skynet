@@ -19,7 +19,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	}
 	
 	@Override
-	public void initialize() {
+	protected void initialize() {
 		super.initialize();
 		
 		try {
