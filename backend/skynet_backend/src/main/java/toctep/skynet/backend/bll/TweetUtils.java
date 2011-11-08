@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TweetUtils {
+public final class TweetUtils {
 	
 	public synchronized static Timestamp createUTCTimeStamp(Date date){
 		c.setTime(date);
