@@ -12,7 +12,7 @@ public class GeoTaggedTweetRetriever extends TweetRetriever {
 	
 	@Override
 	public void run() {
-		twitterStream.filter(new FilterQuery(0, null, null, NETHERLANDS_COORDS));
+		this.getTwitterStream().filter(new FilterQuery(0, null, null, NETHERLANDS_COORDS));
 	}
 	
 	@Override

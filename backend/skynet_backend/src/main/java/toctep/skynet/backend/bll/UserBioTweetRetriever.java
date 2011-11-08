@@ -24,7 +24,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	
 	@Override
 	public void run() {
-		twitterStream.sample();
+		getTwitterStream().sample();
 	}
 	
 	@Override

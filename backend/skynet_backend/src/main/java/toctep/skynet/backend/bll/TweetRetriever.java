@@ -10,9 +10,7 @@ import twitter4j.TwitterStreamFactory;
 public abstract class TweetRetriever implements Runnable {
 
 	private TweetParser tweetParser;
-	protected TwitterStream twitterStream;
-	
-	protected String id;
+	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
 		initialize();
@@ -26,7 +24,6 @@ public abstract class TweetRetriever implements Runnable {
 		StatusListener statusListener = new StatusListener() {
 			public void onStatus(Status status) {
 				if (isDutch(status)) {
-					Skynet.LOG.info(id);
 					tweetParser.parse(status).save();
 				}
 	        }
@@ -48,5 +45,9 @@ public abstract class TweetRetriever implements Runnable {
 	public abstract void run();
 	
 	public abstract boolean isDutch(Status status);
+	
+	protected TwitterStream getTwitterStream() {
+		return twitterStream;
+	}
 	
 }
