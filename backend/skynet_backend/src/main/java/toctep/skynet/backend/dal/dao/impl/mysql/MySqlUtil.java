@@ -208,7 +208,6 @@ public final class MySqlUtil {
 				Skynet.LOG.error(e.getMessage(), e);
 			}
 		}
-		
 		return id;
 	}
 	
