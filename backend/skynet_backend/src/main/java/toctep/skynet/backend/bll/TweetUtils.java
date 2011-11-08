@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class TweetUtils {
 	
+	private TweetUtils() {}
+	
 	private static Calendar c = Calendar.getInstance();
 	public synchronized static Timestamp createUTCTimeStamp(Date date){
 		c.setTime(date);
