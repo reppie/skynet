@@ -9,6 +9,7 @@ import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 public class TweetKeywordTest extends DomainTest {
 	
 	private TweetKeyword tweetKeyword;
+	
 	private Tweet tweet;
 	private String keywordValue;
 	private Keyword keyword;
