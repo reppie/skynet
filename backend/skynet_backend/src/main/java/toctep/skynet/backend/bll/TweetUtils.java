@@ -8,11 +8,12 @@ public final class TweetUtils {
 	
 	private TweetUtils() {}
 	
-	public synchronized static Timestamp createUTCTimeStamp(Date date){
+	private static Calendar c = Calendar.getInstance();
+	
+	public static synchronized Timestamp createUTCTimeStamp(Date date){
 		c.setTime(date);
 		return new Timestamp((long)(c.getTime().getTime()-c.getTimeZone().getRawOffset()));
 	}
 
 	
-	private static Calendar c = Calendar.getInstance();
 }
