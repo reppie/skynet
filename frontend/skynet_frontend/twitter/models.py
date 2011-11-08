@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Count
 from skynet_frontend import settings
+import time
 
 class Url(models.Model):
     text = models.CharField(primary_key=True, max_length=255, blank=True, null=True);
@@ -189,7 +190,8 @@ class Tweet(models.Model):
             'text': self.text,
             'user_id': self.user_id,
             'created_at': self.created_at,
-            'place': self.place
+            'place': self.place,
+            'timestamp': time.mktime(self.created_at.timetuple())
         }
         
     class Meta:

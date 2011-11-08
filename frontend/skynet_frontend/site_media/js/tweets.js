@@ -131,6 +131,36 @@
     	}
 		return this;
     };
+    
+    api.TweetList.prototype.add = function(tweet){
+    	
+		if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
+			var $tweet = $("#tweetTemplate").tmpl(tweet);
+			$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+		
+			$tweet.find('time').localize(function () {
+			  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
+			    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
+			    names = 'seconde minuut uur dag week maand jaar'.split(' '),
+			    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
+			    round = Math.round;
+			
+			  return function (date) {
+			    var
+			      delta = round((date - new Date) / 1000) || -1,
+			      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
+			      i = units.length, n, seconds;
+			    while (i--) {
+			      seconds = units[i];
+			      if (!i || delta > seconds) {
+			        n = round(delta / seconds);
+			        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
+			      }
+			    }
+			  };
+			}());
+    	}
+    }
 	
 	api.TweetList.prototype.reset = function(tweetIds, callback){
 		
@@ -153,32 +183,7 @@
 						if(user){
 							if(tweetList.tweetIds.indexOf(this.id)>-1){
 								tweetList.loaded++;
-								var $tweet = $("#tweetTemplate").tmpl(tweet);
-								if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
-									$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
-								}
-								
-								$tweet.find('time').localize(function () {
-								  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
-								    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
-								    names = 'seconde minuut uur dag week maand jaar'.split(' '),
-								    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
-								    round = Math.round;
-								
-								  return function (date) {
-								    var
-								      delta = round((date - new Date) / 1000) || -1,
-								      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
-								      i = units.length, n, seconds;
-								    while (i--) {
-								      seconds = units[i];
-								      if (!i || delta > seconds) {
-								        n = round(delta / seconds);
-								        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
-								      }
-								    }
-								  };
-								}());
+								tweetList.add(tweet);
 								if(tweetList.loaded>=tweetList.tweetIds.length){
 									if(tweetList.callback){
 										tweetList.callback.call(tweetList);

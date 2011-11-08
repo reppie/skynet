@@ -5,7 +5,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Skynet Backend</name>
   <dependencies>
-  	<dependency>
+	  	<dependency>
+		    <groupId>org.langdetect</groupId>
+		    <artifactId>langdetect</artifactId>
+		    <version>1.0.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/langdetect/langdetect.jar</systemPath>
+		</dependency>
+  		<dependency>
 			<groupId>org.ini4j</groupId>
 	        <artifactId>ini4j</artifactId>
 	        <version>0.5.2</version>
