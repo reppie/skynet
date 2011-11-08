@@ -30,6 +30,12 @@ public class Place extends Domain<String> implements IPlace{
 	private IUrl url 					= NullUrl.getInstance();
 	private String appId				= "";
 
+	public Place() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getPlaceDao());
+	}
+	
 	public IPlaceType getType() {
 		return type;
 	}
@@ -140,11 +146,6 @@ public class Place extends Domain<String> implements IPlace{
 
 	public void setAppId(String appId) {
 		this.appId = appId;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getPlaceDao();		
 	}
 	
 	@Override

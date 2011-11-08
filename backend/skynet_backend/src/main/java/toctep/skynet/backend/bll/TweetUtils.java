@@ -4,13 +4,16 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TweetUtils {
+public final class TweetUtils {
+	
+	private TweetUtils() {}
 	
 	private static Calendar c = Calendar.getInstance();
-	public synchronized static Timestamp createUTCTimeStamp(Date date){
+	
+	public static synchronized Timestamp createUTCTimeStamp(Date date){
 		c.setTime(date);
-		Timestamp ts = new Timestamp((long)(c.getTime().getTime()-c.getTimeZone().getRawOffset()));
-		return ts;
+		return new Timestamp((long)(c.getTime().getTime()-c.getTimeZone().getRawOffset()));
 	}
 
+	
 }

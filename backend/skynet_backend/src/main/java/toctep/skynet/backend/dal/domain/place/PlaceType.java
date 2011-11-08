@@ -8,6 +8,12 @@ public class PlaceType extends Domain<Integer> implements IPlaceType {
 
 	private String text = "";
 	
+	public PlaceType() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getPlaceTypeDao());
+	}
+	
 	@Override
 	public String getText() {
 		return text;
@@ -15,11 +21,6 @@ public class PlaceType extends Domain<Integer> implements IPlaceType {
 	
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getPlaceTypeDao();
 	}
 	
 	public static IPlaceType select(Integer id) {

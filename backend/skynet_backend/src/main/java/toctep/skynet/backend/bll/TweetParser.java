@@ -34,7 +34,6 @@ import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
 import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
-import toctep.skynet.backend.dal.domain.tweet.ITweet;
 import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.url.Url;
@@ -62,7 +61,7 @@ public final class TweetParser {
 		return instance;
 	}
 	
-	public ITweet parse(Status status) {
+	public Tweet parse(Status status) {
 		Tweet tweet = new Tweet();
 		IBoundingBoxType boundingBoxType = NullBoundingBoxType.getInstance();
 		IBoundingBox boundingBox = NullBoundingBox.getInstance();
@@ -97,7 +96,7 @@ public final class TweetParser {
 		} catch (ParseException e) {
 			Skynet.LOG.error(e.getMessage(), e);
 		}
-		tweet.save();
+		
 		return tweet;
 	}
 	
@@ -290,9 +289,9 @@ public final class TweetParser {
     			twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
     			tweet.setInReplyToUserTwitter(parseUser(NullPlace.getInstance(), NullLanguage.getInstance(), NullTimeZone.getInstance(), replyUser));
 			} catch (TwitterException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			} catch (ParseException e) {
-				e.printStackTrace();
+				Skynet.LOG.error(e.getMessage(), e);
 			}
         }
         

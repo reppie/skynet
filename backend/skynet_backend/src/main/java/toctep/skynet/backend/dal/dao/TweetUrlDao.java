@@ -9,11 +9,6 @@ public abstract class TweetUrlDao extends Dao<Integer> {
 
 	public static final String TABLE_NAME = "twitter_tweet_urls";
 	
-	@Override
-	protected void setTableName() {
-		this.tableName = TABLE_NAME;
-	}
-	
 	public abstract List<TweetUrl> select(Tweet tweet);
 
 }

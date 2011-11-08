@@ -13,7 +13,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	public void insert(Domain<Integer> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 
-		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(text) VALUES(?)";
 		
 		Param[] params = new Param[] {
 			new Param(boundingBoxType.getText(), Types.VARCHAR)
@@ -28,7 +28,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	public BoundingBoxType select(Integer id) {
 		BoundingBoxType boundingBoxType = new BoundingBoxType();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -52,7 +52,7 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	public void delete(Domain<Integer> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(boundingBoxType.getId(), Types.INTEGER) }
 		);
 	}
@@ -60,17 +60,17 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		BoundingBoxType boundingBoxType = (BoundingBoxType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text", new Param(boundingBoxType.getText(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "text", new Param(boundingBoxType.getText(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 	
 }

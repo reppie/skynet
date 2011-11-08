@@ -122,3 +122,10 @@ $(function(){
 	$("section#tag-cloud").hide();
 	});
 });
+
+$("#searchbar").focusin(function() {
+	$("#search-explanation").slideDown();
+});
+$("#searchbar").focusout(function() {
+	$("#search-explanation").slideUp();
+});

@@ -8,17 +8,18 @@ public class GeoType extends Domain<Integer> implements IGeoType {
 
 	private String text = "";
 
+	public GeoType() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getGeoTypeDao());
+	}
+	
 	public String getText() {
 		return text;
 	}
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getGeoTypeDao();	
 	}
 	
 	public static IGeoType select(Integer id) {

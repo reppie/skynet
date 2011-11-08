@@ -48,6 +48,12 @@ public class Tweet extends Domain<Long> implements ITweet {
 	private List<User> tweetMentions 		= new ArrayList<User>();
 	private List<Url> tweetUrls 			= new ArrayList<Url>();
 	
+	public Tweet() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getTweetDao());
+	}
+	
 	public void addContributor(IUser contributor) {
 		if (contributor instanceof User) {
 			tweetContributors.add((User) contributor);
@@ -213,13 +219,7 @@ public class Tweet extends Domain<Long> implements ITweet {
 
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getTweetDao();
-	}
-	
+	}	
 
 	private void saveContributors() {
 		for(User contributor : tweetContributors) {
@@ -359,8 +359,9 @@ public class Tweet extends Domain<Long> implements ITweet {
 	public static boolean exists(Long id) {
 		TweetDao dao = DaoFacadeImpl.getInstance().getTweetDao();
 		
-		if(dao.exists(id))
+		if(dao.exists(id)) {
 			return true;
+		}
 		
 		return false;
 	}

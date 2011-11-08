@@ -8,11 +8,6 @@ import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 
 public abstract class TweetKeywordDao extends Dao<Integer> {
 	public static final String TABLE_NAME = "twitter_tweet_keywords";
-	
-	@Override
-	protected void setTableName() {
-		this.tableName = TABLE_NAME;
-	}
 
 	public abstract List<TweetKeyword> select(Tweet tweet);
 	

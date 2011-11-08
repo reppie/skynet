@@ -5,14 +5,13 @@ import toctep.skynet.backend.dal.dao.Dao;
 public abstract class Domain<T> implements IDomain<T> {
 	
 	private boolean dirty;
+		
+	private Dao<T> dao;
 	
 	private T id;
 	
-	protected Dao<T> dao;
-	
 	public Domain() {
 		setDirty();
-		setDao();
 	}
 	
 	public final boolean isDirty() {
@@ -35,7 +34,13 @@ public abstract class Domain<T> implements IDomain<T> {
 		this.id = id;
 	}
 	
-	public abstract void setDao();
+	public void setDao(Dao<T> dao) {
+		this.dao = dao;
+	}
+	
+	public Dao<T> getDao() {
+		return dao;
+	}
 	
 	public void save() {
 		if (isDirty()) {

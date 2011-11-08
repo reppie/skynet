@@ -4,9 +4,4 @@ public abstract class UrlDao extends Dao<String> {
 
 	public static final String TABLE_NAME = "twitter_url";
 	
-	@Override
-	protected void setTableName() {
-		this.tableName = TABLE_NAME;
-	}
-
 }

@@ -12,7 +12,7 @@ public class UrlDaoImpl extends UrlDao {
 	public void insert(Domain<String> domain) {
 		Url url = (Url) domain;
 
-		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(text) VALUES(?)";
 		
 		Param[] params = new Param[] {
 			new Param(url.getId(), Types.VARCHAR)
@@ -25,7 +25,7 @@ public class UrlDaoImpl extends UrlDao {
 	public Url select(String id) {
 		Url url = new Url();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE text=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE text=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.VARCHAR)
@@ -48,7 +48,7 @@ public class UrlDaoImpl extends UrlDao {
 	public void delete(Domain<String> domain) {
 		Url url = (Url) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE text=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE text=?",
 			new Param[] { new Param(url.getId(), Types.VARCHAR) }
 		);
 	}
@@ -56,17 +56,17 @@ public class UrlDaoImpl extends UrlDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Url url = (Url) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text", new Param(url.getId(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "text", new Param(url.getId(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "text", new Param(id, Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "text", new Param(id, Types.VARCHAR));
 	}	
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

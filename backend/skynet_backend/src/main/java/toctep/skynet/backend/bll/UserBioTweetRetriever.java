@@ -1,5 +1,8 @@
 package toctep.skynet.backend.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import toctep.skynet.backend.Skynet;
 import twitter4j.Status;
 
@@ -11,10 +14,13 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	
 	public static final String LANGDETECT_PROFILE_DIR = "lib/langdetect/profiles";
 	
-	@Override
-	public void initialize() {
-		super.initialize();
+	public UserBioTweetRetriever() {
+		super();
 		
+		initialize();
+	}
+	
+	private void initialize() {
 		try {
 			DetectorFactory.loadProfile(LANGDETECT_PROFILE_DIR);
 		} catch (LangDetectException e) {
@@ -24,7 +30,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	
 	@Override
 	public void run() {
-		twitterStream.sample();
+		getTwitterStream().sample();
 	}
 	
 	@Override
@@ -41,15 +47,42 @@ public class UserBioTweetRetriever extends TweetRetriever {
 			Skynet.LOG.error(e.getMessage(), e);
 		}
 		
-		if (status.getUser().getLang().equalsIgnoreCase("nl")
-				|| status.getUser().getTimeZone().equalsIgnoreCase("amsterdam")
-				|| status.getUser().getLocation().toLowerCase().contains("netherland")
-				|| status.getUser().getLocation().toLowerCase().contains("nederland")
-				|| status.getUser().getLocation().toLowerCase().contains("holland")
-				|| lang.equalsIgnoreCase("nl")) {
+		twitter4j.User user = status.getUser();
+		
+		if (isDutchLanguage(user, lang) || isDutchLocation(user) || isDutchTimeZone(user)) {
 			return true;
     	}
 		
+		return false;
+	}
+	
+	private boolean isDutchLocation(twitter4j.User user) {
+		List<String> locations = new ArrayList<String>();
+		locations.add("netherland");
+		locations.add("netherlands");
+		locations.add("nederland");
+		locations.add("holland");
+		
+		if (locations.contains(user.getLocation().toLowerCase())) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isDutchLanguage(twitter4j.User user, String lang) {
+		if (user.getLang().equalsIgnoreCase("nl")) {
+			return true;
+		}
+		if(lang.equalsIgnoreCase("nl")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isDutchTimeZone(twitter4j.User user) {
+		if (user.getTimeZone().equalsIgnoreCase("amsterdam")) {
+			return true;
+		}
 		return false;
 	}
 

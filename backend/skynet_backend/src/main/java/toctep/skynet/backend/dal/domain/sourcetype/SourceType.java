@@ -8,6 +8,12 @@ public class SourceType extends Domain<Integer> implements ISourceType {
 
 	private String text = "";
 
+	public SourceType() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getSourceTypeDao());
+	}
+	
 	@Override
 	public String getText() {
 		return text;
@@ -15,11 +21,6 @@ public class SourceType extends Domain<Integer> implements ISourceType {
 	
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getSourceTypeDao();
 	}
 	
 	public static ISourceType select(Integer id) {

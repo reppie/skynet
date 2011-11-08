@@ -8,17 +8,18 @@ public class Language extends Domain<Integer> implements ILanguage {
 
 	private String text = "";
 	
+	public Language() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getLanguageDao());
+	}
+	
 	public String getText() {
 		return text;
 	}
 	
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getLanguageDao();
 	}
 	
 	public static ILanguage select(Integer id) {
