@@ -14,10 +14,8 @@ class KeywordCloud:
     step = None
     
     def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=50, exclude=[]):
-        blacklist_query = Keyword.get_all_since(datetime.now() - timedelta(days=1))
-        blacklist_query = blacklist_query[:len(blacklist_query)/100*3]
-        for item in blacklist_query:
-            exclude.append(item['keyword'])
+        stored_blacklist = BlacklistItem.objects.all().values_list('keyword', flat=True)
+        exclude.extend(stored_blacklist)
 
         query_set = query_set.all().exclude(keyword__in=exclude)[:num_keywords]
         self.items = self.__generate(query_set, min_font_size, max_font_size)
@@ -104,3 +102,6 @@ class KeywordFontSize:
         
 class BlacklistItem(models.Model):
     keyword = models.CharField(max_length=140, unique=True)
+    
+    def __unicode__(self):
+        return self.keyword
