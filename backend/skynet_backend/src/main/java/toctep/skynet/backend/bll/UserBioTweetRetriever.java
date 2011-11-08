@@ -15,13 +15,12 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	public static final String LANGDETECT_PROFILE_DIR = "lib/langdetect/profiles";
 	
 	public UserBioTweetRetriever() {
+		super();
+		
 		initialize();
 	}
 	
-	@Override
-	protected void initialize() {
-		super.initialize();
-		
+	private void initialize() {
 		try {
 			DetectorFactory.loadProfile(LANGDETECT_PROFILE_DIR);
 		} catch (LangDetectException e) {

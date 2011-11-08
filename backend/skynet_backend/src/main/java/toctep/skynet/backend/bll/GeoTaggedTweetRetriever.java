@@ -10,10 +10,6 @@ public class GeoTaggedTweetRetriever extends TweetRetriever {
 	//private final static double[][] GRONINGEN_CITY_COORDS = new double[][] { {6.45, 53.16}, {6.65, 53.26} };
 	//private final static double[][] GRONINGEN_ZERNIKE_COORDS = new double[][] { {6.52, 53.23}, {6.55, 53.25} };
 	
-	public GeoTaggedTweetRetriever() {
-		initialize();
-	}
-	
 	@Override
 	public void run() {
 		this.getTwitterStream().filter(new FilterQuery(0, null, null, NETHERLANDS_COORDS));
