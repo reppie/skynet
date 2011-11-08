@@ -9,11 +9,9 @@
 		},
 		'Tweet': function(json){
 			api.Base.prototype.constructor.call(this, json);
-			
 		},
 		'User': function(json){
 			api.Base.prototype.constructor.call(this, json);
-			
 		},
 		'CrumblePath': function(element){
 			this.$path = element;
@@ -21,7 +19,6 @@
 			var nl = new api.filters.Geo("Nederland", "NL", null);
 			nl.removable = false;
 			this.add(nl);
-			
 		},
 		'TweetList': function(element, tweets, callback){
 			this.$tweetList = element;
@@ -56,7 +53,6 @@
 		  		callback.call(This, null);
 			  }
 		  	});
-				
 		},
 		'filters': {
 			'Base': function(type, label, value){
@@ -68,19 +64,15 @@
 				this.equals = function(filter){
 					return this.type == filter.type && this.value == filter.value;
 				}
-				
 			},
 			'Keyword': function(keyword){
 				api.filters.Base.prototype.constructor.call(this, 'keyword', keyword, keyword);
-				
 			},
 			'User': function(user){
 				api.filters.Base.prototype.constructor.call(this, 'user', "@" + user, user);
-				
 			},
 			'Tag': function(tag){
 				api.filters.Base.prototype.constructor.call(this, 'tag', "#" + tag, tag);
-				
 			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
@@ -133,7 +125,7 @@
     };
     
     api.TweetList.prototype.add = function(tweet){
-    	
+    	var tweetList = this;
 		if(!$('.tweets .tweet[data-tweet-id="'+this.id+'"]').length){
 			var $tweet = $("#tweetTemplate").tmpl(tweet);
 			$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
