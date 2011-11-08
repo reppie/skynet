@@ -1,18 +1,13 @@
 package toctep.skynet.backend.dal.dao.impl.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Map;
 
-import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.keyword.IKeyword;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.keyword.NullKeyword;
-
-import com.mysql.jdbc.Statement;
 
 public class KeywordDaoImpl extends KeywordDao {
 
@@ -68,32 +63,10 @@ public class KeywordDaoImpl extends KeywordDao {
 	
 	@Override
 	public void update(Domain<Integer> domain) {
-		searchKeyword(domain);
+		// TODO Auto-generated method stub
+		
 	}
 	
-	private void searchKeyword(Domain<Integer> domain) {
-		Keyword keyword = (Keyword) domain;
-		
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		try {
-			stmt = (Statement) MySqlUtil.getInstance().getConnection().createStatement();
-			rs = stmt.executeQuery("SELECT id FROM " + tableName + " WHERE keyword = '" + keyword.getKeyword() + "';");
-			rs.first();
-			keyword.setId(rs.getInt("id"));
-		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
-		} finally {
-			try {
-				stmt.close();
-				rs.close();
-			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
-			}
-		}
-	}
-
 	@Override
 	public void delete(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;	
