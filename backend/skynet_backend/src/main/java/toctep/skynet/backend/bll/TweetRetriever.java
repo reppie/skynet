@@ -27,7 +27,7 @@ public abstract class TweetRetriever implements Runnable {
 			public void onStatus(Status status) {
 				if (isDutch(status)) {
 					Skynet.LOG.info(id);
-					tweetParser.parse(status);
+					tweetParser.parse(status).save();
 				}
 	        }
 			
