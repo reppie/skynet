@@ -5,6 +5,7 @@ $(function(){
 	
 	function getFilter(value){
 		var filter = null;
+		value = value + "";
 		if(value.substring(0,1)=='@'){
 			filter = new api.filters.User(value.substring(1));
 		} else if(value.substring(0,1)=='#'){
