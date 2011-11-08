@@ -402,4 +402,12 @@ public class User extends Domain<Long> implements IUser  {
 		UserDao dao = DaoFacadeImpl.getInstance().getUserDao();
 		return dao.select(screenName);
 	}	
+	
+	public static boolean exists(Long id) {
+		UserDao dao = DaoFacadeImpl.getInstance().getUserDao();
+		if (dao.exists(id)) {
+			return true;
+		}
+		return false;
+	}
 }

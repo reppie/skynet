@@ -18,10 +18,13 @@ import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
 import twitter4j.GeoLocation;
 import twitter4j.HashtagEntity;
 import twitter4j.Status;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.URLEntity;
 import twitter4j.UserMentionEntity;
 
@@ -37,8 +40,8 @@ public final class TweetParser {
 	private SourceType sourceType;
 	private TimeZone timeZone;
 	private Place place;
-	private User user;
 	private Tweet tweet;
+	private User user;
 	
 	private static TweetParser instance;
 	
@@ -66,7 +69,7 @@ public final class TweetParser {
 			parseSourceType(status);
 			parseTimeZone(status.getUser());
 			parsePlace(status.getPlace());
-			parseUser(status.getUser());
+			user = parseUser(status.getUser());
 			parseTweet(status);
 			parseUrl(status);
 			parseHashtag(status);
@@ -166,8 +169,8 @@ public final class TweetParser {
         place.setCountry(country);
     }
     
-    private void parseUser(twitter4j.User userStatus) throws ParseException {
-        this.user = new User();
+    private User parseUser(twitter4j.User userStatus) throws ParseException {
+        User user = new User();
         user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
         user.setStatusesCount(userStatus.getStatusesCount());    
@@ -199,10 +202,12 @@ public final class TweetParser {
         user.setPlace(place);
         user.setLanguage(language);
         user.setTimeZone(timeZone);
-        parseUserUrls(userStatus);
+        user = parseUserUrls(user, userStatus);
+        
+        return user;
     }
     
-    private void parseUserUrls(twitter4j.User userStatus) {
+    private User parseUserUrls(User user, twitter4j.User userStatus) {
         if(userStatus.getProfileBackgroundImageUrl() != null) {
             Url profileBgUrl = new Url();
         	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
@@ -229,7 +234,8 @@ public final class TweetParser {
             Url userUrl = new Url();
         	userUrl.setId(userStatus.getURL().toExternalForm());
             user.setUrl(userUrl);
-        }        
+        }       
+        return user;
 	}
 
 	private void parseTweet(Status status) {
@@ -241,11 +247,24 @@ public final class TweetParser {
         
         Tweet inReplyToTweet = new Tweet();
         inReplyToTweet.setId(status.getInReplyToStatusId());
-        tweet.setInReplyToTweetTwitter(inReplyToTweet);
+        tweet.setInReplyToTweetTwitter(Tweet.select(status.getInReplyToStatusId()));
         
-        User inReplyToUser = new User();
-        inReplyToUser.setId(status.getInReplyToUserId());       
-        tweet.setInReplyToUserTwitter(inReplyToUser);
+        if(User.exists(status.getInReplyToUserId())) {
+            tweet.setInReplyToUserTwitter(User.select(status.getInReplyToUserId()));
+        }
+        else if (status.getInReplyToUserId() == -1) {
+        	tweet.setInReplyToUserTwitter(NullUser.getInstance());
+        }
+        else {
+        	try {
+				twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
+				tweet.setInReplyToUserTwitter(parseUser(replyUser));
+			} catch (TwitterException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+        }
         
         tweet.setRetweetCount(status.getRetweetCount());
         tweet.setCreatedAt(TweetUtils.createUTCTimeStamp(status.getCreatedAt()));

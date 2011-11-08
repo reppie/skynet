@@ -356,4 +356,13 @@ public class Tweet extends Domain<Long> implements ITweet {
 		return NullTweet.getInstance();
 	}
 	
+	public static boolean exists(Long id) {
+		TweetDao dao = DaoFacadeImpl.getInstance().getTweetDao();
+		
+		if(dao.exists(id))
+			return true;
+		
+		return false;
+	}
+	
 }
