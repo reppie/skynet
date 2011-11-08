@@ -16,6 +16,7 @@ import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.NullUser;
@@ -30,19 +31,6 @@ import twitter4j.UserMentionEntity;
 
 public final class TweetParser {
 	
-	private BoundingBoxType boundingBoxType;
-	private BoundingBox boundingBox;
-	private Country country;
-	private GeoType geoType;
-	private Geo geo;
-	private Language language;
-	private PlaceType placeType;
-	private SourceType sourceType;
-	private TimeZone timeZone;
-	private Place place;
-	private Tweet tweet;
-	private User user;
-	
 	private static TweetParser instance;
 	
 	private TweetParser() { }
@@ -54,42 +42,44 @@ public final class TweetParser {
 		return instance;
 	}
 	
-	public void parse(Status status) {
-		try {
-			if (status.getPlace() != null) {
-				parseBoundingBoxType(status.getPlace());
-				parseBoundingBox(status.getPlace());
-			}	
+	public Tweet parse(Status status) {
+			Tweet tweet = new Tweet();
 			
-			parseCountry(status.getPlace());
-			parseGeoType(status.getPlace());
-			parseGeo(status.getPlace());
-			parseLanguage(status.getUser());
-			parsePlaceType(status.getPlace());
-			parseSourceType(status);
-			parseTimeZone(status.getUser());
-			parsePlace(status.getPlace());
-			user = parseUser(status.getUser());
-			parseTweet(status);
-			parseUrl(status);
-			parseHashtag(status);
-			parseContributor(status);
-			parseMention(status);
+		try {
+			BoundingBoxType boundingBoxType = parseBoundingBoxType(status.getPlace());
+			BoundingBox boundingBox = parseBoundingBox(boundingBoxType, status.getPlace());
+			Country country = parseCountry(status.getPlace());
+			GeoType geoType = parseGeoType(status.getPlace());
+			Geo geo = parseGeo(geoType, status.getPlace());
+			Language language = parseLanguage(status.getUser());
+			PlaceType placeType = parsePlaceType(status.getPlace());
+			SourceType sourceType = parseSourceType(status);
+			TimeZone timeZone = parseTimeZone(status.getUser());
+			Place place = parsePlace(placeType, boundingBox, country, status.getPlace());
+			User user = parseUser(place, language, timeZone, status.getUser());
+			tweet = parseTweet(user, geo, sourceType, place, status);
+			
+			parseUrl(tweet, status);
+			parseHashtag(tweet, status);
+			parseContributor(tweet, status);
+			parseMention(tweet, status);
 			parseKeyword(tweet);
+			
 		} catch (ParseException e) {
 			Skynet.LOG.error(e.getMessage(), e);
 		}
-		
 		tweet.save();
+		return tweet;
 	}
 	
-	private void parseBoundingBoxType(twitter4j.Place place) {
-        boundingBoxType = new BoundingBoxType();
+	private BoundingBoxType parseBoundingBoxType(twitter4j.Place place) {
+        BoundingBoxType boundingBoxType = new BoundingBoxType();
         boundingBoxType.setText(place.getBoundingBoxType());
+        return boundingBoxType;
 	}
 	
-	private void parseBoundingBox(twitter4j.Place place) {
-        boundingBox = new BoundingBox();
+	private BoundingBox parseBoundingBox(BoundingBoxType type, twitter4j.Place place) {
+        BoundingBox boundingBox = new BoundingBox();
         String coordinates = "";
         GeoLocation[][] array = place.getBoundingBoxCoordinates();
         for(GeoLocation[] x : array) {
@@ -98,22 +88,25 @@ public final class TweetParser {
         	}
         }        
         boundingBox.setCoordinates(coordinates);
-        boundingBox.setType(boundingBoxType);
+        boundingBox.setType(type);
+        return boundingBox;
 	}
 
-    private void parseCountry(twitter4j.Place place) {
-        country = new Country();
+    private Country parseCountry(twitter4j.Place place) {
+        Country country = new Country();
         country.setId(place.getCountryCode());
         country.setText(place.getCountry());
+        return country;
     }
 
-    private void parseGeoType(twitter4j.Place place) {        
-        geoType = new GeoType();
+    private GeoType parseGeoType(twitter4j.Place place) {        
+    	GeoType geoType = new GeoType();
         geoType.setText(place.getGeometryType());
+        return geoType;
     }
 
-    private void parseGeo(twitter4j.Place place) {
-    	geo = new Geo();
+    private Geo parseGeo(GeoType type, twitter4j.Place place) {
+    	Geo geo = new Geo();
         String geoCoordinates = "";
         GeoLocation[][] geoArray = place.getBoundingBoxCoordinates();
         for(GeoLocation[] x : geoArray) {
@@ -122,32 +115,37 @@ public final class TweetParser {
         	}
         }        
         geo.setCoordinates(geoCoordinates);
-        geo.setType(geoType);   
+        geo.setType(type);   
+        return geo;
     }
 
-    private void parseLanguage(twitter4j.User user) {
-        language = new Language();
+    private Language parseLanguage(twitter4j.User user) {
+        Language language = new Language();
         language.setText(user.getLang());
+        return language;
     }
     
-    private void parsePlaceType(twitter4j.Place place) {
-        placeType = new PlaceType();
+    private PlaceType parsePlaceType(twitter4j.Place place) {
+        PlaceType placeType = new PlaceType();
         placeType.setText(place.getPlaceType());
+        return placeType;
     }
     
-    private void parseSourceType(Status status) {
-        sourceType = new SourceType();
+    private SourceType parseSourceType(Status status) {
+    	SourceType sourceType = new SourceType();
         sourceType.setText(status.getSource());
+        return sourceType;
     }
     
-    private void parseTimeZone(twitter4j.User user) {
-        timeZone = new TimeZone();
+    private TimeZone parseTimeZone(twitter4j.User user) {
+        TimeZone timeZone = new TimeZone();
         timeZone.setTimeZone(user.getTimeZone());
         timeZone.setUtcOffset(user.getUtcOffset());
+        return timeZone;
     }
     
-    private void parsePlace(twitter4j.Place placeStatus) {
-        this.place = new Place();
+    private Place parsePlace(PlaceType type, BoundingBox boundingBox, Country country, twitter4j.Place placeStatus) {
+        Place place = new Place();
         place.setId(placeStatus.getId());
         place.setName(placeStatus.getName());
         place.setFullName(placeStatus.getFullName());
@@ -164,12 +162,13 @@ public final class TweetParser {
         	place.setUrl(placeUrl);
         }
         place.setAppId(""); //Twitter4j has no support for this?
-        place.setType(placeType);
+        place.setType(type);
         place.setBoundingBox(boundingBox);
         place.setCountry(country);
+        return place;
     }
     
-    private User parseUser(twitter4j.User userStatus) throws ParseException {
+    private User parseUser(Place place, Language language, TimeZone timeZone, twitter4j.User userStatus) throws ParseException {
         User user = new User();
         user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
@@ -203,7 +202,6 @@ public final class TweetParser {
         user.setLanguage(language);
         user.setTimeZone(timeZone);
         user = parseUserUrls(user, userStatus);
-        
         return user;
     }
     
@@ -238,16 +236,27 @@ public final class TweetParser {
         return user;
 	}
 
-	private void parseTweet(Status status) {
-        tweet = new Tweet();
+	private Tweet parseTweet(User user, Geo geo, SourceType sourceType, Place place, Status status) {
+        Tweet tweet = new Tweet();
         tweet.setId(status.getId());
         tweet.setText(status.getText());
         tweet.setTruncated(status.isTruncated());
         tweet.setFavorited(status.isFavorited());
         
-        Tweet inReplyToTweet = new Tweet();
-        inReplyToTweet.setId(status.getInReplyToStatusId());
-        tweet.setInReplyToTweetTwitter(Tweet.select(status.getInReplyToStatusId()));
+        if(Tweet.exists(status.getInReplyToStatusId())) {
+            tweet.setInReplyToTweetTwitter((Tweet.select(status.getInReplyToStatusId())));
+        }
+        else if (status.getInReplyToStatusId() == -1) {
+        	tweet.setInReplyToTweetTwitter(NullTweet.getInstance());
+        }
+        else {
+        	try {
+				twitter4j.Status replyTweet = TwitterFactory.getSingleton().showStatus(status.getInReplyToStatusId());
+				tweet.setInReplyToTweetTwitter(parse(replyTweet));
+			} catch (TwitterException e) {
+				e.printStackTrace();
+			}
+        }
         
         if(User.exists(status.getInReplyToUserId())) {
             tweet.setInReplyToUserTwitter(User.select(status.getInReplyToUserId()));
@@ -258,10 +267,8 @@ public final class TweetParser {
         else {
         	try {
 				twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
-				tweet.setInReplyToUserTwitter(parseUser(replyUser));
+				tweet.setInReplyToUserTwitter(parse(replyUser.getStatus()).getUser());
 			} catch (TwitterException e) {
-				e.printStackTrace();
-			} catch (ParseException e) {
 				e.printStackTrace();
 			}
         }
@@ -272,9 +279,11 @@ public final class TweetParser {
         tweet.setSourceType(sourceType);
         tweet.setPlace(place);
         tweet.setUser(user);
+        
+        return tweet;
     }
     
-    private void parseContributor(Status status) {
+    private List<User> parseContributor(Tweet tweet, Status status) {
     	if (status.getContributors() != null) {
 	        for(long contributor : status.getContributors()) {
 	            User contributorUser  = new User();
@@ -282,37 +291,42 @@ public final class TweetParser {
 	            tweet.addContributor(contributorUser);
 	        }
     	}
+    	return tweet.getContributors();
     }
     
-    private void parseHashtag(Status status) {
+    private List<Hashtag> parseHashtag(Tweet tweet, Status status) {
         for(HashtagEntity hashtagEntity : status.getHashtagEntities()) {
             Hashtag hashtag = new Hashtag();
             hashtag.setText(hashtagEntity.getText());
             tweet.addHashtag(hashtag);
         } 
+        return tweet.getHashtags();
     }
     
-    private void parseKeyword(Tweet tweet) {
+    private List<Keyword> parseKeyword(Tweet tweet) {
         List<Keyword> keywords = new TweetIndexer().indexTweetKeywords(tweet);
         
         for(Keyword keyword : keywords) {
         	tweet.addKeyword(keyword);
         }
+        return tweet.getKeywords();
     }
     
-    private void parseMention(Status status) {
+    private List<User> parseMention(Tweet tweet, Status status) {
         for(UserMentionEntity mentionEntity : status.getUserMentionEntities()) {
             User mentionedUser = new User();
             mentionedUser.setId(mentionEntity.getId());
             tweet.addMention(mentionedUser);
         }
+        return tweet.getMentions();
     }
     
-    private void parseUrl(Status status) {
+    private List<Url> parseUrl(Tweet tweet, Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
             Url url = new Url();
             url.setId(urlEntity.getDisplayURL());
             tweet.addUrl(url);
         }
+        return tweet.getUrls();
     }    
 }
