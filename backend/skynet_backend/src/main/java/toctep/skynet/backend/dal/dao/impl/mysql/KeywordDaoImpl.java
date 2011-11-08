@@ -8,7 +8,9 @@ import java.util.Map;
 import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.KeywordDao;
 import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.keyword.IKeyword;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
+import toctep.skynet.backend.dal.domain.keyword.NullKeyword;
 
 import com.mysql.jdbc.Statement;
 
@@ -48,7 +50,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	}
 
 	@Override
-	public Integer select(String keyword) {
+	public IKeyword select(String keyword) {
 		String query = "SELECT id FROM " + tableName + " WHERE keyword=?";
 		
 		Param[] params = new Param[] {
@@ -56,9 +58,12 @@ public class KeywordDaoImpl extends KeywordDao {
 		};
 		
 		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
-		Integer id = (Integer) row.get("id");
 		
-		return id;
+		if (row.size() > 0) {
+			return select((Integer) row.get("id"));
+		} else {
+			return NullKeyword.getInstance();
+		}
 	}
 	
 	@Override

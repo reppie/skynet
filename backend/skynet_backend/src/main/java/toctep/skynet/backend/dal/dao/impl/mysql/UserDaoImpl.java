@@ -10,6 +10,8 @@ import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserDaoImpl extends UserDao {
@@ -135,17 +137,22 @@ public class UserDaoImpl extends UserDao {
 	}
 
 	@Override
-	public Long select(String screenName) {
+	public IUser select(String screenName) {
 		String query = "SELECT id FROM " + tableName + " WHERE screen_name=?";
+		
+		System.out.println("sn: " + screenName);
 		
 		Param[] params = new Param[] {
 			new Param(screenName, Types.VARCHAR)
 		};
 		
 		Map<String, Object> row = MySqlUtil.getInstance().selectRow(query, params);
-		Long id = (Long) row.get("id");
 		
-		return id;
+		if (row.size() > 0) {
+			return select((Long) row.get("id"));
+		} else {
+			return NullUser.getInstance();
+		}
 	}
 	
 	@Override
