@@ -1,4 +1,4 @@
-from models import BlackListItem
+from models import BlacklistItem
 from django.contrib import admin
 
-admin.site.register(BlackListItem)
+admin.site.register(BlacklistItem)
