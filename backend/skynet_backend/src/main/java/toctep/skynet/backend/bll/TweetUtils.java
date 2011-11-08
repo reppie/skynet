@@ -8,8 +8,7 @@ public class TweetUtils {
 	
 	public synchronized static Timestamp createUTCTimeStamp(Date date){
 		c.setTime(date);
-		Timestamp ts = new Timestamp((long)(c.getTime().getTime()-c.getTimeZone().getRawOffset()));
-		return ts;
+		return new Timestamp((long)(c.getTime().getTime()-c.getTimeZone().getRawOffset()));
 	}
 
 	private TweetUtils() {}
