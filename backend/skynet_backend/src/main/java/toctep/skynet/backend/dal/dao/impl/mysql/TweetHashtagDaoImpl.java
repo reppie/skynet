@@ -17,7 +17,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	public void insert(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;
 		
-		String query = "INSERT INTO " + tableName + "(tweet_id, hashtag_id) VALUES(?, ?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(tweet_id, hashtag_id) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(tweetHashtag.getTweet().getId(), Types.BIGINT),
@@ -33,7 +33,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	public TweetHashtag select(Integer id) {
 		TweetHashtag tweetHashtag = new TweetHashtag();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -51,7 +51,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	public List<TweetHashtag> select(Tweet tweet) {
 		List<TweetHashtag> tweetHashtags = new ArrayList<TweetHashtag>();
 		
-		String query = "SELECT id, hashtag_id FROM " + tableName + " WHERE tweet_id=?";
+		String query = "SELECT id, hashtag_id FROM " + TABLE_NAME + " WHERE tweet_id=?";
 		
 		Param[] params = new Param[] {
 			new Param(tweet.getId(), Types.BIGINT)
@@ -79,7 +79,7 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	public void delete(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;	
 		MySqlUtil.getInstance().delete(
-				"DELETE FROM " + tableName + " WHERE id=?",
+				"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 				new Param[] { new Param(tweetHashtag.getId(), Types.INTEGER) }
 			);
 	}
@@ -87,17 +87,17 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetHashtag.getId(), Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(tweetHashtag.getId(), Types.INTEGER));
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

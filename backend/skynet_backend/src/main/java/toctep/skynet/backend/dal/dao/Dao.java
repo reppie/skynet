@@ -4,14 +4,6 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public abstract class Dao<T> {
 	
-	protected String tableName;
-	
-	public Dao() {
-		setTableName();
-	}
-	
-	protected abstract void setTableName();
-	
 	public abstract void insert(Domain<T> domain);
 	public abstract Domain<T> select(T id);
 	public abstract void update(Domain<T> domain);

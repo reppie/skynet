@@ -15,7 +15,7 @@ public class HashtagDaoImpl extends HashtagDao{
 	public void insert(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
 		
-		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(text) VALUES(?)";
 		
 		Param[] params = new Param[] {
 			new Param(hashtag.getText(), Types.VARCHAR)
@@ -30,7 +30,7 @@ public class HashtagDaoImpl extends HashtagDao{
 	public Hashtag select(Integer id) {
 		Hashtag hashtag = new Hashtag();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -46,7 +46,7 @@ public class HashtagDaoImpl extends HashtagDao{
 	
 	@Override
 	public IHashtag select(String text) {
-		String query = "SELECT id FROM " + tableName + " WHERE text=?";
+		String query = "SELECT id FROM " + TABLE_NAME + " WHERE text=?";
 		
 		Param[] params = new Param[] {
 			new Param(text, Types.VARCHAR)
@@ -71,7 +71,7 @@ public class HashtagDaoImpl extends HashtagDao{
 	public void delete(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(hashtag.getId(), Types.INTEGER) }
 		);
 	}
@@ -79,17 +79,17 @@ public class HashtagDaoImpl extends HashtagDao{
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		Hashtag hashtag = (Hashtag) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text", new Param(hashtag.getText(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "text", new Param(hashtag.getText(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

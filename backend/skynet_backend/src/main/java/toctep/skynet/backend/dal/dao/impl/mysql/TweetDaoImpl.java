@@ -25,7 +25,7 @@ public class TweetDaoImpl extends TweetDao {
 		Tweet tweet = (Tweet) domain;
 		
 		String query = 
-			"INSERT INTO " + tableName + 
+			"INSERT INTO " + TABLE_NAME + 
 				"(id, text, geo_id, truncated, source_type_id, favorited, in_reply_to_tweet_id, in_reply_to_user_id, retweet_count, created_at, place_id, user_id, coordinates) " +
 			"VALUES" +
 				"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -53,7 +53,7 @@ public class TweetDaoImpl extends TweetDao {
 	public Tweet select(Long id) {
 		Tweet tweet = new Tweet();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -112,7 +112,7 @@ public class TweetDaoImpl extends TweetDao {
 	public void delete(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(tweet.getId(), Types.BIGINT) }
 		);
 	}
@@ -120,17 +120,17 @@ public class TweetDaoImpl extends TweetDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		Tweet tweet = (Tweet) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweet.getId(), Types.BIGINT));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(tweet.getId(), Types.BIGINT));
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.BIGINT));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.BIGINT));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

@@ -15,7 +15,7 @@ public class GeoDaoImpl extends GeoDao {
 	public void insert(Domain<Integer> domain) {
 		Geo geo = (Geo) domain;
 		
-		String query = "INSERT INTO " + tableName + "(geo_type_id, coordinates) VALUES(?, ?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(geo_type_id, coordinates) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(geo.getType().getId(), Types.BIGINT),
@@ -31,7 +31,7 @@ public class GeoDaoImpl extends GeoDao {
 	public Geo select(Integer id) {
 		Geo geo = new Geo();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -56,7 +56,7 @@ public class GeoDaoImpl extends GeoDao {
 	public void delete(Domain<Integer> domain) {
 		Geo geo = (Geo) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(geo.getId(), Types.INTEGER) }
 		);
 	}
@@ -66,17 +66,17 @@ public class GeoDaoImpl extends GeoDao {
 		Geo geo = (Geo) domain;
 		Map<String, Param> params = new HashMap<String, Param>();
 		params.put("coordinates", new Param(geo.getCoordinates(), Types.VARCHAR));
-		return MySqlUtil.getInstance().exists(tableName, params);
+		return MySqlUtil.getInstance().exists(TABLE_NAME, params);
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 	
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

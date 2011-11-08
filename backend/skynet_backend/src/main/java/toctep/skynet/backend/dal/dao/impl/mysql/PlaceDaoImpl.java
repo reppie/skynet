@@ -18,7 +18,7 @@ public class PlaceDaoImpl extends PlaceDao {
 		Place place = (Place) domain;
 		
 		String query = 
-			"INSERT INTO " + tableName + 
+			"INSERT INTO " + TABLE_NAME + 
 				"(id, place_type_id, bounding_box_id, name, url_id, full_name, country_id, street_address, locality, region, iso3, postal_code, phone, twitter, appid) " +
 			"VALUES" +
 				"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -48,7 +48,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	public Place select(String id) {
 		Place place = new Place();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.VARCHAR)
@@ -85,7 +85,7 @@ public class PlaceDaoImpl extends PlaceDao {
 	public void delete(Domain<String> domain) {
 		Place place = (Place) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(place.getId(), Types.VARCHAR) }
 		);
 	}
@@ -93,17 +93,17 @@ public class PlaceDaoImpl extends PlaceDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Place place = (Place) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(place.getId(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(place.getId(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.VARCHAR));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

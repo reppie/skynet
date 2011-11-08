@@ -17,7 +17,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public void insert(Domain<Integer> domain) {
 		TweetKeyword tweetKeyword = (TweetKeyword) domain;
 		
-		String query = "INSERT INTO " + tableName + "(tweet_id, value, keyword_id) VALUES(?, ?, ?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(tweet_id, value, keyword_id) VALUES(?, ?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(tweetKeyword.getTweet().getId(), Types.BIGINT),
@@ -34,7 +34,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public TweetKeyword select(Integer id) {
 		TweetKeyword tweetKeyword = new TweetKeyword();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -53,7 +53,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public List<TweetKeyword> select(Tweet tweet) {
 		List<TweetKeyword> tweetKeywords = new ArrayList<TweetKeyword>();
 		
-		String query = "SELECT id, value, keyword_id FROM " + tableName + " WHERE tweet_id=?";
+		String query = "SELECT id, value, keyword_id FROM " + TABLE_NAME + " WHERE tweet_id=?";
 		
 		Param[] params = new Param[] {
 			new Param(tweet.getId(), Types.BIGINT)
@@ -83,7 +83,7 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	public void delete(Domain<Integer> domain) {
 		TweetKeyword tweetkeyword = (TweetKeyword) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(tweetkeyword.getId(), Types.INTEGER) }
 		);
 	}
@@ -91,17 +91,17 @@ public class TweetKeywordDaoImpl extends TweetKeywordDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetKeyword tweetKeyword = (TweetKeyword) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(tweetKeyword.getId(), Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(tweetKeyword.getId(), Types.INTEGER));
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

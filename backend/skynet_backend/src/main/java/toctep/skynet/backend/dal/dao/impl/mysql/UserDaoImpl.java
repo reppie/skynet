@@ -21,7 +21,7 @@ public class UserDaoImpl extends UserDao {
 		User user = (User) domain;
 		
 		String query = 
-			"INSERT INTO " + tableName + 
+			"INSERT INTO " + TABLE_NAME + 
 				"(id, place_id, default_profile, statuses_count, profile_background_tile, language_id, profile_link_color, following, favourites_count, protected, " +
 				"profile_text_color, verified, contributors_enabled, description, name, profile_sidebar_border_color, profile_background_color, created_at, default_profile_image, " +
 				"followers_count, profile_image_url_id, profile_image_url_https_id, geo_enabled, profile_background_image_url_id, profile_background_image_url_https_id, " +
@@ -84,7 +84,7 @@ public class UserDaoImpl extends UserDao {
 	public User select(Long id) {
 		User user = new User();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -138,7 +138,7 @@ public class UserDaoImpl extends UserDao {
 
 	@Override
 	public IUser select(String screenName) {
-		String query = "SELECT id FROM " + tableName + " WHERE screen_name=?";
+		String query = "SELECT id FROM " + TABLE_NAME + " WHERE screen_name=?";
 		
 		Param[] params = new Param[] {
 			new Param(screenName, Types.VARCHAR)
@@ -163,7 +163,7 @@ public class UserDaoImpl extends UserDao {
 	public void delete(Domain<Long> domain) {
 		User user = (User) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(user.getId(), Types.BIGINT) }
 		);
 	}
@@ -171,17 +171,17 @@ public class UserDaoImpl extends UserDao {
 	@Override
 	public boolean exists(Domain<Long> domain) {
 		User user = (User) domain;
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(user.getId(), Types.BIGINT));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(user.getId(), Types.BIGINT));
 	}
 	
 	@Override
 	public boolean exists(Long id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.BIGINT));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.BIGINT));
 	}	
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }
