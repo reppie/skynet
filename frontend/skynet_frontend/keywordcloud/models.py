@@ -64,7 +64,7 @@ class KeywordCloud:
         if self.smallest == self.largest:
             return 1 # Hack gedoogd door Wytse Visser
         
-        return (log(occurance)-log(self.smallest))/(log(self.largest)-log(self.smallest));
+        return (log(occurance) - log(self.smallest)) / (log(self.largest) - log(self.smallest))
     
     def __calculate_font_size(self, min_font_size, max_font_size, step):
         return round((min_font_size + (max_font_size-min_font_size)*self.step)/min_font_size*100)
@@ -101,3 +101,6 @@ class KeywordFontSize():
             'keyword':self.keyword,
             'font_scale':self.font_scale,
         }
+        
+class BlackListItem():
+    keyword = models.CharField(max_length=140, unique=True)
