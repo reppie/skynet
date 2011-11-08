@@ -6,9 +6,10 @@ import toctep.skynet.backend.dal.domain.Domain;
 
 public class Url extends Domain<String> implements IUrl{
 
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getUrlDao();
+	public Url() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getUrlDao());
 	}
 	
 	public static IUrl select(String id) {

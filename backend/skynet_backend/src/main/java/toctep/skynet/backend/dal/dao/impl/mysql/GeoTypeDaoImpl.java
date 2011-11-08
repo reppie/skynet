@@ -13,7 +13,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 	public void insert(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
 		
-		String query = "INSERT INTO " + tableName + "(text) VALUES(?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(text) VALUES(?)";
 		
 		Param[] params = new Param[] {
 			new Param(geoType.getText(), Types.VARCHAR)
@@ -28,7 +28,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 	public GeoType select(Integer id) {
 		GeoType geoType = new GeoType();
 
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -52,7 +52,7 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 	public void delete(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(geoType.getId(), Types.INTEGER) }
 		);
 	}
@@ -60,17 +60,17 @@ public class GeoTypeDaoImpl extends GeoTypeDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		GeoType geoType = (GeoType) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text", new Param(geoType.getText(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "text", new Param(geoType.getText(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

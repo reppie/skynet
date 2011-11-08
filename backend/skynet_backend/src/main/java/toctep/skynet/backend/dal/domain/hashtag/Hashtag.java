@@ -8,17 +8,18 @@ public class Hashtag extends Domain<Integer> implements IHashtag {
 
 	private String text = "";
 	
+	public Hashtag() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getHashtagDao());
+	}
+	
 	public String getText() {
 		return text;
 	}
 	
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getHashtagDao();
 	}
 	
 	public static IHashtag select(Integer id) {

@@ -13,7 +13,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	public void insert(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
 		
-		String query = "INSERT INTO " + tableName + "(utc_offset, time_zone) VALUES(?, ?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(utc_offset, time_zone) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(timeZone.getUtcOffset(), Types.INTEGER),
@@ -29,7 +29,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	public TimeZone select(Integer id) {
 		TimeZone timeZone = new TimeZone();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -54,7 +54,7 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	public void delete(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(timeZone.getId(), Types.INTEGER) }
 		);
 	}
@@ -62,16 +62,16 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TimeZone timeZone = (TimeZone) domain;
-		return MySqlUtil.getInstance().exists(tableName, "time_zone", new Param(timeZone.getTimeZone(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "time_zone", new Param(timeZone.getTimeZone(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 	
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 }

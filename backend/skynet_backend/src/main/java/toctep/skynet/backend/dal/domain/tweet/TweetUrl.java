@@ -13,6 +13,12 @@ public class TweetUrl extends Domain<Integer> {
 	private ITweet tweet;
 	private IUrl url;
 
+	public TweetUrl() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getTweetUrlDao());
+	}
+	
 	public ITweet getTweet() {
 		return tweet;
 	}
@@ -27,11 +33,6 @@ public class TweetUrl extends Domain<Integer> {
 
 	public void setUrl(IUrl url) {
 		this.url = url;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
 	}
 	
 	@Override

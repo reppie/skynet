@@ -15,7 +15,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	public void insert(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		
-		String query = "INSERT INTO " + tableName + "(bounding_box_type_id, coordinates) VALUES(?, ?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(bounding_box_type_id, coordinates) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(boundingBox.getType().getId(), Types.BIGINT),
@@ -31,7 +31,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	public BoundingBox select(Integer id) {
 		BoundingBox boundingBox = new BoundingBox();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.BIGINT)
@@ -56,7 +56,7 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	public void delete(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(boundingBox.getId(), Types.INTEGER) }
 		);
 	}
@@ -66,17 +66,17 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		Map<String, Param> params = new HashMap<String, Param>();
 		params.put("coordinates", new Param(boundingBox.getCoordinates(), Types.VARCHAR));
-		return MySqlUtil.getInstance().exists(tableName, params);
+		return MySqlUtil.getInstance().exists(TABLE_NAME, params);
 	}
 	
 	@Override
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 	
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 	
 }

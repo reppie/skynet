@@ -9,6 +9,12 @@ public class TimeZone extends Domain<Integer> implements ITimeZone{
 	private int utcOffset 	= 0;
 	private String timeZone = "";
 
+	public TimeZone() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getTimeZoneDao());
+	}
+	
 	public int getUtcOffset() {
 		return utcOffset;
 	}
@@ -23,11 +29,6 @@ public class TimeZone extends Domain<Integer> implements ITimeZone{
 
 	public void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getTimeZoneDao();
 	}
 	
 	public static ITimeZone select(Integer id) {

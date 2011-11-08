@@ -13,6 +13,12 @@ public class TweetContributor extends Domain<Integer> {
 	private ITweet tweet;
 	private IUser user;
 
+	public TweetContributor() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getTweetContributorDao());
+	}
+	
 	public ITweet getTweet() {
 		return tweet;
 	}
@@ -27,11 +33,6 @@ public class TweetContributor extends Domain<Integer> {
 
 	public void setUser(IUser user) {
 		this.user = user;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 	}
 	
 	@Override

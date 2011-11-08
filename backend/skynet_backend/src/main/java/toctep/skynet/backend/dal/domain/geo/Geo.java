@@ -9,6 +9,12 @@ public class Geo extends Domain<Integer> implements IGeo {
 	private IGeoType type 		= NullGeoType.getInstance();
 	private String coordinates	= "";
 
+	public Geo() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getGeoDao());
+	}
+	
 	public IGeoType getType() {
 		return type;
 	}
@@ -23,11 +29,6 @@ public class Geo extends Domain<Integer> implements IGeo {
 
 	public void setCoordinates(String coordinates) {
 		this.coordinates = coordinates;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getGeoDao();
 	}
 	
 	@Override

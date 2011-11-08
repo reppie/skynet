@@ -13,7 +13,7 @@ public class CountryDaoImpl extends CountryDao {
 	public void insert(Domain<String> domain) {
 		Country country = (Country) domain;
 		
-		String query = "INSERT INTO " + tableName + "(code, text) VALUES(?, ?)";
+		String query = "INSERT INTO " + TABLE_NAME + "(code, text) VALUES(?, ?)";
 		
 		Param[] params = new Param[] {
 			new Param(country.getId(), Types.VARCHAR),
@@ -27,7 +27,7 @@ public class CountryDaoImpl extends CountryDao {
 	public Country select(String id) {
 		Country country = new Country();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE code=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE code=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.VARCHAR)
@@ -51,7 +51,7 @@ public class CountryDaoImpl extends CountryDao {
 	public void delete(Domain<String> domain) {
 		Country country = (Country) domain;
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE code=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE code=?",
 			new Param[] { new Param(country.getId(), Types.VARCHAR) }
 		);
 	}
@@ -59,17 +59,17 @@ public class CountryDaoImpl extends CountryDao {
 	@Override
 	public boolean exists(Domain<String> domain) {
 		Country country = (Country) domain;
-		return MySqlUtil.getInstance().exists(tableName, "text", new Param(country.getText(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "text", new Param(country.getText(), Types.VARCHAR));
 	}
 	
 	@Override
 	public boolean exists(String id) {
-		return MySqlUtil.getInstance().exists(tableName, "code", new Param(id, Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "code", new Param(id, Types.VARCHAR));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 	
 }

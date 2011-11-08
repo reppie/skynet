@@ -15,7 +15,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	public void insert(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;
 		
-		String query = "INSERT INTO " + tableName + " (keyword) VALUES(?)";
+		String query = "INSERT INTO " + TABLE_NAME + " (keyword) VALUES(?)";
 		
 		Param[] params = new Param[] {
 			new Param(keyword.getKeyword(), Types.VARCHAR)
@@ -30,7 +30,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	public Keyword select(Integer id) {
 		Keyword keyword = new Keyword();
 		
-		String query = "SELECT * FROM " + tableName + " WHERE id=?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE id=?";
 		
 		Param[] params = new Param[] {
 			new Param(id, Types.INTEGER)
@@ -46,7 +46,7 @@ public class KeywordDaoImpl extends KeywordDao {
 
 	@Override
 	public IKeyword select(String keyword) {
-		String query = "SELECT id FROM " + tableName + " WHERE keyword=?";
+		String query = "SELECT id FROM " + TABLE_NAME + " WHERE keyword=?";
 		
 		Param[] params = new Param[] {
 			new Param(keyword, Types.VARCHAR)
@@ -71,7 +71,7 @@ public class KeywordDaoImpl extends KeywordDao {
 	public void delete(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;	
 		MySqlUtil.getInstance().delete(
-			"DELETE FROM " + tableName + " WHERE id=?",
+			"DELETE FROM " + TABLE_NAME + " WHERE id=?",
 			new Param[] { new Param(keyword.getId(), Types.INTEGER) }
 		);
 	}
@@ -79,16 +79,16 @@ public class KeywordDaoImpl extends KeywordDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		Keyword keyword = (Keyword) domain;
-		return MySqlUtil.getInstance().exists(tableName, "keyword", new Param(keyword.getKeyword(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "keyword", new Param(keyword.getKeyword(), Types.VARCHAR));
 	}
 	
 	public boolean exists(Integer id) {
-		return MySqlUtil.getInstance().exists(tableName, "id", new Param(id, Types.INTEGER));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(id, Types.INTEGER));
 	}
 
 	@Override
 	public int count() {
-		return MySqlUtil.getInstance().count(tableName);
+		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
 
 }

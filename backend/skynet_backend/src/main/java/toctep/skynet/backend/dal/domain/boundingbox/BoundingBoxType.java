@@ -8,17 +8,18 @@ public class BoundingBoxType extends Domain<Integer> implements IBoundingBoxType
 
 	private String text = "";
 
+	public BoundingBoxType() {
+		super();
+		
+		setDao(DaoFacadeImpl.getInstance().getBoundingBoxTypeDao());
+	}
+	
 	public String getText() {
 		return text;
 	}
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	@Override
-	public void setDao() {
-		dao = DaoFacadeImpl.getInstance().getBoundingBoxTypeDao();		
 	}
 	
 	public static IBoundingBoxType select(Integer id) {
