@@ -14,11 +14,6 @@ public class Keyword extends Domain<Integer> implements IKeyword {
 		setDao(DaoFacadeImpl.getInstance().getKeywordDao());
 	}
 	
-	public Keyword(String keyword) {
-		super();
-		this.keyword = keyword.toLowerCase();
-	}
-	
 	@Override
 	public String getKeyword() {
 		return keyword;
