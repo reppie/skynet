@@ -85,7 +85,7 @@ class KeywordCloud:
 """
 This class is used to store the font sizes of the given keywords in a cloud
 """
-class KeywordFontSize():
+class KeywordFontSize:
     keyword = None
     font_scale = None
     
@@ -102,5 +102,5 @@ class KeywordFontSize():
             'font_scale':self.font_scale,
         }
         
-class BlackListItem():
+class BlacklistItem(models.Model):
     keyword = models.CharField(max_length=140, unique=True)
