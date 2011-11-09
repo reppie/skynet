@@ -1,7 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
+import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 
 public class TimeZoneTest extends DomainTest {
@@ -42,10 +45,13 @@ public class TimeZoneTest extends DomainTest {
 	public void testSelect() {
 		timeZone.save();
 		
-		TimeZone postTimeZone = (TimeZone) timeZoneDao.select(timeZone.getId());
+		ITimeZone postTimeZone = TimeZone.select(timeZone.getId());
 		
 		assertEquals(postTimeZone.getUtcOffset(), timeZone.getUtcOffset());
 		assertTrue(postTimeZone.getTimeZone().equals(timeZone.getTimeZone()));
+		
+		ITimeZone nullTimeZone = TimeZone.select(1000);
+		assertTrue(nullTimeZone instanceof NullTimeZone);
 	}
 
 	@Override

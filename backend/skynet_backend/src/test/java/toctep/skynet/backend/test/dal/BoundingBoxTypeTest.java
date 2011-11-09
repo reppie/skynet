@@ -1,8 +1,11 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
+import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBoxType;
 
 public class BoundingBoxTypeTest extends DomainTest {
 
@@ -37,9 +40,11 @@ public class BoundingBoxTypeTest extends DomainTest {
 	public void testSelect() {
 		boundingBoxType.save();
 		
-		BoundingBoxType postBoundingBoxType = (BoundingBoxType) boundingBoxTypeDao.select(boundingBoxType.getId());
-		
+		IBoundingBoxType postBoundingBoxType = BoundingBoxType.select(boundingBoxType.getId());
 		assertTrue(postBoundingBoxType.getText().equals(boundingBoxType.getText()));
+		
+		IBoundingBoxType nullBoundingBoxType = BoundingBoxType.select(1000);
+		assertTrue(nullBoundingBoxType instanceof NullBoundingBoxType);
 	}
 	
 	@Override

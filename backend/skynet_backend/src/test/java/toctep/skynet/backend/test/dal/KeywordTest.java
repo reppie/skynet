@@ -1,8 +1,11 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import toctep.skynet.backend.dal.domain.keyword.IKeyword;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
+import toctep.skynet.backend.dal.domain.keyword.NullKeyword;
 
 public class KeywordTest extends DomainTest {
 	
@@ -29,8 +32,11 @@ public class KeywordTest extends DomainTest {
 	public void testInsert() {
 		keyword.save();
 		
-		Keyword postKeyword = (Keyword) keywordDao.select(keyword.getId());
+		IKeyword postKeyword = Keyword.select(keyword.getId());
 		assertEquals("getKeyword: ", keyword.getKeyword(), postKeyword.getKeyword());
+		
+		IKeyword nullKeyword = Keyword.select(1000);
+		assertTrue(nullKeyword instanceof NullKeyword);
 	}
 
 	@Override

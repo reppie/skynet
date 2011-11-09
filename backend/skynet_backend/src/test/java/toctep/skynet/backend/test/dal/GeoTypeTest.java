@@ -1,8 +1,11 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.geo.IGeoType;
+import toctep.skynet.backend.dal.domain.geo.NullGeoType;
 
 public class GeoTypeTest extends DomainTest {
 
@@ -37,9 +40,11 @@ public class GeoTypeTest extends DomainTest {
 	public void testSelect() {
 		geoType.save();
 		
-		GeoType postGeoType = (GeoType) geoTypeDao.select(geoType.getId());
-		
+		IGeoType postGeoType = GeoType.select(geoType.getId());
 		assertTrue(postGeoType.getText().equals(geoType.getText()));
+		
+		IGeoType nullGeoType = GeoType.select(1000);
+		assertTrue(nullGeoType instanceof NullGeoType);
 	}
 	
 	@Override

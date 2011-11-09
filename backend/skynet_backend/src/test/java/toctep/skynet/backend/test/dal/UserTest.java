@@ -1,6 +1,8 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 
@@ -12,6 +14,8 @@ import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
 import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
+import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
 
 public class UserTest extends DomainTest {
@@ -221,7 +225,7 @@ public class UserTest extends DomainTest {
 	public void testSelect() {
 		user.save();
 		
-		User postUser = (User) userDao.select(user.getId());
+		IUser postUser = User.select(user.getId());
 		
 		assertEquals(postUser.getId(), user.getId());
 		assertTrue(postUser.getPlace().equals(user.getPlace()));
@@ -259,6 +263,9 @@ public class UserTest extends DomainTest {
 		assertTrue(postUser.isShowAllInlineMedia() == user.isShowAllInlineMedia());
 		assertTrue(postUser.isTranslator() == user.isTranslator());
 		assertEquals(postUser.getListedCount(), user.getListedCount());
+		
+		IUser nullUser = User.select(1000L);
+		assertTrue(nullUser instanceof NullUser);
 	}
 	
 	@Override

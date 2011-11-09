@@ -1,8 +1,11 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.Language;
+import toctep.skynet.backend.dal.domain.language.NullLanguage;
 
 public class LanguageTest extends DomainTest {
 
@@ -37,9 +40,12 @@ public class LanguageTest extends DomainTest {
 	public void testSelect() {
 		language.save();
 		
-		Language postLanguage = (Language) languageDao.select(language.getId());
+		ILanguage postLanguage = Language.select(language.getId());
 		
 		assertTrue(postLanguage.getText().equals(language.getText()));
+		
+		ILanguage nullLanguage = Language.select(1000);
+		assertTrue(nullLanguage instanceof NullLanguage);
 	}
 	
 	@Override
