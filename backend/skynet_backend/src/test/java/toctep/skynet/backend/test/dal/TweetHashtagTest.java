@@ -44,14 +44,7 @@ public class TweetHashtagTest extends DomainTest {
 	}
 	
 	@Override
-	public void testSelect() {
-		tweetHashtag.save();
-		
-		TweetHashtag postTweetHashtag = (TweetHashtag) tweetHashtagDao.select(tweetHashtag.getId());
-		
-		assertTrue(postTweetHashtag.getTweet().getId().equals(tweetHashtag.getTweet().getId()));
-		assertTrue(postTweetHashtag.getHashtag().getId().equals(tweetHashtag.getHashtag().getId()));		
-	}
+	public void testSelect() {}	
 	
 	@Test
 	public void testSelectFromTweet() {

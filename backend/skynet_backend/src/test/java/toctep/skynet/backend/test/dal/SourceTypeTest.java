@@ -1,7 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import toctep.skynet.backend.dal.domain.sourcetype.ISourceType;
+import toctep.skynet.backend.dal.domain.sourcetype.NullSourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 
 public class SourceTypeTest extends DomainTest {
@@ -37,9 +40,11 @@ public class SourceTypeTest extends DomainTest {
 	public void testSelect() {
 		sourceType.save();
 		
-		SourceType postSourceType = (SourceType) sourceTypeDao.select(sourceType.getId());
-		
+		ISourceType postSourceType = SourceType.select(sourceType.getId());
 		assertTrue(postSourceType.getText().equals(sourceType.getText()));
+		
+		ISourceType nullSourceType = SourceType.select(1000);
+		assertTrue(nullSourceType instanceof NullSourceType);
 	}
 	
 	@Override

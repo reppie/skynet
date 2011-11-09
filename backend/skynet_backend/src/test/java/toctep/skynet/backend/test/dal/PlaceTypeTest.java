@@ -1,7 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import toctep.skynet.backend.dal.domain.place.IPlaceType;
+import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 
 public class PlaceTypeTest extends DomainTest {
@@ -37,9 +40,11 @@ public class PlaceTypeTest extends DomainTest {
 	public void testSelect() {
 		placeType.save();
 		
-		PlaceType postPlaceType = (PlaceType) placeTypeDao.select(placeType.getId());
-		
+		IPlaceType postPlaceType = PlaceType.select(placeType.getId());
 		assertTrue(postPlaceType.getText().equals(placeType.getText()));
+		
+		IPlaceType nullPlaceType = PlaceType.select(1000);
+		assertTrue(nullPlaceType instanceof NullPlaceType);
 	}
 	
 	@Override

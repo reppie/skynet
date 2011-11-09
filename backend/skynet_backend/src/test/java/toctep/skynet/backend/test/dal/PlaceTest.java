@@ -1,12 +1,15 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
+import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.IPlaceType;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.url.IUrl;
@@ -115,7 +118,7 @@ public class PlaceTest extends DomainTest {
 	public void testSelect() {
 		place.save();
 		
-		Place postPlace = (Place) placeDao.select(place.getId());
+		IPlace postPlace = Place.select(place.getId());
 		
 		assertTrue(postPlace.getType().equals(place.getType()));
 		assertTrue(postPlace.getBoundingBox().equals(place.getBoundingBox()));
@@ -131,6 +134,9 @@ public class PlaceTest extends DomainTest {
 		assertTrue(postPlace.getTwitter().equals(place.getTwitter()));
 		assertTrue(postPlace.getUrl().equals(place.getUrl()));
 		assertTrue(postPlace.getAppId().equals(place.getAppId()));
+		
+		IPlace nullPlace = Place.select("ThisPlaceDoesNotExist");
+		assertTrue(nullPlace instanceof NullPlace);
 	}
 	
 	@Override

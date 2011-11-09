@@ -278,7 +278,7 @@ public final class MySqlUtil {
 
 		try {
 			stmt = (Statement) conn.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) as rows FROM " + tableName);
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + tableName);
 			rs.next();
 			count = rs.getInt(1);
 		} catch (SQLException e) {

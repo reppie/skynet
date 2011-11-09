@@ -1,8 +1,11 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import toctep.skynet.backend.dal.domain.country.Country;
+import toctep.skynet.backend.dal.domain.country.ICountry;
+import toctep.skynet.backend.dal.domain.country.NullCountry;
 
 public class CountryTest extends DomainTest {
 
@@ -41,8 +44,11 @@ public class CountryTest extends DomainTest {
 	public void testSelect() {
 		country.save();
 		
-		Country postCountry = (Country) countryDao.select(country.getId());
+		ICountry postCountry = Country.select(country.getId());
 		assertTrue(postCountry.getText().equals(country.getText()));
+		
+		ICountry nullCountry = Country.select("ThisCountryDoesNotExist");
+		assertTrue(nullCountry instanceof NullCountry);
 	}
 	
 	@Override

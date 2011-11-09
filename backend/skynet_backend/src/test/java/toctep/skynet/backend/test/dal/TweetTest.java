@@ -113,7 +113,7 @@ public class TweetTest extends DomainTest {
 	public void testSelect() {
 		tweet.save();
 		
-		Tweet postTweet = (Tweet) tweetDao.select(tweet.getId());
+		ITweet postTweet = Tweet.select(tweet.getId());
 		
 		assertTrue(postTweet.getText().equals(tweet.getText()));
 		assertEquals(postTweet.getGeo().getId(), tweet.getGeo().getId());
@@ -128,6 +128,9 @@ public class TweetTest extends DomainTest {
 		assertTrue(postTweet.getPlace().equals(tweet.getPlace()));
 		assertEquals(postTweet.getUser().getId(), tweet.getUser().getId());
 		assertTrue(postTweet.getCoordinates().equals(tweet.getCoordinates()));
+		
+		ITweet nullTweet = Tweet.select(1000L);
+		assertTrue(nullTweet instanceof NullTweet);
 	}
 	
 	@Override
