@@ -74,6 +74,10 @@
 			'Tag': function(tag){
 				api.filters.Base.prototype.constructor.call(this, 'tag', "#" + tag, tag);
 			},
+			'Time': function(from, to){
+				api.filters.Base.prototype.constructor.call(this, 'time', "time filter", from);
+				this.to = to;
+			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
 				this.equals = function(filter){
@@ -206,8 +210,8 @@
 	api.Tweet.prototype = api.Base;
 	api.User.prototype = api.Base;
 	
-	
 	api.filters.Keyword.prototype = api.filters.Base;
+	api.filters.Time.prototype = api.filters.Base;
 	api.filters.User.prototype = api.filters.Base;
 	api.filters.Geo.prototype = api.filters.Base;
 	
