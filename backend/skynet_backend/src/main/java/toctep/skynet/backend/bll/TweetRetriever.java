@@ -41,9 +41,10 @@ public abstract class TweetRetriever implements Runnable {
 	
 	@Override
 	public abstract void run();
+	public abstract void process(Status status);
 	
-	public void process(Status status) {
-		tweetParser.parse(status).save();
+	protected TweetParser getTweetParser() {
+		return tweetParser;
 	}
 	
 	protected TwitterStream getTwitterStream() {
