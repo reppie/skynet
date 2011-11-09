@@ -3,11 +3,15 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 import toctep.skynet.backend.dal.domain.geo.IGeoType;
 import toctep.skynet.backend.dal.domain.geo.NullGeoType;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class GeoTypeTest extends DomainTest {
+public class GeoTypeTest extends SkynetTest implements DomainTest {
 
 	private GeoType geoType;
 	
@@ -23,20 +27,20 @@ public class GeoTypeTest extends DomainTest {
 		geoType.setText(text);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() { 
 		assertNotNull(geoType);
 		assertTrue(text.equals(geoType.getText()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		geoType.save();
-		assertEquals(1, geoTypeDao.count());
+		assertEquals(1, GeoType.count());
 		assertTrue(new Integer(1).equals(geoType.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		geoType.save();
 		
@@ -47,18 +51,18 @@ public class GeoTypeTest extends DomainTest {
 		assertTrue(nullGeoType instanceof NullGeoType);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		geoType.save();
-		assertEquals(1, geoTypeDao.count());
+		assertEquals(1, GeoType.count());
 		geoType.delete();
-		assertEquals(0, geoTypeDao.count());		
+		assertEquals(0, GeoType.count());		
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		geoType.save();
-		assertTrue(geoTypeDao.exists(geoType));
+		assertTrue(GeoType.exists(geoType));
 	}
 	
 }

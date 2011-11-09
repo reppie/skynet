@@ -18,4 +18,12 @@ public class TweetMention extends TweetUser {
 		return dao.select(tweet);
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetMentionDao().count();
+	}
+	
+	public static boolean exists(TweetMention tweetMention) {
+		return DaoFacadeImpl.getInstance().getTweetMentionDao().exists(tweetMention);
+	}
+	
 }

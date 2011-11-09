@@ -3,13 +3,17 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class BoundingBoxTest extends DomainTest {
+public class BoundingBoxTest extends SkynetTest implements DomainTest {
 
 	private BoundingBox boundingBox;
 	
@@ -29,21 +33,21 @@ public class BoundingBoxTest extends DomainTest {
 		boundingBox.setCoordinates(coordinates);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(boundingBox);
 		assertTrue(boundingBox.getType().equals(boundingBoxType));
 		assertTrue(coordinates.equals(boundingBox.getCoordinates()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {	
 		boundingBox.save();
-		assertEquals(1, boundingBoxDao.count());
+		assertEquals(1, BoundingBox.count());
 		assertTrue(new Integer(1).equals(boundingBox.getId()));
 	}
 
-	@Override
+	@Test
 	public void testSelect() {
 		boundingBox.save();
 		
@@ -55,18 +59,18 @@ public class BoundingBoxTest extends DomainTest {
 		assertTrue(nullBoundingBox instanceof NullBoundingBox);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		boundingBox.save();
-		assertEquals(1, boundingBoxDao.count());
+		assertEquals(1, BoundingBox.count());
 		boundingBox.delete();
-		assertEquals(0, boundingBoxDao.count());		
+		assertEquals(0, BoundingBox.count());		
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		boundingBox.save();
-		assertTrue(boundingBoxDao.exists(boundingBox));
+		assertTrue(BoundingBox.exists(boundingBox));
 	}
 	
 }

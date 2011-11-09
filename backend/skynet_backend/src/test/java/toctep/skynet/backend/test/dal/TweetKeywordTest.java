@@ -1,14 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetKeywordTest extends DomainTest {
+public class TweetKeywordTest extends SkynetTest implements DomainTest {
 	
 	private TweetKeyword tweetKeyword;
 	
@@ -35,7 +38,7 @@ public class TweetKeywordTest extends DomainTest {
 		tweetKeyword.setKeyword(keyword);
 	}
 
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweetKeyword);
 		
@@ -44,13 +47,13 @@ public class TweetKeywordTest extends DomainTest {
 		assertEquals("getTweet: ", tweet, tweetKeyword.getTweet());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		tweetKeyword.save();
-		assertEquals(1, tweetKeywordDao.count());
+		assertEquals(1, TweetKeyword.count());
 	}
 
-	@Override
+	@Test
 	public void testSelect() {}
 	
 	@Test
@@ -74,18 +77,18 @@ public class TweetKeywordTest extends DomainTest {
 		assertEquals(1, postTweet.getKeywords().size());
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		tweetKeyword.save();
-		assertEquals(1, tweetKeywordDao.count());
+		assertEquals(1, TweetKeyword.count());
 		tweetKeyword.delete();
-		assertEquals(0, tweetKeywordDao.count());
+		assertEquals(0, TweetKeyword.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweetKeyword.save();
-		assertTrue(tweetKeywordDao.exists(tweetKeyword));
+		assertTrue(TweetKeyword.exists(tweetKeyword));
 	}
 
 }

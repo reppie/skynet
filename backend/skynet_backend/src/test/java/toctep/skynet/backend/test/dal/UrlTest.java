@@ -1,10 +1,16 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
+import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class UrlTest extends DomainTest {
+public class UrlTest extends SkynetTest implements DomainTest {
 	
 	private Url url;
 	
@@ -16,38 +22,38 @@ public class UrlTest extends DomainTest {
 		url.setId("url://");
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(url);
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		url.save();
-		assertEquals(1, urlDao.count());
+		assertEquals(1, Url.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		url.save();
-		assertEquals(1, urlDao.count());
+		assertEquals(1, Url.count());
 		
-		Url postUrl = (Url) urlDao.select(url.getId());
+		IUrl postUrl = Url.select(url.getId());
 		assertTrue(postUrl.getId().equals(url.getId()));
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		url.save();
-		assertEquals(1, urlDao.count());
+		assertEquals(1, Url.count());
 		url.delete();
-		assertEquals(0, urlDao.count());
+		assertEquals(0, Url.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		url.save();
-		assertTrue(urlDao.exists(url));
+		assertTrue(Url.exists(url));
 	}
 
 }

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
 import toctep.skynet.backend.dal.domain.place.IPlace;
@@ -17,8 +19,9 @@ import toctep.skynet.backend.dal.domain.url.NullUrl;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class UserTest extends DomainTest {
+public class UserTest extends SkynetTest implements DomainTest {
 	
 	private User user;
 	
@@ -174,7 +177,7 @@ public class UserTest extends DomainTest {
 		user.setListedCount(listedCount);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(user);
 		assertTrue(new Long(id).equals(user.getId()));
@@ -215,13 +218,13 @@ public class UserTest extends DomainTest {
 		assertEquals(listedCount, user.getListedCount());
 	}
 	
-	@Override
+	@Test
 	public void testInsert() {
 		user.save();
-		assertEquals(1, userDao.count());
+		assertEquals(1, User.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		user.save();
 		
@@ -268,15 +271,15 @@ public class UserTest extends DomainTest {
 		assertTrue(nullUser instanceof NullUser);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		user.save();
-		assertEquals(1, userDao.count());
+		assertEquals(1, User.count());
 		user.delete();
-		assertEquals(0, userDao.count());
+		assertEquals(0, User.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		user.save();
 		assertTrue(User.exists(user.getId()));

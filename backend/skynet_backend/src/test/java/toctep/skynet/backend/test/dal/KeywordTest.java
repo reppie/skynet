@@ -3,11 +3,15 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.keyword.IKeyword;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.keyword.NullKeyword;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class KeywordTest extends DomainTest {
+public class KeywordTest extends SkynetTest implements DomainTest {
 	
 	private Keyword keyword;
 	private String keywordValue;
@@ -21,14 +25,15 @@ public class KeywordTest extends DomainTest {
 		
 		keyword.setKeyword(keywordValue);
 	}
-	@Override
+	
+	@Test
 	public void testCreate() {
 		assertNotNull(keyword);
 		
 		assertEquals("getKeyword: ", keywordValue, keyword.getKeyword());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		keyword.save();
 		
@@ -39,27 +44,27 @@ public class KeywordTest extends DomainTest {
 		assertTrue(nullKeyword instanceof NullKeyword);
 	}
 
-	@Override
+	@Test
 	public void testSelect() {
 		keyword.save();
 		
-		Keyword postKeyword = (Keyword) keywordDao.select(keyword.getId());
+		Keyword postKeyword = (Keyword) Keyword.select(keyword.getId());
 		
 		assertTrue(postKeyword.getKeyword().equals(postKeyword.getKeyword()));
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		keyword.save();
-		assertEquals(1, keywordDao.count());
+		assertEquals(1, Keyword.count());
 		keyword.delete();
-		assertEquals(0, keywordDao.count());	
+		assertEquals(0, Keyword.count());	
 	}
 	
-	@Override
+	@Test
 	public void testExists() {
 		keyword.save();
-		assertTrue(keywordDao.exists(keyword));
+		assertTrue(Keyword.exists(keyword));
 	}
 
 }

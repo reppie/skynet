@@ -1,14 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetHashtagTest extends DomainTest {
+public class TweetHashtagTest extends SkynetTest implements DomainTest {
 
 	private TweetHashtag tweetHashtag;
 	
@@ -30,20 +33,20 @@ public class TweetHashtagTest extends DomainTest {
 		tweetHashtag.setHashtag(hashtag);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweetHashtag);
 		assertEquals("getHashtag: ", hashtag, tweetHashtag.getHashtag());
 		assertEquals("getTweet: ", tweet, tweetHashtag.getTweet());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		tweetHashtag.save();
-		assertEquals(1, tweetHashtagDao.count());
+		assertEquals(1, TweetHashtag.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {}	
 	
 	@Test
@@ -64,18 +67,18 @@ public class TweetHashtagTest extends DomainTest {
 		assertEquals(1, postTweet.getHashtags().size());
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		tweetHashtag.save();
-		assertEquals(1, tweetHashtagDao.count());
+		assertEquals(1, TweetHashtag.count());
 		tweetHashtag.delete();
-		assertEquals(0, tweetHashtagDao.count());
+		assertEquals(0, TweetHashtag.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweetHashtag.save();
-		assertTrue(tweetHashtagDao.exists(tweetHashtag));
+		assertTrue(TweetHashtag.exists(tweetHashtag));
 	}
 
 }

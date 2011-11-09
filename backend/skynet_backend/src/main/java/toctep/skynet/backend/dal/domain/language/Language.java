@@ -32,5 +32,13 @@ public class Language extends Domain<Integer> implements ILanguage {
 		return NullLanguage.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getLanguageDao().count();
+	}
+	
+	public static boolean exists(Language language) {
+		return DaoFacadeImpl.getInstance().getLanguageDao().exists(language);
+	}
+	
 }
 

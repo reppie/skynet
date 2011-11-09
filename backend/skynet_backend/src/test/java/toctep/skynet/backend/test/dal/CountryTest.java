@@ -3,11 +3,15 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class CountryTest extends DomainTest {
+public class CountryTest extends SkynetTest implements DomainTest {
 
 	private Country country;
 	
@@ -27,20 +31,20 @@ public class CountryTest extends DomainTest {
 		country.setText(text);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() { 
 		assertNotNull(country);
 		assertTrue(id.equals(country.getId()));
 		assertTrue(text.equals(country.getText()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		country.save();
-		assertEquals(1, countryDao.count());
+		assertEquals(1, Country.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		country.save();
 		
@@ -51,18 +55,18 @@ public class CountryTest extends DomainTest {
 		assertTrue(nullCountry instanceof NullCountry);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		country.save();
-		assertEquals(1, countryDao.count());
+		assertEquals(1, Country.count());
 		country.delete();
-		assertEquals(0, countryDao.count());		
+		assertEquals(0, Country.count());		
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		country.save();
-		assertTrue(countryDao.exists(country));
+		assertTrue(Country.exists(country));
 	}
 	
 }

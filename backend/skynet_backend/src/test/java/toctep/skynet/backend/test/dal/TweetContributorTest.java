@@ -1,14 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 import toctep.skynet.backend.dal.domain.user.User;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetContributorTest extends DomainTest {
+public class TweetContributorTest extends SkynetTest implements DomainTest {
 
 	private TweetContributor tweetContributor;
 	
@@ -30,17 +33,17 @@ public class TweetContributorTest extends DomainTest {
 		tweetContributor.setTweet(tweet);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweetContributor);
 		assertEquals("getTweet: ", tweet, tweetContributor.getTweet());
 		assertEquals("getUserTwitterId: ", user, tweetContributor.getUser());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		tweetContributor.save();
-		assertEquals(1, tweetContributorDao.count());
+		assertEquals(1, TweetContributor.count());
 	}
 	
 	@Test
@@ -61,21 +64,21 @@ public class TweetContributorTest extends DomainTest {
 		assertEquals(1, postTweet.getContributors().size());
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		tweetContributor.save();
-		assertEquals(1, tweetContributorDao.count());
+		assertEquals(1, TweetContributor.count());
 		tweetContributor.delete();
-		assertEquals(0, tweetContributorDao.count());
+		assertEquals(0, TweetContributor.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweetContributor.save();
-		assertTrue(tweetContributorDao.exists(tweetContributor));
+		assertTrue(TweetContributor.exists(tweetContributor));
 	}
 
-	@Override
+	@Test
 	public void testSelect() {}
 	
 }

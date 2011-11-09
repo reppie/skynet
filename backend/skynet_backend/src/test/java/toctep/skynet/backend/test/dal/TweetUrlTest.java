@@ -1,14 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetUrlTest extends DomainTest {
+public class TweetUrlTest extends SkynetTest implements DomainTest {
 	
 	private TweetUrl tweetUrl;
 	
@@ -31,20 +34,20 @@ public class TweetUrlTest extends DomainTest {
 		tweetUrl.setTweet(tweet);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweetUrl);
 		assertEquals("getTweet: ", tweet, tweetUrl.getTweet());
 		assertEquals("getUrl: ", url, tweetUrl.getUrl());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		tweetUrl.save();
-		assertEquals(1, tweetUrlDao.count());
+		assertEquals(1, TweetUrl.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {}
 	
 	@Test
@@ -65,18 +68,18 @@ public class TweetUrlTest extends DomainTest {
 		assertEquals(1, postTweet.getUrls().size());
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		tweetUrl.save();
-		assertEquals(1, tweetUrlDao.count());
+		assertEquals(1, TweetUrl.count());
 		tweetUrl.delete();
-		assertEquals(0, tweetUrlDao.count());
+		assertEquals(0, TweetUrl.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweetUrl.save();
-		assertTrue(tweetUrlDao.exists(tweetUrl));
+		assertTrue(TweetUrl.exists(tweetUrl));
 	}
 
 }

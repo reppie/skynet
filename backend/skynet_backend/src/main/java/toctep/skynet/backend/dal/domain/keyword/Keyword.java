@@ -40,9 +40,12 @@ public class Keyword extends Domain<Integer> implements IKeyword {
 		return dao.select(text);
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getKeywordDao().count();
+	}
+	
 	public static boolean exists(Keyword keyword) {
-		KeywordDao dao = DaoFacadeImpl.getInstance().getKeywordDao();
-		return dao.exists(keyword);
+		return DaoFacadeImpl.getInstance().getKeywordDao().exists(keyword);
 	}
 	
 }
