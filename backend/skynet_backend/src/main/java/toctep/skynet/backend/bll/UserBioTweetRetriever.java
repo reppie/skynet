@@ -3,7 +3,7 @@ package toctep.skynet.backend.bll;
 import java.util.ArrayList;
 import java.util.List;
 
-import toctep.skynet.backend.Log;
+import toctep.skynet.backend.log.Log;
 import twitter4j.Status;
 
 import com.cybozu.labs.langdetect.Detector;
