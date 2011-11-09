@@ -22,7 +22,7 @@ public final class Log {
 	
 	public static boolean checkInitialized() {
 		if (!initialized) {
-			throw new LogException();
+			throw new LogException("Not initialized");
 		}
 		
 		return true;
