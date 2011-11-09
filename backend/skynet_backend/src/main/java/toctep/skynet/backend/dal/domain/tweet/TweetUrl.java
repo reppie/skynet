@@ -46,16 +46,6 @@ public class TweetUrl extends Domain<Integer> {
 		super.save();
 	}	
 	
-	public static TweetUrl select(Integer id) {
-		TweetUrlDao dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
-		
-		if (dao.exists(id)) {
-			return (TweetUrl) dao.select(id);
-		}
-		
-		return null;
-	}
-	
 	public static List<TweetUrl> select(Tweet tweet) {
 		TweetUrlDao dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
 		return dao.select(tweet);

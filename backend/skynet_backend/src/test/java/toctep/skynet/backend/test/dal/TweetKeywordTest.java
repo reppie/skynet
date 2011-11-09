@@ -51,15 +51,7 @@ public class TweetKeywordTest extends DomainTest {
 	}
 
 	@Override
-	public void testSelect() {
-		tweetKeyword.save();
-		
-		TweetKeyword postTweetKeyword = (TweetKeyword) tweetKeywordDao.select(tweetKeyword.getId());
-		
-		assertTrue(postTweetKeyword.getTweet().getId().equals(tweetKeyword.getTweet().getId()));
-		assertTrue(postTweetKeyword.getTweetKeywordValue().equals(tweetKeyword.getTweetKeywordValue()));
-		assertTrue(postTweetKeyword.getKeyword().getId().equals(tweetKeyword.getKeyword().getId()));
-	}
+	public void testSelect() {}
 	
 	@Test
 	public void testSelectFromTweet() {

@@ -279,7 +279,8 @@ public class UserTest extends DomainTest {
 	@Override
 	public void testExists() {
 		user.save();
-		assertTrue(userDao.exists(user));
+		assertTrue(User.exists(user.getId()));
+		assertTrue(!User.exists(1000L));
 	}
 	
 }
