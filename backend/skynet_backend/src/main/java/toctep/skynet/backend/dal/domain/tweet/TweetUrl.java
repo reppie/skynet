@@ -59,6 +59,10 @@ public class TweetUrl extends Domain<Integer> {
 		return DaoFacadeImpl.getInstance().getTweetUrlDao().count();
 	}
 	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetUrlDao().exists(id);
+	}
+	
 	public static boolean exists(TweetUrl tweetUrl) {
 		return DaoFacadeImpl.getInstance().getTweetUrlDao().exists(tweetUrl);
 	}

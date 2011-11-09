@@ -27,6 +27,10 @@ public class TweetContributor extends TweetUser {
 		return DaoFacadeImpl.getInstance().getTweetContributorDao().count();
 	}
 	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetContributorDao().exists(id);
+	}
+	
 	public static boolean exists(TweetContributor tweetContributor) {
 		return DaoFacadeImpl.getInstance().getTweetContributorDao().exists(tweetContributor);
 	}

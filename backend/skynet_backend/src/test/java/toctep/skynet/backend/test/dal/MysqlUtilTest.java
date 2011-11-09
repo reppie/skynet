@@ -12,6 +12,11 @@ import toctep.skynet.backend.dal.dao.impl.mysql.Param;
 public class MysqlUtilTest extends TestCase {
 	
 	@Test
+	public void testCreation() {
+		assertNotNull(MySqlUtil.getInstance().getConnection());
+	}
+	
+	@Test
 	public void testGetGeneratedId() {
 		MySqlUtil mysql = MySqlUtil.getInstance();
 		mysql.truncateDatabase();
@@ -26,7 +31,7 @@ public class MysqlUtilTest extends TestCase {
 			"INSERT INTO twitter_keyword(keyword) VALUES(?)",
 			new Param[]{new Param("keyword2", Types.VARCHAR)}
 		);
-		assertEquals("ID: ", 2, id);
+		assertEquals("ID: ", 2, id);		
 	}
 	
 }

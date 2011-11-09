@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.tweet.TweetMention;
 import toctep.skynet.backend.dal.domain.user.User;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetMentionTest extends SkynetTest implements DomainTest {
+public class TweetMentionTest extends SkynetTest implements IDomainTest {
 
 	private TweetMention tweetMention;
 	
@@ -105,6 +105,7 @@ public class TweetMentionTest extends SkynetTest implements DomainTest {
 	public void testExists() {
 		tweetMention.save();
 		assertTrue(TweetMention.exists(tweetMention));
+		assertTrue(TweetMention.exists(tweetMention.getId()));
 	}
 	
 }

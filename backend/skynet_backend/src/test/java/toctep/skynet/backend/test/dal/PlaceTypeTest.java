@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class PlaceTypeTest extends SkynetTest implements DomainTest {
+public class PlaceTypeTest extends SkynetTest implements IDomainTest {
 
 	private PlaceType placeType;
 	

@@ -21,7 +21,7 @@ import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetTest extends SkynetTest implements DomainTest {
+public class TweetTest extends SkynetTest implements IDomainTest {
 
 	private Tweet tweet;
 	

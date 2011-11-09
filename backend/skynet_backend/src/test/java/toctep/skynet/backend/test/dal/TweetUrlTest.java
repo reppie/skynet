@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.tweet.TweetUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetUrlTest extends SkynetTest implements DomainTest {
+public class TweetUrlTest extends SkynetTest implements IDomainTest {
 	
 	private TweetUrl tweetUrl;
 	
@@ -106,6 +106,7 @@ public class TweetUrlTest extends SkynetTest implements DomainTest {
 	public void testExists() {
 		tweetUrl.save();
 		assertTrue(TweetUrl.exists(tweetUrl));
+		assertTrue(TweetUrl.exists(tweetUrl.getId()));
 	}
 
 }

@@ -13,7 +13,7 @@ import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class BoundingBoxTest extends SkynetTest implements DomainTest {
+public class BoundingBoxTest extends SkynetTest implements IDomainTest {
 
 	private BoundingBox boundingBox;
 	

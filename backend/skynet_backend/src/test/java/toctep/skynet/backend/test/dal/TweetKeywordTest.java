@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetKeywordTest extends SkynetTest implements DomainTest {
+public class TweetKeywordTest extends SkynetTest implements IDomainTest {
 	
 	private TweetKeyword tweetKeyword;
 	
@@ -119,6 +119,7 @@ public class TweetKeywordTest extends SkynetTest implements DomainTest {
 	public void testExists() {
 		tweetKeyword.save();
 		assertTrue(TweetKeyword.exists(tweetKeyword));
+		assertTrue(TweetKeyword.exists(tweetKeyword.getId()));
 	}
 
 }

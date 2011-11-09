@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 import toctep.skynet.backend.dal.domain.hashtag.NullHashtag;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class HashtagTest extends SkynetTest implements DomainTest {
+public class HashtagTest extends SkynetTest implements IDomainTest {
 
 	private Hashtag hashtag;
 	

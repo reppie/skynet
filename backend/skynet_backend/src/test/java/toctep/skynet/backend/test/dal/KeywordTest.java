@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.keyword.NullKeyword;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class KeywordTest extends SkynetTest implements DomainTest {
+public class KeywordTest extends SkynetTest implements IDomainTest {
 	
 	private Keyword keyword;
 	private String keywordValue;

@@ -19,7 +19,7 @@ import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class PlaceTest extends SkynetTest implements DomainTest {
+public class PlaceTest extends SkynetTest implements IDomainTest {
 
 	private Place place;
 	

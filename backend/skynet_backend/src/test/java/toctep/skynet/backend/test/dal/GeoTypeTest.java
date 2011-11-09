@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.geo.IGeoType;
 import toctep.skynet.backend.dal.domain.geo.NullGeoType;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class GeoTypeTest extends SkynetTest implements DomainTest {
+public class GeoTypeTest extends SkynetTest implements IDomainTest {
 
 	private GeoType geoType;
 	

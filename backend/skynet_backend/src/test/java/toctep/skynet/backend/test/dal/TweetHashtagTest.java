@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetHashtagTest extends SkynetTest implements DomainTest {
+public class TweetHashtagTest extends SkynetTest implements IDomainTest {
 
 	private TweetHashtag tweetHashtag;
 	
@@ -105,6 +105,7 @@ public class TweetHashtagTest extends SkynetTest implements DomainTest {
 	public void testExists() {
 		tweetHashtag.save();
 		assertTrue(TweetHashtag.exists(tweetHashtag));
+		assertTrue(TweetHashtag.exists(tweetHashtag.getId()));
 	}
 
 }

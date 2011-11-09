@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class CountryTest extends SkynetTest implements DomainTest {
+public class CountryTest extends SkynetTest implements IDomainTest {
 
 	private Country country;
 	

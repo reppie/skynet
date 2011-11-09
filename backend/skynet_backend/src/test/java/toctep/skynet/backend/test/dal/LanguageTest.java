@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class LanguageTest extends SkynetTest implements DomainTest {
+public class LanguageTest extends SkynetTest implements IDomainTest {
 
 	private Language language;
 	

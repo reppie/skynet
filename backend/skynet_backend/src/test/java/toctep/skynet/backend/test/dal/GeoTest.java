@@ -12,7 +12,7 @@ import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class GeoTest extends SkynetTest implements DomainTest {
+public class GeoTest extends SkynetTest implements IDomainTest {
 
 	private Geo geo;
 	

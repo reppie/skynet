@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class TimeZoneTest extends SkynetTest implements DomainTest {
+public class TimeZoneTest extends SkynetTest implements IDomainTest {
 
 	private TimeZone timeZone;
 	

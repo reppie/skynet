@@ -21,7 +21,7 @@ import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class UserTest extends SkynetTest implements DomainTest {
+public class UserTest extends SkynetTest implements IDomainTest {
 	
 	private User user;
 	
@@ -180,6 +180,7 @@ public class UserTest extends SkynetTest implements DomainTest {
 	@Test
 	public void testCreate() {
 		assertNotNull(user);
+		assertNotNull(user.getDao());
 		assertTrue(new Long(id).equals(user.getId()));
 		assertTrue(place.equals(user.getPlace()));
 		assertTrue(user.isDefaultProfile() == defaultProfile);

@@ -68,6 +68,10 @@ public class TweetKeyword extends Domain<Integer> {
 		return DaoFacadeImpl.getInstance().getTweetKeywordDao().count();
 	}
 	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetKeywordDao().exists(id);
+	}
+	
 	public static boolean exists(TweetKeyword tweetKeyword) {
 		return DaoFacadeImpl.getInstance().getTweetKeywordDao().exists(tweetKeyword);
 	}

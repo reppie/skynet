@@ -59,6 +59,10 @@ public class TweetHashtag extends Domain<Integer> {
 		return DaoFacadeImpl.getInstance().getTweetHashtagDao().count();
 	}
 	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetHashtagDao().exists(id);
+	}
+	
 	public static boolean exists(TweetHashtag tweetHashtag) {
 		return DaoFacadeImpl.getInstance().getTweetHashtagDao().exists(tweetHashtag);
 	}

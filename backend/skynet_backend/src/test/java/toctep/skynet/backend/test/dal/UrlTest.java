@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class UrlTest extends SkynetTest implements DomainTest {
+public class UrlTest extends SkynetTest implements IDomainTest {
 	
 	private Url url;
 	

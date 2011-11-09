@@ -11,7 +11,7 @@ import toctep.skynet.backend.dal.domain.sourcetype.NullSourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.test.SkynetTest;
 
-public class SourceTypeTest extends SkynetTest implements DomainTest {
+public class SourceTypeTest extends SkynetTest implements IDomainTest {
 
 	private SourceType sourceType;
 	
