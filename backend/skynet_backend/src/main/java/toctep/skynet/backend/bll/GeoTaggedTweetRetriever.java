@@ -17,7 +17,7 @@ public class GeoTaggedTweetRetriever extends TweetRetriever {
 	
 	@Override
 	public void process(Status status) {
-		getTweetParser().parse(status).save();
+		TweetParser.getInstance().parse(status).save();
 	}
 
 }

@@ -9,7 +9,6 @@ import twitter4j.TwitterStreamFactory;
 
 public abstract class TweetRetriever implements Runnable {
 
-	private TweetParser tweetParser;
 	private TwitterStream twitterStream;
 	
 	public TweetRetriever() {
@@ -18,8 +17,6 @@ public abstract class TweetRetriever implements Runnable {
 	
 	private void initialize() {
 		//System.setProperty ("twitter4j.loggerFactory", "twitter4j.internal.logging.NullLoggerFactory");
-				
-		tweetParser = TweetParser.getInstance();
 		
 		StatusListener statusListener = new StatusListener() {
 			public void onStatus(Status status) {
@@ -42,10 +39,6 @@ public abstract class TweetRetriever implements Runnable {
 	@Override
 	public abstract void run();
 	public abstract void process(Status status);
-	
-	protected TweetParser getTweetParser() {
-		return tweetParser;
-	}
 	
 	protected TwitterStream getTwitterStream() {
 		return twitterStream;
