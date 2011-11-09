@@ -24,4 +24,8 @@ public final class NullSourceType implements ISourceType {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }

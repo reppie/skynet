@@ -94,5 +94,9 @@ public final class NullPlace implements IPlace {
 	public IUrl getUrl() {
 		return NullUrl.getInstance();
 	}
+
+	@Override
+	public void save() {
+	}
 	
 }

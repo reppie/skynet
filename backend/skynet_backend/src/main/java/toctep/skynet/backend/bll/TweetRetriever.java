@@ -1,6 +1,6 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.Log;
+import toctep.skynet.backend.log.Log;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;

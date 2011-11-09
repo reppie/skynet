@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.geo;
 
-public final class NullGeo implements IGeo {
+import toctep.skynet.backend.dal.domain.Domain;
+
+public final class NullGeo extends Domain<Integer> implements IGeo {
 
 	private static NullGeo instance;
 	
@@ -27,5 +29,8 @@ public final class NullGeo implements IGeo {
 	public String getCoordinates() {
 		return "";
 	}
-
+	
+	@Override
+	public void save()
+	{}
 }

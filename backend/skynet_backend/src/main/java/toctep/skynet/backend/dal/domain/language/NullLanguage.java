@@ -24,4 +24,8 @@ public final class NullLanguage implements ILanguage {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }
