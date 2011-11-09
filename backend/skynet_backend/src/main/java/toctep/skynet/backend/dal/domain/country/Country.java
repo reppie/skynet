@@ -33,4 +33,12 @@ public class Country extends Domain<String> implements ICountry {
 		return NullCountry.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getCountryDao().count();
+	}
+	
+	public static boolean exists(Country country) {
+		return DaoFacadeImpl.getInstance().getCountryDao().exists(country);
+	}
+	
 }

@@ -1,12 +1,12 @@
 package toctep.skynet.backend.dal.domain;
 
-import toctep.skynet.backend.dal.dao.Dao;
+import toctep.skynet.backend.dal.dao.IDao;
 
 public abstract class Domain<T> implements IDomain<T> {
 	
 	private boolean dirty;
 		
-	private Dao<T> dao;
+	private IDao<T> dao;
 	
 	private T id;
 	
@@ -34,11 +34,11 @@ public abstract class Domain<T> implements IDomain<T> {
 		this.id = id;
 	}
 	
-	public void setDao(Dao<T> dao) {
+	public void setDao(IDao<T> dao) {
 		this.dao = dao;
 	}
 	
-	public Dao<T> getDao() {
+	public IDao<T> getDao() {
 		return dao;
 	}
 	

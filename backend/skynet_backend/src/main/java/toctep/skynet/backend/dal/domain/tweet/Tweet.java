@@ -302,12 +302,12 @@ public class Tweet extends Domain<Long> implements ITweet {
 	
 	@Override
 	public void save() {
-			inReplyToTweetTwitter.save();
-			inReplyToUserTwitter.save();
-			sourceType.save();
-			geo.save();
-			place.save();
-			user.save();
+		inReplyToTweetTwitter.save();
+		inReplyToUserTwitter.save();
+		sourceType.save();
+		geo.save();
+		place.save();
+		user.save();
 		
 		if (isDirty()) {
 			super.save();
@@ -338,6 +338,14 @@ public class Tweet extends Domain<Long> implements ITweet {
 		}
 		
 		return false;
+	}
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetDao().count();
+	}
+	
+	public static boolean exists(Tweet tweet) {
+		return DaoFacadeImpl.getInstance().getTweetDao().exists(tweet);
 	}
 	
 }

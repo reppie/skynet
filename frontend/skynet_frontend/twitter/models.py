@@ -121,10 +121,7 @@ class Keyword(models.Model):
 
     @staticmethod
     def get_all_with_count():
-        henk = Keyword.objects.values('keyword').annotate(count=Count('keyword')).order_by('-count')
-#        from django.db import connection
-#        print connection.queries
-        return henk
+        return Keyword.objects.values('keyword').annotate(count=Count('keyword')).order_by('-count')
 
     @staticmethod
     def get_all_since(datetime_since):

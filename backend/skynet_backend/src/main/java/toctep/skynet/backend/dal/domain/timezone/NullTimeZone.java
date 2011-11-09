@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.timezone;
 
-public final class NullTimeZone implements ITimeZone {
+import toctep.skynet.backend.dal.domain.NullDomain;
+
+public final class NullTimeZone extends NullDomain<Integer> implements ITimeZone {
 
 	private static NullTimeZone instance;
 	
@@ -9,13 +11,6 @@ public final class NullTimeZone implements ITimeZone {
 			instance = new NullTimeZone();
 		}
 		return instance;
-	}
-	
-	private NullTimeZone() {}
-	
-	@Override
-	public Integer getId() {
-		return null;
 	}
 	
 	@Override
@@ -27,8 +22,5 @@ public final class NullTimeZone implements ITimeZone {
 	public int getUtcOffset() {
 		return 0;
 	}
-
-	@Override
-	public void save() {}
 	
 }

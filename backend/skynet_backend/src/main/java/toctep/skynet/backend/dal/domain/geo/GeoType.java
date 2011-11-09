@@ -32,4 +32,12 @@ public class GeoType extends Domain<Integer> implements IGeoType {
 		return NullGeoType.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getGeoTypeDao().count();
+	}
+	
+	public static boolean exists(GeoType geoType) {
+		return DaoFacadeImpl.getInstance().getGeoTypeDao().exists(geoType);
+	}
+	
 }

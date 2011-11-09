@@ -1,10 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
+import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
+import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TimeZoneTest extends DomainTest {
+public class TimeZoneTest extends SkynetTest implements IDomainTest {
 
 	private TimeZone timeZone;
 	
@@ -24,42 +31,45 @@ public class TimeZoneTest extends DomainTest {
 		timeZone.setUtcOffset(utcOffset);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(timeZone);
 		assertEquals("getTimeZone: ", timeZoneString, timeZone.getTimeZone());
 		assertEquals("getUtcOffset: ", utcOffset, timeZone.getUtcOffset());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		timeZone.save();
-		assertEquals(1, timeZoneDao.count());
+		assertEquals(1, TimeZone.count());
 		assertTrue(new Integer(1).equals(timeZone.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		timeZone.save();
 		
-		TimeZone postTimeZone = (TimeZone) timeZoneDao.select(timeZone.getId());
+		ITimeZone postTimeZone = TimeZone.select(timeZone.getId());
 		
 		assertEquals(postTimeZone.getUtcOffset(), timeZone.getUtcOffset());
 		assertTrue(postTimeZone.getTimeZone().equals(timeZone.getTimeZone()));
+		
+		ITimeZone nullTimeZone = TimeZone.select(1000);
+		assertTrue(nullTimeZone instanceof NullTimeZone);
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		timeZone.save();
-		assertEquals(1, timeZoneDao.count());
+		assertEquals(1, TimeZone.count());
 		timeZone.delete();
-		assertEquals(0, timeZoneDao.count());
+		assertEquals(0, TimeZone.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		timeZone.save();
-		assertTrue(timeZoneDao.exists(timeZone));
+		assertTrue(TimeZone.exists(timeZone));
 	}
 
 }

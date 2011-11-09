@@ -22,4 +22,12 @@ public class Url extends Domain<String> implements IUrl {
 		return NullUrl.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getUrlDao().count();
+	}
+	
+	public static boolean exists(Url url) {
+		return DaoFacadeImpl.getInstance().getUrlDao().exists(url);
+	}
+	
 }

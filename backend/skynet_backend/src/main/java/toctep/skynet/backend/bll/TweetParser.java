@@ -70,7 +70,6 @@ public final class TweetParser {
 		IGeo geo = NullGeo.getInstance();
 		IPlaceType placeType = NullPlaceType.getInstance();
 		IPlace place = NullPlace.getInstance();
-			
 		try {
 			if(status.getPlace() != null) {
 				boundingBoxType = parseBoundingBoxType(status.getPlace());
@@ -92,11 +91,9 @@ public final class TweetParser {
 			parseContributor(tweet, status);
 			parseMention(tweet, status);
 			parseKeyword(tweet);
-			
 		} catch (ParseException e) {
 			Log.error(e.getMessage(), e);
 		}
-		
 		return tweet;
 	}
 	
@@ -114,7 +111,7 @@ public final class TweetParser {
         	for(GeoLocation y : x) {
         		coordinates += y.getLatitude() + ", " + y.getLongitude() + "; ";
         	}
-        }        
+        }
         boundingBox.setCoordinates(coordinates);
         boundingBox.setType(type);
         return boundingBox;
@@ -239,7 +236,6 @@ public final class TweetParser {
         	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
             user.setProfileBackgroundImageUrl(profileBgUrl);
         }
-
         if(userStatus.getProfileBackgroundImageUrlHttps() != null) {
             Url profileBgUrlHttps = new Url();
         	profileBgUrlHttps.setId(userStatus.getProfileBackgroundImageUrlHttps());
@@ -250,7 +246,6 @@ public final class TweetParser {
         	profileImageUrl.setId(userStatus.getProfileImageURL().toExternalForm());
             user.setProfileImageUrl(profileImageUrl);
         }
-        
         if(userStatus.getProfileImageUrlHttps().toExternalForm() != null) {
             Url profileImageUrlHttps = new Url();
         	profileImageUrlHttps.setId(userStatus.getProfileImageUrlHttps().toExternalForm());
@@ -273,18 +268,15 @@ public final class TweetParser {
         
         if(Tweet.exists(status.getInReplyToStatusId())) {
             tweet.setInReplyToTweetTwitter((Tweet.select(status.getInReplyToStatusId())));
-        }
-        else {
+        } else {
         	tweet.setInReplyToTweetTwitter(NullTweet.getInstance());
         }
         
         if(User.exists(status.getInReplyToUserId())) {
             tweet.setInReplyToUserTwitter(User.select(status.getInReplyToUserId()));
-        }
-        else if (status.getInReplyToUserId() == -1) {
+        } else if (status.getInReplyToUserId() == -1) {
         	tweet.setInReplyToUserTwitter(NullUser.getInstance());
-        }
-        else {
+        } else {
         	try {
     			twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
     			tweet.setInReplyToUserTwitter(parseUser(NullPlace.getInstance(), NullLanguage.getInstance(), NullTimeZone.getInstance(), replyUser));
@@ -327,7 +319,6 @@ public final class TweetParser {
     
     private List<Keyword> parseKeyword(Tweet tweet) {
         List<Keyword> keywords = new TweetIndexer().indexTweetKeywords(tweet);
-        
         for(Keyword keyword : keywords) {
         	tweet.addKeyword(keyword);
         }

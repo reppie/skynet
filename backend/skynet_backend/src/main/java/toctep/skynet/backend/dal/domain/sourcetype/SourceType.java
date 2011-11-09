@@ -33,4 +33,12 @@ public class SourceType extends Domain<Integer> implements ISourceType {
 		return NullSourceType.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getSourceTypeDao().count();
+	}
+	
+	public static boolean exists(SourceType sourceType) {
+		return DaoFacadeImpl.getInstance().getSourceTypeDao().exists(sourceType);
+	}
+	
 }

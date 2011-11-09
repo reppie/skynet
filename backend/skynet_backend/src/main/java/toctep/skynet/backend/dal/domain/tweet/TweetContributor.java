@@ -4,13 +4,8 @@ import java.util.List;
 
 import toctep.skynet.backend.dal.dao.TweetContributorDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
-import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.user.IUser;
 
-public class TweetContributor extends Domain<Integer> {
-
-	private ITweet tweet;
-	private IUser user;
+public class TweetContributor extends TweetUser {
 
 	public TweetContributor() {
 		super();
@@ -18,46 +13,26 @@ public class TweetContributor extends Domain<Integer> {
 		setDao(DaoFacadeImpl.getInstance().getTweetContributorDao());
 	}
 	
-	public ITweet getTweet() {
-		return tweet;
-	}
-
-	public void setTweet(ITweet tweet) {
-		this.tweet = tweet;
-	}
-
-	public IUser getUser() {
-		return user;
-	}
-
-	public void setUser(IUser user) {
-		this.user = user;
-	}
-	
-	@Override
-	public void save() {
-		if (((Tweet) tweet).isDirty()) {
-			((Tweet) tweet).save();
-		}
-
-		user.save();
-		
-		super.save();
-	}	
-	
 	public static TweetContributor select(Integer id) {
 		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
-		
-		if (dao.exists(id)) {
-			return (TweetContributor) dao.select(id);
-		}
-		
-		return null;
+		return (TweetContributor) dao.select(id);
 	}
 
 	public static List<TweetContributor> select(Tweet tweet) {
 		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 		return dao.select(tweet);
+	}
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetContributorDao().count();
+	}
+	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetContributorDao().exists(id);
+	}
+	
+	public static boolean exists(TweetContributor tweetContributor) {
+		return DaoFacadeImpl.getInstance().getTweetContributorDao().exists(tweetContributor);
 	}
 	
 }

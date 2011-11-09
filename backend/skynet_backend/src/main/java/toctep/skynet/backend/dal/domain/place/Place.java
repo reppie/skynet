@@ -165,4 +165,12 @@ public class Place extends Domain<String> implements IPlace {
 		return NullPlace.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getPlaceDao().count();
+	}
+	
+	public static boolean exists(Place place) {
+		return DaoFacadeImpl.getInstance().getPlaceDao().exists(place);
+	}
+	
 }

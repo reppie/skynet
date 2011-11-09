@@ -16,8 +16,8 @@ public class GeoTaggedTweetRetriever extends TweetRetriever {
 	}
 	
 	@Override
-	public boolean isDutch(Status status) {
-		return true;
+	public void process(Status status) {
+		getTweetParser().parse(status).save();
 	}
 
 }

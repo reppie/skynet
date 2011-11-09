@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.country;
 
-public final class NullCountry implements ICountry {
+import toctep.skynet.backend.dal.domain.NullDomain;
+
+public final class NullCountry extends NullDomain<String> implements ICountry {
 
 	private static NullCountry instance;
 	
@@ -11,19 +13,9 @@ public final class NullCountry implements ICountry {
 		return instance;
 	}
 	
-	private NullCountry() {}		
-	
-	@Override
-	public String getId() {
-		return null;
-	}
-	
 	@Override
 	public String getText() {
 		return "";
 	}
-
-	@Override
-	public void save() {}
 
 }

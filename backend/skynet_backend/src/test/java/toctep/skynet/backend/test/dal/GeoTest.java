@@ -1,11 +1,18 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
+import toctep.skynet.backend.dal.domain.geo.IGeo;
+import toctep.skynet.backend.dal.domain.geo.NullGeo;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class GeoTest extends DomainTest {
+public class GeoTest extends SkynetTest implements IDomainTest {
 
 	private Geo geo;
 	
@@ -26,42 +33,44 @@ public class GeoTest extends DomainTest {
 		geo.setCoordinates(coordinates);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(geo);
 		assertTrue(geo.getType().equals(geoType));
 		assertTrue(coordinates.equals(geo.getCoordinates()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		geo.save();
-		assertEquals(1, geoDao.count());
+		assertEquals(1, Geo.count());
 		assertTrue(new Integer(1).equals(geo.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		geo.save();
 		
-		Geo postGeo = (Geo) geoDao.select(geo.getId());
-		
+		IGeo postGeo = Geo.select(geo.getId());
 		assertTrue(postGeo.getType().getId().equals(geo.getType().getId()));
 		assertTrue(postGeo.getCoordinates().equals(geo.getCoordinates()));
+		
+		IGeo nullGeo = Geo.select(1000);
+		assertTrue(nullGeo instanceof NullGeo);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		geo.save();
-		assertEquals(1, geoDao.count());
+		assertEquals(1, Geo.count());
 		geo.delete();
-		assertEquals(0, geoDao.count());		
+		assertEquals(0, Geo.count());		
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		geo.save();
-		assertTrue(geoDao.exists(geo));
+		assertTrue(Geo.exists(geo));
 	}
 	
 }

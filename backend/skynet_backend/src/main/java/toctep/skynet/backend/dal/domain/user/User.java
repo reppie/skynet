@@ -363,11 +363,18 @@ public class User extends Domain<Long> implements IUser {
 		return NullUser.getInstance();
 	}
 	
-	
 	public static IUser select(String screenName) {
 		UserDao dao = DaoFacadeImpl.getInstance().getUserDao();
 		return dao.select(screenName);
 	}	
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getUserDao().count();
+	}
+	
+	public static boolean exists(User user) {
+		return DaoFacadeImpl.getInstance().getUserDao().exists(user);
+	}
 	
 	public static boolean exists(Long id) {
 		UserDao dao = DaoFacadeImpl.getInstance().getUserDao();

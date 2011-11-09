@@ -41,4 +41,12 @@ public class TimeZone extends Domain<Integer> implements ITimeZone {
 		return NullTimeZone.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTimeZoneDao().count();
+	}
+	
+	public static boolean exists(TimeZone timeZone) {
+		return DaoFacadeImpl.getInstance().getTimeZoneDao().exists(timeZone);
+	}
+	
 }

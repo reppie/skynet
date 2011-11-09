@@ -36,7 +36,6 @@ public class TweetUrl extends Domain<Integer> {
 	
 	@Override
 	public void save() {
-		
 		if (((Tweet) tweet).isDirty()) {
 			((Tweet) tweet).save();
 		}
@@ -48,17 +47,24 @@ public class TweetUrl extends Domain<Integer> {
 	
 	public static TweetUrl select(Integer id) {
 		TweetUrlDao dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
-		
-		if (dao.exists(id)) {
-			return (TweetUrl) dao.select(id);
-		}
-		
-		return null;
+		return (TweetUrl) dao.select(id);
 	}
 	
 	public static List<TweetUrl> select(Tweet tweet) {
 		TweetUrlDao dao = DaoFacadeImpl.getInstance().getTweetUrlDao();
 		return dao.select(tweet);
+	}
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetUrlDao().count();
+	}
+	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetUrlDao().exists(id);
+	}
+	
+	public static boolean exists(TweetUrl tweetUrl) {
+		return DaoFacadeImpl.getInstance().getTweetUrlDao().exists(tweetUrl);
 	}
 	
 }

@@ -1,10 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
+import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.Language;
+import toctep.skynet.backend.dal.domain.language.NullLanguage;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class LanguageTest extends DomainTest {
+public class LanguageTest extends SkynetTest implements IDomainTest {
 
 	private Language language;
 	
@@ -20,40 +27,43 @@ public class LanguageTest extends DomainTest {
 		language.setText(text);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(language);
 		assertTrue(text.equals(language.getText()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		language.save();
-		assertEquals(1, languageDao.count());
+		assertEquals(1, Language.count());
 		assertTrue(new Integer(1).equals(language.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		language.save();
 		
-		Language postLanguage = (Language) languageDao.select(language.getId());
+		ILanguage postLanguage = Language.select(language.getId());
 		
 		assertTrue(postLanguage.getText().equals(language.getText()));
+		
+		ILanguage nullLanguage = Language.select(1000);
+		assertTrue(nullLanguage instanceof NullLanguage);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		language.save();
-		assertEquals(1, languageDao.count());
+		assertEquals(1, Language.count());
 		language.delete();
-		assertEquals(0, languageDao.count());		
+		assertEquals(0, Language.count());		
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		language.save();
-		assertTrue(languageDao.exists(language));
+		assertTrue(Language.exists(language));
 	}
 
 }

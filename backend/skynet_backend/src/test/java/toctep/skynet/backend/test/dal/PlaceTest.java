@@ -1,18 +1,25 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
+import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.IPlaceType;
+import toctep.skynet.backend.dal.domain.place.NullPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class PlaceTest extends DomainTest {
+public class PlaceTest extends SkynetTest implements IDomainTest {
 
 	private Place place;
 	
@@ -84,7 +91,7 @@ public class PlaceTest extends DomainTest {
 		place.setAppId(appId);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() { 
 		assertNotNull(place);
 		assertTrue(id.equals(place.getId()));
@@ -104,18 +111,18 @@ public class PlaceTest extends DomainTest {
 		assertTrue(appId.equals(place.getAppId()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		place.save();
-		assertEquals(1, placeDao.count());
+		assertEquals(1, Place.count());
 		assertEquals(id, place.getId());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		place.save();
 		
-		Place postPlace = (Place) placeDao.select(place.getId());
+		IPlace postPlace = Place.select(place.getId());
 		
 		assertTrue(postPlace.getType().equals(place.getType()));
 		assertTrue(postPlace.getBoundingBox().equals(place.getBoundingBox()));
@@ -131,20 +138,23 @@ public class PlaceTest extends DomainTest {
 		assertTrue(postPlace.getTwitter().equals(place.getTwitter()));
 		assertTrue(postPlace.getUrl().equals(place.getUrl()));
 		assertTrue(postPlace.getAppId().equals(place.getAppId()));
+		
+		IPlace nullPlace = Place.select("ThisPlaceDoesNotExist");
+		assertTrue(nullPlace instanceof NullPlace);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		place.save();
-		assertEquals(1, placeDao.count());
+		assertEquals(1, Place.count());
 		place.delete();
-		assertEquals(0, placeDao.count());
+		assertEquals(0, Place.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		place.save();
-		assertTrue(placeDao.exists(place));
+		assertTrue(Place.exists(place));
 	}
 	
 }

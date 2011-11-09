@@ -36,4 +36,13 @@ public class Hashtag extends Domain<Integer> implements IHashtag {
 		HashtagDao dao = DaoFacadeImpl.getInstance().getHashtagDao();
 		return dao.select(text);
 	}
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getHashtagDao().count();
+	}
+	
+	public static boolean exists(Hashtag hashtag) {
+		return DaoFacadeImpl.getInstance().getHashtagDao().exists(hashtag);
+	}
+	
 }

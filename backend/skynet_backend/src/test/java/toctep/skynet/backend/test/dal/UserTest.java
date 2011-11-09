@@ -1,8 +1,12 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
+
+import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
@@ -12,9 +16,12 @@ import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
 import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
+import toctep.skynet.backend.dal.domain.user.IUser;
+import toctep.skynet.backend.dal.domain.user.NullUser;
 import toctep.skynet.backend.dal.domain.user.User;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class UserTest extends DomainTest {
+public class UserTest extends SkynetTest implements IDomainTest {
 	
 	private User user;
 	
@@ -170,9 +177,10 @@ public class UserTest extends DomainTest {
 		user.setListedCount(listedCount);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(user);
+		assertNotNull(user.getDao());
 		assertTrue(new Long(id).equals(user.getId()));
 		assertTrue(place.equals(user.getPlace()));
 		assertTrue(user.isDefaultProfile() == defaultProfile);
@@ -211,17 +219,17 @@ public class UserTest extends DomainTest {
 		assertEquals(listedCount, user.getListedCount());
 	}
 	
-	@Override
+	@Test
 	public void testInsert() {
 		user.save();
-		assertEquals(1, userDao.count());
+		assertEquals(1, User.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		user.save();
 		
-		User postUser = (User) userDao.select(user.getId());
+		IUser postUser = User.select(user.getId());
 		
 		assertEquals(postUser.getId(), user.getId());
 		assertTrue(postUser.getPlace().equals(user.getPlace()));
@@ -259,20 +267,24 @@ public class UserTest extends DomainTest {
 		assertTrue(postUser.isShowAllInlineMedia() == user.isShowAllInlineMedia());
 		assertTrue(postUser.isTranslator() == user.isTranslator());
 		assertEquals(postUser.getListedCount(), user.getListedCount());
+		
+		IUser nullUser = User.select(1000L);
+		assertTrue(nullUser instanceof NullUser);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		user.save();
-		assertEquals(1, userDao.count());
+		assertEquals(1, User.count());
 		user.delete();
-		assertEquals(0, userDao.count());
+		assertEquals(0, User.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		user.save();
-		assertTrue(userDao.exists(user));
+		assertTrue(User.exists(user.getId()));
+		assertTrue(!User.exists(1000L));
 	}
 	
 }

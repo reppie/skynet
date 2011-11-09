@@ -52,7 +52,7 @@ class TwitterRpcMethods(object):
         cloud = KeywordCloud(keywords, exclude=exclude)
             
         return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids[:20]],
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
             'cloud':cloud,
         }
         
@@ -68,7 +68,7 @@ class TwitterRpcMethods(object):
         cloud = KeywordCloud(keywords)
             
         return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids[:20]],
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
             'cloud':cloud,
         }
         

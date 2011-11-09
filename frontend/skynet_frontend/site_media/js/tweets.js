@@ -1,4 +1,6 @@
 (function($){
+	var pageSize = 20;
+	var moreSize = pageSize;
 	var api = window.api || (window.api = {
 		
 		'Base': function(json){
@@ -73,6 +75,10 @@
 			},
 			'Tag': function(tag){
 				api.filters.Base.prototype.constructor.call(this, 'tag', "#" + tag, tag);
+			},
+			'Time': function(from, to){
+				api.filters.Base.prototype.constructor.call(this, 'time', "time filter", from);
+				this.to = to;
 			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
@@ -163,6 +169,14 @@
 			}());
     	}
     }
+    
+    api.TweetList.prototype.more = function(tweet){
+    	
+    	
+    	
+    	
+    	
+    }
 	
 	api.TweetList.prototype.reset = function(tweetIds, callback){
 		
@@ -170,6 +184,7 @@
 		this.$tweetList.empty();
 		this.tweetIds = tweetIds || [];
 		this.loaded = 0;
+		this.loading = pageSize;
 		this.callback = callback;
 		if(tweetIds.length==0){
 			if(callback){
@@ -177,8 +192,8 @@
 			}
 		}
 		
-		for(var index in tweetIds){
-			var tweetId = tweetIds[index];
+		for(var i =0; i < pageSize && i < tweetIds.length; i++){
+			var tweetId = tweetIds[i];
 			api.Tweet.get(tweetId, function(tweet){
 				if(tweet){
 					tweet.getUser(function(user){
@@ -186,7 +201,7 @@
 							if(tweetList.tweetIds.indexOf(this.id)>-1){
 								tweetList.loaded++;
 								tweetList.add(tweet);
-								if(tweetList.loaded>=tweetList.tweetIds.length){
+								if(tweetList.loaded>=tweetList.loading){
 									if(tweetList.callback){
 										tweetList.callback.call(tweetList);
 									}
@@ -206,8 +221,8 @@
 	api.Tweet.prototype = api.Base;
 	api.User.prototype = api.Base;
 	
-	
 	api.filters.Keyword.prototype = api.filters.Base;
+	api.filters.Time.prototype = api.filters.Base;
 	api.filters.User.prototype = api.filters.Base;
 	api.filters.Geo.prototype = api.filters.Base;
 	
@@ -304,7 +319,7 @@
 		var tweet = api.cache.get('api.Tweet', tweetId);
 		if(tweet){
 			//console.log("serving Tweet with id: "+tweetId+" from cache");
-			callback.call(This,tweet);
+			callback.call(This, tweet);
 			return;
 		}
 		$.jsonRPC.request('load_tweet', {
@@ -313,10 +328,10 @@
 		  		var tweet = new api.Tweet(result.result);
 		  		api.cache.set('api.Tweet', tweet);
 		  		callback.call(This, tweet);
-		  },
-		  error: function(result){
+		  	},
+		  	error: function(result){
 	  			callback.call(This, null);
-		  },
+		  	},
 	  	});
 	}
 	

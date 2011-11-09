@@ -34,7 +34,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	}
 	
 	@Override
-	public boolean isDutch(Status status) {
+	public void process(Status status) {
 		Detector detector = null;
 		String lang = null;
 		
@@ -50,10 +50,8 @@ public class UserBioTweetRetriever extends TweetRetriever {
 		twitter4j.User user = status.getUser();
 		
 		if (isDutchLanguage(user, lang) || isDutchLocation(user) || isDutchTimeZone(user)) {
-			return true;
+			getTweetParser().parse(status).save();
     	}
-		
-		return false;
 	}
 	
 	private boolean isDutchLocation(twitter4j.User user) {

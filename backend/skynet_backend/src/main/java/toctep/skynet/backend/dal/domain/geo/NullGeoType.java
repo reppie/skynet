@@ -1,8 +1,8 @@
 package toctep.skynet.backend.dal.domain.geo;
 
-import toctep.skynet.backend.dal.domain.Domain;
+import toctep.skynet.backend.dal.domain.NullDomain;
 
-public final class NullGeoType extends Domain<Integer> implements IGeoType {
+public final class NullGeoType extends NullDomain<Integer> implements IGeoType {
 
 	private static NullGeoType instance;
 	
@@ -13,19 +13,9 @@ public final class NullGeoType extends Domain<Integer> implements IGeoType {
 		return instance;
 	}
 	
-	private NullGeoType() {}	
-	
-	@Override
-	public Integer getId() {
-		return null;
-	}
-	
 	@Override
 	public String getText() {
 		return "";
 	}
-	
-	@Override
-	public void save() {}
 	
 }

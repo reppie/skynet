@@ -1,14 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetMention;
 import toctep.skynet.backend.dal.domain.user.User;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetMentionTest extends DomainTest {
+public class TweetMentionTest extends SkynetTest implements IDomainTest {
 
 	private TweetMention tweetMention;
 	
@@ -30,31 +33,50 @@ public class TweetMentionTest extends DomainTest {
 		tweetMention.setTweet(tweet);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweetMention);
 		assertEquals("getTweet: ", tweet, tweetMention.getTweet());
 		assertEquals("getUser: ", user, tweetMention.getUser());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		tweetMention.save();
-		assertEquals(1, tweetMentionDao.count());
+		assertEquals(1, TweetMention.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		tweetMention.save();
-		
-		TweetMention postTweetMention = (TweetMention) tweetMentionDao.select(tweetMention.getId());
-		
+
+		TweetMention postTweetMention = TweetMention.select(tweetMention.getId());
+
 		assertTrue(postTweetMention.getTweet().getId().equals(tweetMention.getTweet().getId()));
 		assertTrue(postTweetMention.getUser().getId().equals(tweetMention.getUser().getId()));	
 	}
 	
 	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		User user = new User();
+		user.setId(new Long(1));
+		user.save();
+		
+		tweet.addMention(user);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getMentions().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getMentions().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullUser() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		
@@ -71,18 +93,19 @@ public class TweetMentionTest extends DomainTest {
 		assertEquals(1, postTweet.getMentions().size());
 	}
 
-	@Override
+	@Test
 	public void testDelete() {
 		tweetMention.save();
-		assertEquals(1, tweetMentionDao.count());
+		assertEquals(1, TweetMention.count());
 		tweetMention.delete();
-		assertEquals(0, tweetMentionDao.count());
+		assertEquals(0, TweetMention.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweetMention.save();
-		assertTrue(tweetMentionDao.exists(tweetMention));
+		assertTrue(TweetMention.exists(tweetMention));
+		assertTrue(TweetMention.exists(tweetMention.getId()));
 	}
 	
 }

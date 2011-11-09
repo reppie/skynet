@@ -36,7 +36,6 @@ public class TweetHashtag extends Domain<Integer> {
 	
 	@Override
 	public void save() {
-		
 		if (((Tweet) tweet).isDirty()) {
 			((Tweet) tweet).save();
 		}
@@ -48,17 +47,24 @@ public class TweetHashtag extends Domain<Integer> {
 	
 	public static TweetHashtag select(Integer id) {
 		TweetHashtagDao dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
-		
-		if (dao.exists(id)) {
-			return (TweetHashtag) dao.select(id);
-		}
-		
-		return null;
+		return (TweetHashtag) dao.select(id);
 	}
 	
 	public static List<TweetHashtag> select(Tweet tweet) {
 		TweetHashtagDao dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 		return dao.select(tweet);
+	}
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetHashtagDao().count();
+	}
+	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetHashtagDao().exists(id);
+	}
+	
+	public static boolean exists(TweetHashtag tweetHashtag) {
+		return DaoFacadeImpl.getInstance().getTweetHashtagDao().exists(tweetHashtag);
 	}
 	
 }
