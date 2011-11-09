@@ -4,12 +4,19 @@ import java.sql.Types;
 
 import junit.framework.TestCase;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.dao.impl.mysql.Param;
+import toctep.skynet.backend.log.Log;
 
 public class MysqlUtilTest extends TestCase {
+	
+	@BeforeClass
+	public void setUpOnce() {
+		Log.initialize();
+	}
 	
 	@Test
 	public void testCreation() {
@@ -33,5 +40,4 @@ public class MysqlUtilTest extends TestCase {
 		);
 		assertEquals("ID: ", 2, id);		
 	}
-	
 }
