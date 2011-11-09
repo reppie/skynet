@@ -33,10 +33,7 @@ public class BoundingBox extends Domain<Integer> implements IBoundingBox {
 	
 	@Override
 	public void save() {
-		if(type instanceof BoundingBoxType) {
-			((BoundingBoxType) type).save();
-			((BoundingBoxType) this.type).setId(((BoundingBoxType) type).getId());
-		}
+		type.save();
 		
 		super.save();
 	}

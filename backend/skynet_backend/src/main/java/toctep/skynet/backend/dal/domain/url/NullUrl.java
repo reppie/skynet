@@ -18,4 +18,8 @@ public final class NullUrl implements IUrl {
 		return null;
 	}
 
+	@Override
+	public void save() {
+	}
+
 }
