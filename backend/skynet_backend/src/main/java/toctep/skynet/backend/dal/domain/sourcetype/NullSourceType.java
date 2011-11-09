@@ -1,7 +1,9 @@
 package toctep.skynet.backend.dal.domain.sourcetype;
 
+import toctep.skynet.backend.dal.domain.NullDomain;
 
-public final class NullSourceType implements ISourceType {
+
+public final class NullSourceType extends NullDomain implements ISourceType {
 
 	private static NullSourceType instance;
 	
@@ -11,8 +13,6 @@ public final class NullSourceType implements ISourceType {
 		}
 		return instance;
 	}
-	
-	private NullSourceType() {}
 	
 	@Override
 	public Integer getId() {

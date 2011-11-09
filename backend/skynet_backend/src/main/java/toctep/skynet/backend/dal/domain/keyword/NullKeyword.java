@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.keyword;
 
-public final class NullKeyword implements IKeyword {
+import toctep.skynet.backend.dal.domain.NullDomain;
+
+public final class NullKeyword extends NullDomain implements IKeyword {
 
 	private static NullKeyword instance;
 	
@@ -10,8 +12,6 @@ public final class NullKeyword implements IKeyword {
 		}
 		return instance;
 	}
-	
-	private NullKeyword() {}
 	
 	@Override
 	public Integer getId() {

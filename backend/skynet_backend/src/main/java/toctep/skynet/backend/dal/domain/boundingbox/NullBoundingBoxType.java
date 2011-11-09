@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.boundingbox;
 
-public final class NullBoundingBoxType implements IBoundingBoxType {
+import toctep.skynet.backend.dal.domain.NullDomain;
+
+public final class NullBoundingBoxType extends NullDomain implements IBoundingBoxType {
 
 	private static NullBoundingBoxType instance;
 	
@@ -10,8 +12,6 @@ public final class NullBoundingBoxType implements IBoundingBoxType {
 		}
 		return instance;
 	}
-	
-	private NullBoundingBoxType() {}	
 	
 	@Override
 	public Integer getId() {
