@@ -45,10 +45,36 @@ public class TweetUrlTest extends DomainTest {
 	}
 	
 	@Override
-	public void testSelect() {}
+	public void testSelect() {
+		tweetUrl.save();
+
+		TweetUrl postTweetUrl = (TweetUrl) tweetUrlDao.select(tweetUrl.getId());
+
+		assertTrue(postTweetUrl.getTweet().getId().equals(tweetUrl.getTweet().getId()));
+		assertTrue(postTweetUrl.getUrl().getId().equals(tweetUrl.getUrl().getId()));	
+	}
 	
 	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		Url url = new Url();
+		url.setId("asd");
+		url.save();
+		
+		tweet.addUrl(url);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getUrls().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getUrls().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullUrl() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		
@@ -63,7 +89,7 @@ public class TweetUrlTest extends DomainTest {
 		
 		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
 		assertEquals(1, postTweet.getUrls().size());
-	}
+	}	
 
 	@Override
 	public void testDelete() {

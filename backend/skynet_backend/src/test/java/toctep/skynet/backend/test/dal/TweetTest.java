@@ -1,6 +1,8 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 
@@ -144,7 +146,8 @@ public class TweetTest extends DomainTest {
 	@Override
 	public void testExists() {
 		tweet.save();
-		assertTrue(tweetDao.exists(tweet));
+		assertTrue(Tweet.exists(tweet.getId()));
+		assertTrue(!Tweet.exists(1000L));
 	}
 
 }

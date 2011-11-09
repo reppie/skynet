@@ -13,6 +13,11 @@ public class TweetMention extends TweetUser {
 		setDao(DaoFacadeImpl.getInstance().getTweetMentionDao());
 	}
 	
+	public static TweetMention select(Integer id) {
+		TweetMentionDao dao = DaoFacadeImpl.getInstance().getTweetMentionDao();
+		return (TweetMention) dao.select(id);
+	}
+	
 	public static List<TweetMention> select(Tweet tweet) {
 		TweetMentionDao dao = DaoFacadeImpl.getInstance().getTweetMentionDao();
 		return dao.select(tweet);

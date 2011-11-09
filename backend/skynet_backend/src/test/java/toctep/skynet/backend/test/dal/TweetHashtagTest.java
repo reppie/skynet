@@ -1,6 +1,8 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -44,10 +46,36 @@ public class TweetHashtagTest extends DomainTest {
 	}
 	
 	@Override
-	public void testSelect() {}	
+	public void testSelect() {
+		tweetHashtag.save();
+
+		TweetHashtag postTweetHashtag = TweetHashtag.select(tweetHashtag.getId());
+
+		assertTrue(postTweetHashtag.getTweet().getId().equals(tweetHashtag.getTweet().getId()));
+		assertTrue(postTweetHashtag.getHashtag().getId().equals(tweetHashtag.getHashtag().getId()));		
+	}
 	
 	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		Hashtag hashtag = new Hashtag();
+		hashtag.setId(1);
+		hashtag.save();
+		
+		tweet.addHashtag(hashtag);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getHashtags().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getHashtags().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullHashtag() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		
@@ -62,7 +90,7 @@ public class TweetHashtagTest extends DomainTest {
 		
 		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
 		assertEquals(1, postTweet.getHashtags().size());
-	}
+	}	
 
 	@Override
 	public void testDelete() {

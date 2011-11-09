@@ -51,10 +51,40 @@ public class TweetKeywordTest extends DomainTest {
 	}
 
 	@Override
-	public void testSelect() {}
+	public void testSelect() {
+		tweetKeyword.save();
+
+		TweetKeyword postTweetKeyword = (TweetKeyword) tweetKeywordDao.select(tweetKeyword.getId());
+
+		assertTrue(postTweetKeyword.getTweet().getId().equals(tweetKeyword.getTweet().getId()));
+		assertTrue(postTweetKeyword.getTweetKeywordValue().equals(tweetKeyword.getTweetKeywordValue()));
+		assertTrue(postTweetKeyword.getKeyword().getId().equals(tweetKeyword.getKeyword().getId()));
+	}
 	
 	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		String word = "asd";
+		
+		Keyword keyword = new Keyword();
+		keyword.setId(1);
+		keyword.setKeyword(word);
+		keyword.save();
+		
+		tweet.addKeyword(keyword);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getKeywords().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getKeywords().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullKeyword() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		
@@ -72,7 +102,7 @@ public class TweetKeywordTest extends DomainTest {
 		
 		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
 		assertEquals(1, postTweet.getKeywords().size());
-	}
+	}	
 
 	@Override
 	public void testDelete() {

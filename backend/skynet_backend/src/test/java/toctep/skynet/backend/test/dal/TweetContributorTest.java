@@ -50,6 +50,25 @@ public class TweetContributorTest extends DomainTest {
 		
 		User user = new User();
 		user.setId(new Long(1));
+		user.save();
+		
+		tweet.addContributor(user);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getContributors().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getContributors().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullUser() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		User user = new User();
+		user.setId(new Long(1));
 		
 		tweet.addContributor(user);
 		
@@ -76,6 +95,13 @@ public class TweetContributorTest extends DomainTest {
 	}
 
 	@Override
-	public void testSelect() {}
+	public void testSelect() {
+		tweetContributor.save();
+
+		TweetContributor postTweetContributor = TweetContributor.select(tweetContributor.getId());
+
+		assertTrue(postTweetContributor.getTweet().getId().equals(tweetContributor.getTweet().getId()));
+		assertTrue(postTweetContributor.getUser().getId().equals(tweetContributor.getUser().getId()));		
+	}
 	
 }
