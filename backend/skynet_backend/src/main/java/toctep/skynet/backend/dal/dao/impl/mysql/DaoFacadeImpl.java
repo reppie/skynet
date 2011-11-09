@@ -176,4 +176,5 @@ public final class DaoFacadeImpl implements DaoFacade {
 	public KeywordDao getKeywordDao() {
 		return keywordDao;
 	}
+	
 }

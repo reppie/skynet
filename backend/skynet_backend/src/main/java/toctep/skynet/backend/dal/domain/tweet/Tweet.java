@@ -302,12 +302,12 @@ public class Tweet extends Domain<Long> implements ITweet {
 	
 	@Override
 	public void save() {
-			inReplyToTweetTwitter.save();
-			inReplyToUserTwitter.save();
-			sourceType.save();
-			geo.save();
-			place.save();
-			user.save();
+		inReplyToTweetTwitter.save();
+		inReplyToUserTwitter.save();
+		sourceType.save();
+		geo.save();
+		place.save();
+		user.save();
 		
 		if (isDirty()) {
 			super.save();

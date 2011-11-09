@@ -66,4 +66,5 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 	public int count() {
 		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
+	
 }

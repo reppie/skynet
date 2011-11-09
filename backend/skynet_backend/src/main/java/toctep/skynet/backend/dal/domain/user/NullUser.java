@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.domain.user;
 
 import java.sql.Timestamp;
 
+import toctep.skynet.backend.dal.domain.NullDomain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
 import toctep.skynet.backend.dal.domain.place.IPlace;
@@ -11,7 +12,7 @@ import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public final class NullUser implements IUser {
+public final class NullUser extends NullDomain<Long> implements IUser {
 
 	private static NullUser instance;
 	
@@ -20,13 +21,6 @@ public final class NullUser implements IUser {
 			instance = new NullUser();
 		}
 		return instance;
-	}
-	
-	private NullUser() { }
-	
-	@Override
-	public Long getId() {
-		return null;
 	}
 	
 	@Override
@@ -202,10 +196,6 @@ public final class NullUser implements IUser {
 	@Override
 	public boolean isVerified() {
 		return false;
-	}
-
-	@Override
-	public void save() {
 	}
 
 }

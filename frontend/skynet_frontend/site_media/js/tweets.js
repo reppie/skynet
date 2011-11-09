@@ -74,6 +74,10 @@
 			'Tag': function(tag){
 				api.filters.Base.prototype.constructor.call(this, 'tag', "#" + tag, tag);
 			},
+			'Time': function(from, to){
+				api.filters.Base.prototype.constructor.call(this, 'time', "time filter", from);
+				this.to = to;
+			},
 			'Geo': function(label, country, place){
 				api.filters.Base.prototype.constructor.call(this, 'geo', label, place);
 				this.equals = function(filter){
@@ -129,7 +133,18 @@
     	var tweetList = this;
 		if(!$('.tweets .tweet[data-tweet-id="'+tweet.id+'"]').length){
 			var $tweet = $("#tweetTemplate").tmpl(tweet);
-			$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+			
+			var inserted = false;
+			$(".tweets .tweet").each(function(){
+				if(tweet.timestamp > $(this).data("timestamp")){
+					inserted = true;
+					$tweet.insertBefore($(this));
+					return false;
+				}
+			});
+			if(!inserted){
+				$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
+			}
 			$tweet.find('time').localize(function () {
 			  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
 			    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
@@ -195,8 +210,8 @@
 	api.Tweet.prototype = api.Base;
 	api.User.prototype = api.Base;
 	
-	
 	api.filters.Keyword.prototype = api.filters.Base;
+	api.filters.Time.prototype = api.filters.Base;
 	api.filters.User.prototype = api.filters.Base;
 	api.filters.Geo.prototype = api.filters.Base;
 	
@@ -276,7 +291,6 @@
  	}
  	
 	api.Tweet.prototype.getUser = function(callback){
-		
 		var This = this;
 		if(this.user){
 			callback.call(This, this.user);

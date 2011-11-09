@@ -68,4 +68,5 @@ public class TimeZoneDaoImpl extends TimeZoneDao {
 	public int count() {
 		return MySqlUtil.getInstance().count(TABLE_NAME);
 	}
+	
 }

@@ -1,7 +1,8 @@
 package toctep.skynet.backend.dal.domain.language;
 
+import toctep.skynet.backend.dal.domain.NullDomain;
 
-public final class NullLanguage implements ILanguage {
+public final class NullLanguage extends NullDomain<Integer> implements ILanguage {
 
 	private static NullLanguage instance;
 	
@@ -12,20 +13,9 @@ public final class NullLanguage implements ILanguage {
 		return instance;
 	}
 	
-	private NullLanguage() { }
-	
-	@Override
-	public Integer getId() {
-		return null;
-	}
-	
 	@Override
 	public String getText() {
 		return "";
-	}
-
-	@Override
-	public void save() {
 	}
 
 }

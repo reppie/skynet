@@ -14,7 +14,7 @@ import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public class User extends Domain<Long> implements IUser  {
+public class User extends Domain<Long> implements IUser {
 
 	private IPlace place 						= NullPlace.getInstance();
 	private boolean defaultProfile				= false;
@@ -375,4 +375,5 @@ public class User extends Domain<Long> implements IUser  {
 		}
 		return false;
 	}
+	
 }

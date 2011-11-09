@@ -1,5 +1,6 @@
 package toctep.skynet.backend.dal.domain.place;
 
+import toctep.skynet.backend.dal.domain.NullDomain;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.dal.domain.country.ICountry;
@@ -7,7 +8,7 @@ import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public final class NullPlace implements IPlace {
+public final class NullPlace extends NullDomain<String> implements IPlace {
 
 	private static NullPlace instance;
 	
@@ -16,13 +17,6 @@ public final class NullPlace implements IPlace {
 			instance = new NullPlace();
 		}
 		return instance;
-	}
-	
-	private NullPlace() { }
-	
-	@Override
-	public String getId() {
-		return null;
 	}
 	
 	@Override
@@ -93,10 +87,6 @@ public final class NullPlace implements IPlace {
 	@Override
 	public IUrl getUrl() {
 		return NullUrl.getInstance();
-	}
-
-	@Override
-	public void save() {
 	}
 	
 }

@@ -10,7 +10,7 @@ import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public class Place extends Domain<String> implements IPlace{
+public class Place extends Domain<String> implements IPlace {
 
 	private IPlaceType type 			= NullPlaceType.getInstance();
 	private IBoundingBox boundingBox 	= NullBoundingBox.getInstance();

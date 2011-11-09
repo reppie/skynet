@@ -1,6 +1,8 @@
 package toctep.skynet.backend.dal.domain.hashtag;
 
-public final class NullHashtag implements IHashtag {
+import toctep.skynet.backend.dal.domain.NullDomain;
+
+public final class NullHashtag extends NullDomain<Integer> implements IHashtag {
 
 	private static NullHashtag instance;
 	
@@ -11,20 +13,9 @@ public final class NullHashtag implements IHashtag {
 		return instance;
 	}
 	
-	private NullHashtag() { }
-	
-	@Override
-	public Integer getId() {
-		return null;
-	}
-	
 	@Override
 	public String getText() {
 		return "";
-	}
-
-	@Override
-	public void save() {
 	}
 
 }

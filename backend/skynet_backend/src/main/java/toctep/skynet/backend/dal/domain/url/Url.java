@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class Url extends Domain<String> implements IUrl{
+public class Url extends Domain<String> implements IUrl {
 
 	public Url() {
 		super();
@@ -21,4 +21,5 @@ public class Url extends Domain<String> implements IUrl{
 		
 		return NullUrl.getInstance();
 	}
+	
 }

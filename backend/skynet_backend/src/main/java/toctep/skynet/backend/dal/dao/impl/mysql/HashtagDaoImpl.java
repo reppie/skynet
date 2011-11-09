@@ -9,7 +9,7 @@ import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 import toctep.skynet.backend.dal.domain.hashtag.NullHashtag;
 
-public class HashtagDaoImpl extends HashtagDao{
+public class HashtagDaoImpl extends HashtagDao {
 
 	@Override
 	public void insert(Domain<Integer> domain) {
