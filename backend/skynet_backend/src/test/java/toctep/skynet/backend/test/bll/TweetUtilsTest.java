@@ -1,6 +1,7 @@
 package toctep.skynet.backend.test.bll;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -26,5 +27,4 @@ public class TweetUtilsTest extends SkynetTest {
 		assertTrue(TweetUtils.isDutchLanguage("gutentag", "NL"));
 		assertFalse(TweetUtils.isDutchLanguage("gutentag", "en"));
 	}
-	
 }

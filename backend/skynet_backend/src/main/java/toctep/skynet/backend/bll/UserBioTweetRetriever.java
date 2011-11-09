@@ -4,7 +4,6 @@ import twitter4j.Status;
 
 public class UserBioTweetRetriever extends TweetRetriever {
 	
-	private twitter4j.User user;
 	
 	public UserBioTweetRetriever() {
 		super();
@@ -18,7 +17,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 	@Override
 	public void process(Status status) {
 	
-		user = status.getUser();
+		twitter4j.User user = status.getUser();
 		
 		if (TweetUtils.isDutchLanguage(status.getText(), user.getLang()) 
 										|| TweetUtils.isDutchLocation(user.getLocation()) 
