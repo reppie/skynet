@@ -45,6 +45,11 @@ public class TweetHashtag extends Domain<Integer> {
 		super.save();
 	}	
 	
+	public static TweetHashtag select(Integer id) {
+		TweetHashtagDao dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
+		return (TweetHashtag) dao.select(id);
+	}
+	
 	public static List<TweetHashtag> select(Tweet tweet) {
 		TweetHashtagDao dao = DaoFacadeImpl.getInstance().getTweetHashtagDao();
 		return dao.select(tweet);

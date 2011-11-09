@@ -47,7 +47,36 @@ public class TweetContributorTest extends SkynetTest implements DomainTest {
 	}
 	
 	@Test
+	public void testSelect() {
+		tweetContributor.save();
+
+		TweetContributor postTweetContributor = TweetContributor.select(tweetContributor.getId());
+
+		assertTrue(postTweetContributor.getTweet().getId().equals(tweetContributor.getTweet().getId()));
+		assertTrue(postTweetContributor.getUser().getId().equals(tweetContributor.getUser().getId()));		
+	}
+	
+	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		User user = new User();
+		user.setId(new Long(1));
+		user.save();
+		
+		tweet.addContributor(user);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getContributors().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getContributors().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullUser() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		
@@ -77,8 +106,5 @@ public class TweetContributorTest extends SkynetTest implements DomainTest {
 		tweetContributor.save();
 		assertTrue(TweetContributor.exists(tweetContributor));
 	}
-
-	@Test
-	public void testSelect() {}
 	
 }

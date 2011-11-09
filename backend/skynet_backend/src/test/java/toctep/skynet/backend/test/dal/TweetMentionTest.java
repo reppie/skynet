@@ -47,10 +47,36 @@ public class TweetMentionTest extends SkynetTest implements DomainTest {
 	}
 	
 	@Test
-	public void testSelect() {}
+	public void testSelect() {
+		tweetMention.save();
+
+		TweetMention postTweetMention = TweetMention.select(tweetMention.getId());
+
+		assertTrue(postTweetMention.getTweet().getId().equals(tweetMention.getTweet().getId()));
+		assertTrue(postTweetMention.getUser().getId().equals(tweetMention.getUser().getId()));	
+	}
 	
 	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		User user = new User();
+		user.setId(new Long(1));
+		user.save();
+		
+		tweet.addMention(user);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getMentions().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getMentions().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullUser() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		

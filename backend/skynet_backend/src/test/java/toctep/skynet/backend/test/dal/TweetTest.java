@@ -150,6 +150,8 @@ public class TweetTest extends SkynetTest implements DomainTest {
 	public void testExists() {
 		tweet.save();
 		assertTrue(Tweet.exists(tweet));
+		assertTrue(Tweet.exists(tweet.getId()));
+		assertTrue(!Tweet.exists(1000L));
 	}
 
 }

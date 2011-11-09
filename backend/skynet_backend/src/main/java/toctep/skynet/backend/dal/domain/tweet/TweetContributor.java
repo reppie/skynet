@@ -12,6 +12,11 @@ public class TweetContributor extends TweetUser {
 		
 		setDao(DaoFacadeImpl.getInstance().getTweetContributorDao());
 	}
+	
+	public static TweetContributor select(Integer id) {
+		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
+		return (TweetContributor) dao.select(id);
+	}
 
 	public static List<TweetContributor> select(Tweet tweet) {
 		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
