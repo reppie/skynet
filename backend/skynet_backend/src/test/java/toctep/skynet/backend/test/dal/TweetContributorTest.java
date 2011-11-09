@@ -70,12 +70,6 @@ public class TweetContributorTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		tweetContributor.save();
 		assertEquals(1, tweetContributorDao.count());

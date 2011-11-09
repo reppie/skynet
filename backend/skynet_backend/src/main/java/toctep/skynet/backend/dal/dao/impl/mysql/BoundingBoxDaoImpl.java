@@ -47,12 +47,6 @@ public class BoundingBoxDaoImpl extends BoundingBoxDao {
 	}
 	
 	@Override
-	public void update(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void delete(Domain<Integer> domain) {
 		BoundingBox boundingBox = (BoundingBox) domain;
 		MySqlUtil.getInstance().delete(

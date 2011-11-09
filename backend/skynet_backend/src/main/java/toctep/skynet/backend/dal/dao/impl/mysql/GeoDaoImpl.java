@@ -45,12 +45,6 @@ public class GeoDaoImpl extends GeoDao {
 		
 		return geo;
 	}
-
-	@Override
-	public void update(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void delete(Domain<Integer> domain) {

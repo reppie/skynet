@@ -41,12 +41,6 @@ public class KeywordTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		keyword.save();
 		assertEquals(1, keywordDao.count());

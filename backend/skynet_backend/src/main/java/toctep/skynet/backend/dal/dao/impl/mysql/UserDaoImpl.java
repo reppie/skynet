@@ -152,12 +152,6 @@ public class UserDaoImpl extends UserDao {
 			return NullUser.getInstance();
 		}
 	}
-	
-	@Override
-	public void update(Domain<Long> domain) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void delete(Domain<Long> domain) {

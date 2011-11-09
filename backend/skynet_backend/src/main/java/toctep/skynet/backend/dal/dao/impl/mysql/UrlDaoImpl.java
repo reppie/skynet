@@ -39,12 +39,6 @@ public class UrlDaoImpl extends UrlDao {
 	}
 
 	@Override
-	public void update(Domain<String> domain) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void delete(Domain<String> domain) {
 		Url url = (Url) domain;
 		MySqlUtil.getInstance().delete(

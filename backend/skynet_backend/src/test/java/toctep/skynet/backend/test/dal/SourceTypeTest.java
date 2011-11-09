@@ -39,12 +39,6 @@ public class SourceTypeTest extends DomainTest {
 		
 		assertTrue(postSourceType.getText().equals(sourceType.getText()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {

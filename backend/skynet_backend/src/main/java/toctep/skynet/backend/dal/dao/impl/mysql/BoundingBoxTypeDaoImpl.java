@@ -41,12 +41,6 @@ public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
 		
 		return boundingBoxType;
 	}
-
-	@Override
-	public void update(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void delete(Domain<Integer> domain) {

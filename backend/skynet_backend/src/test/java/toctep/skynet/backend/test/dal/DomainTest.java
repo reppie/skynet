@@ -111,9 +111,6 @@ public abstract class DomainTest extends TestCase {
 	public abstract void testSelect();
 	
 	@Test
-	public abstract void testUpdate();
-	
-	@Test
 	public abstract void testDelete();
 	
 	@Test

@@ -102,11 +102,6 @@ public class TweetDaoImpl extends TweetDao {
 		
 		return tweet;
 	}
-
-	@Override
-	public void update(Domain<Long> domain) {
-		// TODO
-	}
 	
 	@Override
 	public void delete(Domain<Long> domain) {

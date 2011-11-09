@@ -41,12 +41,6 @@ public class HashtagTest extends DomainTest{
 	}
 	
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void testDelete() {
 		hashtag.save();
 		assertEquals(1, hashtagDao.count());

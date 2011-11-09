@@ -35,12 +35,6 @@ public class UrlTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		url.save();
 		assertEquals(1, urlDao.count());

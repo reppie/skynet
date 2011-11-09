@@ -71,12 +71,6 @@ public class TweetUrlTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		tweetUrl.save();
 		assertEquals(1, tweetUrlDao.count());

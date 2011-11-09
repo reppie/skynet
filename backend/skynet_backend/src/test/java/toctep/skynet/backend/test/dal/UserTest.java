@@ -260,11 +260,6 @@ public class UserTest extends DomainTest {
 	}
 	
 	@Override
-	public void testUpdate() {
-		// TODO
-	}
-	
-	@Override
 	public void testDelete() {
 		user.save();
 		assertEquals(1, userDao.count());

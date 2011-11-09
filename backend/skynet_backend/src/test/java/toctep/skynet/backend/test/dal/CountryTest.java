@@ -42,12 +42,6 @@ public class CountryTest extends DomainTest{
 		Country postCountry = (Country) countryDao.select(country.getId());
 		assertTrue(postCountry.getText().equals(country.getText()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {

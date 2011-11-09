@@ -39,12 +39,6 @@ public class BoundingBoxTypeTest extends DomainTest{
 		
 		assertTrue(postBoundingBoxType.getText().equals(boundingBoxType.getText()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {

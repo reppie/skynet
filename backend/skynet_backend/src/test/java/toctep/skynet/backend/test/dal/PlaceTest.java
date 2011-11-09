@@ -130,12 +130,6 @@ public class PlaceTest extends DomainTest{
 		assertTrue(postPlace.getUrl().equals(place.getUrl()));
 		assertTrue(postPlace.getAppId().equals(place.getAppId()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {
