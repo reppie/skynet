@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import toctep.skynet.backend.Constants;
-import toctep.skynet.backend.Log;
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
+import toctep.skynet.backend.log.Log;
 
 public class SkynetTest {
 	

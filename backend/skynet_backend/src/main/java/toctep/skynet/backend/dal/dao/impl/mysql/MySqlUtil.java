@@ -17,7 +17,6 @@ import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
 import toctep.skynet.backend.Constants;
-import toctep.skynet.backend.Log;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -38,6 +37,7 @@ import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
+import toctep.skynet.backend.log.Log;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;

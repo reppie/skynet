@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public final class TweetSplitter {
 	
-	private TweetSplitter() { }
+	private TweetSplitter() {}
 	
 	private static final Pattern SINGLE_SPACE_REGEX = Pattern.compile("\\s");
 	
