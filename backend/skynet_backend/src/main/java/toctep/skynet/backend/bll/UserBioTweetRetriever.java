@@ -50,7 +50,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 		twitter4j.User user = status.getUser();
 		
 		if (isDutchLanguage(user, lang) || isDutchLocation(user) || isDutchTimeZone(user)) {
-			super.process(status);
+			getTweetParser().parse(status).save();
     	}
 	}
 	
