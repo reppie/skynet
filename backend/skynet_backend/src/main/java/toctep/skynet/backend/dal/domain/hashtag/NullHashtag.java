@@ -23,4 +23,8 @@ public final class NullHashtag implements IHashtag {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }

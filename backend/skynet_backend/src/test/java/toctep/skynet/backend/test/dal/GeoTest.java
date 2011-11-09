@@ -1,9 +1,11 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 
-public class GeoTest extends DomainTest{
+public class GeoTest extends DomainTest {
 
 	private Geo geo;
 	
@@ -46,12 +48,6 @@ public class GeoTest extends DomainTest{
 		
 		assertTrue(postGeo.getType().getId().equals(geo.getType().getId()));
 		assertTrue(postGeo.getCoordinates().equals(geo.getCoordinates()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

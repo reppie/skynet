@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.country.Country;
 
-public class CountryTest extends DomainTest{
+public class CountryTest extends DomainTest {
 
 	private Country country;
 	
@@ -41,12 +43,6 @@ public class CountryTest extends DomainTest{
 		
 		Country postCountry = (Country) countryDao.select(country.getId());
 		assertTrue(postCountry.getText().equals(country.getText()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

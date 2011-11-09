@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 
 public class TimeZoneTest extends DomainTest {
@@ -44,12 +46,6 @@ public class TimeZoneTest extends DomainTest {
 		
 		assertEquals(postTimeZone.getUtcOffset(), timeZone.getUtcOffset());
 		assertTrue(postTimeZone.getTimeZone().equals(timeZone.getTimeZone()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.language.Language;
 
-public class LanguageTest extends DomainTest{
+public class LanguageTest extends DomainTest {
 
 	private Language language;
 	
@@ -38,12 +40,6 @@ public class LanguageTest extends DomainTest{
 		Language postLanguage = (Language) languageDao.select(language.getId());
 		
 		assertTrue(postLanguage.getText().equals(language.getText()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

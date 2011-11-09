@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
@@ -70,12 +72,6 @@ public class TweetHashtagTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		tweetHashtag.save();
 		assertEquals(1, tweetHashtagDao.count());
@@ -88,6 +84,5 @@ public class TweetHashtagTest extends DomainTest {
 		tweetHashtag.save();
 		assertTrue(tweetHashtagDao.exists(tweetHashtag));
 	}
-	
 
 }

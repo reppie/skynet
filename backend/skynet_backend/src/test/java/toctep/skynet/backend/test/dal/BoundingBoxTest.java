@@ -1,10 +1,12 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
 
-public class BoundingBoxTest extends DomainTest{
+public class BoundingBoxTest extends DomainTest {
 
 	private BoundingBox boundingBox;
 	
@@ -46,12 +48,6 @@ public class BoundingBoxTest extends DomainTest{
 		
 		assertTrue(postBoundingBox.getType().getId().equals(boundingBox.getType().getId()));
 		assertTrue(postBoundingBox.getCoordinates().equals(boundingBox.getCoordinates()));
-	}
-	
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

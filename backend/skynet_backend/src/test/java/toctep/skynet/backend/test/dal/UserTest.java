@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.language.ILanguage;
@@ -257,11 +259,6 @@ public class UserTest extends DomainTest {
 		assertTrue(postUser.isShowAllInlineMedia() == user.isShowAllInlineMedia());
 		assertTrue(postUser.isTranslator() == user.isTranslator());
 		assertEquals(postUser.getListedCount(), user.getListedCount());
-	}
-	
-	@Override
-	public void testUpdate() {
-		// TODO
 	}
 	
 	@Override

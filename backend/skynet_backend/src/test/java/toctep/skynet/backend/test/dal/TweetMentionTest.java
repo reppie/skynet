@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
@@ -67,12 +69,6 @@ public class TweetMentionTest extends DomainTest {
 		
 		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
 		assertEquals(1, postTweet.getMentions().size());
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

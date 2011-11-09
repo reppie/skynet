@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public final class TweetFilter {
 	
-	private TweetFilter() { }
+	private TweetFilter() {}
 	
 	private static String[] commonWords = { " de ", " het ", " een " };
 	private static final Pattern MENTION_OR_HASHTAG_REGEX = Pattern.compile("(^([#@]){1})([\\w]+)");

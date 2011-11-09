@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 
 public class SourceTypeTest extends DomainTest {
@@ -38,12 +40,6 @@ public class SourceTypeTest extends DomainTest {
 		SourceType postSourceType = (SourceType) sourceTypeDao.select(sourceType.getId());
 		
 		assertTrue(postSourceType.getText().equals(sourceType.getText()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

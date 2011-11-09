@@ -6,7 +6,6 @@ public abstract class Dao<T> {
 	
 	public abstract void insert(Domain<T> domain);
 	public abstract Domain<T> select(T id);
-	public abstract void update(Domain<T> domain);
 	public abstract void delete(Domain<T> domain);
 		
 	public abstract boolean exists(Domain<T> domain);

@@ -7,7 +7,6 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.TweetDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.geo.Geo;
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
@@ -16,10 +15,8 @@ import toctep.skynet.backend.dal.domain.keyword.IKeyword;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlace;
-import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.sourcetype.ISourceType;
 import toctep.skynet.backend.dal.domain.sourcetype.NullSourceType;
-import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.Url;
 import toctep.skynet.backend.dal.domain.user.IUser;
@@ -305,35 +302,12 @@ public class Tweet extends Domain<Long> implements ITweet {
 	
 	@Override
 	public void save() {
-		if (inReplyToTweetTwitter instanceof Tweet) {
-			((Tweet) inReplyToTweetTwitter).save();
-			((Tweet) this.inReplyToTweetTwitter).setId(((Tweet) inReplyToTweetTwitter).getId());
-		}
-		
-		if (inReplyToUserTwitter instanceof User) {
-			((User) inReplyToUserTwitter).save();
-			((User) this.inReplyToUserTwitter).setId(((User) inReplyToUserTwitter).getId());
-		}	
-		
-		if (sourceType instanceof SourceType) {
-			((SourceType) sourceType).save();
-			((SourceType) this.sourceType).setId(((SourceType) sourceType).getId());
-		}
-		
-		if (geo instanceof Geo) {
-			((Geo) geo).save();
-			((Geo) this.geo).setId(((Geo) geo).getId());
-		}
-		
-		if (place instanceof Place) {
-			((Place) place).save();
-			((Place) this.place).setId(((Place) place).getId());
-		}
-		
-		if (user instanceof User) {
-			((User) user).save();
-			((User) this.user).setId(((User) user).getId());
-		}
+			inReplyToTweetTwitter.save();
+			inReplyToUserTwitter.save();
+			sourceType.save();
+			geo.save();
+			place.save();
+			user.save();
 		
 		if (isDirty()) {
 			super.save();

@@ -4,4 +4,5 @@ public interface IDomain<T> {
 	
 	T getId();
 	
+	void save();
 }

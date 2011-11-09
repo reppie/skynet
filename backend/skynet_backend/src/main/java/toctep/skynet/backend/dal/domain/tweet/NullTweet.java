@@ -94,4 +94,8 @@ public final class NullTweet implements ITweet {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }

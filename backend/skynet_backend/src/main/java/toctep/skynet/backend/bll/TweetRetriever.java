@@ -1,6 +1,6 @@
 package toctep.skynet.backend.bll;
 
-import toctep.skynet.backend.Skynet;
+import toctep.skynet.backend.log.Log;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
@@ -33,7 +33,7 @@ public abstract class TweetRetriever implements Runnable {
 	        public void onScrubGeo(long userId, long upToStatusId) { }
 	
 	        public void onException(Exception e) {
-	            Skynet.LOG.error(e.getMessage(), e);
+	            Log.error(e.getMessage(), e);
 	        }
 	    };
 	    

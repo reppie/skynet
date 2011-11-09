@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 
-public class HashtagTest extends DomainTest{
+public class HashtagTest extends DomainTest {
 
 	private Hashtag hashtag;
 	
@@ -38,12 +40,6 @@ public class HashtagTest extends DomainTest{
 		Hashtag postHashtag = (Hashtag) hashtagDao.select(hashtag.getId());
 		
 		assertTrue(postHashtag.getText().equals(hashtag.getText()));
-	}
-	
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

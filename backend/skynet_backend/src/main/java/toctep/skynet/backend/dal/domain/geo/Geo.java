@@ -33,11 +33,8 @@ public class Geo extends Domain<Integer> implements IGeo {
 	
 	@Override
 	public void save() {
-		if (type instanceof GeoType) {
-			((GeoType) type).save();
-			((GeoType) this.type).setId(((GeoType) type).getId());
-		}
-		
+		type.save();
+				
 		super.save();
 	}
 	

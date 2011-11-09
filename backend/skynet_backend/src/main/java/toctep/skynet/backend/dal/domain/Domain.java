@@ -44,10 +44,8 @@ public abstract class Domain<T> implements IDomain<T> {
 	
 	public void save() {
 		if (isDirty()) {
-			if (dao.exists(this)) {
-				dao.update(this);			
-			} else {
-				dao.insert(this);
+			if (!dao.exists(this)) {
+				dao.insert(this);			
 			}
 			clearDirty();
 		}

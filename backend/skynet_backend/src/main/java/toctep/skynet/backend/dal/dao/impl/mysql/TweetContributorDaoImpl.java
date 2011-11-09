@@ -72,12 +72,6 @@ public class TweetContributorDaoImpl extends TweetContributorDao {
 	}
 
 	@Override
-	public void update(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(Domain<Integer> domain) {
 		TweetContributor tweetContributor = (TweetContributor) domain;
 		MySqlUtil.getInstance().delete(

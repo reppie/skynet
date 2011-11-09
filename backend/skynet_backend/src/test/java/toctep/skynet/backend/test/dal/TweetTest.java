@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.geo.IGeo;
@@ -126,11 +128,6 @@ public class TweetTest extends DomainTest {
 		assertTrue(postTweet.getPlace().equals(tweet.getPlace()));
 		assertEquals(postTweet.getUser().getId(), tweet.getUser().getId());
 		assertTrue(postTweet.getCoordinates().equals(tweet.getCoordinates()));
-	}
-	
-	@Override
-	public void testUpdate() {
-		// TODO
 	}
 	
 	@Override

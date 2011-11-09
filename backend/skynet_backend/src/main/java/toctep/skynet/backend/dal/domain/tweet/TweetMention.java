@@ -6,7 +6,6 @@ import toctep.skynet.backend.dal.dao.TweetMentionDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.user.IUser;
-import toctep.skynet.backend.dal.domain.user.User;
 
 public class TweetMention extends Domain<Integer> {
 	
@@ -38,15 +37,11 @@ public class TweetMention extends Domain<Integer> {
 	@Override
 	public void save() {
 		
-		if (tweet instanceof Tweet && ((Tweet) tweet).isDirty()) {
+		if (((Tweet) tweet).isDirty()) {
 			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
 		}
 		
-		if (user instanceof User) {
-			((User) user).save();
-			((User) this.user).setId(((User) user).getId());
-		}
+		user.save();
 		
 		super.save();
 	}	

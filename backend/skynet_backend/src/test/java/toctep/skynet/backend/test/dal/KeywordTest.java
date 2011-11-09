@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 
 public class KeywordTest extends DomainTest {
@@ -38,12 +40,6 @@ public class KeywordTest extends DomainTest {
 		Keyword postKeyword = (Keyword) keywordDao.select(keyword.getId());
 		
 		assertTrue(postKeyword.getKeyword().equals(postKeyword.getKeyword()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

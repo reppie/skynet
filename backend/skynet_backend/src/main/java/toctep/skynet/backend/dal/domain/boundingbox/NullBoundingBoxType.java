@@ -22,5 +22,9 @@ public final class NullBoundingBoxType implements IBoundingBoxType {
 	public String getText() {
 		return "";
 	}
+
+	@Override
+	public void save() {
+	}
 	
 }

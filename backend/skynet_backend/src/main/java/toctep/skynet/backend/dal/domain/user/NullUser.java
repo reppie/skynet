@@ -204,4 +204,8 @@ public final class NullUser implements IUser {
 		return false;
 	}
 
+	@Override
+	public void save() {
+	}
+
 }

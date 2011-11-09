@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.url.Url;
 
 public class UrlTest extends DomainTest {
@@ -32,12 +34,6 @@ public class UrlTest extends DomainTest {
 		
 		Url postUrl = (Url) urlDao.select(url.getId());
 		assertTrue(postUrl.getId().equals(url.getId()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

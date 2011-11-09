@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 
-public class GeoTypeTest extends DomainTest{
+public class GeoTypeTest extends DomainTest {
 
 	private GeoType geoType;
 	
@@ -38,12 +40,6 @@ public class GeoTypeTest extends DomainTest{
 		GeoType postGeoType = (GeoType) geoTypeDao.select(geoType.getId());
 		
 		assertTrue(postGeoType.getText().equals(geoType.getText()));
-	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
