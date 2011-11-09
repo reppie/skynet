@@ -5,7 +5,7 @@ import java.util.List;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetContributor;
 
-public abstract class TweetContributorDao extends Dao<Integer> {
+public abstract class TweetContributorDao implements IDao<Integer> {
 
 	public static final String TABLE_NAME = "twitter_tweet_contributors";
 	
