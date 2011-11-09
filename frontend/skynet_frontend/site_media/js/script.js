@@ -134,8 +134,8 @@ $(function() {
 	$( ".time-sliders" ).slider({
 		range: true,
 		min: 0,
-		max: 500,
-		values: [ 75, 300 ],
+		max: 30,
+		values: [ 3, 28 ],
 		slide: function( event, ui ) {
 			$( ".time-value" ).html( "Toon tweets van: " + ui.values[ 0 ] + " tot: " + ui.values[ 1 ] );
 		}
