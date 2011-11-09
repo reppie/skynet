@@ -16,7 +16,8 @@ import java.util.Map;
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
-import toctep.skynet.backend.Skynet;
+import toctep.skynet.backend.Constants;
+import toctep.skynet.backend.Log;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -53,7 +54,7 @@ public final class MySqlUtil {
 	}
 	
 	public static MySqlUtil getInstance() {
-		return MySqlUtil.getInstance(Skynet.DB_CONFIG);
+		return MySqlUtil.getInstance(Constants.DB_CONFIG);
 	}
 	
 	private String properties;
@@ -85,9 +86,9 @@ public final class MySqlUtil {
 	        user = getIniValue("user");
 	        pass = getIniValue("pass");
 		} catch (InvalidFileFormatException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} catch (IOException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -100,7 +101,7 @@ public final class MySqlUtil {
 			String url = "jdbc:" + driver + "://" + host + "/" + name;
 			conn = (Connection) DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -122,12 +123,12 @@ public final class MySqlUtil {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -171,13 +172,13 @@ public final class MySqlUtil {
 				rows.add(row);
 			}
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -204,13 +205,13 @@ public final class MySqlUtil {
 				id = rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 		return id;
@@ -260,13 +261,13 @@ public final class MySqlUtil {
 				exists = true;
 			}
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 
@@ -285,13 +286,13 @@ public final class MySqlUtil {
 			rs.next();
 			count = rs.getInt(1);
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				stmt.close();
 				rs.close();
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 		
@@ -335,15 +336,15 @@ public final class MySqlUtil {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				Skynet.LOG.error(e1.getMessage(), e);
+				Log.error(e1.getMessage(), e1);
 			}
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 				conn.setAutoCommit(true);
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 	}
@@ -354,12 +355,12 @@ public final class MySqlUtil {
 			pstmt = conn.prepareStatement("TRUNCATE TABLE " + tableName);
 			pstmt.execute();
 		} catch (SQLException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		} finally {
 			try {
 				pstmt.close();
 			} catch (SQLException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
 		}
 	}

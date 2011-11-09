@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
 import toctep.skynet.backend.dal.domain.country.ICountry;
@@ -10,7 +12,7 @@ import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public class PlaceTest extends DomainTest{
+public class PlaceTest extends DomainTest {
 
 	private Place place;
 	

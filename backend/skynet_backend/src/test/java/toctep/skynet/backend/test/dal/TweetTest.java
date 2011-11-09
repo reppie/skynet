@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import java.sql.Timestamp;
 
 import toctep.skynet.backend.dal.domain.geo.IGeo;

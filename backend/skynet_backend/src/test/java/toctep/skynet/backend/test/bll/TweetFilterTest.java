@@ -1,6 +1,6 @@
 package toctep.skynet.backend.test.bll;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import toctep.skynet.backend.bll.TweetFilter;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetFilterTest {
+public class TweetFilterTest extends SkynetTest {
 	
 	@Test
 	public void filterCommonWordsTest() {

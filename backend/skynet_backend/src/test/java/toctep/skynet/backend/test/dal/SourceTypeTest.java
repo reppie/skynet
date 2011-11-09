@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.sourcetype.SourceType;
 
 public class SourceTypeTest extends DomainTest {

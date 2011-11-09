@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.language.Language;
 
-public class LanguageTest extends DomainTest{
+public class LanguageTest extends DomainTest {
 
 	private Language language;
 	

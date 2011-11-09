@@ -1,5 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 
 public class KeywordTest extends DomainTest {

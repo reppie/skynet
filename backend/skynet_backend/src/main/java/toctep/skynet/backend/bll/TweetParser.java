@@ -3,7 +3,7 @@ package toctep.skynet.backend.bll;
 import java.text.ParseException;
 import java.util.List;
 
-import toctep.skynet.backend.Skynet;
+import toctep.skynet.backend.Log;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
@@ -94,7 +94,7 @@ public final class TweetParser {
 			parseKeyword(tweet);
 			
 		} catch (ParseException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		}
 		
 		return tweet;
@@ -289,9 +289,9 @@ public final class TweetParser {
     			twitter4j.User replyUser = TwitterFactory.getSingleton().showUser(status.getInReplyToUserId());
     			tweet.setInReplyToUserTwitter(parseUser(NullPlace.getInstance(), NullLanguage.getInstance(), NullTimeZone.getInstance(), replyUser));
 			} catch (TwitterException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			} catch (ParseException e) {
-				Skynet.LOG.error(e.getMessage(), e);
+				Log.error(e.getMessage(), e);
 			}
         }
         

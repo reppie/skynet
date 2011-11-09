@@ -3,7 +3,7 @@ package toctep.skynet.backend.bll;
 import java.util.ArrayList;
 import java.util.List;
 
-import toctep.skynet.backend.Skynet;
+import toctep.skynet.backend.Log;
 import twitter4j.Status;
 
 import com.cybozu.labs.langdetect.Detector;
@@ -24,7 +24,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 		try {
 			DetectorFactory.loadProfile(LANGDETECT_PROFILE_DIR);
 		} catch (LangDetectException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 
 			lang = detector.detect();
 		} catch (LangDetectException e) {
-			Skynet.LOG.error(e.getMessage(), e);
+			Log.error(e.getMessage(), e);
 		}
 		
 		twitter4j.User user = status.getUser();

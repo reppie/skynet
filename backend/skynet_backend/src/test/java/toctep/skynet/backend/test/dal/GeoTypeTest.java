@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.geo.GeoType;
 
-public class GeoTypeTest extends DomainTest{
+public class GeoTypeTest extends DomainTest {
 
 	private GeoType geoType;
 	

@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.country.Country;
 
-public class CountryTest extends DomainTest{
+public class CountryTest extends DomainTest {
 
 	private Country country;
 	

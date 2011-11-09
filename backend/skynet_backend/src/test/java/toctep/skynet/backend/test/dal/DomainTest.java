@@ -1,13 +1,7 @@
 package toctep.skynet.backend.test.dal;
 
-import junit.framework.TestCase;
-
-import org.apache.log4j.PropertyConfigurator;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import toctep.skynet.backend.Skynet;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
@@ -30,11 +24,9 @@ import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
-import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
+import toctep.skynet.backend.test.SkynetTest;
 
-public abstract class DomainTest extends TestCase {
-
-	private MySqlUtil mySqlUtil;
+public abstract class DomainTest extends SkynetTest {
 	
 	private DaoFacade daoFacade;
 	
@@ -59,13 +51,9 @@ public abstract class DomainTest extends TestCase {
 	protected KeywordDao keywordDao;
 	protected TweetKeywordDao tweetKeywordDao;
 	
-	@Before
+	@Override
 	public void setUp() {
-		PropertyConfigurator.configure(Skynet.LOG4J_CONFIG);
-		
-		mySqlUtil = MySqlUtil.getInstance(Skynet.DB_TEST_CONFIG);
-		
-		emptyDatabase();
+		super.setUp();
 		
 		daoFacade = DaoFacadeImpl.getInstance();
 		
@@ -90,15 +78,6 @@ public abstract class DomainTest extends TestCase {
 		userDao = daoFacade.getUserDao();
 		keywordDao = daoFacade.getKeywordDao();
 		tweetKeywordDao = daoFacade.getTweetKeywordDao();
-	}
-
-	@After
-	public void tearDown() {
-		emptyDatabase();
-	}
-	
-	public void emptyDatabase() {
-		mySqlUtil.truncateDatabase();
 	}
 	
 	@Test

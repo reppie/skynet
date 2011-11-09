@@ -1,8 +1,10 @@
 package toctep.skynet.backend.test.dal;
 
+import static org.junit.Assert.*;
+
 import toctep.skynet.backend.dal.domain.place.PlaceType;
 
-public class PlaceTypeTest extends DomainTest{
+public class PlaceTypeTest extends DomainTest {
 
 	private PlaceType placeType;
 	
