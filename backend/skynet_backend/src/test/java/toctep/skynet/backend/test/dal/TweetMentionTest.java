@@ -72,12 +72,6 @@ public class TweetMentionTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		tweetMention.save();
 		assertEquals(1, tweetMentionDao.count());

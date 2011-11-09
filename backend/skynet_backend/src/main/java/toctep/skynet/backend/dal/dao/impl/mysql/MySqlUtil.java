@@ -217,10 +217,6 @@ public final class MySqlUtil {
 		return id;
 	}
 	
-	public int update(String query, Param[] params) {
-		return this.query(query, params);
-	}
-	
 	public int delete(String query, Param[] params) {
 		return this.query(query, params);
 	}

@@ -76,12 +76,6 @@ public class PlaceDaoImpl extends PlaceDao {
 	}
 
 	@Override
-	public void update(Domain<String> domain) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(Domain<String> domain) {
 		Place place = (Place) domain;
 		MySqlUtil.getInstance().delete(

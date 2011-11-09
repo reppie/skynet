@@ -51,12 +51,6 @@ public class BoundingBoxTest extends DomainTest {
 	}
 	
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public void testDelete() {
 		boundingBox.save();
 		assertEquals(1, boundingBoxDao.count());

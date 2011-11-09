@@ -83,12 +83,6 @@ public class TweetKeywordTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void testDelete() {
 		tweetKeyword.save();
 		assertEquals(1, tweetKeywordDao.count());

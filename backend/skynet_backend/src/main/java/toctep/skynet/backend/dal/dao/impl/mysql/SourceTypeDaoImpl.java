@@ -41,12 +41,6 @@ public class SourceTypeDaoImpl extends SourceTypeDao {
 		
 		return sourceType;
 	}
-
-	@Override
-	public void update(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-
-	}
 	
 	@Override
 	public void delete(Domain<Integer> domain) {

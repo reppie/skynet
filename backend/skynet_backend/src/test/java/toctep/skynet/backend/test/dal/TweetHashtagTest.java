@@ -72,12 +72,6 @@ public class TweetHashtagTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		tweetHashtag.save();
 		assertEquals(1, tweetHashtagDao.count());

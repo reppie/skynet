@@ -41,12 +41,6 @@ public class PlaceTypeTest extends DomainTest {
 		
 		assertTrue(postPlaceType.getText().equals(placeType.getText()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {

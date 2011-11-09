@@ -41,12 +41,6 @@ public class GeoTypeTest extends DomainTest {
 		
 		assertTrue(postGeoType.getText().equals(geoType.getText()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {

@@ -70,12 +70,6 @@ public class TweetHashtagDaoImpl extends TweetHashtagDao {
 	}	
 
 	@Override
-	public void update(Domain<Integer> domain) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void delete(Domain<Integer> domain) {
 		TweetHashtag tweetHashtag = (TweetHashtag) domain;	
 		MySqlUtil.getInstance().delete(

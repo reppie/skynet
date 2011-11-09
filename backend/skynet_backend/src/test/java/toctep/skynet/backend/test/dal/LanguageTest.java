@@ -41,12 +41,6 @@ public class LanguageTest extends DomainTest {
 		
 		assertTrue(postLanguage.getText().equals(language.getText()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {

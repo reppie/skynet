@@ -49,12 +49,6 @@ public class TimeZoneTest extends DomainTest {
 	}
 
 	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void testDelete() {
 		timeZone.save();
 		assertEquals(1, timeZoneDao.count());

@@ -49,12 +49,6 @@ public class GeoTest extends DomainTest {
 		assertTrue(postGeo.getType().getId().equals(geo.getType().getId()));
 		assertTrue(postGeo.getCoordinates().equals(geo.getCoordinates()));
 	}
-
-	@Override
-	public void testUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void testDelete() {
