@@ -114,7 +114,7 @@ class User(models.Model):
             'name': self.name,
             'screen_name': self.screen_name,
             'profile_image_url': self.profile_image_url_https,
-            }  
+        }  
 
 class Keyword(models.Model):
     keyword = models.CharField(max_length=140, unique=True)
