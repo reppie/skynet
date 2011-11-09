@@ -23,4 +23,8 @@ public final class NullPlaceType implements IPlaceType {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }

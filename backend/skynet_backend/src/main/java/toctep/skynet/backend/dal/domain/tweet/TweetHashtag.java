@@ -5,7 +5,6 @@ import java.util.List;
 import toctep.skynet.backend.dal.dao.TweetHashtagDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 
 public class TweetHashtag extends Domain<Integer> {
@@ -38,15 +37,11 @@ public class TweetHashtag extends Domain<Integer> {
 	@Override
 	public void save() {
 		
-		if (tweet instanceof Tweet && ((Tweet) tweet).isDirty()) {
+		if (((Tweet) tweet).isDirty()) {
 			((Tweet) tweet).save();
-			((Tweet) this.tweet).setId(((Tweet) tweet).getId());
 		}
 		
-		if (hashtag instanceof Hashtag) {
-			((Hashtag) hashtag).save();
-			((Hashtag) this.hashtag).setId(((Hashtag) hashtag).getId());
-		}
+		hashtag.save();
 		
 		super.save();
 	}	

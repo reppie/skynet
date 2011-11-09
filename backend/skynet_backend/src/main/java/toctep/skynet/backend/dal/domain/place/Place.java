@@ -3,15 +3,12 @@ package toctep.skynet.backend.dal.domain.place;
 import toctep.skynet.backend.dal.dao.PlaceDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
-import toctep.skynet.backend.dal.domain.boundingbox.BoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBox;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBox;
-import toctep.skynet.backend.dal.domain.country.Country;
 import toctep.skynet.backend.dal.domain.country.ICountry;
 import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
-import toctep.skynet.backend.dal.domain.url.Url;
 
 public class Place extends Domain<String> implements IPlace{
 
@@ -150,29 +147,13 @@ public class Place extends Domain<String> implements IPlace{
 	
 	@Override
 	public void save() {
-		if (boundingBox instanceof BoundingBox) {
-			((BoundingBox) boundingBox).save();
-			((BoundingBox) this.boundingBox).setId(((BoundingBox) boundingBox).getId());
-		}
-		
-		if (url instanceof Url) {
-			((Url) url).save();
-			((Url) this.url).setId(((Url) url).getId());
-		}
-		
-		if (type instanceof PlaceType) {
-			((PlaceType) type).save();
-			((PlaceType) this.type).setId(((PlaceType) type).getId());
-		}
-		
-		if (country instanceof Country) {
-			((Country) country).save();
-			((Country) this.country).setId(((Country) country).getId());
-		}
+		boundingBox.save();
+		url.save();
+		type.save();
+		country.save();
 		
 		super.save();
 	}
-	
 	
 	public static IPlace select(String id) {
 		PlaceDao dao = DaoFacadeImpl.getInstance().getPlaceDao();

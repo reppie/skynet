@@ -6,17 +6,13 @@ import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.language.ILanguage;
-import toctep.skynet.backend.dal.domain.language.Language;
 import toctep.skynet.backend.dal.domain.language.NullLanguage;
 import toctep.skynet.backend.dal.domain.place.IPlace;
 import toctep.skynet.backend.dal.domain.place.NullPlace;
-import toctep.skynet.backend.dal.domain.place.Place;
 import toctep.skynet.backend.dal.domain.timezone.ITimeZone;
 import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
-import toctep.skynet.backend.dal.domain.timezone.TimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
-import toctep.skynet.backend.dal.domain.url.Url;
 
 public class User extends Domain<Long> implements IUser  {
 
@@ -345,45 +341,14 @@ public class User extends Domain<Long> implements IUser  {
 	
 	@Override
 	public void save() {
-		if(place instanceof Place) {
-			((Place)place).save();	
-			((Place)this.place).setId(((Place)place).getId());
-		}
-		
-		if(language instanceof Language) {
-			((Language)language).save();
-			((Language)this.language).setId(((Language)language).getId());
-		}
-		
-		if(url instanceof Url) {
-			((Url)url).save();
-			((Url)this.url).setId(((Url)url).getId());
-		}
-		
-		if(timeZone instanceof TimeZone) {
-			((TimeZone)timeZone).save();
-			((TimeZone)this.timeZone).setId(((TimeZone)timeZone).getId());
-		}
-		
-		if(profileBackgroundImageUrl instanceof Url) {
-			((Url)profileBackgroundImageUrl).save();
-			((Url)this.profileBackgroundImageUrl).setId(((Url)profileBackgroundImageUrl).getId());
-		}
-		
-		if(profileBackgroundImageUrlHttps instanceof Url) {
-			((Url)profileBackgroundImageUrlHttps).save();
-			((Url)this.profileBackgroundImageUrlHttps).setId(((Url)profileBackgroundImageUrlHttps).getId());
-		}
-		
-		if(profileImageUrl instanceof Url) {
-			((Url)profileImageUrl).save();
-			((Url)this.profileImageUrl).setId(((Url)profileImageUrl).getId());
-		}
-		
-		if(profileImageUrlHttps instanceof Url) {
-			((Url)profileImageUrlHttps).save();
-			((Url)this.profileImageUrlHttps).setId(((Url)profileImageUrlHttps).getId());
-		}
+		place.save();	
+		language.save();
+		url.save();
+		timeZone.save();
+		profileBackgroundImageUrl.save();
+		profileBackgroundImageUrlHttps.save();
+		profileImageUrl.save();
+		profileImageUrlHttps.save();
 		
 		super.save();
 	}

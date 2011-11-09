@@ -27,5 +27,9 @@ public final class NullTimeZone implements ITimeZone {
 	public int getUtcOffset() {
 		return 0;
 	}
+
+	@Override
+	public void save() {
+	}
 	
 }

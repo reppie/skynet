@@ -23,4 +23,8 @@ public final class NullCountry implements ICountry {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }

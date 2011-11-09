@@ -27,5 +27,9 @@ public final class NullBoundingBox implements IBoundingBox {
 	public IBoundingBoxType getType() {
 		return NullBoundingBoxType.getInstance();
 	}
+
+	@Override
+	public void save() {		
+	}
 	
 }

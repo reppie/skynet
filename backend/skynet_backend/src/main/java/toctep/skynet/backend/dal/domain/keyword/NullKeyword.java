@@ -23,4 +23,8 @@ public final class NullKeyword implements IKeyword {
 		return "";
 	}
 
+	@Override
+	public void save() {
+	}
+
 }
