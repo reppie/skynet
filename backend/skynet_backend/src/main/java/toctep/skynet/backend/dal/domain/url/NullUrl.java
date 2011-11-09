@@ -11,7 +11,7 @@ public final class NullUrl implements IUrl {
 		return instance;
 	}
 	
-	private NullUrl() { }
+	private NullUrl() {}
 	
 	@Override
 	public String getId() {
@@ -19,7 +19,6 @@ public final class NullUrl implements IUrl {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

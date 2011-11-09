@@ -11,7 +11,7 @@ public final class NullHashtag implements IHashtag {
 		return instance;
 	}
 	
-	private NullHashtag() { }
+	private NullHashtag() {}
 	
 	@Override
 	public Integer getId() {
@@ -24,7 +24,6 @@ public final class NullHashtag implements IHashtag {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

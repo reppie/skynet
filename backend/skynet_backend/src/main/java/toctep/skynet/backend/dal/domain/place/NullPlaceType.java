@@ -11,7 +11,7 @@ public final class NullPlaceType implements IPlaceType {
 		return instance;
 	}
 	
-	private NullPlaceType() { }
+	private NullPlaceType() {}
 	
 	@Override
 	public Integer getId() {
@@ -24,7 +24,6 @@ public final class NullPlaceType implements IPlaceType {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

@@ -11,7 +11,7 @@ public final class NullCountry implements ICountry {
 		return instance;
 	}
 	
-	private NullCountry() { }		
+	private NullCountry() {}		
 	
 	@Override
 	public String getId() {
@@ -24,7 +24,6 @@ public final class NullCountry implements ICountry {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

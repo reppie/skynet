@@ -4,7 +4,7 @@ import toctep.skynet.backend.dal.dao.TimeZoneDao;
 import toctep.skynet.backend.dal.dao.impl.mysql.DaoFacadeImpl;
 import toctep.skynet.backend.dal.domain.Domain;
 
-public class TimeZone extends Domain<Integer> implements ITimeZone{
+public class TimeZone extends Domain<Integer> implements ITimeZone {
 
 	private int utcOffset 	= 0;
 	private String timeZone = "";

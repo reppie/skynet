@@ -11,7 +11,7 @@ public final class NullKeyword implements IKeyword {
 		return instance;
 	}
 	
-	private NullKeyword() { }
+	private NullKeyword() {}
 	
 	@Override
 	public Integer getId() {
@@ -24,7 +24,6 @@ public final class NullKeyword implements IKeyword {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

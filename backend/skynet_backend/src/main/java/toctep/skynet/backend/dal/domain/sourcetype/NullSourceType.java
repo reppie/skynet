@@ -12,7 +12,7 @@ public final class NullSourceType implements ISourceType {
 		return instance;
 	}
 	
-	private NullSourceType() { }
+	private NullSourceType() {}
 	
 	@Override
 	public Integer getId() {
@@ -25,7 +25,6 @@ public final class NullSourceType implements ISourceType {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

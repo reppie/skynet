@@ -11,7 +11,7 @@ public final class NullBoundingBox implements IBoundingBox {
 		return instance;
 	}
 	
-	private NullBoundingBox() { }	
+	private NullBoundingBox() {}	
 	
 	@Override
 	public Integer getId() {
@@ -29,7 +29,6 @@ public final class NullBoundingBox implements IBoundingBox {
 	}
 
 	@Override
-	public void save() {		
-	}
+	public void save() {}
 	
 }

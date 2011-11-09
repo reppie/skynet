@@ -7,7 +7,7 @@ import toctep.skynet.backend.dal.dao.LanguageDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.language.Language;
 
-public class LanguageDaoImpl extends LanguageDao{
+public class LanguageDaoImpl extends LanguageDao {
 
 	@Override
 	public void insert(Domain<Integer> domain) {

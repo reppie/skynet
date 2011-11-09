@@ -7,7 +7,7 @@ import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.domain.Domain;
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 
-public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao{
+public class BoundingBoxTypeDaoImpl extends BoundingBoxTypeDao {
 
 	@Override
 	public void insert(Domain<Integer> domain) {

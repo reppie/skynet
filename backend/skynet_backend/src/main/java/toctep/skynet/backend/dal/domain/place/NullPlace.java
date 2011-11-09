@@ -18,7 +18,7 @@ public final class NullPlace implements IPlace {
 		return instance;
 	}
 	
-	private NullPlace() { }
+	private NullPlace() {}
 	
 	@Override
 	public String getId() {
@@ -96,7 +96,6 @@ public final class NullPlace implements IPlace {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 	
 }
