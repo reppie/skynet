@@ -3,11 +3,15 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.boundingbox.BoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.IBoundingBoxType;
 import toctep.skynet.backend.dal.domain.boundingbox.NullBoundingBoxType;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class BoundingBoxTypeTest extends DomainTest {
+public class BoundingBoxTypeTest extends SkynetTest implements IDomainTest {
 
 	private BoundingBoxType boundingBoxType;
 	
@@ -23,20 +27,20 @@ public class BoundingBoxTypeTest extends DomainTest {
 		boundingBoxType.setText(text);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(boundingBoxType);
 		assertTrue(text.equals(boundingBoxType.getText()));
 	}
 	
-	@Override
+	@Test
 	public void testInsert() {
 		boundingBoxType.save();
-		assertEquals(1, boundingBoxTypeDao.count());
+		assertEquals(1, BoundingBoxType.count());
 		assertTrue(new Integer(1).equals(boundingBoxType.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		boundingBoxType.save();
 		
@@ -47,18 +51,18 @@ public class BoundingBoxTypeTest extends DomainTest {
 		assertTrue(nullBoundingBoxType instanceof NullBoundingBoxType);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		boundingBoxType.save();
-		assertEquals(1, boundingBoxTypeDao.count());
+		assertEquals(1, BoundingBoxType.count());
 		boundingBoxType.delete();
-		assertEquals(0, boundingBoxTypeDao.count());		
+		assertEquals(0, BoundingBoxType.count());		
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		boundingBoxType.save();
-		assertTrue(boundingBoxTypeDao.exists(boundingBoxType));
+		assertTrue(BoundingBoxType.exists(boundingBoxType));
 	}
 	
 }

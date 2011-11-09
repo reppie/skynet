@@ -340,4 +340,12 @@ public class Tweet extends Domain<Long> implements ITweet {
 		return false;
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetDao().count();
+	}
+	
+	public static boolean exists(Tweet tweet) {
+		return DaoFacadeImpl.getInstance().getTweetDao().exists(tweet);
+	}
+	
 }

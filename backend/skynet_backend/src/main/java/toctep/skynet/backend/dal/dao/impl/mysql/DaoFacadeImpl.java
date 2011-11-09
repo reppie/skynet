@@ -3,7 +3,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 import toctep.skynet.backend.dal.dao.BoundingBoxDao;
 import toctep.skynet.backend.dal.dao.BoundingBoxTypeDao;
 import toctep.skynet.backend.dal.dao.CountryDao;
-import toctep.skynet.backend.dal.dao.DaoFacade;
+import toctep.skynet.backend.dal.dao.IDaoFacade;
 import toctep.skynet.backend.dal.dao.GeoDao;
 import toctep.skynet.backend.dal.dao.GeoTypeDao;
 import toctep.skynet.backend.dal.dao.HashtagDao;
@@ -22,7 +22,7 @@ import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 
-public final class DaoFacadeImpl implements DaoFacade {
+public final class DaoFacadeImpl implements IDaoFacade {
 	
 	private static DaoFacadeImpl instance;
 	

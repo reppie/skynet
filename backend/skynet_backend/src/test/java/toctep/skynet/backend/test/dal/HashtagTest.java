@@ -3,11 +3,15 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.hashtag.Hashtag;
 import toctep.skynet.backend.dal.domain.hashtag.IHashtag;
 import toctep.skynet.backend.dal.domain.hashtag.NullHashtag;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class HashtagTest extends DomainTest {
+public class HashtagTest extends SkynetTest implements IDomainTest {
 
 	private Hashtag hashtag;
 	
@@ -23,20 +27,20 @@ public class HashtagTest extends DomainTest {
 		hashtag.setText(text);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() { 
 		assertNotNull(hashtag);
 		assertTrue(text.equals(hashtag.getText()));
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		hashtag.save();
-		assertEquals(1, hashtagDao.count());
+		assertEquals(1, Hashtag.count());
 		assertTrue(new Integer(1).equals(hashtag.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		hashtag.save();
 		
@@ -48,18 +52,18 @@ public class HashtagTest extends DomainTest {
 		assertTrue(nullHashtag instanceof NullHashtag);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		hashtag.save();
-		assertEquals(1, hashtagDao.count());
+		assertEquals(1, Hashtag.count());
 		hashtag.delete();
-		assertEquals(0, hashtagDao.count());	
+		assertEquals(0, Hashtag.count());	
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		hashtag.save();
-		assertTrue(hashtagDao.exists(hashtag));
+		assertTrue(Hashtag.exists(hashtag));
 	}
 
 }

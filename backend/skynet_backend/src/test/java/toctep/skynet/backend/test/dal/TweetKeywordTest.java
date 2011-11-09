@@ -1,14 +1,17 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetKeyword;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetKeywordTest extends DomainTest {
+public class TweetKeywordTest extends SkynetTest implements IDomainTest {
 	
 	private TweetKeyword tweetKeyword;
 	
@@ -35,7 +38,7 @@ public class TweetKeywordTest extends DomainTest {
 		tweetKeyword.setKeyword(keyword);
 	}
 
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweetKeyword);
 		
@@ -44,17 +47,47 @@ public class TweetKeywordTest extends DomainTest {
 		assertEquals("getTweet: ", tweet, tweetKeyword.getTweet());
 	}
 
-	@Override
+	@Test
 	public void testInsert() {
 		tweetKeyword.save();
-		assertEquals(1, tweetKeywordDao.count());
+		assertEquals(1, TweetKeyword.count());
 	}
 
-	@Override
-	public void testSelect() {}
+	@Test
+	public void testSelect() {
+		tweetKeyword.save();
+
+		TweetKeyword postTweetKeyword = TweetKeyword.select(tweetKeyword.getId());
+
+		assertTrue(postTweetKeyword.getTweet().getId().equals(tweetKeyword.getTweet().getId()));
+		assertTrue(postTweetKeyword.getTweetKeywordValue().equals(tweetKeyword.getTweetKeywordValue()));
+		assertTrue(postTweetKeyword.getKeyword().getId().equals(tweetKeyword.getKeyword().getId()));
+	}
 	
 	@Test
 	public void testSelectFromTweet() {
+		Tweet tweet = new Tweet();
+		tweet.setId(new Long(1));
+		
+		String word = "asd";
+		
+		Keyword keyword = new Keyword();
+		keyword.setId(1);
+		keyword.setKeyword(word);
+		keyword.save();
+		
+		tweet.addKeyword(keyword);
+		
+		tweet.save();
+		
+		assertEquals(1, tweet.getKeywords().size());
+		
+		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
+		assertEquals(1, postTweet.getKeywords().size());
+	}
+	
+	@Test
+	public void testSelectFromTweetWithNullKeyword() {
 		Tweet tweet = new Tweet();
 		tweet.setId(new Long(1));
 		
@@ -72,20 +105,21 @@ public class TweetKeywordTest extends DomainTest {
 		
 		Tweet postTweet = (Tweet) Tweet.select(tweet.getId());
 		assertEquals(1, postTweet.getKeywords().size());
-	}
+	}	
 
-	@Override
+	@Test
 	public void testDelete() {
 		tweetKeyword.save();
-		assertEquals(1, tweetKeywordDao.count());
+		assertEquals(1, TweetKeyword.count());
 		tweetKeyword.delete();
-		assertEquals(0, tweetKeywordDao.count());
+		assertEquals(0, TweetKeyword.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweetKeyword.save();
-		assertTrue(tweetKeywordDao.exists(tweetKeyword));
+		assertTrue(TweetKeyword.exists(tweetKeyword));
+		assertTrue(TweetKeyword.exists(tweetKeyword.getId()));
 	}
 
 }

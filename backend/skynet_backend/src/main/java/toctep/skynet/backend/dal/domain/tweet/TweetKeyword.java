@@ -54,9 +54,26 @@ public class TweetKeyword extends Domain<Integer> {
 		super.save();
 	}
 	
+	public static TweetKeyword select(Integer id) {
+		TweetKeywordDao dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
+		return (TweetKeyword) dao.select(id);
+	}
+	
 	public static List<TweetKeyword> select(Tweet tweet) {
 		TweetKeywordDao dao = DaoFacadeImpl.getInstance().getTweetKeywordDao();
 		return dao.select(tweet);
+	}
+	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getTweetKeywordDao().count();
+	}
+	
+	public static boolean exists(Integer id) {
+		return DaoFacadeImpl.getInstance().getTweetKeywordDao().exists(id);
+	}
+	
+	public static boolean exists(TweetKeyword tweetKeyword) {
+		return DaoFacadeImpl.getInstance().getTweetKeywordDao().exists(tweetKeyword);
 	}
 	
 }

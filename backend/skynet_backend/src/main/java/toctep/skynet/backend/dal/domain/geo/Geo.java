@@ -48,4 +48,12 @@ public class Geo extends Domain<Integer> implements IGeo {
 		return NullGeo.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getGeoDao().count();
+	}
+	
+	public static boolean exists(Geo geo) {
+		return DaoFacadeImpl.getInstance().getGeoDao().exists(geo);
+	}
+	
 }

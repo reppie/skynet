@@ -1,8 +1,12 @@
 package toctep.skynet.backend.test.dal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
+
+import org.junit.Test;
 
 import toctep.skynet.backend.dal.domain.geo.IGeo;
 import toctep.skynet.backend.dal.domain.geo.NullGeo;
@@ -15,8 +19,9 @@ import toctep.skynet.backend.dal.domain.tweet.NullTweet;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class TweetTest extends DomainTest {
+public class TweetTest extends SkynetTest implements IDomainTest {
 
 	private Tweet tweet;
 	
@@ -84,7 +89,7 @@ public class TweetTest extends DomainTest {
 		tweet.setCoordinates(coordinates);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(tweet);
 		assertTrue(new Long(id).equals(tweet.getId()));
@@ -103,13 +108,13 @@ public class TweetTest extends DomainTest {
 		assertTrue(coordinates.equals(tweet.getCoordinates()));
 	}
 	
-	@Override
+	@Test
 	public void testInsert() {
 		tweet.save();
-		assertEquals(1, tweetDao.count());
+		assertEquals(1, Tweet.count());
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		tweet.save();
 		
@@ -133,18 +138,20 @@ public class TweetTest extends DomainTest {
 		assertTrue(nullTweet instanceof NullTweet);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		tweet.save();
-		assertEquals(1, tweetDao.count());
+		assertEquals(1, Tweet.count());
 		tweet.delete();
-		assertEquals(0, tweetDao.count());
+		assertEquals(0, Tweet.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		tweet.save();
-		assertTrue(tweetDao.exists(tweet));
+		assertTrue(Tweet.exists(tweet));
+		assertTrue(Tweet.exists(tweet.getId()));
+		assertTrue(!Tweet.exists(1000L));
 	}
 
 }

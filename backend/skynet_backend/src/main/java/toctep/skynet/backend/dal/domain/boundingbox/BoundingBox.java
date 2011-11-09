@@ -48,4 +48,12 @@ public class BoundingBox extends Domain<Integer> implements IBoundingBox {
 		return NullBoundingBox.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getBoundingBoxDao().count();
+	}
+	
+	public static boolean exists(BoundingBox boundingBox) {
+		return DaoFacadeImpl.getInstance().getBoundingBoxDao().exists(boundingBox);
+	}
+	
 }

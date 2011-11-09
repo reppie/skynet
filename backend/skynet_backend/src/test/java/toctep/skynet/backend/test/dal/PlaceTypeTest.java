@@ -3,11 +3,15 @@ package toctep.skynet.backend.test.dal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import toctep.skynet.backend.dal.domain.place.IPlaceType;
 import toctep.skynet.backend.dal.domain.place.NullPlaceType;
 import toctep.skynet.backend.dal.domain.place.PlaceType;
+import toctep.skynet.backend.test.SkynetTest;
 
-public class PlaceTypeTest extends DomainTest {
+public class PlaceTypeTest extends SkynetTest implements IDomainTest {
 
 	private PlaceType placeType;
 	
@@ -23,20 +27,20 @@ public class PlaceTypeTest extends DomainTest {
 		placeType.setText(text);
 	}
 	
-	@Override
+	@Test
 	public void testCreate() {
 		assertNotNull(placeType);
 		assertTrue(text.equals(placeType.getText()));
 	}
 	
-	@Override
+	@Test
 	public void testInsert() {
 		placeType.save();
-		assertEquals(1, placeTypeDao.count());
+		assertEquals(1, PlaceType.count());
 		assertTrue(new Integer(1).equals(placeType.getId()));
 	}
 	
-	@Override
+	@Test
 	public void testSelect() {
 		placeType.save();
 		
@@ -47,18 +51,18 @@ public class PlaceTypeTest extends DomainTest {
 		assertTrue(nullPlaceType instanceof NullPlaceType);
 	}
 	
-	@Override
+	@Test
 	public void testDelete() {
 		placeType.save();
-		assertEquals(1, placeTypeDao.count());
+		assertEquals(1, PlaceType.count());
 		placeType.delete();
-		assertEquals(0, placeTypeDao.count());
+		assertEquals(0, PlaceType.count());
 	}
 
-	@Override
+	@Test
 	public void testExists() {
 		placeType.save();
-		assertTrue(placeTypeDao.exists(placeType));
+		assertTrue(PlaceType.exists(placeType));
 	}
 	
 }

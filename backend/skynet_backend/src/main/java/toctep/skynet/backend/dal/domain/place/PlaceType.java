@@ -33,4 +33,12 @@ public class PlaceType extends Domain<Integer> implements IPlaceType {
 		return NullPlaceType.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getPlaceTypeDao().count();
+	}
+	
+	public static boolean exists(PlaceType placeType) {
+		return DaoFacadeImpl.getInstance().getPlaceTypeDao().exists(placeType);
+	}
+	
 }

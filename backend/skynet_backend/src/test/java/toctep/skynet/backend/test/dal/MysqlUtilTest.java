@@ -4,12 +4,24 @@ import java.sql.Types;
 
 import junit.framework.TestCase;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import toctep.skynet.backend.dal.dao.impl.mysql.MySqlUtil;
 import toctep.skynet.backend.dal.dao.impl.mysql.Param;
+import toctep.skynet.backend.log.Log;
 
 public class MysqlUtilTest extends TestCase {
+	
+	@BeforeClass
+	public void setUpOnce() {
+		Log.initialize();
+	}
+	
+	@Test
+	public void testCreation() {
+		assertNotNull(MySqlUtil.getInstance().getConnection());
+	}
 	
 	@Test
 	public void testGetGeneratedId() {
@@ -26,7 +38,6 @@ public class MysqlUtilTest extends TestCase {
 			"INSERT INTO twitter_keyword(keyword) VALUES(?)",
 			new Param[]{new Param("keyword2", Types.VARCHAR)}
 		);
-		assertEquals("ID: ", 2, id);
+		assertEquals("ID: ", 2, id);		
 	}
-	
 }

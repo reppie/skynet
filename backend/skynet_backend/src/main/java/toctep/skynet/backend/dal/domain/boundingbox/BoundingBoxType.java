@@ -32,4 +32,12 @@ public class BoundingBoxType extends Domain<Integer> implements IBoundingBoxType
 		return NullBoundingBoxType.getInstance();
 	}
 	
+	public static int count() {
+		return DaoFacadeImpl.getInstance().getBoundingBoxTypeDao().count();
+	}
+	
+	public static boolean exists(BoundingBoxType boundingBoxType) {
+		return DaoFacadeImpl.getInstance().getBoundingBoxTypeDao().exists(boundingBoxType);
+	}
+	
 }
