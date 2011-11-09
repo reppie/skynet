@@ -211,7 +211,7 @@
 	api.User.prototype = api.Base;
 	
 	api.filters.Keyword.prototype = api.filters.Base;
-	pi.filters.Time.prototype = api.filters.Base;
+	api.filters.Time.prototype = api.filters.Base;
 	api.filters.User.prototype = api.filters.Base;
 	api.filters.Geo.prototype = api.filters.Base;
 	
