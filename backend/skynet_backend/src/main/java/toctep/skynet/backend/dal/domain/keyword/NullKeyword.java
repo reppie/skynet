@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain.keyword;
 
 import toctep.skynet.backend.dal.domain.NullDomain;
 
-public final class NullKeyword extends NullDomain implements IKeyword {
+public final class NullKeyword extends NullDomain<Integer> implements IKeyword {
 
 	private static NullKeyword instance;
 	
@@ -14,16 +14,8 @@ public final class NullKeyword extends NullDomain implements IKeyword {
 	}
 	
 	@Override
-	public Integer getId() {
-		return null;
-	}
-	
-	@Override
 	public String getKeyword() {
 		return "";
 	}
-
-	@Override
-	public void save() {}
 
 }

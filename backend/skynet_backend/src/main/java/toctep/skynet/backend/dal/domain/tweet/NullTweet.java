@@ -12,7 +12,7 @@ import toctep.skynet.backend.dal.domain.sourcetype.NullSourceType;
 import toctep.skynet.backend.dal.domain.user.IUser;
 import toctep.skynet.backend.dal.domain.user.NullUser;
 
-public final class NullTweet extends NullDomain implements ITweet {
+public final class NullTweet extends NullDomain<Long> implements ITweet {
 
 	private static NullTweet instance;
 	
@@ -21,11 +21,6 @@ public final class NullTweet extends NullDomain implements ITweet {
 			instance = new NullTweet();
 		}
 		return instance;
-	}
-	
-	@Override
-	public Long getId() {
-		return null;
 	}
 	
 	@Override
@@ -92,8 +87,5 @@ public final class NullTweet extends NullDomain implements ITweet {
 	public String getCoordinates() {
 		return "";
 	}
-
-	@Override
-	public void save() {}
 
 }

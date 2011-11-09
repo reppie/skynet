@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain.place;
 
 import toctep.skynet.backend.dal.domain.NullDomain;
 
-public final class NullPlaceType extends NullDomain implements IPlaceType {
+public final class NullPlaceType extends NullDomain<Integer> implements IPlaceType {
 
 	private static NullPlaceType instance;
 	
@@ -14,16 +14,8 @@ public final class NullPlaceType extends NullDomain implements IPlaceType {
 	}
 	
 	@Override
-	public Integer getId() {
-		return null;
-	}
-	
-	@Override
 	public String getText() {
 		return "";
 	}
-
-	@Override
-	public void save() {}
 
 }

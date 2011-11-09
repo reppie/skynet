@@ -8,7 +8,7 @@ import toctep.skynet.backend.dal.domain.country.NullCountry;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public final class NullPlace extends NullDomain implements IPlace {
+public final class NullPlace extends NullDomain<String> implements IPlace {
 
 	private static NullPlace instance;
 	
@@ -17,11 +17,6 @@ public final class NullPlace extends NullDomain implements IPlace {
 			instance = new NullPlace();
 		}
 		return instance;
-	}
-	
-	@Override
-	public String getId() {
-		return null;
 	}
 	
 	@Override
@@ -93,8 +88,5 @@ public final class NullPlace extends NullDomain implements IPlace {
 	public IUrl getUrl() {
 		return NullUrl.getInstance();
 	}
-
-	@Override
-	public void save() {}
 	
 }

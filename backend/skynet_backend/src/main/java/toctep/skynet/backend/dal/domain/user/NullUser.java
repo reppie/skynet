@@ -12,7 +12,7 @@ import toctep.skynet.backend.dal.domain.timezone.NullTimeZone;
 import toctep.skynet.backend.dal.domain.url.IUrl;
 import toctep.skynet.backend.dal.domain.url.NullUrl;
 
-public final class NullUser extends NullDomain implements IUser {
+public final class NullUser extends NullDomain<Long> implements IUser {
 
 	private static NullUser instance;
 	
@@ -21,11 +21,6 @@ public final class NullUser extends NullDomain implements IUser {
 			instance = new NullUser();
 		}
 		return instance;
-	}
-	
-	@Override
-	public Long getId() {
-		return null;
 	}
 	
 	@Override
@@ -201,10 +196,6 @@ public final class NullUser extends NullDomain implements IUser {
 	@Override
 	public boolean isVerified() {
 		return false;
-	}
-
-	@Override
-	public void save() {
 	}
 
 }

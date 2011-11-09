@@ -2,7 +2,7 @@ package toctep.skynet.backend.dal.domain.url;
 
 import toctep.skynet.backend.dal.domain.NullDomain;
 
-public final class NullUrl extends NullDomain implements IUrl {
+public final class NullUrl extends NullDomain<String> implements IUrl {
 
 	private static NullUrl instance;
 	
@@ -12,13 +12,5 @@ public final class NullUrl extends NullDomain implements IUrl {
 		}
 		return instance;
 	}
-	
-	@Override
-	public String getId() {
-		return null;
-	}
-
-	@Override
-	public void save() {}
 
 }
