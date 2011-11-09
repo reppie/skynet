@@ -12,7 +12,7 @@ public final class NullLanguage implements ILanguage {
 		return instance;
 	}
 	
-	private NullLanguage() { }
+	private NullLanguage() {}
 	
 	@Override
 	public Integer getId() {
@@ -25,7 +25,6 @@ public final class NullLanguage implements ILanguage {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 
 }

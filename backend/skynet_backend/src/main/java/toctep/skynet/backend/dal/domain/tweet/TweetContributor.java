@@ -58,5 +58,6 @@ public class TweetContributor extends Domain<Integer> {
 	public static List<TweetContributor> select(Tweet tweet) {
 		TweetContributorDao dao = DaoFacadeImpl.getInstance().getTweetContributorDao();
 		return dao.select(tweet);
-	}	
+	}
+	
 }

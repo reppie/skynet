@@ -13,7 +13,7 @@ public final class NullGeo extends Domain<Integer> implements IGeo {
 		return instance;
 	}
 	
-	private NullGeo() { }
+	private NullGeo() {}
 	
 	@Override
 	public Integer getId() {
@@ -31,6 +31,6 @@ public final class NullGeo extends Domain<Integer> implements IGeo {
 	}
 	
 	@Override
-	public void save()
-	{}
+	public void save() {}
+	
 }

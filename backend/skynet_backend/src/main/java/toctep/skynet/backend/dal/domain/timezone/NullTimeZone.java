@@ -11,7 +11,7 @@ public final class NullTimeZone implements ITimeZone {
 		return instance;
 	}
 	
-	private NullTimeZone() { }
+	private NullTimeZone() {}
 	
 	@Override
 	public Integer getId() {
@@ -29,7 +29,6 @@ public final class NullTimeZone implements ITimeZone {
 	}
 
 	@Override
-	public void save() {
-	}
+	public void save() {}
 	
 }

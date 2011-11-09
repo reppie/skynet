@@ -22,7 +22,7 @@ public final class NullUser implements IUser {
 		return instance;
 	}
 	
-	private NullUser() { }
+	private NullUser() {}
 	
 	@Override
 	public Long getId() {

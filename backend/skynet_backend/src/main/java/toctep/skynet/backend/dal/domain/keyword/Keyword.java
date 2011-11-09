@@ -44,4 +44,5 @@ public class Keyword extends Domain<Integer> implements IKeyword {
 		KeywordDao dao = DaoFacadeImpl.getInstance().getKeywordDao();
 		return dao.exists(keyword);
 	}
+	
 }
