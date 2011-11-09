@@ -23,9 +23,7 @@ public abstract class TweetRetriever implements Runnable {
 		
 		StatusListener statusListener = new StatusListener() {
 			public void onStatus(Status status) {
-				if (isDutch(status)) {
-					tweetParser.parse(status).save();
-				}
+				process(status);
 	        }
 			
 	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) { }
@@ -40,11 +38,13 @@ public abstract class TweetRetriever implements Runnable {
 	    twitterStream = new TwitterStreamFactory().getInstance();
 	    twitterStream.addListener(statusListener);
 	}
-
+	
 	@Override
 	public abstract void run();
 	
-	public abstract boolean isDutch(Status status);
+	public void process(Status status) {
+		tweetParser.parse(status).save();
+	}
 	
 	protected TwitterStream getTwitterStream() {
 		return twitterStream;

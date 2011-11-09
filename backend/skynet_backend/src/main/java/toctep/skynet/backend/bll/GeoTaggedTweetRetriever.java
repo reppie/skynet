@@ -1,7 +1,6 @@
 package toctep.skynet.backend.bll;
 
 import twitter4j.FilterQuery;
-import twitter4j.Status;
 
 public class GeoTaggedTweetRetriever extends TweetRetriever {
 
@@ -13,11 +12,6 @@ public class GeoTaggedTweetRetriever extends TweetRetriever {
 	@Override
 	public void run() {
 		this.getTwitterStream().filter(new FilterQuery(0, null, null, NETHERLANDS_COORDS));
-	}
-	
-	@Override
-	public boolean isDutch(Status status) {
-		return true;
 	}
 
 }
