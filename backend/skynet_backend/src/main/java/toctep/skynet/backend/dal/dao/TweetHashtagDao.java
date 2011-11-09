@@ -5,7 +5,7 @@ import java.util.List;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 import toctep.skynet.backend.dal.domain.tweet.TweetHashtag;
 
-public abstract class TweetHashtagDao extends Dao<Integer> {
+public abstract class TweetHashtagDao implements IDao<Integer> {
 
 	public static final String TABLE_NAME = "twitter_tweet_hashtags";
 	

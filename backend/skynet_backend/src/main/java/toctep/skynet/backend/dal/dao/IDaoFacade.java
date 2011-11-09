@@ -1,6 +1,6 @@
 package toctep.skynet.backend.dal.dao;
 
-public interface DaoFacade {
+public interface IDaoFacade {
 
 	BoundingBoxDao getBoundingBoxDao();
 	BoundingBoxTypeDao getBoundingBoxTypeDao();
