@@ -45,6 +45,7 @@
 							value="{{ search_string }}" 
 						{% endif %}
 						/>
+						<input id="timebutton" type="button" title="Tijd" value="{% trans '&#x231A' %}" />
 						<input id="crumblebutton" type="button" title="Bewaar" value="{% trans '⇧' %}" />
 						<input id="searchbutton" type="submit" value="{% trans 'Search' %}" />		
 					</form>
@@ -53,8 +54,10 @@
 							Voorbeelden: <span>@hfinkers</span>, <span>^Groningen</span> of <span>#voetbal</span></p>					
 					</div>
  				{% endblock %}
- 				<div class="time-sliders"></div>
- 				<label class="time-value"></label>
+ 				<div id="slider-container">
+	 				<div class="time-sliders"></div>
+	 				<label class="time-value"></label>
+ 				</div>
  				<div class="search-result-status"></div>
  				<div class="tag-cloud main-tag-cloud"></div>
 				{% block main %}The center column{% endblock %}

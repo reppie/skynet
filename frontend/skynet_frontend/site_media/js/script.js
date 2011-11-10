@@ -182,5 +182,19 @@ $(function() {
 	updateTimeValues();
 });
 
+$( ".time-sliders" ).slider({
+		range: true,
+		min: 0,
+		max: 30,
+		values: [ 3, 28 ],
+		slide: function( event, ui ) {
+			$( ".time-value" ).html( "Toon tweets van: " + ui.values[ 0 ] + " tot: " + ui.values[ 1 ] );
+		}
+	});
+	$( ".time-value" ).html( "Toon tweets van: " +  $( ".time-sliders" ).slider( "values", 0 ) +
+		" tot: " + $( ".time-sliders" ).slider( "values", 1 ) );
+	$("#timebutton").click(function() {
+		$("#slider-container").toggle();
+	})
 
 
