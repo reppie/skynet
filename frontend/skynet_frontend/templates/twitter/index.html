@@ -10,7 +10,10 @@
 
 {% block title %} Social Media Lab {% endblock %}
 
-{% block main %} 
+{% block main %}
+	<script type="text/javascript">
+		var permafilters = ["{{ filters|join:"\",\"" }}"];
+	</script> 
 	<div class="tweet-results">
 		<div class="tweets"></div>
 		<div class="more-tweets">Meer tweets tonen</div>

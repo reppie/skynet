@@ -98,6 +98,7 @@ $(function(){
 	});
 	$("input#crumblebutton").click(function(){
 		var filters = getSearchFilters();
+		console.log(filters);
 		for (var index in filters){
 			var filter = filters[index];
 			crumblePath.add(filter);
@@ -161,4 +162,18 @@ $(".more-tweets").click(function(){
 	});
 });
 
-
+$(function() {
+	if(permafilters) {
+		var filters = [];
+		for (var index in permafilters) {
+			filters.push(getFilter(permafilters[index]));
+		}
+		console.log(filters);
+		for (var index in filters){
+			var filter = filters[index];
+			crumblePath.add(filter);
+		}
+//		updateRegion();
+		$searchbar.val("");
+	}
+});
