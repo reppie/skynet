@@ -1,13 +1,12 @@
+from datetime import datetime
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-
+from jsonrpc import JSONRPCService, jsonremote
 from skynet_frontend.keywordcloud.models import KeywordCloud
 from skynet_frontend.twitter.models import Tweet, Keyword, User
-from jsonrpc import JSONRPCService, jsonremote
-from datetime import datetime
 
 def index(request):
     return render_to_response("twitter/index.html", { }, context_instance=RequestContext(request)) 
@@ -92,7 +91,14 @@ class TwitterRpcMethods(object):
                 tweets = tweets.distinct().filter(place__country=country)
                 if filter['value']:
                     tweets = tweets.distinct().filter(place__name=value)
-        
+                    
+            if filter['type']=='time':
+                from_time = datetime.fromtimestamp(value)
+                tweets = tweets.distinct().filter(created_at__gte=from_time)
+                if filter['to']:
+                    to_time = datetime.fromtimestamo(filter['to'])
+                    tweets = tweets.distinct().filter(created_at__lte=to_time)
+                    
         return tweets        
             
     @staticmethod
