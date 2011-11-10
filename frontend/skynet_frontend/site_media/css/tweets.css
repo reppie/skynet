@@ -80,6 +80,11 @@ section#tag-cloud{
 .crumble-path a:hover{
 	text-decoration: underline;
 }
+
+.crumble-path a.to-be-removed{
+	color: gray !important;
+	text-decoration:line-through;
+}
 .more-tweets{
 	margin-top: 8px;
 	cursor: pointer;

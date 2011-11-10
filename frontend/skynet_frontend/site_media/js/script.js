@@ -227,6 +227,22 @@ $(function(){
 		$search.submit();
 		return false;
 	});
+	
+	$(".crumble-path li").live({
+        mouseenter:
+           function()
+           {
+           	console.log("test");
+           	console.log($(this).nextUntil());
+				$(this).nextUntil().find("a").addClass("to-be-removed");
+           },
+        mouseleave:
+           function()
+           {
+				$(this).nextUntil().removeClass("to-be-removed");
+           }
+       }
+    );
 });
 
 
