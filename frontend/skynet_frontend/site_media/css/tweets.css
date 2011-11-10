@@ -80,4 +80,26 @@ section#tag-cloud{
 .crumble-path a:hover{
 	text-decoration: underline;
 }
+.more-tweets{
+	margin-top: 8px;
+	cursor: pointer;
+	display: none;
+	text-align: center;
+	font-size: 15px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	color: #06F;
+	border: solid 1px #CCC;
+}
+.more-tweets:hover{
+	text-decoration: underline;
+}
+
+.more-tweets.loading{
+	background-image: url("../img/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position-x: 10px;
+	background-position-y: 3px;
+}
 

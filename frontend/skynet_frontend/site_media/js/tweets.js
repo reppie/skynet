@@ -1,6 +1,5 @@
 (function($){
-	var pageSize = 20;
-	var moreSize = pageSize;
+	
 	var api = window.api || (window.api = {
 		
 		'Base': function(json){
@@ -24,7 +23,10 @@
 		},
 		'TweetList': function(element, tweets, callback){
 			this.$tweetList = element;
+			this.pageSize = 15;
+			this.moreSize = this.pageSize;
 			this.reset(tweets, callback);
+			
 		},
 		'cache':{
 			'collections':{},
@@ -91,16 +93,17 @@
 	});
 	
 	var shuffle = function(array) {
-		var s = [];
-		while (array.length) s.push(array.splice(Math.random() * array.length, 1)[0]);
-		while (s.length) array.push(s.pop());
+		if(array){
+			var s = [];
+			while (array.length) s.push(array.splice(Math.random() * array.length, 1)[0]);
+			while (s.length) array.push(s.pop());
+		}
 		return array;
 	}
 	
 	var tweetListKey = "__TweetList";
 	$.fn.TweetList = function(tweetIds, callback) {
 		var tweetList = this.data(tweetListKey);
-		this.show();
 		if(!tweetList){
 			tweetList = new api.TweetList(this, tweetIds, callback);
 			this.data(tweetListKey, tweetList);
@@ -135,7 +138,6 @@
     	var tweetList = this;
 		if(!$('.tweets .tweet[data-tweet-id="'+tweet.id+'"]').length){
 			var $tweet = $("#tweetTemplate").tmpl(tweet);
-			
 			var inserted = false;
 			$(".tweets .tweet").each(function(){
 				if(tweet.timestamp > $(this).data("timestamp")){
@@ -170,11 +172,48 @@
     	}
     }
     
-    api.TweetList.prototype.more = function(tweet){
-    	
-    	
-    	
-    	
+    api.TweetList.prototype.more = function(callback){
+    	var tweetList = this;
+		
+		var tweetIds = this.tweetIds || [];
+		this.loaded = 0;
+		this.loading = 0;
+		this.callback = callback;
+		if(tweetIds.length==0){
+			if(callback){
+				callback.call(this);
+			}
+		}
+		for(var i in tweetIds){
+			var tweetId = tweetIds[i];
+			if(tweetList.loading>=tweetList.moreSize){
+				break;
+			}
+			if(!$('.tweets .tweet[data-tweet-id="'+tweetId+'"]').length){
+				tweetList.loading++;
+				
+				api.Tweet.get(tweetId, function(tweet){
+					if(tweet){
+						tweet.getUser(function(user){
+							if(user){
+								if(tweetList.tweetIds.indexOf(this.id)>-1){
+									tweetList.loaded++;
+									tweetList.add(tweet);
+									if(tweetList.loaded>=tweetList.loading){
+										if(tweetList.callback){
+											tweetList.callback.call(tweetList);
+										}
+									}
+								}
+							}
+						});
+					}
+				});
+			}
+		}
+		if(!tweetList.loading && callback){
+			callback.call(this);
+		}
     	
     }
 	
@@ -184,15 +223,14 @@
 		this.$tweetList.empty();
 		this.tweetIds = tweetIds || [];
 		this.loaded = 0;
-		this.loading = pageSize;
+		this.loading = this.pageSize;
 		this.callback = callback;
 		if(tweetIds.length==0){
 			if(callback){
 				callback.call(this);
 			}
 		}
-		
-		for(var i =0; i < pageSize && i < tweetIds.length; i++){
+		for(var i = 0; i < this.pageSize && i < tweetIds.length; i++){
 			var tweetId = tweetIds[i];
 			api.Tweet.get(tweetId, function(tweet){
 				if(tweet){
@@ -280,7 +318,6 @@
  		}
  		this.chain = newChain;
  		this.build();
- 		
  	}
  	
  	api.CrumblePath.prototype.remove = function(filter){

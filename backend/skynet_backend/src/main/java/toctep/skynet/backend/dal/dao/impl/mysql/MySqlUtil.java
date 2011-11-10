@@ -2,11 +2,13 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -38,9 +40,6 @@ import toctep.skynet.backend.dal.dao.TweetUrlDao;
 import toctep.skynet.backend.dal.dao.UrlDao;
 import toctep.skynet.backend.dal.dao.UserDao;
 import toctep.skynet.backend.log.Log;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 public final class MySqlUtil {
 

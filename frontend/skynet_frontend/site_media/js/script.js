@@ -50,27 +50,29 @@ $(function(){
 	}
 	
 	var $search = $("form#keyword-search-form").submit(function(){
-		
 		$(".main-tag-cloud").hide();
 		$searchbar.addClass("loading");
 		updateRegion();
 		var filters = getFilters();
 		$(".search-result-status").hide();
+		$(".tweet-results").show();
 		api.Tweet.search(filters, function(twitterIds, cloud){
 			if(twitterIds){
-				$(".tweets").TweetList(twitterIds, function(){
+				var tweetList = $(".tweets").TweetList(twitterIds, function(){
 					$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
 					$searchbar.removeClass("loading");
 				});
 				$(".mini-tag-cloud").TagCloud(cloud);
 				$("section#tag-cloud").show();
+				
+				$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
 			}
 		});	
+		
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
 		$(".main-tag-cloud").hide();
-		
 		var $searchbar = $(this).find("input#searchbar");
 		$searchbar.addClass("loading");
 		var keyword = $(this).data("keyword");
@@ -79,13 +81,17 @@ $(function(){
 		var filters = crumblePath.path();
 		$(".search-result-status").hide();
 		updateRegion();
+		$(".tweet-results").show();
 		api.Tweet.search(filters, function(twitterIds, cloud){
-			$(".tweets").TweetList(twitterIds, function(){
-				$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
-				$searchbar.removeClass("loading");
-			});
-			$(".mini-tag-cloud").TagCloud(cloud);
-			$("section#tag-cloud").show();
+			if(twitterIds){
+				var tweetList = $(".tweets").TweetList(twitterIds, function(){
+					$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
+					$searchbar.removeClass("loading");
+				});
+				$(".mini-tag-cloud").TagCloud(cloud);
+				$("section#tag-cloud").show();
+				$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
+			}
 		});	
 		$search.submit();
 		return false;
@@ -100,14 +106,13 @@ $(function(){
 		$searchbar.val("");
 	});
 	$(".crumble-path a").live('click', function(){
-		
 		var index = $(this).data("index");
 		var clicked = crumblePath.path()[index];
 		crumblePath.removeAfter(clicked);
-		console.log(index);
 		if(index==0){
 			$searchbar.val("");
-			$(".tweets").hide().empty();
+			$(".tweet-results").hide();
+			$(".tweets").empty();
 			$("section#tag-cloud").hide();
 			$(".main-tag-cloud").show();
 			$(".search-result-status").hide();
@@ -143,3 +148,17 @@ $(function() {
 	$( ".time-value" ).html( "Toon tweets van: " +  $( ".time-sliders" ).slider( "values", 0 ) +
 		" tot: " + $( ".time-sliders" ).slider( "values", 1 ) );
 });
+$(".more-tweets").click(function(){
+	var $div = $(this);
+	if($div.is('.loading')){
+		return;
+	}
+	$div.addClass('loading');
+	$(".tweets").TweetList().more(function(){
+		
+		$div.removeClass('loading');
+		
+	});
+});
+
+
