@@ -228,15 +228,42 @@ $(function(){
 		return false;
 	});
 	
+	$("a.tweet-location").live('click',function(){
+		var countryId = $(this).data("country-id");
+		var place = $(this).data("place-name");
+		var path = crumblePath.path();
+		for(var i in path){
+			var filter = path[i];
+			if(filter.type=="geo"&&filter.removable){
+				crumblePath.remove(filter);
+			}
+		}
+		var filter = new api.filters.Geo(place, countryId, place);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
+	});
+	
+	$("a.tweet-screen-name").live('click',function(){
+		var userName = $(this).data("user-name");
+		var path = crumblePath.path();
+		for(var i in path){
+			var filter = path[i];
+			if(filter.type=="user"&&filter.removable){
+				crumblePath.remove(filter);
+			}
+		}
+		var filter = new api.filters.User(userName);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
+	});
+	
 	$(".crumble-path li").live({
-        mouseenter:
-           function()
-           {
+        	mouseenter: function() {
 				$(this).nextUntil().find("a").addClass("to-be-removed");
            },
-        mouseleave:
-           function()
-           {
+        	mouseleave: function() {
 				$(this).nextUntil().find("a").removeClass("to-be-removed");
            }
        }
