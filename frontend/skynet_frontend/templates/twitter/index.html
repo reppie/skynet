@@ -12,7 +12,9 @@
 
 {% block main %}
 	<script type="text/javascript">
-		var permafilters = ["{{ filters|join:"\",\"" }}"];
+		{% if filters %}
+			var permafilters = ["{{ filters|join:"\",\"" }}"];
+		{% endif %}
 	</script> 
 	<div class="tweet-results">
 		<div class="tweets"></div>
