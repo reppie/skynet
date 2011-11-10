@@ -246,13 +246,6 @@ $(function(){
 	
 	$("a.tweet-screen-name").live('click',function(){
 		var userName = $(this).data("user-name");
-		var path = crumblePath.path();
-		for(var i in path){
-			var filter = path[i];
-			if(filter.type=="user"&&filter.removable){
-				crumblePath.remove(filter);
-			}
-		}
 		var filter = new api.filters.User(userName);
 		crumblePath.add(filter);
 		$search.submit();
