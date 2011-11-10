@@ -95,9 +95,9 @@
     		<div class="tweet" data-tweet-id="${id}" data-user-id="${user.id}" data-timestamp="${timestamp}">
     			<div class="tweet-image"><img height="48" width="48" src="${user.profile_image_url}"/></div>
     			<div class="tweet-content">
-    				<div class="tweet-user"><span class=​"tweet-user-name">​
+    				<div class="tweet-user">​
     					<span class="tweet-user-name">
-						  <a class="tweet-screen-name" href="http://twitter.com/#!/${user.screen_name}/">${user.screen_name}</a>
+						  <a class="tweet-screen-name" data-user-name="${user.screen_name}" href="http://twitter.com/#!/${user.screen_name}/">${user.screen_name}</a>
 						  <span class="tweet-full-name">${user.name}</span>
 					  	</span>
 				  	</div>
@@ -117,12 +117,9 @@
 		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
 			<ul>
 				{% templatetag openvariable %}each chain{% templatetag closevariable %}
-					<li><a data-index="${$index}" type="" href="#">${label} &raquo;</a></li>
+					<li><a class="filter-type-${type}" data-filter-type="${type}" data-index="${$index}" type="" href="#">${label} &raquo;</a></li>
 				{% templatetag openvariable %}/each{% templatetag closevariable %}
 			</ul> 
-		</script>
-		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
-			
 		</script>
 		<!-- scripts concatenated and minified via ant build script-->		
 		<script src="/site_media/js/libs/jquery.jsonrpc.js"></script>
