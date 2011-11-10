@@ -68,7 +68,7 @@ footer
 {
 	background-image: url("../img/ajax-loader.gif");
 	background-repeat: no-repeat;
-	background-position: 410px;
+	background-position: 360px;
 }
 
 #searchbutton
@@ -236,12 +236,20 @@ aside section h1.title
 
 #slider-container
 {
+	margin-top: 4px;
+	padding: 2px;
+	padding-left: 20px;
+	padding-right: 20px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: solid 1px #CCC;
 	display: none;
 }
 
 .time-sliders
 {
-	width: 370px;
+
 	padding-left: 15px;
 	margin-bottom: 10px;
 	margin-top: 10px;
@@ -249,5 +257,6 @@ aside section h1.title
 
 .time-value
 {
+	text-shadow: 1px 1px rgba(128, 128, 128, 0.1);
 	color: #F7B850;
 }

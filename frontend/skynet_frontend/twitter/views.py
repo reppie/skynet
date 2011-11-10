@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.http import urlencode
 from jsonrpc import JSONRPCService, jsonremote
 from skynet_frontend.keywordcloud.models import KeywordCloud
 from skynet_frontend.twitter.models import Tweet, Keyword, User
@@ -45,12 +46,14 @@ class TwitterRpcMethods(object):
             elif filter['type'] == 'user':
                 exclude.append('@' + filter['value'])
         
+        print urlencode(filter)
+        
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords, exclude=exclude)
             
         return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids or []],
             'cloud':cloud,
         }
         
@@ -90,7 +93,6 @@ class TwitterRpcMethods(object):
                 tweets = tweets.distinct().filter(place__country=country)
                 if filter['value']:
                     tweets = tweets.distinct().filter(place__name=value)
-            print filter['type']
             if filter['type']=='time':
                 from_time = datetime.fromtimestamp(value)
                 tweets = tweets.distinct().filter(created_at__gte=from_time)
@@ -102,7 +104,7 @@ class TwitterRpcMethods(object):
             
     @staticmethod
     @jsonremote(service)
-    def cloud():
+    def cloud(filters):
         tweets = Tweet.objects.all()
         tweet_ids = tweets.values_list('id', flat=True)                
         keywords = Keyword.get_all_in_tweets(tweet_ids)

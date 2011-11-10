@@ -61,8 +61,7 @@ $(function(){
 	}
 	
 	function updateResults(total){
-		
-		$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+total+" resultaten").show();
+		$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+total+" resultaten - <a id='permalink' href='"+getCurrentPermaLink()+"'>Directe link</a>").show();
 		
 	}
 	
@@ -91,7 +90,6 @@ $(function(){
 				});
 				$(".mini-tag-cloud").TagCloud(cloud);
 				$("section#tag-cloud").show();
-				
 				$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
 			}
 		});	
@@ -149,7 +147,8 @@ $(function(){
 		updateRegion();
 		return false;
 	});
-	api.cloud(function(cloud){
+	
+	api.cloud([], function(cloud){
 		$(".main-tag-cloud").TagCloud(cloud);
 		$("section#tag-cloud").hide();
 	});
@@ -162,6 +161,9 @@ $(function(){
 		$(".tweets").TweetList().more(function(){
 			$div.removeClass('loading');
 			updateResults(this.tweetIds.length);
+			if(this.tweetIds.length==$(".tweets>.tweet").length){
+				$(".more-tweets").hide();
+			}
 		});
 	});
 	
@@ -201,26 +203,108 @@ $(function(){
 	$("#searchbar").focusout(function() {
 		$("#search-explanation").slideUp();
 	});
-
-		
-});
-
-$( ".time-sliders" ).slider({
-		range: true,
-		min: 0,
-		max: 30,
-		values: [ 3, 28 ],
-		slide: function( event, ui ) {
-			$( ".time-value" ).html( "Toon tweets van: " + ui.values[ 0 ] + " tot: " + ui.values[ 1 ] );
-		}
-	});
-	$( ".time-value" ).html( "Toon tweets van: " +  $( ".time-sliders" ).slider( "values", 0 ) +
-		" tot: " + $( ".time-sliders" ).slider( "values", 1 ) );
+	
 	$("#timebutton").click(function() {
 		$("#slider-container").toggle();
-	})
-
-
-
-
-
+		$search.submit();
+	});
+	
+	$("a.tweet-location").live('click',function(){
+		var countryId = $(this).data("country-id");
+		var place = $(this).data("place-name");
+		var path = crumblePath.path();
+		for(var i in path){
+			var filter = path[i];
+			if(filter.type=="geo"&&filter.removable){
+				crumblePath.remove(filter);
+			}
+		}
+		var filter = new api.filters.Geo(place, countryId, place);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
+	});
+	
+	$("a.tweet-location").live('click',function(){
+		var countryId = $(this).data("country-id");
+		var place = $(this).data("place-name");
+		var path = crumblePath.path();
+		for(var i in path){
+			var filter = path[i];
+			if(filter.type=="geo"&&filter.removable){
+				crumblePath.remove(filter);
+			}
+		}
+		var filter = new api.filters.Geo(place, countryId, place);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
+	});
+	
+	$("a.tweet-screen-name").live('click',function(){
+		var userName = $(this).data("user-name");
+		var filter = new api.filters.User(userName);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
+	});
+	
+	$(".crumble-path li").live({
+        	mouseenter: function() {
+				$(this).nextUntil().find("a").addClass("to-be-removed");
+           },
+        	mouseleave: function() {
+				$(this).nextUntil().find("a").removeClass("to-be-removed");
+           }
+       }
+    );
+	
+	$(function() {
+		querystring = $.deparam.querystring(true);
+		if(querystring&&querystring.filter) {
+			$("#searchbar").addClass("loading");
+			var filters = [];
+			for (var index in querystring.filter) {
+				filters.push(getFilter(querystring.filter[index]));
+			}
+			for (var index in filters){
+				var filter = filters[index];
+				crumblePath.add(filter);
+			}
+			updateRegion();
+			$(".main-tag-cloud").hide();
+			var filters = getFilters();
+			$(".search-result-status").hide();
+			$(".tweet-results").show();
+			api.Tweet.search(filters, function(twitterIds, cloud){
+				if(twitterIds){
+					var tweetList = $(".tweets").TweetList(twitterIds, function(){
+						updateResults(twitterIds.length);
+						$searchbar.removeClass("loading");
+					});
+					$(".mini-tag-cloud").TagCloud(cloud);
+					$("section#tag-cloud").show();
+					$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
+				}
+			});
+		}
+	});
+	
+	function getCurrentPermaLink() {
+		filters = getFilters();
+		querystring = "";
+		for(var index in filters) {
+			value = filters[index].value
+			if(value != null) {
+				if(querystring == "") {
+					querystring = "?";
+				} else {
+					querystring += "&";
+				}
+				querystring += "filter[]=" + filters[index].value;
+			}
+		}
+		
+		return window.location.origin + querystring;
+	}
+});

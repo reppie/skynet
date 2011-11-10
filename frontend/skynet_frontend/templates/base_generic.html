@@ -58,7 +58,7 @@
 	 				<div class="time-sliders"></div>
 	 				<label class="time-value"></label>
  				</div>
- 				<div class="search-result-status"></div>
+				<div class="search-result-status"></div>
  				<div class="tag-cloud main-tag-cloud"></div>
 				{% block main %}The center column{% endblock %}
 			</section>
@@ -92,15 +92,15 @@
     		<div class="tweet" data-tweet-id="${id}" data-user-id="${user.id}" data-timestamp="${timestamp}">
     			<div class="tweet-image"><img height="48" width="48" src="${user.profile_image_url}"/></div>
     			<div class="tweet-content">
-    				<div class="tweet-user"><span class=​"tweet-user-name">​
+    				<div class="tweet-user">​
     					<span class="tweet-user-name">
-						  <a class="tweet-screen-name" href="http://twitter.com/#!/${user.screen_name}/">${user.screen_name}</a>
+						  <a class="tweet-screen-name" data-user-name="${user.screen_name}" href="http://twitter.com/#!/${user.screen_name}/">${user.screen_name}</a>
 						  <span class="tweet-full-name">${user.name}</span>
 					  	</span>
 				  	</div>
   					<div class="tweet-text">${text}</div>
   					<div class="tweet-footer">
-  						<span class="tweet-location">${place.name}, ${place.country}</span>
+  						<a href="#" data-country-id="${place.country.id}" data-place-name="${place.name}" class="tweet-location">${place.name}, ${place.country.name}</a>
   						<time datetime="${created_at+'Z'}"></time>
   						op
 						<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>
@@ -114,12 +114,9 @@
 		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
 			<ul>
 				{% templatetag openvariable %}each chain{% templatetag closevariable %}
-					<li><a data-index="${$index}" type="" href="#">${label} &raquo;</a></li>
+					<li><a class="filter-type-${type}" data-filter-type="${type}" data-index="${$index}" type="" href="#">${label} &raquo;</a></li>
 				{% templatetag openvariable %}/each{% templatetag closevariable %}
 			</ul> 
-		</script>
-		<script id="crumblePathTemplate" type="text/x-jquery-tmpl">
-			
 		</script>
 		<!-- scripts concatenated and minified via ant build script-->		
 		<script src="/site_media/js/libs/jquery.jsonrpc.js"></script>
@@ -129,6 +126,7 @@
 		<script src="/site_media/js/tweets.js"></script>
 		<script src="/site_media/js/plugins.js"></script>
 		<script src="/site_media/js/script.js"></script>
+		<script src="https://raw.github.com/cowboy/jquery-bbq/v1.2.1/jquery.ba-bbq.min.js"></script>
 		<!-- end scripts-->
 		<!--[if lt IE 7 ]>
 		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>

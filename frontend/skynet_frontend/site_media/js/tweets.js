@@ -67,10 +67,10 @@
 				col[""+item.id] = item;
 			}
 		},
-		'cloud': function(callback){
+		'cloud': function(filters, callback){
 			var This = this;
 			$.jsonRPC.request('cloud', {
-			  	params: [],
+			  	params: [filters],
 			  	success: function(result){
 			  		callback.call(This, result.result);
 			  },
@@ -300,6 +300,7 @@
  		return this.chain;
  	}
  	api.CrumblePath.prototype.add = function(filter){
+ 		
  		for(var index in this.chain){
  			var item = this.chain[index];
  			if(filter.equals(item)){
@@ -405,7 +406,7 @@
 		  	success: function(result){
 		  		var tweetIds = result.result.tweet_ids;
 		  		var cloud = result.result.cloud;
-		  		callback.call(This, tweetIds,cloud);
+		  		callback.call(This, tweetIds, cloud);
 		  },
 		  error: function(result){
 	  		callback.call(This, null);
