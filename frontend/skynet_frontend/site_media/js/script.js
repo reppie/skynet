@@ -124,7 +124,6 @@ $(function(){
 	});
 	$("input#crumblebutton").click(function(){
 		var filters = getSearchFilters();
-		console.log(filters);
 		for (var index in filters){
 			var filter = filters[index];
 			crumblePath.add(filter);
