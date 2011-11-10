@@ -228,20 +228,36 @@ $(function(){
 		$search.submit();
 		return false;
 	});
-});
-
-$(function() {
-	if(permafilters) {
-		var filters = [];
-		for (var index in permafilters) {
-			filters.push(getFilter(permafilters[index]));
+	
+	$(function() {
+		if(permafilters) {
+			$("#searchbar").addClass("loading");
+			var filters = [];
+			for (var index in permafilters) {
+				filters.push(getFilter(permafilters[index]));
+			}
+			console.log(filters);
+			for (var index in filters){
+				var filter = filters[index];
+				crumblePath.add(filter);
+			}
+			updateRegion();
+			$(".main-tag-cloud").hide();
+			var filters = getFilters();
+			$(".search-result-status").hide();
+			$(".tweet-results").show();
+			api.Tweet.search(filters, function(twitterIds, cloud){
+				if(twitterIds){
+					var tweetList = $(".tweets").TweetList(twitterIds, function(){
+						updateResults(twitterIds.length);
+						$searchbar.removeClass("loading");
+					});
+					$(".mini-tag-cloud").TagCloud(cloud);
+					$("section#tag-cloud").show();
+					
+					$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
+				}
+			});	
 		}
-		console.log(filters);
-		for (var index in filters){
-			var filter = filters[index];
-			crumblePath.add(filter);
-		}
-//		updateRegion();
-		$searchbar.val("");
-	}
+	});
 });
