@@ -10,11 +10,7 @@ from skynet_frontend.keywordcloud.models import KeywordCloud
 from skynet_frontend.twitter.models import Tweet, Keyword, User
 
 def index(request):
-    filters = []
-    if request.method == "GET":
-        filters = request.GET.getlist('filter[]')
-
-    return render_to_response("twitter/index.html", { 'filters': filters }, context_instance=RequestContext(request)) 
+    return render_to_response("twitter/index.html", { }, context_instance=RequestContext(request)) 
 
 service = JSONRPCService()
 

@@ -270,13 +270,13 @@ $(function(){
     );
 
 	$(function() {
-		if(permafilters) {
+		querystring = $.deparam.querystring(true);
+		if(querystring) {
 			$("#searchbar").addClass("loading");
 			var filters = [];
-			for (var index in permafilters) {
-				filters.push(getFilter(permafilters[index]));
+			for (var index in querystring.filter) {
+				filters.push(getFilter(querystring.filter[index]));
 			}
-			console.log(filters);
 			for (var index in filters){
 				var filter = filters[index];
 				crumblePath.add(filter);
