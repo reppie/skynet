@@ -163,6 +163,9 @@ $(function(){
 		$(".tweets").TweetList().more(function(){
 			$div.removeClass('loading');
 			updateResults(this.tweetIds.length);
+			if(this.tweetIds.length==$(".tweets>.tweet").length){
+				$(".more-tweets").hide();
+			}
 		});
 	});
 	
