@@ -4,12 +4,17 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils.http import urlencode
 from jsonrpc import JSONRPCService, jsonremote
 from skynet_frontend.keywordcloud.models import KeywordCloud
 from skynet_frontend.twitter.models import Tweet, Keyword, User
 
 def index(request):
-    return render_to_response("twitter/index.html", { }, context_instance=RequestContext(request)) 
+    filters = []
+    if request.method == "GET":
+        filters = request.GET.getlist('filter[]')
+
+    return render_to_response("twitter/index.html", { 'filters': filters }, context_instance=RequestContext(request)) 
 
 service = JSONRPCService()
 
@@ -44,6 +49,8 @@ class TwitterRpcMethods(object):
                 exclude.append(filter['value'])
             elif filter['type'] == 'user':
                 exclude.append('@' + filter['value'])
+        
+        print urlencode(filter)
         
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)

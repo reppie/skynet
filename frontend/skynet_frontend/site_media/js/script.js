@@ -125,6 +125,7 @@ $(function(){
 	});
 	$("input#crumblebutton").click(function(){
 		var filters = getSearchFilters();
+		console.log(filters);
 		for (var index in filters){
 			var filter = filters[index];
 			crumblePath.add(filter);
@@ -221,7 +222,6 @@ $(function(){
 				crumblePath.remove(filter);
 			}
 		}
-		
 		var filter = new api.filters.Geo(place, countryId, place);
 		crumblePath.add(filter);
 		$search.submit();
@@ -232,21 +232,45 @@ $(function(){
         mouseenter:
            function()
            {
-           	console.log("test");
-           	console.log($(this).nextUntil());
 				$(this).nextUntil().find("a").addClass("to-be-removed");
            },
         mouseleave:
            function()
            {
-				$(this).nextUntil().removeClass("to-be-removed");
+				$(this).nextUntil().find("a").removeClass("to-be-removed");
            }
        }
     );
+
+	$(function() {
+		if(permafilters) {
+			$("#searchbar").addClass("loading");
+			var filters = [];
+			for (var index in permafilters) {
+				filters.push(getFilter(permafilters[index]));
+			}
+			console.log(filters);
+			for (var index in filters){
+				var filter = filters[index];
+				crumblePath.add(filter);
+			}
+			updateRegion();
+			$(".main-tag-cloud").hide();
+			var filters = getFilters();
+			$(".search-result-status").hide();
+			$(".tweet-results").show();
+			api.Tweet.search(filters, function(twitterIds, cloud){
+				if(twitterIds){
+					var tweetList = $(".tweets").TweetList(twitterIds, function(){
+						updateResults(twitterIds.length);
+						$searchbar.removeClass("loading");
+					});
+					$(".mini-tag-cloud").TagCloud(cloud);
+					$("section#tag-cloud").show();
+					
+					$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
+				}
+			});	
+		}
+	});
 });
-
-
-
-
-
-
