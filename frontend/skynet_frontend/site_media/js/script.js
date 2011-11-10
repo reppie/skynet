@@ -80,7 +80,6 @@ $(function(){
 		$searchbar.addClass("loading");
 		updateRegion();
 		var filters = getFilters();
-		updatePermaLink();
 		$(".search-result-status").hide();
 		$(".tweet-results").show();
 		api.Tweet.search(filters, function(twitterIds, cloud){
@@ -290,10 +289,6 @@ $(function(){
 			});
 		}
 	});
-	
-	function updatePermaLink() {
-		$("#permalink").attr('href', getCurrentPermaLink());
-	}
 	
 	function getCurrentPermaLink() {
 		filters = getFilters();
