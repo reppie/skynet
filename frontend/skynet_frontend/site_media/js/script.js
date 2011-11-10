@@ -61,7 +61,7 @@ $(function(){
 	}
 	
 	function updateResults(total){
-		$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+total+" resultaten").show();
+		$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+total+" resultaten - <a id='permalink' href='"+getCurrentPermaLink()+"'>Directe link</a>").show();
 		
 	}
 	
