@@ -262,7 +262,7 @@ $(function(){
 	
 	$(function() {
 		querystring = $.deparam.querystring(true);
-		if(querystring) {
+		if(querystring&&querystring.filter) {
 			$("#searchbar").addClass("loading");
 			var filters = [];
 			for (var index in querystring.filter) {
@@ -285,7 +285,6 @@ $(function(){
 					});
 					$(".mini-tag-cloud").TagCloud(cloud);
 					$("section#tag-cloud").show();
-					
 					$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
 				}
 			});
