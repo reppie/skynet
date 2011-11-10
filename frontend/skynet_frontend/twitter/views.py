@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.db.models import Q, Count
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -8,7 +8,6 @@ from skynet_frontend.keywordcloud.models import KeywordCloud
 from skynet_frontend.twitter.models import Tweet, Keyword, User
 from jsonrpc import JSONRPCService, jsonremote
 from datetime import datetime
-
 
 def index(request):
     return render_to_response("twitter/index.html", { }, context_instance=RequestContext(request)) 
@@ -45,7 +44,6 @@ class TwitterRpcMethods(object):
             if filter['type'] == 'keyword':
                 exclude.append(filter['value'])
             elif filter['type'] == 'user':
-                print filter
                 exclude.append('@' + filter['value'])
         
         tweet_ids = tweets.values_list('id', flat=True)
@@ -105,5 +103,4 @@ class TwitterRpcMethods(object):
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords, num_keywords=100)
         return cloud
-    
-    
+        
