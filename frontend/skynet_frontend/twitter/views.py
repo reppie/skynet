@@ -101,7 +101,7 @@ class TwitterRpcMethods(object):
             
     @staticmethod
     @jsonremote(service)
-    def cloud():
+    def cloud(filters):
         tweets = Tweet.objects.all()
         tweet_ids = tweets.values_list('id', flat=True)                
         keywords = Keyword.get_all_in_tweets(tweet_ids)

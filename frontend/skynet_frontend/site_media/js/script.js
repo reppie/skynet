@@ -149,7 +149,8 @@ $(function(){
 		updateRegion();
 		return false;
 	});
-	api.cloud(function(cloud){
+	
+	api.cloud([], function(cloud){
 		$(".main-tag-cloud").TagCloud(cloud);
 		$("section#tag-cloud").hide();
 	});

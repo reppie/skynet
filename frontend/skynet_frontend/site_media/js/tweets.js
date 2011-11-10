@@ -67,10 +67,10 @@
 				col[""+item.id] = item;
 			}
 		},
-		'cloud': function(callback){
+		'cloud': function(filters, callback){
 			var This = this;
 			$.jsonRPC.request('cloud', {
-			  	params: [],
+			  	params: [filters],
 			  	success: function(result){
 			  		callback.call(This, result.result);
 			  },
@@ -406,7 +406,7 @@
 		  	success: function(result){
 		  		var tweetIds = result.result.tweet_ids;
 		  		var cloud = result.result.cloud;
-		  		callback.call(This, tweetIds,cloud);
+		  		callback.call(This, tweetIds, cloud);
 		  },
 		  error: function(result){
 	  		callback.call(This, null);
