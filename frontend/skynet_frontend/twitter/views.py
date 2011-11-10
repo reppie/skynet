@@ -70,7 +70,6 @@ class TwitterRpcMethods(object):
             'cloud':cloud,
         }
         
-        
     @staticmethod
     def do_query(filters):
         tweets = Tweet.objects.all()
@@ -91,12 +90,12 @@ class TwitterRpcMethods(object):
                 tweets = tweets.distinct().filter(place__country=country)
                 if filter['value']:
                     tweets = tweets.distinct().filter(place__name=value)
-                    
+            print filter['type']
             if filter['type']=='time':
                 from_time = datetime.fromtimestamp(value)
                 tweets = tweets.distinct().filter(created_at__gte=from_time)
                 if filter['to']:
-                    to_time = datetime.fromtimestamo(filter['to'])
+                    to_time = datetime.fromtimestamp(filter['to'])
                     tweets = tweets.distinct().filter(created_at__lte=to_time)
                     
         return tweets        
