@@ -44,5 +44,7 @@ class CloudMapTest(TestCase):
         item_0_size = round(min_font_size + (max_font_size-min_font_size)*step_largest)/min_font_size*100
         item_1_size = round(min_font_size + (max_font_size-min_font_size)*step_smallest)/min_font_size*100
         
+        print cloud.items
+        
         self.assertEquals(cloud.items[0].font_scale, item_0_size)
         self.assertEquals(cloud.items[1].font_scale, item_1_size)
