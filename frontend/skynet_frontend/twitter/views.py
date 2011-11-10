@@ -57,7 +57,7 @@ class TwitterRpcMethods(object):
         cloud = KeywordCloud(keywords, exclude=exclude)
             
         return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids or []],
             'cloud':cloud,
         }
         
@@ -76,7 +76,6 @@ class TwitterRpcMethods(object):
             'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
             'cloud':cloud,
         }
-        
         
     @staticmethod
     def do_query(filters):
@@ -98,19 +97,18 @@ class TwitterRpcMethods(object):
                 tweets = tweets.distinct().filter(place__country=country)
                 if filter['value']:
                     tweets = tweets.distinct().filter(place__name=value)
-                    
             if filter['type']=='time':
                 from_time = datetime.fromtimestamp(value)
                 tweets = tweets.distinct().filter(created_at__gte=from_time)
                 if filter['to']:
-                    to_time = datetime.fromtimestamo(filter['to'])
+                    to_time = datetime.fromtimestamp(filter['to'])
                     tweets = tweets.distinct().filter(created_at__lte=to_time)
                     
         return tweets        
             
     @staticmethod
     @jsonremote(service)
-    def cloud():
+    def cloud(filters):
         tweets = Tweet.objects.all()
         tweet_ids = tweets.values_list('id', flat=True)                
         keywords = Keyword.get_all_in_tweets(tweet_ids)

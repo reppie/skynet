@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Removing unique constraint on 'BlacklistItem', fields ['keyword']
-        db.delete_unique('keywordcloud_blacklistitem', ['keyword'])
+        #db.delete_unique('keywordcloud_blacklistitem', ['keyword'])
 
         # Renaming column for 'BlacklistItem.keyword' to match new field type.
         db.rename_column('keywordcloud_blacklistitem', 'keyword', 'keyword_id')

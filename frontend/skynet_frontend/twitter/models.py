@@ -15,6 +15,11 @@ class Hashtag(models.Model):
 class Country(models.Model):
     code = models.CharField(primary_key=True, max_length=4, blank=True, null=True)
     text = models.CharField(max_length=255, blank=True, null=True, unique=True)
+    def to_json(self):
+        return {
+            'id': self.code,
+            'name': self.text,
+        }
     
 class PlaceType(models.Model):
     text = models.CharField(max_length=10, blank=True, null=True, unique=True)
@@ -59,7 +64,7 @@ class Place(models.Model):
     def to_json(self):
         return {
             'id': str(self.id),
-            'country': self.country.text,
+            'country': self.country,
             'name': self.name,
         }
 

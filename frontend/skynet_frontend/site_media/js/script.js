@@ -1,4 +1,4 @@
-window.getFilter = function (value){
+var getFilter = window.getFilter = function (value){
 		var filter = null;
 		value = value + "";
 		if(value.substring(0,1)=='@'){
@@ -18,6 +18,11 @@ $(function(){
 	var $search = $("form#keyword-search-form");
 	var $searchbar = $search.find("input#searchbar");
 	
+	var milisInMinute = 1000 * 60;
+	var sliderTimeSpan = milisInMinute * 60* 24 * 30; // 30 dagen in miliseconden
+	var nowRange = milisInMinute * 60 * 2; // 8 hour sweet spot (door beperking in slider implementatie)
+	var timezoneOffset = new Date().getTimezoneOffset() * milisInMinute;
+	
 	function getSearchFilters(){
 		var filters = [];
 		var search = $searchbar.val();
@@ -32,11 +37,33 @@ $(function(){
 		return filters;
 	}
 	
+	function getTimeFilter(){
+		var filter = null;
+		if($(".time-sliders").is(":visible")){
+			var now = new Date();
+			var nowTime = now.getTime();
+			var from = (new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 0 )).getTime() + timezoneOffset)/1000;
+			var to = (new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 1 )).getTime() + timezoneOffset)/1000;
+			var toIsNow = $( ".time-sliders" ).slider( "values", 1 ) > sliderTimeSpan - nowRange;			
+			filter = new api.filters.Time(from, toIsNow ? null : to);
+		}
+		return filter;
+	}
+	
 	function getFilters(){
 		var searchFilters = getSearchFilters();
 		var filters = [].concat(crumblePath.path(), searchFilters);
-		
+		var timeFilter = getTimeFilter();
+		if(timeFilter){
+			filters.push(timeFilter);
+		}
 		return filters;
+	}
+	
+	function updateResults(total){
+		
+		$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+total+" resultaten").show();
+		
 	}
 	
 	function updateRegion(){
@@ -59,7 +86,7 @@ $(function(){
 		api.Tweet.search(filters, function(twitterIds, cloud){
 			if(twitterIds){
 				var tweetList = $(".tweets").TweetList(twitterIds, function(){
-					$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
+					updateResults(twitterIds.length);
 					$searchbar.removeClass("loading");
 				});
 				$(".mini-tag-cloud").TagCloud(cloud);
@@ -85,7 +112,7 @@ $(function(){
 		api.Tweet.search(filters, function(twitterIds, cloud){
 			if(twitterIds){
 				var tweetList = $(".tweets").TweetList(twitterIds, function(){
-					$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+twitterIds.length+" resultaten").show();
+					updateResults(twitterIds.length);
 					$searchbar.removeClass("loading");
 				});
 				$(".mini-tag-cloud").TagCloud(cloud);
@@ -123,42 +150,83 @@ $(function(){
 		updateRegion();
 		return false;
 	});
-	api.cloud(function(cloud){
-	$(".main-tag-cloud").TagCloud(cloud);
-	$("section#tag-cloud").hide();
+	
+	api.cloud([], function(cloud){
+		$(".main-tag-cloud").TagCloud(cloud);
+		$("section#tag-cloud").hide();
 	});
-});
-
-$("#searchbar").focusin(function() {
-	$("#search-explanation").slideDown();
-});
-$("#searchbar").focusout(function() {
-	$("#search-explanation").slideUp();
-});
-
-$(function() {
-	$( ".time-sliders" ).slider({
-		range: true,
-		min: 0,
-		max: 30,
-		values: [ 3, 28 ],
-		slide: function( event, ui ) {
-			$( ".time-value" ).html( "Toon tweets van: " + ui.values[ 0 ] + " tot: " + ui.values[ 1 ] );
+	$(".more-tweets").click(function(){
+		var $div = $(this);
+		if($div.is('.loading')){
+			return;
 		}
+		$div.addClass('loading');
+		$(".tweets").TweetList().more(function(){
+			$div.removeClass('loading');
+			updateResults(this.tweetIds.length);
+			if(this.tweetIds.length==$(".tweets>.tweet").length){
+				$(".more-tweets").hide();
+			}
+		});
 	});
-	$( ".time-value" ).html( "Toon tweets van: " +  $( ".time-sliders" ).slider( "values", 0 ) +
-		" tot: " + $( ".time-sliders" ).slider( "values", 1 ) );
-});
-$(".more-tweets").click(function(){
-	var $div = $(this);
-	if($div.is('.loading')){
-		return;
-	}
-	$div.addClass('loading');
-	$(".tweets").TweetList().more(function(){
+	
+	$(function() {
+	
+		function updateTimeValues(){
+			var now = new Date();
+			var nowTime = now.getTime();
+			var from = new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 0 ));
+			var fromText = jQuery.localize(from, localizedSpan());
+			var to = new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 1 ));
+			var toIsNow = $( ".time-sliders" ).slider( "values", 1 ) > sliderTimeSpan-nowRange;
+			var toText =  toIsNow ? "heden" : jQuery.localize(to, localizedSpan());
+			var format = "d-m-yyyy H:MM";
+			var fromTitle = jQuery.localize(from, format);
+			var toTitle = jQuery.localize(toIsNow ? now : to, format);
+			$( ".time-value" ).html('Toon tweets van: <span title="' + fromTitle + '">' + fromText + '</span> tot: <span title="' + toTitle + '">' + toText+'</span>');
+		}
 		
-		$div.removeClass('loading');
+		$( ".time-sliders" ).slider({
+			range: true,
+			min: 0,
+			max: sliderTimeSpan,
+			values: [ 0, sliderTimeSpan ],
+			change: function(){
+				$search.submit();
+				updateTimeValues();
+			},
+			slide: updateTimeValues
+		});
+		updateTimeValues();
+	});
+	
+	$("#searchbar").focusin(function() {
+		$("#search-explanation").slideDown();
+	});
+	$("#searchbar").focusout(function() {
+		$("#search-explanation").slideUp();
+	});
+	
+	$("#timebutton").click(function() {
+		$("#slider-container").toggle();
+		$search.submit();
+	});
+	
+	$("a.tweet-location").live('click',function(){
+		var countryId = $(this).data("country-id");
+		var place = $(this).data("place-name");
+		var path = crumblePath.path();
+		for(var i in path){
+			var filter = path[i];
+			if(filter.type=="geo"&&filter.removable){
+				crumblePath.remove(filter);
+			}
+		}
 		
+		var filter = new api.filters.Geo(place, countryId, place);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
 	});
 });
 

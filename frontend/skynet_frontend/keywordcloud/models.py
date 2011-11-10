@@ -16,8 +16,10 @@ class KeywordCloud:
     def __init__(self, query_set, min_font_size=14, max_font_size=30, num_keywords=50, exclude=[]):
         exclude_ids = []
         for word in exclude:
-            keyword = Keyword.objects.filter(keyword=word)[0]
-            exclude_ids.append(keyword.id)
+            query = Keyword.objects.filter(keyword=word)
+            if len(query):
+                keyword = query[0]
+                exclude_ids.append(keyword.id)
         
         
         blacklist = BlacklistItem.objects.all().values_list('keyword_id', flat=True)
