@@ -1,5 +1,27 @@
 (function($){
 	
+	
+	var localizedSpan = window.localizedSpan = function () {
+	  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
+	    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
+	    names = 'seconde minuut uur dag week maand jaar'.split(' '),
+	    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
+	    round = Math.round;
+	  return function (date) {
+	    var
+	      delta = round((date - new Date) / 1000) || -1,
+	      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
+	      i = units.length, n, seconds;
+	    while (i--) {
+	      seconds = units[i];
+	      if (!i || delta > seconds) {
+	        n = round(delta / seconds);
+	        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
+	      }
+	    }
+	  };
+	}
+	
 	var api = window.api || (window.api = {
 		
 		'Base': function(json){
@@ -26,7 +48,6 @@
 			this.pageSize = 15;
 			this.moreSize = this.pageSize;
 			this.reset(tweets, callback);
-			
 		},
 		'cache':{
 			'collections':{},
@@ -80,6 +101,9 @@
 			},
 			'Time': function(from, to){
 				api.filters.Base.prototype.constructor.call(this, 'time', "time filter", from);
+				this.equals = function(filter){
+					return this.type == filter.type && this.value == filter.value && this.to == filter.to;
+				}
 				this.to = to;
 			},
 			'Geo': function(label, country, place){
@@ -149,26 +173,7 @@
 			if(!inserted){
 				$tweet.appendTo(tweetList.$tweetList).data('tweet', tweet);
 			}
-			$tweet.find('time').localize(function () {
-			  var s = 1, m = 60 * s, h = 60 * m, d = 24 * h,
-			    units = [s, m, h, d, 7 * d, 30 * d, 365 * d],
-			    names = 'seconde minuut uur dag week maand jaar'.split(' '),
-			    namesPlural = 'seconden minuten uren dagen weken maanden jaren'.split(' '),
-			    round = Math.round;
-			  return function (date) {
-			    var
-			      delta = round((date - new Date) / 1000) || -1,
-			      suffix = delta < 0 ? (delta = Math.abs(delta), 'geleden') : 'van nu',
-			      i = units.length, n, seconds;
-			    while (i--) {
-			      seconds = units[i];
-			      if (!i || delta > seconds) {
-			        n = round(delta / seconds);
-			        return [n, n === 1 ? names[i] : namesPlural[i], suffix].join(' ');
-			      }
-			    }
-			  };
-			}());
+			$tweet.find('time').localize(localizedSpan());
     	}
     }
     
