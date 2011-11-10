@@ -300,6 +300,7 @@
  		return this.chain;
  	}
  	api.CrumblePath.prototype.add = function(filter){
+ 		
  		for(var index in this.chain){
  			var item = this.chain[index];
  			if(filter.equals(item)){

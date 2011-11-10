@@ -50,7 +50,7 @@ class TwitterRpcMethods(object):
         cloud = KeywordCloud(keywords, exclude=exclude)
             
         return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
+            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids or []],
             'cloud':cloud,
         }
         
@@ -90,7 +90,6 @@ class TwitterRpcMethods(object):
                 tweets = tweets.distinct().filter(place__country=country)
                 if filter['value']:
                     tweets = tweets.distinct().filter(place__name=value)
-            print filter['type']
             if filter['type']=='time':
                 from_time = datetime.fromtimestamp(value)
                 tweets = tweets.distinct().filter(created_at__gte=from_time)

@@ -201,24 +201,30 @@ $(function(){
 	$("#searchbar").focusout(function() {
 		$("#search-explanation").slideUp();
 	});
-
-		
-});
-
-$( ".time-sliders" ).slider({
-		range: true,
-		min: 0,
-		max: 30,
-		values: [ 3, 28 ],
-		slide: function( event, ui ) {
-			$( ".time-value" ).html( "Toon tweets van: " + ui.values[ 0 ] + " tot: " + ui.values[ 1 ] );
-		}
-	});
-	$( ".time-value" ).html( "Toon tweets van: " +  $( ".time-sliders" ).slider( "values", 0 ) +
-		" tot: " + $( ".time-sliders" ).slider( "values", 1 ) );
+	
 	$("#timebutton").click(function() {
 		$("#slider-container").toggle();
-	})
+		$search.submit();
+	});
+	
+	$("a.tweet-location").live('click',function(){
+		var countryId = $(this).data("country-id");
+		var place = $(this).data("place-name");
+		var path = crumblePath.path();
+		for(var i in path){
+			var filter = path[i];
+			if(filter.type=="geo"&&filter.removable){
+				crumblePath.remove(filter);
+			}
+		}
+		
+		var filter = new api.filters.Geo(place, countryId, place);
+		crumblePath.add(filter);
+		$search.submit();
+		return false;
+	});
+});
+
 
 
 

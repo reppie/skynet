@@ -3,7 +3,7 @@
 #   also from: http://www.pimentech.fr/technologies/outils
 from django.utils import simplejson
 from django.core.serializers.json import DjangoJSONEncoder
-import sys
+import sys, traceback
 
 # JSONRPCService and jsonremote are used in combination to drastically
 # simplify the provision of JSONRPC services.  use as follows:
@@ -68,9 +68,11 @@ class JSONRPCService:
                 return response(id, result)
             except BaseException:
                 etype, eval, etb = sys.exc_info()
+                traceback.print_exc(file=sys.stdout)
                 return error(id, 100, '%s: %s %s' %(etype.__name__, eval, params))
             except:
                 etype, eval, etb = sys.exc_info()
+                traceback.print_exc(file=sys.stdout)
                 return error(id, 100, 'Exception %s: %s' %(etype, eval))
         else:
             return error(id, 100, 'method "%s" does not exist' % (method))

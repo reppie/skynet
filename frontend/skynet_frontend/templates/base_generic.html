@@ -100,7 +100,7 @@
 				  	</div>
   					<div class="tweet-text">${text}</div>
   					<div class="tweet-footer">
-  						<span class="tweet-location">${place.name}, ${place.country}</span>
+  						<a href="#" data-country-id="${place.country.id}" data-place-name="${place.name}" class="tweet-location">${place.name}, ${place.country.name}</a>
   						<time datetime="${created_at+'Z'}"></time>
   						op
 						<a href="http://twitter.com/#!/${user.name}/status/${id}">twitter</a>
