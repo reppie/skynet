@@ -219,7 +219,6 @@
 		if(!tweetList.loading && callback){
 			callback.call(this);
 		}
-    	
     }
 	
 	api.TweetList.prototype.reset = function(tweetIds, callback){
@@ -228,7 +227,7 @@
 		this.$tweetList.empty();
 		this.tweetIds = tweetIds || [];
 		this.loaded = 0;
-		this.loading = this.pageSize;
+		this.loading = 0;
 		this.callback = callback;
 		if(tweetIds.length==0){
 			if(callback){
@@ -236,6 +235,7 @@
 			}
 		}
 		for(var i = 0; i < this.pageSize && i < tweetIds.length; i++){
+			this.loading++;
 			var tweetId = tweetIds[i];
 			api.Tweet.get(tweetId, function(tweet){
 				if(tweet){
