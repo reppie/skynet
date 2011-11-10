@@ -81,6 +81,7 @@ $(function(){
 		$searchbar.addClass("loading");
 		updateRegion();
 		var filters = getFilters();
+		updatePermaLink();
 		$(".search-result-status").hide();
 		$(".tweet-results").show();
 		api.Tweet.search(filters, function(twitterIds, cloud){
@@ -241,7 +242,7 @@ $(function(){
            }
        }
     );
-
+	
 	$(function() {
 		querystring = $.deparam.querystring(true);
 		if(querystring) {
@@ -270,7 +271,29 @@ $(function(){
 					
 					$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
 				}
-			});	
+			});
 		}
 	});
+	
+	function updatePermaLink() {
+		$("#permalink").attr('href', getCurrentPermaLink());
+	}
+	
+	function getCurrentPermaLink() {
+		filters = getFilters();
+		querystring = "";
+		for(var index in filters) {
+			value = filters[index].value
+			if(value != null) {
+				if(querystring == "") {
+					querystring = "?";
+				} else {
+					querystring += "&";
+				}
+				querystring += "filter[]=" + filters[index].value;
+			}
+		}
+		
+		return window.location.origin + querystring;
+	}
 });
