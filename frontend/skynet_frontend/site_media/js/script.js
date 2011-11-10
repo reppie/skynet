@@ -61,7 +61,6 @@ $(function(){
 	}
 	
 	function updateResults(total){
-		
 		$(".search-result-status").html("Getoond "+$(".tweets>.tweet").length+" van de "+total+" resultaten").show();
 		
 	}
@@ -91,7 +90,6 @@ $(function(){
 				});
 				$(".mini-tag-cloud").TagCloud(cloud);
 				$("section#tag-cloud").show();
-				
 				$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
 			}
 		});	
