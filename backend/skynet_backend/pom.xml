@@ -4,7 +4,19 @@
   <artifactId>skynet-backend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Skynet Backend</name>
+  <repositories>
+   	<repository>
+	    <id>Seasar</id>
+	    <name>Seasar Repository</name>
+	    <url>http://maven.seasar.org/maven2/</url>
+	</repository>
+  </repositories>
   <dependencies>
+  		<dependency>
+		  	<groupId>net.arnx.jsonic</groupId>
+		  	<artifactId>jsonic</artifactId>
+		  	<version>1.2.0</version>
+		</dependency>
 	  	<dependency>
 		    <groupId>org.langdetect</groupId>
 		    <artifactId>langdetect</artifactId>
