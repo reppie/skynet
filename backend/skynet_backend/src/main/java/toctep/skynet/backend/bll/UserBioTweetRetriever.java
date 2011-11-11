@@ -22,7 +22,7 @@ public class UserBioTweetRetriever extends TweetRetriever {
 		if (TweetUtils.isDutchLanguage(status.getText(), user.getLang()) 
 				|| TweetUtils.isDutchLocation(user.getLocation()) 
 				|| TweetUtils.isDutchTimeZone(user.getTimeZone())) {
-			TweetParser.getInstance().parse(status).save();
+			TweetParser.parse(status).save();
     	}
 	}
 }

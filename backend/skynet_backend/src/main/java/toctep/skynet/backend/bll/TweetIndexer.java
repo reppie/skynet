@@ -6,9 +6,11 @@ import java.util.List;
 import toctep.skynet.backend.dal.domain.keyword.Keyword;
 import toctep.skynet.backend.dal.domain.tweet.Tweet;
 
-public class TweetIndexer {
+public final class TweetIndexer {
 	
-	public List<Keyword> indexTweetKeywords(Tweet tweet) {
+	private TweetIndexer() {}
+	
+	public static List<Keyword> indexTweetKeywords(Tweet tweet) {
 		List<Keyword> tweetKeywords = new ArrayList<Keyword>();
 		List<String> keywordStrings = TweetSplitter.splitTweet(tweet.getText());
 		TweetFilter.filterTweet(keywordStrings);

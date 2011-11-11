@@ -50,18 +50,9 @@ import twitter4j.UserMentionEntity;
 
 public final class TweetParser {
 	
-	private static TweetParser instance;
-	
 	private TweetParser() {}
 	
-	public static TweetParser getInstance() {
-		if (instance == null) {
-			instance = new TweetParser();
-		}
-		return instance;
-	}
-	
-	public Tweet parse(Status status) {
+	public static Tweet parse(Status status) {
 		Tweet tweet = new Tweet();
 		IBoundingBoxType boundingBoxType = NullBoundingBoxType.getInstance();
 		IBoundingBox boundingBox = NullBoundingBox.getInstance();
@@ -97,13 +88,13 @@ public final class TweetParser {
 		return tweet;
 	}
 	
-	private BoundingBoxType parseBoundingBoxType(twitter4j.Place place) {
+	private static BoundingBoxType parseBoundingBoxType(twitter4j.Place place) {
         BoundingBoxType boundingBoxType = new BoundingBoxType();
         boundingBoxType.setText(place.getBoundingBoxType());
         return boundingBoxType;
 	}
 	
-	private BoundingBox parseBoundingBox(IBoundingBoxType type, twitter4j.Place place) {
+	private static BoundingBox parseBoundingBox(IBoundingBoxType type, twitter4j.Place place) {
         BoundingBox boundingBox = new BoundingBox();
         String coordinates = "";
         GeoLocation[][] array = place.getBoundingBoxCoordinates();
@@ -117,20 +108,20 @@ public final class TweetParser {
         return boundingBox;
 	}
 
-    private Country parseCountry(twitter4j.Place place) {
+    private static Country parseCountry(twitter4j.Place place) {
         Country country = new Country();
         country.setId(place.getCountryCode());
         country.setText(place.getCountry());
         return country;
     }
 
-    private GeoType parseGeoType(twitter4j.Place place) {        
+    private static GeoType parseGeoType(twitter4j.Place place) {        
     	GeoType geoType = new GeoType();
         geoType.setText(place.getGeometryType());
         return geoType;
     }
 
-    private Geo parseGeo(IGeoType type, twitter4j.Place place) {
+    private static Geo parseGeo(IGeoType type, twitter4j.Place place) {
     	Geo geo = new Geo();
         String geoCoordinates = "";
         GeoLocation[][] geoArray = place.getBoundingBoxCoordinates();
@@ -144,32 +135,32 @@ public final class TweetParser {
         return geo;
     }
 
-    private Language parseLanguage(twitter4j.User user) {
+    private static Language parseLanguage(twitter4j.User user) {
         Language language = new Language();
         language.setText(user.getLang());
         return language;
     }
     
-    private IPlaceType parsePlaceType(twitter4j.Place place) {
+    private static IPlaceType parsePlaceType(twitter4j.Place place) {
         PlaceType placeType = new PlaceType();
         placeType.setText(place.getPlaceType());
         return placeType;
     }
     
-    private SourceType parseSourceType(Status status) {
+    private static SourceType parseSourceType(Status status) {
     	SourceType sourceType = new SourceType();
         sourceType.setText(status.getSource());
         return sourceType;
     }
     
-    private TimeZone parseTimeZone(twitter4j.User user) {
+    private static TimeZone parseTimeZone(twitter4j.User user) {
         TimeZone timeZone = new TimeZone();
         timeZone.setTimeZone(user.getTimeZone());
         timeZone.setUtcOffset(user.getUtcOffset());
         return timeZone;
     }
     
-    private Place parsePlace(IPlaceType type, IBoundingBox boundingBox, ICountry country, twitter4j.Place placeStatus) {
+    private static Place parsePlace(IPlaceType type, IBoundingBox boundingBox, ICountry country, twitter4j.Place placeStatus) {
         Place place = new Place();
         place.setId(placeStatus.getId());
         place.setName(placeStatus.getName());
@@ -193,7 +184,7 @@ public final class TweetParser {
         return place;
     }
     
-    private IUser parseUser(IPlace place, ILanguage language, ITimeZone timeZone, twitter4j.User userStatus) throws ParseException {
+    private static IUser parseUser(IPlace place, ILanguage language, ITimeZone timeZone, twitter4j.User userStatus) throws ParseException {
         User user = new User();
         user.setId(userStatus.getId());
         user.setDefaultProfile(false); //Twitter4j has no support for this?
@@ -230,7 +221,7 @@ public final class TweetParser {
         return user;
     }
     
-    private User parseUserUrls(User user, twitter4j.User userStatus) {
+    private static User parseUserUrls(User user, twitter4j.User userStatus) {
         if(userStatus.getProfileBackgroundImageUrl() != null) {
             Url profileBgUrl = new Url();
         	profileBgUrl.setId(userStatus.getProfileBackgroundImageUrl());
@@ -259,7 +250,7 @@ public final class TweetParser {
         return user;
 	}
 
-	private Tweet parseTweet(IUser user, IGeo geo, SourceType sourceType, IPlace place, Status status) {
+	private static Tweet parseTweet(IUser user, IGeo geo, SourceType sourceType, IPlace place, Status status) {
         Tweet tweet = new Tweet();
         tweet.setId(status.getId());
         tweet.setText(status.getText());
@@ -297,7 +288,7 @@ public final class TweetParser {
         return tweet;
     }
     
-    private List<User> parseContributor(Tweet tweet, Status status) {
+    private static List<User> parseContributor(Tweet tweet, Status status) {
     	if (status.getContributors() != null) {
 	        for(long contributor : status.getContributors()) {
 	            User contributorUser  = new User();
@@ -308,7 +299,7 @@ public final class TweetParser {
     	return tweet.getContributors();
     }
     
-    private List<Hashtag> parseHashtag(Tweet tweet, Status status) {
+    private static List<Hashtag> parseHashtag(Tweet tweet, Status status) {
         for(HashtagEntity hashtagEntity : status.getHashtagEntities()) {
             Hashtag hashtag = new Hashtag();
             hashtag.setText(hashtagEntity.getText());
@@ -317,15 +308,15 @@ public final class TweetParser {
         return tweet.getHashtags();
     }
     
-    private List<Keyword> parseKeyword(Tweet tweet) {
-        List<Keyword> keywords = new TweetIndexer().indexTweetKeywords(tweet);
+    private static List<Keyword> parseKeyword(Tweet tweet) {
+        List<Keyword> keywords = TweetIndexer.indexTweetKeywords(tweet);
         for(Keyword keyword : keywords) {
         	tweet.addKeyword(keyword);
         }
         return tweet.getKeywords();
     }
     
-    private List<User> parseMention(Tweet tweet, Status status) {
+    private static List<User> parseMention(Tweet tweet, Status status) {
         for(UserMentionEntity mentionEntity : status.getUserMentionEntities()) {
             User mentionedUser = new User();
             mentionedUser.setId(mentionEntity.getId());
@@ -334,12 +325,13 @@ public final class TweetParser {
         return tweet.getMentions();
     }
     
-    private List<Url> parseUrl(Tweet tweet, Status status) {
+    private static List<Url> parseUrl(Tweet tweet, Status status) {
         for(URLEntity urlEntity : status.getURLEntities()) {
             Url url = new Url();
             url.setId(urlEntity.getDisplayURL());
             tweet.addUrl(url);
         }
         return tweet.getUrls();
-    }    
+    }
+    
 }

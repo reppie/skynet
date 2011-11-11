@@ -17,7 +17,6 @@ public class TweetParserTest extends SkynetTest {
 		
 	@Test
 	public void indexTweetKeywordsText() {
-		TweetIndexer indexer = new TweetIndexer();
 		Tweet tweet = new Tweet();
 		
 		tweet.setId(new Long(1001));
@@ -46,7 +45,7 @@ public class TweetParserTest extends SkynetTest {
 		keyword.save();
 		assertEquals("keyword count: ", 2, MySqlUtil.getInstance("mysql_test.properties").count("twitter_keyword"));
 		
-		List<Keyword> kws = indexer.indexTweetKeywords(tweet);
+		List<Keyword> kws = TweetIndexer.indexTweetKeywords(tweet);
 		
 		assertEquals("keyword count: ", 6, kws.size());			
 	}

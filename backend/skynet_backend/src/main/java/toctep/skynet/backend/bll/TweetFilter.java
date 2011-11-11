@@ -10,9 +10,11 @@ public final class TweetFilter {
 	private TweetFilter() {}
 	
 	private static String[] commonWords = { " de ", " het ", " een " };
+	
 	private static final Pattern MENTION_OR_HASHTAG_REGEX = Pattern.compile("(^([#@]){1})([\\w]+)");
 	private static final Pattern START_SPECIAL_CHAR_REGEX = Pattern.compile("^[^\\w]+");
 	private static final Pattern END_SPECIAL_CHAR_REGEX = Pattern.compile("[^\\w]+$");
+	
 	private static Matcher matcher;
 	
 	public static List<String> filterTweet(List<String> unfilteredWords) {

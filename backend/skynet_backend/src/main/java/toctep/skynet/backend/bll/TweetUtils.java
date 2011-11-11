@@ -16,16 +16,15 @@ public final class TweetUtils {
 	
 	private TweetUtils() {}
 	
-	public static final String LANGDETECT_PROFILE_DIR = "lib/langdetect/profiles";
-	private static boolean langdetectInitialized = false;
 	private static Calendar c = Calendar.getInstance();
 	
+	private static final String LANGDETECT_PROFILE_DIR = "lib/langdetect/profiles";
+	private static boolean langdetectInitialized = false;
 	
 	public static synchronized Timestamp createUTCTimeStamp(Date date){
 		c.setTime(date);
 		return new Timestamp((long)(c.getTime().getTime()-c.getTimeZone().getRawOffset()));
 	}
-	
 	
 	private static void initialize() {
 		try {
@@ -80,5 +79,6 @@ public final class TweetUtils {
 			return true;
 		}
 		return false;
-	}	
+	}
+	
 }
