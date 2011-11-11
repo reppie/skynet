@@ -26,16 +26,7 @@ class TweetTest(TestCase):
         
 class TweetIndexTest(TestCase):
     def test_get_keyword_cloud_no_data(self):
-        self.assertFalse(Keyword.get_keyword_cloud().items)
-    
-    def test_get_keyword_cloud(self):
-        id = 1337l
-        text = "keyword keyword keyword keyword singlekeyword"
-        created_at = datetime.now()
-        user = User(name="username")
-        tweet = Tweet(text=text, id=id, created_at=created_at, user=user)
-        tweet.save()
-        self.assertTrue(Keyword.get_keyword_cloud().items[0])
+        self.assertFalse(Keyword.get_keyword_cloud().items)    
         
     def test_get_all_since_no_data(self):
         yesterday = datetime.now() - timedelta(days=1)

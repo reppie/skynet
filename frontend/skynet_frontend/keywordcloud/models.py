@@ -37,7 +37,6 @@ class KeywordCloud:
             whereclause += " AND U4.keyword = '%s'" % word
             
         query = "SELECT twitter_keyword.keyword , COUNT(  twitter_keyword.keyword ) AS count FROM  twitter_keyword LEFT OUTER JOIN  twitter_tweet_keywords ON (  twitter_keyword.id =  twitter_tweet_keywords.keyword_id ) WHERE EXISTS(SELECT DISTINCT U0.id FROM  twitter_tweet U0 INNER JOIN  twitter_place U1 ON ( U0.place_id = U1.id ) INNER JOIN  twitter_tweet_keywords U3 ON ( U0.id = U3.tweet_id ) INNER JOIN  twitter_keyword U4 ON ( U3.keyword_id = U4.id ) WHERE (U1.country_id = 'NL' %s ) AND NOT (twitter_keyword.id IN (%s))) GROUP BY twitter_keyword.keyword, twitter_keyword.keyword ORDER BY count DESC LIMIT 50;" % (whereclause, excludestring)
-        print query
         cursor.execute(query)
         list = cursor.fetchall()
         
