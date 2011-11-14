@@ -80,32 +80,33 @@ class TwitterRpcMethods(object):
         for filter in filters:
             value = filter['value']
             if filter['type']=='keyword':
-                tweets = tweets.distinct().filter(keywords__keyword=value)
+                tweets = tweets.filter(keywords__keyword=value)
                 
             if filter['type']=='user':
-                tweets = tweets.distinct().filter(Q(keywords__keyword="@"+value) | Q(user__screen_name=value))
+                tweets = tweets.filter(Q(keywords__keyword="@"+value) | Q(user__screen_name=value))
             
             if filter['type']=='tag':
-                tweets = tweets.distinct().filter(hashtags__text=value)
+                tweets = tweets.filter(hashtags__text=value)
                 
             if filter['type']=='geo':
                 country = filter['country']
-                tweets = tweets.distinct().filter(place__country=country)
+                tweets = tweets.filter(place__country=country)
                 if filter['value']:
-                    tweets = tweets.distinct().filter(place__name=value)
+                    tweets = tweets.filter(place__name=value)
+                    
             if filter['type']=='time':
                 from_time = datetime.fromtimestamp(value)
-                tweets = tweets.distinct().filter(created_at__gte=from_time)
+                tweets = tweets.filter(created_at__gte=from_time)
                 if filter['to']:
                     to_time = datetime.fromtimestamp(filter['to'])
-                    tweets = tweets.distinct().filter(created_at__lte=to_time)
+                    tweets = tweets.filter(created_at__lte=to_time)
                     
-        return tweets        
+        return tweets.distinct()
             
     @staticmethod
     @jsonremote(service)
     def cloud(filters):
-        tweets = Tweet.objects.all()
+        tweets = TwitterRpcMethods.do_query(filters)
         tweet_ids = tweets.values_list('id', flat=True)                
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords, num_keywords=100)
