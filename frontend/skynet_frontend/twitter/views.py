@@ -60,18 +60,14 @@ class TwitterRpcMethods(object):
     @staticmethod
     @jsonremote(service)
     def check_for_update(filters, last):
-        
-        last = datetime.fromtimestamp(last)
         tweets = TwitterRpcMethods.do_query(filters)
-        tweets.distinct().filter(created_at__gt=last)
+        if last:
+            last = datetime.fromtimestamp(last)        
+            tweets = tweets.filter(created_at__gt=last)
         tweet_ids = tweets.values_list('id', flat=True)
         keywords = Keyword.get_all_in_tweets(tweet_ids)
         cloud = KeywordCloud(keywords)
-            
-        return {
-            'tweet_ids': [str(tweet_id) for tweet_id in tweet_ids],
-            'cloud':cloud,
-        }
+        return [str(tweet_id) for tweet_id in tweet_ids]        
         
     @staticmethod
     def do_query(filters):
@@ -101,7 +97,7 @@ class TwitterRpcMethods(object):
                     to_time = datetime.fromtimestamp(filter['to'])
                     tweets = tweets.filter(created_at__lte=to_time)
                     
-        return tweets.distinct()
+        return tweets.distinct().order_by('-created_at')
             
     @staticmethod
     @jsonremote(service)

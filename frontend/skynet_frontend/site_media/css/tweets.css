@@ -106,4 +106,26 @@ section#tag-cloud{
 	background-position-x: 10px;
 	background-position-y: 3px;
 }
+.next-tweets{
+	margin-top: 8px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	display: none;
+	text-align: center;
+	font-size: 15px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #06F;
+	border: solid 1px #CCC;
+}
+.next-tweets:hover{
+	text-decoration: underline;
+}
 
+.next-tweets.loading{
+	background-image: url("../img/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position-x: 10px;
+	background-position-y: 3px;
+}

@@ -221,6 +221,51 @@
 		}
     }
 	
+	api.TweetList.prototype.next = function(nextItems, callback){
+    	var tweetList = this;
+    	console.log(nextItems);
+		
+		var tweetIds = this.tweetIds = [].concat(nextItems, this.tweetIds || []);
+		this.loaded = 0;
+		this.loading = 0;
+		this.callback = callback;
+		if(nextItems.length==0){
+			if(callback){
+				callback.call(this);
+			}
+		}
+		for(var i in nextItems){
+			var tweetId = nextItems[i];
+			if(tweetList.loading>=tweetList.moreSize){
+				break;
+			}
+			if(!$('.tweets .tweet[data-tweet-id="'+tweetId+'"]').length){
+				tweetList.loading++;
+				
+				api.Tweet.get(tweetId, function(tweet){
+					if(tweet){
+						tweet.getUser(function(user){
+							if(user){
+								if(tweetList.tweetIds.indexOf(this.id)>-1){
+									tweetList.loaded++;
+									tweetList.add(tweet);
+									if(tweetList.loaded>=tweetList.loading){
+										if(tweetList.callback){
+											tweetList.callback.call(tweetList);
+										}
+									}
+								}
+							}
+						});
+					}
+				});
+			}
+		}
+		if(!tweetList.loading && callback){
+			callback.call(this);
+		}
+    }
+	
 	api.TweetList.prototype.reset = function(tweetIds, callback){
 		
 		var tweetList = this;
@@ -407,6 +452,19 @@
 		  		var tweetIds = result.result.tweet_ids;
 		  		var cloud = result.result.cloud;
 		  		callback.call(This, tweetIds, cloud);
+		  },
+		  error: function(result){
+	  		callback.call(This, null);
+		  },
+	  	});
+	}
+	api.Tweet.checkForUpdate = function(filters, last, callback) {
+		var This = this;
+		$.jsonRPC.request('check_for_update', {
+		  	params: [filters, last],
+		  	success: function(result){
+		  		var tweetIds = result.result;
+		  		callback.call(This, tweetIds);
 		  },
 		  error: function(result){
 	  		callback.call(This, null);
