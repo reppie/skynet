@@ -2,6 +2,7 @@ package toctep.skynet.backend.dal.dao.impl.mysql;
 
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,7 +84,10 @@ public class TweetUrlDaoImpl extends TweetUrlDao {
 	@Override
 	public boolean exists(Domain<Integer> domain) {
 		TweetUrl tweetUrl = (TweetUrl) domain;
-		return MySqlUtil.getInstance().exists(TABLE_NAME, "id", new Param(tweetUrl.getId(), Types.INTEGER));
+		Map<String, Param> params = new HashMap<String, Param>();
+		params.put("tweet_id", new Param(tweetUrl.getTweet().getId(), Types.BIGINT));
+		params.put("url_id", new Param(tweetUrl.getUrl().getId(), Types.VARCHAR));
+		return MySqlUtil.getInstance().exists(TABLE_NAME, params);
 	}
 	
 	@Override
