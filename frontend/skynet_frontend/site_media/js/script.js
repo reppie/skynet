@@ -18,6 +18,8 @@ $(function(){
 	var $search = $("form#keyword-search-form");
 	var $searchbar = $search.find("input#searchbar");
 	
+	var intervalHandler = null;
+	
 	var milisInMinute = 1000 * 60;
 	var sliderTimeSpan = milisInMinute * 60* 24 * 30; // 30 dagen in miliseconden
 	var nowRange = milisInMinute * 60 * 2; // 8 hour sweet spot (door beperking in slider implementatie)
@@ -76,6 +78,12 @@ $(function(){
 	}
 	
 	var $search = $("form#keyword-search-form").submit(function(){
+		
+		if(intervalHandler){
+			window.clearInterval(intervalHandler);
+			intervalHandler = null;
+		}
+		
 		$(".main-tag-cloud").hide();
 		$searchbar.addClass("loading");
 		updateRegion();
@@ -90,34 +98,16 @@ $(function(){
 				});
 				$(".mini-tag-cloud").TagCloud(cloud);
 				$("section#tag-cloud").show();
-				$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
+				$(".more-tweets").toggle(twitterIds.length > tweetList.pageSize);
 			}
-		});	
-		
+		});
 		return false;
 	})
 	$("div.tag-cloud a").live('click', function(){
 		$(".main-tag-cloud").hide();
-		var $searchbar = $(this).find("input#searchbar");
-		$searchbar.addClass("loading");
 		var keyword = $(this).data("keyword");
 		var filter = getFilter(keyword);
-		crumblePath.add(filter);
-		var filters = crumblePath.path();
-		$(".search-result-status").hide();
-		updateRegion();
-		$(".tweet-results").show();
-		api.Tweet.search(filters, function(twitterIds, cloud){
-			if(twitterIds){
-				var tweetList = $(".tweets").TweetList(twitterIds, function(){
-					updateResults(twitterIds.length);
-					$searchbar.removeClass("loading");
-				});
-				$(".mini-tag-cloud").TagCloud(cloud);
-				$("section#tag-cloud").show();
-				$(".more-tweets").toggle(twitterIds.length>tweetList.pageSize);
-			}
-		});	
+		crumblePath.add(filter);		
 		$search.submit();
 		return false;
 	});
