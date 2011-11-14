@@ -166,36 +166,35 @@ $(function(){
 			}
 		});
 	});
+
+
+	function updateTimeValues(){
+		var now = new Date();
+		var nowTime = now.getTime();
+		var from = new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 0 ));
+		var fromText = jQuery.localize(from, localizedSpan());
+		var to = new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 1 ));
+		var toIsNow = $( ".time-sliders" ).slider( "values", 1 ) > sliderTimeSpan-nowRange;
+		var toText =  toIsNow ? "heden" : jQuery.localize(to, localizedSpan());
+		var format = "d-m-yyyy H:MM";
+		var fromTitle = jQuery.localize(from, format);
+		var toTitle = jQuery.localize(toIsNow ? now : to, format);
+		$( ".time-value" ).html('Toon tweets van: <span title="' + fromTitle + '">' + fromText + '</span> tot: <span title="' + toTitle + '">' + toText+'</span>');
+	}
 	
-	$(function() {
-	
-		function updateTimeValues(){
-			var now = new Date();
-			var nowTime = now.getTime();
-			var from = new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 0 ));
-			var fromText = jQuery.localize(from, localizedSpan());
-			var to = new Date(nowTime-sliderTimeSpan+$( ".time-sliders" ).slider( "values", 1 ));
-			var toIsNow = $( ".time-sliders" ).slider( "values", 1 ) > sliderTimeSpan-nowRange;
-			var toText =  toIsNow ? "heden" : jQuery.localize(to, localizedSpan());
-			var format = "d-m-yyyy H:MM";
-			var fromTitle = jQuery.localize(from, format);
-			var toTitle = jQuery.localize(toIsNow ? now : to, format);
-			$( ".time-value" ).html('Toon tweets van: <span title="' + fromTitle + '">' + fromText + '</span> tot: <span title="' + toTitle + '">' + toText+'</span>');
-		}
-		
-		$( ".time-sliders" ).slider({
-			range: true,
-			min: 0,
-			max: sliderTimeSpan,
-			values: [ 0, sliderTimeSpan ],
-			change: function(){
-				$search.submit();
-				updateTimeValues();
-			},
-			slide: updateTimeValues
-		});
-		updateTimeValues();
+	$( ".time-sliders" ).slider({
+		range: true,
+		min: 0,
+		max: sliderTimeSpan,
+		values: [ 0, sliderTimeSpan ],
+		change: function(){
+			$search.submit();
+			updateTimeValues();
+		},
+		slide: updateTimeValues
 	});
+	updateTimeValues();
+
 	
 	$("#searchbar").focusin(function() {
 		$("#search-explanation").slideDown();
