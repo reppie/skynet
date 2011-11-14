@@ -1,6 +1,5 @@
 from django.db import models
 from skynet_frontend.twitter.models import Keyword
-
 from datetime import datetime, timedelta
 from math import log
 """
@@ -22,33 +21,20 @@ class KeywordCloud:
                 keyword = query[0]
                 exclude_ids.append(keyword.id)
         
-        blacklist = BlacklistItem.objects.all().values_list('keyword__id', flat=True)
-        exclude_ids.extend(blacklist)
-
-        excludestring = ""
-        for exclude_id in exclude_ids:
-            excludestring += str(exclude_id) + ","
-        excludestring = excludestring[:-1]    
-
-        from django.db import connection
-        cursor = connection.cursor()
-        whereclause = ""
-        for word in exclude:
-            whereclause += " AND U4.keyword = '%s'" % word
-            
-        query = "SELECT twitter_keyword.keyword , COUNT(  twitter_keyword.keyword ) AS count FROM  twitter_keyword LEFT OUTER JOIN  twitter_tweet_keywords ON (  twitter_keyword.id =  twitter_tweet_keywords.keyword_id ) WHERE EXISTS(SELECT DISTINCT U0.id FROM  twitter_tweet U0 INNER JOIN  twitter_place U1 ON ( U0.place_id = U1.id ) INNER JOIN  twitter_tweet_keywords U3 ON ( U0.id = U3.tweet_id ) INNER JOIN  twitter_keyword U4 ON ( U3.keyword_id = U4.id ) WHERE (U1.country_id = 'NL' %s ) AND NOT (twitter_keyword.id IN (%s))) GROUP BY twitter_keyword.keyword, twitter_keyword.keyword ORDER BY count DESC LIMIT 50;" % (whereclause, excludestring)
-        cursor.execute(query)
-        list = cursor.fetchall()
         
-        self.items = self.__generate(list, min_font_size, max_font_size)
+        blacklist = BlacklistItem.objects.all().values_list('keyword_id', flat=True)
+        exclude_ids.extend(blacklist)
+        
+        query_set = query_set.all().exclude(id__in=exclude_ids)[:num_keywords]
+        self.items = self.__generate(query_set, min_font_size, max_font_size)
 
-    def __generate(self, list, min_font_size, max_font_size):
-        keyword_map = self.__get_map_from_query_set(list)
+    def __generate(self, query_set, min_font_size, max_font_size):
+        keyword_map = self.__get_map_from_query_set(query_set)
 
         self.largest = self.__get_largest_value_from_map(keyword_map)
         self.smallest = self.__get_smallest_value_from_map(keyword_map)
         
-        return self.__generate_item_list(keyword_map, min_font_size, max_font_size, self.smallest)
+        return self.__generate_item_list(query_set, min_font_size, max_font_size, self.smallest)
 
     def __get_largest_value_from_map(self, a_map):
         if not a_map:
@@ -66,11 +52,10 @@ class KeywordCloud:
         
         return int(a_map[key_of_smallest_value])
     
-    def __get_map_from_query_set(self, list):
+    def __get_map_from_query_set(self, the_query_set):
         keyword_map = {}
-        
-        for row in list:
-            keyword_map[row[0]] = row[1]
+        for entry in the_query_set:
+            keyword_map[entry['keyword']] = entry['count']
             
         return keyword_map
     
@@ -90,18 +75,16 @@ class KeywordCloud:
     def __calculate_font_size(self, min_font_size, max_font_size, step):
         return round((min_font_size + (max_font_size-min_font_size)*self.step)/min_font_size*100)
     
-    def __generate_item_list(self, keyword_map, min_font_size, max_font_size, smallest_value):
+    def __generate_item_list(self, the_query_set, min_font_size, max_font_size, smallest_value):
         tweet_index_count_array = []
-        
-        if len(keyword_map) == 0:
+        if len(the_query_set) == 0:
             return []
-        for item in keyword_map:
-            self.step = self.__calculate_font_size_increment(keyword_map[item], max_font_size, min_font_size)
+        for row in the_query_set:
+            self.step = self.__calculate_font_size_increment(row['count'], max_font_size, min_font_size)
             new_font_size = self.__calculate_font_size(min_font_size, max_font_size, self.step)
-            tweet_index_count_array.append(KeywordFontSize(keyword=item, font_scale=new_font_size))
+            tweet_index_count_array.append(KeywordFontSize(keyword=row["keyword"], font_scale=new_font_size))
             
         return tweet_index_count_array
-    
     def to_json(self):
         return self.items
 
