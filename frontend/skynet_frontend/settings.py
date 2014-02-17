@@ -10,11 +10,11 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Wytse Visser', 'wytsevisser@gmail.com'),
-    ('Daniel van den Brink', 'daniel.j.a.van.den.brink@gmail.com'),
-    ('Maciek Dulkiewicz', 'maciek.t.d@gmail.com'),
-    ('Tjeerd Jan van der Molen', 'aidamina@gmail.com'),
-    ('Steven Elzinga', 'repsels@gmail.com'),
+    ('Wytse Visser', 'wytse@mailinator.com'),
+    ('Daniel van den Brink', 'daniel@mailinator.com'),
+    ('Maciek Dulkiewicz', 'maciek@mailinator.com'),
+    ('Tjeerd Jan van der Molen', 'tj@mailinator.com'),
+    ('Steven Elzinga', 'steven@mailinator.com'),
 )
 
 MANAGERS = ADMINS
